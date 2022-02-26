@@ -6,13 +6,15 @@ namespace Silksprite.MeshBuilder.Controllers
     [ExecuteAlways]
     public abstract class CustomMeshBehaviour : MonoBehaviour
     {
+        public bool autoUpdate;
+        
         public Mesh sharedMesh;
 
         public MeshFilter[] meshFilters;
 
         void Update()
         {
-            if (sharedMesh == null)
+            if (sharedMesh == null || autoUpdate)
             {
                 Compile();
             }
