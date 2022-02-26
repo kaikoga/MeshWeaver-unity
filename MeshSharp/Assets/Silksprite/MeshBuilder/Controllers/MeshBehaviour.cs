@@ -1,3 +1,5 @@
+using System.Linq;
+using Silksprite.MeshBuilder.Models;
 using UnityEngine;
 
 namespace Silksprite.MeshBuilder.Controllers
@@ -6,6 +8,8 @@ namespace Silksprite.MeshBuilder.Controllers
     public class MeshBehaviour : MonoBehaviour
     {
         public Mesh sharedMesh;
+
+        public MeshProvider[] meshProviders;
 
         public MeshFilter[] meshFilters;
 
@@ -19,25 +23,26 @@ namespace Silksprite.MeshBuilder.Controllers
 
         public void Compile()
         {
-            sharedMesh = new Mesh();
+            if (sharedMesh == null) sharedMesh = new Mesh();
             OnPopulateMesh(sharedMesh);
+
+            if (meshFilters == null) return;
 
             foreach (var meshFilter in meshFilters)
             {
                 meshFilter.sharedMesh = sharedMesh;
             }
         }
-        
+
         protected virtual void OnPopulateMesh(Mesh mesh)
         {
-            mesh.subMeshCount = 1;
-            mesh.SetVertices(new []
+            mesh.Clear();
+            var meshie = new Meshie();
+            foreach (var meshProvider in meshProviders.Where(component => component.isActiveAndEnabled))
             {
-                Vector3.zero,
-                Vector3.right,
-                Vector3.up
-            });
-            mesh.SetTriangles(new[] { 0, 1, 2 }, 0);
+                meshie.Concat(meshProvider.ToMeshie());
+            }
+            meshie.ExportToMesh(mesh);
         }
     }
 }
