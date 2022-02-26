@@ -16,10 +16,10 @@ namespace Silksprite.MeshBuilder.Models
             mesh.SetTriangles(Indices.ToArray(), 0);
         }
 
-        public void Concat(Meshie other)
+        public void Concat(Meshie other, Matrix4x4 matrix4x4)
         {
             var offset = Vertices.Count;
-            Vertices.AddRange(other.Vertices);
+            Vertices.AddRange(other.Vertices.Select(matrix4x4.MultiplyPoint));
             Indices.AddRange(other.Indices.Select(i => i + offset));
         }
     }

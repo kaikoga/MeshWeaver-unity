@@ -13,7 +13,7 @@ namespace Silksprite.MeshBuilder.Controllers
         {
             foreach (var meshProvider in meshProviders.Where(component => component.isActiveAndEnabled))
             {
-                meshie.Concat(meshProvider.ToMeshie());
+                meshie.Concat(meshProvider.ToMeshie(), meshProvider.Translation);
             }
         }
     }

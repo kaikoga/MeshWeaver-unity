@@ -1,19 +1,20 @@
 using System.Linq;
+using Silksprite.MeshBuilder.Controllers.Base;
 using Silksprite.MeshBuilder.Models;
-using UnityEngine;
 
 namespace Silksprite.MeshBuilder.Controllers
 {
-    public class MeshProvider : MonoBehaviour
+    public class MeshProvider : GeometryProvider
     {
         public PathProvider[] pathProviders;
 
         public Meshie ToMeshie()
         {
+            var inverse = Translation.inverse;
             var pathie = new Pathie();
             foreach (var pathProvider in pathProviders.Where(c => c.isActiveAndEnabled))
             {
-                pathie.Concat(pathProvider.ToPathie());
+                pathie.Concat(pathProvider.ToPathie(), inverse * pathProvider.Translation);
             }
 
             var meshie = new Meshie();

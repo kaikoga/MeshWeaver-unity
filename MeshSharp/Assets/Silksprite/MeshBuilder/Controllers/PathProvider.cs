@@ -1,9 +1,10 @@
+using Silksprite.MeshBuilder.Controllers.Base;
 using Silksprite.MeshBuilder.Models;
 using UnityEngine;
 
 namespace Silksprite.MeshBuilder.Controllers
 {
-    public class PathProvider : MonoBehaviour
+    public class PathProvider : GeometryProvider
     {
         public Pathie ToPathie()
         {
