@@ -1,0 +1,17 @@
+/*/obj
+/*/Temp
+/*/Library
+/*/*.pidb
+/*/*.csproj
+/*/*.csproj.DotSettings
+/*/*.sln
+/*/*.userprefs
+/*/*.unityproj
+/**/*.unitypackage
+/**/*.unitypackage.meta
+/*/Assets/Plugins/Editor/JetBrains*
+
+/**/*_Private*
+
+/*/Assets/VRCSDK*
+/*/Assets/Yodokorochan*
