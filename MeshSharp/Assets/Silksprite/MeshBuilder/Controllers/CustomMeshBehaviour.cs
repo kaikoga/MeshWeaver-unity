@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using Silksprite.MeshBuilder.Models;
 using UnityEngine;
 
@@ -43,6 +45,14 @@ namespace Silksprite.MeshBuilder.Controllers
 
         protected virtual void OnPopulateMesh(Meshie meshie)
         {
+        }
+
+        protected static void CollectMeshies(IEnumerable<MeshProvider> meshProviders, Meshie meshie)
+        {
+            foreach (var meshProvider in meshProviders.Where(c => c != null && c.isActiveAndEnabled))
+            {
+                meshie.Concat(meshProvider.ToMeshie(), meshProvider.Translation);
+            }
         }
     }
 }

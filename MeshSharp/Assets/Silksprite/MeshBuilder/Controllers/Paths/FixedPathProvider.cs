@@ -1,5 +1,5 @@
 using Silksprite.MeshBuilder.Models;
-using UnityEngine;
+using Silksprite.MeshBuilder.Models.Paths;
 
 namespace Silksprite.MeshBuilder.Controllers.Paths
 {
@@ -7,18 +7,7 @@ namespace Silksprite.MeshBuilder.Controllers.Paths
     {
         public override Pathie ToPathie()
         {
-            var pathie = new Pathie();
-            pathie.Vertices.AddRange(new []
-            {
-                Vector3.zero,
-                Vector3.left,
-                Vector3.left + Vector3.up,
-                Vector3.up,
-                Vector3.up + Vector3.right,
-                Vector3.right
-            });
-            return pathie;
+            return new FixedPathieFactory().Build(new Pathie());
         }
-
     }
 }
