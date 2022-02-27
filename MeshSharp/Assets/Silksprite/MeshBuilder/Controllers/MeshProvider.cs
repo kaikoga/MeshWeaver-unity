@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using Silksprite.MeshBuilder.Controllers.Base;
 using Silksprite.MeshBuilder.Models;
@@ -6,7 +7,7 @@ namespace Silksprite.MeshBuilder.Controllers
 {
     public class MeshProvider : GeometryProvider
     {
-        public PathProvider[] pathProviders;
+        public List<PathProvider> pathProviders = new List<PathProvider>();
 
         public Meshie ToMeshie()
         {

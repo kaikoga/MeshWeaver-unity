@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using Silksprite.MeshBuilder.Models;
 using UnityEngine;
@@ -7,7 +8,7 @@ namespace Silksprite.MeshBuilder.Controllers
     [ExecuteAlways]
     public class MeshBehaviour : CustomMeshBehaviour
     {
-        public MeshProvider[] meshProviders;
+        public List<MeshProvider> meshProviders = new List<MeshProvider>();
 
         protected override void OnPopulateMesh(Meshie meshie)
         {
