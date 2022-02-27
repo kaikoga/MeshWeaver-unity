@@ -1,3 +1,4 @@
+using Silksprite.MeshBuilder.Controllers.Meshes;
 using Silksprite.MeshBuilder.Utils;
 using UnityEditor;
 using UnityEngine;
@@ -8,7 +9,7 @@ namespace Silksprite.MeshBuilder.Controllers
     public class MeshBehaviourEditor : Editor
     {
         static readonly ComponentPopupMenu<MeshProvider> MeshProviderMenu = new ComponentPopupMenu<MeshProvider>(
-            typeof(MeshProvider)
+            typeof(PolygonMeshProvider)
         );
 
         public override void OnInspectorGUI()
