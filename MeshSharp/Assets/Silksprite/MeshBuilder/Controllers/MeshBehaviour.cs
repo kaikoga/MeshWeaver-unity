@@ -11,7 +11,7 @@ namespace Silksprite.MeshBuilder.Controllers
 
         protected override void OnPopulateMesh(Meshie meshie)
         {
-            foreach (var meshProvider in meshProviders.Where(component => component.isActiveAndEnabled))
+            foreach (var meshProvider in meshProviders.Where(c => c != null && c.isActiveAndEnabled))
             {
                 meshie.Concat(meshProvider.ToMeshie(), meshProvider.Translation);
             }

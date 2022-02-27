@@ -12,7 +12,7 @@ namespace Silksprite.MeshBuilder.Controllers
         {
             var inverse = Translation.inverse;
             var pathie = new Pathie();
-            foreach (var pathProvider in pathProviders.Where(c => c.isActiveAndEnabled))
+            foreach (var pathProvider in pathProviders.Where(c => c != null && c.isActiveAndEnabled))
             {
                 pathie.Concat(pathProvider.ToPathie(), inverse * pathProvider.Translation);
             }
