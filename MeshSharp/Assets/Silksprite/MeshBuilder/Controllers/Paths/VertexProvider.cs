@@ -8,7 +8,7 @@ namespace Silksprite.MeshBuilder.Controllers.Paths
     {
         public override Pathie ToPathie()
         {
-            return new Pathie { Vector3.zero };
+            return new Pathie { Vertie.Empty };
         }
         
         void OnDrawGizmos()
