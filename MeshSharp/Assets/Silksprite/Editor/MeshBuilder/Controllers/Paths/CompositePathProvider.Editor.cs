@@ -8,6 +8,7 @@ namespace Silksprite.MeshBuilder.Controllers.Paths
     {
         static readonly ComponentPopupMenu<PathProvider> PathProviderMenu = new ComponentPopupMenu<PathProvider>
         (
+            typeof(PathReference),
             typeof(VertexProvider)
         );
 

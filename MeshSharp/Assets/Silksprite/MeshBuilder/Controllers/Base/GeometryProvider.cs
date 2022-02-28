@@ -9,6 +9,23 @@ namespace Silksprite.MeshBuilder.Controllers.Base
     {
         public Matrix4x4 Translation => transform.localToWorldMatrix;
 
+        protected Pathie CollectPathie(PathProvider pathProvider, Pathie pathie, bool applyTranslation)
+        {
+            if (pathProvider == null) return pathie;
+
+            var inverse = Translation.inverse;
+            if (applyTranslation)
+            {
+                pathie.Concat(pathProvider.ToPathie(), Matrix4x4.identity);
+            }
+            else
+            {
+                pathie.Concat(pathProvider.ToPathie(), inverse * pathProvider.Translation);
+            }
+
+            return pathie;
+        }
+
         protected Pathie CollectPathies(IEnumerable<PathProvider> pathProviders, Pathie pathie, bool applyTranslation)
         {
             var inverse = Translation.inverse;

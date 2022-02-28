@@ -10,6 +10,7 @@ namespace Silksprite.MeshBuilder.Controllers.Meshes
         static readonly ComponentPopupMenu<PathProvider> PathProviderMenu = new ComponentPopupMenu<PathProvider>
         (
             typeof(CompositePathProvider),
+            typeof(PathReference),
             typeof(FixedPathProvider)
         );
 
@@ -20,7 +21,7 @@ namespace Silksprite.MeshBuilder.Controllers.Meshes
             var child = PathProviderMenu.ChildPopup(polygonMeshProvider.transform);
             if (child != null)
             {
-                polygonMeshProvider.pathProviders.Add(child);
+                polygonMeshProvider.pathProvider = child;
             }
         }
     }
