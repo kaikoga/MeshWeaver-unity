@@ -24,5 +24,10 @@ namespace Silksprite.MeshBuilder.Models
         {
             return new Vertie(a.Vertex + b.Vertex, a.Uv + b.Uv);
         }
+
+        public static Vertie operator -(Vertie a, Vertie b)
+        {
+            return new Vertie(a.Vertex - b.Vertex, a.Uv - b.Uv);
+        }
     }
 }
