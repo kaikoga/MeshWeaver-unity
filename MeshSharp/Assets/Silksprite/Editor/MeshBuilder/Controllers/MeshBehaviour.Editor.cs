@@ -10,8 +10,7 @@ namespace Silksprite.MeshBuilder.Controllers
     {
         static readonly ComponentPopupMenu<MeshProvider> MeshProviderMenu = new ComponentPopupMenu<MeshProvider>(
             typeof(PolygonMeshProvider),
-            typeof(MatrixMeshProvider),
-            typeof(SweepMeshProvider)
+            typeof(MatrixMeshProvider)
         );
 
         public override void OnInspectorGUI()

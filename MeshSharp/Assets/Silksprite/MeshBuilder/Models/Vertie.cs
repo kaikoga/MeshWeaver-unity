@@ -49,6 +49,5 @@ namespace Silksprite.MeshBuilder.Models
             for (var i = 0; i < 16; i++) result[i] = a[i] - b[i];
             return result;
         }
-
     }
 }
