@@ -7,20 +7,19 @@ namespace Silksprite.MeshBuilder.Controllers.Base
 {
     public class GeometryProvider : MonoBehaviour
     {
-        public Matrix4x4 Translation => transform.localToWorldMatrix;
+        public Matrix4x4 Translation => Matrix4x4.TRS(transform.localPosition, transform.localRotation, transform.localScale);
 
         protected Pathie CollectPathie(PathProvider pathProvider, Pathie pathie, bool applyTranslation)
         {
             if (pathProvider == null) return pathie;
 
-            var inverse = Translation.inverse;
             if (applyTranslation)
             {
                 pathie.Concat(pathProvider.ToPathie(), Matrix4x4.identity);
             }
             else
             {
-                pathie.Concat(pathProvider.ToPathie(), inverse * pathProvider.Translation);
+                pathie.Concat(pathProvider.ToPathie(), pathProvider.Translation);
             }
 
             return pathie;
@@ -28,7 +27,6 @@ namespace Silksprite.MeshBuilder.Controllers.Base
 
         protected Pathie CollectPathies(IEnumerable<PathProvider> pathProviders, Pathie pathie, bool applyTranslation)
         {
-            var inverse = Translation.inverse;
             foreach (var pathProvider in pathProviders.Where(c => c != null && c.isActiveAndEnabled))
             {
                 if (applyTranslation)
@@ -37,7 +35,7 @@ namespace Silksprite.MeshBuilder.Controllers.Base
                 }
                 else
                 {
-                    pathie.Concat(pathProvider.ToPathie(), inverse * pathProvider.Translation);
+                    pathie.Concat(pathProvider.ToPathie(), pathProvider.Translation);
                 }
             }
 
