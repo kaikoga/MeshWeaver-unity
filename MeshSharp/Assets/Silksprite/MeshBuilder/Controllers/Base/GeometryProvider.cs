@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace Silksprite.MeshBuilder.Controllers.Base
 {
+    [DisallowMultipleComponent]
     public class GeometryProvider : MonoBehaviour
     {
         public Matrix4x4 Translation => Matrix4x4.TRS(transform.localPosition, transform.localRotation, transform.localScale);
