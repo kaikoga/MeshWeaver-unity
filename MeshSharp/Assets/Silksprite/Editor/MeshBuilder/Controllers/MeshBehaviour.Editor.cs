@@ -9,7 +9,7 @@ namespace Silksprite.MeshBuilder.Controllers
     [CustomEditor(typeof(MeshBehaviour))]
     public class MeshBehaviourEditor : Editor
     {
-        static readonly ComponentPopupMenu<MeshProvider> MeshProviderMenu = new ComponentPopupMenu<MeshProvider>(
+        static readonly ChildComponentPopupMenu<MeshProvider> MeshProviderMenu = new ChildComponentPopupMenu<MeshProvider>(
             typeof(PolygonMeshProvider),
             typeof(MatrixMeshProvider)
         );

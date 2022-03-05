@@ -1,19 +1,25 @@
 using System.Collections.Generic;
 using System.Linq;
 using Silksprite.MeshBuilder.Controllers.Base;
+using Silksprite.MeshBuilder.Controllers.Base.Modifiers;
+using Silksprite.MeshBuilder.Controllers.Paths.Modifiers;
 using Silksprite.MeshBuilder.Utils;
 using UnityEditor;
-using UnityEngine;
 
 namespace Silksprite.MeshBuilder.Controllers.Paths
 {
     [CustomEditor(typeof(CompositePathProvider))]
     public class CompositePathProviderEditor : Editor
     {
-        static readonly ComponentPopupMenu<PathProvider> PathProviderMenu = new ComponentPopupMenu<PathProvider>
+        static readonly ChildComponentPopupMenu<PathProvider> PathProviderMenu = new ChildComponentPopupMenu<PathProvider>
         (
             typeof(PathReference),
             typeof(VertexProvider)
+        );
+
+        static readonly ModifierComponentPopupMenu<PathModifierProvider> ModifierMenu = new ModifierComponentPopupMenu<PathModifierProvider>
+        (
+            typeof(UvRemapperProvider)
         );
 
         IEnumerable<VertexProvider> ActiveVertices()
@@ -46,46 +52,8 @@ namespace Silksprite.MeshBuilder.Controllers.Paths
             base.OnInspectorGUI();
             var compositePathProvider = (CompositePathProvider)target;
             PathProviderMenu.PropertyField(compositePathProvider, ref compositePathProvider.pathProviders);
-            using (new GUILayout.HorizontalScope())
-            {
-                GUILayout.Label("Set UV.u");
-                if (GUILayout.Button("0"))
-                {
-                    DistributeX(0f, 0f);
-                }
-                if (GUILayout.Button("0..1"))
-                {
-                    DistributeX(0f, 1f);
-                }
-                if (GUILayout.Button("1"))
-                {
-                    DistributeX(1f, 1f);
-                }
-                if (GUILayout.Button("1..0"))
-                {
-                    DistributeX(1f, 0f);
-                }
-            }
-            using (new GUILayout.HorizontalScope())
-            {
-                GUILayout.Label("Set UV.v");
-                if (GUILayout.Button("0"))
-                {
-                    DistributeY(0f, 0f);
-                }
-                if (GUILayout.Button("0..1"))
-                {
-                    DistributeY(0f, 1f);
-                }
-                if (GUILayout.Button("1"))
-                {
-                    DistributeY(1f, 1f);
-                }
-                if (GUILayout.Button("1..0"))
-                {
-                    DistributeY(1f, 0f);
-                }
-            }
+            
+            ModifierMenu.ModifierPopup(compositePathProvider);
         }
     }
 }

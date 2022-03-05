@@ -8,7 +8,7 @@ namespace Silksprite.MeshBuilder.Controllers.Meshes
     [CustomEditor(typeof(PolygonMeshProvider))]
     public class PolygonMeshProviderEditor : Editor
     {
-        static readonly ComponentPopupMenu<PathProvider> PathProviderMenu = new ComponentPopupMenu<PathProvider>
+        static readonly ChildComponentPopupMenu<PathProvider> PathProviderMenu = new ChildComponentPopupMenu<PathProvider>
         (
             typeof(CompositePathProvider),
             typeof(PathReference),

@@ -17,7 +17,6 @@ namespace Silksprite.MeshBuilder.Models.Paths.Modifiers
         public override Pathie Modify(Pathie pathie)
         {
             var iMax = pathie.Vertices.Count - 1;
-            Debug.Log($"{iMax} {pathie.Vertices.Count}");
             return pathie.Modify((vertie, i) => new Vertie(vertie.Vertex, _min + (_max - _min) * i / iMax, vertie.Translation));
         }
     }
