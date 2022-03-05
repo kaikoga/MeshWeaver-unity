@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
@@ -25,6 +26,36 @@ namespace Silksprite.MeshBuilder.Utils
             var gameObject = new GameObject(_menuOptions[index]);
             gameObject.transform.SetParent(parent, false);
             return (T)gameObject.AddComponent(_types[index]);
+        }
+
+        public void PropertyField(Component self, ref T property)
+        {
+            var child = ChildPopup(self.transform);
+            if (child != null)
+            {
+                property = child;
+            }
+        }
+
+        public void PropertyField(Component self, ref List<T> property)
+        {
+            using (new GUILayout.HorizontalScope())
+            {
+                var child = ChildPopup(self.transform);
+                if (child != null)
+                {
+                    property.Add(child);
+                }
+
+                if (GUILayout.Button("Collect"))
+                {
+                    property = self.transform.OfType<Transform>()
+                        .Select(t => t.GetComponent<T>())
+                        .Where(p => p != null)
+                        .ToList();
+                    EditorUtility.SetDirty(self);
+                }
+            }
         }
     }
 }

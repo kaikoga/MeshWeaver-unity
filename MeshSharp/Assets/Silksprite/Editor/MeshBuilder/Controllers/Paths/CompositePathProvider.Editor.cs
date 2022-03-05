@@ -1,7 +1,5 @@
-using System.Linq;
 using Silksprite.MeshBuilder.Utils;
 using UnityEditor;
-using UnityEngine;
 
 namespace Silksprite.MeshBuilder.Controllers.Paths
 {
@@ -18,20 +16,7 @@ namespace Silksprite.MeshBuilder.Controllers.Paths
         {
             base.OnInspectorGUI();
             var compositePathProvider = (CompositePathProvider)target;
-            var child = PathProviderMenu.ChildPopup(compositePathProvider.transform);
-            if (child != null)
-            {
-                compositePathProvider.pathProviders.Add(child);
-            }
-
-            if (GUILayout.Button("Collect"))
-            {
-                compositePathProvider.pathProviders = compositePathProvider.transform.OfType<Transform>()
-                    .Select(t => t.GetComponent<PathProvider>())
-                    .Where(p => p != null)
-                    .ToList();
-                EditorUtility.SetDirty(compositePathProvider);
-            }
+            PathProviderMenu.PropertyField(compositePathProvider, ref compositePathProvider.pathProviders);
         }
     }
 }

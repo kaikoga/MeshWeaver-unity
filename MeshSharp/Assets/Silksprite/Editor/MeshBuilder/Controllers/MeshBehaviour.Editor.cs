@@ -18,19 +18,7 @@ namespace Silksprite.MeshBuilder.Controllers
         {
             base.OnInspectorGUI();
             var meshBehaviour = (MeshBehaviour)target;
-            var child = MeshProviderMenu.ChildPopup(meshBehaviour.transform);
-            if (child != null)
-            {
-                meshBehaviour.meshProviders.Add(child);
-            }
-            if (GUILayout.Button("Collect"))
-            {
-                meshBehaviour.meshProviders = meshBehaviour.transform.OfType<Transform>()
-                    .Select(t => t.GetComponent<MeshProvider>())
-                    .Where(p => p != null)
-                    .ToList();
-                EditorUtility.SetDirty(meshBehaviour);
-            }
+            MeshProviderMenu.PropertyField(meshBehaviour, ref meshBehaviour.meshProviders);
             if (GUILayout.Button("Compile"))
             {
                 meshBehaviour.Compile();

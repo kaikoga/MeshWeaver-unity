@@ -18,11 +18,7 @@ namespace Silksprite.MeshBuilder.Controllers.Meshes
         {
             base.OnInspectorGUI();
             var polygonMeshProvider = (PolygonMeshProvider)target;
-            var child = PathProviderMenu.ChildPopup(polygonMeshProvider.transform);
-            if (child != null)
-            {
-                polygonMeshProvider.pathProvider = child;
-            }
+            PathProviderMenu.PropertyField(polygonMeshProvider, ref polygonMeshProvider.pathProvider);
         }
     }
 }

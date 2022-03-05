@@ -18,16 +18,8 @@ namespace Silksprite.MeshBuilder.Controllers.Meshes
         {
             base.OnInspectorGUI();
             var matrixMeshProvider = (MatrixMeshProvider)target;
-            var child = PathProviderMenu.ChildPopup(matrixMeshProvider.transform);
-            if (child != null)
-            {
-                matrixMeshProvider.pathProviderX = child;
-            }
-            child = PathProviderMenu.ChildPopup(matrixMeshProvider.transform);
-            if (child != null)
-            {
-                matrixMeshProvider.pathProviderY = child;
-            }
+            PathProviderMenu.PropertyField(matrixMeshProvider, ref matrixMeshProvider.pathProviderX);
+            PathProviderMenu.PropertyField(matrixMeshProvider, ref matrixMeshProvider.pathProviderY);
         }
     }
 }
