@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Silksprite.MeshBuilder.Controllers.Base;
 using Silksprite.MeshBuilder.Models;
 
 namespace Silksprite.MeshBuilder.Controllers.Paths
@@ -7,7 +8,7 @@ namespace Silksprite.MeshBuilder.Controllers.Paths
     {
         public List<PathProvider> pathProviders = new List<PathProvider>();
 
-        public override Pathie ToPathie()
+        protected override Pathie GeneratePathie()
         {
             return CollectPathies(pathProviders, new Pathie(), true);
         }

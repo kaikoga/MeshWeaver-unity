@@ -1,3 +1,4 @@
+using Silksprite.MeshBuilder.Controllers.Base;
 using Silksprite.MeshBuilder.Controllers.Paths;
 using Silksprite.MeshBuilder.Utils;
 using UnityEditor;

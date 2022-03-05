@@ -1,3 +1,4 @@
+using Silksprite.MeshBuilder.Controllers.Base;
 using Silksprite.MeshBuilder.Models;
 using UnityEditor;
 using UnityEngine;
@@ -8,7 +9,7 @@ namespace Silksprite.MeshBuilder.Controllers.Paths
     {
         public Vector2 uv;
 
-        public override Pathie ToPathie()
+        protected override Pathie GeneratePathie()
         {
             return new Pathie { new Vertie(new Vector3(), uv, Matrix4x4.identity) };
         }

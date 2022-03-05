@@ -1,0 +1,24 @@
+using Silksprite.MeshBuilder.Models.Base;
+using UnityEngine;
+
+namespace Silksprite.MeshBuilder.Models.Paths.Modifiers
+{
+    public class UvRemapper : PathModifier
+    {
+        readonly Vector2 _min;
+        readonly Vector2 _max;
+
+        public UvRemapper(Vector2 min, Vector2 max)
+        {
+            _min = min;
+            _max = max;
+        }
+
+        public override Pathie Modify(Pathie pathie)
+        {
+            var iMax = pathie.Vertices.Count - 1;
+            Debug.Log($"{iMax} {pathie.Vertices.Count}");
+            return pathie.Modify((vertie, i) => new Vertie(vertie.Vertex, _min + (_max - _min) * i / iMax, vertie.Translation));
+        }
+    }
+}

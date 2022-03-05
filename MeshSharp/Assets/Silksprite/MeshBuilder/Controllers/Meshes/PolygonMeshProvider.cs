@@ -1,3 +1,4 @@
+using Silksprite.MeshBuilder.Controllers.Base;
 using Silksprite.MeshBuilder.Models;
 using Silksprite.MeshBuilder.Models.Meshes;
 
@@ -7,7 +8,7 @@ namespace Silksprite.MeshBuilder.Controllers.Meshes
     {
         public PathProvider pathProvider;
 
-        public override Meshie ToMeshie()
+        protected override Meshie GenerateMeshie()
         {
             return new PolygonMeshieFactory().Build(CollectPathie(pathProvider, new Pathie(), false), new Meshie());
         }
