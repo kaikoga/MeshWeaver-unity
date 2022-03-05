@@ -1,4 +1,3 @@
-using System.Linq;
 using Silksprite.MeshBuilder.Controllers.Meshes;
 using Silksprite.MeshBuilder.Utils;
 using UnityEditor;

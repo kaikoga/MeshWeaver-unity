@@ -6,9 +6,11 @@ namespace Silksprite.MeshBuilder.Controllers.Paths
 {
     public class VertexProvider : PathProvider
     {
+        public Vector2 uv;
+
         public override Pathie ToPathie()
         {
-            return new Pathie { Vertie.Empty };
+            return new Pathie { new Vertie(new Vector3(), uv, Matrix4x4.identity) };
         }
         
         void OnDrawGizmos()

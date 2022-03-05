@@ -4,8 +4,6 @@ namespace Silksprite.MeshBuilder.Models
 {
     public readonly struct Vertie
     {
-        public static readonly Vertie Empty = new Vertie(new Vector3(), new Vector2(), Matrix4x4.identity);
-
         public readonly Vector3 Vertex;
         public readonly Vector2 Uv;
         public readonly Matrix4x4 Translation;
