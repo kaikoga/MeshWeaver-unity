@@ -1,7 +1,5 @@
 using Silksprite.MeshBuilder.Controllers.Base;
-using Silksprite.MeshBuilder.Controllers.Base.Modifiers;
-using Silksprite.MeshBuilder.Controllers.Paths.Modifiers;
-using Silksprite.MeshBuilder.Utils;
+using Silksprite.MeshBuilder.Controllers.Utils;
 using UnityEditor;
 
 namespace Silksprite.MeshBuilder.Controllers.Paths
@@ -9,26 +7,13 @@ namespace Silksprite.MeshBuilder.Controllers.Paths
     [CustomEditor(typeof(CompositePathProvider))]
     public class CompositePathProviderEditor : PathProviderEditor
     {
-        static readonly ChildComponentPopupMenu<PathProvider> PathProviderMenu = new ChildComponentPopupMenu<PathProvider>
-        (
-            typeof(PathReference),
-            typeof(VertexProvider),
-            typeof(ShapePathProvider)
-        );
-
-        static readonly ModifierComponentPopupMenu<PathModifierProvider> ModifierMenu = new ModifierComponentPopupMenu<PathModifierProvider>
-        (
-            typeof(UvGeneratorProvider),
-            typeof(UvRemapperProvider)
-        );
-
         public override void OnInspectorGUI()
         {
             base.OnInspectorGUI();
             var compositePathProvider = (CompositePathProvider)target;
-            PathProviderMenu.PropertyField(compositePathProvider, ref compositePathProvider.pathProviders);
-            
-            ModifierMenu.ModifierPopup(compositePathProvider);
+            PathProviderMenus.ElementsMenu.PropertyField(compositePathProvider, ref compositePathProvider.pathProviders);
+
+            PathModifierProviderMenus.Menu.ModifierPopup(compositePathProvider);
         }
     }
 }

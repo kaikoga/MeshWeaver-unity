@@ -1,6 +1,5 @@
 using Silksprite.MeshBuilder.Controllers.Base;
-using Silksprite.MeshBuilder.Controllers.Paths;
-using Silksprite.MeshBuilder.Utils;
+using Silksprite.MeshBuilder.Controllers.Utils;
 using UnityEditor;
 
 namespace Silksprite.MeshBuilder.Controllers.Meshes
@@ -8,19 +7,11 @@ namespace Silksprite.MeshBuilder.Controllers.Meshes
     [CustomEditor(typeof(PolygonMeshProvider))]
     public class PolygonMeshProviderEditor : MeshProviderEditor
     {
-        static readonly ChildComponentPopupMenu<PathProvider> PathProviderMenu = new ChildComponentPopupMenu<PathProvider>
-        (
-            typeof(CompositePathProvider),
-            typeof(PathReference),
-            typeof(FixedPathProvider),
-            typeof(ShapePathProvider)
-        );
-
         public override void OnInspectorGUI()
         {
             base.OnInspectorGUI();
             var polygonMeshProvider = (PolygonMeshProvider)target;
-            PathProviderMenu.PropertyField(polygonMeshProvider, ref polygonMeshProvider.pathProvider);
+            PathProviderMenus.CollectionsMenu.PropertyField(polygonMeshProvider, ref polygonMeshProvider.pathProvider);
         }
     }
 }
