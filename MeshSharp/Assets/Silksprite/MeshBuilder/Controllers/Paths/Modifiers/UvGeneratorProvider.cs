@@ -5,11 +5,11 @@ using UnityEngine;
 
 namespace Silksprite.MeshBuilder.Controllers.Paths.Modifiers
 {
-    public class UvRemapperProvider : PathModifierProvider
+    public class UvGeneratorProvider : PathModifierProvider
     {
-        public Vector2 min = Vector2.zero;
-        public Vector2 max = Vector2.one;
+        public Vector2 min;
+        public Vector2 max;
 
-        public override PathModifier Modifier => new UvRemapper(min, max);
+        public override PathModifier Modifier => new UvGenerator(min, max);
     }
 }

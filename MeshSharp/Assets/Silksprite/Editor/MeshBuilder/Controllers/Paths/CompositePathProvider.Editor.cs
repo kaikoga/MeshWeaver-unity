@@ -18,6 +18,7 @@ namespace Silksprite.MeshBuilder.Controllers.Paths
 
         static readonly ModifierComponentPopupMenu<PathModifierProvider> ModifierMenu = new ModifierComponentPopupMenu<PathModifierProvider>
         (
+            typeof(UvGeneratorProvider),
             typeof(UvRemapperProvider)
         );
 
