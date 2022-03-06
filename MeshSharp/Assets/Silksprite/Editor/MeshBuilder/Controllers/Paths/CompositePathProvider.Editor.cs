@@ -12,7 +12,8 @@ namespace Silksprite.MeshBuilder.Controllers.Paths
         static readonly ChildComponentPopupMenu<PathProvider> PathProviderMenu = new ChildComponentPopupMenu<PathProvider>
         (
             typeof(PathReference),
-            typeof(VertexProvider)
+            typeof(VertexProvider),
+            typeof(ShapePathProvider)
         );
 
         static readonly ModifierComponentPopupMenu<PathModifierProvider> ModifierMenu = new ModifierComponentPopupMenu<PathModifierProvider>

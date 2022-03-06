@@ -12,7 +12,8 @@ namespace Silksprite.MeshBuilder.Controllers.Meshes
         (
             typeof(CompositePathProvider),
             typeof(PathReference),
-            typeof(FixedPathProvider)
+            typeof(FixedPathProvider),
+            typeof(ShapePathProvider)
         );
 
         public override void OnInspectorGUI()
