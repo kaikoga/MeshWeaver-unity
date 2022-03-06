@@ -6,9 +6,11 @@ using UnityEngine;
 namespace Silksprite.MeshBuilder.Controllers
 {
     [ExecuteAlways]
-    public class MeshBehaviour : CustomMeshBehaviour
+    public class MeshBehaviour : CustomMeshBehaviour, ICompositeGeometry<MeshProvider>
     {
         public List<MeshProvider> meshProviders = new List<MeshProvider>();
+
+        public List<MeshProvider> PrimaryElements { set => meshProviders = value; }
 
         protected override void OnPopulateMesh(Meshie meshie)
         {

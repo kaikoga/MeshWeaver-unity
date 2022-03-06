@@ -1,4 +1,7 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEditor;
 using UnityEngine;
 
 namespace Silksprite.MeshBuilder.Extensions
@@ -17,6 +20,15 @@ namespace Silksprite.MeshBuilder.Extensions
             var gameObject = new GameObject(name ?? type.Name);
             gameObject.transform.SetParent(self.transform, false);
             return (T)gameObject.AddComponent(type);
+        }
+
+        public static void CollectDirectChildren<T>(this Component self, out List<T> property) where T : Component
+        {
+            property = self.transform.OfType<Transform>()
+                .Select(t => t.GetComponent<T>())
+                .Where(p => p != null)
+                .ToList();
+            EditorUtility.SetDirty(self);
         }
     }
 }

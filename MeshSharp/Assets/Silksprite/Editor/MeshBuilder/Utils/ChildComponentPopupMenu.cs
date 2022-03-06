@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Silksprite.MeshBuilder.Controllers.Base;
 using Silksprite.MeshBuilder.Extensions;
 using UnityEditor;
 using UnityEngine;
@@ -42,15 +43,12 @@ namespace Silksprite.MeshBuilder.Utils
                 if (child != null)
                 {
                     property.Add(child);
+                    if (self is GeometryProvider g) g.RefreshElements();
                 }
 
                 if (GUILayout.Button("Collect"))
                 {
-                    property = self.transform.OfType<Transform>()
-                        .Select(t => t.GetComponent<T>())
-                        .Where(p => p != null)
-                        .ToList();
-                    EditorUtility.SetDirty(self);
+                    self.CollectDirectChildren(out property);
                 }
             }
         }

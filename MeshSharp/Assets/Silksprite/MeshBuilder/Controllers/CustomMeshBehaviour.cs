@@ -7,7 +7,7 @@ using UnityEngine;
 namespace Silksprite.MeshBuilder.Controllers
 {
     [ExecuteAlways]
-    public abstract class CustomMeshBehaviour : MonoBehaviour
+    public abstract class CustomMeshBehaviour : GeometryProvider
     {
         public bool autoUpdate;
         

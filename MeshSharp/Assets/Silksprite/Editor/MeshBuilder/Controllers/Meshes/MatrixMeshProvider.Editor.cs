@@ -19,7 +19,6 @@ namespace Silksprite.MeshBuilder.Controllers.Meshes
                 EditorGUILayout.TextArea(matrixMeshProvider.LastPathieX?.ToString() ?? "null");
                 EditorGUILayout.TextArea(matrixMeshProvider.LastPathieY?.ToString() ?? "null");
             }
-
         }
     }
 }
