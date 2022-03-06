@@ -4,9 +4,12 @@ namespace Silksprite.MeshBuilder.Controllers.Base
 {
     public abstract class MeshProvider : GeometryProvider
     {
+        public Meshie LastMeshie { get; private set; }
+
         public Meshie ToMeshie()
         {
-            return GenerateMeshie();
+            LastMeshie = GenerateMeshie();
+            return LastMeshie;
         }
 
         protected abstract Meshie GenerateMeshie();

@@ -36,5 +36,10 @@ namespace Silksprite.MeshBuilder.Models
         {
             return GetEnumerator();
         }
+
+        public override string ToString()
+        {
+            return string.Join("\n", Vertices.Select(v => v.ToString()));
+        }
     }
 }

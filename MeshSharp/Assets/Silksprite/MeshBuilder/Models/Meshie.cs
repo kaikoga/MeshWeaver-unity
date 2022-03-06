@@ -23,5 +23,12 @@ namespace Silksprite.MeshBuilder.Models
             Vertices.AddRange(other.Vertices.Select(v => v.MultiplyPoint(matrix4x4)));
             Indices.AddRange(other.Indices.Select(i => i + offset));
         }
+
+        public override string ToString()
+        {
+            var vertices = string.Join("\n", Vertices.Select(v => v.ToString()));
+            var indices = string.Join(",", Indices.Select(v => v.ToString()));
+            return $"{vertices}\n{indices}";
+        }
     }
 }

@@ -47,5 +47,10 @@ namespace Silksprite.MeshBuilder.Models
             for (var i = 0; i < 16; i++) result[i] = a[i] - b[i];
             return result;
         }
+
+        public override string ToString()
+        {
+            return $"[{Vertex.x:G3}, {Vertex.y:G3}, {Vertex.z:G3}] <{Uv.x:G3}, {Uv.y:G3}>";
+        }
     }
 }

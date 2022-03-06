@@ -7,7 +7,7 @@ using UnityEditor;
 namespace Silksprite.MeshBuilder.Controllers.Paths
 {
     [CustomEditor(typeof(CompositePathProvider))]
-    public class CompositePathProviderEditor : Editor
+    public class CompositePathProviderEditor : PathProviderEditor
     {
         static readonly ChildComponentPopupMenu<PathProvider> PathProviderMenu = new ChildComponentPopupMenu<PathProvider>
         (

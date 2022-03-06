@@ -6,7 +6,7 @@ using UnityEditor;
 namespace Silksprite.MeshBuilder.Controllers.Meshes
 {
     [CustomEditor(typeof(PolygonMeshProvider))]
-    public class PolygonMeshProviderEditor : Editor
+    public class PolygonMeshProviderEditor : MeshProviderEditor
     {
         static readonly ChildComponentPopupMenu<PathProvider> PathProviderMenu = new ChildComponentPopupMenu<PathProvider>
         (
