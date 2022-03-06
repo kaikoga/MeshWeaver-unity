@@ -12,6 +12,7 @@ namespace Silksprite.MeshBuilder.Controllers
         public bool autoUpdate;
         
         public Mesh sharedMesh;
+        public Mesh outputMesh;
 
         public MeshFilter[] meshFilters;
 
@@ -34,6 +35,13 @@ namespace Silksprite.MeshBuilder.Controllers
             {
                 meshFilter.sharedMesh = sharedMesh;
             }
+        }
+
+        public Mesh ExportMesh()
+        {
+            var mesh = new Mesh();
+            OnPopulateMesh(mesh);
+            return mesh;
         }
 
         protected virtual void OnPopulateMesh(Mesh mesh)
