@@ -28,7 +28,7 @@ namespace Silksprite.MeshBuilder.Controllers.Base
 
         protected Pathie CollectPathies(IEnumerable<PathProvider> pathProviders, Pathie pathie, bool applyTranslation)
         {
-            foreach (var pathProvider in pathProviders.Where(c => c != null && c.isActiveAndEnabled))
+            foreach (var pathProvider in pathProviders.Where(c => c != null && c.gameObject.activeSelf))
             {
                 if (applyTranslation)
                 {
