@@ -10,6 +10,13 @@ namespace Silksprite.MeshBuilder.Models
     {
         public readonly List<Vertie> Vertices = new List<Vertie>();
 
+        public Pathie() { }
+
+        public Pathie(IEnumerable<Vertie> vertices)
+        {
+            Vertices.AddRange(vertices);
+        }
+        
         public void Add(Vertie item) => Vertices.Add(item);
 
         public void Concat(Pathie other, Matrix4x4 matrix4x4)

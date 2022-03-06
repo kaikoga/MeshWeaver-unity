@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Silksprite.MeshBuilder.Extensions;
 using UnityEditor;
 using UnityEngine;
 
@@ -18,14 +19,10 @@ namespace Silksprite.MeshBuilder.Utils
             _menuOptions = new [] { "Create Child..." }.Concat(types.Select(type => type.Name)).ToArray();
         }
 
-        public T ChildPopup(Component self)
+        T ChildPopup(Component self)
         {
             var index = EditorGUILayout.Popup(0, _menuOptions);
-            if (index <= 0) return null;
-
-            var gameObject = new GameObject(_menuOptions[index]);
-            gameObject.transform.SetParent(self.transform, false);
-            return (T)gameObject.AddComponent(_types[index]);
+            return index <= 0 ? null : self.AddChildComponent<T>(_types[index]);
         }
 
         public void PropertyField(Component self, ref T property)

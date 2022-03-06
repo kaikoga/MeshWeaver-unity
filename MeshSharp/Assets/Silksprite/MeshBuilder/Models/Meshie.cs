@@ -9,6 +9,14 @@ namespace Silksprite.MeshBuilder.Models
         public readonly List<Vertie> Vertices = new List<Vertie>();
         public readonly List<int> Indices = new List<int>();
 
+        public Meshie() { }
+
+        public Meshie(IEnumerable<Vertie> vertices, IEnumerable<int> indices)
+        {
+            Vertices.AddRange(vertices);
+            Indices.AddRange(indices);
+        }
+
         public void ExportToMesh(Mesh mesh)
         {
             mesh.subMeshCount = 1;
