@@ -9,12 +9,14 @@ namespace Silksprite.MeshBuilder.Controllers.Meshes
         public PathProvider pathProviderX;
         public PathProvider pathProviderY;
 
+        public Pathie LastPathieX { get; private set; }
+        public Pathie LastPathieY { get; private set; }
+
         protected override Meshie GenerateMeshie()
         {
-            return new MatrixMeshieFactory().Build(
-                CollectPathie(pathProviderX, new Pathie(), false),
-                CollectPathie(pathProviderY, new Pathie(), false),
-                new Meshie());
+            LastPathieX = CollectPathie(pathProviderX, new Pathie(), true);
+            LastPathieY = CollectPathie(pathProviderY, new Pathie(), true);
+            return new MatrixMeshieFactory().Build(LastPathieX, LastPathieY, new Meshie());
         }
     }
 }

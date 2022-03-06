@@ -11,7 +11,7 @@ namespace Silksprite.MeshBuilder.Controllers.Paths
 
         protected override Pathie GeneratePathie()
         {
-            return new Pathie { new Vertie(new Vector3(), uv, Matrix4x4.identity) };
+            return new Pathie { new Vertie(Vector3.zero, uv) };
         }
         
         void OnDrawGizmos()

@@ -16,7 +16,7 @@ namespace Silksprite.MeshBuilder.Controllers.Base
 
             if (applyTranslation)
             {
-                pathie.Concat(pathProvider.ToPathie(), Matrix4x4.identity);
+                pathie.Concat(pathProvider.ToPathie(), pathProvider.Translation);
             }
             else
             {
@@ -32,7 +32,7 @@ namespace Silksprite.MeshBuilder.Controllers.Base
             {
                 if (applyTranslation)
                 {
-                    pathie.Concat(pathProvider.ToPathie(), Matrix4x4.identity);
+                    pathie.Concat(pathProvider.ToPathie(), pathProvider.Translation);
                 }
                 else
                 {

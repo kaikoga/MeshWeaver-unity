@@ -8,7 +8,10 @@ namespace Silksprite.MeshBuilder.Models
         public readonly Vector2 Uv;
         public readonly Matrix4x4 Translation;
 
-        public Vertie(Vector3 vertex, Vector2 uv, Matrix4x4 translation)
+        public Vertie(Vector3 vertex, Vector2 uv) : this(vertex, uv, Matrix4x4.Translate(vertex)) { }
+        public Vertie(Matrix4x4 translation, Vector2 uv) : this(new Vector3(translation.m03, translation.m13, translation.m23), uv, translation) { }
+
+        Vertie(Vector3 vertex, Vector2 uv, Matrix4x4 translation)
         {
             Vertex = vertex;
             Uv = uv;
@@ -50,7 +53,10 @@ namespace Silksprite.MeshBuilder.Models
 
         public override string ToString()
         {
-            return $"[{Vertex.x:G3}, {Vertex.y:G3}, {Vertex.z:G3}] <{Uv.x:G3}, {Uv.y:G3}>";
+            var translation = Translation;
+            var scale = translation.lossyScale;
+            translation.rotation.ToAngleAxis(out var angle, out _);
+            return $"[{Vertex.x:G3}, {Vertex.y:G3}, {Vertex.z:G3}] <{Uv.x:G3}, {Uv.y:G3}> ({scale.x:G3}, {scale.y:G3}, {scale.z:G3} : {angle:G3})";
         }
     }
 }

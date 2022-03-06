@@ -22,6 +22,13 @@ namespace Silksprite.MeshBuilder.Controllers.Meshes
             var matrixMeshProvider = (MatrixMeshProvider)target;
             PathProviderMenu.PropertyField(matrixMeshProvider, ref matrixMeshProvider.pathProviderX);
             PathProviderMenu.PropertyField(matrixMeshProvider, ref matrixMeshProvider.pathProviderY);
+
+            using (new EditorGUI.DisabledScope(false))
+            {
+                EditorGUILayout.TextArea(matrixMeshProvider.LastPathieX?.ToString() ?? "null");
+                EditorGUILayout.TextArea(matrixMeshProvider.LastPathieY?.ToString() ?? "null");
+            }
+
         }
     }
 }
