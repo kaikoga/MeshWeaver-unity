@@ -21,5 +21,10 @@ namespace Silksprite.MeshBuilder.Controllers.Utils
             typeof(ShapePathProvider),
             typeof(BakedPathProvider)
         );
+
+        public static readonly ChildComponentPopupMenu<VertexProvider> VertexMenu = new ChildComponentPopupMenu<VertexProvider>
+        (
+            typeof(VertexProvider)
+        );
     }
 }

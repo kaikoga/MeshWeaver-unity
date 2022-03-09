@@ -1,4 +1,5 @@
 using Silksprite.MeshBuilder.Controllers.Meshes;
+using Silksprite.MeshBuilder.Controllers.Utils;
 using Silksprite.MeshBuilder.Extensions;
 using Silksprite.MeshBuilder.Models.DataObjects;
 using UnityEditor;
@@ -17,6 +18,8 @@ namespace Silksprite.MeshBuilder.Controllers.Base
             {
                 EditorGUILayout.TextArea(meshProvider.LastMeshie?.ToString() ?? "null");
             }
+
+            MeshModifierProviderMenus.Menu.ModifierPopup(meshProvider);
 
             if (GUILayout.Button("Bake"))
             {
