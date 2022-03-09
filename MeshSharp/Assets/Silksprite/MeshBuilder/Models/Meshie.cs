@@ -23,6 +23,9 @@ namespace Silksprite.MeshBuilder.Models
             mesh.SetVertices(Vertices.Select(v => v.Vertex).ToArray());
             mesh.SetUVs(0, Vertices.Select(v => v.Uv).ToArray());
             mesh.SetTriangles(Indices.ToArray(), 0);
+            mesh.RecalculateBounds();
+            mesh.RecalculateNormals();
+            mesh.RecalculateTangents();
         }
 
         public void Concat(Meshie other, Matrix4x4 matrix4x4)
