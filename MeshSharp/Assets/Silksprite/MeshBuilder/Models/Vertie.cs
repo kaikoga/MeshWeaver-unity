@@ -23,6 +23,11 @@ namespace Silksprite.MeshBuilder.Models
             return new Vertie(translation.MultiplyPoint(Vertex), Uv, translation * Translation);
         }
 
+        public static Vertie operator +(Vertie a, Vector3 vertex)
+        {
+            return new Vertie(a.Vertex + vertex, a.Uv, Matrix4x4.Translate(vertex) * a.Translation);
+        }
+
         public static Vertie operator +(Vertie a, Vertie b)
         {
             return new Vertie(a.Vertex + b.Vertex, a.Uv + b.Uv, ComponentWiseAdd(a.Translation, b.Translation));
@@ -38,6 +43,11 @@ namespace Silksprite.MeshBuilder.Models
             return new Vertie(a.Translation.MultiplyPoint(b.Vertex), a.Uv + b.Uv, a.Translation * b.Translation);
         }
 
+        public static Vertie operator *(Vertie a, float f)
+        {
+            return new Vertie(a.Vertex * f, a.Uv * f, ComponentWiseMultiply(a.Translation, f));
+        }
+
         static Matrix4x4 ComponentWiseAdd(Matrix4x4 a, Matrix4x4 b)
         {
             var result = new Matrix4x4();
@@ -48,6 +58,13 @@ namespace Silksprite.MeshBuilder.Models
         {
             var result = new Matrix4x4();
             for (var i = 0; i < 16; i++) result[i] = a[i] - b[i];
+            return result;
+        }
+
+        static Matrix4x4 ComponentWiseMultiply(Matrix4x4 a, float f)
+        {
+            var result = new Matrix4x4();
+            for (var i = 0; i < 16; i++) result[i] = a[i] * f;
             return result;
         }
 
