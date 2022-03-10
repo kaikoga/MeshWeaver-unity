@@ -1,7 +1,9 @@
+using System;
 using Silksprite.MeshBuilder.Controllers.Meshes;
 using Silksprite.MeshBuilder.Controllers.Utils;
 using Silksprite.MeshBuilder.Extensions;
 using Silksprite.MeshBuilder.Models.DataObjects;
+using Silksprite.MeshBuilder.Utils;
 using UnityEditor;
 using UnityEngine;
 
@@ -10,14 +12,13 @@ namespace Silksprite.MeshBuilder.Controllers.Base
     [CustomEditor(typeof(MeshProvider), true, isFallback = true)]
     public class MeshProviderEditor : Editor
     {
+        bool _isExpanded;
+
         public override void OnInspectorGUI()
         {
             var meshProvider = (MeshProvider)target;
             base.OnInspectorGUI();
-            using (new EditorGUI.DisabledScope(false))
-            {
-                EditorGUILayout.TextArea(meshProvider.LastMeshie?.ToString() ?? "null");
-            }
+            MeshBuilderGUI.DumpFoldout("Mesh data", ref _isExpanded, () => meshProvider.LastMeshie);
 
             MeshModifierProviderMenus.Menu.ModifierPopup(meshProvider);
 

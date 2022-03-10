@@ -1,5 +1,6 @@
 using Silksprite.MeshBuilder.Controllers.Base;
 using Silksprite.MeshBuilder.Controllers.Utils;
+using Silksprite.MeshBuilder.Utils;
 using UnityEditor;
 
 namespace Silksprite.MeshBuilder.Controllers.Meshes
@@ -7,6 +8,9 @@ namespace Silksprite.MeshBuilder.Controllers.Meshes
     [CustomEditor(typeof(MatrixMeshProvider))]
     public class MatrixMeshProviderEditor : MeshProviderEditor
     {
+        bool _isExpandedX;
+        bool _isExpandedY;
+
         public override void OnInspectorGUI()
         {
             base.OnInspectorGUI();
@@ -14,11 +18,8 @@ namespace Silksprite.MeshBuilder.Controllers.Meshes
             PathProviderMenus.CollectionsMenu.PropertyField(matrixMeshProvider, ref matrixMeshProvider.pathProviderX);
             PathProviderMenus.CollectionsMenu.PropertyField(matrixMeshProvider, ref matrixMeshProvider.pathProviderY);
 
-            using (new EditorGUI.DisabledScope(false))
-            {
-                EditorGUILayout.TextArea(matrixMeshProvider.LastPathieX?.ToString() ?? "null");
-                EditorGUILayout.TextArea(matrixMeshProvider.LastPathieY?.ToString() ?? "null");
-            }
+            MeshBuilderGUI.DumpFoldout("Path data X", ref _isExpandedX, () => matrixMeshProvider.LastPathieX);
+            MeshBuilderGUI.DumpFoldout("Path data Y", ref _isExpandedY, () => matrixMeshProvider.LastPathieY);
         }
     }
 }
