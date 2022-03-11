@@ -11,11 +11,21 @@ namespace Silksprite.MeshBuilder.Extensions
             return e.Dedup((a, b) => Equals(a, b));
         }
 
+        public static IEnumerable<T> DedupLoop<T>(this IEnumerable<T> e)
+        {
+            return e.DedupLoop((a, b) => Equals(a, b));
+        }
+
         public static IEnumerable<T> Dedup<T>(this IEnumerable<T> e, Func<T, T, bool> equality)
         {
             return e.Take(1).Concat(
                 e.Pairwise((a, b) => equality(a, b) ? Enumerable.Empty<T>() : Enumerable.Repeat(b, 1))
                     .SelectMany(x => x));
+        }
+
+        public static IEnumerable<T> DedupLoop<T>(this IEnumerable<T> e, Func<T, T, bool> equality)
+        {
+            return equality(e.First(), e.Last()) ? e.Skip(1).Dedup(equality) : e.Dedup(equality);
         }
 
         public static IEnumerable<TResult> Pairwise<TSource, TResult>(this IEnumerable<TSource> e, Func<TSource, TSource, TResult> selector)
