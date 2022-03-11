@@ -8,9 +8,9 @@ namespace Silksprite.MeshBuilder.Models.Meshes
     // Shamelessly copied from https://edom18.hateblo.jp/entry/2018/03/25/100234
     public class PolygonMeshieFactory2
     {
-        List<int> _triangles = new List<int>();
-        List<Vector3> _vertices = new List<Vector3>();
-        Dictionary<int, bool> _verticesBuffer = new Dictionary<int, bool>();
+        readonly List<int> _triangles = new List<int>();
+        readonly List<Vector3> _vertices = new List<Vector3>();
+        readonly List<bool> _verticesBuffer = new List<bool>();
 
         Vector3 _prevDirection = Vector3.zero;
 
@@ -33,7 +33,7 @@ namespace Silksprite.MeshBuilder.Models.Meshes
             _triangles.Clear();
         }
 
-        void Initialize(List<Vector3> vertices)
+        void Initialize(IReadOnlyCollection<Vector3> vertices)
         {
             Clear();
 
@@ -41,10 +41,7 @@ namespace Silksprite.MeshBuilder.Models.Meshes
             _vertices.AddRange(vertices);
 
             // 全頂点のインデックスを保持、使用済みフラグをfalseで初期化
-            for (int i = 0; i < vertices.Count; i++)
-            {
-                _verticesBuffer.Add(i, false);
-            }
+            _verticesBuffer.AddRange(vertices.Select(_ => false));
         }
 
         /// <summary>
@@ -59,23 +56,15 @@ namespace Silksprite.MeshBuilder.Models.Meshes
 
             for (var i = 0; i < 16384; i++)
             {
-                KeyValuePair<int, bool>[] left = _verticesBuffer.Where(buf => !buf.Value).ToArray();
-                if (left.Length <= 3)
+                if (_verticesBuffer.Count(buf => !buf) <= 3)
                 {
                     break;
                 }
                 DetectTriangle();
             }
 
-            int[] keys = _verticesBuffer.Keys.ToArray();
-            foreach (int key in keys)
-            {
-                if (!_verticesBuffer[key])
-                {
-                    _verticesBuffer[key] = true;
-                    _triangles.Add(key);
-                }
-            }
+            var unusedIndices = _verticesBuffer.Select((b, i) => new KeyValuePair<int, bool>(i, b)).Where(kv => !kv.Value).Select(kv => kv.Key);
+            _triangles.AddRange(unusedIndices);
 
             meshie.Vertices.AddRange(vertices);
             meshie.Indices.AddRange(_triangles);
@@ -92,14 +81,14 @@ namespace Silksprite.MeshBuilder.Models.Meshes
                 FindFarPoint();
             }
 
-            Vector3 a = CurrentPoint;
-            Vector3 b = NextPoint;
-            Vector3 c = PreviousPoint;
+            var a = CurrentPoint;
+            var b = NextPoint;
+            var c = PreviousPoint;
 
-            Vector3 edge1 = b - a;
-            Vector3 edge2 = c - a;
+            var edge1 = b - a;
+            var edge2 = c - a;
 
-            float angle = Vector3.Angle(edge1, edge2);
+            var angle = Vector3.Angle(edge1, edge2);
             if (angle >= 180)
             {
                 // Debug.LogError("Something was wrong.");
@@ -136,11 +125,9 @@ namespace Silksprite.MeshBuilder.Models.Meshes
         /// <returns></returns>
         bool IsIncludePoint()
         {
-            foreach (var key in _verticesBuffer.Keys)
+            for (var index = 0; index < _vertices.Count; index++)
             {
-                int index = key;
-
-                if (_verticesBuffer[key])
+                if (_verticesBuffer[index])
                 {
                     continue;
                 }
@@ -166,8 +153,8 @@ namespace Silksprite.MeshBuilder.Models.Meshes
         /// <returns>Triangle direction normal.</returns>
         Vector3 GetCurrentDirection()
         {
-            Vector3 edge1 = (NextPoint - CurrentPoint).normalized;
-            Vector3 edge2 = (PreviousPoint - CurrentPoint).normalized;
+            var edge1 = (NextPoint - CurrentPoint).normalized;
+            var edge2 = (PreviousPoint - CurrentPoint).normalized;
 
             return Vector3.Cross(edge1, edge2);
         }
@@ -187,15 +174,15 @@ namespace Silksprite.MeshBuilder.Models.Meshes
                 PreviousPoint,
             };
 
-            Vector3 prevNormal = default(Vector3);
-            for (int i = 0; i < tp.Length; i++)
+            var prevNormal = default(Vector3);
+            for (var i = 0; i < tp.Length; i++)
             {
-                Vector3 edge1 = (target - tp[i]);
-                Vector3 edge2 = (target - tp[(i + 1) % tp.Length]);
+                var edge1 = (target - tp[i]);
+                var edge2 = (target - tp[(i + 1) % tp.Length]);
 
-                Vector3 normal = Vector3.Cross(edge1, edge2).normalized;
+                var normal = Vector3.Cross(edge1, edge2).normalized;
 
-                if (prevNormal == default(Vector3))
+                if (prevNormal == default)
                 {
                     prevNormal = normal;
                     continue;
@@ -226,21 +213,21 @@ namespace Silksprite.MeshBuilder.Models.Meshes
         /// </summary>
         void FindFarPoint()
         {
-            int farIndex = -1;
-            float maxDist = float.MinValue;
+            var farIndex = -1;
+            var maxDist = float.MinValue;
 
-            foreach (var key in _verticesBuffer.Keys)
+            for (var index = 0; index < _vertices.Count; index++)
             {
-                if (_verticesBuffer[key])
+                if (_verticesBuffer[index])
                 {
                     continue;
                 }
 
-                float dist = Vector3.Distance(Vector3.zero, _vertices[key]);
+                var dist = Vector3.Distance(Vector3.zero, _vertices[index]);
                 if (dist > maxDist)
                 {
                     maxDist = dist;
-                    farIndex = key;
+                    farIndex = index;
                 }
             }
 
@@ -254,7 +241,7 @@ namespace Silksprite.MeshBuilder.Models.Meshes
         /// </summary>
         int FindNextIndex(int start)
         {
-            int i = start;
+            var i = start;
             while (true)
             {
                 i = (i + 1) % _vertices.Count;
@@ -270,7 +257,7 @@ namespace Silksprite.MeshBuilder.Models.Meshes
         /// </summary>
         int FindPrevIndex(int start)
         {
-            int i = start;
+            var i = start;
             while (true)
             {
                 i = (i - 1) >= 0 ? i - 1 : _vertices.Count - 1;
