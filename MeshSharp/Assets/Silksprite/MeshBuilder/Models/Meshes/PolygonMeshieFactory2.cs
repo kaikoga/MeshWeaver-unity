@@ -49,8 +49,9 @@ namespace Silksprite.MeshBuilder.Models.Meshes
         /// <summary>
         /// Create mesh by vertices.
         /// </summary>
-        public Meshie Build(Pathie pathie, Meshie meshie)
+        public Meshie Build(Pathie pathie)
         {
+            var meshie = new Meshie();
             Initialize(pathie.Vertices.Select(v => v.Vertex).ToList());
 
             for (var i = 0; i < 1024; i++)

@@ -8,7 +8,7 @@ namespace Silksprite.MeshBuilder.Controllers.Paths
     {
         protected override Pathie GeneratePathie()
         {
-            return new FixedPathieFactory().Build(new Pathie());
+            return new FixedPathieFactory().Build();
         }
     }
 }

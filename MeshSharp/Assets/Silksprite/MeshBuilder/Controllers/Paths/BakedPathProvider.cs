@@ -11,7 +11,7 @@ namespace Silksprite.MeshBuilder.Controllers.Paths
 
         protected override Pathie GeneratePathie()
         {
-            return new BakedPathieFactory(pathData).Build(new Pathie());
+            return new BakedPathieFactory(pathData).Build();
         }
     }
 }

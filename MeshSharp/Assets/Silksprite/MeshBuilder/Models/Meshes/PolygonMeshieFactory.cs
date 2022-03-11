@@ -4,8 +4,9 @@ namespace Silksprite.MeshBuilder.Models.Meshes
 {
     public class PolygonMeshieFactory
     {
-        public Meshie Build(Pathie pathie, Meshie meshie)
+        public Meshie Build(Pathie pathie)
         {
+            var meshie = new Meshie();
             if (pathie.Vertices.Count < 3) return meshie;
 
             meshie.Vertices.AddRange(pathie.Vertices);

@@ -10,7 +10,7 @@ namespace Silksprite.MeshBuilder.Controllers.Paths
 
         protected override Pathie GeneratePathie()
         {
-            return new ShapePathieFactory(kind).Build(new Pathie());
+            return new ShapePathieFactory(kind).Build();
         }
     }
 }

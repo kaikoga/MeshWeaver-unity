@@ -11,9 +11,10 @@ namespace Silksprite.MeshBuilder.Models.Meshes
         {
             _data = data;
         }
-        
-        public Meshie Build(Meshie meshie)
+
+        public Meshie Build()
         {
+            var meshie = new Meshie();
             if (_data == null) return meshie;
             meshie.Vertices.AddRange(_data.vertices.Select(v => v.ToVertie()));
             meshie.Indices.AddRange(_data.indices);

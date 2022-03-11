@@ -11,7 +11,7 @@ namespace Silksprite.MeshBuilder.Controllers.Meshes
 
         protected override Meshie GenerateMeshie()
         {
-            return new BakedMeshieFactory(meshData).Build(new Meshie());
+            return new BakedMeshieFactory(meshData).Build();
         }
     }
 }

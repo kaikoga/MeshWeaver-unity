@@ -4,8 +4,9 @@ namespace Silksprite.MeshBuilder.Models.Meshes
 {
     public class MatrixMeshieFactory
     {
-        public Meshie Build(Pathie pathieX, Pathie pathieY, Meshie meshie)
+        public Meshie Build(Pathie pathieX, Pathie pathieY)
         {
+            var meshie = new Meshie();
             var countX = pathieX.Vertices.Count;
             if (countX < 2) return meshie;
             var countY = pathieY.Vertices.Count;

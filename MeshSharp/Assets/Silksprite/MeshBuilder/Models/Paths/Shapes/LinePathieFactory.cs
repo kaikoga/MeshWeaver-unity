@@ -5,8 +5,9 @@ namespace Silksprite.MeshBuilder.Models.Paths.Shapes
 {
     public class LinePathieFactory
     {
-        public Pathie Build(Pathie pathie)
+        public Pathie Build()
         {
+            var pathie = new Pathie();
             pathie.Vertices.AddRange(new []
             {
                 Vector3.zero,

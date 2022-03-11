@@ -11,17 +11,17 @@ namespace Silksprite.MeshBuilder.Models.Paths
             _kind = kind;
         }
 
-        public Pathie Build(Pathie pathie)
+        public Pathie Build()
         {
             switch (_kind)
             {
                 case ShapePathieKind.Line:
-                    return new LinePathieFactory().Build(pathie);
+                    return new LinePathieFactory().Build();
                 case ShapePathieKind.Rect:
-                    return new RectPathieFactory().Build(pathie);
+                    return new RectPathieFactory().Build();
             }
 
-            return pathie;
+            return new Pathie();
         }
 
         public enum ShapePathieKind

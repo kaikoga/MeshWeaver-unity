@@ -12,8 +12,9 @@ namespace Silksprite.MeshBuilder.Models.Paths
             _data = data;
         }
 
-        public Pathie Build(Pathie pathie)
+        public Pathie Build()
         {
+            var pathie = new Pathie();
             if (_data == null) return pathie;
             pathie.Vertices.AddRange(_data.vertices.Select(v => v.ToVertie()));
             return pathie;

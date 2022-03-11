@@ -14,9 +14,9 @@ namespace Silksprite.MeshBuilder.Controllers.Meshes
 
         protected override Meshie GenerateMeshie()
         {
-            LastPathieX = CollectPathie(pathProviderX, new Pathie(), true);
-            LastPathieY = CollectPathie(pathProviderY, new Pathie(), true);
-            return new MatrixMeshieFactory().Build(LastPathieX, LastPathieY, new Meshie());
+            LastPathieX = CollectPathie(pathProviderX, true);
+            LastPathieY = CollectPathie(pathProviderY, true);
+            return new MatrixMeshieFactory().Build(LastPathieX, LastPathieY);
         }
     }
 }

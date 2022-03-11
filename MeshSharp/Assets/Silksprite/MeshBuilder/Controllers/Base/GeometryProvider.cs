@@ -10,8 +10,9 @@ namespace Silksprite.MeshBuilder.Controllers.Base
     {
         public Matrix4x4 Translation => Matrix4x4.TRS(transform.localPosition, transform.localRotation, transform.localScale);
 
-        protected Pathie CollectPathie(PathProvider pathProvider, Pathie pathie, bool applyTranslation)
+        protected static Pathie CollectPathie(PathProvider pathProvider, bool applyTranslation)
         {
+            var pathie = new Pathie();
             if (pathProvider == null) return pathie;
 
             if (applyTranslation)
@@ -26,8 +27,9 @@ namespace Silksprite.MeshBuilder.Controllers.Base
             return pathie;
         }
 
-        protected Pathie CollectPathies(IEnumerable<PathProvider> pathProviders, Pathie pathie, bool applyTranslation)
+        protected static Pathie CollectPathies(IEnumerable<PathProvider> pathProviders, bool applyTranslation)
         {
+            var pathie = new Pathie();
             foreach (var pathProvider in pathProviders.Where(c => c != null && c.gameObject.activeSelf))
             {
                 if (applyTranslation)
