@@ -15,6 +15,7 @@ namespace Silksprite.MeshBuilder.Controllers
         public Mesh outputMesh;
 
         public MeshFilter[] meshFilters;
+        public MeshCollider[] meshColliders;
 
         void Update()
         {
@@ -29,11 +30,13 @@ namespace Silksprite.MeshBuilder.Controllers
             if (sharedMesh == null) sharedMesh = new Mesh();
             OnPopulateMesh(sharedMesh);
 
-            if (meshFilters == null) return;
-
-            foreach (var meshFilter in meshFilters)
+            foreach (var meshFilter in meshFilters ?? Enumerable.Empty<MeshFilter>())
             {
-                meshFilter.sharedMesh = sharedMesh;
+                if (meshFilter) meshFilter.sharedMesh = sharedMesh;
+            }
+            foreach (var meshCollider in meshColliders ?? Enumerable.Empty<MeshCollider>())
+            {
+                if (meshCollider) meshCollider.sharedMesh = sharedMesh;
             }
         }
 
