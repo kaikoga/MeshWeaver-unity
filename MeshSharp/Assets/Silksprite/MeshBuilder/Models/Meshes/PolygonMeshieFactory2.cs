@@ -200,7 +200,7 @@ namespace Silksprite.MeshBuilder.Models.Meshes
                 }
 
                 // If not same direction, the point out of a triangle.
-                if (Vector3.Dot(prevNormal, normal) <= -0.99f)
+                if (Vector3.Dot(prevNormal, normal) <= -0.01f)
                 {
                     return false;
                 }
