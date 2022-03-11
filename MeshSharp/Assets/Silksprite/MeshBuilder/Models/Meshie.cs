@@ -39,7 +39,7 @@ namespace Silksprite.MeshBuilder.Models
         {
             var vertices = string.Join("\n", Vertices.Select(v => v.ToString()));
             var indices = string.Join(",", Indices.Select(v => v.ToString()));
-            return $"{vertices}\n{indices}";
+            return $"V[{Vertices.Count}]\n{vertices}\nI[{Indices.Count}]\n{indices}";
         }
     }
 }

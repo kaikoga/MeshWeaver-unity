@@ -15,6 +15,8 @@ namespace Silksprite.MeshBuilder.Models.Meshes.Modifiers
             _back = back;
         }
 
+        public static MeshReverse BackOnly => new MeshReverse(false, true);
+
         public override Meshie Modify(Meshie meshie)
         {
             var result = new Meshie();
@@ -26,7 +28,7 @@ namespace Silksprite.MeshBuilder.Models.Meshes.Modifiers
             }
             if (_back)
             {
-                var offset = meshie.Vertices.Count;
+                var offset = result.Vertices.Count;
                 result.Vertices.AddRange(meshie.Vertices);
                 result.Indices.AddRange(meshie.Indices
                     .EachTrio((a, b, c) => new []{a, c, b})

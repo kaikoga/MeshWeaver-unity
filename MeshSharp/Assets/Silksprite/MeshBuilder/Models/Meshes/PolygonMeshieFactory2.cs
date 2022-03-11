@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Silksprite.MeshBuilder.Extensions;
 using UnityEngine;
 
 namespace Silksprite.MeshBuilder.Models.Meshes
@@ -52,9 +53,10 @@ namespace Silksprite.MeshBuilder.Models.Meshes
         public Meshie Build(Pathie pathie)
         {
             var meshie = new Meshie();
-            Initialize(pathie.Vertices.Select(v => v.Vertex).ToList());
+            var vertices = pathie.Vertices.Dedup((a, b) => (a.Vertex - b.Vertex).sqrMagnitude < 0.0001f).ToArray();
+            Initialize(vertices.Select(v => v.Vertex).ToList());
 
-            for (var i = 0; i < 1024; i++)
+            for (var i = 0; i < 16384; i++)
             {
                 KeyValuePair<int, bool>[] left = _verticesBuffer.Where(buf => !buf.Value).ToArray();
                 if (left.Length <= 3)
@@ -74,7 +76,7 @@ namespace Silksprite.MeshBuilder.Models.Meshes
                 }
             }
 
-            meshie.Vertices.AddRange(pathie.Vertices);
+            meshie.Vertices.AddRange(vertices);
             meshie.Indices.AddRange(_triangles);
             return meshie;
         }

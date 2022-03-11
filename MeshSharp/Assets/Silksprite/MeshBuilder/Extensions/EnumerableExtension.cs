@@ -6,6 +6,18 @@ namespace Silksprite.MeshBuilder.Extensions
 {
     public static class EnumerableExtension
     {
+        public static IEnumerable<T> Dedup<T>(this IEnumerable<T> e)
+        {
+            return e.Dedup((a, b) => Equals(a, b));
+        }
+
+        public static IEnumerable<T> Dedup<T>(this IEnumerable<T> e, Func<T, T, bool> equality)
+        {
+            return e.Take(1).Concat(
+                e.Pairwise((a, b) => equality(a, b) ? Enumerable.Empty<T>() : Enumerable.Repeat(b, 1))
+                    .SelectMany(x => x));
+        }
+
         public static IEnumerable<TResult> Pairwise<TSource, TResult>(this IEnumerable<TSource> e, Func<TSource, TSource, TResult> selector)
         {
             return e.Zip(e.Skip(1), selector);
