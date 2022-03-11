@@ -54,7 +54,8 @@ namespace Silksprite.MeshBuilder.Models.Meshes
             vertices = vertices.DedupLoop((a, b) => (a.Vertex - b.Vertex).sqrMagnitude < 0.0001f).ToArray();
             Initialize(vertices.Select(v => v.Vertex).ToList());
 
-            for (var i = 0; i < 16384; i++)
+            var i = 0;
+            for (; i < 65536; i++)
             {
                 if (_verticesBuffer.Count(buf => !buf) <= 3)
                 {
@@ -62,8 +63,9 @@ namespace Silksprite.MeshBuilder.Models.Meshes
                 }
                 DetectTriangle();
             }
+            // Debug.Log(i);
 
-            var unusedIndices = _verticesBuffer.Select((b, i) => new KeyValuePair<int, bool>(i, b)).Where(kv => !kv.Value).Select(kv => kv.Key);
+            var unusedIndices = _verticesBuffer.Select((b, index) => new KeyValuePair<int, bool>(index, b)).Where(kv => !kv.Value).Select(kv => kv.Key);
             _triangles.AddRange(unusedIndices);
 
             meshie.Vertices.AddRange(vertices);
@@ -85,25 +87,34 @@ namespace Silksprite.MeshBuilder.Models.Meshes
             var b = NextPoint;
             var c = PreviousPoint;
 
-            var edge1 = b - a;
-            var edge2 = c - a;
+            // var edge1 = b - a;
+            // var edge2 = c - a;
+            //
+            // var angle = Vector3.Angle(edge1, edge2);
+            // if (angle >= 180)
+            // {
+            //     Debug.LogError("Something was wrong.");
+            //     return;
+            // }
 
-            var angle = Vector3.Angle(edge1, edge2);
-            if (angle >= 180)
+            if (_isIncluding)
             {
-                // Debug.LogError("Something was wrong.");
-                return;
+                if (Vector3.Dot(_prevDirection, GetCurrentDirection()) < 0f)
+                {
+                    MoveToNext();
+                    return;
+                }
             }
 
             if (IsIncludePoint())
             {
                 // Debug.Log("Point is including.");
 
+                // Store current triangle direction.
+                if (!_isIncluding) _prevDirection = GetCurrentDirection();
+
                 // try to find other point.
                 _isIncluding = true;
-
-                // Store current triangle direction.
-                _prevDirection = GetCurrentDirection();
 
                 MoveToNext();
 
@@ -189,7 +200,7 @@ namespace Silksprite.MeshBuilder.Models.Meshes
                 }
 
                 // If not same direction, the point out of a triangle.
-                if (Vector3.Dot(prevNormal, normal) <= 0.99f)
+                if (Vector3.Dot(prevNormal, normal) <= -0.99f)
                 {
                     return false;
                 }
