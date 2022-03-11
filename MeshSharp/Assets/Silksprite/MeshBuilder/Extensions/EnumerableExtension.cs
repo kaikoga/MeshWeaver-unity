@@ -10,5 +10,26 @@ namespace Silksprite.MeshBuilder.Extensions
         {
             return e.Zip(e.Skip(1), selector);
         }
+
+        public static IEnumerable<TResult> EachTrio<TSource, TResult>(this IEnumerable<TSource> e, Func<TSource, TSource, TSource, TResult> selector)
+        {
+            using (var it = e.GetEnumerator())
+            {
+                while (it.MoveNext())
+                {
+                    var a = it.Current;
+                    TSource b = default, c = default;
+                    if (it.MoveNext())
+                    {
+                        b = it.Current;
+                        if (it.MoveNext())
+                        {
+                            c = it.Current;
+                        }
+                    }
+                    yield return selector(a, b, c);
+                }
+            }
+        }
     }
 }

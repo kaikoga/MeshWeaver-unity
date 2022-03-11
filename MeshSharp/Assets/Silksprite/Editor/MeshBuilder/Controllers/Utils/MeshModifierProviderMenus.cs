@@ -9,6 +9,7 @@ namespace Silksprite.MeshBuilder.Controllers.Utils
     {
         public static readonly ModifierComponentPopupMenu<MeshModifierProvider> Menu = new ModifierComponentPopupMenu<MeshModifierProvider>
         (
+            typeof(MeshReverseProvider),
             typeof(MeshRepeatProvider),
             typeof(MeshSubdivisionProvider)
         );
