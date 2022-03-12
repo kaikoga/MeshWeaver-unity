@@ -9,7 +9,7 @@ namespace Silksprite.MeshBuilder.Controllers.Paths
     {
         public Vector2 uv;
 
-        protected override Pathie GeneratePathie()
+        protected override Pathie GeneratePathie(LodMask lod)
         {
             return new Pathie { new Vertie(Vector3.zero, uv) };
         }

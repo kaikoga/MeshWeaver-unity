@@ -2,6 +2,7 @@ using System;
 using Silksprite.MeshBuilder.Controllers.Meshes;
 using Silksprite.MeshBuilder.Controllers.Utils;
 using Silksprite.MeshBuilder.Extensions;
+using Silksprite.MeshBuilder.Models;
 using Silksprite.MeshBuilder.Models.DataObjects;
 using Silksprite.MeshBuilder.Utils;
 using UnityEditor;
@@ -26,7 +27,7 @@ namespace Silksprite.MeshBuilder.Controllers.Base
             {
                 var transform = meshProvider.transform;
                 var baked = transform.parent.AddChildComponent<BakedMeshProvider>();
-                baked.meshData = MeshieData.FromMeshie(meshProvider.ToMeshie());
+                baked.meshData = MeshieData.FromMeshie(meshProvider.ToMeshie(LodMask.LOD0));
                 var bakedTransform = baked.transform;
                 bakedTransform.localPosition = transform.localPosition;
                 bakedTransform.localRotation = transform.localRotation;

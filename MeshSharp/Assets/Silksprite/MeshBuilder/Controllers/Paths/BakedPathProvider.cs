@@ -9,7 +9,7 @@ namespace Silksprite.MeshBuilder.Controllers.Paths
     {
         public PathieData pathData;
 
-        protected override Pathie GeneratePathie()
+        protected override Pathie GeneratePathie(LodMask lod)
         {
             return new BakedPathieFactory(pathData).Build();
         }

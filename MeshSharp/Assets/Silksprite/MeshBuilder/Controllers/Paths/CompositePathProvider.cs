@@ -10,9 +10,9 @@ namespace Silksprite.MeshBuilder.Controllers.Paths
 
         public List<PathProvider> PrimaryElements { set => pathProviders = value; }
 
-        protected override Pathie GeneratePathie()
+        protected override Pathie GeneratePathie(LodMask lod)
         {
-            return CollectPathies(pathProviders, true);
+            return CollectPathies(pathProviders, lod, true);
         }
 
     }

@@ -16,10 +16,10 @@ namespace Silksprite.MeshBuilder.Controllers.Meshes
         public Pathie LastPathieX { get; private set; }
         public Pathie LastPathieY { get; private set; }
 
-        protected override Meshie GenerateMeshie()
+        protected override Meshie GenerateMeshie(LodMask lod)
         {
-            LastPathieX = CollectPathie(pathProviderX, true);
-            LastPathieY = CollectPathie(pathProviderY, true);
+            LastPathieX = CollectPathie(pathProviderX, lod, true);
+            LastPathieY = CollectPathie(pathProviderY, lod, true);
             return new PillarMeshieFactory(fillBody, fillBottom, fillTop).Build(LastPathieX, LastPathieY);
         }
     }

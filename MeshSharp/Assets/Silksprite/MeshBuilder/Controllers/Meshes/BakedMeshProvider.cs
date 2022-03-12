@@ -9,7 +9,7 @@ namespace Silksprite.MeshBuilder.Controllers.Meshes
     {
         public MeshieData meshData;
 
-        protected override Meshie GenerateMeshie()
+        protected override Meshie GenerateMeshie(LodMask lod)
         {
             return new BakedMeshieFactory(meshData).Build();
         }

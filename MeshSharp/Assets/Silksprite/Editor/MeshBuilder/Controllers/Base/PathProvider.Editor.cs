@@ -1,5 +1,6 @@
 using Silksprite.MeshBuilder.Controllers.Paths;
 using Silksprite.MeshBuilder.Extensions;
+using Silksprite.MeshBuilder.Models;
 using Silksprite.MeshBuilder.Models.DataObjects;
 using Silksprite.MeshBuilder.Utils;
 using UnityEditor;
@@ -23,7 +24,7 @@ namespace Silksprite.MeshBuilder.Controllers.Base
             {
                 var transform = pathProvider.transform;
                 var baked = transform.parent.AddChildComponent<BakedPathProvider>();
-                baked.pathData = PathieData.FromPathie(pathProvider.ToPathie());
+                baked.pathData = PathieData.FromPathie(pathProvider.ToPathie(LodMask.LOD0));
                 var bakedTransform = baked.transform;
                 bakedTransform.localPosition = transform.localPosition;
                 bakedTransform.localRotation = transform.localRotation;

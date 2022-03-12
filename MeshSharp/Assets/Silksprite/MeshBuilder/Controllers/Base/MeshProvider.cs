@@ -6,11 +6,13 @@ namespace Silksprite.MeshBuilder.Controllers.Base
 {
     public abstract class MeshProvider : GeometryProvider
     {
+        public LodMask lodMask = LodMask.All;
+
         public Meshie LastMeshie { get; private set; }
 
-        public Meshie ToMeshie()
+        public Meshie ToMeshie(LodMask lod)
         {
-            var meshie = GenerateMeshie();
+            var meshie = GenerateMeshie(lod);
             LastMeshie = GetComponents<MeshModifierProvider>()
                 .Where(provider => provider.enabled)
                 .Select(provider => provider.Modifier)
@@ -18,6 +20,6 @@ namespace Silksprite.MeshBuilder.Controllers.Base
             return LastMeshie;
         }
 
-        protected abstract Meshie GenerateMeshie();
+        protected abstract Meshie GenerateMeshie(LodMask lod);
     }
 }

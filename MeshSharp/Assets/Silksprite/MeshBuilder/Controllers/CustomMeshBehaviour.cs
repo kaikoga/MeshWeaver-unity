@@ -9,6 +9,7 @@ namespace Silksprite.MeshBuilder.Controllers
     [ExecuteAlways]
     public abstract class CustomMeshBehaviour : GeometryProvider
     {
+        public LodMaskLayer lodMaskLayer;
         public bool autoUpdate;
         
         public Mesh sharedMesh;
@@ -51,19 +52,19 @@ namespace Silksprite.MeshBuilder.Controllers
         {
             mesh.Clear();
             var meshie = new Meshie();
-            OnPopulateMesh(meshie);
+            OnPopulateMesh((LodMask)lodMaskLayer, meshie);
             meshie.ExportToMesh(mesh);
         }
 
-        protected virtual void OnPopulateMesh(Meshie meshie)
+        protected virtual void OnPopulateMesh(LodMask lodMask, Meshie meshie)
         {
         }
 
-        protected static void CollectMeshies(IEnumerable<MeshProvider> meshProviders, Meshie meshie)
+        protected static void CollectMeshies(IEnumerable<MeshProvider> meshProviders, LodMask lod, Meshie meshie)
         {
             foreach (var meshProvider in meshProviders.Where(c => c != null && c.gameObject.activeSelf))
             {
-                meshie.Concat(meshProvider.ToMeshie(), meshProvider.Translation);
+                meshie.Concat(meshProvider.ToMeshie(lod), meshProvider.Translation);
             }
         }
     }
