@@ -4,6 +4,7 @@ using UnityEditor;
 namespace Silksprite.MeshBuilder.Controllers.Meshes.Modifiers
 {
     [CustomEditor(typeof(MeshRepeatProvider))]
+    [CanEditMultipleObjects]
     public class MeshRepeatProviderEditor : Editor
     {
         public override void OnInspectorGUI()

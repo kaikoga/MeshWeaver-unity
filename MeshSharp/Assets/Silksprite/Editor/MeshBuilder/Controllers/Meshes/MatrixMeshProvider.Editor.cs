@@ -6,6 +6,7 @@ using UnityEditor;
 namespace Silksprite.MeshBuilder.Controllers.Meshes
 {
     [CustomEditor(typeof(MatrixMeshProvider))]
+    [CanEditMultipleObjects]
     public class MatrixMeshProviderEditor : MeshProviderEditor
     {
         bool _isExpandedX;

@@ -9,6 +9,7 @@ using UnityEngine;
 namespace Silksprite.MeshBuilder.Controllers.Base
 {
     [CustomEditor(typeof(PathProvider), true, isFallback = true)]
+    [CanEditMultipleObjects]
     public class PathProviderEditor : Editor
     {
         bool _isExpanded;

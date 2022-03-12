@@ -5,6 +5,7 @@ using UnityEditor;
 namespace Silksprite.MeshBuilder.Controllers.Meshes
 {
     [CustomEditor(typeof(PolygonMeshProvider))]
+    [CanEditMultipleObjects]
     public class PolygonMeshProviderEditor : MeshProviderEditor
     {
         public override void OnInspectorGUI()

@@ -5,6 +5,7 @@ using UnityEditor;
 namespace Silksprite.MeshBuilder.Controllers.Paths
 {
     [CustomEditor(typeof(CompositePathProvider))]
+    [CanEditMultipleObjects]
     public class CompositePathProviderEditor : PathProviderEditor
     {
         public override void OnInspectorGUI()
