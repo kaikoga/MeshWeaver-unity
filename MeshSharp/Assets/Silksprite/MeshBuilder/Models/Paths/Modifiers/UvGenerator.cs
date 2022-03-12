@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Silksprite.MeshBuilder.Models.Paths.Modifiers
 {
-    public class UvGenerator : PathModifier
+    public class UvGenerator : PathieModifier
     {
         readonly Vector2 _min;
         readonly Vector2 _max;

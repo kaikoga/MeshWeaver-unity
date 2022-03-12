@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Silksprite.MeshBuilder.Models.Meshes.Modifiers
 {
-    public class MeshSubdivision : MeshModifier
+    public class MeshSubdivision : MeshieModifier
     {
         readonly int _count;
 

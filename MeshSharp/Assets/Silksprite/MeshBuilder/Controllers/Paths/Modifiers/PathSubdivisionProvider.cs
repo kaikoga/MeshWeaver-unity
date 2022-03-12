@@ -9,6 +9,6 @@ namespace Silksprite.MeshBuilder.Controllers.Paths.Modifiers
     {
         public int count = 2;
 
-        public override PathModifier Modifier => new PathSubdivision(count);
+        public override PathieModifier Modifier => new PathieSubdivision(count);
     }
 }

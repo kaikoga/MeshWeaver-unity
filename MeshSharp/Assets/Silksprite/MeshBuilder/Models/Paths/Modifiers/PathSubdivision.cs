@@ -5,11 +5,11 @@ using Silksprite.MeshBuilder.Models.Base;
 
 namespace Silksprite.MeshBuilder.Models.Paths.Modifiers
 {
-    public class PathSubdivision : PathModifier
+    public class PathieSubdivision : PathieModifier
     {
         readonly int _count;
 
-        public PathSubdivision(int count)
+        public PathieSubdivision(int count)
         {
             _count = count;
         }

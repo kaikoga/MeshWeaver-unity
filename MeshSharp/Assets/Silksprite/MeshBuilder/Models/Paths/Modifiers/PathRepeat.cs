@@ -3,12 +3,12 @@ using Silksprite.MeshBuilder.Models.Base;
 
 namespace Silksprite.MeshBuilder.Models.Paths.Modifiers
 {
-    public class PathRepeat : PathModifier
+    public class PathieRepeat : PathieModifier
     {
         readonly int _count;
         readonly bool _aggregate;
 
-        public PathRepeat(int count, bool aggregate)
+        public PathieRepeat(int count, bool aggregate)
         {
             _count = count;
             _aggregate = aggregate;

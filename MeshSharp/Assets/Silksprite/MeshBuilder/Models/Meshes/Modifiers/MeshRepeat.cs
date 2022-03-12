@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Silksprite.MeshBuilder.Models.Meshes.Modifiers
 {
-    public class MeshRepeat : MeshModifier
+    public class MeshRepeat : MeshieModifier
     {
         readonly int _count;
         readonly Matrix4x4 _translation;

@@ -22,6 +22,6 @@ namespace Silksprite.MeshBuilder.Controllers.Meshes.Modifiers
             }
         }
 
-        public override MeshModifier Modifier => new MeshRepeat(count, Translation);
+        public override MeshieModifier Modifier => new MeshRepeat(count, Translation);
     }
 }

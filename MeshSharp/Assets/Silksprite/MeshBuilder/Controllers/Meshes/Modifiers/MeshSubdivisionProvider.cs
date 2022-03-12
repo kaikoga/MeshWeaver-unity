@@ -8,6 +8,6 @@ namespace Silksprite.MeshBuilder.Controllers.Meshes.Modifiers
     {
         public int count = 1;
 
-        public override MeshModifier Modifier => new MeshSubdivision(count);
+        public override MeshieModifier Modifier => new MeshSubdivision(count);
     }
 }

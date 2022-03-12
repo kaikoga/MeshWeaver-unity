@@ -10,6 +10,6 @@ namespace Silksprite.MeshBuilder.Controllers.Paths.Modifiers
         public int count = 2;
         public bool aggregate;
 
-        public override PathModifier Modifier => new PathRepeat(count, aggregate);
+        public override PathieModifier Modifier => new PathieRepeat(count, aggregate);
     }
 }

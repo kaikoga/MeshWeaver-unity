@@ -10,6 +10,6 @@ namespace Silksprite.MeshBuilder.Controllers.Paths.Modifiers
         public Vector2 min;
         public Vector2 max;
 
-        public override PathModifier Modifier => new UvGenerator(min, max);
+        public override PathieModifier Modifier => new UvGenerator(min, max);
     }
 }

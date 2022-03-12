@@ -11,6 +11,6 @@ namespace Silksprite.MeshBuilder.Controllers.Base.Modifiers
             // The sole reason for this empty method is for showing enabled checkbox
         }
 
-        public abstract PathModifier Modifier { get; }
+        public abstract PathieModifier Modifier { get; }
     }
 }

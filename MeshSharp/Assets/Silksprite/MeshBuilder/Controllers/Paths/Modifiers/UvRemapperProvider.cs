@@ -10,6 +10,6 @@ namespace Silksprite.MeshBuilder.Controllers.Paths.Modifiers
         public Vector2 min = Vector2.zero;
         public Vector2 max = Vector2.one;
 
-        public override PathModifier Modifier => new UvRemapper(min, max);
+        public override PathieModifier Modifier => new UvRemapper(min, max);
     }
 }
