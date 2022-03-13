@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Silksprite.MeshBuilder.Controllers.Base;
@@ -13,6 +14,7 @@ namespace Silksprite.MeshBuilder.Controllers
         public bool autoUpdate;
         
         public Mesh sharedMesh;
+        public Mesh sharedColliderMesh;
         public Mesh outputMesh;
 
         public MeshFilter[] meshFilters;
@@ -28,31 +30,37 @@ namespace Silksprite.MeshBuilder.Controllers
 
         public void Compile()
         {
+            var lodMask = (LodMask)lodMaskLayer;
+
             if (sharedMesh == null) sharedMesh = new Mesh();
-            OnPopulateMesh(sharedMesh);
+            OnPopulateMesh(lodMask, sharedMesh);
 
             foreach (var meshFilter in meshFilters ?? Enumerable.Empty<MeshFilter>())
             {
                 if (meshFilter) meshFilter.sharedMesh = sharedMesh;
             }
+
+            if (sharedColliderMesh == null) sharedColliderMesh = new Mesh();
+            OnPopulateMesh(LodMask.Collider, sharedColliderMesh);
+
             foreach (var meshCollider in meshColliders ?? Enumerable.Empty<MeshCollider>())
             {
-                if (meshCollider) meshCollider.sharedMesh = sharedMesh;
+                if (meshCollider) meshCollider.sharedMesh = sharedColliderMesh;
             }
         }
 
-        public Mesh ExportMesh()
+        public Mesh ExportMesh(LodMask lodMask)
         {
             var mesh = new Mesh();
-            OnPopulateMesh(mesh);
+            OnPopulateMesh(lodMask, mesh);
             return mesh;
         }
 
-        protected virtual void OnPopulateMesh(Mesh mesh)
+        protected virtual void OnPopulateMesh(LodMask lodMask, Mesh mesh)
         {
             mesh.Clear();
             var meshie = new Meshie();
-            OnPopulateMesh((LodMask)lodMaskLayer, meshie);
+            OnPopulateMesh(lodMask, meshie);
             meshie.ExportToMesh(mesh);
         }
 

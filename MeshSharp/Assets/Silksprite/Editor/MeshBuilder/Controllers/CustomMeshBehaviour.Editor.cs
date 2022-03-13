@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using Silksprite.MeshBuilder.Controllers.Utils;
+using Silksprite.MeshBuilder.Models;
 using UnityEditor;
 using UnityEngine;
 
@@ -46,7 +47,7 @@ namespace Silksprite.MeshBuilder.Controllers
                 throw new OperationCanceledException();
             }
 
-            var mesh = meshBehaviour.ExportMesh();
+            var mesh = meshBehaviour.ExportMesh(LodMask.LOD0);
             mesh.name = Path.GetFileNameWithoutExtension(projectFilePath);
             meshBehaviour.outputMesh = mesh; 
             AssetDatabase.CreateAsset(mesh, projectFilePath);
