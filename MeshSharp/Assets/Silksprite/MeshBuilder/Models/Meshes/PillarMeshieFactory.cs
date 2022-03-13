@@ -1,11 +1,10 @@
 using System.Linq;
 using Silksprite.MeshBuilder.Models.Meshes.Modifiers;
-using UnityEditor.UI;
 using UnityEngine;
 
 namespace Silksprite.MeshBuilder.Models.Meshes
 {
-    public class PillarMeshieFactory
+    public class PillarMeshieFactory : IMeshieFactory<Pathie, Pathie>
     {
         readonly bool _fillBody;
         readonly bool _fillBottom;

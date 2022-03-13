@@ -2,7 +2,7 @@ using System.Linq;
 
 namespace Silksprite.MeshBuilder.Models.Meshes
 {
-    public class MatrixMeshieFactory
+    public class MatrixMeshieFactory : IMeshieFactory<Pathie, Pathie>
     {
         public Meshie Build(Pathie pathieX, Pathie pathieY)
         {

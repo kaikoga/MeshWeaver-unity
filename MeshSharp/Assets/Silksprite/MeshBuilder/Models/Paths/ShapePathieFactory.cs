@@ -2,7 +2,7 @@ using Silksprite.MeshBuilder.Models.Paths.Shapes;
 
 namespace Silksprite.MeshBuilder.Models.Paths
 {
-    public class ShapePathieFactory
+    public class ShapePathieFactory : IPathieFactory
     {
         readonly ShapePathieKind _kind;
 

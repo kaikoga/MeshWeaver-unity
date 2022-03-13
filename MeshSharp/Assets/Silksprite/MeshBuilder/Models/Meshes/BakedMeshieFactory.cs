@@ -3,7 +3,7 @@ using Silksprite.MeshBuilder.Models.DataObjects;
 
 namespace Silksprite.MeshBuilder.Models.Meshes
 {
-    public class BakedMeshieFactory
+    public class BakedMeshieFactory : IMeshieFactory
     {
         readonly MeshieData _data;
 

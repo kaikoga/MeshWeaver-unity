@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Silksprite.MeshBuilder.Models.Paths.Shapes
 {
-    public class LinePathieFactory
+    public class LinePathieFactory : IPathieFactory
     {
         public Pathie Build()
         {

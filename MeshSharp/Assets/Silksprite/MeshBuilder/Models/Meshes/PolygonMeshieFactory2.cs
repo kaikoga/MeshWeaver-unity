@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Silksprite.MeshBuilder.Models.Meshes
 {
     // Shamelessly copied from https://edom18.hateblo.jp/entry/2018/03/25/100234
-    public class PolygonMeshieFactory2
+    public class PolygonMeshieFactory2 : IMeshieFactory<Pathie>
     {
         readonly List<int> _triangles = new List<int>();
         readonly List<Vector3> _vertices = new List<Vector3>();

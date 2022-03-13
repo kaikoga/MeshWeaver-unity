@@ -3,7 +3,7 @@ using Silksprite.MeshBuilder.Models.DataObjects;
 
 namespace Silksprite.MeshBuilder.Models.Paths
 {
-    public class BakedPathieFactory
+    public class BakedPathieFactory : IPathieFactory
     {
         readonly PathieData _data;
 
