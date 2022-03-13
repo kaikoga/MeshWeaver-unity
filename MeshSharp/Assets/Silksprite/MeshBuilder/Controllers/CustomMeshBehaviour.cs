@@ -9,7 +9,7 @@ namespace Silksprite.MeshBuilder.Controllers
     [ExecuteAlways]
     public abstract class CustomMeshBehaviour : GeometryProvider
     {
-        public LodMaskLayer lodMaskLayer;
+        public LodMaskLayer lodMaskLayer = LodMaskLayer.LOD0;
         public bool autoUpdate;
         
         public Mesh sharedMesh;
