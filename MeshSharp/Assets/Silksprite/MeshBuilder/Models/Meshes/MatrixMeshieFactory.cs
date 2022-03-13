@@ -1,4 +1,5 @@
 using System.Linq;
+using Silksprite.MeshBuilder.Extensions;
 
 namespace Silksprite.MeshBuilder.Models.Meshes
 {
@@ -13,8 +14,10 @@ namespace Silksprite.MeshBuilder.Models.Meshes
             if (countY < 2) return meshie;
 
             meshie.Vertices.AddRange(pathieY.Vertices.SelectMany(pY => pathieX.Select(pX => pX * pY)));
-            meshie.Indices.AddRange(Enumerable.Range(0, countY - 1)
-                .SelectMany(iY => Enumerable.Range(iY * countX, countX - 1))
+            var indicesX = pathieX.ChangingIndices((a, b) => a.VertexEquals(b, 0f));
+            var indicesY = pathieY.ChangingIndices((a, b) => a.VertexEquals(b, 0f));
+            meshie.Indices.AddRange(indicesY
+                .SelectMany(iY => indicesX.Select(i => i + iY * countX))
                 .SelectMany(i => new[] { i, i + countX, i + countX + 1, i, i + countX + 1, i + 1 }));
             return meshie;
         }

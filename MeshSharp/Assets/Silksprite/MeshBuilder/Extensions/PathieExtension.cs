@@ -16,5 +16,18 @@ namespace Silksprite.MeshBuilder.Extensions
         {
             return equality(e.First, e.Last) ? e.Skip(1).Dedup(equality) : e.Dedup(equality);
         }
+
+        public static IEnumerable<int> ChangingIndices(this Pathie e)
+        {
+            return e.ChangingIndices((a, b) => a.VertexEquals(b));
+        }
+
+        public static IEnumerable<int> ChangingIndices(this Pathie e, Func<Vertie, Vertie, bool> equality)
+        {
+            return e.Pairwise((a, b) => (a, b))
+                .Select((ab, i) => (ab.a, ab.b, i))
+                .Where(abi => !equality(abi.a, abi.b))
+                .Select(abi => abi.i);
+        }
     }
 }
