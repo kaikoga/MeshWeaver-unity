@@ -43,6 +43,12 @@ namespace Silksprite.MeshBuilder.Models
             return new Vertie(a.Translation.MultiplyPoint(b.Vertex), a.Uv + b.Uv, a.Translation * b.Translation);
         }
 
+        public static Vertie operator /(Vertie a, Vertie b)
+        {
+            // I don't think this is correct, Translation part in particular, but we need the Vertex part at least
+            return new Vertie(b.Translation.inverse.MultiplyPoint(a.Vertex), a.Uv - b.Uv, a.Translation * b.Translation.inverse);
+        }
+
         public static Vertie operator *(Vertie a, float f)
         {
             return new Vertie(a.Vertex * f, a.Uv * f, ComponentWiseMultiply(a.Translation, f));
