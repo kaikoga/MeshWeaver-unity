@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Silksprite.MeshBuilder.Models;
 
 namespace Silksprite.MeshBuilder.Extensions
 {
@@ -17,11 +16,6 @@ namespace Silksprite.MeshBuilder.Extensions
             return e.DedupLoop((a, b) => Equals(a, b));
         }
 
-        public static IEnumerable<Vertie> DedupLoop(this Pathie e)
-        {
-            return e.DedupLoop((a, b) => Equals(a, b));
-        }
-
         public static IEnumerable<T> Dedup<T>(this IEnumerable<T> e, Func<T, T, bool> equality)
         {
             return e.Take(1).Concat(
@@ -32,11 +26,6 @@ namespace Silksprite.MeshBuilder.Extensions
         public static IEnumerable<T> DedupLoop<T>(this IEnumerable<T> e, Func<T, T, bool> equality)
         {
             return equality(e.First(), e.Last()) ? e.Skip(1).Dedup(equality) : e.Dedup(equality);
-        }
-
-        public static IEnumerable<Vertie> DedupLoop(this Pathie e, Func<Vertie, Vertie, bool> equality)
-        {
-            return equality(e.First, e.Last) ? e.Skip(1).Dedup(equality) : e.Dedup(equality);
         }
 
         public static IEnumerable<TResult> Pairwise<TSource, TResult>(this IEnumerable<TSource> e, Func<TSource, TSource, TResult> selector)
