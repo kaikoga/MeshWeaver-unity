@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Silksprite.MeshBuilder.Controllers.Base;
@@ -13,16 +12,17 @@ namespace Silksprite.MeshBuilder.Controllers
         public LodMaskLayer lodMaskLayer = LodMaskLayer.LOD0;
         public bool autoUpdate;
         
-        public Mesh sharedMesh;
-        public Mesh sharedColliderMesh;
         public Mesh outputMesh;
 
         public MeshFilter[] meshFilters;
         public MeshCollider[] meshColliders;
 
+        Mesh _runtimeMesh;
+        Mesh _runtimeColliderMesh;
+
         void Update()
         {
-            if (sharedMesh == null || autoUpdate)
+            if (_runtimeMesh == null || autoUpdate)
             {
                 Compile();
             }
@@ -32,20 +32,28 @@ namespace Silksprite.MeshBuilder.Controllers
         {
             var lodMask = (LodMask)lodMaskLayer;
 
-            if (sharedMesh == null) sharedMesh = new Mesh();
-            OnPopulateMesh(lodMask, sharedMesh);
+            if (_runtimeMesh == null) _runtimeMesh = new Mesh();
+            OnPopulateMesh(lodMask, _runtimeMesh);
 
             foreach (var meshFilter in meshFilters ?? Enumerable.Empty<MeshFilter>())
             {
-                if (meshFilter) meshFilter.sharedMesh = sharedMesh;
+                if (meshFilter) meshFilter.sharedMesh = _runtimeMesh;
             }
 
-            if (sharedColliderMesh == null) sharedColliderMesh = new Mesh();
-            OnPopulateMesh(LodMask.Collider, sharedColliderMesh);
-
+            Mesh runtimeColliderMesh;
+            if (lodMask == LodMask.Collider)
+            {
+                runtimeColliderMesh = _runtimeMesh;
+            }
+            else
+            {
+                if (_runtimeColliderMesh == null) _runtimeColliderMesh = new Mesh();
+                OnPopulateMesh(LodMask.Collider, _runtimeColliderMesh);
+                runtimeColliderMesh = _runtimeColliderMesh;
+            }
             foreach (var meshCollider in meshColliders ?? Enumerable.Empty<MeshCollider>())
             {
-                if (meshCollider) meshCollider.sharedMesh = sharedColliderMesh;
+                if (meshCollider) meshCollider.sharedMesh = runtimeColliderMesh;
             }
         }
 
