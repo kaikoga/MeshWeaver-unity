@@ -18,6 +18,8 @@ namespace Silksprite.MeshBuilder.Models
             Translation = translation;
         }
 
+        public bool VertexEquals(Vertie other, float sqrError = 0.000001f) => !((Vertex - other.Vertex).sqrMagnitude >= sqrError);
+
         public Vertie MultiplyPoint(Matrix4x4 translation)
         {
             return new Vertie(translation.MultiplyPoint(Vertex), Uv, translation * Translation);
