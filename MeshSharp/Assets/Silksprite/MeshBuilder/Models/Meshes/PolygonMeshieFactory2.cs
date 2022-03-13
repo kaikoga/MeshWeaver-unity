@@ -50,8 +50,7 @@ namespace Silksprite.MeshBuilder.Models.Meshes
         public Meshie Build(Pathie pathie)
         {
             var meshie = new Meshie();
-            IEnumerable<Vertie> vertices = pathie.Vertices;
-            vertices = vertices.DedupLoop((a, b) => (a.Vertex - b.Vertex).sqrMagnitude < 0.0001f).ToArray();
+            var vertices = pathie.DedupLoop((a, b) => (a.Vertex - b.Vertex).sqrMagnitude < 0.0001f).ToArray();
             Initialize(vertices.Select(v => v.Vertex).ToList());
 
             var i = 0;

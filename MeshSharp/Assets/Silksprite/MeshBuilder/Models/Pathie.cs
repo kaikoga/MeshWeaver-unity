@@ -10,6 +10,11 @@ namespace Silksprite.MeshBuilder.Models
     {
         public readonly List<Vertie> Vertices = new List<Vertie>();
 
+        public Vertie First => Vertices.Count > 0 ? Vertices[0] : default;
+        public Vertie Last => Vertices.Count > 0 ? Vertices[Vertices.Count - 1] : default;
+        
+        public Vertie Diff => Last - First;
+
         public Pathie() { }
 
         public Pathie(IEnumerable<Vertie> vertices)

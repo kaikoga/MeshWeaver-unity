@@ -21,7 +21,7 @@ namespace Silksprite.MeshBuilder.Models.Paths.Modifiers
 
             if (_aggregate)
             {
-                var diff = pathie.Vertices.Last() - pathie.Vertices.First();
+                var diff = pathie.Diff;
                 var vertices = pathie.Vertices.Take(1)
                     .Concat(Enumerable.Range(0, _count)
                         .Select(i =>
@@ -34,7 +34,7 @@ namespace Silksprite.MeshBuilder.Models.Paths.Modifiers
             }
             else
             {
-                var diff = pathie.Vertices.Last().Vertex - pathie.Vertices.First().Vertex;
+                var diff = pathie.Diff.Vertex;
                 var vertices = Enumerable.Range(0, _count)
                     .Select(i =>
                     {
