@@ -57,11 +57,9 @@ namespace Silksprite.MeshBuilder.Controllers
             }
         }
 
-        public Mesh ExportMesh(LodMask lodMask)
+        public void ExportMesh(LodMask lodMask, Mesh mesh)
         {
-            var mesh = new Mesh();
             OnPopulateMesh(lodMask, mesh);
-            return mesh;
         }
 
         protected virtual void OnPopulateMesh(LodMask lodMask, Mesh mesh)

@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Linq;
 using Silksprite.MeshBuilder.Controllers.Utils;
 using Silksprite.MeshBuilder.Models;
 using UnityEditor;
@@ -47,10 +48,55 @@ namespace Silksprite.MeshBuilder.Controllers
                 throw new OperationCanceledException();
             }
 
-            var mesh = meshBehaviour.ExportMesh(LodMask.LOD0);
-            mesh.name = Path.GetFileNameWithoutExtension(projectFilePath);
-            meshBehaviour.outputMesh = mesh; 
-            AssetDatabase.CreateAsset(mesh, projectFilePath);
+            var meshes = AssetDatabase.LoadAllAssetsAtPath(projectFilePath).OfType<Mesh>().ToArray();
+            var mesh0 = meshes.FirstOrDefault(AssetDatabase.IsMainAsset);
+            var subAssets = meshes.Where(AssetDatabase.IsSubAsset).ToArray();
+            var mesh1 = subAssets.FirstOrDefault(mesh => mesh.name.EndsWith("_LOD1"));
+            var mesh2 = subAssets.FirstOrDefault(mesh => mesh.name.EndsWith("_LOD2"));
+            var mesh9 = subAssets.FirstOrDefault(mesh => mesh.name.EndsWith("_Collider"));
+            foreach (var subAsset in subAssets)
+            {
+                AssetDatabase.RemoveObjectFromAsset(subAsset);
+            }
+
+            if (!mesh0)
+            {
+                mesh0 = new Mesh();
+                AssetDatabase.CreateAsset(mesh0, projectFilePath);
+            }
+
+            if (!mesh1)
+            {
+                mesh1 = new Mesh();
+            }
+            if (!mesh2)
+            {
+                mesh2 = new Mesh();
+            }
+            if (!mesh9)
+            {
+                mesh9 = new Mesh();
+            }
+
+            AssetDatabase.AddObjectToAsset(mesh1, projectFilePath);
+            AssetDatabase.AddObjectToAsset(mesh2, projectFilePath);
+            AssetDatabase.AddObjectToAsset(mesh9, projectFilePath);
+
+            meshBehaviour.ExportMesh(LodMask.LOD0, mesh0);
+            mesh0.name = Path.GetFileNameWithoutExtension(projectFilePath);
+            
+            meshBehaviour.ExportMesh(LodMask.LOD1, mesh1);
+            mesh1.name = Path.GetFileNameWithoutExtension(projectFilePath) + "_LOD1";
+
+            meshBehaviour.ExportMesh(LodMask.LOD2, mesh2);
+            mesh2.name = Path.GetFileNameWithoutExtension(projectFilePath) + "_LOD2";
+
+            meshBehaviour.ExportMesh(LodMask.Collider, mesh9);
+            mesh9.name = Path.GetFileNameWithoutExtension(projectFilePath) + "_Collider";
+
+            meshBehaviour.outputMesh = mesh0; 
+
+            AssetDatabase.SaveAssets();
         }
     }
 }
