@@ -1,49 +1,35 @@
-using System.Linq;
 using Silksprite.MeshBuilder.Models.Base;
+using UnityEngine;
 
 namespace Silksprite.MeshBuilder.Models.Paths.Modifiers
 {
-    public class PathieRepeat : PathieModifier
+    public class PathRepeat : PathieModifier
     {
         readonly int _count;
-        readonly bool _aggregate;
+        readonly Matrix4x4 _translation;
+        readonly bool _fromPath;
 
-        public PathieRepeat(int count, bool aggregate)
+        public PathRepeat(int count, Matrix4x4 translation, bool fromPath = false)
         {
             _count = count;
-            _aggregate = aggregate;
+            _translation = translation;
+            _fromPath = fromPath;
         }
+
+        public PathRepeat(int count, bool fromPath) : this(count, Matrix4x4.identity, fromPath) { }
 
         public override Pathie Modify(Pathie pathie)
         {
-            if (pathie.Vertices.Count <= 1) return pathie;
             if (_count <= 1) return pathie;
-
-            if (_aggregate)
+            var result = new Pathie();
+            var t = Matrix4x4.identity;
+            var dt = _fromPath ? pathie.Diff.Translation : _translation; 
+            for (var i = 0; i < _count; i++)
             {
-                var diff = pathie.Diff;
-                var vertices = pathie.Vertices.Take(1)
-                    .Concat(Enumerable.Range(0, _count)
-                        .Select(i =>
-                        {
-                            var iDiff = diff * i;
-                            return pathie.Vertices.Skip(1).Select(v => v + iDiff);
-                        })
-                        .SelectMany(v => v));
-                return new Pathie(vertices);
+                result.Concat(pathie, t);
+                t *= dt;
             }
-            else
-            {
-                var diff = pathie.Diff.Vertex;
-                var vertices = Enumerable.Range(0, _count)
-                    .Select(i =>
-                    {
-                        var iDiff = diff * i;
-                        return pathie.Vertices.Select(v => v + iDiff);
-                    })
-                    .SelectMany(v => v);
-                return new Pathie(vertices);
-            }
+            return result;
         }
     }
 }

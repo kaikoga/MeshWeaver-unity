@@ -8,8 +8,20 @@ namespace Silksprite.MeshBuilder.Controllers.Paths.Modifiers
     public class PathRepeatProvider : PathModifierProvider
     {
         public int count = 2;
-        public bool aggregate;
+        public Vector3 offset;
+        public VertexProvider referenceTranslation;
+        public bool fromPath = true;
 
-        public override PathieModifier Modifier => new PathieRepeat(count, aggregate);
+        Matrix4x4 Translation
+        {
+            get
+            {
+                var translation = Matrix4x4.Translate(offset);
+                if (referenceTranslation) translation = referenceTranslation.Translation * translation;
+                return translation;
+            }
+        }
+
+        public override PathieModifier Modifier => new PathRepeat(count, Translation, fromPath);
     }
 }
