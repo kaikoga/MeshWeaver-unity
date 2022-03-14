@@ -1,4 +1,3 @@
-using System.Linq;
 using Silksprite.MeshBuilder.Models.Meshes.Modifiers;
 using UnityEngine;
 

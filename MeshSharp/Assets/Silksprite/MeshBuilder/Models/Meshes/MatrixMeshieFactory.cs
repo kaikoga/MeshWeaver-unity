@@ -8,12 +8,14 @@ namespace Silksprite.MeshBuilder.Models.Meshes
         public Meshie Build(Pathie pathieX, Pathie pathieY)
         {
             var meshie = new Meshie();
-            var countX = pathieX.ActiveVertices.Count();
+            var activeX = pathieX.Active;
+            var countX = activeX.Vertices.Count;
             if (countX < 2) return meshie;
-            var countY = pathieY.ActiveVertices.Count();
+            var activeY = pathieY.Active;
+            var countY = activeY.Vertices.Count;
             if (countY < 2) return meshie;
 
-            meshie.Vertices.AddRange(pathieY.ActiveVertices.SelectMany(pY => pathieX.ActiveVertices.Select(pX => pX * pY)));
+            meshie.Vertices.AddRange(activeY.Vertices.SelectMany(pY => activeX.Vertices.Select(pX => pX * pY)));
             var indicesX = pathieX.ChangingIndices((a, b) => a.VertexEquals(b, 0f));
             var indicesY = pathieY.ChangingIndices((a, b) => a.VertexEquals(b, 0f));
             meshie.Indices.AddRange(indicesY

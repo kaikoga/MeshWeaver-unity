@@ -7,7 +7,7 @@ namespace Silksprite.MeshBuilder.Models.Meshes
         public Meshie Build(Pathie pathie)
         {
             var meshie = new Meshie();
-            var vertices = pathie.ActiveVertices.ToArray(); 
+            var vertices = pathie.Active.Vertices.ToArray(); 
             if (vertices.Length < 3) return meshie;
 
             meshie.Vertices.AddRange(vertices);
