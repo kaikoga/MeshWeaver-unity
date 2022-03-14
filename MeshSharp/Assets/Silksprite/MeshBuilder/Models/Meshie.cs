@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Silksprite.MeshBuilder.Models.Base;
 using UnityEngine;
 
 namespace Silksprite.MeshBuilder.Models
@@ -34,6 +35,8 @@ namespace Silksprite.MeshBuilder.Models
             Vertices.AddRange(other.Vertices.Select(v => v.MultiplyPoint(matrix4x4)));
             Indices.AddRange(other.Indices.Select(i => i + offset));
         }
+
+        public Meshie Apply(MeshieModifier modifier) => modifier.Modify(this);
 
         public override string ToString()
         {

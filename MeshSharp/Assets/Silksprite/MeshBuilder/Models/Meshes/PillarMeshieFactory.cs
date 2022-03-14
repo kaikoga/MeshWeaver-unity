@@ -28,7 +28,7 @@ namespace Silksprite.MeshBuilder.Models.Meshes
             }
             if (_fillTop)
             {
-                meshie.Concat(MeshReverse.BackOnly.Modify(new PolygonMeshieFactory2().Build(pathieX)), Matrix4x4.Translate(pathieY.Last.Vertex));
+                meshie.Concat(new PolygonMeshieFactory2().Build(pathieX).Apply(MeshReverse.BackOnly), Matrix4x4.Translate(pathieY.Last.Vertex));
             }
             return meshie;
         }

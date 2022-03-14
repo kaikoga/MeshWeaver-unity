@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Silksprite.MeshBuilder.Models.Base;
 using UnityEngine;
 
 namespace Silksprite.MeshBuilder.Models
@@ -37,6 +38,8 @@ namespace Silksprite.MeshBuilder.Models
             }
             return result;
         }
+
+        public Pathie Apply(PathieModifier modifier) => modifier.Modify(this);
 
         public override string ToString()
         {
