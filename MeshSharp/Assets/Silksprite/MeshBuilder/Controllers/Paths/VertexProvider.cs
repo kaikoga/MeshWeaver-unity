@@ -11,7 +11,12 @@ namespace Silksprite.MeshBuilder.Controllers.Paths
 
         protected override Pathie GeneratePathie(LodMask lod)
         {
-            return lodMask.HasFlag(lod) ? new Pathie { new Vertie(Vector3.zero, uv) } : new Pathie();
+            var pathie = new Pathie();
+            if (lodMask.HasFlag(lod))
+            {
+                pathie.Add(new Vertie(Vector3.zero, uv));
+            }
+            return pathie;
         }
         
         void OnDrawGizmos()

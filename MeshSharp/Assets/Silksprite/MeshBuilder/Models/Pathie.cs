@@ -21,8 +21,6 @@ namespace Silksprite.MeshBuilder.Models
         {
             Vertices.AddRange(vertices);
         }
-        
-        public void Add(Vertie item) => Vertices.Add(item);
 
         public void Concat(Pathie other, Matrix4x4 matrix4x4)
         {
@@ -34,7 +32,7 @@ namespace Silksprite.MeshBuilder.Models
             var result = new Pathie();
             foreach (var (vertie, i) in this.Select((vertie, i) => (vertie, i)))
             {
-                result.Add(modifier(vertie, i));
+                result.Vertices.Add(modifier(vertie, i));
             }
             return result;
         }
