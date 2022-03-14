@@ -14,7 +14,7 @@ namespace Silksprite.MeshBuilder.Extensions
 
         public static IEnumerable<Vertie> DedupLoop(this Pathie e, Func<Vertie, Vertie, bool> equality)
         {
-            return equality(e.First, e.Last) ? e.Vertices.Skip(1).Dedup(equality) : e.Vertices.Dedup(equality);
+            return equality(e.First, e.Last) ? e.ActiveVertices.Skip(1).Dedup(equality) : e.ActiveVertices.Dedup(equality);
         }
 
         public static IEnumerable<int> ChangingIndices(this Pathie e)
@@ -24,7 +24,7 @@ namespace Silksprite.MeshBuilder.Extensions
 
         public static IEnumerable<int> ChangingIndices(this Pathie e, Func<Vertie, Vertie, bool> equality)
         {
-            return e.Vertices.Pairwise((a, b) => (a, b))
+            return e.ActiveVertices.Pairwise((a, b) => (a, b))
                 .Select((ab, i) => (ab.a, ab.b, i))
                 .Where(abi => !equality(abi.a, abi.b))
                 .Select(abi => abi.i);

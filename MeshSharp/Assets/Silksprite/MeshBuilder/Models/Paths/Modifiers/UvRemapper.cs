@@ -16,7 +16,7 @@ namespace Silksprite.MeshBuilder.Models.Paths.Modifiers
 
         public override Pathie Modify(Pathie pathie)
         {
-            return pathie.Modify((vertie, i) => new Vertie(vertie.Translation, _min * (Vector2.one - vertie.Uv) + (_max - _min) * vertie.Uv));
+            return pathie.Modify((vertie, i) => new Vertie(vertie.Translation, _min * (Vector2.one - vertie.Uv) + (_max - _min) * vertie.Uv, vertie.Culled));
         }
     }
 }
