@@ -10,15 +10,24 @@ namespace Silksprite.MeshBuilder.Controllers.Base
         public LodMask lodMask = LodMask.All;
 
         public Pathie LastPathie { get; private set; }
+        public Pathie LastColliderPathie { get; private set; }
 
         public Pathie ToPathie(LodMask lod)
         {
             var pathie = GeneratePathie(lod);
-            LastPathie = GetComponents<PathModifierProvider>()
+            var lastPathie = GetComponents<PathModifierProvider>()
                 .Where(provider => provider.enabled)
                 .Select(provider => provider.Modifier)
                 .Aggregate(pathie, (current, modifier) => modifier.Modify(current));
-            return LastPathie;
+            if (lod == LodMask.Collider)
+            {
+                LastColliderPathie = lastPathie;
+            }
+            else
+            {
+                LastPathie = lastPathie;
+            }
+            return lastPathie;
         }
 
         protected abstract Pathie GeneratePathie(LodMask lod);

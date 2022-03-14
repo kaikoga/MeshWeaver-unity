@@ -15,12 +15,18 @@ namespace Silksprite.MeshBuilder.Controllers.Base
     public class MeshProviderEditor : Editor
     {
         bool _isExpanded;
+        bool _isColliderExpanded;
 
         public override void OnInspectorGUI()
         {
             var meshProvider = (MeshProvider)target;
             base.OnInspectorGUI();
-            MeshBuilderGUI.DumpFoldout("Mesh data", ref _isExpanded, () => meshProvider.LastMeshie);
+            MeshBuilderGUI.DumpFoldout($"Mesh Dump: {meshProvider.LastMeshie}",
+                ref _isExpanded,
+                () => meshProvider.LastMeshie.Dump());
+            MeshBuilderGUI.DumpFoldout($"Collider Mesh Dump: {meshProvider.LastColliderMeshie}",
+                ref _isColliderExpanded,
+                () => meshProvider.LastColliderMeshie.Dump());
 
             MeshModifierProviderMenus.Menu.ModifierPopup(meshProvider);
 

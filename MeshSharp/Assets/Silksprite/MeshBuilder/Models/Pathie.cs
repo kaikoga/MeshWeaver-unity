@@ -51,6 +51,11 @@ namespace Silksprite.MeshBuilder.Models
 
         public override string ToString()
         {
+            return $"V[{Vertices.Count}]";
+        }
+
+        public string Dump()
+        {
             var vertices = string.Join("\n", Vertices.Select(v => v.ToString()));
             return $"V[{Vertices.Count}]\n{vertices}";
         }
