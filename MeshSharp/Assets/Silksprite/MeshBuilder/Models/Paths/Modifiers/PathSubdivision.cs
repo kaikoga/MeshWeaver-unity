@@ -30,7 +30,7 @@ namespace Silksprite.MeshBuilder.Models.Paths.Modifiers
             }
 
             var vertices = pathie.Vertices.Take(1)
-                .Concat(pathie.Pairwise(SubdivideNextEdge).SelectMany(v => v));
+                .Concat(pathie.Vertices.Pairwise(SubdivideNextEdge).SelectMany(v => v));
             return new Pathie(vertices);
         }
     }

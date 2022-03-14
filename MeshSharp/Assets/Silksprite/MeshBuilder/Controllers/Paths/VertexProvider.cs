@@ -14,7 +14,7 @@ namespace Silksprite.MeshBuilder.Controllers.Paths
             var pathie = new Pathie();
             if (lodMask.HasFlag(lod))
             {
-                pathie.Add(new Vertie(Vector3.zero, uv));
+                pathie.Vertices.Add(new Vertie(Vector3.zero, uv));
             }
             return pathie;
         }

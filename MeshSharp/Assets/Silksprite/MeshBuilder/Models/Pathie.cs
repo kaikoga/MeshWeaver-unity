@@ -1,12 +1,11 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 namespace Silksprite.MeshBuilder.Models
 {
-    public class Pathie : IEnumerable<Vertie>
+    public class Pathie
     {
         public readonly List<Vertie> Vertices = new List<Vertie>();
 
@@ -30,21 +29,11 @@ namespace Silksprite.MeshBuilder.Models
         public Pathie Modify(Func<Vertie, int, Vertie> modifier)
         {
             var result = new Pathie();
-            foreach (var (vertie, i) in this.Select((vertie, i) => (vertie, i)))
+            foreach (var (vertie, i) in Vertices.Select((vertie, i) => (vertie, i)))
             {
                 result.Vertices.Add(modifier(vertie, i));
             }
             return result;
-        }
-
-        public IEnumerator<Vertie> GetEnumerator()
-        {
-            return Vertices.GetEnumerator();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
         }
 
         public override string ToString()
