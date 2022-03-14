@@ -29,8 +29,9 @@ namespace Silksprite.MeshBuilder.Models.Paths.Modifiers
                 yield return b;
             }
 
-            var vertices = pathie.Vertices.Take(1)
-                .Concat(pathie.Vertices.Pairwise(SubdivideNextEdge).SelectMany(v => v));
+            var active = pathie.Active;
+            var vertices = active.Vertices.Take(1)
+                .Concat(active.Vertices.Pairwise(SubdivideNextEdge).SelectMany(v => v));
             return new Pathie(vertices);
         }
     }

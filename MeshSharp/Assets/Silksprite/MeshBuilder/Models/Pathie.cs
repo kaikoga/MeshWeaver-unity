@@ -10,7 +10,17 @@ namespace Silksprite.MeshBuilder.Models
     {
         public readonly List<Vertie> Vertices = new List<Vertie>();
 
-        public Pathie Active => new Pathie(Vertices.Where(v => !v.Culled));
+        public Pathie Active => new Pathie(ActiveVertices());
+
+        IEnumerable<Vertie> ActiveVertices()
+        {
+            for (var index = 0; index < Vertices.Count; index++)
+            {
+                if (index == 0 || index == Vertices.Count - 1) yield return Vertices[index];
+                var v = Vertices[index];
+                if (!v.Culled) yield return v;
+            }
+        }
 
         public Vertie First => Vertices.Count > 0 ? Vertices[0] : default;
         public Vertie Last => Vertices.Count > 0 ? Vertices[Vertices.Count - 1] : default;
