@@ -11,7 +11,8 @@ namespace Silksprite.MeshBuilder.Controllers.Utils
         (
             typeof(MeshReverseProvider),
             typeof(MeshRepeatProvider),
-            typeof(MeshSubdivisionProvider)
+            typeof(MeshSubdivisionProvider),
+            typeof(UvProjectorProvider)
         );
     }
 }
