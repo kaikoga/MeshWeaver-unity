@@ -1,6 +1,5 @@
 using Silksprite.MeshBuilder.Controllers.Base.Modifiers;
 using Silksprite.MeshBuilder.Controllers.Meshes.Modifiers;
-using Silksprite.MeshBuilder.Controllers.Paths.Modifiers;
 using Silksprite.MeshBuilder.Utils;
 
 namespace Silksprite.MeshBuilder.Controllers.Utils
@@ -12,6 +11,8 @@ namespace Silksprite.MeshBuilder.Controllers.Utils
             typeof(MeshReverseProvider),
             typeof(MeshRepeatProvider),
             typeof(MeshSubdivisionProvider),
+            typeof(MeshResizeProvider),
+            typeof(MeshNormalizeProvider),
             typeof(UvProjectorProvider)
         );
     }
