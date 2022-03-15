@@ -73,13 +73,5 @@ namespace Silksprite.MeshBuilder.Controllers
         protected virtual void OnPopulateMesh(LodMask lodMask, Meshie meshie)
         {
         }
-
-        protected static void CollectMeshies(IEnumerable<MeshProvider> meshProviders, LodMask lod, Meshie meshie)
-        {
-            foreach (var meshProvider in meshProviders.Where(c => c != null && c.gameObject.activeSelf))
-            {
-                meshie.Concat(meshProvider.ToMeshie(lod), meshProvider.Translation);
-            }
-        }
     }
 }
