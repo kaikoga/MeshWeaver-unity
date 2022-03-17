@@ -9,8 +9,9 @@ namespace Silksprite.MeshBuilder.Controllers.Paths.Modifiers
     {
         public Vector2 min;
         public Vector2 max;
+        public float topologicalWeight;
         public int uvChannel;
 
-        public override IPathieModifier PathieModifier => new UvGenerator(min, max, uvChannel);
+        public override IPathieModifier PathieModifier => new UvGenerator(min, max, topologicalWeight, uvChannel);
     }
 }

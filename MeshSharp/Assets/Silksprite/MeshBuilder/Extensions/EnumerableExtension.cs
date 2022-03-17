@@ -6,6 +6,16 @@ namespace Silksprite.MeshBuilder.Extensions
 {
     public static class EnumerableExtension
     {
+        public static IEnumerable<float> Integral(this IEnumerable<float> e)
+        {
+            var value = 0f;
+            foreach (var v in e)
+            {
+                value += v;
+                yield return value;
+            }
+        }
+
         public static IEnumerable<T> Dedup<T>(this IEnumerable<T> e)
         {
             return e.Dedup((a, b) => Equals(a, b));
