@@ -1,5 +1,29 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+
 namespace Silksprite.MeshBuilder.Models
 {
+    public class Mux<T> : IEnumerable<MuxLayer<T>>
+    {
+        readonly MuxLayer<T>[] _layers;
+
+        public Mux(IEnumerable<MuxLayer<T>> layers)
+        {
+            _layers = layers.ToArray();
+        }
+
+        public IEnumerator<MuxLayer<T>> GetEnumerator()
+        {
+            return ((IEnumerable<MuxLayer<T>>)_layers).GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return _layers.GetEnumerator();
+        }
+    }
+
     public readonly struct MuxLayer<T>
     {
         public readonly T Value;
@@ -11,4 +35,5 @@ namespace Silksprite.MeshBuilder.Models
             MinIndex = minIndex;
         }
     }
+
 }

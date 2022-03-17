@@ -10,17 +10,17 @@ namespace Silksprite.MeshBuilder.Models
         public readonly Matrix4x4 Translation;
         public readonly bool Culled;
         
-        readonly MuxLayer<Vector2>[] _uvs;
-        public IEnumerable<MuxLayer<Vector2>> Uvs => _uvs;
+        readonly Mux<Vector2> _uvs;
+        public Mux<Vector2> Uvs => _uvs;
 
         public readonly Vector3 Vertex;
         public readonly Vector2 Uv;
 
         public Vertie(Vector3 vertex) : this(Matrix4x4.Translate(vertex), false, new []{ new MuxLayer<Vector2>(Vector2.zero, 0) }) { }
 
-        public Vertie(Matrix4x4 translation, bool culled, IEnumerable<MuxLayer<Vector2>> uvs) : this(translation, culled, uvs.ToArray()) { } 
+        public Vertie(Matrix4x4 translation, bool culled, IEnumerable<MuxLayer<Vector2>> uvs) : this(translation, culled, new Mux<Vector2>(uvs)) { } 
 
-        public Vertie(Matrix4x4 translation, bool culled, MuxLayer<Vector2>[] uvs)
+        public Vertie(Matrix4x4 translation, bool culled, Mux<Vector2> uvs)
         {
             Translation = translation;
             Culled = culled;
@@ -66,7 +66,7 @@ namespace Silksprite.MeshBuilder.Models
 
         public static Vertie operator *(Vertie a, float f)
         {
-            return new Vertie(ComponentWiseMultiply(a.Translation, f), a.Culled, a.Uvs.SelectChannelValues(uv => uv * f));
+            return new Vertie(ComponentWiseMultiply(a.Translation, f), a.Culled, a.Uvs.SelectMuxValues(uv => uv * f));
         }
 
         static Matrix4x4 ComponentWiseAdd(Matrix4x4 a, Matrix4x4 b)

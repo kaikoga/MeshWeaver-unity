@@ -5,7 +5,7 @@ using Silksprite.MeshBuilder.Models;
 
 namespace Silksprite.MeshBuilder.Extensions
 {
-    public static class ChannelExtension
+    public static class MuxExtension
     {
         public static T Value<T>(this IEnumerable<MuxLayer<T>> ch)
         {
@@ -77,12 +77,12 @@ namespace Silksprite.MeshBuilder.Extensions
             }
         }
 
-        public static IEnumerable<MuxLayer<TOut>> SelectChannelValues<TIn, TOut>(this IEnumerable<MuxLayer<TIn>> self, Func<TIn, TOut> selector)
+        public static IEnumerable<MuxLayer<TOut>> SelectMuxValues<TIn, TOut>(this IEnumerable<MuxLayer<TIn>> self, Func<TIn, TOut> selector)
         {
-            return self.SelectChannelValues((v, _) => selector(v));
+            return self.SelectMuxValues((v, _) => selector(v));
         }
 
-        static IEnumerable<MuxLayer<TOut>> SelectChannelValues<TIn, TOut>(this IEnumerable<MuxLayer<TIn>> self, Func<TIn, int, TOut> selector)
+        static IEnumerable<MuxLayer<TOut>> SelectMuxValues<TIn, TOut>(this IEnumerable<MuxLayer<TIn>> self, Func<TIn, int, TOut> selector)
         {
             return self.Select(ch => new MuxLayer<TOut>(selector(ch.Value, ch.MinIndex), ch.MinIndex));
         }
