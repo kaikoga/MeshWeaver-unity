@@ -13,7 +13,7 @@ namespace Silksprite.MeshBuilder.Utils
 
         public ModifierComponentPopupMenu(params Type[] types)
         {
-            _types = new [] { (Type)null }.Concat(types).ToArray();
+            _types = new [] { (Type)null, null }.Concat(types).ToArray();
             _menuOptions = new [] { "Add Modifier...", "" }.Concat(types.Select(type => type == typeof(void) ? "" : type.Name)).ToArray();
         }
 
