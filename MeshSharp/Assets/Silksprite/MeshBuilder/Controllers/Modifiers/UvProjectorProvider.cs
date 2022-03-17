@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Silksprite.MeshBuilder.Controllers.Modifiers
 {
-    public class UvProjectorProvider : VertexModifierProviderBase
+    public class UvProjectorProvider : VertwiseModifierProviderBase
     {
         public VertexProvider referenceTranslation;
         public int uvChannel;
@@ -21,7 +21,6 @@ namespace Silksprite.MeshBuilder.Controllers.Modifiers
             }
         }
 
-        public override IMeshieModifier MeshieModifier => new UvProjector(Translation, uvChannel);
-        public override IPathieModifier PathieModifier => new UvProjector(Translation, uvChannel);
+        protected override VertwiseModifierBase VertwiseModifier => new UvProjector(Translation, uvChannel);
     }
 }

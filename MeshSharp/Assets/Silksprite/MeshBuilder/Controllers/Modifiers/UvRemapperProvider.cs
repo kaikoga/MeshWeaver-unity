@@ -5,12 +5,11 @@ using UnityEngine;
 
 namespace Silksprite.MeshBuilder.Controllers.Modifiers
 {
-    public class UvRemapperProvider : VertexModifierProviderBase
+    public class UvRemapperProvider : VertwiseModifierProviderBase
     {
         public Vector2 min = Vector2.zero;
         public Vector2 max = Vector2.one;
 
-        public override IPathieModifier PathieModifier => new UvRemapper(min, max);
-        public override IMeshieModifier MeshieModifier => new UvRemapper(min, max);
+        protected override VertwiseModifierBase VertwiseModifier => new UvRemapper(min, max);
     }
 }

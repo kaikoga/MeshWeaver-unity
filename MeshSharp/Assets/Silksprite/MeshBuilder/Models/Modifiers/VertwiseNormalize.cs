@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Silksprite.MeshBuilder.Models.Modifiers
 {
-    public class MeshNormalize : VertiesModifierBase
+    public class MeshNormalize : VertwiseModifierBase
     {
         protected override IEnumerable<Vertie> Modify(IEnumerable<Vertie> vertices)
         {

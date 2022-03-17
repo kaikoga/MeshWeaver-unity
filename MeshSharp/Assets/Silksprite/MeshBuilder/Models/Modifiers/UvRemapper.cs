@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Silksprite.MeshBuilder.Models.Modifiers
 {
-    public class UvRemapper : VertiesModifierBase
+    public class UvRemapper : VertwiseModifierBase
     {
         readonly Vector2 _min;
         readonly Vector2 _max;

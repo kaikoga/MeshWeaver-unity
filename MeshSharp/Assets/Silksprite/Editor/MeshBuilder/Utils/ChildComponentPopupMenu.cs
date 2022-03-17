@@ -17,7 +17,7 @@ namespace Silksprite.MeshBuilder.Utils
         public ChildComponentPopupMenu(params Type[] types)
         {
             _types = new [] { (Type)null }.Concat(types).ToArray();
-            _menuOptions = new [] { "Create Child..." }.Concat(types.Select(type => type.Name)).ToArray();
+            _menuOptions = new [] { "Create Child...", "" }.Concat(types.Select(type => type == typeof(void) ? "" : type.Name)).ToArray();
         }
 
         T ChildPopup(Component self)

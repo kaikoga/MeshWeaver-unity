@@ -9,16 +9,20 @@ namespace Silksprite.MeshBuilder.Controllers.Utils
         public static readonly ChildComponentPopupMenu<PathProvider> CollectionsMenu = new ChildComponentPopupMenu<PathProvider>(
             typeof(CompositePathProvider),
             typeof(PathReference),
+            typeof(void),
             typeof(FixedPathProvider),
             typeof(ShapePathProvider),
+            typeof(void),
             typeof(BakedPathProvider)
         );
 
         public static readonly ChildComponentPopupMenu<PathProvider> ElementsMenu = new ChildComponentPopupMenu<PathProvider>
         (
             typeof(PathReference),
+            typeof(void),
             typeof(VertexProvider),
             typeof(ShapePathProvider),
+            typeof(void),
             typeof(BakedPathProvider)
         );
 

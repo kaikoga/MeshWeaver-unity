@@ -8,8 +8,10 @@ namespace Silksprite.MeshBuilder.Controllers.Utils
     {
         public static readonly ChildComponentPopupMenu<MeshProvider> Menu = new ChildComponentPopupMenu<MeshProvider>(
             typeof(CompositeMeshProvider),
+            typeof(void),
             typeof(PolygonMeshProvider),
             typeof(MatrixMeshProvider),
+            typeof(void),
             typeof(BakedMeshProvider)
         );
     }

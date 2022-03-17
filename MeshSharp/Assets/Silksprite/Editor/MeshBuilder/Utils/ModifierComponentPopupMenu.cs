@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
@@ -15,7 +14,7 @@ namespace Silksprite.MeshBuilder.Utils
         public ModifierComponentPopupMenu(params Type[] types)
         {
             _types = new [] { (Type)null }.Concat(types).ToArray();
-            _menuOptions = new [] { "Add Modifier..." }.Concat(types.Select(type => type.Name)).ToArray();
+            _menuOptions = new [] { "Add Modifier...", "" }.Concat(types.Select(type => type == typeof(void) ? "" : type.Name)).ToArray();
         }
 
         public T ModifierPopup(Component self)

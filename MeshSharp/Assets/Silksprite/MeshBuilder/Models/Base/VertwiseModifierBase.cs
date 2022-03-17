@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Silksprite.MeshBuilder.Models.Base
 {
-    public abstract class VertiesModifierBase : IMeshieModifier, IPathieModifier
+    public abstract class VertwiseModifierBase : IMeshieModifier, IPathieModifier
     {
         public Meshie Modify(Meshie meshie)
         {

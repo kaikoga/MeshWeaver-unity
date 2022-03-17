@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Silksprite.MeshBuilder.Models.Modifiers
 {
-    public class UvProjector : VertiesModifierBase
+    public class UvProjector : VertwiseModifierBase
     {
         readonly Matrix4x4 _translation;
         readonly int _uvChannel;

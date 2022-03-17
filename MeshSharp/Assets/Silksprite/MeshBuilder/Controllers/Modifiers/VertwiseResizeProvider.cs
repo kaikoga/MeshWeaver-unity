@@ -1,13 +1,12 @@
 using Silksprite.MeshBuilder.Controllers.Base.Modifiers;
 using Silksprite.MeshBuilder.Controllers.Paths;
 using Silksprite.MeshBuilder.Models.Base;
-using Silksprite.MeshBuilder.Models.Meshes.Modifiers;
 using Silksprite.MeshBuilder.Models.Modifiers;
 using UnityEngine;
 
-namespace Silksprite.MeshBuilder.Controllers.Meshes.Modifiers
+namespace Silksprite.MeshBuilder.Controllers.Modifiers
 {
-    public class MeshResizeProvider : MeshModifierProviderBase
+    public class VertwiseResizeProvider : VertwiseModifierProviderBase
     {
         public Vector3 size = Vector3.one;
         public VertexProvider referenceTranslation;
@@ -22,6 +21,6 @@ namespace Silksprite.MeshBuilder.Controllers.Meshes.Modifiers
             }
         }
 
-        public override IMeshieModifier MeshieModifier => new MeshResize(Translation);
+        protected override VertwiseModifierBase VertwiseModifier => new MeshResize(Translation);
     }
 }
