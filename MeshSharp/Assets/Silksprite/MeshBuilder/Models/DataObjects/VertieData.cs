@@ -9,7 +9,7 @@ namespace Silksprite.MeshBuilder.Models.DataObjects
     {
         public Matrix4x4 translation;
         public bool culled;
-        public Vector2[] uvs;
+        public UvChannel[] uvs;
 
         public static VertieData FromVertie(Vertie vertie)
         {

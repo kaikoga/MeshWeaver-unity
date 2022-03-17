@@ -12,7 +12,7 @@ namespace Silksprite.MeshBuilder.Extensions
 
         public static Vertie WithUv(this Vertie v, Vector2 uv)
         {
-            return new Vertie(v.Translation, v.Culled, new [] { uv });
+            return new Vertie(v.Translation, v.Culled, new [] { new UvChannel(uv, 0) });
         }
     }
 }

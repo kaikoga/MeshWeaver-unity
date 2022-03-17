@@ -7,7 +7,7 @@ namespace Silksprite.MeshBuilder.Controllers.Paths
 {
     public class VertexProvider : PathProvider
     {
-        public Vector2[] uvs;
+        public UvChannel[] uvs;
 
         protected override Pathie GeneratePathie(LodMask lod)
         {
