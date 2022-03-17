@@ -9,8 +9,7 @@ namespace Silksprite.MeshBuilder.Models
         public readonly Matrix4x4 Translation;
         public readonly bool Culled;
         
-        readonly Mux<Vector2> _uvs;
-        public Mux<Vector2> Uvs => _uvs;
+        public readonly Mux<Vector2> Uvs;
 
         public readonly Vector3 Vertex;
         public readonly Vector2 Uv;
@@ -22,10 +21,10 @@ namespace Silksprite.MeshBuilder.Models
             Translation = translation;
             Culled = culled;
 
-            _uvs = uvs;
+            Uvs = uvs;
 
             Vertex = new Vector3(translation.m03, translation.m13, translation.m23);
-            Uv = _uvs.Value;
+            Uv = Uvs.Value;
         }
 
         public bool VertexEquals(Vertie other, float sqrError = 0.000001f) => (Vertex - other.Vertex).sqrMagnitude <= sqrError;

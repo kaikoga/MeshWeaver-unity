@@ -46,5 +46,4 @@ namespace Silksprite.MeshBuilder.Models
             MinIndex = minIndex;
         }
     }
-
 }
