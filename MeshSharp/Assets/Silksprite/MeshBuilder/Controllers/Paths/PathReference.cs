@@ -4,15 +4,13 @@ using Silksprite.MeshBuilder.Models;
 
 namespace Silksprite.MeshBuilder.Controllers.Paths
 {
-    public class PathReference : PathProvider, ICompositeGeometry<PathProvider>
+    public class PathReference : PathProvider
     {
         public List<PathProvider> pathProviders = new List<PathProvider>();
 
-        public List<PathProvider> PrimaryElements { set => pathProviders = value; }
-
         protected override Pathie GeneratePathie(LodMask lod)
         {
-            return CollectPathies(pathProviders, lod, false);
+            return CollectPathies(pathProviders, lod);
         }
     }
 }
