@@ -11,16 +11,16 @@ namespace Silksprite.MeshBuilder.Models
         {
             var a = new[]
             {
-                new Channel<string>("(0-19)", 0),
-                new Channel<string>("(20-29)", 20),
-                new Channel<string>("(30-49)", 30),
-                new Channel<string>("(50-)", 50)
+                new MuxLayer<string>("(0-19)", 0),
+                new MuxLayer<string>("(20-29)", 20),
+                new MuxLayer<string>("(30-49)", 30),
+                new MuxLayer<string>("(50-)", 50)
             };
             var b = new[]
             {
-                new Channel<string>("[0-9]", 0),
-                new Channel<string>("[10-29]", 10),
-                new Channel<string>("[30-]", 30)
+                new MuxLayer<string>("[0-9]", 0),
+                new MuxLayer<string>("[10-29]", 10),
+                new MuxLayer<string>("[30-]", 30)
             };
             var r = a.ZipChannels(b, (m, n, i) => $"{m}{n}{i}").ToArray();
             Assert.AreEqual(5, r.Length);

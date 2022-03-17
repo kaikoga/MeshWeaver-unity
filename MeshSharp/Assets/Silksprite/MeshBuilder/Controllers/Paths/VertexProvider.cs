@@ -9,12 +9,12 @@ namespace Silksprite.MeshBuilder.Controllers.Paths
 {
     public class VertexProvider : PathProvider
     {
-        public Vector2ChannelData[] uvs;
+        public Vector2MuxData[] uvs;
 
         protected override Pathie GeneratePathie(LodMask lod)
         {
             var pathie = new Pathie();
-            pathie.Vertices.Add(new Vertie(Matrix4x4.identity, !lodMask.HasFlag(lod), uvs.Select(uv => uv.ToChannel())));
+            pathie.Vertices.Add(new Vertie(Matrix4x4.identity, !lodMask.HasFlag(lod), uvs.Select(uv => uv.ToMuxLayer())));
             return pathie;
         }
         

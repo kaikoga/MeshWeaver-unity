@@ -9,7 +9,7 @@ namespace Silksprite.MeshBuilder.Models.DataObjects
     {
         public Matrix4x4 translation;
         public bool culled;
-        public Vector2ChannelData[] uvs;
+        public Vector2MuxData[] uvs;
 
         public static VertieData FromVertie(Vertie vertie)
         {
@@ -17,13 +17,13 @@ namespace Silksprite.MeshBuilder.Models.DataObjects
             {
                 translation = vertie.Translation,
                 culled = vertie.Culled,
-                uvs = vertie.Uvs.Select(Vector2ChannelData.FromChannel).ToArray()
+                uvs = vertie.Uvs.Select(Vector2MuxData.FromMuxLayer).ToArray()
             };
         }
 
         public Vertie ToVertie()
         {
-            return new Vertie(translation, culled, uvs.Select(uv => uv.ToChannel()));
+            return new Vertie(translation, culled, uvs.Select(uv => uv.ToMuxLayer()));
         }
     }
 }

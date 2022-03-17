@@ -10,17 +10,17 @@ namespace Silksprite.MeshBuilder.Models
         public readonly Matrix4x4 Translation;
         public readonly bool Culled;
         
-        readonly Channel<Vector2>[] _uvs;
-        public IEnumerable<Channel<Vector2>> Uvs => _uvs;
+        readonly MuxLayer<Vector2>[] _uvs;
+        public IEnumerable<MuxLayer<Vector2>> Uvs => _uvs;
 
         public readonly Vector3 Vertex;
         public readonly Vector2 Uv;
 
-        public Vertie(Vector3 vertex) : this(Matrix4x4.Translate(vertex), false, new []{ new Channel<Vector2>(Vector2.zero, 0) }) { }
+        public Vertie(Vector3 vertex) : this(Matrix4x4.Translate(vertex), false, new []{ new MuxLayer<Vector2>(Vector2.zero, 0) }) { }
 
-        public Vertie(Matrix4x4 translation, bool culled, IEnumerable<Channel<Vector2>> uvs) : this(translation, culled, uvs.ToArray()) { } 
+        public Vertie(Matrix4x4 translation, bool culled, IEnumerable<MuxLayer<Vector2>> uvs) : this(translation, culled, uvs.ToArray()) { } 
 
-        public Vertie(Matrix4x4 translation, bool culled, Channel<Vector2>[] uvs)
+        public Vertie(Matrix4x4 translation, bool culled, MuxLayer<Vector2>[] uvs)
         {
             Translation = translation;
             Culled = culled;

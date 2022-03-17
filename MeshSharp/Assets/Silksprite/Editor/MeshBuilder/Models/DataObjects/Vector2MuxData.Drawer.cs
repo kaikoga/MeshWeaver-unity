@@ -3,8 +3,8 @@ using UnityEngine;
 
 namespace Silksprite.MeshBuilder.Models.DataObjects
 {
-    [CustomPropertyDrawer(typeof(Vector2ChannelData))]
-    public class Vector2ChannelDataDrawer : PropertyDrawer
+    [CustomPropertyDrawer(typeof(Vector2MuxData))]
+    public class Vector2MuxDataDrawer : PropertyDrawer
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
