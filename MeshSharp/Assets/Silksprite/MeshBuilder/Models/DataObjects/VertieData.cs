@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using UnityEngine;
 
 namespace Silksprite.MeshBuilder.Models.DataObjects
@@ -8,7 +9,7 @@ namespace Silksprite.MeshBuilder.Models.DataObjects
     {
         public Matrix4x4 translation;
         public bool culled;
-        public Vector2 uv;
+        public Vector2[] uvs;
 
         public static VertieData FromVertie(Vertie vertie)
         {
@@ -16,13 +17,13 @@ namespace Silksprite.MeshBuilder.Models.DataObjects
             {
                 translation = vertie.Translation,
                 culled = vertie.Culled,
-                uv = vertie.Uv
+                uvs = vertie.Uvs.ToArray()
             };
         }
 
         public Vertie ToVertie()
         {
-            return new Vertie(translation, culled, uv);
+            return new Vertie(translation, culled, uvs);
         }
     }
 }

@@ -7,12 +7,12 @@ namespace Silksprite.MeshBuilder.Controllers.Paths
 {
     public class VertexProvider : PathProvider
     {
-        public Vector2 uv;
+        public Vector2[] uvs;
 
         protected override Pathie GeneratePathie(LodMask lod)
         {
             var pathie = new Pathie();
-            pathie.Vertices.Add(new Vertie(Matrix4x4.identity, !lodMask.HasFlag(lod), uv));
+            pathie.Vertices.Add(new Vertie(Matrix4x4.identity, !lodMask.HasFlag(lod), uvs));
             return pathie;
         }
         
