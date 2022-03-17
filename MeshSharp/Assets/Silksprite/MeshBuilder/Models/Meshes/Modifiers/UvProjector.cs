@@ -1,4 +1,5 @@
 using System.Linq;
+using Silksprite.MeshBuilder.Extensions;
 using Silksprite.MeshBuilder.Models.Base;
 using UnityEngine;
 
@@ -19,7 +20,7 @@ namespace Silksprite.MeshBuilder.Models.Meshes.Modifiers
             result.Vertices.AddRange(meshie.Vertices.Select(v =>
             {
                 var translation = _translation;
-                return new Vertie(v.Translation, translation.MultiplyPoint(v.Vertex), v.Culled);
+                return v.WithUv(translation.MultiplyPoint(v.Vertex));
             }));
             result.Indices.AddRange(meshie.Indices);
             return result;

@@ -23,7 +23,7 @@ namespace Silksprite.MeshBuilder.Models.Meshes.Modifiers
             if (diff.z == 0f) diff.z = 1f;
             var translation = Matrix4x4.Translate(-min) * Matrix4x4.Scale(diff).inverse; 
             var result = new Meshie();
-            result.Vertices.AddRange(meshie.Vertices.Select(v => new Vertie(translation * v.Translation, v.Uv, v.Culled)));
+            result.Vertices.AddRange(meshie.Vertices.Select(v => v.WithTranslation(translation * v.Translation)));
             result.Indices.AddRange(meshie.Indices);
             return result;
         }

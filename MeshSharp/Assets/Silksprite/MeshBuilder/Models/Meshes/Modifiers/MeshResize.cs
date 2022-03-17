@@ -17,7 +17,7 @@ namespace Silksprite.MeshBuilder.Models.Meshes.Modifiers
         public override Meshie Modify(Meshie meshie)
         {
             var result = new Meshie();
-            result.Vertices.AddRange(meshie.Vertices.Select(v => new Vertie(_translation * v.Translation, v.Uv, v.Culled)));
+            result.Vertices.AddRange(meshie.Vertices.Select(v => v.WithTranslation(_translation * v.Translation)));
             result.Indices.AddRange(meshie.Indices);
             return result;
         }
