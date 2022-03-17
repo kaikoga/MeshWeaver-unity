@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Linq;
 using Silksprite.MeshBuilder.Controllers.Base;
 using Silksprite.MeshBuilder.Models;
@@ -13,6 +12,7 @@ namespace Silksprite.MeshBuilder.Controllers
         public bool autoUpdate;
         
         public Mesh outputMesh;
+        public GameObject outputPrefab;
 
         public MeshFilter[] meshFilters;
         public MeshCollider[] meshColliders;
