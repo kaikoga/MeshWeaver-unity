@@ -45,28 +45,28 @@ namespace Silksprite.MeshBuilder.Models
 
         public static Vertie operator +(Vertie a, Vertie b)
         {
-            return new Vertie(ComponentWiseAdd(a.Translation, b.Translation), a.Culled && b.Culled, a.Uvs.ZipChannels(b.Uvs, (x, y, minIndex) => x + y));
+            return new Vertie(ComponentWiseAdd(a.Translation, b.Translation), a.Culled && b.Culled, a.Uvs.ZipChannels(b.Uvs, (x, y) => x + y));
         }
 
         public static Vertie operator -(Vertie a, Vertie b)
         {
-            return new Vertie(ComponentWiseSubtract(a.Translation, b.Translation), a.Culled && b.Culled, a.Uvs.ZipChannels(b.Uvs, (x, y, minIndex) => x - y));
+            return new Vertie(ComponentWiseSubtract(a.Translation, b.Translation), a.Culled && b.Culled, a.Uvs.ZipChannels(b.Uvs, (x, y) => x - y));
         }
 
         public static Vertie operator *(Vertie a, Vertie b)
         {
-            return new Vertie(a.Translation * b.Translation, a.Culled && b.Culled, a.Uvs.ZipChannels(b.Uvs, (x, y, minIndex) => x + y));
+            return new Vertie(a.Translation * b.Translation, a.Culled && b.Culled, a.Uvs.ZipChannels(b.Uvs, (x, y) => x + y));
         }
 
         public static Vertie operator /(Vertie a, Vertie b)
         {
             // I don't think this is correct, Translation part in particular, but we need the Vertex part at least
-            return new Vertie(a.Translation * b.Translation.inverse, a.Culled && b.Culled, a.Uvs.ZipChannels(b.Uvs, (x, y, minIndex) => x - y));
+            return new Vertie(a.Translation * b.Translation.inverse, a.Culled && b.Culled, a.Uvs.ZipChannels(b.Uvs, (x, y) => x - y));
         }
 
         public static Vertie operator *(Vertie a, float f)
         {
-            return new Vertie(ComponentWiseMultiply(a.Translation, f), a.Culled, a.Uvs.Select(uvCh => new Channel<Vector2>(uvCh.Value * f, uvCh.MinIndex)));
+            return new Vertie(ComponentWiseMultiply(a.Translation, f), a.Culled, a.Uvs.SelectChannelValues(uv => uv * f));
         }
 
         static Matrix4x4 ComponentWiseAdd(Matrix4x4 a, Matrix4x4 b)
