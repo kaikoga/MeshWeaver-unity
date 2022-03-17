@@ -22,10 +22,10 @@ namespace Silksprite.MeshBuilder.Controllers.Base
 
             MeshBuilderGUI.DumpFoldout($"Path Dump: {pathProvider.LastPathie}",
                 ref _isExpanded,
-                () => pathProvider.LastPathie.Dump());
+                () => pathProvider.LastPathie?.Dump());
             MeshBuilderGUI.DumpFoldout($"Collider Path Dump: {pathProvider.LastColliderPathie}",
                 ref _isColliderExpanded,
-                () => pathProvider.LastColliderPathie.Dump());
+                () => pathProvider.LastColliderPathie?.Dump());
 
             if (GUILayout.Button("Bake"))
             {

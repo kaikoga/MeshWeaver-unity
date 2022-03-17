@@ -23,10 +23,10 @@ namespace Silksprite.MeshBuilder.Controllers.Base
             base.OnInspectorGUI();
             MeshBuilderGUI.DumpFoldout($"Mesh Dump: {meshProvider.LastMeshie}",
                 ref _isExpanded,
-                () => meshProvider.LastMeshie.Dump());
+                () => meshProvider.LastMeshie?.Dump());
             MeshBuilderGUI.DumpFoldout($"Collider Mesh Dump: {meshProvider.LastColliderMeshie}",
                 ref _isColliderExpanded,
-                () => meshProvider.LastColliderMeshie.Dump());
+                () => meshProvider.LastColliderMeshie?.Dump());
 
             MeshModifierProviderMenus.Menu.ModifierPopup(meshProvider);
 
