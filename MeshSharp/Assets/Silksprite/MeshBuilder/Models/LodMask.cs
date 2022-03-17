@@ -20,4 +20,16 @@ namespace Silksprite.MeshBuilder.Models
         LOD2 = 4,
         Collider = 65536
     }
+
+    public static class LodMaskLayers
+    {
+        public static LodMaskLayer[] Values =
+        {
+            LodMaskLayer.LOD0,
+            LodMaskLayer.LOD1,
+            LodMaskLayer.LOD2,
+            LodMaskLayer.Collider
+        };
+    }
+    
 }

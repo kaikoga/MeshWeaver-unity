@@ -1,3 +1,4 @@
+using System.Linq;
 using Silksprite.MeshBuilder.Controllers.Paths;
 using Silksprite.MeshBuilder.Extensions;
 using Silksprite.MeshBuilder.Models;
@@ -31,7 +32,8 @@ namespace Silksprite.MeshBuilder.Controllers.Base
             {
                 var transform = pathProvider.transform;
                 var baked = transform.parent.AddChildComponent<BakedPathProvider>();
-                baked.pathData = PathieData.FromPathie(pathProvider.ToPathie(LodMaskLayer.LOD0));
+                baked.lodMaskLayers = LodMaskLayers.Values;
+                baked.pathData = LodMaskLayers.Values.Select(lod => PathieData.FromPathie(pathProvider.ToPathie(lod))).ToArray();
                 var bakedTransform = baked.transform;
                 bakedTransform.localPosition = transform.localPosition;
                 bakedTransform.localRotation = transform.localRotation;

@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Silksprite.MeshBuilder.Controllers.Meshes;
 using Silksprite.MeshBuilder.Controllers.Utils;
 using Silksprite.MeshBuilder.Extensions;
@@ -34,7 +35,8 @@ namespace Silksprite.MeshBuilder.Controllers.Base
             {
                 var transform = meshProvider.transform;
                 var baked = transform.parent.AddChildComponent<BakedMeshProvider>();
-                baked.meshData = MeshieData.FromMeshie(meshProvider.ToMeshie(LodMaskLayer.LOD0));
+                baked.lodMaskLayers = LodMaskLayers.Values;
+                baked.meshData = LodMaskLayers.Values.Select(lod => MeshieData.FromMeshie(meshProvider.ToMeshie(lod))).ToArray();
                 var bakedTransform = baked.transform;
                 bakedTransform.localPosition = transform.localPosition;
                 bakedTransform.localRotation = transform.localRotation;

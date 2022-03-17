@@ -1,3 +1,4 @@
+using System;
 using Silksprite.MeshBuilder.Controllers.Base;
 using Silksprite.MeshBuilder.Models;
 using Silksprite.MeshBuilder.Models.DataObjects;
@@ -7,11 +8,19 @@ namespace Silksprite.MeshBuilder.Controllers.Meshes
 {
     public class BakedMeshProvider : MeshProvider
     {
-        public MeshieData meshData;
+        public LodMaskLayer[] lodMaskLayers;
+        public MeshieData[] meshData;
 
         protected override Meshie GenerateMeshie(LodMaskLayer lod)
         {
-            return new BakedMeshieFactory(meshData).Build();
+            if (lodMaskLayers == null || meshData == null) return new Meshie();
+            var c = Math.Min(lodMaskLayers.Length, meshData.Length);
+            for (var i = 0; i < c; i++)
+            {
+                if (lod == lodMaskLayers[i]) return new BakedMeshieFactory(meshData[i]).Build(); 
+            }
+
+            return meshData.Length > 0 ? new BakedMeshieFactory(meshData[0]).Build() : new Meshie();
         }
     }
 }
