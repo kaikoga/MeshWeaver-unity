@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Silksprite.MeshBuilder.Controllers.Paths.Modifiers
 {
-    public class PathRepeatProvider : PathModifierProvider
+    public class PathRepeatProvider : PathModifierProviderBase
     {
         public int count = 2;
         public Vector3 offset;

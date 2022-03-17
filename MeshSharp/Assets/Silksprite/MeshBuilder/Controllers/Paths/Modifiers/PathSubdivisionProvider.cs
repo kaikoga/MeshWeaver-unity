@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Silksprite.MeshBuilder.Controllers.Paths.Modifiers
 {
-    public class PathSubdivisionProvider : PathModifierProvider
+    public class PathSubdivisionProvider : PathModifierProviderBase
     {
         public int count = 2;
 

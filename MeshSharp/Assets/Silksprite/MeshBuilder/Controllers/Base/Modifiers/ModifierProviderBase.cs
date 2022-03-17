@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Silksprite.MeshBuilder.Controllers.Base.Modifiers
 {
-    public abstract class ModifierProvider : MonoBehaviour
+    public abstract class ModifierProviderBase : MonoBehaviour
     {
         public LodMask lodMask = LodMask.All;
         
@@ -18,12 +18,5 @@ namespace Silksprite.MeshBuilder.Controllers.Base.Modifiers
         {
             // The sole reason for this empty method is for showing enabled checkbox
         }
-    }
-    public interface IModifierProvider
-    {
-        LodMask LodMask { get; set; }
-
-        // ReSharper disable once InconsistentNaming
-        bool enabled { get; } // This is for MonoBehaviour
     }
 }

@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Silksprite.MeshBuilder.Controllers.Meshes.Modifiers
 {
-    public class MeshResizeProvider : MeshModifierProvider
+    public class MeshResizeProvider : MeshModifierProviderBase
     {
         public Vector3 size = Vector3.one;
         public VertexProvider referenceTranslation;

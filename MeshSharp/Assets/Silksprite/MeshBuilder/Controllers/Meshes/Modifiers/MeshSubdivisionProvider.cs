@@ -4,7 +4,7 @@ using Silksprite.MeshBuilder.Models.Meshes.Modifiers;
 
 namespace Silksprite.MeshBuilder.Controllers.Meshes.Modifiers
 {
-    public class MeshSubdivisionProvider : MeshModifierProvider
+    public class MeshSubdivisionProvider : MeshModifierProviderBase
     {
         public int count = 1;
 

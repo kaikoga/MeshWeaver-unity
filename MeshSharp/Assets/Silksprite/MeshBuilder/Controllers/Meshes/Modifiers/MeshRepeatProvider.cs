@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Silksprite.MeshBuilder.Controllers.Meshes.Modifiers
 {
-    public class MeshRepeatProvider : MeshModifierProvider
+    public class MeshRepeatProvider : MeshModifierProviderBase
     {
         public int count = 2;
         public Vector3 offset;

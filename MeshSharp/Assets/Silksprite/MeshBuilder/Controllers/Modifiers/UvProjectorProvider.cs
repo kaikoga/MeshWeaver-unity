@@ -1,12 +1,12 @@
 using Silksprite.MeshBuilder.Controllers.Base.Modifiers;
 using Silksprite.MeshBuilder.Controllers.Paths;
 using Silksprite.MeshBuilder.Models.Base;
-using Silksprite.MeshBuilder.Models.Meshes.Modifiers;
+using Silksprite.MeshBuilder.Models.Modifiers;
 using UnityEngine;
 
-namespace Silksprite.MeshBuilder.Controllers.Meshes.Modifiers
+namespace Silksprite.MeshBuilder.Controllers.Modifiers
 {
-    public class UvProjectorProvider : MeshModifierProvider, IPathModifierProvider
+    public class UvProjectorProvider : VertexModifierProviderBase
     {
         public VertexProvider referenceTranslation;
         public int minIndex;
@@ -22,6 +22,6 @@ namespace Silksprite.MeshBuilder.Controllers.Meshes.Modifiers
         }
 
         public override IMeshieModifier MeshieModifier => new UvProjector(Translation, minIndex);
-        public IPathieModifier PathieModifier => new UvProjector(Translation, minIndex);
+        public override IPathieModifier PathieModifier => new UvProjector(Translation, minIndex);
     }
 }

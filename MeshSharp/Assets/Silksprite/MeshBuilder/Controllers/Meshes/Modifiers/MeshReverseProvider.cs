@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Silksprite.MeshBuilder.Controllers.Meshes.Modifiers
 {
-    public class MeshReverseProvider : MeshModifierProvider
+    public class MeshReverseProvider : MeshModifierProviderBase
     {
         public bool front = true;
         public bool back = false;

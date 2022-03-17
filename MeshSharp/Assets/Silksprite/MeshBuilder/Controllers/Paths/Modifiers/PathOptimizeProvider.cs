@@ -4,7 +4,7 @@ using Silksprite.MeshBuilder.Models.Paths.Modifiers;
 
 namespace Silksprite.MeshBuilder.Controllers.Paths.Modifiers
 {
-    public class PathOptimizeProvider : PathModifierProvider
+    public class PathOptimizeProvider : PathModifierProviderBase
     {
         public override IPathieModifier PathieModifier => new PathOptimize();
     }

@@ -5,7 +5,7 @@ using Silksprite.MeshBuilder.Models.Meshes.Modifiers;
 
 namespace Silksprite.MeshBuilder.Controllers.Meshes.Modifiers
 {
-    public class MeshNormalizeProvider : MeshModifierProvider
+    public class MeshNormalizeProvider : MeshModifierProviderBase
     {
         public override IMeshieModifier MeshieModifier => new MeshNormalize();
     }
