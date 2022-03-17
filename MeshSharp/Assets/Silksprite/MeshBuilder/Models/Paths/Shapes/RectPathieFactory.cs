@@ -14,7 +14,7 @@ namespace Silksprite.MeshBuilder.Models.Paths.Shapes
                 Vector3.up,
                 Vector3.up + Vector3.right,
                 Vector3.right
-            }.Select(v => new Vertie(v, Vector2.zero, false)));
+            }.Select(v => new Vertie(v)));
             return pathie;
         }
     }

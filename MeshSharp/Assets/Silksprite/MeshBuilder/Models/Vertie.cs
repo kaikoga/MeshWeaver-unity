@@ -9,7 +9,8 @@ namespace Silksprite.MeshBuilder.Models
         public readonly Matrix4x4 Translation;
         public readonly bool Culled;
 
-        public Vertie(Vector3 vertex, Vector2 uv, bool culled) : this(vertex, uv, Matrix4x4.Translate(vertex), culled) { }
+        public Vertie(Vector3 vertex) : this(vertex, Vector2.zero, Matrix4x4.Translate(vertex), false) { }
+
         public Vertie(Matrix4x4 translation, Vector2 uv, bool culled) : this(new Vector3(translation.m03, translation.m13, translation.m23), uv, translation, culled) { }
 
         Vertie(Vector3 vertex, Vector2 uv, Matrix4x4 translation, bool culled)
