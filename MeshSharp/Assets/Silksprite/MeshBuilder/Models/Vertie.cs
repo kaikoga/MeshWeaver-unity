@@ -10,17 +10,17 @@ namespace Silksprite.MeshBuilder.Models
         public readonly Matrix4x4 Translation;
         public readonly bool Culled;
         
-        readonly UvChannel[] _uvs;
-        public IEnumerable<UvChannel> Uvs => _uvs;
+        readonly Channel<Vector2>[] _uvs;
+        public IEnumerable<Channel<Vector2>> Uvs => _uvs;
 
         public readonly Vector3 Vertex;
         public readonly Vector2 Uv;
 
-        public Vertie(Vector3 vertex) : this(Matrix4x4.Translate(vertex), false, new []{ new UvChannel(Vector2.zero, 0) }) { }
+        public Vertie(Vector3 vertex) : this(Matrix4x4.Translate(vertex), false, new []{ new Channel<Vector2>(Vector2.zero, 0) }) { }
 
-        public Vertie(Matrix4x4 translation, bool culled, IEnumerable<UvChannel> uvs) : this(translation, culled, uvs.ToArray()) { } 
+        public Vertie(Matrix4x4 translation, bool culled, IEnumerable<Channel<Vector2>> uvs) : this(translation, culled, uvs.ToArray()) { } 
 
-        public Vertie(Matrix4x4 translation, bool culled, UvChannel[] uvs)
+        public Vertie(Matrix4x4 translation, bool culled, Channel<Vector2>[] uvs)
         {
             Translation = translation;
             Culled = culled;
@@ -28,7 +28,7 @@ namespace Silksprite.MeshBuilder.Models
             _uvs = uvs;
 
             Vertex = new Vector3(translation.m03, translation.m13, translation.m23);
-            Uv = _uvs.FirstOrDefault()?.Value ?? Vector2.zero;
+            Uv = _uvs.FirstOrDefault().Value;
         }
 
         public bool VertexEquals(Vertie other, float sqrError = 0.000001f) => (Vertex - other.Vertex).sqrMagnitude <= sqrError;
@@ -45,28 +45,28 @@ namespace Silksprite.MeshBuilder.Models
 
         public static Vertie operator +(Vertie a, Vertie b)
         {
-            return new Vertie(ComponentWiseAdd(a.Translation, b.Translation), a.Culled && b.Culled, a.Uvs.ZipUvChannels(b.Uvs, (x, y, minIndex) => x + y));
+            return new Vertie(ComponentWiseAdd(a.Translation, b.Translation), a.Culled && b.Culled, a.Uvs.ZipChannels(b.Uvs, (x, y, minIndex) => x + y));
         }
 
         public static Vertie operator -(Vertie a, Vertie b)
         {
-            return new Vertie(ComponentWiseSubtract(a.Translation, b.Translation), a.Culled && b.Culled, a.Uvs.ZipUvChannels(b.Uvs, (x, y, minIndex) => x - y));
+            return new Vertie(ComponentWiseSubtract(a.Translation, b.Translation), a.Culled && b.Culled, a.Uvs.ZipChannels(b.Uvs, (x, y, minIndex) => x - y));
         }
 
         public static Vertie operator *(Vertie a, Vertie b)
         {
-            return new Vertie(a.Translation * b.Translation, a.Culled && b.Culled, a.Uvs.ZipUvChannels(b.Uvs, (x, y, minIndex) => x + y));
+            return new Vertie(a.Translation * b.Translation, a.Culled && b.Culled, a.Uvs.ZipChannels(b.Uvs, (x, y, minIndex) => x + y));
         }
 
         public static Vertie operator /(Vertie a, Vertie b)
         {
             // I don't think this is correct, Translation part in particular, but we need the Vertex part at least
-            return new Vertie(a.Translation * b.Translation.inverse, a.Culled && b.Culled, a.Uvs.ZipUvChannels(b.Uvs, (x, y, minIndex) => x - y));
+            return new Vertie(a.Translation * b.Translation.inverse, a.Culled && b.Culled, a.Uvs.ZipChannels(b.Uvs, (x, y, minIndex) => x - y));
         }
 
         public static Vertie operator *(Vertie a, float f)
         {
-            return new Vertie(ComponentWiseMultiply(a.Translation, f), a.Culled, a.Uvs.Select(uvCh => new UvChannel(uvCh.Value * f, uvCh.MinIndex)));
+            return new Vertie(ComponentWiseMultiply(a.Translation, f), a.Culled, a.Uvs.Select(uvCh => new Channel<Vector2>(uvCh.Value * f, uvCh.MinIndex)));
         }
 
         static Matrix4x4 ComponentWiseAdd(Matrix4x4 a, Matrix4x4 b)

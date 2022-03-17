@@ -1,10 +1,6 @@
-using System;
-using UnityEngine;
-
 namespace Silksprite.MeshBuilder.Models
 {
-    [Serializable]
-    public class Channel<T>
+    public readonly struct Channel<T>
     {
         public readonly T Value;
         public readonly int MinIndex;
@@ -13,14 +9,6 @@ namespace Silksprite.MeshBuilder.Models
         {
             Value = value;
             MinIndex = minIndex;
-        }
-    }
-
-    [Serializable]
-    public class UvChannel : Channel<Vector2>
-    {
-        public UvChannel(Vector2 value, int minIndex) : base(value, minIndex)
-        {
         }
     }
 }
