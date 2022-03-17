@@ -15,7 +15,7 @@ namespace Silksprite.MeshBuilder.Models.Modifiers
             _max = max;
         }
 
-        protected override Vertie ModifyVertie(Vertie vertie)
+        protected override Vertie Modify(Vertie vertie)
         {
             return vertie.WithUvs(vertie.Uvs.SelectMuxValues(uv => _min * (Vector2.one - uv) + (_max - _min) * uv));
         }
