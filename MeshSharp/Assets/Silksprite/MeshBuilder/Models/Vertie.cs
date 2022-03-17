@@ -28,7 +28,7 @@ namespace Silksprite.MeshBuilder.Models
             _uvs = uvs;
 
             Vertex = new Vector3(translation.m03, translation.m13, translation.m23);
-            Uv = _uvs.FirstOrDefault().Value;
+            Uv = _uvs.Value();
         }
 
         public bool VertexEquals(Vertie other, float sqrError = 0.000001f) => (Vertex - other.Vertex).sqrMagnitude <= sqrError;
@@ -94,7 +94,8 @@ namespace Silksprite.MeshBuilder.Models
             var translation = Translation;
             var scale = translation.lossyScale;
             translation.rotation.ToAngleAxis(out var angle, out _);
-            return $"[{(Culled ? "?" : "")} {Vertex.x:G3}, {Vertex.y:G3}, {Vertex.z:G3}] <{Uv.x:G3}, {Uv.y:G3}> ({scale.x:G3}, {scale.y:G3}, {scale.z:G3} : {angle:G3})";
+            var uvs = string.Join(", ", Uvs.Select(uv => $"[{uv.MinIndex}] : {uv.Value.x:G3}, {uv.Value.y:G3}"));
+            return $"[{(Culled ? "?" : "")} {Vertex.x:G3}, {Vertex.y:G3}, {Vertex.z:G3}] ({scale.x:G3}, {scale.y:G3}, {scale.z:G3} : {angle:G3}) <{uvs}> ";
         }
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Silksprite.MeshBuilder.Models.Meshes.Modifiers
 {
-    public class MeshResize : MeshieModifier
+    public class MeshResize : IMeshieModifier
     {
         readonly Matrix4x4 _translation;
 
@@ -14,7 +14,7 @@ namespace Silksprite.MeshBuilder.Models.Meshes.Modifiers
             _translation = translation;
         }
 
-        public override Meshie Modify(Meshie meshie)
+        public Meshie Modify(Meshie meshie)
         {
             var result = new Meshie();
             result.Vertices.AddRange(meshie.Vertices.Select(v => v.WithTranslation(_translation * v.Translation)));

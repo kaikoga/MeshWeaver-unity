@@ -15,9 +15,9 @@ namespace Silksprite.MeshBuilder.Controllers.Base
         public Pathie ToPathie(LodMask lod)
         {
             var pathie = GeneratePathie(lod);
-            var lastPathie = GetComponents<PathModifierProvider>()
-                .Where(provider => provider.enabled && provider.lodMask.HasFlag(lod))
-                .Select(provider => provider.Modifier)
+            var lastPathie = GetComponents<IPathModifierProvider>()
+                .Where(provider => provider.enabled && provider.LodMask.HasFlag(lod))
+                .Select(provider => provider.PathieModifier)
                 .Aggregate(pathie, (current, modifier) => modifier.Modify(current));
             if (lod == LodMask.Collider)
             {

@@ -6,9 +6,10 @@ using UnityEngine;
 
 namespace Silksprite.MeshBuilder.Controllers.Meshes.Modifiers
 {
-    public class UvProjectorProvider : MeshModifierProvider
+    public class UvProjectorProvider : MeshModifierProvider, IPathModifierProvider
     {
         public VertexProvider referenceTranslation;
+        public int minIndex;
 
         Matrix4x4 Translation
         {
@@ -20,6 +21,7 @@ namespace Silksprite.MeshBuilder.Controllers.Meshes.Modifiers
             }
         }
 
-        public override MeshieModifier Modifier => new UvProjector(Translation);
+        public override IMeshieModifier MeshieModifier => new UvProjector(Translation, minIndex);
+        public IPathieModifier PathieModifier => new UvProjector(Translation, minIndex);
     }
 }

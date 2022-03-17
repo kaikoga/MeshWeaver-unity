@@ -6,6 +6,6 @@ namespace Silksprite.MeshBuilder.Controllers.Paths.Modifiers
 {
     public class PathOptimizeProvider : PathModifierProvider
     {
-        public override PathieModifier Modifier => new PathOptimize();
+        public override IPathieModifier PathieModifier => new PathOptimize();
     }
 }

@@ -7,6 +7,6 @@ namespace Silksprite.MeshBuilder.Controllers.Meshes.Modifiers
 {
     public class MeshNormalizeProvider : MeshModifierProvider
     {
-        public override MeshieModifier Modifier => new MeshNormalize();
+        public override IMeshieModifier MeshieModifier => new MeshNormalize();
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Silksprite.MeshBuilder.Models.Paths.Modifiers
 {
-    public class UvRemapper : PathieModifier
+    public class UvRemapper : IPathieModifier
     {
         readonly Vector2 _min;
         readonly Vector2 _max;
@@ -15,9 +15,9 @@ namespace Silksprite.MeshBuilder.Models.Paths.Modifiers
             _max = max;
         }
 
-        public override Pathie Modify(Pathie pathie)
+        public Pathie Modify(Pathie pathie)
         {
-            return pathie.Modify((vertie, i) => vertie.WithUv(_min * (Vector2.one - vertie.Uv) + (_max - _min) * vertie.Uv));
+            return pathie.Modify((vertie, i) => vertie.WithUvs(vertie.Uvs.SelectChannelValues(uv => _min * (Vector2.one - uv) + (_max - _min) * uv)));
         }
     }
 }

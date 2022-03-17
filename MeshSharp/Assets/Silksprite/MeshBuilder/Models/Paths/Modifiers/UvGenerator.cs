@@ -4,21 +4,24 @@ using UnityEngine;
 
 namespace Silksprite.MeshBuilder.Models.Paths.Modifiers
 {
-    public class UvGenerator : PathieModifier
+    public class UvGenerator : IPathieModifier
     {
         readonly Vector2 _min;
         readonly Vector2 _max;
 
-        public UvGenerator(Vector2 min, Vector2 max)
+        readonly int _minIndex;
+
+        public UvGenerator(Vector2 min, Vector2 max, int minIndex)
         {
             _min = min;
             _max = max;
+            _minIndex = minIndex;
         }
 
-        public override Pathie Modify(Pathie pathie)
+        public Pathie Modify(Pathie pathie)
         {
             var iMax = pathie.Vertices.Count - 1;
-            return pathie.Modify((vertie, i) => vertie.WithUv(_min + (_max - _min) * i / iMax));
+            return pathie.Modify((vertie, i) => vertie.AddUv(new Channel<Vector2>(_min + (_max - _min) * i / iMax, _minIndex)));
         }
     }
 }

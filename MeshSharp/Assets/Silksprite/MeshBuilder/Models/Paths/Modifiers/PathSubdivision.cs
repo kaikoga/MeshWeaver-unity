@@ -5,7 +5,7 @@ using Silksprite.MeshBuilder.Models.Base;
 
 namespace Silksprite.MeshBuilder.Models.Paths.Modifiers
 {
-    public class PathieSubdivision : PathieModifier
+    public class PathieSubdivision : IPathieModifier
     {
         readonly int _count;
 
@@ -14,7 +14,7 @@ namespace Silksprite.MeshBuilder.Models.Paths.Modifiers
             _count = count;
         }
 
-        public override Pathie Modify(Pathie pathie)
+        public Pathie Modify(Pathie pathie)
         {
             if (pathie.Vertices.Count <= 1) return pathie;
             if (_count <= 1) return pathie;

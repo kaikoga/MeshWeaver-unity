@@ -22,6 +22,6 @@ namespace Silksprite.MeshBuilder.Controllers.Paths.Modifiers
             }
         }
 
-        public override PathieModifier Modifier => new PathRepeat(count, Translation, fromPath);
+        public override IPathieModifier PathieModifier => new PathRepeat(count, Translation, fromPath);
     }
 }

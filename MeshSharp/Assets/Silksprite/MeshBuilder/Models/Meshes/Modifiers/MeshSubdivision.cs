@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Silksprite.MeshBuilder.Models.Meshes.Modifiers
 {
-    public class MeshSubdivision : MeshieModifier
+    public class MeshSubdivision : IMeshieModifier
     {
         readonly int _count;
 
@@ -15,7 +15,7 @@ namespace Silksprite.MeshBuilder.Models.Meshes.Modifiers
 
         static readonly int[] SubdividedIndices = { 0, 1, 3, 1, 2, 4, 1, 4, 3, 3, 4, 5 };
 
-        public override Meshie Modify(Meshie meshie)
+        public Meshie Modify(Meshie meshie)
         {
             if (_count < 1) return meshie;
             var count = Mathf.Clamp(_count, 1, 2);

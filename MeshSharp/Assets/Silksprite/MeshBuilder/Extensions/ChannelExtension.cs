@@ -7,6 +7,11 @@ namespace Silksprite.MeshBuilder.Extensions
 {
     public static class ChannelExtension
     {
+        public static T Value<T>(this IEnumerable<Channel<T>> ch)
+        {
+            return ch.LastOrDefault(uv => uv.MinIndex <= 0).Value;
+        }
+        
         public static IEnumerable<Channel<TOut>> ZipChannels<T1, T2, TOut>(this IEnumerable<Channel<T1>> self, IEnumerable<Channel<T2>> other, Func<T1, T2, TOut> selector)
         {
             return self.ZipChannels(other, (a, b, _) => selector(a, b));

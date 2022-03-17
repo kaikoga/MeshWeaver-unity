@@ -10,6 +10,10 @@ namespace Silksprite.MeshBuilder.Controllers.Meshes
         public bool fillBottom;
         public bool fillTop;
 
+        public int uvBody;
+        public int uvBottom;
+        public int uvTop;
+
         public PathProvider pathProviderX;
         public PathProvider pathProviderY;
 
@@ -20,7 +24,7 @@ namespace Silksprite.MeshBuilder.Controllers.Meshes
         {
             LastPathieX = CollectPathie(pathProviderX, lod, true);
             LastPathieY = CollectPathie(pathProviderY, lod, true);
-            return new PillarMeshieFactory(fillBody, fillBottom, fillTop).Build(LastPathieX, LastPathieY);
+            return new PillarMeshieFactory(fillBody, fillBottom, fillTop, uvBody, uvBottom, uvTop).Build(LastPathieX, LastPathieY);
         }
     }
 }

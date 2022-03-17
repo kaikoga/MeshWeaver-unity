@@ -5,9 +5,9 @@ using UnityEngine;
 
 namespace Silksprite.MeshBuilder.Models.Meshes.Modifiers
 {
-    public class MeshNormalize : MeshieModifier
+    public class MeshNormalize : IMeshieModifier
     {
-        public override Meshie Modify(Meshie meshie)
+        public Meshie Modify(Meshie meshie)
         {
             var min = new Vector3(
                 meshie.Vertices.Select(v => v.Vertex.x).Min(),

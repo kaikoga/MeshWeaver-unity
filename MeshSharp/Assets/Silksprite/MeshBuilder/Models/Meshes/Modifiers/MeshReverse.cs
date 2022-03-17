@@ -4,7 +4,7 @@ using Silksprite.MeshBuilder.Models.Base;
 
 namespace Silksprite.MeshBuilder.Models.Meshes.Modifiers
 {
-    public class MeshReverse : MeshieModifier
+    public class MeshReverse : IMeshieModifier
     {
         readonly bool _front;
         readonly bool _back;
@@ -17,7 +17,7 @@ namespace Silksprite.MeshBuilder.Models.Meshes.Modifiers
 
         public static MeshReverse BackOnly => new MeshReverse(false, true);
 
-        public override Meshie Modify(Meshie meshie)
+        public Meshie Modify(Meshie meshie)
         {
             var result = new Meshie();
 

@@ -11,6 +11,6 @@ namespace Silksprite.MeshBuilder.Controllers.Meshes.Modifiers
         public bool front = true;
         public bool back = false;
 
-        public override MeshieModifier Modifier => new MeshReverse(front, back);
+        public override IMeshieModifier MeshieModifier => new MeshReverse(front, back);
     }
 }

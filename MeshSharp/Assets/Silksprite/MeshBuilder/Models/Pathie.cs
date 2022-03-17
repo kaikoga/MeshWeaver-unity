@@ -49,7 +49,7 @@ namespace Silksprite.MeshBuilder.Models
             return result;
         }
 
-        public Pathie Apply(PathieModifier modifier) => modifier.Modify(this);
+        public Pathie Apply(IPathieModifier modifier) => modifier.Modify(this);
 
         public override string ToString()
         {

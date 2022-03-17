@@ -21,6 +21,6 @@ namespace Silksprite.MeshBuilder.Controllers.Meshes.Modifiers
             }
         }
 
-        public override MeshieModifier Modifier => new MeshResize(Translation);
+        public override IMeshieModifier MeshieModifier => new MeshResize(Translation);
     }
 }

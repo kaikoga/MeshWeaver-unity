@@ -1,19 +1,15 @@
-using Silksprite.MeshBuilder.Models;
 using Silksprite.MeshBuilder.Models.Base;
-using UnityEngine;
 
 namespace Silksprite.MeshBuilder.Controllers.Base.Modifiers
 {
-    public abstract class PathModifierProvider : MonoBehaviour
+    public abstract class PathModifierProvider : ModifierProvider, IPathModifierProvider
     {
-        public LodMask lodMask = LodMask.All;
-
-        // ReSharper disable once Unity.RedundantEventFunction
-        void Start()
-        {
-            // The sole reason for this empty method is for showing enabled checkbox
-        }
-
-        public abstract PathieModifier Modifier { get; }
+        public abstract IPathieModifier PathieModifier { get; }
     }
+
+    public interface IPathModifierProvider : IModifierProvider
+    {
+        IPathieModifier PathieModifier { get; }
+    }
+
 }

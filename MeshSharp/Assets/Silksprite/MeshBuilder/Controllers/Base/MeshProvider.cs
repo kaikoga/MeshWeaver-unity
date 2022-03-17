@@ -14,9 +14,9 @@ namespace Silksprite.MeshBuilder.Controllers.Base
         public Meshie ToMeshie(LodMask lod)
         {
             var meshie = GenerateMeshie(lod);
-            var lastMeshie = GetComponents<MeshModifierProvider>()
-                .Where(provider => provider.enabled && provider.lodMask.HasFlag(lod))
-                .Select(provider => provider.Modifier)
+            var lastMeshie = GetComponents<IMeshModifierProvider>()
+                .Where(provider => provider.enabled && provider.LodMask.HasFlag(lod))
+                .Select(provider => provider.MeshieModifier)
                 .Aggregate(meshie, (current, modifier) => modifier.Modify(current));
             if (lod == LodMask.Collider)
             {

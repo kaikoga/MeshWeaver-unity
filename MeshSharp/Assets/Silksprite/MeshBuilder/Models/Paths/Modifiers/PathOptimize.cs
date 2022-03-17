@@ -5,13 +5,13 @@ using UnityEngine;
 
 namespace Silksprite.MeshBuilder.Models.Paths.Modifiers
 {
-    public class PathOptimize : PathieModifier
+    public class PathOptimize : IPathieModifier
     {
         public PathOptimize()
         {
         }
 
-        public override Pathie Modify(Pathie pathie)
+        public Pathie Modify(Pathie pathie)
         {
             if (pathie.Active.Vertices.Pairwise((a, b) => (a, b)).All(ab => ab.a.VertexEquals(ab.b))) return pathie;
 

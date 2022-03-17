@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Silksprite.MeshBuilder.Models.Paths.Modifiers
 {
-    public class PathRepeat : PathieModifier
+    public class PathRepeat : IPathieModifier
     {
         readonly int _count;
         readonly Matrix4x4 _translation;
@@ -18,7 +18,7 @@ namespace Silksprite.MeshBuilder.Models.Paths.Modifiers
 
         public PathRepeat(int count, bool fromPath) : this(count, Matrix4x4.identity, fromPath) { }
 
-        public override Pathie Modify(Pathie pathie)
+        public Pathie Modify(Pathie pathie)
         {
             if (_count <= 1) return pathie;
             var result = new Pathie();

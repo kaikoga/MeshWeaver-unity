@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Silksprite.MeshBuilder.Extensions;
 using Silksprite.MeshBuilder.Models.Base;
 using UnityEngine;
 
@@ -29,14 +30,14 @@ namespace Silksprite.MeshBuilder.Models
             mesh.RecalculateTangents();
         }
 
-        public void Concat(Meshie other, Matrix4x4 matrix4x4)
+        public void Concat(Meshie other, Matrix4x4 matrix4x4, int uvIndex)
         {
             var offset = Vertices.Count;
-            Vertices.AddRange(other.Vertices.Select(v => v.MultiplyPoint(matrix4x4)));
+            Vertices.AddRange(other.Vertices.Select(v => v.MultiplyPoint(matrix4x4).WithUvIndex(uvIndex)));
             Indices.AddRange(other.Indices.Select(i => i + offset));
         }
 
-        public Meshie Apply(MeshieModifier modifier) => modifier.Modify(this);
+        public Meshie Apply(IMeshieModifier modifier) => modifier.Modify(this);
 
         public override string ToString()
         {

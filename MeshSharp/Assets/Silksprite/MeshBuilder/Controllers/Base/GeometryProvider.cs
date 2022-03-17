@@ -49,7 +49,7 @@ namespace Silksprite.MeshBuilder.Controllers.Base
         {
             foreach (var meshProvider in meshProviders.Where(c => c != null && c.gameObject.activeSelf))
             {
-                meshie.Concat(meshProvider.ToMeshie(lod), meshProvider.Translation);
+                meshie.Concat(meshProvider.ToMeshie(lod), meshProvider.Translation, 0);
             }
         }
     }

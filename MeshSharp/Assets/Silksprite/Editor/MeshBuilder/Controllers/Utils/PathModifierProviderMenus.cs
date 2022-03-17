@@ -1,4 +1,5 @@
 using Silksprite.MeshBuilder.Controllers.Base.Modifiers;
+using Silksprite.MeshBuilder.Controllers.Meshes.Modifiers;
 using Silksprite.MeshBuilder.Controllers.Paths.Modifiers;
 using Silksprite.MeshBuilder.Utils;
 
@@ -11,7 +12,8 @@ namespace Silksprite.MeshBuilder.Controllers.Utils
             typeof(PathRepeatProvider),
             typeof(PathSubdivisionProvider),
             typeof(UvGeneratorProvider),
-            typeof(UvRemapperProvider)
+            typeof(UvRemapperProvider),
+            typeof(UvProjectorProvider)
         );
     }
 }
