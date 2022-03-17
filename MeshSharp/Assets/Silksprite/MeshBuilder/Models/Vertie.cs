@@ -4,59 +4,61 @@ namespace Silksprite.MeshBuilder.Models
 {
     public class Vertie
     {
-        public readonly Vector3 Vertex;
-        public readonly Vector2 Uv;
         public readonly Matrix4x4 Translation;
         public readonly bool Culled;
+        
+        public readonly Vector2 Uv;
 
-        public Vertie(Vector3 vertex) : this(vertex, Vector2.zero, Matrix4x4.Translate(vertex), false) { }
+        public readonly Vector3 Vertex;
 
-        public Vertie(Matrix4x4 translation, Vector2 uv, bool culled) : this(new Vector3(translation.m03, translation.m13, translation.m23), uv, translation, culled) { }
+        public Vertie(Vector3 vertex) : this(Matrix4x4.Translate(vertex), false, Vector2.zero) { }
 
-        Vertie(Vector3 vertex, Vector2 uv, Matrix4x4 translation, bool culled)
+        public Vertie(Matrix4x4 translation, bool culled, Vector2 uv)
         {
-            Vertex = vertex;
-            Uv = uv;
             Translation = translation;
             Culled = culled;
+
+            Uv = uv;
+
+            Vertex = new Vector3(translation.m03, translation.m13, translation.m23);
         }
 
         public bool VertexEquals(Vertie other, float sqrError = 0.000001f) => (Vertex - other.Vertex).sqrMagnitude <= sqrError;
 
         public Vertie MultiplyPoint(Matrix4x4 translation)
         {
-            return new Vertie(translation.MultiplyPoint(Vertex), Uv, translation * Translation, Culled);
+            return new Vertie(translation * Translation, Culled, Uv);
         }
 
         public static Vertie operator +(Vertie a, Vector3 vertex)
         {
-            return new Vertie(a.Vertex + vertex, a.Uv, Matrix4x4.Translate(vertex) * a.Translation, a.Culled);
+            return new Vertie(Matrix4x4.Translate(vertex) * a.Translation, a.Culled, a.Uv);
         }
 
         public static Vertie operator +(Vertie a, Vertie b)
         {
-            return new Vertie(a.Vertex + b.Vertex, a.Uv + b.Uv, ComponentWiseAdd(a.Translation, b.Translation), a.Culled && b.Culled);
+            return new Vertie(ComponentWiseAdd(a.Translation, b.Translation), a.Culled && b.Culled, a.Uv + b.Uv);
         }
 
         public static Vertie operator -(Vertie a, Vertie b)
         {
-            return new Vertie(a.Vertex - b.Vertex, a.Uv - b.Uv, ComponentWiseSubtract(a.Translation, b.Translation), a.Culled && b.Culled);
+            return new Vertie(ComponentWiseSubtract(a.Translation, b.Translation), a.Culled && b.Culled, a.Uv - b.Uv);
         }
 
         public static Vertie operator *(Vertie a, Vertie b)
         {
-            return new Vertie(a.Translation.MultiplyPoint(b.Vertex), a.Uv + b.Uv, a.Translation * b.Translation, a.Culled && b.Culled);
+            return new Vertie(a.Translation * b.Translation, a.Culled && b.Culled, a.Uv + b.Uv);
         }
 
         public static Vertie operator /(Vertie a, Vertie b)
         {
             // I don't think this is correct, Translation part in particular, but we need the Vertex part at least
-            return new Vertie(b.Translation.inverse.MultiplyPoint(a.Vertex), a.Uv - b.Uv, a.Translation * b.Translation.inverse, a.Culled && b.Culled);
+            return new Vertie(a.Translation * b.Translation.inverse, a.Culled && b.Culled, a.Uv - b.Uv);
         }
 
         public static Vertie operator *(Vertie a, float f)
         {
-            return new Vertie(a.Vertex * f, a.Uv * f, ComponentWiseMultiply(a.Translation, f), a.Culled);
+            return new Vertie(ComponentWiseMultiply(a.Translation, f), a.Culled, a.Uv * f);
         }
 
         static Matrix4x4 ComponentWiseAdd(Matrix4x4 a, Matrix4x4 b)
