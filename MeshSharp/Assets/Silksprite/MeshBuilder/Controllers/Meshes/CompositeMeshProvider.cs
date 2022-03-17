@@ -10,7 +10,7 @@ namespace Silksprite.MeshBuilder.Controllers.Meshes
 
         public List<MeshProvider> PrimaryElements { set => meshProviders = value; }
 
-        protected override Meshie GenerateMeshie(LodMask lod)
+        protected override Meshie GenerateMeshie(LodMaskLayer lod)
         {
             var meshie = new Meshie();
             CollectMeshies(meshProviders, lod, meshie);

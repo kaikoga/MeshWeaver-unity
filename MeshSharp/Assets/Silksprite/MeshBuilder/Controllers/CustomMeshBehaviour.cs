@@ -30,10 +30,8 @@ namespace Silksprite.MeshBuilder.Controllers
 
         public void Compile()
         {
-            var lodMask = (LodMask)lodMaskLayer;
-
             if (_runtimeMesh == null) _runtimeMesh = new Mesh();
-            OnPopulateMesh(lodMask, _runtimeMesh);
+            OnPopulateMesh(lodMaskLayer, _runtimeMesh);
 
             foreach (var meshFilter in meshFilters ?? Enumerable.Empty<MeshFilter>())
             {
@@ -41,14 +39,14 @@ namespace Silksprite.MeshBuilder.Controllers
             }
 
             Mesh runtimeColliderMesh;
-            if (lodMask == LodMask.Collider)
+            if (lodMaskLayer == LodMaskLayer.Collider)
             {
                 runtimeColliderMesh = _runtimeMesh;
             }
             else
             {
                 if (_runtimeColliderMesh == null) _runtimeColliderMesh = new Mesh();
-                OnPopulateMesh(LodMask.Collider, _runtimeColliderMesh);
+                OnPopulateMesh(LodMaskLayer.Collider, _runtimeColliderMesh);
                 runtimeColliderMesh = _runtimeColliderMesh;
             }
             foreach (var meshCollider in meshColliders ?? Enumerable.Empty<MeshCollider>())
@@ -57,12 +55,12 @@ namespace Silksprite.MeshBuilder.Controllers
             }
         }
 
-        public void ExportMesh(LodMask lodMask, Mesh mesh)
+        public void ExportMesh(LodMaskLayer lodMask, Mesh mesh)
         {
             OnPopulateMesh(lodMask, mesh);
         }
 
-        protected virtual void OnPopulateMesh(LodMask lodMask, Mesh mesh)
+        protected virtual void OnPopulateMesh(LodMaskLayer lodMask, Mesh mesh)
         {
             mesh.Clear();
             var meshie = new Meshie();
@@ -70,7 +68,7 @@ namespace Silksprite.MeshBuilder.Controllers
             meshie.ExportToMesh(mesh);
         }
 
-        protected virtual void OnPopulateMesh(LodMask lodMask, Meshie meshie)
+        protected virtual void OnPopulateMesh(LodMaskLayer lodMask, Meshie meshie)
         {
         }
     }

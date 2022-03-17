@@ -1,5 +1,5 @@
-using System.Linq;
 using Silksprite.MeshBuilder.Controllers.Base;
+using Silksprite.MeshBuilder.Extensions;
 using Silksprite.MeshBuilder.Models;
 using Silksprite.MeshBuilder.Models.DataObjects;
 using Silksprite.MeshBuilder.Models.DataObjects.Extensions;
@@ -12,10 +12,10 @@ namespace Silksprite.MeshBuilder.Controllers.Paths
     {
         public Vector2MuxData[] uvs;
 
-        protected override Pathie GeneratePathie(LodMask lod)
+        protected override Pathie GeneratePathie(LodMaskLayer lod)
         {
             var pathie = new Pathie();
-            pathie.Vertices.Add(new Vertie(Matrix4x4.identity, !lodMask.HasFlag(lod), uvs.ToMux()));
+            pathie.Vertices.Add(new Vertie(Matrix4x4.identity, !lodMask.HasLayer(lod), uvs.ToMux()));
             return pathie;
         }
         

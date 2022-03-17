@@ -1,5 +1,6 @@
 using System.Linq;
 using Silksprite.MeshBuilder.Controllers.Base.Modifiers;
+using Silksprite.MeshBuilder.Extensions;
 using Silksprite.MeshBuilder.Models;
 
 namespace Silksprite.MeshBuilder.Controllers.Base
@@ -11,14 +12,14 @@ namespace Silksprite.MeshBuilder.Controllers.Base
         public Meshie LastMeshie { get; private set; }
         public Meshie LastColliderMeshie { get; private set; }
 
-        public Meshie ToMeshie(LodMask lod)
+        public Meshie ToMeshie(LodMaskLayer lod)
         {
             var meshie = GenerateMeshie(lod);
             var lastMeshie = GetComponents<IMeshModifierProvider>()
-                .Where(provider => provider.enabled && provider.LodMask.HasFlag(lod))
+                .Where(provider => provider.enabled && provider.LodMask.HasLayer(lod))
                 .Select(provider => provider.MeshieModifier)
                 .Aggregate(meshie, (current, modifier) => modifier.Modify(current));
-            if (lod == LodMask.Collider)
+            if (lod == LodMaskLayer.Collider)
             {
                 LastColliderMeshie = lastMeshie;
             }
@@ -29,6 +30,6 @@ namespace Silksprite.MeshBuilder.Controllers.Base
             return lastMeshie;
         }
 
-        protected abstract Meshie GenerateMeshie(LodMask lod);
+        protected abstract Meshie GenerateMeshie(LodMaskLayer lod);
     }
 }

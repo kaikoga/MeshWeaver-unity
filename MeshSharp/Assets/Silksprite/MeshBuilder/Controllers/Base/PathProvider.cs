@@ -1,5 +1,6 @@
 using System.Linq;
 using Silksprite.MeshBuilder.Controllers.Base.Modifiers;
+using Silksprite.MeshBuilder.Extensions;
 using Silksprite.MeshBuilder.Models;
 using UnityEngine;
 
@@ -12,14 +13,14 @@ namespace Silksprite.MeshBuilder.Controllers.Base
         public Pathie LastPathie { get; private set; }
         public Pathie LastColliderPathie { get; private set; }
 
-        public Pathie ToPathie(LodMask lod)
+        public Pathie ToPathie(LodMaskLayer lod)
         {
             var pathie = GeneratePathie(lod);
             var lastPathie = GetComponents<IPathModifierProvider>()
-                .Where(provider => provider.enabled && provider.LodMask.HasFlag(lod))
+                .Where(provider => provider.enabled && provider.LodMask.HasLayer(lod))
                 .Select(provider => provider.PathieModifier)
                 .Aggregate(pathie, (current, modifier) => modifier.Modify(current));
-            if (lod == LodMask.Collider)
+            if (lod == LodMaskLayer.Collider)
             {
                 LastColliderPathie = lastPathie;
             }
@@ -30,7 +31,7 @@ namespace Silksprite.MeshBuilder.Controllers.Base
             return lastPathie;
         }
 
-        protected abstract Pathie GeneratePathie(LodMask lod);
+        protected abstract Pathie GeneratePathie(LodMaskLayer lod);
 
         void OnDrawGizmosSelected()
         {

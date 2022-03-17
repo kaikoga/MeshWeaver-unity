@@ -10,7 +10,7 @@ namespace Silksprite.MeshBuilder.Controllers.Base
     {
         public Matrix4x4 Translation => Matrix4x4.TRS(transform.localPosition, transform.localRotation, transform.localScale);
 
-        protected static Pathie CollectPathie(PathProvider pathProvider, LodMask lod)
+        protected static Pathie CollectPathie(PathProvider pathProvider, LodMaskLayer lod)
         {
             var pathie = new Pathie();
             if (pathProvider == null) return pathie;
@@ -20,7 +20,7 @@ namespace Silksprite.MeshBuilder.Controllers.Base
             return pathie;
         }
 
-        protected static Pathie CollectPathies(IEnumerable<PathProvider> pathProviders, LodMask lod)
+        protected static Pathie CollectPathies(IEnumerable<PathProvider> pathProviders, LodMaskLayer lod)
         {
             var pathie = new Pathie();
             foreach (var pathProvider in pathProviders.Where(c => c != null && c.gameObject.activeSelf))
@@ -31,7 +31,7 @@ namespace Silksprite.MeshBuilder.Controllers.Base
             return pathie;
         }
 
-        protected static void CollectMeshies(IEnumerable<MeshProvider> meshProviders, LodMask lod, Meshie meshie)
+        protected static void CollectMeshies(IEnumerable<MeshProvider> meshProviders, LodMaskLayer lod, Meshie meshie)
         {
             foreach (var meshProvider in meshProviders.Where(c => c != null && c.gameObject.activeSelf))
             {

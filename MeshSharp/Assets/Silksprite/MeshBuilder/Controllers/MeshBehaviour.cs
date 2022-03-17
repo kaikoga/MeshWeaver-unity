@@ -12,7 +12,7 @@ namespace Silksprite.MeshBuilder.Controllers
 
         public List<MeshProvider> PrimaryElements { set => meshProviders = value; }
 
-        protected override void OnPopulateMesh(LodMask lodMask, Meshie meshie)
+        protected override void OnPopulateMesh(LodMaskLayer lodMask, Meshie meshie)
         {
             CollectMeshies(meshProviders, lodMask, meshie);
         }

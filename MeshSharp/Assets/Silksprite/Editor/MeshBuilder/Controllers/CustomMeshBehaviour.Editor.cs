@@ -82,16 +82,16 @@ namespace Silksprite.MeshBuilder.Controllers
             AssetDatabase.AddObjectToAsset(mesh2, projectFilePath);
             AssetDatabase.AddObjectToAsset(mesh9, projectFilePath);
 
-            meshBehaviour.ExportMesh(LodMask.LOD0, mesh0);
+            meshBehaviour.ExportMesh(LodMaskLayer.LOD0, mesh0);
             mesh0.name = Path.GetFileNameWithoutExtension(projectFilePath);
             
-            meshBehaviour.ExportMesh(LodMask.LOD1, mesh1);
+            meshBehaviour.ExportMesh(LodMaskLayer.LOD1, mesh1);
             mesh1.name = Path.GetFileNameWithoutExtension(projectFilePath) + "_LOD1";
 
-            meshBehaviour.ExportMesh(LodMask.LOD2, mesh2);
+            meshBehaviour.ExportMesh(LodMaskLayer.LOD2, mesh2);
             mesh2.name = Path.GetFileNameWithoutExtension(projectFilePath) + "_LOD2";
 
-            meshBehaviour.ExportMesh(LodMask.Collider, mesh9);
+            meshBehaviour.ExportMesh(LodMaskLayer.Collider, mesh9);
             mesh9.name = Path.GetFileNameWithoutExtension(projectFilePath) + "_Collider";
 
             meshBehaviour.outputMesh = mesh0; 

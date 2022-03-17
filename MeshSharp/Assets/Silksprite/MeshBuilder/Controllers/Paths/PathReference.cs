@@ -8,7 +8,7 @@ namespace Silksprite.MeshBuilder.Controllers.Paths
     {
         public List<PathProvider> pathProviders = new List<PathProvider>();
 
-        protected override Pathie GeneratePathie(LodMask lod)
+        protected override Pathie GeneratePathie(LodMaskLayer lod)
         {
             return CollectPathies(pathProviders, lod);
         }
