@@ -12,8 +12,8 @@ namespace Silksprite.MeshBuilder.Controllers.Utils
             typeof(PathRepeatProvider),
             typeof(PathSubdivisionProvider),
             typeof(UvGeneratorProvider),
-            typeof(UvRemapperProvider),
-            typeof(UvProjectorProvider)
+            typeof(UvProjectorProvider),
+            typeof(UvRemapperProvider)
         );
     }
 }
