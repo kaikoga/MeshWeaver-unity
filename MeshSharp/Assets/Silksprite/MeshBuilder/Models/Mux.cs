@@ -15,7 +15,7 @@ namespace Silksprite.MeshBuilder.Models
     {
         readonly MuxLayer<T>[] _layers;
 
-        public T Value => _layers.LastOrDefault(layer => layer.MinIndex <= 0).Value;
+        public T Value => _layers.LastOrDefault(layer => layer.Channel <= 0).Value;
 
         public Mux(IEnumerable<MuxLayer<T>> layers) : this(layers.ToArray()) { }
 
@@ -38,12 +38,12 @@ namespace Silksprite.MeshBuilder.Models
     public readonly struct MuxLayer<T>
     {
         public readonly T Value;
-        public readonly int MinIndex;
+        public readonly int Channel;
 
-        public MuxLayer(T value, int minIndex)
+        public MuxLayer(T value, int channel)
         {
             Value = value;
-            MinIndex = minIndex;
+            Channel = channel;
         }
     }
 }

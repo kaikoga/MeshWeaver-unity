@@ -15,14 +15,14 @@ namespace Silksprite.MeshBuilder.Extensions
             return new Vertie(v.Translation, v.Culled, uvs);
         }
 
-        public static Vertie AddUv(this Vertie v, Vector2 uv, int ch)
+        public static Vertie AddUv(this Vertie v, Vector2 uv, int channel)
         {
-            return new Vertie(v.Translation, v.Culled, v.Uvs.AddLayer(uv, ch));
+            return new Vertie(v.Translation, v.Culled, v.Uvs.AddLayer(uv, channel));
         }
 
-        public static Vertie WithUvCh(this Vertie v, int uvCh)
+        public static Vertie ShiftUvChannel(this Vertie v, int uvChannel)
         {
-            return new Vertie(v.Translation, v.Culled, v.Uvs.SelectMuxChannels(ch => ch - uvCh));
+            return new Vertie(v.Translation, v.Culled, v.Uvs.SelectMuxChannels(channel => channel - uvChannel));
         }
     }
 }

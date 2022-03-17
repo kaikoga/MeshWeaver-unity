@@ -29,11 +29,11 @@ namespace Silksprite.MeshBuilder.Models
             Assert.AreEqual("(20-29)[10-29]20", r[2].Value);
             Assert.AreEqual("(30-49)[30-]30", r[3].Value);
             Assert.AreEqual("(50-)[30-]50", r[4].Value);
-            Assert.AreEqual(0, r[0].MinIndex);
-            Assert.AreEqual(10, r[1].MinIndex);
-            Assert.AreEqual(20, r[2].MinIndex);
-            Assert.AreEqual(30, r[3].MinIndex);
-            Assert.AreEqual(50, r[4].MinIndex);
+            Assert.AreEqual(0, r[0].Channel);
+            Assert.AreEqual(10, r[1].Channel);
+            Assert.AreEqual(20, r[2].Channel);
+            Assert.AreEqual(30, r[3].Channel);
+            Assert.AreEqual(50, r[4].Channel);
         }
     }
 }

@@ -7,9 +7,9 @@ namespace Silksprite.MeshBuilder.Extensions
 {
     public static class MuxExtension
     {
-        public static Mux<T> AddLayer<T>(this Mux<T> self, T value, int minIndex)
+        public static Mux<T> AddLayer<T>(this Mux<T> self, T value, int channel)
         {
-            return new Mux<T>(self.Concat(new[] { new MuxLayer<T>(value, minIndex) }));
+            return new Mux<T>(self.Concat(new[] { new MuxLayer<T>(value, channel) }));
         }
 
         public static Mux<TOut> ZipMux<T1, T2, TOut>(this Mux<T1> self, Mux<T2> other, Func<T1, T2, TOut> selector)
@@ -26,12 +26,12 @@ namespace Silksprite.MeshBuilder.Extensions
         {
             MuxLayer<TOut> ZipChannel(MuxLayer<T1> curSelf, MuxLayer<T2> curOther)
             {
-                var minIndex = Math.Max(curSelf.MinIndex, curOther.MinIndex);
-                return new MuxLayer<TOut>(selector(curSelf.Value, curOther.Value, minIndex), minIndex);
+                var channel = Math.Max(curSelf.Channel, curOther.Channel);
+                return new MuxLayer<TOut>(selector(curSelf.Value, curOther.Value, channel), channel);
             }
 
-            using (var itSelf = self.OrderBy(ch => ch.MinIndex).GetEnumerator())
-            using (var itOther = other.OrderBy(ch => ch.MinIndex).GetEnumerator())
+            using (var itSelf = self.OrderBy(layer => layer.Channel).GetEnumerator())
+            using (var itOther = other.OrderBy(layer => layer.Channel).GetEnumerator())
             {
                 MuxLayer<T1> lastSelf = default;
                 MuxLayer<T2> lastOther = default;
@@ -54,13 +54,13 @@ namespace Silksprite.MeshBuilder.Extensions
                         continue;
                     }
 
-                    if (itSelf.Current.MinIndex < itOther.Current.MinIndex)
+                    if (itSelf.Current.Channel < itOther.Current.Channel)
                     {
                         lastSelf = itSelf.Current;
                         hasSelf = itSelf.MoveNext();
                         yield return ZipChannel(lastSelf, lastOther);
                     }
-                    else if (itSelf.Current.MinIndex > itOther.Current.MinIndex)
+                    else if (itSelf.Current.Channel > itOther.Current.Channel)
                     {
                         lastOther = itOther.Current;
                         hasOther = itOther.MoveNext();
@@ -80,12 +80,12 @@ namespace Silksprite.MeshBuilder.Extensions
 
         public static Mux<T> SelectMuxChannels<T>(this Mux<T> self, Func<int, int> selector)
         {
-            return new Mux<T>(self.Select(ch => new MuxLayer<T>(ch.Value, selector(ch.MinIndex))));
+            return new Mux<T>(self.Select(layer => new MuxLayer<T>(layer.Value, selector(layer.Channel))));
         }
 
         public static Mux<TOut> SelectMuxValues<TIn, TOut>(this Mux<TIn> self, Func<TIn, TOut> selector)
         {
-            return new Mux<TOut>(self.Select(ch => new MuxLayer<TOut>(selector(ch.Value), ch.MinIndex)));
+            return new Mux<TOut>(self.Select(layer => new MuxLayer<TOut>(selector(layer.Value), layer.Channel)));
         }
     }
 }

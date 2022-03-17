@@ -7,18 +7,18 @@ namespace Silksprite.MeshBuilder.Models.Modifiers
     public class UvProjector : VertiesModifierBase
     {
         readonly Matrix4x4 _translation;
-        readonly int _minIndex;
+        readonly int _uvChannel;
 
-        public UvProjector(Matrix4x4 translation, int minIndex)
+        public UvProjector(Matrix4x4 translation, int uvChannel)
         {
             _translation = translation;
-            _minIndex = minIndex;
+            _uvChannel = uvChannel;
         }
 
         protected override Vertie ModifyVertie(Vertie vertie)
         {
             var translation = _translation;
-            return vertie.AddUv(translation.MultiplyPoint(vertie.Vertex), _minIndex);
+            return vertie.AddUv(translation.MultiplyPoint(vertie.Vertex), _uvChannel);
         }
     }
 }

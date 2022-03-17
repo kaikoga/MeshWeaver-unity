@@ -90,7 +90,7 @@ namespace Silksprite.MeshBuilder.Models
             var translation = Translation;
             var scale = translation.lossyScale;
             translation.rotation.ToAngleAxis(out var angle, out _);
-            var uvs = string.Join(", ", Uvs.Select(uv => $"[{uv.MinIndex}] : {uv.Value.x:G3}, {uv.Value.y:G3}"));
+            var uvs = string.Join(", ", Uvs.Select(uv => $"[{uv.Channel}] : {uv.Value.x:G3}, {uv.Value.y:G3}"));
             return $"[{(Culled ? "?" : "")} {Vertex.x:G3}, {Vertex.y:G3}, {Vertex.z:G3}] ({scale.x:G3}, {scale.y:G3}, {scale.z:G3} : {angle:G3}) <{uvs}> ";
         }
     }

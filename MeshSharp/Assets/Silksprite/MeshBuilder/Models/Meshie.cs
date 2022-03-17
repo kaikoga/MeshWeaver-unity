@@ -33,7 +33,7 @@ namespace Silksprite.MeshBuilder.Models
         public void Concat(Meshie other, Matrix4x4 matrix4x4, int uvIndex)
         {
             var offset = Vertices.Count;
-            Vertices.AddRange(other.Vertices.Select(v => v.MultiplyPoint(matrix4x4).WithUvCh(uvIndex)));
+            Vertices.AddRange(other.Vertices.Select(v => v.MultiplyPoint(matrix4x4).ShiftUvChannel(uvIndex)));
             Indices.AddRange(other.Indices.Select(i => i + offset));
         }
 

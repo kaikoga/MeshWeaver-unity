@@ -9,7 +9,7 @@ namespace Silksprite.MeshBuilder.Controllers.Modifiers
     public class UvProjectorProvider : VertexModifierProviderBase
     {
         public VertexProvider referenceTranslation;
-        public int minIndex;
+        public int uvChannel;
 
         Matrix4x4 Translation
         {
@@ -21,7 +21,7 @@ namespace Silksprite.MeshBuilder.Controllers.Modifiers
             }
         }
 
-        public override IMeshieModifier MeshieModifier => new UvProjector(Translation, minIndex);
-        public override IPathieModifier PathieModifier => new UvProjector(Translation, minIndex);
+        public override IMeshieModifier MeshieModifier => new UvProjector(Translation, uvChannel);
+        public override IPathieModifier PathieModifier => new UvProjector(Translation, uvChannel);
     }
 }

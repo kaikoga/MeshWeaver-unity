@@ -19,7 +19,7 @@ namespace Silksprite.MeshBuilder.Models.DataObjects
 
             using (new EditorGUI.IndentLevelScope(1 - EditorGUI.indentLevel))
             {
-                EditorGUI.PropertyField(r1, property.FindPropertyRelative("minIndex"), new GUIContent(""));
+                EditorGUI.PropertyField(r1, property.FindPropertyRelative("channel"), new GUIContent(""));
                 EditorGUI.PropertyField(r2, property.FindPropertyRelative("value"), new GUIContent(""));
             }
         }

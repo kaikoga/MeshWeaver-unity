@@ -8,11 +8,11 @@ namespace Silksprite.MeshBuilder.Models.DataObjects
     public class MuxData<T>
     {
         public T value;
-        public int minIndex;
+        public int channel;
         
         public MuxLayer<T> ToMuxLayer()
         {
-            return new MuxLayer<T>(value, minIndex);
+            return new MuxLayer<T>(value, channel);
         }
     }
 
@@ -24,7 +24,7 @@ namespace Silksprite.MeshBuilder.Models.DataObjects
             return new Vector2MuxData
             {
                 value = muxLayer.Value,
-                minIndex = muxLayer.MinIndex
+                channel = muxLayer.Channel
             };
         }
         
