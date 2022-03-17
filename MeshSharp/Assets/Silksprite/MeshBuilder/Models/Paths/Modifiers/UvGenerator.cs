@@ -21,7 +21,7 @@ namespace Silksprite.MeshBuilder.Models.Paths.Modifiers
         public Pathie Modify(Pathie pathie)
         {
             var iMax = pathie.Vertices.Count - 1;
-            return pathie.Modify((vertie, i) => vertie.AddUv(new MuxLayer<Vector2>(_min + (_max - _min) * i / iMax, _minIndex)));
+            return pathie.Modify((vertie, i) => vertie.AddUv(_min + (_max - _min) * i / iMax, _minIndex));
         }
     }
 }

@@ -18,7 +18,7 @@ namespace Silksprite.MeshBuilder.Models.Modifiers
         protected override Vertie ModifyVertie(Vertie vertie)
         {
             var translation = _translation;
-            return vertie.AddUv(new MuxLayer<Vector2>(translation.MultiplyPoint(vertie.Vertex), _minIndex));
+            return vertie.AddUv(translation.MultiplyPoint(vertie.Vertex), _minIndex);
         }
     }
 }

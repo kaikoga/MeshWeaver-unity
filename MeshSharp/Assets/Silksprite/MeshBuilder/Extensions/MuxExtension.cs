@@ -7,6 +7,11 @@ namespace Silksprite.MeshBuilder.Extensions
 {
     public static class MuxExtension
     {
+        public static Mux<T> AddLayer<T>(this Mux<T> self, T value, int minIndex)
+        {
+            return new Mux<T>(self.Concat(new[] { new MuxLayer<T>(value, minIndex) }));
+        }
+
         public static Mux<TOut> ZipMux<T1, T2, TOut>(this Mux<T1> self, Mux<T2> other, Func<T1, T2, TOut> selector)
         {
             return self.ZipMux(other, (a, b, _) => selector(a, b));
@@ -73,14 +78,14 @@ namespace Silksprite.MeshBuilder.Extensions
             }
         }
 
-        public static Mux<TOut> SelectMuxValues<TIn, TOut>(this Mux<TIn> self, Func<TIn, TOut> selector)
+        public static Mux<T> SelectMuxChannels<T>(this Mux<T> self, Func<int, int> selector)
         {
-            return new Mux<TOut>(self.SelectMuxValuesLayers((v, _) => selector(v)));
+            return new Mux<T>(self.Select(ch => new MuxLayer<T>(ch.Value, selector(ch.MinIndex))));
         }
 
-        static IEnumerable<MuxLayer<TOut>> SelectMuxValuesLayers<TIn, TOut>(this Mux<TIn> self, Func<TIn, int, TOut> selector)
+        public static Mux<TOut> SelectMuxValues<TIn, TOut>(this Mux<TIn> self, Func<TIn, TOut> selector)
         {
-            return self.Select(ch => new MuxLayer<TOut>(selector(ch.Value, ch.MinIndex), ch.MinIndex));
+            return new Mux<TOut>(self.Select(ch => new MuxLayer<TOut>(selector(ch.Value), ch.MinIndex)));
         }
     }
 }
