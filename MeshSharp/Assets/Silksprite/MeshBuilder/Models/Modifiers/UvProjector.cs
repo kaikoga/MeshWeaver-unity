@@ -1,11 +1,10 @@
-using System.Linq;
 using Silksprite.MeshBuilder.Extensions;
 using Silksprite.MeshBuilder.Models.Base;
 using UnityEngine;
 
 namespace Silksprite.MeshBuilder.Models.Modifiers
 {
-    public class UvProjector : IMeshieModifier, IPathieModifier
+    public class UvProjector : VertiesModifierBase
     {
         readonly Matrix4x4 _translation;
         readonly int _minIndex;
@@ -16,27 +15,10 @@ namespace Silksprite.MeshBuilder.Models.Modifiers
             _minIndex = minIndex;
         }
 
-        public Meshie Modify(Meshie meshie)
+        protected override Vertie ModifyVertie(Vertie vertie)
         {
-            var result = new Meshie();
-            result.Vertices.AddRange(meshie.Vertices.Select(v =>
-            {
-                var translation = _translation;
-                return v.AddUv(new Channel<Vector2>(translation.MultiplyPoint(v.Vertex), _minIndex));
-            }));
-            result.Indices.AddRange(meshie.Indices);
-            return result;
-        }
-
-        public Pathie Modify(Pathie meshie)
-        {
-            var result = new Pathie();
-            result.Vertices.AddRange(meshie.Vertices.Select(v =>
-            {
-                var translation = _translation;
-                return v.AddUv(new Channel<Vector2>(translation.MultiplyPoint(v.Vertex), _minIndex));
-            }));
-            return result;
+            var translation = _translation;
+            return vertie.AddUv(new Channel<Vector2>(translation.MultiplyPoint(vertie.Vertex), _minIndex));
         }
     }
 }
