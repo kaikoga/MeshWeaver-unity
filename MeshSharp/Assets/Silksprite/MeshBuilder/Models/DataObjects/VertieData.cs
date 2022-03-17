@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Silksprite.MeshBuilder.Models.DataObjects.Extensions;
 using UnityEngine;
 
 namespace Silksprite.MeshBuilder.Models.DataObjects
@@ -17,13 +18,13 @@ namespace Silksprite.MeshBuilder.Models.DataObjects
             {
                 translation = vertie.Translation,
                 culled = vertie.Culled,
-                uvs = vertie.Uvs.Select(Vector2MuxData.FromMuxLayer).ToArray()
+                uvs = Vector2MuxData.FromMux(vertie.Uvs)
             };
         }
 
         public Vertie ToVertie()
         {
-            return new Vertie(translation, culled, uvs.Select(uv => uv.ToMuxLayer()));
+            return new Vertie(translation, culled, uvs.ToMux());
         }
     }
 }

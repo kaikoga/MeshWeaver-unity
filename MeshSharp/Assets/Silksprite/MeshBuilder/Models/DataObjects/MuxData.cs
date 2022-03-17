@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using UnityEngine;
 
 namespace Silksprite.MeshBuilder.Models.DataObjects
@@ -26,5 +27,7 @@ namespace Silksprite.MeshBuilder.Models.DataObjects
                 minIndex = muxLayer.MinIndex
             };
         }
+        
+        public static Vector2MuxData[] FromMux(Mux<Vector2> mux) => mux.Select(FromMuxLayer).ToArray();
     }
 }

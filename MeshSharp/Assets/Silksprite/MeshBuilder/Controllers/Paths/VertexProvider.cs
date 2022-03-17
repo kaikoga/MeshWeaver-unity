@@ -2,6 +2,7 @@ using System.Linq;
 using Silksprite.MeshBuilder.Controllers.Base;
 using Silksprite.MeshBuilder.Models;
 using Silksprite.MeshBuilder.Models.DataObjects;
+using Silksprite.MeshBuilder.Models.DataObjects.Extensions;
 using UnityEditor;
 using UnityEngine;
 
@@ -14,7 +15,7 @@ namespace Silksprite.MeshBuilder.Controllers.Paths
         protected override Pathie GeneratePathie(LodMask lod)
         {
             var pathie = new Pathie();
-            pathie.Vertices.Add(new Vertie(Matrix4x4.identity, !lodMask.HasFlag(lod), uvs.Select(uv => uv.ToMuxLayer())));
+            pathie.Vertices.Add(new Vertie(Matrix4x4.identity, !lodMask.HasFlag(lod), uvs.ToMux()));
             return pathie;
         }
         

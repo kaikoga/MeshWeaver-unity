@@ -16,7 +16,7 @@ namespace Silksprite.MeshBuilder.Models
         public readonly Vector3 Vertex;
         public readonly Vector2 Uv;
 
-        public Vertie(Vector3 vertex) : this(Matrix4x4.Translate(vertex), false, new []{ new MuxLayer<Vector2>(Vector2.zero, 0) }) { }
+        public Vertie(Vector3 vertex) : this(Matrix4x4.Translate(vertex), false, Mux.Single(Vector2.zero)) { }
 
         public Vertie(Matrix4x4 translation, bool culled, IEnumerable<MuxLayer<Vector2>> uvs) : this(translation, culled, new Mux<Vector2>(uvs)) { } 
 
@@ -45,23 +45,23 @@ namespace Silksprite.MeshBuilder.Models
 
         public static Vertie operator +(Vertie a, Vertie b)
         {
-            return new Vertie(ComponentWiseAdd(a.Translation, b.Translation), a.Culled && b.Culled, a.Uvs.ZipChannels(b.Uvs, (x, y) => x + y));
+            return new Vertie(ComponentWiseAdd(a.Translation, b.Translation), a.Culled && b.Culled, a.Uvs.ZipMux(b.Uvs, (x, y) => x + y));
         }
 
         public static Vertie operator -(Vertie a, Vertie b)
         {
-            return new Vertie(ComponentWiseSubtract(a.Translation, b.Translation), a.Culled && b.Culled, a.Uvs.ZipChannels(b.Uvs, (x, y) => x - y));
+            return new Vertie(ComponentWiseSubtract(a.Translation, b.Translation), a.Culled && b.Culled, a.Uvs.ZipMux(b.Uvs, (x, y) => x - y));
         }
 
         public static Vertie operator *(Vertie a, Vertie b)
         {
-            return new Vertie(a.Translation * b.Translation, a.Culled && b.Culled, a.Uvs.ZipChannels(b.Uvs, (x, y) => x + y));
+            return new Vertie(a.Translation * b.Translation, a.Culled && b.Culled, a.Uvs.ZipMux(b.Uvs, (x, y) => x + y));
         }
 
         public static Vertie operator /(Vertie a, Vertie b)
         {
             // I don't think this is correct, Translation part in particular, but we need the Vertex part at least
-            return new Vertie(a.Translation * b.Translation.inverse, a.Culled && b.Culled, a.Uvs.ZipChannels(b.Uvs, (x, y) => x - y));
+            return new Vertie(a.Translation * b.Translation.inverse, a.Culled && b.Culled, a.Uvs.ZipMux(b.Uvs, (x, y) => x - y));
         }
 
         public static Vertie operator *(Vertie a, float f)

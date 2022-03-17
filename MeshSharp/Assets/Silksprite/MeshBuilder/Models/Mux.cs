@@ -4,6 +4,13 @@ using System.Linq;
 
 namespace Silksprite.MeshBuilder.Models
 {
+    public static class Mux
+    {
+        public static Mux<T> Empty<T>() => new Mux<T>(new MuxLayer<T>[] { });
+
+        public static Mux<T> Single<T>(T singleValue) => new Mux<T>(new[] { new MuxLayer<T>(singleValue, 0) });
+    }
+
     public class Mux<T> : IEnumerable<MuxLayer<T>>
     {
         readonly MuxLayer<T>[] _layers;

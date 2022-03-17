@@ -9,20 +9,20 @@ namespace Silksprite.MeshBuilder.Models
         [Test]
         public void TestZipChannels()
         {
-            var a = new[]
+            var a = new Mux<string>(new[]
             {
                 new MuxLayer<string>("(0-19)", 0),
                 new MuxLayer<string>("(20-29)", 20),
                 new MuxLayer<string>("(30-49)", 30),
                 new MuxLayer<string>("(50-)", 50)
-            };
-            var b = new[]
+            });
+            var b = new Mux<string>(new[]
             {
                 new MuxLayer<string>("[0-9]", 0),
                 new MuxLayer<string>("[10-29]", 10),
                 new MuxLayer<string>("[30-]", 30)
-            };
-            var r = a.ZipChannels(b, (m, n, i) => $"{m}{n}{i}").ToArray();
+            });
+            var r = a.ZipMux(b, (m, n, i) => $"{m}{n}{i}").ToArray();
             Assert.AreEqual(5, r.Length);
             Assert.AreEqual("(0-19)[0-9]0", r[0].Value);
             Assert.AreEqual("(0-19)[10-29]10", r[1].Value);
