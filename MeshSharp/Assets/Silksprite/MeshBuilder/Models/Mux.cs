@@ -8,7 +8,11 @@ namespace Silksprite.MeshBuilder.Models
     {
         readonly MuxLayer<T>[] _layers;
 
-        public Mux(IEnumerable<MuxLayer<T>> layers)
+        public T Value => _layers.LastOrDefault(layer => layer.MinIndex <= 0).Value;
+
+        public Mux(IEnumerable<MuxLayer<T>> layers) : this(layers.ToArray()) { }
+
+        Mux(MuxLayer<T>[] layers)
         {
             _layers = layers.ToArray();
         }

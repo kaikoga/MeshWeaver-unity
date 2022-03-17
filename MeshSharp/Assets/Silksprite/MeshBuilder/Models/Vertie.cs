@@ -28,7 +28,7 @@ namespace Silksprite.MeshBuilder.Models
             _uvs = uvs;
 
             Vertex = new Vector3(translation.m03, translation.m13, translation.m23);
-            Uv = _uvs.Value();
+            Uv = _uvs.Value;
         }
 
         public bool VertexEquals(Vertie other, float sqrError = 0.000001f) => (Vertex - other.Vertex).sqrMagnitude <= sqrError;

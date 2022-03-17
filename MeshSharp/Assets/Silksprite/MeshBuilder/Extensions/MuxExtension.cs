@@ -7,11 +7,6 @@ namespace Silksprite.MeshBuilder.Extensions
 {
     public static class MuxExtension
     {
-        public static T Value<T>(this IEnumerable<MuxLayer<T>> ch)
-        {
-            return ch.LastOrDefault(uv => uv.MinIndex <= 0).Value;
-        }
-        
         public static IEnumerable<MuxLayer<TOut>> ZipChannels<T1, T2, TOut>(this IEnumerable<MuxLayer<T1>> self, IEnumerable<MuxLayer<T2>> other, Func<T1, T2, TOut> selector)
         {
             return self.ZipChannels(other, (a, b, _) => selector(a, b));
