@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Silksprite.MeshBuilder.Models
 {
-    public readonly struct Vertie
+    public class Vertie
     {
         public readonly Vector3 Vertex;
         public readonly Vector2 Uv;
