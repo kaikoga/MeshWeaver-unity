@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Silksprite.MeshBuilder.Controllers.Modifiers
 {
-    public class VertwiseResizeProvider : VertwiseModifierProviderBase
+    public class VertwiseTranslateProvider : VertwiseModifierProviderBase
     {
         public Vector3 size = Vector3.one;
         public VertexProvider referenceTranslation;
@@ -21,6 +21,6 @@ namespace Silksprite.MeshBuilder.Controllers.Modifiers
             }
         }
 
-        protected override VertwiseModifierBase VertwiseModifier => new VertwiseResize(Translation);
+        protected override VertwiseModifierBase VertwiseModifier => new VertwiseTranslate(Translation);
     }
 }
