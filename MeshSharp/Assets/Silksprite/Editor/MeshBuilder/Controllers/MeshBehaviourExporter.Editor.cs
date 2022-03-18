@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Silksprite.MeshBuilder.Models;
@@ -126,63 +127,65 @@ namespace Silksprite.MeshBuilder.Controllers
             var baseName = Path.GetFileNameWithoutExtension(projectFilePath);
             var prefab = new GameObject(baseName);
 
-            var gameObject0 = new GameObject(baseName + "_LOD0");
-            gameObject0.transform.SetParent(prefab.transform, false);
-            var meshFilter0 = gameObject0.AddComponent<MeshFilter>();
-            meshFilter0.sharedMesh = meshBehaviourExporter.outputMesh;
-            var meshRenderer0 = gameObject0.AddComponent<MeshRenderer>();
-            meshRenderer0.sharedMaterial = material;
-
-            var gameObject1 = new GameObject(baseName + "_LOD1");
-            gameObject1.transform.SetParent(prefab.transform, false);
-            var meshFilter1 = gameObject1.AddComponent<MeshFilter>();
-            meshFilter1.sharedMesh = meshBehaviourExporter.outputMeshLod1;
-            var meshRenderer1 = gameObject1.AddComponent<MeshRenderer>();
-            meshRenderer1.sharedMaterial = material;
-
-            var gameObject2 = new GameObject(baseName + "_LOD2");
-            gameObject2.transform.SetParent(prefab.transform, false);
-            var meshFilter2 = gameObject2.AddComponent<MeshFilter>();
-            meshFilter2.sharedMesh = meshBehaviourExporter.outputMeshLod2;
-            var meshRenderer2 = gameObject2.AddComponent<MeshRenderer>();
-            meshRenderer2.sharedMaterial = material;
-
-            var gameObject9 = new GameObject(baseName + "_Collider");
-            gameObject9.transform.SetParent(prefab.transform, false);
-            var collider = gameObject9.AddComponent<MeshCollider>();
-            collider.sharedMesh = meshBehaviourExporter.outputMeshForCollider;
-
-            var lodGroup = prefab.AddComponent<LODGroup>();
-            lodGroup.SetLODs(new []
+            MeshRenderer SetupRenderer(GameObject gameObject, Mesh mesh)
             {
-                new LOD
+                var meshFilter = gameObject.AddComponent<MeshFilter>();
+                meshFilter.sharedMesh = mesh;
+                var meshRenderer = gameObject.AddComponent<MeshRenderer>();
+                meshRenderer.sharedMaterial = material;
+                return meshRenderer;
+            }
+
+            if (!meshBehaviourExporter.useLod)
+            {
+                SetupRenderer(prefab, meshBehaviourExporter.outputMesh);
+            }
+            else
+            {
+                MeshRenderer CreateChildRenderer(string name, Mesh mesh)
                 {
-                    screenRelativeTransitionHeight = 0.6f,
-                    fadeTransitionWidth = 0,
-                    renderers = new Renderer[]
-                    {
-                        meshRenderer0
-                    }
-                },
-                new LOD
-                {
-                    screenRelativeTransitionHeight = 0.3f,
-                    fadeTransitionWidth = 0,
-                    renderers = new Renderer[]
-                    {
-                        meshRenderer1
-                    }
-                },
-                new LOD
-                {
-                    screenRelativeTransitionHeight = 0.1f,
-                    fadeTransitionWidth = 0,
-                    renderers = new Renderer[]
-                    {
-                        meshRenderer2
-                    }
+                    var gameObject = new GameObject(name);
+                    gameObject.transform.SetParent(prefab.transform, false);
+                    return SetupRenderer(gameObject, mesh);
                 }
-            });
+                
+                LOD CreateLOD(Renderer meshRenderer, float screenRelativeTransitionHeight)
+                {
+                    return new LOD
+                    {
+                        screenRelativeTransitionHeight = screenRelativeTransitionHeight,
+                        fadeTransitionWidth = 0,
+                        renderers = new Renderer[] { meshRenderer }
+                    };
+                }
+
+                var lods = new List<LOD>();
+
+                var meshRenderer0 = CreateChildRenderer(baseName + "_LOD0", meshBehaviourExporter.outputMesh);
+                lods.Add(CreateLOD(meshRenderer0, meshBehaviourExporter.useLod1 ? 0.6f : meshBehaviourExporter.useLod2 ? 0.3f : 0.1f));
+
+                if (meshBehaviourExporter.useLod1)
+                {
+                    var meshRenderer1 = CreateChildRenderer(baseName + "_LOD1", meshBehaviourExporter.outputMeshLod1);
+                    lods.Add(CreateLOD(meshRenderer1, meshBehaviourExporter.useLod2 ? 0.3f : 0.1f));
+                }
+
+                if (meshBehaviourExporter.useLod2)
+                {
+                    var meshRenderer2 = CreateChildRenderer(baseName + "_LOD2", meshBehaviourExporter.outputMeshLod2);
+                    lods.Add(CreateLOD(meshRenderer2, 0.1f));
+                }
+
+                prefab.AddComponent<LODGroup>().SetLODs(lods.ToArray());
+            }
+
+            if (meshBehaviourExporter.useCollider)
+            {
+                var gameObject9 = new GameObject(baseName + "_Collider");
+                gameObject9.transform.SetParent(prefab.transform, false);
+                var collider = gameObject9.AddComponent<MeshCollider>();
+                collider.sharedMesh = meshBehaviourExporter.outputMeshForCollider;
+            }
 
             PrefabUtility.SaveAsPrefabAsset(prefab, projectFilePath);
             DestroyImmediate(prefab);
