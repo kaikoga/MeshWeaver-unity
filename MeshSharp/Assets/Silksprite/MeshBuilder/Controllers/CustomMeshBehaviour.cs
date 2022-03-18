@@ -11,9 +11,6 @@ namespace Silksprite.MeshBuilder.Controllers
         public LodMaskLayer lodMaskLayer = LodMaskLayer.LOD0;
         public bool autoUpdate;
         
-        public Mesh outputMesh;
-        public GameObject outputPrefab;
-
         public MeshFilter[] meshFilters;
         public MeshCollider[] meshColliders;
 
