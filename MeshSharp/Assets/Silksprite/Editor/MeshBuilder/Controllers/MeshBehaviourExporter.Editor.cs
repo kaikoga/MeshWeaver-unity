@@ -48,6 +48,53 @@ namespace Silksprite.MeshBuilder.Controllers
             }
         }
 
+        static void RefreshMeshReferences(string projectFilePath, MeshBehaviourExporter meshBehaviourExporter, bool reconnect)
+        {
+            var meshes = AssetDatabase.LoadAllAssetsAtPath(projectFilePath).OfType<Mesh>().ToArray();
+            meshBehaviourExporter.outputMesh = meshes.FirstOrDefault(AssetDatabase.IsMainAsset);
+            
+            var subAssets = meshes.Where(AssetDatabase.IsSubAsset).ToArray();
+            meshBehaviourExporter.outputMeshLod1 = subAssets.FirstOrDefault(mesh => mesh.name.EndsWith("_LOD1"));
+            meshBehaviourExporter.outputMeshLod2 = subAssets.FirstOrDefault(mesh => mesh.name.EndsWith("_LOD2"));
+            meshBehaviourExporter.outputMeshForCollider = subAssets.FirstOrDefault(mesh => mesh.name.EndsWith("_Collider"));
+
+            if (!reconnect) return;
+
+            foreach (var subAsset in subAssets)
+            {
+                AssetDatabase.RemoveObjectFromAsset(subAsset);
+            }
+
+            if (!meshBehaviourExporter.outputMesh)
+            {
+                meshBehaviourExporter.outputMesh = new Mesh();
+                AssetDatabase.CreateAsset(meshBehaviourExporter.outputMesh, projectFilePath);
+            }
+
+            if (!meshBehaviourExporter.outputMeshLod1)
+            {
+                meshBehaviourExporter.outputMeshLod1 = new Mesh();
+            }
+            if (!meshBehaviourExporter.outputMeshLod2)
+            {
+                meshBehaviourExporter.outputMeshLod2 = new Mesh();
+            }
+            if (!meshBehaviourExporter.outputMeshForCollider)
+            {
+                meshBehaviourExporter.outputMeshForCollider = new Mesh();
+            }
+
+            AssetDatabase.AddObjectToAsset(meshBehaviourExporter.outputMeshLod1, projectFilePath);
+            AssetDatabase.AddObjectToAsset(meshBehaviourExporter.outputMeshLod2, projectFilePath);
+            AssetDatabase.AddObjectToAsset(meshBehaviourExporter.outputMeshForCollider, projectFilePath);
+
+            var baseName = Path.GetFileNameWithoutExtension(projectFilePath);
+            meshBehaviourExporter.outputMesh.name = baseName;
+            meshBehaviourExporter.outputMeshLod1.name = baseName + "_LOD1";
+            meshBehaviourExporter.outputMeshLod2.name = baseName + "_LOD2";
+            meshBehaviourExporter.outputMeshForCollider.name = baseName + "_Collider";
+        }
+
         static void ExportMeshAsset(string projectFilePath, MeshBehaviourExporter meshBehaviourExporter, CustomMeshBehaviour meshBehaviour)
         {
             if (string.IsNullOrEmpty(projectFilePath))
@@ -55,54 +102,12 @@ namespace Silksprite.MeshBuilder.Controllers
                 throw new OperationCanceledException();
             }
 
-            var meshes = AssetDatabase.LoadAllAssetsAtPath(projectFilePath).OfType<Mesh>().ToArray();
-            var mesh0 = meshes.FirstOrDefault(AssetDatabase.IsMainAsset);
-            var subAssets = meshes.Where(AssetDatabase.IsSubAsset).ToArray();
-            var mesh1 = subAssets.FirstOrDefault(mesh => mesh.name.EndsWith("_LOD1"));
-            var mesh2 = subAssets.FirstOrDefault(mesh => mesh.name.EndsWith("_LOD2"));
-            var mesh9 = subAssets.FirstOrDefault(mesh => mesh.name.EndsWith("_Collider"));
-            foreach (var subAsset in subAssets)
-            {
-                AssetDatabase.RemoveObjectFromAsset(subAsset);
-            }
+            RefreshMeshReferences(projectFilePath, meshBehaviourExporter, true);
 
-            if (!mesh0)
-            {
-                mesh0 = new Mesh();
-                AssetDatabase.CreateAsset(mesh0, projectFilePath);
-            }
-
-            if (!mesh1)
-            {
-                mesh1 = new Mesh();
-            }
-            if (!mesh2)
-            {
-                mesh2 = new Mesh();
-            }
-            if (!mesh9)
-            {
-                mesh9 = new Mesh();
-            }
-
-            AssetDatabase.AddObjectToAsset(mesh1, projectFilePath);
-            AssetDatabase.AddObjectToAsset(mesh2, projectFilePath);
-            AssetDatabase.AddObjectToAsset(mesh9, projectFilePath);
-
-            var baseName = Path.GetFileNameWithoutExtension(projectFilePath);
-            meshBehaviour.ExportMesh(LodMaskLayer.LOD0, mesh0);
-            mesh0.name = baseName;
-            
-            meshBehaviour.ExportMesh(LodMaskLayer.LOD1, mesh1);
-            mesh1.name = mesh0.name + "_LOD1";
-
-            meshBehaviour.ExportMesh(LodMaskLayer.LOD2, mesh2);
-            mesh2.name = mesh0.name + "_LOD2";
-
-            meshBehaviour.ExportMesh(LodMaskLayer.Collider, mesh9);
-            mesh9.name = mesh0.name + "_Collider";
-
-            meshBehaviourExporter.outputMesh = mesh0; 
+            meshBehaviour.ExportMesh(LodMaskLayer.LOD0, meshBehaviourExporter.outputMesh);
+            meshBehaviour.ExportMesh(LodMaskLayer.LOD1, meshBehaviourExporter.outputMeshLod1);
+            meshBehaviour.ExportMesh(LodMaskLayer.LOD2, meshBehaviourExporter.outputMeshLod2);
+            meshBehaviour.ExportMesh(LodMaskLayer.Collider, meshBehaviourExporter.outputMeshForCollider);
 
             AssetDatabase.SaveAssets();
         }
@@ -114,12 +119,7 @@ namespace Silksprite.MeshBuilder.Controllers
                 throw new OperationCanceledException();
             }
 
-            var meshes = AssetDatabase.LoadAllAssetsAtPath(AssetDatabase.GetAssetPath(meshBehaviourExporter.outputMesh)).OfType<Mesh>().ToArray();
-            var mesh0 = meshes.FirstOrDefault(AssetDatabase.IsMainAsset);
-            var subAssets = meshes.Where(AssetDatabase.IsSubAsset).ToArray();
-            var mesh1 = subAssets.FirstOrDefault(mesh => mesh.name.EndsWith("_LOD1"));
-            var mesh2 = subAssets.FirstOrDefault(mesh => mesh.name.EndsWith("_LOD2"));
-            var mesh9 = subAssets.FirstOrDefault(mesh => mesh.name.EndsWith("_Collider"));
+            RefreshMeshReferences(AssetDatabase.GetAssetPath(meshBehaviourExporter.outputMesh), meshBehaviourExporter, false);
 
             var material = meshBehaviourExporter.GetComponent<MeshRenderer>().sharedMaterial;
 
@@ -129,28 +129,28 @@ namespace Silksprite.MeshBuilder.Controllers
             var gameObject0 = new GameObject(baseName + "_LOD0");
             gameObject0.transform.SetParent(prefab.transform, false);
             var meshFilter0 = gameObject0.AddComponent<MeshFilter>();
-            meshFilter0.sharedMesh = mesh0;
+            meshFilter0.sharedMesh = meshBehaviourExporter.outputMesh;
             var meshRenderer0 = gameObject0.AddComponent<MeshRenderer>();
             meshRenderer0.sharedMaterial = material;
 
             var gameObject1 = new GameObject(baseName + "_LOD1");
             gameObject1.transform.SetParent(prefab.transform, false);
             var meshFilter1 = gameObject1.AddComponent<MeshFilter>();
-            meshFilter1.sharedMesh = mesh1;
+            meshFilter1.sharedMesh = meshBehaviourExporter.outputMeshLod1;
             var meshRenderer1 = gameObject1.AddComponent<MeshRenderer>();
             meshRenderer1.sharedMaterial = material;
 
             var gameObject2 = new GameObject(baseName + "_LOD2");
             gameObject2.transform.SetParent(prefab.transform, false);
             var meshFilter2 = gameObject2.AddComponent<MeshFilter>();
-            meshFilter2.sharedMesh = mesh2;
+            meshFilter2.sharedMesh = meshBehaviourExporter.outputMeshLod2;
             var meshRenderer2 = gameObject2.AddComponent<MeshRenderer>();
             meshRenderer2.sharedMaterial = material;
 
             var gameObject9 = new GameObject(baseName + "_Collider");
             gameObject9.transform.SetParent(prefab.transform, false);
             var collider = gameObject9.AddComponent<MeshCollider>();
-            collider.sharedMesh = mesh9;
+            collider.sharedMesh = meshBehaviourExporter.outputMeshForCollider;
 
             var lodGroup = prefab.AddComponent<LODGroup>();
             lodGroup.SetLODs(new []

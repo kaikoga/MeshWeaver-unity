@@ -7,5 +7,9 @@ namespace Silksprite.MeshBuilder.Controllers
     {
         public Mesh outputMesh;
         public GameObject outputPrefab;
+
+        public Mesh outputMeshLod1;
+        public Mesh outputMeshLod2;
+        public Mesh outputMeshForCollider;
     }
 }
