@@ -21,6 +21,6 @@ namespace Silksprite.MeshBuilder.Controllers.Modifiers
             }
         }
 
-        protected override VertwiseModifierBase VertwiseModifier => new MeshResize(Translation);
+        protected override VertwiseModifierBase VertwiseModifier => new VertwiseResize(Translation);
     }
 }

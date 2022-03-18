@@ -6,6 +6,6 @@ namespace Silksprite.MeshBuilder.Controllers.Modifiers
 {
     public class VertwiseNormalizeProvider : VertwiseModifierProviderBase
     {
-        protected override VertwiseModifierBase VertwiseModifier => new MeshNormalize();
+        protected override VertwiseModifierBase VertwiseModifier => new VertwiseNormalize();
     }
 }

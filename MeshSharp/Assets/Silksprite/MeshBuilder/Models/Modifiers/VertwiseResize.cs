@@ -4,11 +4,11 @@ using UnityEngine;
 
 namespace Silksprite.MeshBuilder.Models.Modifiers
 {
-    public class MeshResize : VertwiseModifierBase
+    public class VertwiseResize : VertwiseModifierBase
     {
         readonly Matrix4x4 _translation;
 
-        public MeshResize(Matrix4x4 translation)
+        public VertwiseResize(Matrix4x4 translation)
         {
             _translation = translation;
         }
