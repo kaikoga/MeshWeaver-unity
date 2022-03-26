@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Silksprite.MeshBuilder.Extensions;
 
 namespace Silksprite.MeshBuilder.Models
 {
@@ -21,6 +22,11 @@ namespace Silksprite.MeshBuilder.Models
         Mux(MuxLayer<T>[] layers) => _layers = layers;
 
         public Mux(IEnumerable<MuxLayer<T>> layers) : this(layers.GroupBy(layer => layer.Channel).Select(g => g.Last()).ToArray()) { }
+
+        public Mux<T> Shift(int deltaChannel)
+        {
+            return this.SelectMuxChannels(channel => channel - deltaChannel);
+        }
 
         public IEnumerator<MuxLayer<T>> GetEnumerator()
         {

@@ -22,7 +22,7 @@ namespace Silksprite.MeshBuilder.Extensions
 
         public static Vertie ShiftUvChannel(this Vertie v, int uvChannel)
         {
-            return new Vertie(v.Translation, v.Culled, v.Uvs.SelectMuxChannels(channel => channel - uvChannel));
+            return new Vertie(v.Translation, v.Culled, v.Uvs.Shift(uvChannel));
         }
     }
 }
