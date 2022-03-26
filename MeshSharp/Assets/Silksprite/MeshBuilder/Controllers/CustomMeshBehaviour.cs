@@ -34,10 +34,13 @@ namespace Silksprite.MeshBuilder.Controllers
 
             var sharedMaterials = (materials?.Length ?? 0) > 0 ? materials : null;
 
-            foreach (var meshFilter in meshFilters ?? Enumerable.Empty<MeshFilter>())
+            foreach (var meshFilter in meshFilters?.Where(m => m != null) ?? Enumerable.Empty<MeshFilter>())
             {
                 if (meshFilter) meshFilter.sharedMesh = _runtimeMesh;
-                if (sharedMaterials != null) meshFilter.GetComponent<MeshRenderer>().sharedMaterials = sharedMaterials;
+                if (sharedMaterials != null)
+                {
+                    if (meshFilter.TryGetComponent<MeshRenderer>(out var meshRenderer)) meshRenderer.sharedMaterials = sharedMaterials;
+                }
             }
 
             Mesh runtimeColliderMesh;

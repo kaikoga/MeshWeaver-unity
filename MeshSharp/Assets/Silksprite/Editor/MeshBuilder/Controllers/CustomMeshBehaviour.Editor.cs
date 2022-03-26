@@ -19,10 +19,54 @@ namespace Silksprite.MeshBuilder.Controllers
             {
                 meshBehaviour.Compile();
             }
-            if (GUILayout.Button("Create Exporter"))
+            if (HasSetupAsMeshRendererButton(meshBehaviour) && GUILayout.Button("I am Mesh Renderer"))
             {
-                if (!meshBehaviour.GetComponent<MeshBehaviourExporter>()) meshBehaviour.gameObject.AddComponent<MeshBehaviourExporter>();
+                SetupAsMeshRenderer(meshBehaviour);
             }
+
+            if (HasCreateExporterButton(meshBehaviour) && GUILayout.Button("Create Exporter"))
+            {
+                CreateExporter(meshBehaviour);
+            }
+        }
+
+        static bool HasSetupAsMeshRendererButton(CustomMeshBehaviour meshBehaviour)
+        {
+            return !meshBehaviour.GetComponent<MeshFilter>() ||
+                   !meshBehaviour.GetComponent<MeshRenderer>() ||
+                   !meshBehaviour.GetComponent<MeshCollider>();
+        }
+
+        static bool HasCreateExporterButton(CustomMeshBehaviour meshBehaviour)
+        {
+            return !meshBehaviour.GetComponent<MeshBehaviourExporter>();
+        }
+
+        static void SetupAsMeshRenderer(CustomMeshBehaviour meshBehaviour)
+        {
+            if (!meshBehaviour.GetComponent<MeshFilter>())
+            {
+                var meshFilter = meshBehaviour.gameObject.AddComponent<MeshFilter>();
+                meshBehaviour.meshFilters = meshBehaviour.meshFilters ?? new MeshFilter[] { };
+                ArrayUtility.Add(ref meshBehaviour.meshFilters, meshFilter);
+            }
+
+            if (!meshBehaviour.GetComponent<MeshRenderer>())
+            {
+                meshBehaviour.gameObject.AddComponent<MeshRenderer>();
+            }
+
+            if (!meshBehaviour.GetComponent<MeshCollider>())
+            {
+                var meshCollider = meshBehaviour.gameObject.AddComponent<MeshCollider>();
+                meshBehaviour.meshColliders = meshBehaviour.meshColliders ?? new MeshCollider[] { };
+                ArrayUtility.Add(ref meshBehaviour.meshColliders, meshCollider);
+            }
+        }
+
+        static void CreateExporter(CustomMeshBehaviour meshBehaviour)
+        {
+            if (!meshBehaviour.GetComponent<MeshBehaviourExporter>()) meshBehaviour.gameObject.AddComponent<MeshBehaviourExporter>();
         }
     }
 }
