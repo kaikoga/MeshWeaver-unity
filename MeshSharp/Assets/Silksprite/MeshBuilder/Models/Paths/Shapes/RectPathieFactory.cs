@@ -7,15 +7,14 @@ namespace Silksprite.MeshBuilder.Models.Paths.Shapes
     {
         public Pathie Build()
         {
-            var pathie = new Pathie();
-            pathie.Vertices.AddRange(new []
+            var vertices = new []
             {
                 Vector3.zero,
                 Vector3.up,
                 Vector3.up + Vector3.right,
                 Vector3.right
-            }.Select(v => new Vertie(v)));
-            return pathie;
+            }.Select(v => new Vertie(v));
+            return new Pathie(vertices);
         }
     }
 }

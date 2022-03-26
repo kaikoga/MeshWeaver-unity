@@ -14,9 +14,8 @@ namespace Silksprite.MeshBuilder.Controllers.Paths
 
         protected override Pathie GeneratePathie(LodMaskLayer lod)
         {
-            var pathie = new Pathie();
-            pathie.Vertices.Add(new Vertie(Matrix4x4.identity, !lodMask.HasLayer(lod), uvs.ToMux()));
-            return pathie;
+            var vertex = new Vertie(Matrix4x4.identity, !lodMask.HasLayer(lod), uvs.ToMux());
+            return new Pathie(vertex);
         }
         
         void OnDrawGizmos()

@@ -24,7 +24,6 @@ namespace Silksprite.MeshBuilder.Models.Paths
 
         public Pathie Build()
         {
-            var pathie = new Pathie();
             var drs = Enumerable.Range(0, _steps)
                 .Select(i => _min + (_max - _min) * i / (_steps - 1))
                 .Select(deg => new { deg, rad = deg * Mathf.Deg2Rad });
@@ -64,8 +63,9 @@ namespace Silksprite.MeshBuilder.Models.Paths
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-            pathie.Vertices.AddRange(mm.Select(m => new Vertie(m)));
-            return pathie;
+
+            var vertices = mm.Select(m => new Vertie(m));
+            return new Pathie(vertices);
         }
         
         

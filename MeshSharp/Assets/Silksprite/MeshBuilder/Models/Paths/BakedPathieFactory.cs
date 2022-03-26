@@ -14,10 +14,10 @@ namespace Silksprite.MeshBuilder.Models.Paths
 
         public Pathie Build()
         {
-            var pathie = new Pathie();
-            if (_data == null) return pathie;
-            pathie.Vertices.AddRange(_data.vertices.Select(v => v.ToVertie()));
-            return pathie;
+            if (_data == null) return new Pathie();
+
+            var vertices = _data.vertices.Select(v => v.ToVertie());
+            return new Pathie(vertices);
         }
     }
 }

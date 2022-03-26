@@ -29,6 +29,11 @@ namespace Silksprite.MeshBuilder.Models
 
         public Pathie() { }
 
+        public Pathie(Vertie soleVertex)
+        {
+            Vertices.Add(soleVertex);
+        }
+
         public Pathie(IEnumerable<Vertie> vertices)
         {
             Vertices.AddRange(vertices);
