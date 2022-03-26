@@ -17,12 +17,9 @@ namespace Silksprite.MeshBuilder.Models
 
         public T Value => _layers.LastOrDefault(layer => layer.Channel <= 0).Value;
 
-        public Mux(IEnumerable<MuxLayer<T>> layers) : this(layers.ToArray()) { }
+        Mux(MuxLayer<T>[] layers) => _layers = layers;
 
-        Mux(MuxLayer<T>[] layers)
-        {
-            _layers = layers.ToArray();
-        }
+        public Mux(IEnumerable<MuxLayer<T>> layers) : this(layers.ToArray()) { }
 
         public IEnumerator<MuxLayer<T>> GetEnumerator()
         {
