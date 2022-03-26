@@ -17,7 +17,7 @@ namespace Silksprite.MeshBuilder.Models.Meshes.Modifiers
         public Meshie Modify(Meshie meshie)
         {
             if (_count <= 1) return meshie;
-            var result = new Meshie();
+            var result = Meshie.Empty();
             var t = Matrix4x4.identity;
             for (var i = 0; i < _count; i++)
             {

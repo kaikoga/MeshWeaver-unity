@@ -21,7 +21,7 @@ namespace Silksprite.MeshBuilder.Models.Paths
                     return new RectPathieFactory().Build();
             }
 
-            return new Pathie();
+            return Pathie.Empty();
         }
 
         public enum ShapePathieKind

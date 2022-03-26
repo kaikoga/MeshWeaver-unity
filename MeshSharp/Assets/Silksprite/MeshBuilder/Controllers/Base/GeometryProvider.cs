@@ -12,7 +12,7 @@ namespace Silksprite.MeshBuilder.Controllers.Base
 
         protected static Pathie CollectPathie(PathProvider pathProvider, LodMaskLayer lod)
         {
-            var pathie = new Pathie();
+            var pathie = Pathie.Empty();
             if (pathProvider == null) return pathie;
 
             pathie.Concat(pathProvider.ToPathie(lod), pathProvider.Translation);
@@ -22,7 +22,7 @@ namespace Silksprite.MeshBuilder.Controllers.Base
 
         protected static Pathie CollectPathies(IEnumerable<PathProvider> pathProviders, LodMaskLayer lod)
         {
-            var pathie = new Pathie();
+            var pathie = Pathie.Empty();
             foreach (var pathProvider in pathProviders.Where(c => c != null && c.gameObject.activeSelf))
             {
                 pathie.Concat(pathProvider.ToPathie(lod), pathProvider.Translation);

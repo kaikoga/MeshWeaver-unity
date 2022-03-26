@@ -10,10 +10,10 @@ namespace Silksprite.MeshBuilder.Models.Meshes
             // FIXME: not "Iterate active pathies", but "Cull invalid triangles"  
             var activeX = pathieX.Active;
             var countX = activeX.Vertices.Count;
-            if (countX < 2) return new Meshie();
+            if (countX < 2) return Meshie.Empty();
             var activeY = pathieY.Active;
             var countY = activeY.Vertices.Count;
-            if (countY < 2) return new Meshie();
+            if (countY < 2) return Meshie.Empty();
 
             var indicesX = pathieX.ChangingIndices((a, b) => a.TranslationEquals(b, 0f));
             var indicesY = pathieY.ChangingIndices((a, b) => a.TranslationEquals(b, 0f));

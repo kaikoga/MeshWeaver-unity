@@ -24,7 +24,7 @@ namespace Silksprite.MeshBuilder.Models.Meshes
         }
         public Meshie Build(Pathie pathieX, Pathie pathieY)
         {
-            var meshie = new Meshie();
+            var meshie = Meshie.Empty();
             if (_fillBody)
             {
                 meshie.Concat(new MatrixMeshieFactory().Build(pathieX, pathieY), Matrix4x4.identity, _uvChannelBody);

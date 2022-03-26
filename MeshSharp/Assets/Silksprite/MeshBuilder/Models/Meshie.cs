@@ -11,7 +11,7 @@ namespace Silksprite.MeshBuilder.Models
         public readonly List<Vertie> Vertices = new List<Vertie>();
         public readonly List<int> Indices = new List<int>();
 
-        public Meshie() { }
+        Meshie() { }
 
         public Meshie(IEnumerable<Vertie> vertices, IEnumerable<int> indices)
         {
@@ -50,5 +50,7 @@ namespace Silksprite.MeshBuilder.Models
             var indices = string.Join(",", Indices.Select(v => v.ToString()));
             return $"V[{Vertices.Count}]\n{vertices}\nI[{Indices.Count}]\n{indices}";
         }
+
+        public static Meshie Empty() => new Meshie();
     }
 }

@@ -12,7 +12,7 @@ namespace Silksprite.MeshBuilder.Controllers.Meshes
 
         protected override Meshie GenerateMeshie(LodMaskLayer lod)
         {
-            var meshie = new Meshie();
+            var meshie = Meshie.Empty();
             CollectMeshies(meshProviders, lod, meshie);
             return meshie;
         }

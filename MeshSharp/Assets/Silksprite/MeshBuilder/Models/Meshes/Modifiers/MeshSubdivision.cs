@@ -21,7 +21,7 @@ namespace Silksprite.MeshBuilder.Models.Meshes.Modifiers
             var count = Mathf.Clamp(_count, 1, 2);
             for (var n = 0; n < count; n++)
             {
-                var result = new Meshie();
+                var result = Meshie.Empty();
                 for (var i = 0; i < meshie.Indices.Count; i += 3)
                 {
                     var a = meshie.Vertices[meshie.Indices[i]];

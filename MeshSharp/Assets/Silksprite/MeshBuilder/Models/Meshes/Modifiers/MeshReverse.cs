@@ -19,7 +19,7 @@ namespace Silksprite.MeshBuilder.Models.Meshes.Modifiers
 
         public Meshie Modify(Meshie meshie)
         {
-            var result = new Meshie();
+            var result = Meshie.Empty();
 
             if (_front)
             {

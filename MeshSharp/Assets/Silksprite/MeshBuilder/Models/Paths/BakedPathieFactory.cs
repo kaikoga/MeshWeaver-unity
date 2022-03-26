@@ -14,7 +14,7 @@ namespace Silksprite.MeshBuilder.Models.Paths
 
         public Pathie Build()
         {
-            if (_data == null) return new Pathie();
+            if (_data == null) return Pathie.Empty();
 
             var vertices = _data.vertices.Select(v => v.ToVertie());
             return new Pathie(vertices);

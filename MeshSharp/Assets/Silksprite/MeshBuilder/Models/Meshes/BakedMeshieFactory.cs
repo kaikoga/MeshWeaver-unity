@@ -14,7 +14,7 @@ namespace Silksprite.MeshBuilder.Models.Meshes
 
         public Meshie Build()
         {
-            if (_data == null) return new Meshie();
+            if (_data == null) return Meshie.Empty();
             return new Meshie(
                 _data.vertices.Select(v => v.ToVertie()),
                 _data.indices);

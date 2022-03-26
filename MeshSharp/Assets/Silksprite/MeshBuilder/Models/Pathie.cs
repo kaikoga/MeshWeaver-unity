@@ -27,7 +27,7 @@ namespace Silksprite.MeshBuilder.Models
         
         public Vertie Diff => Last / First;
 
-        public Pathie() { }
+        Pathie() { }
 
         public Pathie(Vertie soleVertex)
         {
@@ -66,5 +66,7 @@ namespace Silksprite.MeshBuilder.Models
             var vertices = string.Join("\n", Vertices.Select(v => v.ToString()));
             return $"V[{Vertices.Count}]\n{vertices}";
         }
+        
+        public static Pathie Empty() => new Pathie();
     }
 }
