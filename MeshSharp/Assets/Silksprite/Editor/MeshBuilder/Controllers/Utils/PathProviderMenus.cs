@@ -12,6 +12,7 @@ namespace Silksprite.MeshBuilder.Controllers.Utils
             typeof(void),
             typeof(FixedPathProvider),
             typeof(ShapePathProvider),
+            typeof(RevolutionPathProvider),
             typeof(void),
             typeof(BakedPathProvider)
         );
@@ -22,6 +23,7 @@ namespace Silksprite.MeshBuilder.Controllers.Utils
             typeof(void),
             typeof(VertexProvider),
             typeof(ShapePathProvider),
+            typeof(RevolutionPathProvider),
             typeof(void),
             typeof(BakedPathProvider)
         );

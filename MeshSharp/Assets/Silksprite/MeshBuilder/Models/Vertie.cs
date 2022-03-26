@@ -15,6 +15,7 @@ namespace Silksprite.MeshBuilder.Models
         public readonly Vector2 Uv;
 
         public Vertie(Vector3 vertex) : this(Matrix4x4.Translate(vertex), false, Mux.Single(Vector2.zero)) { }
+        public Vertie(Matrix4x4 translation) : this(translation, false, Mux.Single(Vector2.zero)) { }
 
         public Vertie(Matrix4x4 translation, bool culled, Mux<Vector2> uvs)
         {
