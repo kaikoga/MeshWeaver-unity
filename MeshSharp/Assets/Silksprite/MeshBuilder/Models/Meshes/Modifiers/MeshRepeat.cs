@@ -17,14 +17,14 @@ namespace Silksprite.MeshBuilder.Models.Meshes.Modifiers
         public Meshie Modify(Meshie meshie)
         {
             if (_count <= 1) return meshie;
-            var result = Meshie.Empty();
+            var builder = Meshie.Builder();
             var t = Matrix4x4.identity;
             for (var i = 0; i < _count; i++)
             {
-                result.Concat(meshie, t, 0);
+                builder.Concat(meshie, t, 0);
                 t *= _translation;
             }
-            return result;
+            return builder.ToMeshie();
         }
     }
 }

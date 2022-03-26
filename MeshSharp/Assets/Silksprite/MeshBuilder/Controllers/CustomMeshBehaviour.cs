@@ -68,13 +68,13 @@ namespace Silksprite.MeshBuilder.Controllers
         protected virtual void OnPopulateMesh(LodMaskLayer lodMask, Mesh mesh)
         {
             mesh.Clear();
-            var meshie = Meshie.Empty();
-            OnPopulateMesh(lodMask, meshie);
+            var meshie = OnPopulateMesh(lodMask);
             meshie.ExportToMesh(mesh);
         }
 
-        protected virtual void OnPopulateMesh(LodMaskLayer lodMask, Meshie meshie)
+        protected virtual Meshie OnPopulateMesh(LodMaskLayer lodMask)
         {
+            return Meshie.Empty();
         }
     }
 }

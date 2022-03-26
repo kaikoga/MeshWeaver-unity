@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Silksprite.MeshBuilder.Models.Base;
-using UnityEngine;
 
 namespace Silksprite.MeshBuilder.Models
 {
@@ -38,11 +37,6 @@ namespace Silksprite.MeshBuilder.Models
 
         public Pathie(IEnumerable<Vertie> vertices) : this(vertices.ToList()) { }
 
-        public void Concat(Pathie other, Matrix4x4 matrix4x4)
-        {
-            Vertices.AddRange(other.Vertices.Select(v => v.MultiplyPoint(matrix4x4)));
-        }
-
         public Pathie Modify(Func<Vertie, int, Vertie> modifier)
         {
             var result = new Pathie();
@@ -67,5 +61,6 @@ namespace Silksprite.MeshBuilder.Models
         }
         
         public static Pathie Empty() => new Pathie();
+        public static PathieBuilder Builder() => new PathieBuilder();
     }
 }

@@ -12,31 +12,33 @@ namespace Silksprite.MeshBuilder.Controllers.Base
 
         protected static Pathie CollectPathie(PathProvider pathProvider, LodMaskLayer lod)
         {
-            var pathie = Pathie.Empty();
-            if (pathProvider == null) return pathie;
+            if (pathProvider == null) return Pathie.Empty();
 
-            pathie.Concat(pathProvider.ToPathie(lod), pathProvider.Translation);
-
-            return pathie;
+            return Pathie.Builder().Concat(pathProvider.ToPathie(lod), pathProvider.Translation).ToPathie();
         }
 
         protected static Pathie CollectPathies(IEnumerable<PathProvider> pathProviders, LodMaskLayer lod)
         {
-            var pathie = Pathie.Empty();
+            var builder = Pathie.Builder();
+            
             foreach (var pathProvider in pathProviders.Where(c => c != null && c.gameObject.activeSelf))
             {
-                pathie.Concat(pathProvider.ToPathie(lod), pathProvider.Translation);
+                builder.Concat(pathProvider.ToPathie(lod), pathProvider.Translation);
             }
 
-            return pathie;
+            return builder.ToPathie();
         }
 
-        protected static void CollectMeshies(IEnumerable<MeshProvider> meshProviders, LodMaskLayer lod, Meshie meshie)
+        protected static Meshie CollectMeshies(IEnumerable<MeshProvider> meshProviders, LodMaskLayer lod)
         {
+            var builder = Meshie.Builder();
+
             foreach (var meshProvider in meshProviders.Where(c => c != null && c.gameObject.activeSelf))
             {
-                meshie.Concat(meshProvider.ToMeshie(lod), meshProvider.Translation, 0);
+                builder.Concat(meshProvider.ToMeshie(lod), meshProvider.Translation, 0);
             }
+
+            return builder.ToMeshie();
         }
     }
 }

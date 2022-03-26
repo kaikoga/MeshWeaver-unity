@@ -21,15 +21,15 @@ namespace Silksprite.MeshBuilder.Models.Paths.Modifiers
         public Pathie Modify(Pathie pathie)
         {
             if (_count <= 1) return pathie;
-            var result = Pathie.Empty();
+            var builder = Pathie.Builder();
             var t = Matrix4x4.identity;
             var dt = _fromPath ? pathie.Diff.Translation : _translation; 
             for (var i = 0; i < _count; i++)
             {
-                result.Concat(pathie, t);
+                builder.Concat(pathie, t);
                 t *= dt;
             }
-            return result;
+            return builder.ToPathie();
         }
     }
 }
