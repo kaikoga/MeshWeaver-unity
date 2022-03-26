@@ -19,7 +19,10 @@ namespace Silksprite.MeshBuilder.Models.Modifiers
 
         protected override IEnumerable<Vertie> Modify(IEnumerable<Vertie> vertices)
         {
-            var verts = vertices.ToArray(); 
+            if (!vertices.Any()) return vertices;
+
+            var verts = vertices.ToArray();
+
             var min = new Vector3(
                 verts.Select(v => v.Vertex.x).Min(),
                 verts.Select(v => v.Vertex.y).Min(),
