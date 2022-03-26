@@ -13,12 +13,7 @@ namespace Silksprite.MeshBuilder.Models
 
         IEnumerable<Vertie> ActiveVertices()
         {
-            for (var index = 0; index < Vertices.Length; index++)
-            {
-                if (index == 0 || index == Vertices.Length - 1) yield return Vertices[index];
-                var v = Vertices[index];
-                if (!v.Culled) yield return v;
-            }
+            return Vertices.Where((v, index) => index == 0 || index == Vertices.Length - 1 || !v.Culled);
         }
 
         public Vertie First => Vertices.Length > 0 ? Vertices[0] : default;
