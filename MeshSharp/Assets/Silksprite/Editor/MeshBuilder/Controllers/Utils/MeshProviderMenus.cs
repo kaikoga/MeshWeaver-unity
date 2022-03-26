@@ -11,6 +11,7 @@ namespace Silksprite.MeshBuilder.Controllers.Utils
             typeof(void),
             typeof(PolygonMeshProvider),
             typeof(MatrixMeshProvider),
+            typeof(PillarMeshProvider),
             typeof(void),
             typeof(BakedMeshProvider)
         );
