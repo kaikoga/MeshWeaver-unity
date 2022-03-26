@@ -13,7 +13,7 @@ namespace Silksprite.MeshBuilder.Models.Paths.Modifiers
 
         public Pathie Modify(Pathie pathie)
         {
-            if (pathie.Active.Vertices.Pairwise((a, b) => (a, b)).All(ab => ab.a.VertexEquals(ab.b))) return pathie;
+            if (pathie.Active.Vertices.Pairwise((a, b) => (a, b)).All(ab => ab.a.TranslationEquals(ab.b))) return pathie;
 
             var verticesCount = pathie.Vertices.Count;
             var result = new Pathie();
@@ -24,13 +24,13 @@ namespace Silksprite.MeshBuilder.Models.Paths.Modifiers
                 for (var j = 0; j < verticesCount; j++)
                 {
                     prevIndex = (prevIndex + verticesCount - 1) % verticesCount;
-                    if (!pathie.Vertices[prevIndex].Culled && !curr.VertexEquals(pathie.Vertices[prevIndex])) break;
+                    if (!pathie.Vertices[prevIndex].Culled && !curr.TranslationEquals(pathie.Vertices[prevIndex])) break;
                 }
                 var nextIndex = i;
                 for (var j = 0; j < verticesCount; j++)
                 {
                     nextIndex = (nextIndex + 1) % verticesCount;
-                    if (!pathie.Vertices[nextIndex].Culled && !curr.VertexEquals(pathie.Vertices[nextIndex])) break;
+                    if (!pathie.Vertices[nextIndex].Culled && !curr.TranslationEquals(pathie.Vertices[nextIndex])) break;
                 }
                 if (Vector3.Angle(curr.Vertex - pathie.Vertices[prevIndex].Vertex, curr.Vertex - pathie.Vertices[nextIndex].Vertex) < 179.9f)
                 {

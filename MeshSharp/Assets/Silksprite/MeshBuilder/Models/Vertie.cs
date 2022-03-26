@@ -29,6 +29,14 @@ namespace Silksprite.MeshBuilder.Models
         }
 
         public bool VertexEquals(Vertie other, float sqrError = 0.000001f) => (Vertex - other.Vertex).sqrMagnitude <= sqrError;
+        public bool TranslationEquals(Vertie other, float error = 0.000001f)
+        {
+            for (var i = 0; i < 16; i++)
+            {
+                if (Translation[i] - other.Translation[i] > error) return false;
+            }
+            return true;
+        }
 
         public Vertie MultiplyPoint(Matrix4x4 translation)
         {

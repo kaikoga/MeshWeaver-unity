@@ -9,7 +9,7 @@ namespace Silksprite.MeshBuilder.Extensions
     {
         public static IEnumerable<Vertie> DedupLoop(this Pathie e)
         {
-            return e.DedupLoop((a, b) => Equals(a, b));
+            return e.DedupLoop((a, b) => a.TranslationEquals(b));
         }
 
         public static IEnumerable<Vertie> DedupLoop(this Pathie e, Func<Vertie, Vertie, bool> equality)
@@ -19,7 +19,7 @@ namespace Silksprite.MeshBuilder.Extensions
 
         public static IEnumerable<int> ChangingIndices(this Pathie e)
         {
-            return e.ChangingIndices((a, b) => a.VertexEquals(b));
+            return e.ChangingIndices((a, b) => a.TranslationEquals(b));
         }
 
         public static IEnumerable<int> ChangingIndices(this Pathie e, Func<Vertie, Vertie, bool> equality)

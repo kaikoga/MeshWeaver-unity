@@ -17,8 +17,8 @@ namespace Silksprite.MeshBuilder.Models.Meshes
             if (countY < 2) return meshie;
 
             meshie.Vertices.AddRange(activeY.Vertices.SelectMany(pY => activeX.Vertices.Select(pX => pX * pY)));
-            var indicesX = pathieX.ChangingIndices((a, b) => a.VertexEquals(b, 0f));
-            var indicesY = pathieY.ChangingIndices((a, b) => a.VertexEquals(b, 0f));
+            var indicesX = pathieX.ChangingIndices((a, b) => a.TranslationEquals(b, 0f));
+            var indicesY = pathieY.ChangingIndices((a, b) => a.TranslationEquals(b, 0f));
             meshie.Indices.AddRange(indicesY
                 .SelectMany(iY => indicesX.Select(i => i + iY * countX))
                 .SelectMany(i => new[] { i, i + countX, i + countX + 1, i, i + countX + 1, i + 1 }));
