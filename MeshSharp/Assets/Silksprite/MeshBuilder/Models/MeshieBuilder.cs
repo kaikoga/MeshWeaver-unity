@@ -17,6 +17,7 @@ namespace Silksprite.MeshBuilder.Models
         }
 
         public MeshieBuilder() : this(new List<Vertie>(), new List<int>()) { }
+        public MeshieBuilder(Meshie meshie) : this(meshie.Vertices.ToList(), meshie.Indices.ToList()) { }
 
         public MeshieBuilder Concat(Meshie meshie, Matrix4x4 matrix4x4, int uvIndex)
         {

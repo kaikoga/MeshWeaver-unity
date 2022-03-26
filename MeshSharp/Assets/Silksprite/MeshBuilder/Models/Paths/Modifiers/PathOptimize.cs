@@ -15,8 +15,8 @@ namespace Silksprite.MeshBuilder.Models.Paths.Modifiers
         {
             if (pathie.Active.Vertices.Pairwise((a, b) => (a, b)).All(ab => ab.a.TranslationEquals(ab.b))) return pathie;
 
-            var verticesCount = pathie.Vertices.Count;
-            var result = Pathie.Empty();
+            var verticesCount = pathie.Vertices.Length;
+            var result = Pathie.Builder();
             for (var i = 0; i < verticesCount; i++)
             {
                 var curr = pathie.Vertices[i];
@@ -37,7 +37,7 @@ namespace Silksprite.MeshBuilder.Models.Paths.Modifiers
                     result.Vertices.Add(curr);
                 }
             }
-            return result;
+            return result.ToPathie();
         }
     }
 }

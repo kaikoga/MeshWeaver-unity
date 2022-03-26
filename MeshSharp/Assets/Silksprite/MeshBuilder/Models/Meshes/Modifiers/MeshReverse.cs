@@ -19,7 +19,7 @@ namespace Silksprite.MeshBuilder.Models.Meshes.Modifiers
 
         public Meshie Modify(Meshie meshie)
         {
-            var result = Meshie.Empty();
+            var result = Meshie.Builder();
 
             if (_front)
             {
@@ -35,7 +35,7 @@ namespace Silksprite.MeshBuilder.Models.Meshes.Modifiers
                     .SelectMany(i => i)
                     .Select(i => i + offset));
             }
-            return result;
+            return result.ToMeshie();
         }
     }
 }

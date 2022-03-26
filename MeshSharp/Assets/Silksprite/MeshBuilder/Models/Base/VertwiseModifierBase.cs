@@ -7,17 +7,17 @@ namespace Silksprite.MeshBuilder.Models.Base
     {
         public Meshie Modify(Meshie meshie)
         {
-            var result = Meshie.Empty();
+            var result = Meshie.Builder();
             result.Vertices.AddRange(Modify(meshie.Vertices));
             result.Indices.AddRange(meshie.Indices);
-            return result;
+            return result.ToMeshie();
         }
 
         public Pathie Modify(Pathie meshie)
         {
-            var result = Pathie.Empty();
+            var result = Pathie.Builder();
             result.Vertices.AddRange(meshie.Vertices.Select(Modify));
-            return result;
+            return result.ToPathie();
         }
 
         protected virtual IEnumerable<Vertie> Modify(IEnumerable<Vertie> vertices)

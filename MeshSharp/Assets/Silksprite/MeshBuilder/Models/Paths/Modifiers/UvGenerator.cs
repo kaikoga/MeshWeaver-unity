@@ -25,7 +25,7 @@ namespace Silksprite.MeshBuilder.Models.Paths.Modifiers
 
         public Pathie Modify(Pathie pathie)
         {
-            var iMax = pathie.Vertices.Count - 1;
+            var iMax = pathie.Vertices.Length - 1;
             if (_topologicalWeight == 0)
             {
                 return pathie.Modify((vertie, i) => vertie.AddUv(_min + (_max - _min) * i / iMax, _uvChannel));
@@ -34,7 +34,7 @@ namespace Silksprite.MeshBuilder.Models.Paths.Modifiers
             var lengths = new [] { 0f }.Concat(pathie.Vertices.Pairwise((a, b) => (b.Vertex - a.Vertex).magnitude).Integral()).ToArray();
             var lMax = lengths[lengths.Length - 1];
             var vertices = new List<Vertie>();
-            for (var i = 0; i < pathie.Vertices.Count; i++)
+            for (var i = 0; i < pathie.Vertices.Length; i++)
             {
                 var vertie = pathie.Vertices[i];
                 var ordinal = (float)i / iMax;

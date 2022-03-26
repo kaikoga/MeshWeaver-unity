@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Silksprite.MeshBuilder.Models.Base;
@@ -7,18 +8,18 @@ namespace Silksprite.MeshBuilder.Models
 {
     public class Meshie
     {
-        public readonly List<Vertie> Vertices;
-        public readonly List<int> Indices;
+        public readonly Vertie[] Vertices;
+        public readonly int[] Indices;
 
-        Meshie(List<Vertie> vertices, List<int> indices)
+        Meshie(Vertie[] vertices, int[] indices)
         {
             Vertices = vertices;
             Indices = indices;
         }
 
-        Meshie() : this(new List<Vertie>(), new List<int>()) { }
+        Meshie() : this(Array.Empty<Vertie>(), Array.Empty<int>()) { }
 
-        public Meshie(IEnumerable<Vertie> vertices, IEnumerable<int> indices) : this(vertices.ToList(), indices.ToList()) { }
+        public Meshie(IEnumerable<Vertie> vertices, IEnumerable<int> indices) : this(vertices.ToArray(), indices.ToArray()) { }
 
         public void ExportToMesh(Mesh mesh)
         {
@@ -35,17 +36,18 @@ namespace Silksprite.MeshBuilder.Models
 
         public override string ToString()
         {
-            return $"V[{Vertices.Count}] I[{Indices.Count}]";
+            return $"V[{Vertices.Length}] I[{Indices.Length}]";
         }
 
         public string Dump()
         {
             var vertices = string.Join("\n", Vertices.Select(v => v.ToString()));
             var indices = string.Join(",", Indices.Select(v => v.ToString()));
-            return $"V[{Vertices.Count}]\n{vertices}\nI[{Indices.Count}]\n{indices}";
+            return $"V[{Vertices.Length}]\n{vertices}\nI[{Indices.Length}]\n{indices}";
         }
 
         public static Meshie Empty() => new Meshie();
         public static MeshieBuilder Builder() => new MeshieBuilder();
+        public static MeshieBuilder Builder(Meshie meshie) => new MeshieBuilder(meshie);
     }
 }

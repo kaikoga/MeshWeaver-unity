@@ -14,6 +14,7 @@ namespace Silksprite.MeshBuilder.Models
         }
 
         public PathieBuilder() : this(new List<Vertie>()) { }
+        public PathieBuilder(Pathie pathie) : this(pathie.Vertices.ToList()) { }
 
         public PathieBuilder Concat(Pathie other, Matrix4x4 matrix4x4)
         {
