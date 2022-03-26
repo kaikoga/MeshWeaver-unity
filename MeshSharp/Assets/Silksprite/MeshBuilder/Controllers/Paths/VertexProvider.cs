@@ -3,8 +3,11 @@ using Silksprite.MeshBuilder.Extensions;
 using Silksprite.MeshBuilder.Models;
 using Silksprite.MeshBuilder.Models.DataObjects;
 using Silksprite.MeshBuilder.Models.DataObjects.Extensions;
-using UnityEditor;
 using UnityEngine;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 namespace Silksprite.MeshBuilder.Controllers.Paths
 {
@@ -18,6 +21,7 @@ namespace Silksprite.MeshBuilder.Controllers.Paths
             return new Pathie(vertex);
         }
         
+        #if UNITY_EDITOR
         void OnDrawGizmos()
         {
             var activeTransform = Selection.activeTransform;
@@ -28,5 +32,6 @@ namespace Silksprite.MeshBuilder.Controllers.Paths
                 Gizmos.DrawIcon(transform.position, "curvekeyframeweighted", false); // it works!
             }
         }
+        #endif
     }
 }
