@@ -35,7 +35,7 @@ namespace Silksprite.MeshBuilder.Models.Meshes.Modifiers
                     builder.Vertices.Add((a + c) * 0.5f);
                     builder.Vertices.Add((b + c) * 0.5f);
                     builder.Vertices.Add(c);
-                    builder.Indices.AddRange(SubdividedIndices.Select(j => j + offset));
+                    builder.AddTriangleIndices(SubdividedIndices.Select(j => j + offset));
                 }
                 result = builder;
             }

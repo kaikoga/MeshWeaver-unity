@@ -22,7 +22,7 @@ namespace Silksprite.MeshBuilder.Models.Meshes
             var indices = indicesY
                 .SelectMany(iY => indicesX.Select(i => i + iY * countX))
                 .SelectMany(i => new[] { i, i + countX, i + countX + 1, i, i + countX + 1, i + 1 });
-            return new Meshie(vertices, indices);
+            return Meshie.Builder(vertices, indices, true).ToMeshie();
         }
     }
 }

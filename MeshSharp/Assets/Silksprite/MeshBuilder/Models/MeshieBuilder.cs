@@ -27,6 +27,29 @@ namespace Silksprite.MeshBuilder.Models
             return this;
         }
 
+        public MeshieBuilder AddTriangleIndices(IEnumerable<int> indices)
+        {
+            // Indices.AddRange(indices);
+            // return this;
+            foreach (var trio in indices.EachTrio((a, b, c) => new [] { a, b, c }))
+            {
+                if (Vertices[trio[0]].VertexEquals(Vertices[trio[1]]))
+                {
+                    continue;
+                }
+                if (Vertices[trio[1]].VertexEquals(Vertices[trio[2]]))
+                {
+                    continue;
+                }
+                if (Vertices[trio[0]].VertexEquals(Vertices[trio[2]]))
+                {
+                    continue;
+                }
+                Indices.AddRange(trio);
+            }
+            return this;
+        }
+
         public Meshie ToMeshie() => new Meshie(Vertices, Indices);
     }
 }

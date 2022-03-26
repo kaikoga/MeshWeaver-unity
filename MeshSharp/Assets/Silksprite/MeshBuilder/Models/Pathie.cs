@@ -61,7 +61,15 @@ namespace Silksprite.MeshBuilder.Models
         }
         
         public static Pathie Empty() => new Pathie();
+
         public static PathieBuilder Builder() => new PathieBuilder();
         public static PathieBuilder Builder(Pathie pathie) => new PathieBuilder(pathie);
+
+        public static PathieBuilder Builder(IEnumerable<Vertie> vertices)
+        {
+            var builder = new PathieBuilder();
+            builder.Vertices.AddRange(vertices);
+            return builder;
+        }
     }
 }

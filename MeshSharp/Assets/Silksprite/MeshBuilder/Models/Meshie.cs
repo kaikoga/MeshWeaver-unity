@@ -47,7 +47,24 @@ namespace Silksprite.MeshBuilder.Models
         }
 
         public static Meshie Empty() => new Meshie();
+
         public static MeshieBuilder Builder() => new MeshieBuilder();
         public static MeshieBuilder Builder(Meshie meshie) => new MeshieBuilder(meshie);
+
+        public static MeshieBuilder Builder(IEnumerable<Vertie> vertices, IEnumerable<int> indices, bool validateIndices = false)
+        {
+            var builder = new MeshieBuilder();
+            builder.Vertices.AddRange(vertices);
+            if (validateIndices)
+            {
+                builder.AddTriangleIndices(indices);
+            }
+            else
+            {
+                builder.Indices.AddRange(indices);
+            }
+            return builder;
+        }
+
     }
 }

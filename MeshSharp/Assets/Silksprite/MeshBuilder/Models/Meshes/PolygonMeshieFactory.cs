@@ -10,7 +10,7 @@ namespace Silksprite.MeshBuilder.Models.Meshes
             if (vertices.Length < 3) return Meshie.Empty();
 
             var indices = Enumerable.Range(1, vertices.Length - 2).SelectMany(i => new[] { 0, i, i + 1 });
-            return new Meshie(vertices, indices);
+            return Meshie.Builder(vertices, indices, true).ToMeshie();
         }
     }
 }
