@@ -8,7 +8,7 @@ namespace Silksprite.MeshBuilder.Models
 {
     public class Pathie
     {
-        public readonly List<Vertie> Vertices = new List<Vertie>();
+        public readonly List<Vertie> Vertices;
 
         public Pathie Active => new Pathie(ActiveVertices());
 
@@ -27,17 +27,16 @@ namespace Silksprite.MeshBuilder.Models
         
         public Vertie Diff => Last / First;
 
-        Pathie() { }
-
-        public Pathie(Vertie soleVertex)
+        Pathie(List<Vertie> vertices)
         {
-            Vertices.Add(soleVertex);
+            Vertices = vertices;
         }
 
-        public Pathie(IEnumerable<Vertie> vertices)
-        {
-            Vertices.AddRange(vertices);
-        }
+        Pathie() : this(new List<Vertie>()) { }
+
+        public Pathie(Vertie soleVertex) : this(new List<Vertie> { soleVertex }) { }
+
+        public Pathie(IEnumerable<Vertie> vertices) : this(vertices.ToList()) { }
 
         public void Concat(Pathie other, Matrix4x4 matrix4x4)
         {

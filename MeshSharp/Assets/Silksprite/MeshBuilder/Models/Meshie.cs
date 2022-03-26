@@ -8,16 +8,18 @@ namespace Silksprite.MeshBuilder.Models
 {
     public class Meshie
     {
-        public readonly List<Vertie> Vertices = new List<Vertie>();
-        public readonly List<int> Indices = new List<int>();
+        public readonly List<Vertie> Vertices;
+        public readonly List<int> Indices;
 
-        Meshie() { }
-
-        public Meshie(IEnumerable<Vertie> vertices, IEnumerable<int> indices)
+        Meshie(List<Vertie> vertices, List<int> indices)
         {
-            Vertices.AddRange(vertices);
-            Indices.AddRange(indices);
+            Vertices = vertices;
+            Indices = indices;
         }
+
+        Meshie() : this(new List<Vertie>(), new List<int>()) { }
+
+        public Meshie(IEnumerable<Vertie> vertices, IEnumerable<int> indices) : this(vertices.ToList(), indices.ToList()) { }
 
         public void ExportToMesh(Mesh mesh)
         {
