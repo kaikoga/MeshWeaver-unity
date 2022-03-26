@@ -33,7 +33,8 @@ namespace Silksprite.MeshBuilder.Models
         {
             for (var i = 0; i < 16; i++)
             {
-                if (Translation[i] - other.Translation[i] > error) return false;
+                var d = Translation[i] - other.Translation[i];
+                if (d > error || d < -error) return false;
             }
             return true;
         }
