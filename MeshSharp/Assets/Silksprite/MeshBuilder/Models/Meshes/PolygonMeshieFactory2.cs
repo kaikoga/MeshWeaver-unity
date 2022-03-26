@@ -49,7 +49,6 @@ namespace Silksprite.MeshBuilder.Models.Meshes
         /// </summary>
         public Meshie Build(Pathie pathie)
         {
-            var meshie = new Meshie();
             var vertices = pathie.DedupLoop((a, b) => a.VertexEquals(b)).ToArray();
             Initialize(vertices.Select(v => v.Vertex).ToList());
 
@@ -67,9 +66,7 @@ namespace Silksprite.MeshBuilder.Models.Meshes
             var unusedIndices = _verticesBuffer.Select((b, index) => new KeyValuePair<int, bool>(index, b)).Where(kv => !kv.Value).Select(kv => kv.Key);
             _triangles.AddRange(unusedIndices);
 
-            meshie.Vertices.AddRange(vertices);
-            meshie.Indices.AddRange(_triangles);
-            return meshie;
+            return new Meshie(vertices, _triangles);
         }
 
         /// <summary>
