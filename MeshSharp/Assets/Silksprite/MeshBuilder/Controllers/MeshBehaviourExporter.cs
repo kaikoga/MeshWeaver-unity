@@ -5,6 +5,8 @@ namespace Silksprite.MeshBuilder.Controllers
     [RequireComponent(typeof(CustomMeshBehaviour))]
     public class MeshBehaviourExporter : MonoBehaviour
     {
+        public Material[] materials;
+
         public Mesh outputMesh;
         public GameObject outputPrefab;
 

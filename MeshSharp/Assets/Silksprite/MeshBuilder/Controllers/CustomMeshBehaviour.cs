@@ -11,6 +11,8 @@ namespace Silksprite.MeshBuilder.Controllers
         public LodMaskLayer lodMaskLayer = LodMaskLayer.LOD0;
         public bool autoUpdate;
         
+        public Material[] materials;
+
         public MeshFilter[] meshFilters;
         public MeshCollider[] meshColliders;
 
@@ -30,9 +32,12 @@ namespace Silksprite.MeshBuilder.Controllers
             if (_runtimeMesh == null) _runtimeMesh = new Mesh();
             OnPopulateMesh(lodMaskLayer, _runtimeMesh);
 
+            var sharedMaterials = (materials?.Length ?? 0) > 0 ? materials : null;
+
             foreach (var meshFilter in meshFilters ?? Enumerable.Empty<MeshFilter>())
             {
                 if (meshFilter) meshFilter.sharedMesh = _runtimeMesh;
+                if (sharedMaterials != null) meshFilter.GetComponent<MeshRenderer>().sharedMaterials = sharedMaterials;
             }
 
             Mesh runtimeColliderMesh;

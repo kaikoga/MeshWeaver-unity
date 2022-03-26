@@ -122,7 +122,7 @@ namespace Silksprite.MeshBuilder.Controllers
 
             RefreshMeshReferences(AssetDatabase.GetAssetPath(meshBehaviourExporter.outputMesh), meshBehaviourExporter, false);
 
-            var material = meshBehaviourExporter.GetComponent<MeshRenderer>().sharedMaterial;
+            var material = meshBehaviourExporter.materials.FirstOrDefault();
 
             var baseName = Path.GetFileNameWithoutExtension(projectFilePath);
             var prefab = new GameObject(baseName);
