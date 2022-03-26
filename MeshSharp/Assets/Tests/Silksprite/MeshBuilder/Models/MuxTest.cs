@@ -4,8 +4,28 @@ using Silksprite.MeshBuilder.Extensions;
 
 namespace Silksprite.MeshBuilder.Models
 {
-    public class ChannelTest
+    public class MuxTest
     {
+        [Test]
+        public void TestValue()
+        {
+            var a = new Mux<string>(new[]
+            {
+                new MuxLayer<string>("a", 0),
+                new MuxLayer<string>("b", 0),
+                new MuxLayer<string>("c", 10),
+                new MuxLayer<string>("d", 10)
+            });
+            Assert.AreEqual("b", a.Value);
+
+            Assert.AreEqual(default, a.ValueAt(-1));
+            Assert.AreEqual("b", a.ValueAt(0));
+            Assert.AreEqual("b", a.ValueAt(1));
+            Assert.AreEqual("b", a.ValueAt(9));
+            Assert.AreEqual("d", a.ValueAt(10));
+            Assert.AreEqual("d", a.ValueAt(11));
+        }
+
         [Test]
         public void TestZipChannels()
         {

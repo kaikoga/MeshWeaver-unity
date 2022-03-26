@@ -15,11 +15,12 @@ namespace Silksprite.MeshBuilder.Models
     {
         readonly MuxLayer<T>[] _layers;
 
-        public T Value => _layers.LastOrDefault(layer => layer.Channel <= 0).Value;
+        public T Value => ValueAt(0);
+        public T ValueAt(int channel) => _layers.LastOrDefault(layer => layer.Channel <= channel).Value;
 
         Mux(MuxLayer<T>[] layers) => _layers = layers;
 
-        public Mux(IEnumerable<MuxLayer<T>> layers) : this(layers.ToArray()) { }
+        public Mux(IEnumerable<MuxLayer<T>> layers) : this(layers.GroupBy(layer => layer.Channel).Select(g => g.Last()).ToArray()) { }
 
         public IEnumerator<MuxLayer<T>> GetEnumerator()
         {
