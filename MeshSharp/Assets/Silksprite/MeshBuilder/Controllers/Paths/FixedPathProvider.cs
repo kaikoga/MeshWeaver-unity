@@ -6,7 +6,7 @@ namespace Silksprite.MeshBuilder.Controllers.Paths
 {
     public class FixedPathProvider : PathProvider
     {
-        public override IPathieFactory ToFactory(LodMaskLayer lod)
+        protected override IPathieFactory CreateFactory(LodMaskLayer lod)
         {
             return new FixedPathieFactory();
         }

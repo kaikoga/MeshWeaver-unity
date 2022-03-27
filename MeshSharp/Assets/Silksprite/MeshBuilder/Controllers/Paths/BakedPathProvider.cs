@@ -11,7 +11,7 @@ namespace Silksprite.MeshBuilder.Controllers.Paths
         public LodMaskLayer[] lodMaskLayers;
         public PathieData[] pathData;
 
-        public override IPathieFactory ToFactory(LodMaskLayer lod)
+        protected override IPathieFactory CreateFactory(LodMaskLayer lod)
         {
             if (lodMaskLayers == null || pathData == null) return PathieFactory.Empty;
 

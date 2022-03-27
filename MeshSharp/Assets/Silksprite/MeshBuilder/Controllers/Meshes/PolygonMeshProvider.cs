@@ -8,7 +8,7 @@ namespace Silksprite.MeshBuilder.Controllers.Meshes
     {
         public PathProvider pathProvider;
 
-        public override IMeshieFactory ToFactory(LodMaskLayer lod)
+        protected override IMeshieFactory CreateFactory(LodMaskLayer lod)
         {
             return new PolygonMeshieFactory2(CollectPathie(pathProvider, lod));
         }
