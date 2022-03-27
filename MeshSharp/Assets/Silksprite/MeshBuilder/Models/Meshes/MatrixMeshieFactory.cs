@@ -3,20 +3,28 @@ using Silksprite.MeshBuilder.Extensions;
 
 namespace Silksprite.MeshBuilder.Models.Meshes
 {
-    public class MatrixMeshieFactory : IMeshieFactory<Pathie, Pathie>
+    public class MatrixMeshieFactory : IMeshieFactory
     {
-        public Meshie Build(Pathie pathieX, Pathie pathieY)
+        readonly Pathie _pathieX;
+        readonly Pathie _pathieY;
+
+        public MatrixMeshieFactory(Pathie pathieX, Pathie pathieY)
         {
-            // FIXME: not "Iterate active pathies", but "Cull invalid triangles"  
-            var activeX = pathieX.Active;
+            _pathieX = pathieX;
+            _pathieY = pathieY;
+        }
+
+        public Meshie Build()
+        {
+            var activeX = _pathieX.Active;
             var countX = activeX.Vertices.Length;
             if (countX < 2) return Meshie.Empty();
-            var activeY = pathieY.Active;
+            var activeY = _pathieY.Active;
             var countY = activeY.Vertices.Length;
             if (countY < 2) return Meshie.Empty();
 
-            var indicesX = pathieX.ChangingIndices((a, b) => a.TranslationEquals(b, 0f));
-            var indicesY = pathieY.ChangingIndices((a, b) => a.TranslationEquals(b, 0f));
+            var indicesX = _pathieX.ChangingIndices((a, b) => a.TranslationEquals(b, 0f));
+            var indicesY = _pathieY.ChangingIndices((a, b) => a.TranslationEquals(b, 0f));
 
             var vertices = activeY.Vertices.SelectMany(pY => activeX.Vertices.Select(pX => pX * pY));
             var indices = indicesY

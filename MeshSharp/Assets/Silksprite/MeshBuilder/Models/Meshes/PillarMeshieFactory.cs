@@ -3,8 +3,11 @@ using UnityEngine;
 
 namespace Silksprite.MeshBuilder.Models.Meshes
 {
-    public class PillarMeshieFactory : IMeshieFactory<Pathie, Pathie>
+    public class PillarMeshieFactory : IMeshieFactory
     {
+        readonly Pathie _pathieX;
+        readonly Pathie _pathieY;
+        
         readonly bool _fillBody;
         readonly bool _fillBottom;
         readonly bool _fillTop;
@@ -12,9 +15,11 @@ namespace Silksprite.MeshBuilder.Models.Meshes
         readonly int _uvChannelBody;
         readonly int _uvChannelBottom;
         readonly int _uvChannelTop;
-
-        public PillarMeshieFactory(bool fillBody, bool fillBottom, bool fillTop, int uvChannelBody, int uvChannelBottom, int uvChannelTop)
+        
+        public PillarMeshieFactory(Pathie pathieX, Pathie pathieY, bool fillBody, bool fillBottom, bool fillTop, int uvChannelBody, int uvChannelBottom, int uvChannelTop)
         {
+            _pathieX = pathieX;
+            _pathieY = pathieY;
             _fillBody = fillBody;
             _fillBottom = fillBottom;
             _fillTop = fillTop;
@@ -22,20 +27,21 @@ namespace Silksprite.MeshBuilder.Models.Meshes
             _uvChannelBottom = uvChannelBottom;
             _uvChannelTop = uvChannelTop;
         }
-        public Meshie Build(Pathie pathieX, Pathie pathieY)
+
+        public Meshie Build()
         {
             var builder = Meshie.Builder();
             if (_fillBody)
             {
-                builder.Concat(new MatrixMeshieFactory().Build(pathieX, pathieY), Matrix4x4.identity, _uvChannelBody);
+                builder.Concat(new MatrixMeshieFactory(_pathieX, _pathieY).Build(), Matrix4x4.identity, _uvChannelBody);
             }
             if (_fillBottom)
             {
-                builder.Concat(new PolygonMeshieFactory2().Build(pathieX), Matrix4x4.Translate(pathieY.First.Vertex), _uvChannelBottom);
+                builder.Concat(new PolygonMeshieFactory2(_pathieX).Build(), Matrix4x4.Translate(_pathieY.First.Vertex), _uvChannelBottom);
             }
             if (_fillTop)
             {
-                builder.Concat(new PolygonMeshieFactory2().Build(pathieX).Apply(MeshReverse.BackOnly), Matrix4x4.Translate(pathieY.Last.Vertex), _uvChannelTop);
+                builder.Concat(new PolygonMeshieFactory2(_pathieX).Build().Apply(MeshReverse.BackOnly), Matrix4x4.Translate(_pathieY.Last.Vertex), _uvChannelTop);
             }
             return builder.ToMeshie();
         }

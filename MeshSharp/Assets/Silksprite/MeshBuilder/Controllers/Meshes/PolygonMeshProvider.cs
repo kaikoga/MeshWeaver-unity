@@ -10,7 +10,7 @@ namespace Silksprite.MeshBuilder.Controllers.Meshes
 
         protected override Meshie GenerateMeshie(LodMaskLayer lod)
         {
-            return new PolygonMeshieFactory2().Build(CollectPathie(pathProvider, lod));
+            return new PolygonMeshieFactory2(CollectPathie(pathProvider, lod)).Build();
         }
     }
 }

@@ -24,13 +24,15 @@ namespace Silksprite.MeshBuilder.Controllers.Meshes
         {
             LastPathieX = CollectPathie(pathProviderX, lod);
             LastPathieY = CollectPathie(pathProviderY, lod);
-            return new PillarMeshieFactory(fillBody,
+            return new PillarMeshieFactory(LastPathieX,
+                LastPathieY,
+                fillBody,
                 fillBottom,
                 fillTop,
                 uvChannelBody,
                 uvChannelBottom,
                 uvChannelTop)
-                .Build(LastPathieX, LastPathieY);
+                .Build();
         }
     }
 }

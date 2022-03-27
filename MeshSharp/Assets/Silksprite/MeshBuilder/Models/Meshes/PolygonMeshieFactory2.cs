@@ -6,8 +6,20 @@ using UnityEngine;
 namespace Silksprite.MeshBuilder.Models.Meshes
 {
     // Shamelessly copied from https://edom18.hateblo.jp/entry/2018/03/25/100234
-    public class PolygonMeshieFactory2 : IMeshieFactory<Pathie>
+    public class PolygonMeshieFactory2 : IMeshieFactory
     {
+        readonly Pathie _pathie;
+
+        public PolygonMeshieFactory2(Pathie pathie)
+        {
+            _pathie = pathie;
+        }
+
+        public Meshie Build()
+        {
+            return BuildInternal();
+        }
+
         readonly List<int> _triangles = new List<int>();
         readonly List<Vector3> _vertices = new List<Vector3>();
         readonly List<bool> _verticesBuffer = new List<bool>();
@@ -47,9 +59,9 @@ namespace Silksprite.MeshBuilder.Models.Meshes
         /// <summary>
         /// Create mesh by vertices.
         /// </summary>
-        public Meshie Build(Pathie pathie)
+        Meshie BuildInternal()
         {
-            var vertices = pathie.DedupLoop((a, b) => a.VertexEquals(b)).ToArray();
+            var vertices = _pathie.DedupLoop((a, b) => a.VertexEquals(b)).ToArray();
             Initialize(vertices.Select(v => v.Vertex).ToList());
 
             var i = 0;
