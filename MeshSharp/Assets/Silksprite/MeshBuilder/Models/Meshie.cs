@@ -2,12 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Silksprite.MeshBuilder.Models.Base;
-using Silksprite.MeshBuilder.Models.Meshes;
 using UnityEngine;
 
 namespace Silksprite.MeshBuilder.Models
 {
-    public class Meshie : IMeshieFactory
+    public class Meshie
     {
         public readonly Vertie[] Vertices;
         public readonly int[] Indices;
@@ -66,7 +65,5 @@ namespace Silksprite.MeshBuilder.Models
             }
             return builder;
         }
-
-        public Meshie Build(LodMaskLayer lod) => this; // FIXME
     }
 }

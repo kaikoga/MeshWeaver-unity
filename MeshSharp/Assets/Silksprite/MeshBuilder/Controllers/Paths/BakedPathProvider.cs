@@ -13,7 +13,7 @@ namespace Silksprite.MeshBuilder.Controllers.Paths
 
         public override IPathieFactory ToFactory(LodMaskLayer lod)
         {
-            if (lodMaskLayers == null || pathData == null) return Pathie.Empty();
+            if (lodMaskLayers == null || pathData == null) return PathieFactory.Empty;
 
             var c = Math.Min(lodMaskLayers.Length, pathData.Length);
             for (var i = 0; i < c; i++)
@@ -21,7 +21,7 @@ namespace Silksprite.MeshBuilder.Controllers.Paths
                 if (lod == lodMaskLayers[i]) return new BakedPathieFactory(pathData[i]); 
             }
 
-            return pathData.Length > 0 ? (IPathieFactory)new BakedPathieFactory(pathData[0]) : Pathie.Empty();
+            return pathData.Length > 0 ? (IPathieFactory)new BakedPathieFactory(pathData[0]) : PathieFactory.Empty;
         }
     }
 }

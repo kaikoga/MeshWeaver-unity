@@ -18,7 +18,7 @@ namespace Silksprite.MeshBuilder.Controllers.Meshes
             var pathieY = CollectPathie(pathProviderY, lod);
             LastPathieX = pathieX.Build(lod); // FIXME
             LastPathieY = pathieY.Build(lod); // FIXME
-            return new MatrixMeshieFactory(LastPathieX, LastPathieY);
+            return new MatrixMeshieFactory(pathieX, pathieY);
         }
     }
 }

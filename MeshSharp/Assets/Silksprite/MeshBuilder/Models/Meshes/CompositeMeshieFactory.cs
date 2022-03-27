@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -21,7 +20,6 @@ namespace Silksprite.MeshBuilder.Models.Meshes
             return _children.Aggregate(Meshie.Builder(), (builder, factory) => builder.Concat(factory.MeshieFactory.Build(lod), factory.Translation, 0)).ToMeshie();
         }
 
-        public static CompositeMeshieFactory Empty() => new CompositeMeshieFactory(Array.Empty<ChildMeshieFactory>());
         public static CompositeMeshieFactoryBuilder Builder() => new CompositeMeshieFactoryBuilder();
 
         class ChildMeshieFactory

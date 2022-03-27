@@ -14,9 +14,9 @@ namespace Silksprite.MeshBuilder.Controllers.Base
 
         protected static IPathieFactory CollectPathie(PathProvider pathProvider, LodMaskLayer lod)
         {
-            if (pathProvider == null) return CompositePathieFactory.Empty();
+            if (pathProvider == null) return PathieFactory.Empty;
 
-            return CompositePathieFactory.Builder().Concat(pathProvider.ToPathie(lod), pathProvider.Translation).ToFactory();
+            return CompositePathieFactory.Builder().Concat(pathProvider.ToFactory(lod), pathProvider.Translation).ToFactory();
         }
 
         protected static IPathieFactory CollectPathies(IEnumerable<PathProvider> pathProviders, LodMaskLayer lod)
@@ -25,7 +25,7 @@ namespace Silksprite.MeshBuilder.Controllers.Base
             
             foreach (var pathProvider in pathProviders.Where(c => c != null && c.gameObject.activeSelf))
             {
-                builder.Concat(pathProvider.ToPathie(lod), pathProvider.Translation);
+                builder.Concat(pathProvider.ToFactory(lod), pathProvider.Translation);
             }
 
             return builder.ToFactory();
@@ -37,7 +37,7 @@ namespace Silksprite.MeshBuilder.Controllers.Base
 
             foreach (var meshProvider in meshProviders.Where(c => c != null && c.gameObject.activeSelf))
             {
-                builder.Concat(meshProvider.ToMeshie(lod), meshProvider.Translation);
+                builder.Concat(meshProvider.ToFactory(lod), meshProvider.Translation);
             }
 
             return builder.ToFactory();

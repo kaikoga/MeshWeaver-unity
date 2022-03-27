@@ -9,7 +9,7 @@ namespace Silksprite.MeshBuilder.Controllers.Meshes
     {
         public override IMeshieFactory ToFactory(LodMaskLayer lod)
         {
-            return CollectMeshies(this.GetComponentsInDirectChildren<MeshProvider>(), lod).Build(lod);
+            return CollectMeshies(this.GetComponentsInDirectChildren<MeshProvider>(), lod);
         }
     }
 }

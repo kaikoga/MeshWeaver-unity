@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -20,8 +19,7 @@ namespace Silksprite.MeshBuilder.Models.Paths
         {
             return _children.Aggregate(Pathie.Builder(), (builder, factory) => builder.Concat(factory.PathieFactory.Build(lod), factory.Translation)).ToPathie();
         }
-        
-        public static CompositePathieFactory Empty() => new CompositePathieFactory(Array.Empty<ChildPathieFactory>());
+
         public static CompositePathieFactoryBuilder Builder() => new CompositePathieFactoryBuilder();
 
         public class ChildPathieFactory

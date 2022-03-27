@@ -13,14 +13,14 @@ namespace Silksprite.MeshBuilder.Controllers.Meshes
 
         public override IMeshieFactory ToFactory(LodMaskLayer lod)
         {
-            if (lodMaskLayers == null || meshData == null) return Meshie.Empty();
+            if (lodMaskLayers == null || meshData == null) return MeshieFactory.Empty;
             var c = Math.Min(lodMaskLayers.Length, meshData.Length);
             for (var i = 0; i < c; i++)
             {
                 if (lod == lodMaskLayers[i]) return new BakedMeshieFactory(meshData[i]); 
             }
 
-            return meshData.Length > 0 ? (IMeshieFactory)new BakedMeshieFactory(meshData[0]) : Meshie.Empty();
+            return meshData.Length > 0 ? (IMeshieFactory)new BakedMeshieFactory(meshData[0]) : MeshieFactory.Empty;
         }
     }
 }
