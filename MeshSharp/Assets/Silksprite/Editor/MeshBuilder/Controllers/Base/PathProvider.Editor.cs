@@ -1,5 +1,6 @@
 using System.Linq;
 using Silksprite.MeshBuilder.Controllers.Paths;
+using Silksprite.MeshBuilder.Controllers.Utils;
 using Silksprite.MeshBuilder.Extensions;
 using Silksprite.MeshBuilder.Models;
 using Silksprite.MeshBuilder.Models.DataObjects;
@@ -28,6 +29,8 @@ namespace Silksprite.MeshBuilder.Controllers.Base
                 ref _isColliderExpanded,
                 () => pathProvider.LastColliderPathie?.Dump());
 
+            PathModifierProviderMenus.Menu.ModifierPopup(pathProvider);
+
             if (GUILayout.Button("Bake"))
             {
                 var transform = pathProvider.transform;
@@ -38,7 +41,6 @@ namespace Silksprite.MeshBuilder.Controllers.Base
                 bakedTransform.localPosition = transform.localPosition;
                 bakedTransform.localRotation = transform.localRotation;
                 bakedTransform.localScale = transform.localScale;
-                baked.RefreshElementsOfParent();
             }
         }
     }

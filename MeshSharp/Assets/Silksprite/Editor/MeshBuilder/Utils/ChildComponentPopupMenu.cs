@@ -20,7 +20,7 @@ namespace Silksprite.MeshBuilder.Utils
             _menuOptions = new [] { "Create Child...", "" }.Concat(types.Select(type => type == typeof(void) ? "" : type.Name)).ToArray();
         }
 
-        T ChildPopup(Component self)
+        public T ChildPopup(Component self)
         {
             var index = EditorGUILayout.Popup(0, _menuOptions);
             return index <= 0 ? null : self.AddChildComponent<T>(_types[index]);
@@ -32,24 +32,6 @@ namespace Silksprite.MeshBuilder.Utils
             if (child != null)
             {
                 property = child;
-            }
-        }
-
-        public void PropertyField(Component self, ref List<T> property)
-        {
-            using (new GUILayout.HorizontalScope())
-            {
-                var child = ChildPopup(self);
-                if (child != null)
-                {
-                    property.Add(child);
-                    if (self is GeometryProvider g) g.RefreshElements();
-                }
-
-                if (GUILayout.Button("Collect"))
-                {
-                    self.CollectDirectChildren(out property);
-                }
             }
         }
     }

@@ -41,7 +41,6 @@ namespace Silksprite.MeshBuilder.Controllers.Base
                 bakedTransform.localPosition = transform.localPosition;
                 bakedTransform.localRotation = transform.localRotation;
                 bakedTransform.localScale = transform.localScale;
-                baked.RefreshElementsOfParent();
             }
         }
     }

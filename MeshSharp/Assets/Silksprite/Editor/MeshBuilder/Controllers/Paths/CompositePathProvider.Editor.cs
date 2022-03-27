@@ -12,9 +12,7 @@ namespace Silksprite.MeshBuilder.Controllers.Paths
         {
             base.OnInspectorGUI();
             var compositePathProvider = (CompositePathProvider)target;
-            PathProviderMenus.ElementsMenu.PropertyField(compositePathProvider, ref compositePathProvider.pathProviders);
-
-            PathModifierProviderMenus.Menu.ModifierPopup(compositePathProvider);
+            PathProviderMenus.ElementsMenu.ChildPopup(compositePathProvider);
         }
     }
 }

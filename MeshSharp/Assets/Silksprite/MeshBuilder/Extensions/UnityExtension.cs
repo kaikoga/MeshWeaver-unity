@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Silksprite.MeshBuilder.Extensions
 {
-    public static class UnityExtensions
+    public static class UnityEditorExtension
     {
         public static T AddChildComponent<T>(this Component self, string name = null) where T : Component
         {

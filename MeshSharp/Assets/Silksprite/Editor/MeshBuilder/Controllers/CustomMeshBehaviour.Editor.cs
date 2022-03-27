@@ -11,9 +11,9 @@ namespace Silksprite.MeshBuilder.Controllers
         {
             base.OnInspectorGUI();
             var meshBehaviour = (CustomMeshBehaviour)target;
-            if (meshBehaviour is MeshBehaviour concreteBehaviour)
+            if (meshBehaviour is MeshBehaviour)
             {
-                MeshProviderMenus.Menu.PropertyField(meshBehaviour, ref concreteBehaviour.meshProviders);
+                MeshProviderMenus.Menu.ChildPopup(meshBehaviour);
             }
             if (GUILayout.Button("Compile"))
             {
