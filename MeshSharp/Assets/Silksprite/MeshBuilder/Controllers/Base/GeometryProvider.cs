@@ -14,33 +14,33 @@ namespace Silksprite.MeshBuilder.Controllers.Base
 
         protected static IPathieFactory CollectPathie(PathProvider pathProvider, LodMaskLayer lod)
         {
-            if (pathProvider == null) return Pathie.Empty();
+            if (pathProvider == null) return CompositePathieFactory.Empty();
 
-            return Pathie.Builder().Concat(pathProvider.ToPathie(lod), pathProvider.Translation).ToPathie(); // FIXME
+            return CompositePathieFactory.Builder().Concat(pathProvider.ToPathie(lod), pathProvider.Translation).ToFactory();
         }
 
         protected static IPathieFactory CollectPathies(IEnumerable<PathProvider> pathProviders, LodMaskLayer lod)
         {
-            var builder = Pathie.Builder();
+            var builder = CompositePathieFactory.Builder();
             
             foreach (var pathProvider in pathProviders.Where(c => c != null && c.gameObject.activeSelf))
             {
                 builder.Concat(pathProvider.ToPathie(lod), pathProvider.Translation);
             }
 
-            return builder.ToPathie(); // FIXME
+            return builder.ToFactory();
         }
 
         protected static IMeshieFactory CollectMeshies(IEnumerable<MeshProvider> meshProviders, LodMaskLayer lod)
         {
-            var builder = Meshie.Builder();
+            var builder = CompositeMeshieFactory.Builder();
 
             foreach (var meshProvider in meshProviders.Where(c => c != null && c.gameObject.activeSelf))
             {
-                builder.Concat(meshProvider.ToMeshie(lod), meshProvider.Translation, 0);
+                builder.Concat(meshProvider.ToMeshie(lod), meshProvider.Translation);
             }
 
-            return builder.ToMeshie(); // FIXME
+            return builder.ToFactory();
         }
     }
 }
