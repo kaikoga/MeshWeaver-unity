@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using Silksprite.MeshBuilder.Models;
+using Silksprite.MeshBuilder.Models.Meshes;
+using Silksprite.MeshBuilder.Models.Paths;
 using UnityEngine;
 
 namespace Silksprite.MeshBuilder.Controllers.Base
@@ -10,14 +12,14 @@ namespace Silksprite.MeshBuilder.Controllers.Base
     {
         public Matrix4x4 Translation => Matrix4x4.TRS(transform.localPosition, transform.localRotation, transform.localScale);
 
-        protected static Pathie CollectPathie(PathProvider pathProvider, LodMaskLayer lod)
+        protected static IPathieFactory CollectPathie(PathProvider pathProvider, LodMaskLayer lod)
         {
             if (pathProvider == null) return Pathie.Empty();
 
-            return Pathie.Builder().Concat(pathProvider.ToPathie(lod), pathProvider.Translation).ToPathie();
+            return Pathie.Builder().Concat(pathProvider.ToPathie(lod), pathProvider.Translation).ToPathie(); // FIXME
         }
 
-        protected static Pathie CollectPathies(IEnumerable<PathProvider> pathProviders, LodMaskLayer lod)
+        protected static IPathieFactory CollectPathies(IEnumerable<PathProvider> pathProviders, LodMaskLayer lod)
         {
             var builder = Pathie.Builder();
             
@@ -26,10 +28,10 @@ namespace Silksprite.MeshBuilder.Controllers.Base
                 builder.Concat(pathProvider.ToPathie(lod), pathProvider.Translation);
             }
 
-            return builder.ToPathie();
+            return builder.ToPathie(); // FIXME
         }
 
-        protected static Meshie CollectMeshies(IEnumerable<MeshProvider> meshProviders, LodMaskLayer lod)
+        protected static IMeshieFactory CollectMeshies(IEnumerable<MeshProvider> meshProviders, LodMaskLayer lod)
         {
             var builder = Meshie.Builder();
 
@@ -38,7 +40,7 @@ namespace Silksprite.MeshBuilder.Controllers.Base
                 builder.Concat(meshProvider.ToMeshie(lod), meshProvider.Translation, 0);
             }
 
-            return builder.ToMeshie();
+            return builder.ToMeshie(); // FIXME
         }
     }
 }

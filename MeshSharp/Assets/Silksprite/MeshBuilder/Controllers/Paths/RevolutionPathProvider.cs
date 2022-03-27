@@ -14,7 +14,7 @@ namespace Silksprite.MeshBuilder.Controllers.Paths
 
         protected override Pathie GeneratePathie(LodMaskLayer lod)
         {
-            return new RevolutionPathieFactory(min, max, radius, steps, axis).Build();
+            return new RevolutionPathieFactory(min, max, radius, steps, axis).Build(lod);
         }
     }
 }

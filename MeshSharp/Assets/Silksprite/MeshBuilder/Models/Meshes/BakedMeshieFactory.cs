@@ -12,7 +12,7 @@ namespace Silksprite.MeshBuilder.Models.Meshes
             _data = data;
         }
 
-        public Meshie Build()
+        public Meshie Build(LodMaskLayer lod)
         {
             if (_data == null) return Meshie.Empty();
             return new Meshie(

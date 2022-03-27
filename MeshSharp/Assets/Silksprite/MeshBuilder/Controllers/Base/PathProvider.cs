@@ -2,6 +2,7 @@ using System.Linq;
 using Silksprite.MeshBuilder.Controllers.Base.Modifiers;
 using Silksprite.MeshBuilder.Extensions;
 using Silksprite.MeshBuilder.Models;
+using Silksprite.MeshBuilder.Models.Paths;
 using UnityEngine;
 
 namespace Silksprite.MeshBuilder.Controllers.Base
@@ -31,7 +32,9 @@ namespace Silksprite.MeshBuilder.Controllers.Base
             return lastPathie;
         }
 
-        protected abstract Pathie GeneratePathie(LodMaskLayer lod);
+        protected virtual Pathie GeneratePathie(LodMaskLayer lod) => ToFactory(lod).Build(lod);
+
+        protected virtual IPathieFactory ToFactory(LodMaskLayer lod) => null;
 
         void OnDrawGizmosSelected()
         {

@@ -2,10 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Silksprite.MeshBuilder.Models.Base;
+using Silksprite.MeshBuilder.Models.Paths;
 
 namespace Silksprite.MeshBuilder.Models
 {
-    public class Pathie
+    public class Pathie : IPathieFactory
     {
         public readonly Vertie[] Vertices;
 
@@ -66,5 +67,7 @@ namespace Silksprite.MeshBuilder.Models
             builder.Vertices.AddRange(vertices);
             return builder;
         }
+        
+        public Pathie Build(LodMaskLayer lod) => this; // FIXME
     }
 }

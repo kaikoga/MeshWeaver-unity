@@ -22,8 +22,8 @@ namespace Silksprite.MeshBuilder.Controllers.Meshes
 
         protected override Meshie GenerateMeshie(LodMaskLayer lod)
         {
-            LastPathieX = CollectPathie(pathProviderX, lod);
-            LastPathieY = CollectPathie(pathProviderY, lod);
+            LastPathieX = CollectPathie(pathProviderX, lod).Build(lod);
+            LastPathieY = CollectPathie(pathProviderY, lod).Build(lod);
             return new PillarMeshieFactory(LastPathieX,
                 LastPathieY,
                 fillBody,
@@ -32,7 +32,7 @@ namespace Silksprite.MeshBuilder.Controllers.Meshes
                 uvChannelBody,
                 uvChannelBottom,
                 uvChannelTop)
-                .Build();
+                .Build(lod);
         }
     }
 }

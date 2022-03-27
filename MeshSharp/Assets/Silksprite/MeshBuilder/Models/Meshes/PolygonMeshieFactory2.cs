@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Silksprite.MeshBuilder.Extensions;
+using Silksprite.MeshBuilder.Models.Paths;
 using UnityEngine;
 
 namespace Silksprite.MeshBuilder.Models.Meshes
@@ -8,16 +9,16 @@ namespace Silksprite.MeshBuilder.Models.Meshes
     // Shamelessly copied from https://edom18.hateblo.jp/entry/2018/03/25/100234
     public class PolygonMeshieFactory2 : IMeshieFactory
     {
-        readonly Pathie _pathie;
+        readonly IPathieFactory _pathie;
 
-        public PolygonMeshieFactory2(Pathie pathie)
+        public PolygonMeshieFactory2(IPathieFactory pathie)
         {
             _pathie = pathie;
         }
 
-        public Meshie Build()
+        public Meshie Build(LodMaskLayer lod)
         {
-            return BuildInternal();
+            return BuildInternal(lod);
         }
 
         readonly List<int> _triangles = new List<int>();
@@ -59,9 +60,10 @@ namespace Silksprite.MeshBuilder.Models.Meshes
         /// <summary>
         /// Create mesh by vertices.
         /// </summary>
-        Meshie BuildInternal()
+        Meshie BuildInternal(LodMaskLayer lod)
         {
-            var vertices = _pathie.DedupLoop((a, b) => a.VertexEquals(b)).ToArray();
+            var pathie = _pathie.Build(lod);
+            var vertices = pathie.DedupLoop((a, b) => a.VertexEquals(b)).ToArray();
             Initialize(vertices.Select(v => v.Vertex).ToList());
 
             var i = 0;

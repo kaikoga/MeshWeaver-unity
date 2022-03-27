@@ -5,7 +5,7 @@ namespace Silksprite.MeshBuilder.Models.Paths.Shapes
 {
     public class LinePathieFactory : IPathieFactory
     {
-        public Pathie Build()
+        public Pathie Build(LodMaskLayer lod)
         {
             var vertices = new []
             {

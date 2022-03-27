@@ -8,9 +8,9 @@ namespace Silksprite.MeshBuilder.Controllers
     [ExecuteAlways]
     public class MeshBehaviour : CustomMeshBehaviour
     {
-        protected override Meshie OnPopulateMesh(LodMaskLayer lodMask)
+        protected override Meshie OnPopulateMesh(LodMaskLayer lod)
         {
-            return CollectMeshies(this.GetComponentsInDirectChildren<MeshProvider>(), lodMask);
+            return CollectMeshies(this.GetComponentsInDirectChildren<MeshProvider>(), lod).Build(lod);
         }
     }
 }

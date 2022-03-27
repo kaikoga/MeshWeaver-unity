@@ -13,9 +13,9 @@ namespace Silksprite.MeshBuilder.Models.Paths
             _children = children.ToArray();
         }
 
-        public Pathie Build()
+        public Pathie Build(LodMaskLayer lod)
         {
-            return _children.Aggregate(Pathie.Builder(), (builder, factory) => builder.Concat(factory.Build(), Matrix4x4.identity)).ToPathie();
+            return _children.Aggregate(Pathie.Builder(), (builder, factory) => builder.Concat(factory.Build(lod), Matrix4x4.identity)).ToPathie();
         }
     }
 }

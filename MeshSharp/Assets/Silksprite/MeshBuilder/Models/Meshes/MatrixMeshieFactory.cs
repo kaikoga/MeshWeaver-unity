@@ -1,30 +1,34 @@
 using System.Linq;
 using Silksprite.MeshBuilder.Extensions;
+using Silksprite.MeshBuilder.Models.Paths;
 
 namespace Silksprite.MeshBuilder.Models.Meshes
 {
     public class MatrixMeshieFactory : IMeshieFactory
     {
-        readonly Pathie _pathieX;
-        readonly Pathie _pathieY;
+        readonly IPathieFactory _pathieX;
+        readonly IPathieFactory _pathieY;
 
-        public MatrixMeshieFactory(Pathie pathieX, Pathie pathieY)
+        public MatrixMeshieFactory(IPathieFactory pathieX, IPathieFactory pathieY)
         {
             _pathieX = pathieX;
             _pathieY = pathieY;
         }
 
-        public Meshie Build()
+        public Meshie Build(LodMaskLayer lod)
         {
-            var activeX = _pathieX.Active;
+            var pathieX = _pathieX.Build(lod);
+            var pathieY = _pathieY.Build(lod);
+
+            var activeX = pathieX.Active;
             var countX = activeX.Vertices.Length;
             if (countX < 2) return Meshie.Empty();
-            var activeY = _pathieY.Active;
+            var activeY = pathieY.Active;
             var countY = activeY.Vertices.Length;
             if (countY < 2) return Meshie.Empty();
 
-            var indicesX = _pathieX.ChangingIndices((a, b) => a.TranslationEquals(b, 0f));
-            var indicesY = _pathieY.ChangingIndices((a, b) => a.TranslationEquals(b, 0f));
+            var indicesX = pathieX.ChangingIndices((a, b) => a.TranslationEquals(b, 0f));
+            var indicesY = pathieY.ChangingIndices((a, b) => a.TranslationEquals(b, 0f));
 
             var vertices = activeY.Vertices.SelectMany(pY => activeX.Vertices.Select(pX => pX * pY));
             var indices = indicesY

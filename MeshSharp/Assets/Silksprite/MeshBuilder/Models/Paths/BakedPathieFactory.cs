@@ -12,7 +12,7 @@ namespace Silksprite.MeshBuilder.Models.Paths
             _data = data;
         }
 
-        public Pathie Build()
+        public Pathie Build(LodMaskLayer lod)
         {
             if (_data == null) return Pathie.Empty();
 

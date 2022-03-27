@@ -18,8 +18,7 @@ namespace Silksprite.MeshBuilder.Controllers.Paths
 
         protected override Pathie GeneratePathie(LodMaskLayer lod)
         {
-            var vertex = new Vertie(Matrix4x4.identity, !lodMask.HasLayer(lod), uvs.ToMux());
-            return new VertexFactory(vertex).Build();
+            return new VertexFactory(lodMask, uvs.ToMux()).Build(lod);
         }
         
         #if UNITY_EDITOR

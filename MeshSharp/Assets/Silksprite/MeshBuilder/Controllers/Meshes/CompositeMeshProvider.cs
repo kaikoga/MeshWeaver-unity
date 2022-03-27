@@ -8,7 +8,7 @@ namespace Silksprite.MeshBuilder.Controllers.Meshes
     {
         protected override Meshie GenerateMeshie(LodMaskLayer lod)
         {
-            return CollectMeshies(this.GetComponentsInDirectChildren<MeshProvider>(), lod);
+            return CollectMeshies(this.GetComponentsInDirectChildren<MeshProvider>(), lod).Build(lod);
         }
     }
 }

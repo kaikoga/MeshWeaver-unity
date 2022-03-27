@@ -18,10 +18,10 @@ namespace Silksprite.MeshBuilder.Controllers.Paths
             var c = Math.Min(lodMaskLayers.Length, pathData.Length);
             for (var i = 0; i < c; i++)
             {
-                if (lod == lodMaskLayers[i]) return new BakedPathieFactory(pathData[i]).Build(); 
+                if (lod == lodMaskLayers[i]) return new BakedPathieFactory(pathData[i]).Build(lod); 
             }
 
-            return pathData.Length > 0 ? new BakedPathieFactory(pathData[0]).Build() : Pathie.Empty();
+            return pathData.Length > 0 ? new BakedPathieFactory(pathData[0]).Build(lod) : Pathie.Empty();
         }
     }
 }

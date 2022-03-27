@@ -17,10 +17,10 @@ namespace Silksprite.MeshBuilder.Controllers.Meshes
             var c = Math.Min(lodMaskLayers.Length, meshData.Length);
             for (var i = 0; i < c; i++)
             {
-                if (lod == lodMaskLayers[i]) return new BakedMeshieFactory(meshData[i]).Build(); 
+                if (lod == lodMaskLayers[i]) return new BakedMeshieFactory(meshData[i]).Build(lod); 
             }
 
-            return meshData.Length > 0 ? new BakedMeshieFactory(meshData[0]).Build() : Meshie.Empty();
+            return meshData.Length > 0 ? new BakedMeshieFactory(meshData[0]).Build(lod) : Meshie.Empty();
         }
     }
 }

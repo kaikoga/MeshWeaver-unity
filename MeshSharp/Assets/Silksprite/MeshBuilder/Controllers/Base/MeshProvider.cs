@@ -2,6 +2,7 @@ using System.Linq;
 using Silksprite.MeshBuilder.Controllers.Base.Modifiers;
 using Silksprite.MeshBuilder.Extensions;
 using Silksprite.MeshBuilder.Models;
+using Silksprite.MeshBuilder.Models.Meshes;
 
 namespace Silksprite.MeshBuilder.Controllers.Base
 {
@@ -30,6 +31,9 @@ namespace Silksprite.MeshBuilder.Controllers.Base
             return lastMeshie;
         }
 
-        protected abstract Meshie GenerateMeshie(LodMaskLayer lod);
+        protected virtual Meshie GenerateMeshie(LodMaskLayer lod) => ToFactory(lod).Build(lod);
+
+        protected virtual IMeshieFactory ToFactory(LodMaskLayer lod) => null;
     }
+
 }

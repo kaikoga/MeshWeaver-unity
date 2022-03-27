@@ -2,6 +2,6 @@ namespace Silksprite.MeshBuilder.Models.Meshes
 {
     public interface IMeshieFactory
     {
-        Meshie Build();
+        Meshie Build(LodMaskLayer lod);
     }
 }

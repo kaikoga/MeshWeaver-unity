@@ -22,7 +22,7 @@ namespace Silksprite.MeshBuilder.Models.Paths
             _axis = axis;
         }
 
-        public Pathie Build()
+        public Pathie Build(LodMaskLayer lod)
         {
             var drs = Enumerable.Range(0, _steps)
                 .Select(i => _min + (_max - _min) * i / (_steps - 1))

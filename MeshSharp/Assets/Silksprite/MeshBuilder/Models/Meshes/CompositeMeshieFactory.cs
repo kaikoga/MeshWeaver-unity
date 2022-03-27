@@ -13,9 +13,9 @@ namespace Silksprite.MeshBuilder.Models.Meshes
             _children = children.ToArray();
         }
 
-        public Meshie Build()
+        public Meshie Build(LodMaskLayer lod)
         {
-            return _children.Aggregate(Meshie.Builder(), (builder, factory) => builder.Concat(factory.Build(), Matrix4x4.identity, 0)).ToMeshie();
+            return _children.Aggregate(Meshie.Builder(), (builder, factory) => builder.Concat(factory.Build(lod), Matrix4x4.identity, 0)).ToMeshie();
         }
     }
 }
