@@ -12,11 +12,13 @@ namespace Silksprite.MeshBuilder.Controllers.Meshes
         public Pathie LastPathieX { get; private set; }
         public Pathie LastPathieY { get; private set; }
 
-        protected override Meshie GenerateMeshie(LodMaskLayer lod)
+        protected override IMeshieFactory ToFactory(LodMaskLayer lod)
         {
-            LastPathieX = CollectPathie(pathProviderX, lod).Build(lod);
-            LastPathieY = CollectPathie(pathProviderY, lod).Build(lod);
-            return new MatrixMeshieFactory(LastPathieX, LastPathieY).Build(lod);
+            var pathieX = CollectPathie(pathProviderX, lod);
+            var pathieY = CollectPathie(pathProviderY, lod);
+            LastPathieX = pathieX.Build(lod); // FIXME
+            LastPathieY = pathieY.Build(lod); // FIXME
+            return new MatrixMeshieFactory(LastPathieX, LastPathieY);
         }
     }
 }

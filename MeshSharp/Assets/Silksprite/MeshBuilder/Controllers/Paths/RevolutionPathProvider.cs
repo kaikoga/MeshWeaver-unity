@@ -12,9 +12,9 @@ namespace Silksprite.MeshBuilder.Controllers.Paths
         public int steps = 16;
         public RevolutionPathieFactory.Axis axis = RevolutionPathieFactory.Axis.X;
 
-        protected override Pathie GeneratePathie(LodMaskLayer lod)
+        protected override IPathieFactory ToFactory(LodMaskLayer lod)
         {
-            return new RevolutionPathieFactory(min, max, radius, steps, axis).Build(lod);
+            return new RevolutionPathieFactory(min, max, radius, steps, axis);
         }
     }
 }

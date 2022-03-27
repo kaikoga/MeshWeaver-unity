@@ -1,5 +1,4 @@
 using Silksprite.MeshBuilder.Controllers.Base;
-using Silksprite.MeshBuilder.Extensions;
 using Silksprite.MeshBuilder.Models;
 using Silksprite.MeshBuilder.Models.DataObjects;
 using Silksprite.MeshBuilder.Models.DataObjects.Extensions;
@@ -16,9 +15,9 @@ namespace Silksprite.MeshBuilder.Controllers.Paths
     {
         public Vector2MuxData[] uvs;
 
-        protected override Pathie GeneratePathie(LodMaskLayer lod)
+        protected override IPathieFactory ToFactory(LodMaskLayer lod)
         {
-            return new VertexFactory(lodMask, uvs.ToMux()).Build(lod);
+            return new VertexFactory(lodMask, uvs.ToMux());
         }
         
         #if UNITY_EDITOR

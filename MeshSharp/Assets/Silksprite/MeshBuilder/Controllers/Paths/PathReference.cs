@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Silksprite.MeshBuilder.Controllers.Base;
 using Silksprite.MeshBuilder.Models;
+using Silksprite.MeshBuilder.Models.Paths;
 
 namespace Silksprite.MeshBuilder.Controllers.Paths
 {
@@ -8,9 +9,9 @@ namespace Silksprite.MeshBuilder.Controllers.Paths
     {
         public List<PathProvider> pathProviders = new List<PathProvider>();
 
-        protected override Pathie GeneratePathie(LodMaskLayer lod)
+        protected override IPathieFactory ToFactory(LodMaskLayer lod)
         {
-            return CollectPathies(pathProviders, lod).Build(lod);
+            return CollectPathies(pathProviders, lod);
         }
     }
 }
