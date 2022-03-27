@@ -15,7 +15,7 @@ namespace Silksprite.MeshBuilder.Controllers.Base
 
         public Meshie ToMeshie(LodMaskLayer lod)
         {
-            var meshie = GenerateMeshie(lod);
+            var meshie = ToFactory(lod).Build(lod);
             var lastMeshie = GetComponents<IMeshModifierProvider>()
                 .Where(provider => provider.enabled && provider.LodMask.HasLayer(lod))
                 .Select(provider => provider.MeshieModifier)
@@ -31,9 +31,7 @@ namespace Silksprite.MeshBuilder.Controllers.Base
             return lastMeshie;
         }
 
-        protected virtual Meshie GenerateMeshie(LodMaskLayer lod) => ToFactory(lod).Build(lod);
-
-        protected virtual IMeshieFactory ToFactory(LodMaskLayer lod) => null;
+        protected abstract IMeshieFactory ToFactory(LodMaskLayer lod);
     }
 
 }

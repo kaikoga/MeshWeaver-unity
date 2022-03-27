@@ -16,7 +16,7 @@ namespace Silksprite.MeshBuilder.Controllers.Base
 
         public Pathie ToPathie(LodMaskLayer lod)
         {
-            var pathie = GeneratePathie(lod);
+            var pathie = ToFactory(lod).Build(lod);
             var lastPathie = GetComponents<IPathModifierProvider>()
                 .Where(provider => provider.enabled && provider.LodMask.HasLayer(lod))
                 .Select(provider => provider.PathieModifier)
@@ -32,9 +32,7 @@ namespace Silksprite.MeshBuilder.Controllers.Base
             return lastPathie;
         }
 
-        protected virtual Pathie GeneratePathie(LodMaskLayer lod) => ToFactory(lod).Build(lod);
-
-        protected virtual IPathieFactory ToFactory(LodMaskLayer lod) => null;
+        protected abstract IPathieFactory ToFactory(LodMaskLayer lod);
 
         void OnDrawGizmosSelected()
         {
