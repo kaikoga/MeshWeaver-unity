@@ -22,12 +22,17 @@ namespace Silksprite.MeshBuilder.Extensions
             return (T)gameObject.AddComponent(type);
         }
 
+        public static IEnumerable<T> GetComponentsInDirectChildren<T>(this Component self) where T : Component
+        {
+            foreach (Transform child in self.transform)
+            {
+                if (child.TryGetComponent<T>(out var c)) yield return c;
+            }
+        }
+
         public static void CollectDirectChildren<T>(this Component self, out List<T> property) where T : Component
         {
-            property = self.transform.OfType<Transform>()
-                .Select(t => t.GetComponent<T>())
-                .Where(p => p != null)
-                .ToList();
+            property = self.GetComponentsInDirectChildren<T>().ToList();
             EditorUtility.SetDirty(self);
         }
     }
