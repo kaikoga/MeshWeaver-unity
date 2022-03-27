@@ -3,6 +3,7 @@ using Silksprite.MeshBuilder.Extensions;
 using Silksprite.MeshBuilder.Models;
 using Silksprite.MeshBuilder.Models.DataObjects;
 using Silksprite.MeshBuilder.Models.DataObjects.Extensions;
+using Silksprite.MeshBuilder.Models.Paths;
 using UnityEngine;
 
 #if UNITY_EDITOR
@@ -18,7 +19,7 @@ namespace Silksprite.MeshBuilder.Controllers.Paths
         protected override Pathie GeneratePathie(LodMaskLayer lod)
         {
             var vertex = new Vertie(Matrix4x4.identity, !lodMask.HasLayer(lod), uvs.ToMux());
-            return new Pathie(vertex);
+            return new VertexFactory(vertex).Build();
         }
         
         #if UNITY_EDITOR
