@@ -7,7 +7,7 @@ namespace Silksprite.MeshBuilder.Controllers.Meshes
 {
     public class CompositeMeshProvider : MeshProvider
     {
-        protected override IMeshieFactory ToFactory(LodMaskLayer lod)
+        public override IMeshieFactory ToFactory(LodMaskLayer lod)
         {
             return CollectMeshies(this.GetComponentsInDirectChildren<MeshProvider>(), lod).Build(lod);
         }

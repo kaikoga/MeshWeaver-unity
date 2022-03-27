@@ -15,7 +15,7 @@ namespace Silksprite.MeshBuilder.Controllers.Paths
     {
         public Vector2MuxData[] uvs;
 
-        protected override IPathieFactory ToFactory(LodMaskLayer lod)
+        public override IPathieFactory ToFactory(LodMaskLayer lod)
         {
             return new VertexFactory(lodMask, uvs.ToMux());
         }

@@ -31,7 +31,7 @@ namespace Silksprite.MeshBuilder.Controllers.Base
             return lastMeshie;
         }
 
-        protected abstract IMeshieFactory ToFactory(LodMaskLayer lod);
+        public abstract IMeshieFactory ToFactory(LodMaskLayer lod);
     }
 
 }

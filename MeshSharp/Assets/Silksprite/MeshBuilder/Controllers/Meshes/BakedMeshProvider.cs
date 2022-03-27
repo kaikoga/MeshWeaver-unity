@@ -11,7 +11,7 @@ namespace Silksprite.MeshBuilder.Controllers.Meshes
         public LodMaskLayer[] lodMaskLayers;
         public MeshieData[] meshData;
 
-        protected override IMeshieFactory ToFactory(LodMaskLayer lod)
+        public override IMeshieFactory ToFactory(LodMaskLayer lod)
         {
             if (lodMaskLayers == null || meshData == null) return Meshie.Empty();
             var c = Math.Min(lodMaskLayers.Length, meshData.Length);

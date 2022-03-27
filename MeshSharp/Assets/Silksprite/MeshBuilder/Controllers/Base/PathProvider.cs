@@ -32,7 +32,7 @@ namespace Silksprite.MeshBuilder.Controllers.Base
             return lastPathie;
         }
 
-        protected abstract IPathieFactory ToFactory(LodMaskLayer lod);
+        public abstract IPathieFactory ToFactory(LodMaskLayer lod);
 
         void OnDrawGizmosSelected()
         {

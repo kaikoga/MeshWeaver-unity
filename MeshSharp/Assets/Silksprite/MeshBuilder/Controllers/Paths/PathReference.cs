@@ -9,7 +9,7 @@ namespace Silksprite.MeshBuilder.Controllers.Paths
     {
         public List<PathProvider> pathProviders = new List<PathProvider>();
 
-        protected override IPathieFactory ToFactory(LodMaskLayer lod)
+        public override IPathieFactory ToFactory(LodMaskLayer lod)
         {
             return CollectPathies(pathProviders, lod);
         }

@@ -12,7 +12,7 @@ namespace Silksprite.MeshBuilder.Controllers.Meshes
         public Pathie LastPathieX { get; private set; }
         public Pathie LastPathieY { get; private set; }
 
-        protected override IMeshieFactory ToFactory(LodMaskLayer lod)
+        public override IMeshieFactory ToFactory(LodMaskLayer lod)
         {
             var pathieX = CollectPathie(pathProviderX, lod);
             var pathieY = CollectPathie(pathProviderY, lod);
