@@ -29,10 +29,11 @@ namespace Silksprite.MeshBuilder.Controllers.Base
 
         public IMeshieFactory ToFactory(LodMaskLayer lod)
         {
-            var modifiers = GetComponents<IMeshModifierProvider>()
-                .Where(provider => provider.enabled && provider.LodMask.HasLayer(lod))
-                .Select(provider => provider.MeshieModifier);
-            return CreateFactory(lod).WithModifiers(modifiers);
+            var providers = GetComponents<IMeshModifierProvider>()
+                .Where(provider => provider.enabled && provider.LodMask.HasLayer(lod));
+            return providers.Aggregate(ModifiedMeshieFactory.Builder(CreateFactory(lod)),
+                (builder, provider) => builder.Concat(provider.MeshieModifier))
+                .ToFactory();
         }
 
         protected abstract IMeshieFactory CreateFactory(LodMaskLayer lod);

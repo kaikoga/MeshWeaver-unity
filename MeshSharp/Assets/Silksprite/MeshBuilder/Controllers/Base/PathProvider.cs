@@ -30,10 +30,11 @@ namespace Silksprite.MeshBuilder.Controllers.Base
 
         public IPathieFactory ToFactory(LodMaskLayer lod)
         {
-            var modifiers = GetComponents<IPathModifierProvider>()
-                .Where(provider => provider.enabled && provider.LodMask.HasLayer(lod))
-                .Select(provider => provider.PathieModifier);
-            return CreateFactory(lod).WithModifiers(modifiers);
+            var providers = GetComponents<IPathModifierProvider>()
+                .Where(provider => provider.enabled && provider.LodMask.HasLayer(lod));
+            return providers.Aggregate(ModifiedPathieFactory.Builder(CreateFactory(lod)),
+                (builder, provider) => builder.Concat(provider.PathieModifier))
+                .ToFactory();
         }
 
         protected abstract IPathieFactory CreateFactory(LodMaskLayer lod);

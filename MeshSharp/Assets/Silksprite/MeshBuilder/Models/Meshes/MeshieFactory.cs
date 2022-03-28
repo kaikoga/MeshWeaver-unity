@@ -8,41 +8,54 @@ namespace Silksprite.MeshBuilder.Models.Meshes
     {
         public static readonly IMeshieFactory Empty = new EmptyMeshieFactory();
 
-        public static IMeshieFactory WithModifiers(this IMeshieFactory factory, IEnumerable<IMeshieModifier> modifiers)
-        {
-            return new ModifiedMeshieFactory(factory, modifiers);    
-        }
-
         class EmptyMeshieFactory : IMeshieFactory
         {
             public Meshie Build(LodMaskLayer lod) => Meshie.Empty();
         }
+    }
 
-        class ModifiedMeshieFactory : IMeshieFactory
+    public class ModifiedMeshieFactory : IMeshieFactory
+    {
+        readonly IMeshieFactory _factory;
+        readonly ChildModifier[] _modifiers;
+
+        ModifiedMeshieFactory(IMeshieFactory factory, IEnumerable<ChildModifier> modifiers)
+        {
+            _factory = factory;
+            _modifiers = modifiers.ToArray();
+        }
+
+        public Meshie Build(LodMaskLayer lod)
+        {
+            return _modifiers.Aggregate(_factory.Build(lod), (current, modifier) => modifier.Modifier.Modify(current));
+        }
+
+        public static ModifiedMeshieFactoryBuilder Builder(IMeshieFactory factory) => new ModifiedMeshieFactoryBuilder(factory);
+
+        class ChildModifier
+        {
+            public readonly IMeshieModifier Modifier;
+
+            public ChildModifier(IMeshieModifier modifier)
+            {
+                Modifier = modifier;
+            }
+        }
+
+        public class ModifiedMeshieFactoryBuilder
         {
             readonly IMeshieFactory _factory;
-            readonly ChildModifier[] _modifiers;
+            readonly List<ChildModifier> _modifiers = new List<ChildModifier>();
 
-            public ModifiedMeshieFactory(IMeshieFactory factory, IEnumerable<IMeshieModifier> modifiers)
+            public ModifiedMeshieFactoryBuilder(IMeshieFactory factory) => _factory = factory;
+
+            public ModifiedMeshieFactoryBuilder Concat(IMeshieModifier modifier)
             {
-                _factory = factory;
-                _modifiers = modifiers.Select(modifier => new ChildModifier(modifier)).ToArray();
+                _modifiers.Add(new ChildModifier(modifier));
+                return this;
             }
 
-            public Meshie Build(LodMaskLayer lod)
-            {
-                return _modifiers.Aggregate(_factory.Build(lod), (current, modifier) => modifier.Modifier.Modify(current));
-            }
-
-            class ChildModifier
-            {
-                public readonly IMeshieModifier Modifier;
-
-                public ChildModifier(IMeshieModifier modifier)
-                {
-                    Modifier = modifier;
-                }
-            }
+            public ModifiedMeshieFactory ToFactory() => new ModifiedMeshieFactory(_factory, _modifiers);
         }
     }
 }
