@@ -13,7 +13,7 @@ namespace Silksprite.MeshBuilder.Models.Paths
             _children = children;
         }
 
-        public CompositePathieFactory(IEnumerable<ChildPathieFactory> children) : this(children.ToArray()) { }
+        CompositePathieFactory(IEnumerable<ChildPathieFactory> children) : this(children.ToArray()) { }
 
         public Pathie Build(LodMaskLayer lod)
         {
@@ -22,7 +22,7 @@ namespace Silksprite.MeshBuilder.Models.Paths
 
         public static CompositePathieFactoryBuilder Builder() => new CompositePathieFactoryBuilder();
 
-        public class ChildPathieFactory
+        class ChildPathieFactory
         {
             public IPathieFactory PathieFactory;
             public Matrix4x4 Translation;
