@@ -1,7 +1,6 @@
 using System.Linq;
 using Silksprite.MeshBuilder.Controllers.Base.Modifiers;
 using Silksprite.MeshBuilder.Models;
-using Silksprite.MeshBuilder.Models.Extensions;
 using Silksprite.MeshBuilder.Models.Meshes;
 
 namespace Silksprite.MeshBuilder.Controllers.Base
@@ -30,7 +29,7 @@ namespace Silksprite.MeshBuilder.Controllers.Base
         public IMeshieFactory ToFactory(LodMaskLayer lod)
         {
             var providers = GetComponents<IMeshModifierProvider>()
-                .Where(provider => provider.enabled && provider.LodMask.HasLayer(lod));
+                .Where(provider => provider.enabled);
             return providers.Aggregate(ModifiedMeshieFactory.Builder(CreateFactory(lod)),
                 (builder, provider) => builder.Concat(provider.MeshieModifier, provider.LodMask))
                 .ToFactory();

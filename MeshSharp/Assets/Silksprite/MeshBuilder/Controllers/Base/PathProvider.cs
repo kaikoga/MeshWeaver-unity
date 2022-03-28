@@ -1,7 +1,6 @@
 using System.Linq;
 using Silksprite.MeshBuilder.Controllers.Base.Modifiers;
 using Silksprite.MeshBuilder.Models;
-using Silksprite.MeshBuilder.Models.Extensions;
 using Silksprite.MeshBuilder.Models.Paths;
 using UnityEngine;
 
@@ -31,7 +30,7 @@ namespace Silksprite.MeshBuilder.Controllers.Base
         public IPathieFactory ToFactory(LodMaskLayer lod)
         {
             var providers = GetComponents<IPathModifierProvider>()
-                .Where(provider => provider.enabled && provider.LodMask.HasLayer(lod));
+                .Where(provider => provider.enabled);
             return providers.Aggregate(ModifiedPathieFactory.Builder(CreateFactory(lod)),
                 (builder, provider) => builder.Concat(provider.PathieModifier, provider.LodMask))
                 .ToFactory();
