@@ -1,7 +1,7 @@
 {
-    "name": "MeshBuilder.Tests",
+    "name": "MeshBuilder.Model.Tests",
     "references": [
-        "MeshBuilder"
+        "MeshBuilder.Model"
     ],
     "includePlatforms": [
         "Editor"

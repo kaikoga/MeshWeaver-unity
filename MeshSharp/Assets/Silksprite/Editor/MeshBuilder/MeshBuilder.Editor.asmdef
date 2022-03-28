@@ -1,7 +1,8 @@
 {
     "name": "MeshBuilder.Editor",
     "references": [
-        "MeshBuilder"
+        "MeshBuilder.Model",
+        "MeshBuilder.Controller"
     ],
     "includePlatforms": [
         "Editor"

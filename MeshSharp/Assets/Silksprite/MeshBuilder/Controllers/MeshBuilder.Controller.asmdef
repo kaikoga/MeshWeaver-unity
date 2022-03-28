@@ -1,6 +1,8 @@
 {
-    "name": "MeshBuilder",
-    "references": [],
+    "name": "MeshBuilder.Controller",
+    "references": [
+        "MeshBuilder.Model"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
