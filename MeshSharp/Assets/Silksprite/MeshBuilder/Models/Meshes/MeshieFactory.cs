@@ -21,17 +21,27 @@ namespace Silksprite.MeshBuilder.Models.Meshes
         class ModifiedMeshieFactory : IMeshieFactory
         {
             readonly IMeshieFactory _factory;
-            readonly IMeshieModifier[] _modifiers;
+            readonly ChildModifier[] _modifiers;
 
             public ModifiedMeshieFactory(IMeshieFactory factory, IEnumerable<IMeshieModifier> modifiers)
             {
                 _factory = factory;
-                _modifiers = modifiers.ToArray();
+                _modifiers = modifiers.Select(modifier => new ChildModifier(modifier)).ToArray();
             }
 
             public Meshie Build(LodMaskLayer lod)
             {
-                return _modifiers.Aggregate(_factory.Build(lod), (current, modifier) => modifier.Modify(current));
+                return _modifiers.Aggregate(_factory.Build(lod), (current, modifier) => modifier.Modifier.Modify(current));
+            }
+
+            class ChildModifier
+            {
+                public readonly IMeshieModifier Modifier;
+
+                public ChildModifier(IMeshieModifier modifier)
+                {
+                    Modifier = modifier;
+                }
             }
         }
     }
