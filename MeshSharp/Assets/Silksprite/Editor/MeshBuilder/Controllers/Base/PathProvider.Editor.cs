@@ -22,12 +22,16 @@ namespace Silksprite.MeshBuilder.Controllers.Base
             var pathProvider = (PathProvider)target;
             base.OnInspectorGUI();
 
-            MeshBuilderGUI.DumpFoldout($"Path Dump: {pathProvider.LastPathie}",
+            var factory = pathProvider.LastFactory;
+            var pathie = factory?.Build(LodMaskLayer.LOD0);
+            var colliderPathie = factory?.Build(LodMaskLayer.Collider);
+
+            MeshBuilderGUI.DumpFoldout($"Path Dump: {pathie}",
                 ref _isExpanded,
-                () => pathProvider.LastPathie?.Dump());
-            MeshBuilderGUI.DumpFoldout($"Collider Path Dump: {pathProvider.LastColliderPathie}",
+                () => pathie?.Dump());
+            MeshBuilderGUI.DumpFoldout($"Collider Path Dump: {colliderPathie}",
                 ref _isColliderExpanded,
-                () => pathProvider.LastColliderPathie?.Dump());
+                () => colliderPathie?.Dump());
 
             PathModifierProviderMenus.Menu.ModifierPopup(pathProvider);
 
@@ -36,7 +40,7 @@ namespace Silksprite.MeshBuilder.Controllers.Base
                 var transform = pathProvider.transform;
                 var baked = transform.parent.AddChildComponent<BakedPathProvider>();
                 baked.lodMaskLayers = LodMaskLayers.Values;
-                baked.pathData = LodMaskLayers.Values.Select(lod => PathieData.FromPathie(pathProvider.ToPathie(lod))).ToArray();
+                baked.pathData = LodMaskLayers.Values.Select(lod => PathieData.FromPathie(pathProvider.ToFactory().Build(lod))).ToArray();
                 var bakedTransform = baked.transform;
                 bakedTransform.localPosition = transform.localPosition;
                 bakedTransform.localRotation = transform.localRotation;

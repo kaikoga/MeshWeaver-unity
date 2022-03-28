@@ -10,30 +10,16 @@ namespace Silksprite.MeshBuilder.Controllers.Base
     {
         public LodMask lodMask = LodMask.All;
 
-        public Pathie LastPathie { get; private set; }
-        public Pathie LastColliderPathie { get; private set; }
-
-        public Pathie ToPathie(LodMaskLayer lod)
-        {
-            var lastPathie = ToFactory().Build(lod);
-            if (lod == LodMaskLayer.Collider)
-            {
-                LastColliderPathie = lastPathie;
-            }
-            else
-            {
-                LastPathie = lastPathie;
-            }
-            return lastPathie;
-        }
+        public IPathieFactory LastFactory { get; private set; }
 
         public IPathieFactory ToFactory()
         {
             var providers = GetComponents<IPathModifierProvider>()
                 .Where(provider => provider.enabled);
-            return providers.Aggregate(ModifiedPathieFactory.Builder(CreateFactory()),
+            LastFactory = providers.Aggregate(ModifiedPathieFactory.Builder(CreateFactory()),
                 (builder, provider) => builder.Concat(provider.PathieModifier, provider.LodMask))
                 .ToFactory();
+            return LastFactory;
         }
 
         protected abstract IPathieFactory CreateFactory();

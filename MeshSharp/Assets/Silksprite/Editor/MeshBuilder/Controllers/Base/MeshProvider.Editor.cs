@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using Silksprite.MeshBuilder.Controllers.Extensions;
 using Silksprite.MeshBuilder.Controllers.Meshes;
@@ -22,12 +21,17 @@ namespace Silksprite.MeshBuilder.Controllers.Base
         {
             var meshProvider = (MeshProvider)target;
             base.OnInspectorGUI();
-            MeshBuilderGUI.DumpFoldout($"Mesh Dump: {meshProvider.LastMeshie}",
+            
+            var factory = meshProvider.LastFactory;
+            var meshie = factory?.Build(LodMaskLayer.LOD0);
+            var colliderMeshie = factory?.Build(LodMaskLayer.Collider);
+
+            MeshBuilderGUI.DumpFoldout($"Mesh Dump: {meshie}",
                 ref _isExpanded,
-                () => meshProvider.LastMeshie?.Dump());
-            MeshBuilderGUI.DumpFoldout($"Collider Mesh Dump: {meshProvider.LastColliderMeshie}",
+                () => meshie?.Dump());
+            MeshBuilderGUI.DumpFoldout($"Collider Mesh Dump: {colliderMeshie}",
                 ref _isColliderExpanded,
-                () => meshProvider.LastColliderMeshie?.Dump());
+                () => colliderMeshie?.Dump());
 
             MeshModifierProviderMenus.Menu.ModifierPopup(meshProvider);
 
@@ -36,7 +40,7 @@ namespace Silksprite.MeshBuilder.Controllers.Base
                 var transform = meshProvider.transform;
                 var baked = transform.parent.AddChildComponent<BakedMeshProvider>();
                 baked.lodMaskLayers = LodMaskLayers.Values;
-                baked.meshData = LodMaskLayers.Values.Select(lod => MeshieData.FromMeshie(meshProvider.ToMeshie(lod))).ToArray();
+                baked.meshData = LodMaskLayers.Values.Select(lod => MeshieData.FromMeshie(meshProvider.ToFactory().Build(lod))).ToArray();
                 var bakedTransform = baked.transform;
                 bakedTransform.localPosition = transform.localPosition;
                 bakedTransform.localRotation = transform.localRotation;
