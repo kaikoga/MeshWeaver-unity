@@ -15,7 +15,7 @@ namespace Silksprite.MeshBuilder.Controllers.Base
 
         public Pathie ToPathie(LodMaskLayer lod)
         {
-            var lastPathie = ToFactory(lod).Build(lod);
+            var lastPathie = ToFactory().Build(lod);
             if (lod == LodMaskLayer.Collider)
             {
                 LastColliderPathie = lastPathie;
@@ -27,16 +27,16 @@ namespace Silksprite.MeshBuilder.Controllers.Base
             return lastPathie;
         }
 
-        public IPathieFactory ToFactory(LodMaskLayer lod)
+        public IPathieFactory ToFactory()
         {
             var providers = GetComponents<IPathModifierProvider>()
                 .Where(provider => provider.enabled);
-            return providers.Aggregate(ModifiedPathieFactory.Builder(CreateFactory(lod)),
+            return providers.Aggregate(ModifiedPathieFactory.Builder(CreateFactory()),
                 (builder, provider) => builder.Concat(provider.PathieModifier, provider.LodMask))
                 .ToFactory();
         }
 
-        protected abstract IPathieFactory CreateFactory(LodMaskLayer lod);
+        protected abstract IPathieFactory CreateFactory();
 
         void OnDrawGizmosSelected()
         {

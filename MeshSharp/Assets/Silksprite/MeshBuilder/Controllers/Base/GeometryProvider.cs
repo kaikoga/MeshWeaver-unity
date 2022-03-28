@@ -12,32 +12,32 @@ namespace Silksprite.MeshBuilder.Controllers.Base
     {
         public Matrix4x4 Translation => Matrix4x4.TRS(transform.localPosition, transform.localRotation, transform.localScale);
 
-        protected static IPathieFactory CollectPathie(PathProvider pathProvider, LodMaskLayer lod)
+        protected static IPathieFactory CollectPathie(PathProvider pathProvider)
         {
             if (pathProvider == null) return PathieFactory.Empty;
 
-            return CompositePathieFactory.Builder().Concat(pathProvider.ToFactory(lod), pathProvider.Translation).ToFactory();
+            return CompositePathieFactory.Builder().Concat(pathProvider.ToFactory(), pathProvider.Translation).ToFactory();
         }
 
-        protected static IPathieFactory CollectPathies(IEnumerable<PathProvider> pathProviders, LodMaskLayer lod)
+        protected static IPathieFactory CollectPathies(IEnumerable<PathProvider> pathProviders)
         {
             var builder = CompositePathieFactory.Builder();
             
             foreach (var pathProvider in pathProviders.Where(c => c != null && c.gameObject.activeSelf))
             {
-                builder.Concat(pathProvider.ToFactory(lod), pathProvider.Translation);
+                builder.Concat(pathProvider.ToFactory(), pathProvider.Translation);
             }
 
             return builder.ToFactory();
         }
 
-        protected static IMeshieFactory CollectMeshies(IEnumerable<MeshProvider> meshProviders, LodMaskLayer lod)
+        protected static IMeshieFactory CollectMeshies(IEnumerable<MeshProvider> meshProviders)
         {
             var builder = CompositeMeshieFactory.Builder();
 
             foreach (var meshProvider in meshProviders.Where(c => c != null && c.gameObject.activeSelf))
             {
-                builder.Concat(meshProvider.ToFactory(lod), meshProvider.Translation);
+                builder.Concat(meshProvider.ToFactory(), meshProvider.Translation);
             }
 
             return builder.ToFactory();

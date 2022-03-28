@@ -8,7 +8,7 @@ namespace Silksprite.MeshBuilder.Controllers.Paths
     {
        public ShapePathieFactory.ShapePathieKind kind;
 
-       protected override IPathieFactory CreateFactory(LodMaskLayer lod)
+       protected override IPathieFactory CreateFactory()
         {
             return new ShapePathieFactory(kind);
         }

@@ -20,12 +20,12 @@ namespace Silksprite.MeshBuilder.Controllers.Meshes
         public Pathie LastPathieX { get; private set; }
         public Pathie LastPathieY { get; private set; }
 
-        protected override IMeshieFactory CreateFactory(LodMaskLayer lod)
+        protected override IMeshieFactory CreateFactory()
         {
-            var pathieX = CollectPathie(pathProviderX, lod);
-            var pathieY = CollectPathie(pathProviderY, lod);
-            LastPathieX = pathieX.Build(lod); // FIXME
-            LastPathieY = pathieY.Build(lod); // FIXME
+            var pathieX = CollectPathie(pathProviderX);
+            var pathieY = CollectPathie(pathProviderY);
+            LastPathieX = pathieX.Build(LodMaskLayer.LOD0); // FIXME
+            LastPathieY = pathieY.Build(LodMaskLayer.LOD0); // FIXME
             return new PillarMeshieFactory(pathieX,
                 pathieY,
                 fillBody,

@@ -7,9 +7,9 @@ namespace Silksprite.MeshBuilder.Controllers.Paths
 {
     public class CompositePathProvider : PathProvider
     {
-        protected override IPathieFactory CreateFactory(LodMaskLayer lod)
+        protected override IPathieFactory CreateFactory()
         {
-            return CollectPathies(this.GetComponentsInDirectChildren<PathProvider>(), lod);
+            return CollectPathies(this.GetComponentsInDirectChildren<PathProvider>());
         }
 
     }

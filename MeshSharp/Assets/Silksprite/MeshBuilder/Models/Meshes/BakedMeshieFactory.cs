@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using Silksprite.MeshBuilder.Models.DataObjects;
 
@@ -5,19 +6,31 @@ namespace Silksprite.MeshBuilder.Models.Meshes
 {
     public class BakedMeshieFactory : IMeshieFactory
     {
-        readonly MeshieData _data;
+        readonly Dictionary<LodMaskLayer, MeshieData> _data;
+        readonly MeshieData _defaultData;
 
-        public BakedMeshieFactory(MeshieData data)
+        public BakedMeshieFactory(Dictionary<LodMaskLayer, MeshieData> data)
         {
             _data = data;
         }
 
+        public BakedMeshieFactory(MeshieData data)
+        {
+            _data = new Dictionary<LodMaskLayer, MeshieData>();
+            _defaultData = data;
+        }
+
         public Meshie Build(LodMaskLayer lod)
         {
-            if (_data == null) return Meshie.Empty();
-            return new Meshie(
-                _data.vertices.Select(v => v.ToVertie()),
-                _data.indices);
+            if (!_data.TryGetValue(lod, out var data))
+            {
+                data = _defaultData;
+                if (data == null) return Meshie.Empty();
+            }
+
+            var vertices = data.vertices.Select(v => v.ToVertie());
+            return new Meshie(vertices, data.indices);
         }
     }
+
 }

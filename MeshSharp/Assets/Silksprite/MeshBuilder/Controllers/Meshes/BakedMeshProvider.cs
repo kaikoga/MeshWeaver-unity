@@ -1,4 +1,4 @@
-using System;
+using System.Linq;
 using Silksprite.MeshBuilder.Controllers.Base;
 using Silksprite.MeshBuilder.Models;
 using Silksprite.MeshBuilder.Models.DataObjects;
@@ -11,16 +11,14 @@ namespace Silksprite.MeshBuilder.Controllers.Meshes
         public LodMaskLayer[] lodMaskLayers;
         public MeshieData[] meshData;
 
-        protected override IMeshieFactory CreateFactory(LodMaskLayer lod)
+        protected override IMeshieFactory CreateFactory()
         {
             if (lodMaskLayers == null || meshData == null) return MeshieFactory.Empty;
-            var c = Math.Min(lodMaskLayers.Length, meshData.Length);
-            for (var i = 0; i < c; i++)
-            {
-                if (lod == lodMaskLayers[i]) return new BakedMeshieFactory(meshData[i]); 
-            }
 
-            return meshData.Length > 0 ? (IMeshieFactory)new BakedMeshieFactory(meshData[0]) : MeshieFactory.Empty;
+            var dict = lodMaskLayers
+                .Zip(meshData, (lod, meshie) => (lod, meshie))
+                .ToDictionary(kv => kv.lod, kv => kv.meshie);
+            return new BakedMeshieFactory(dict);
         }
     }
 }

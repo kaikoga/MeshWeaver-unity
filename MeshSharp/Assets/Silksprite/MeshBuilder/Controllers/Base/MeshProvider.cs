@@ -14,7 +14,7 @@ namespace Silksprite.MeshBuilder.Controllers.Base
 
         public Meshie ToMeshie(LodMaskLayer lod)
         {
-            var lastMeshie = ToFactory(lod).Build(lod);
+            var lastMeshie = ToFactory().Build(lod);
             if (lod == LodMaskLayer.Collider)
             {
                 LastColliderMeshie = lastMeshie;
@@ -26,16 +26,16 @@ namespace Silksprite.MeshBuilder.Controllers.Base
             return lastMeshie;
         }
 
-        public IMeshieFactory ToFactory(LodMaskLayer lod)
+        public IMeshieFactory ToFactory()
         {
             var providers = GetComponents<IMeshModifierProvider>()
                 .Where(provider => provider.enabled);
-            return providers.Aggregate(ModifiedMeshieFactory.Builder(CreateFactory(lod)),
+            return providers.Aggregate(ModifiedMeshieFactory.Builder(CreateFactory()),
                 (builder, provider) => builder.Concat(provider.MeshieModifier, provider.LodMask))
                 .ToFactory();
         }
 
-        protected abstract IMeshieFactory CreateFactory(LodMaskLayer lod);
+        protected abstract IMeshieFactory CreateFactory();
     }
 
 }
