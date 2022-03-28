@@ -32,7 +32,7 @@ namespace Silksprite.MeshBuilder.Controllers.Base
             var providers = GetComponents<IMeshModifierProvider>()
                 .Where(provider => provider.enabled && provider.LodMask.HasLayer(lod));
             return providers.Aggregate(ModifiedMeshieFactory.Builder(CreateFactory(lod)),
-                (builder, provider) => builder.Concat(provider.MeshieModifier))
+                (builder, provider) => builder.Concat(provider.MeshieModifier, provider.LodMask))
                 .ToFactory();
         }
 

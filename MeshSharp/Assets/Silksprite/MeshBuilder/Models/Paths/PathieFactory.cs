@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Silksprite.MeshBuilder.Models.Base;
+using Silksprite.MeshBuilder.Models.Extensions;
 
 namespace Silksprite.MeshBuilder.Models.Paths
 {
@@ -27,7 +28,9 @@ namespace Silksprite.MeshBuilder.Models.Paths
 
         public Pathie Build(LodMaskLayer lod)
         {
-            return _modifiers.Aggregate(_factory.Build(lod), (current, modifier) => modifier.Modifier.Modify(current));
+            var result = _factory.Build(lod);
+            return _modifiers.Where(modifier => modifier.LodMask.HasLayer(lod))
+                .Aggregate(result, (current, modifier) => modifier.Modifier.Modify(current));
         }
             
         public static ModifiedPathieFactoryBuilder Builder(IPathieFactory factory) => new ModifiedPathieFactoryBuilder(factory);
@@ -35,10 +38,12 @@ namespace Silksprite.MeshBuilder.Models.Paths
         class ChildModifier
         {
             public readonly IPathieModifier Modifier;
+            public readonly LodMask LodMask;
 
-            public ChildModifier(IPathieModifier modifier)
+            public ChildModifier(IPathieModifier modifier, LodMask lodMask)
             {
                 Modifier = modifier;
+                LodMask = lodMask;
             }
         }
 
@@ -52,9 +57,9 @@ namespace Silksprite.MeshBuilder.Models.Paths
                 _factory = factory;
             }
 
-            public ModifiedPathieFactoryBuilder Concat(IPathieModifier modifier)
+            public ModifiedPathieFactoryBuilder Concat(IPathieModifier modifier, LodMask lod)
             {
-                _children.Add(new ChildModifier(modifier));
+                _children.Add(new ChildModifier(modifier, lod));
                 return this;
             }
 

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Silksprite.MeshBuilder.Models.Base;
+using Silksprite.MeshBuilder.Models.Extensions;
 
 namespace Silksprite.MeshBuilder.Models.Meshes
 {
@@ -27,7 +28,9 @@ namespace Silksprite.MeshBuilder.Models.Meshes
 
         public Meshie Build(LodMaskLayer lod)
         {
-            return _modifiers.Aggregate(_factory.Build(lod), (current, modifier) => modifier.Modifier.Modify(current));
+            var result = _factory.Build(lod);
+            return _modifiers.Where(modifier => modifier.LodMask.HasLayer(lod))
+                .Aggregate(result, (current, modifier) => modifier.Modifier.Modify(current));
         }
 
         public static ModifiedMeshieFactoryBuilder Builder(IMeshieFactory factory) => new ModifiedMeshieFactoryBuilder(factory);
@@ -35,10 +38,12 @@ namespace Silksprite.MeshBuilder.Models.Meshes
         class ChildModifier
         {
             public readonly IMeshieModifier Modifier;
+            public readonly LodMask LodMask;
 
-            public ChildModifier(IMeshieModifier modifier)
+            public ChildModifier(IMeshieModifier modifier, LodMask lodMask)
             {
                 Modifier = modifier;
+                LodMask = lodMask;
             }
         }
 
@@ -49,9 +54,9 @@ namespace Silksprite.MeshBuilder.Models.Meshes
 
             public ModifiedMeshieFactoryBuilder(IMeshieFactory factory) => _factory = factory;
 
-            public ModifiedMeshieFactoryBuilder Concat(IMeshieModifier modifier)
+            public ModifiedMeshieFactoryBuilder Concat(IMeshieModifier modifier, LodMask lod)
             {
-                _modifiers.Add(new ChildModifier(modifier));
+                _modifiers.Add(new ChildModifier(modifier, lod));
                 return this;
             }
 
