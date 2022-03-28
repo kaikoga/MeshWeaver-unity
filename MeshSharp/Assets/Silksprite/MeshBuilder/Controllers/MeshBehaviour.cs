@@ -1,5 +1,5 @@
 using Silksprite.MeshBuilder.Controllers.Base;
-using Silksprite.MeshBuilder.Extensions;
+using Silksprite.MeshBuilder.Controllers.Extensions;
 using Silksprite.MeshBuilder.Models;
 using UnityEngine;
 

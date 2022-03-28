@@ -1,5 +1,5 @@
-using Silksprite.MeshBuilder.Extensions;
 using Silksprite.MeshBuilder.Models.Base;
+using Silksprite.MeshBuilder.Models.Extensions;
 using UnityEngine;
 
 namespace Silksprite.MeshBuilder.Models.Modifiers

@@ -1,6 +1,6 @@
 using System.Linq;
 using NUnit.Framework;
-using Silksprite.MeshBuilder.Extensions;
+using Silksprite.MeshBuilder.Models.Extensions;
 
 namespace Silksprite.MeshBuilder.Models
 {

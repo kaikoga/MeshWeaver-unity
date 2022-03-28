@@ -1,6 +1,6 @@
 using System.Linq;
-using Silksprite.MeshBuilder.Extensions;
 using Silksprite.MeshBuilder.Models.Base;
+using Silksprite.MeshBuilder.Models.Extensions;
 
 namespace Silksprite.MeshBuilder.Models.Meshes.Modifiers
 {

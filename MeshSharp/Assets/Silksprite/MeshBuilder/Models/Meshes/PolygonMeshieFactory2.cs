@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using Silksprite.MeshBuilder.Extensions;
+using Silksprite.MeshBuilder.Models.Extensions;
 using Silksprite.MeshBuilder.Models.Paths;
 using UnityEngine;
 

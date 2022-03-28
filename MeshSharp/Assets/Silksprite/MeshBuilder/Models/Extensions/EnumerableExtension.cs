@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Silksprite.MeshBuilder.Extensions
+namespace Silksprite.MeshBuilder.Models.Extensions
 {
     public static class EnumerableExtension
     {

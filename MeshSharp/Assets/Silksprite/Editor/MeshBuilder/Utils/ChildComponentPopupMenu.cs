@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Silksprite.MeshBuilder.Controllers.Base;
-using Silksprite.MeshBuilder.Extensions;
+using Silksprite.MeshBuilder.Controllers.Extensions;
 using UnityEditor;
 using UnityEngine;
 

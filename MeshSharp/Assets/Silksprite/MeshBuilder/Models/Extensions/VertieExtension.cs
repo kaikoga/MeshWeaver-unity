@@ -1,7 +1,6 @@
-using Silksprite.MeshBuilder.Models;
 using UnityEngine;
 
-namespace Silksprite.MeshBuilder.Extensions
+namespace Silksprite.MeshBuilder.Models.Extensions
 {
     public static class VertieExtension
     {

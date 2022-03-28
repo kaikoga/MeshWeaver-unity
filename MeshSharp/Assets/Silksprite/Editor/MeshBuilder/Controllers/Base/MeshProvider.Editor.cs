@@ -1,8 +1,8 @@
 using System;
 using System.Linq;
+using Silksprite.MeshBuilder.Controllers.Extensions;
 using Silksprite.MeshBuilder.Controllers.Meshes;
 using Silksprite.MeshBuilder.Controllers.Utils;
-using Silksprite.MeshBuilder.Extensions;
 using Silksprite.MeshBuilder.Models;
 using Silksprite.MeshBuilder.Models.DataObjects;
 using Silksprite.MeshBuilder.Utils;

@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-namespace Silksprite.MeshBuilder.Extensions
+namespace Silksprite.MeshBuilder.Controllers.Extensions
 {
     public static class UnityEditorExtension
     {
