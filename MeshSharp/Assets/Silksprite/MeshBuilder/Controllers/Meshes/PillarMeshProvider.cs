@@ -1,6 +1,6 @@
 using Silksprite.MeshBuilder.Controllers.Base;
-using Silksprite.MeshBuilder.Models;
 using Silksprite.MeshBuilder.Models.Meshes;
+using Silksprite.MeshBuilder.Models.Paths;
 
 namespace Silksprite.MeshBuilder.Controllers.Meshes
 {
@@ -17,17 +17,15 @@ namespace Silksprite.MeshBuilder.Controllers.Meshes
         public PathProvider pathProviderX;
         public PathProvider pathProviderY;
 
-        public Pathie LastPathieX { get; private set; }
-        public Pathie LastPathieY { get; private set; }
+        public IPathieFactory LastPathieX { get; private set; }
+        public IPathieFactory LastPathieY { get; private set; }
 
         protected override IMeshieFactory CreateFactory()
         {
-            var pathieX = CollectPathie(pathProviderX);
-            var pathieY = CollectPathie(pathProviderY);
-            LastPathieX = pathieX.Build(LodMaskLayer.LOD0); // FIXME
-            LastPathieY = pathieY.Build(LodMaskLayer.LOD0); // FIXME
-            return new PillarMeshieFactory(pathieX,
-                pathieY,
+            LastPathieX = CollectPathie(pathProviderX);
+            LastPathieY = CollectPathie(pathProviderY);
+            return new PillarMeshieFactory(LastPathieX,
+                LastPathieY,
                 fillBody,
                 fillBottom,
                 fillTop,
