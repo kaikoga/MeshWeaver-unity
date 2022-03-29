@@ -12,7 +12,7 @@ namespace Silksprite.MeshBuilder.Controllers.Base
 {
     [CustomEditor(typeof(PathProvider), true, isFallback = true)]
     [CanEditMultipleObjects]
-    public class PathProviderEditor : Editor
+    public class PathProviderEditor : GeometryProviderEditor
     {
         bool _isExpanded;
         bool _isColliderExpanded;
@@ -23,7 +23,7 @@ namespace Silksprite.MeshBuilder.Controllers.Base
             base.OnInspectorGUI();
 
             var factory = pathProvider.LastFactory;
-            var pathie = factory?.Build(LodMaskLayer.LOD0);
+            var pathie = factory?.Build(GuessCurrentLodMaskLayer());
             var colliderPathie = factory?.Build(LodMaskLayer.Collider);
 
             MeshBuilderGUI.DumpFoldout($"Path Dump: {pathie}",

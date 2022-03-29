@@ -12,7 +12,7 @@ namespace Silksprite.MeshBuilder.Controllers.Base
 {
     [CustomEditor(typeof(MeshProvider), true, isFallback = true)]
     [CanEditMultipleObjects]
-    public class MeshProviderEditor : Editor
+    public class MeshProviderEditor : GeometryProviderEditor
     {
         bool _isExpanded;
         bool _isColliderExpanded;
@@ -23,7 +23,7 @@ namespace Silksprite.MeshBuilder.Controllers.Base
             base.OnInspectorGUI();
             
             var factory = meshProvider.LastFactory;
-            var meshie = factory?.Build(LodMaskLayer.LOD0);
+            var meshie = factory?.Build(GuessCurrentLodMaskLayer());
             var colliderMeshie = factory?.Build(LodMaskLayer.Collider);
 
             MeshBuilderGUI.DumpFoldout($"Mesh Dump: {meshie}",
