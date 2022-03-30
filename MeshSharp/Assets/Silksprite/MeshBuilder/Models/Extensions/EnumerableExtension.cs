@@ -43,6 +43,15 @@ namespace Silksprite.MeshBuilder.Models.Extensions
             return e.Zip(e.Skip(1), selector);
         }
 
+        public static IEnumerable<TResult> EachSlidingTrio<TSource, TResult>(this IEnumerable<TSource> e, Func<TSource, TSource, TSource, TResult> selector)
+        {
+            var list = e.ToList();
+            for (var i = 2; i < list.Count; i++)
+            {
+                yield return selector(list[i - 2], list[i - 1], list[i]);
+            }
+        }
+
         public static IEnumerable<TResult> EachTrio<TSource, TResult>(this IEnumerable<TSource> e, Func<TSource, TSource, TSource, TResult> selector)
         {
             using (var it = e.GetEnumerator())
