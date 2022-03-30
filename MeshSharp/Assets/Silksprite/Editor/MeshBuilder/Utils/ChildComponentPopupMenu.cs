@@ -26,12 +26,13 @@ namespace Silksprite.MeshBuilder.Utils
             return index <= 0 ? null : self.AddChildComponent<T>(_types[index]);
         }
 
-        public void PropertyField(Component self, ref T property)
+        public void PropertyField(Component self, string name, ref T property)
         {
             var child = ChildPopup(self);
             if (child != null)
             {
                 property = child;
+                property.name = $"{property.name}_{name}";
             }
         }
     }

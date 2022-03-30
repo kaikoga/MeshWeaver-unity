@@ -16,8 +16,8 @@ namespace Silksprite.MeshBuilder.Controllers.Meshes
         {
             base.OnInspectorGUI();
             var pillarMeshProvider = (PillarMeshProvider)target;
-            PathProviderMenus.CollectionsMenu.PropertyField(pillarMeshProvider, ref pillarMeshProvider.pathProviderX);
-            PathProviderMenus.CollectionsMenu.PropertyField(pillarMeshProvider, ref pillarMeshProvider.pathProviderY);
+            PathProviderMenus.CollectionsMenu.PropertyField(pillarMeshProvider, "Path X", ref pillarMeshProvider.pathProviderX);
+            PathProviderMenus.CollectionsMenu.PropertyField(pillarMeshProvider, "Path Y", ref pillarMeshProvider.pathProviderY);
 
             MeshBuilderGUI.DumpFoldout("Path data X", ref _isExpandedX, () => pillarMeshProvider.LastPathieX.Build(GuessCurrentLodMaskLayer()));
             MeshBuilderGUI.DumpFoldout("Path data Y", ref _isExpandedY, () => pillarMeshProvider.LastPathieY.Build(GuessCurrentLodMaskLayer()));

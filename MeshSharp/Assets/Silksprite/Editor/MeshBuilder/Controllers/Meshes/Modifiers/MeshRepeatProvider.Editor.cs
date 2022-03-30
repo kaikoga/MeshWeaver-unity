@@ -11,7 +11,7 @@ namespace Silksprite.MeshBuilder.Controllers.Meshes.Modifiers
         {
             base.OnInspectorGUI();
             var meshRepeatProvider = (MeshRepeatProvider)target;
-            PathProviderMenus.VertexMenu.PropertyField(meshRepeatProvider, ref meshRepeatProvider.referenceTranslation);
+            PathProviderMenus.VertexMenu.PropertyField(meshRepeatProvider, "Reference Translation", ref meshRepeatProvider.referenceTranslation);
         }
     }
 }
