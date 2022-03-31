@@ -10,7 +10,6 @@ namespace Silksprite.MeshBuilder.Controllers.Utils
             typeof(CompositePathProvider),
             typeof(PathReference),
             typeof(void),
-            typeof(FixedPathProvider),
             typeof(ShapePathProvider),
             typeof(RevolutionPathProvider),
             typeof(void),
