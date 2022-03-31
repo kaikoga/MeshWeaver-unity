@@ -13,7 +13,10 @@ namespace Silksprite.MeshBuilder.Models.Extensions
 
         public static IEnumerable<Vertie> DedupLoop(this Pathie e, Func<Vertie, Vertie, bool> equality)
         {
-            return equality(e.First, e.Last) ? e.Active.Vertices.Skip(1).Dedup(equality) : e.Active.Vertices.Dedup(equality);
+            var vertices = e.Active.Vertices;
+            if (vertices.Length < 2) return vertices;
+            var enumerable = equality(e.First, e.Last) ? vertices.Skip(1) : vertices;
+            return enumerable.Dedup(equality);
         }
 
         public static IEnumerable<int> ChangingIndices(this Pathie e)
