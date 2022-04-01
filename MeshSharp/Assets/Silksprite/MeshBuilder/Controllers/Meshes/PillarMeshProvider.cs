@@ -17,6 +17,8 @@ namespace Silksprite.MeshBuilder.Controllers.Meshes
         public PathProvider pathProviderX;
         public PathProvider pathProviderY;
 
+        public MatrixMeshieFactory.OperatorKind operatorKind = MatrixMeshieFactory.OperatorKind.ApplyX;
+
         public IPathieFactory LastPathieX { get; private set; }
         public IPathieFactory LastPathieY { get; private set; }
 
@@ -26,6 +28,7 @@ namespace Silksprite.MeshBuilder.Controllers.Meshes
             LastPathieY = CollectPathie(pathProviderY);
             return new PillarMeshieFactory(LastPathieX,
                 LastPathieY,
+                operatorKind,
                 fillBody,
                 fillBottom,
                 fillTop,

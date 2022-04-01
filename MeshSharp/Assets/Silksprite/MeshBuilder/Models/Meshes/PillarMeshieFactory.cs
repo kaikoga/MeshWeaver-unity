@@ -8,7 +8,9 @@ namespace Silksprite.MeshBuilder.Models.Meshes
     {
         readonly IPathieFactory _pathieX;
         readonly IPathieFactory _pathieY;
-        
+
+        readonly MatrixMeshieFactory.OperatorKind _operatorKind;
+
         readonly bool _fillBody;
         readonly bool _fillBottom;
         readonly bool _fillTop;
@@ -17,10 +19,11 @@ namespace Silksprite.MeshBuilder.Models.Meshes
         readonly int _uvChannelBottom;
         readonly int _uvChannelTop;
         
-        public PillarMeshieFactory(IPathieFactory pathieX, IPathieFactory pathieY, bool fillBody, bool fillBottom, bool fillTop, int uvChannelBody, int uvChannelBottom, int uvChannelTop)
+        public PillarMeshieFactory(IPathieFactory pathieX, IPathieFactory pathieY, MatrixMeshieFactory.OperatorKind operatorKind, bool fillBody, bool fillBottom, bool fillTop, int uvChannelBody, int uvChannelBottom, int uvChannelTop)
         {
             _pathieX = pathieX;
             _pathieY = pathieY;
+            _operatorKind = operatorKind;
             _fillBody = fillBody;
             _fillBottom = fillBottom;
             _fillTop = fillTop;
@@ -35,7 +38,7 @@ namespace Silksprite.MeshBuilder.Models.Meshes
             var builder = Meshie.Builder();
             if (_fillBody)
             {
-                builder.Concat(new MatrixMeshieFactory(_pathieX, _pathieY).Build(lod), Matrix4x4.identity, _uvChannelBody);
+                builder.Concat(new MatrixMeshieFactory(_pathieX, _pathieY, _operatorKind).Build(lod), Matrix4x4.identity, _uvChannelBody);
             }
             if (_fillBottom)
             {
