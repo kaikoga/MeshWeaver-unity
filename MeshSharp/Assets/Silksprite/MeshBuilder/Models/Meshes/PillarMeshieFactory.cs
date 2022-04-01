@@ -39,11 +39,11 @@ namespace Silksprite.MeshBuilder.Models.Meshes
             }
             if (_fillBottom)
             {
-                builder.Concat(new PolygonMeshieFactory2(_pathieX).Build(lod), Matrix4x4.Translate(pathieY.First.Vertex), _uvChannelBottom);
+                builder.Concat(new PolygonMeshieFactory2(_pathieX).Build(lod), pathieY.First.Translation, _uvChannelBottom);
             }
             if (_fillTop)
             {
-                builder.Concat(new PolygonMeshieFactory2(_pathieX).Build(lod).Apply(MeshReverse.BackOnly), Matrix4x4.Translate(pathieY.Last.Vertex), _uvChannelTop);
+                builder.Concat(new PolygonMeshieFactory2(_pathieX).Build(lod).Apply(MeshReverse.BackOnly), pathieY.Last.Translation, _uvChannelTop);
             }
             return builder.ToMeshie();
         }
