@@ -34,12 +34,12 @@ namespace Silksprite.MeshBuilder.Models.Meshes
 
         public Meshie Build(LodMaskLayer lod)
         {
-            var pathieY = _pathieX.Build(lod);
             var builder = Meshie.Builder();
             if (_fillBody)
             {
                 builder.Concat(new MatrixMeshieFactory(_pathieX, _pathieY, _operatorKind).Build(lod), Matrix4x4.identity, _uvChannelBody);
             }
+            var pathieY = _pathieY.Build(lod);
             if (_fillBottom)
             {
                 builder.Concat(new PolygonMeshieFactory2(_pathieX).Build(lod), pathieY.First.Translation, _uvChannelBottom);
