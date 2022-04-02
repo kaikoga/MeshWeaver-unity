@@ -51,11 +51,13 @@ namespace Silksprite.MeshBuilder.Models
 
         public static Vertie operator +(Vertie a, Vertie b)
         {
+            // Use this for blending only. Perhaps another type?
             return new Vertie(ComponentWiseAdd(a.Translation, b.Translation), a.Culled && b.Culled, a.Uvs.ZipMux(b.Uvs, (x, y) => x + y));
         }
 
         public static Vertie operator -(Vertie a, Vertie b)
         {
+            // Use this for blending only. Perhaps another type?
             return new Vertie(ComponentWiseSubtract(a.Translation, b.Translation), a.Culled && b.Culled, a.Uvs.ZipMux(b.Uvs, (x, y) => x - y));
         }
 
