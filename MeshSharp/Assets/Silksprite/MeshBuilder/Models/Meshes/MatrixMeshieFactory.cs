@@ -39,7 +39,7 @@ namespace Silksprite.MeshBuilder.Models.Meshes
                 switch (_operatorKind)
                 {
                     case OperatorKind.TranslateOnly:
-                        return pX + pY;
+                        return pX + pY.Vertex;
                     case OperatorKind.ApplyX:
                         return pX * pY;
                     case OperatorKind.ApplyY:

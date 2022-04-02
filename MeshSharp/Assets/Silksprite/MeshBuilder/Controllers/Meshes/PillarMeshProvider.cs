@@ -18,6 +18,7 @@ namespace Silksprite.MeshBuilder.Controllers.Meshes
         public PathProvider pathProviderY;
 
         public MatrixMeshieFactory.OperatorKind operatorKind = MatrixMeshieFactory.OperatorKind.ApplyX;
+        public PillarMeshieFactory.LongitudeAxisKind longitudeAxisKind = PillarMeshieFactory.LongitudeAxisKind.Y;
 
         public IPathieFactory LastPathieX { get; private set; }
         public IPathieFactory LastPathieY { get; private set; }
@@ -29,6 +30,7 @@ namespace Silksprite.MeshBuilder.Controllers.Meshes
             return new PillarMeshieFactory(LastPathieX,
                 LastPathieY,
                 operatorKind,
+                longitudeAxisKind,
                 fillBody,
                 fillBottom,
                 fillTop,

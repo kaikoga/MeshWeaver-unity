@@ -10,6 +10,7 @@ namespace Silksprite.MeshBuilder.Models.Meshes
         readonly IPathieFactory _pathieY;
 
         readonly MatrixMeshieFactory.OperatorKind _operatorKind;
+        readonly LongitudeAxisKind _longitudeAxisKind;
 
         readonly bool _fillBody;
         readonly bool _fillBottom;
@@ -19,11 +20,12 @@ namespace Silksprite.MeshBuilder.Models.Meshes
         readonly int _uvChannelBottom;
         readonly int _uvChannelTop;
         
-        public PillarMeshieFactory(IPathieFactory pathieX, IPathieFactory pathieY, MatrixMeshieFactory.OperatorKind operatorKind, bool fillBody, bool fillBottom, bool fillTop, int uvChannelBody, int uvChannelBottom, int uvChannelTop)
+        public PillarMeshieFactory(IPathieFactory pathieX, IPathieFactory pathieY, MatrixMeshieFactory.OperatorKind operatorKind, LongitudeAxisKind longitudeAxisKind, bool fillBody, bool fillBottom, bool fillTop, int uvChannelBody, int uvChannelBottom, int uvChannelTop)
         {
             _pathieX = pathieX;
             _pathieY = pathieY;
             _operatorKind = operatorKind;
+            _longitudeAxisKind = longitudeAxisKind;
             _fillBody = fillBody;
             _fillBottom = fillBottom;
             _fillTop = fillTop;
@@ -39,16 +41,25 @@ namespace Silksprite.MeshBuilder.Models.Meshes
             {
                 builder.Concat(new MatrixMeshieFactory(_pathieX, _pathieY, _operatorKind).Build(lod), Matrix4x4.identity, _uvChannelBody);
             }
-            var pathieY = _pathieY.Build(lod);
+
+            var (longitudePathie, latitudePathie) = _longitudeAxisKind == LongitudeAxisKind.Y ? (_pathieY, _pathieX) : (_pathieX, _pathieY);
+            var ends = longitudePathie.Build(lod);
+
             if (_fillBottom)
             {
-                builder.Concat(new PolygonMeshieFactory2(_pathieX).Build(lod), pathieY.First.Translation, _uvChannelBottom);
+                builder.Concat(new PolygonMeshieFactory2(latitudePathie).Build(lod), ends.First.Translation, _uvChannelBottom);
             }
             if (_fillTop)
             {
-                builder.Concat(new PolygonMeshieFactory2(_pathieX).Build(lod).Apply(MeshReverse.BackOnly), pathieY.Last.Translation, _uvChannelTop);
+                builder.Concat(new PolygonMeshieFactory2(latitudePathie).Build(lod).Apply(MeshReverse.BackOnly), ends.Last.Translation, _uvChannelTop);
             }
             return builder.ToMeshie();
+        }
+        
+        public enum LongitudeAxisKind
+        {
+            X = 1,
+            Y = 2
         }
     }
 }
