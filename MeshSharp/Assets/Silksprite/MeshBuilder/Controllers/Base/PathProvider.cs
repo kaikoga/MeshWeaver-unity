@@ -2,6 +2,7 @@ using System.Linq;
 using Silksprite.MeshBuilder.Controllers.Base.Modifiers;
 using Silksprite.MeshBuilder.Models;
 using Silksprite.MeshBuilder.Models.Paths;
+using Silksprite.MeshBuilder.Models.Paths.Core;
 using UnityEngine;
 
 namespace Silksprite.MeshBuilder.Controllers.Base
