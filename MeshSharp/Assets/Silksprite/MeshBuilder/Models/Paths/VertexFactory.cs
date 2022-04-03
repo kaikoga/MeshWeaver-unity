@@ -8,10 +8,10 @@ namespace Silksprite.MeshBuilder.Models.Paths
         readonly LodMask _lodMask;
         readonly Mux<Vector2> _uvs;
 
-        public VertexFactory(LodMask lodMask, Mux<Vector2> uvs)
+        public VertexFactory(LodMask lodMask = LodMask.All, Mux<Vector2> uvs = null)
         {
             _lodMask = lodMask;
-            _uvs = uvs;
+            _uvs = uvs ?? Mux.Empty<Vector2>();
         }
 
         public Pathie Build(LodMaskLayer lod)

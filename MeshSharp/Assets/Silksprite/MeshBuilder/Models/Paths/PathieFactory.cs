@@ -57,7 +57,7 @@ namespace Silksprite.MeshBuilder.Models.Paths
                 _factory = factory;
             }
 
-            public ModifiedPathieFactoryBuilder Concat(IPathieModifier modifier, LodMask lod)
+            public ModifiedPathieFactoryBuilder Concat(IPathieModifier modifier, LodMask lod = LodMask.All)
             {
                 _children.Add(new ChildModifier(modifier, lod));
                 return this;

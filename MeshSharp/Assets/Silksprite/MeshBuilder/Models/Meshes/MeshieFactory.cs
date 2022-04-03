@@ -54,7 +54,7 @@ namespace Silksprite.MeshBuilder.Models.Meshes
 
             public ModifiedMeshieFactoryBuilder(IMeshieFactory factory) => _factory = factory;
 
-            public ModifiedMeshieFactoryBuilder Concat(IMeshieModifier modifier, LodMask lod)
+            public ModifiedMeshieFactoryBuilder Concat(IMeshieModifier modifier, LodMask lod = LodMask.All)
             {
                 _modifiers.Add(new ChildModifier(modifier, lod));
                 return this;
