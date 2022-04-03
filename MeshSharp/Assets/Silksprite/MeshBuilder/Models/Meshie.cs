@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Silksprite.MeshBuilder.Models.Extensions;
 using Silksprite.MeshBuilder.Models.Meshes.Modifiers;
 using UnityEngine;
 
@@ -9,27 +10,27 @@ namespace Silksprite.MeshBuilder.Models
     public class Meshie
     {
         readonly Vertie[] _vertices;
-        readonly int[] _indices;
+        readonly Gon[] _gons;
 
         public IReadOnlyCollection<Vertie> Vertices => _vertices;
-        public IReadOnlyCollection<int> Indices => _indices;
+        public IReadOnlyCollection<Gon> Gons => _gons;
 
-        Meshie(Vertie[] vertices, int[] indices)
+        Meshie(Vertie[] vertices, Gon[] gons)
         {
             _vertices = vertices;
-            _indices = indices;
+            _gons = gons;
         }
 
-        Meshie() : this(Array.Empty<Vertie>(), Array.Empty<int>()) { }
+        Meshie() : this(Array.Empty<Vertie>(), Array.Empty<Gon>()) { }
 
-        public Meshie(IEnumerable<Vertie> vertices, IEnumerable<int> indices) : this(vertices.ToArray(), indices.ToArray()) { }
+        public Meshie(IEnumerable<Vertie> vertices, IEnumerable<Gon> gons) : this(vertices.ToArray(), gons.ToArray()) { }
 
         public void ExportToMesh(Mesh mesh)
         {
             mesh.subMeshCount = 1;
             mesh.SetVertices(_vertices.Select(v => v.Vertex).ToArray());
             mesh.SetUVs(0, _vertices.Select(v => v.Uv).ToArray());
-            mesh.SetTriangles(_indices.ToArray(), 0);
+            mesh.SetTriangles(_gons.SelectMany(gon => gon.Indices).ToArray(), 0);
             mesh.RecalculateBounds();
             mesh.RecalculateNormals();
             mesh.RecalculateTangents();
@@ -39,14 +40,14 @@ namespace Silksprite.MeshBuilder.Models
 
         public override string ToString()
         {
-            return $"V[{_vertices.Length}] I[{_indices.Length}]";
+            return $"V[{_vertices.Length}] T[{_gons.Length}]";
         }
 
         public string Dump()
         {
             var vertices = string.Join("\n", _vertices.Select(v => v.ToString()));
-            var indices = string.Join(",", _indices.Select(v => v.ToString()));
-            return $"V[{_vertices.Length}]\n{vertices}\nI[{_indices.Length}]\n{indices}";
+            var gons = string.Join("\n", _gons.Select(v => v.ToString()));
+            return $"V[{_vertices.Length}]\n{vertices}\nT[{_gons.Length}]\n{gons}";
         }
 
         public static Meshie Empty() => new Meshie();
@@ -54,17 +55,32 @@ namespace Silksprite.MeshBuilder.Models
         public static MeshieBuilder Builder() => new MeshieBuilder();
         public static MeshieBuilder Builder(Meshie meshie) => new MeshieBuilder(meshie);
 
-        public static MeshieBuilder Builder(IEnumerable<Vertie> vertices, IEnumerable<int> indices, bool validateIndices = false)
+        public static MeshieBuilder Builder(IEnumerable<Vertie> vertices, IEnumerable<Gon> gons, bool validateIndices = false)
         {
             var builder = new MeshieBuilder();
             builder.Vertices.AddRange(vertices);
             if (validateIndices)
             {
-                builder.AddTriangleIndices(indices);
+                builder.AddTriangles(gons);
             }
             else
             {
-                builder.Indices.AddRange(indices);
+                builder.Gons.AddRange(gons);
+            }
+            return builder;
+        }
+
+        public static MeshieBuilder Builder(IEnumerable<Vertie> vertices, IEnumerable<int> indices, int materialIndex, bool validateIndices = false)
+        {
+            var builder = new MeshieBuilder();
+            builder.Vertices.AddRange(vertices);
+            if (validateIndices)
+            {
+                builder.AddTriangles(indices, 0);
+            }
+            else
+            {
+                builder.Gons.AddRange(indices.EachTrio((a, b, c) => new Gon(new []{ a, b, c }, materialIndex)));
             }
             return builder;
         }

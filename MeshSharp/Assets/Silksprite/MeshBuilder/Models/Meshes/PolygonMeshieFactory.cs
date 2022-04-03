@@ -19,8 +19,8 @@ namespace Silksprite.MeshBuilder.Models.Meshes
             var vertices = pathie.Active.Vertices.ToArray(); 
             if (vertices.Length < 3) return Meshie.Empty();
 
-            var indices = Enumerable.Range(1, vertices.Length - 2).SelectMany(i => new[] { 0, i, i + 1 });
-            return Meshie.Builder(vertices, indices, true).ToMeshie();
+            var gons = Enumerable.Range(1, vertices.Length - 2).Select(i => new Gon(new []{ 0, i, i + 1 }, 0));
+            return Meshie.Builder(vertices, gons, true).ToMeshie();
         }
     }
 }

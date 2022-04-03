@@ -23,16 +23,13 @@ namespace Silksprite.MeshBuilder.Models.Meshes.Modifiers
             if (_front)
             {
                 result.Vertices.AddRange(meshie.Vertices);
-                result.Indices.AddRange(meshie.Indices);
+                result.Gons.AddRange(meshie.Gons);
             }
             if (_back)
             {
                 var offset = result.Vertices.Count;
                 result.Vertices.AddRange(meshie.Vertices);
-                result.Indices.AddRange(meshie.Indices
-                    .EachTrio((a, b, c) => new []{a, c, b})
-                    .SelectMany(i => i)
-                    .Select(i => i + offset));
+                result.Gons.AddRange(meshie.Gons.Select(gon => gon.Reverse() + offset));
             }
             return result.ToMeshie();
         }

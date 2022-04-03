@@ -28,9 +28,7 @@ namespace Silksprite.MeshBuilder.Models.Meshes
                 if (data == null) return Meshie.Empty();
             }
 
-            var vertices = data.vertices.Select(v => v.ToVertie());
-            return new Meshie(vertices, data.indices);
+            return data.ToMeshie();
         }
     }
-
 }

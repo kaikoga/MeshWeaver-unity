@@ -80,7 +80,7 @@ namespace Silksprite.MeshBuilder.Models.Meshes
             var unusedIndices = _verticesBuffer.Select((b, index) => new KeyValuePair<int, bool>(index, b)).Where(kv => !kv.Value).Select(kv => kv.Key);
             _triangles.AddRange(unusedIndices);
 
-            return Meshie.Builder(vertices, _triangles, true).ToMeshie();
+            return Meshie.Builder(vertices, _triangles, 0, true).ToMeshie();
         }
 
         /// <summary>

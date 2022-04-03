@@ -8,29 +8,27 @@ namespace Silksprite.MeshBuilder.Models
     public class MeshieBuilder
     {
         public readonly List<Vertie> Vertices;
-        public readonly List<int> Indices;
+        public readonly List<Gon> Gons;
 
-        MeshieBuilder(List<Vertie> vertices, List<int> indices)
+        MeshieBuilder(List<Vertie> vertices, List<Gon> gons)
         {
             Vertices = vertices;
-            Indices = indices;
+            Gons = gons;
         }
 
-        public MeshieBuilder() : this(new List<Vertie>(), new List<int>()) { }
-        public MeshieBuilder(Meshie meshie) : this(meshie.Vertices.ToList(), meshie.Indices.ToList()) { }
+        public MeshieBuilder() : this(new List<Vertie>(), new List<Gon>()) { }
+        public MeshieBuilder(Meshie meshie) : this(meshie.Vertices.ToList(), meshie.Gons.ToList()) { }
 
         public MeshieBuilder Concat(Meshie meshie, Matrix4x4 matrix4x4, int uvIndex)
         {
             var offset = Vertices.Count;
             Vertices.AddRange(meshie.Vertices.Select(v => v.MultiplyPoint(matrix4x4).ShiftUvChannel(uvIndex)));
-            Indices.AddRange(meshie.Indices.Select(i => i + offset));
+            Gons.AddRange(meshie.Gons.Select(gon => gon + offset));
             return this;
         }
 
-        public MeshieBuilder AddTriangleIndices(IEnumerable<int> indices)
+        public MeshieBuilder AddTriangles(IEnumerable<int> indices, int materialIndex)
         {
-            // Indices.AddRange(indices);
-            // return this;
             foreach (var trio in indices.EachTrio((a, b, c) => new [] { a, b, c }))
             {
                 if (Vertices[trio[0]].VertexEquals(Vertices[trio[1]]))
@@ -45,11 +43,33 @@ namespace Silksprite.MeshBuilder.Models
                 {
                     continue;
                 }
-                Indices.AddRange(trio);
+                Gons.Add(new Gon(trio, materialIndex));
             }
             return this;
         }
 
-        public Meshie ToMeshie() => new Meshie(Vertices, Indices);
+
+        public MeshieBuilder AddTriangles(IEnumerable<Gon> gons)
+        {
+            foreach (var gon in gons)
+            {
+                if (Vertices[gon[0]].VertexEquals(Vertices[gon[1]]))
+                {
+                    continue;
+                }
+                if (Vertices[gon[1]].VertexEquals(Vertices[gon[2]]))
+                {
+                    continue;
+                }
+                if (Vertices[gon[0]].VertexEquals(Vertices[gon[2]]))
+                {
+                    continue;
+                }
+                Gons.Add(gon);
+            }
+            return this;
+        }
+
+        public Meshie ToMeshie() => new Meshie(Vertices, Gons);
     }
 }

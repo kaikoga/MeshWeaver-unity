@@ -11,7 +11,7 @@ namespace Silksprite.MeshBuilder.Models.Modifiers.Base
         {
             var result = Meshie.Builder();
             result.Vertices.AddRange(Modify(meshie.Vertices));
-            result.Indices.AddRange(meshie.Indices);
+            result.Gons.AddRange(meshie.Gons);
             return result.ToMeshie();
         }
 

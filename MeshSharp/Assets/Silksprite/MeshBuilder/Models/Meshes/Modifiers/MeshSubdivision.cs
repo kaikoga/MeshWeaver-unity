@@ -22,11 +22,11 @@ namespace Silksprite.MeshBuilder.Models.Meshes.Modifiers
             for (var n = 0; n < count; n++)
             {
                 var builder = Meshie.Builder();
-                for (var i = 0; i < result.Indices.Count; i += 3)
+                foreach (var gon in result.Gons)
                 {
-                    var a = result.Vertices[result.Indices[i]];
-                    var b = result.Vertices[result.Indices[i + 1]];
-                    var c = result.Vertices[result.Indices[i + 2]];
+                    var a = result.Vertices[gon[0]];
+                    var b = result.Vertices[gon[1]];
+                    var c = result.Vertices[gon[2]];
                     var offset = builder.Vertices.Count;
                     builder.Vertices.Add(a);
                     builder.Vertices.Add((a + b) * 0.5f);
@@ -34,7 +34,7 @@ namespace Silksprite.MeshBuilder.Models.Meshes.Modifiers
                     builder.Vertices.Add((a + c) * 0.5f);
                     builder.Vertices.Add((b + c) * 0.5f);
                     builder.Vertices.Add(c);
-                    builder.AddTriangleIndices(SubdividedIndices.Select(j => j + offset));
+                    builder.AddTriangles(SubdividedIndices.Select(j => j + offset), gon.MaterialIndex);
                 }
                 result = builder;
             }
