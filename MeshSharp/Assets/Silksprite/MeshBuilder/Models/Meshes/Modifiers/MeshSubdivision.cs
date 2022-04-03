@@ -22,11 +22,11 @@ namespace Silksprite.MeshBuilder.Models.Meshes.Modifiers
             for (var n = 0; n < count; n++)
             {
                 var builder = Meshie.Builder();
-                for (var i = 0; i < meshie.Indices.Length; i += 3)
+                for (var i = 0; i < result.Indices.Count; i += 3)
                 {
-                    var a = meshie.Vertices[meshie.Indices[i]];
-                    var b = meshie.Vertices[meshie.Indices[i + 1]];
-                    var c = meshie.Vertices[meshie.Indices[i + 2]];
+                    var a = result.Vertices[result.Indices[i]];
+                    var b = result.Vertices[result.Indices[i + 1]];
+                    var c = result.Vertices[result.Indices[i + 2]];
                     var offset = builder.Vertices.Count;
                     builder.Vertices.Add(a);
                     builder.Vertices.Add((a + b) * 0.5f);

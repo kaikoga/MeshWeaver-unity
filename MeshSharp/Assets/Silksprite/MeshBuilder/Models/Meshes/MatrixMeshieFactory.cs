@@ -25,10 +25,10 @@ namespace Silksprite.MeshBuilder.Models.Meshes
             var pathieY = _pathieY.Build(lod);
 
             var activeX = pathieX.Active;
-            var countX = activeX.Vertices.Length;
+            var countX = activeX.Vertices.Count;
             if (countX < 2) return Meshie.Empty();
             var activeY = pathieY.Active;
-            var countY = activeY.Vertices.Length;
+            var countY = activeY.Vertices.Count;
             if (countY < 2) return Meshie.Empty();
 
             var indicesX = pathieX.ChangingIndices((a, b) => a.TranslationEquals(b, 0f));

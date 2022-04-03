@@ -21,7 +21,8 @@ namespace Silksprite.MeshBuilder.Models.Paths.Modifiers
         public Pathie Modify(Pathie pathie)
         {
             var vertices = pathie.Active.Vertices;
-            if (vertices.Length < 2) return pathie;
+            if (vertices.Count < 2) return pathie;
+            var workVertices = vertices.ToArray();
 
             var halfSize = _size / 2;
 
@@ -60,9 +61,9 @@ namespace Silksprite.MeshBuilder.Models.Paths.Modifiers
             }
 
             var builder = Pathie.Builder();
-            builder.Vertices.Add(vertices[0]);
-            builder.Vertices.AddRange(vertices.EachSlidingTrio(Bevel).SelectMany(v => v));
-            builder.Vertices.Add(vertices[vertices.Length - 1]);
+            builder.Vertices.Add(workVertices[0]);
+            builder.Vertices.AddRange(workVertices.EachSlidingTrio(Bevel).SelectMany(v => v));
+            builder.Vertices.Add(workVertices[workVertices.Length - 1]);
             return builder.ToPathie();
         }
     }

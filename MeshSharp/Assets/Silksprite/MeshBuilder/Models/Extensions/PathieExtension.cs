@@ -14,7 +14,7 @@ namespace Silksprite.MeshBuilder.Models.Extensions
         public static IEnumerable<Vertie> DedupLoop(this Pathie e, Func<Vertie, Vertie, bool> equality)
         {
             var vertices = e.Active.Vertices;
-            if (vertices.Length < 2) return vertices;
+            if (vertices.Count < 2) return vertices;
             var enumerable = equality(e.First, e.Last) ? vertices.Skip(1) : vertices;
             return enumerable.Dedup(equality);
         }

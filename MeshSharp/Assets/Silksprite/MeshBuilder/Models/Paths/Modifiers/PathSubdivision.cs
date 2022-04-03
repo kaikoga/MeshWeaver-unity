@@ -15,7 +15,7 @@ namespace Silksprite.MeshBuilder.Models.Paths.Modifiers
 
         public Pathie Modify(Pathie pathie)
         {
-            if (pathie.Vertices.Length <= 1) return pathie;
+            if (pathie.Vertices.Count <= 1) return pathie;
             if (_count <= 1) return pathie;
 
             IEnumerable<Vertie> SubdivideNextEdge(Vertie a, Vertie b)

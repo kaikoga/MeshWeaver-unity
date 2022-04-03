@@ -8,13 +8,16 @@ namespace Silksprite.MeshBuilder.Models
 {
     public class Meshie
     {
-        public readonly Vertie[] Vertices;
-        public readonly int[] Indices;
+        readonly Vertie[] _vertices;
+        readonly int[] _indices;
+
+        public IReadOnlyCollection<Vertie> Vertices => _vertices;
+        public IReadOnlyCollection<int> Indices => _indices;
 
         Meshie(Vertie[] vertices, int[] indices)
         {
-            Vertices = vertices;
-            Indices = indices;
+            _vertices = vertices;
+            _indices = indices;
         }
 
         Meshie() : this(Array.Empty<Vertie>(), Array.Empty<int>()) { }
@@ -24,9 +27,9 @@ namespace Silksprite.MeshBuilder.Models
         public void ExportToMesh(Mesh mesh)
         {
             mesh.subMeshCount = 1;
-            mesh.SetVertices(Vertices.Select(v => v.Vertex).ToArray());
-            mesh.SetUVs(0, Vertices.Select(v => v.Uv).ToArray());
-            mesh.SetTriangles(Indices.ToArray(), 0);
+            mesh.SetVertices(_vertices.Select(v => v.Vertex).ToArray());
+            mesh.SetUVs(0, _vertices.Select(v => v.Uv).ToArray());
+            mesh.SetTriangles(_indices.ToArray(), 0);
             mesh.RecalculateBounds();
             mesh.RecalculateNormals();
             mesh.RecalculateTangents();
@@ -36,14 +39,14 @@ namespace Silksprite.MeshBuilder.Models
 
         public override string ToString()
         {
-            return $"V[{Vertices.Length}] I[{Indices.Length}]";
+            return $"V[{_vertices.Length}] I[{_indices.Length}]";
         }
 
         public string Dump()
         {
-            var vertices = string.Join("\n", Vertices.Select(v => v.ToString()));
-            var indices = string.Join(",", Indices.Select(v => v.ToString()));
-            return $"V[{Vertices.Length}]\n{vertices}\nI[{Indices.Length}]\n{indices}";
+            var vertices = string.Join("\n", _vertices.Select(v => v.ToString()));
+            var indices = string.Join(",", _indices.Select(v => v.ToString()));
+            return $"V[{_vertices.Length}]\n{vertices}\nI[{_indices.Length}]\n{indices}";
         }
 
         public static Meshie Empty() => new Meshie();

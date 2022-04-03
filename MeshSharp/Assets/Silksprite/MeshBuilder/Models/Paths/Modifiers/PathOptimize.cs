@@ -14,24 +14,26 @@ namespace Silksprite.MeshBuilder.Models.Paths.Modifiers
         {
             if (pathie.Active.Vertices.Pairwise((a, b) => (a, b)).All(ab => ab.a.TranslationEquals(ab.b))) return pathie;
 
-            var verticesCount = pathie.Vertices.Length;
+            var workVertices = pathie.Vertices.ToArray();
+            var verticesCount = workVertices.Length;
+
             var result = Pathie.Builder();
             for (var i = 0; i < verticesCount; i++)
             {
-                var curr = pathie.Vertices[i];
+                var curr = workVertices[i];
                 var prevIndex = i;
                 for (var j = 0; j < verticesCount; j++)
                 {
                     prevIndex = (prevIndex + verticesCount - 1) % verticesCount;
-                    if (!pathie.Vertices[prevIndex].Culled && !curr.TranslationEquals(pathie.Vertices[prevIndex])) break;
+                    if (!workVertices[prevIndex].Culled && !curr.TranslationEquals(workVertices[prevIndex])) break;
                 }
                 var nextIndex = i;
                 for (var j = 0; j < verticesCount; j++)
                 {
                     nextIndex = (nextIndex + 1) % verticesCount;
-                    if (!pathie.Vertices[nextIndex].Culled && !curr.TranslationEquals(pathie.Vertices[nextIndex])) break;
+                    if (!workVertices[nextIndex].Culled && !curr.TranslationEquals(workVertices[nextIndex])) break;
                 }
-                if (Vector3.Angle(curr.Vertex - pathie.Vertices[prevIndex].Vertex, curr.Vertex - pathie.Vertices[nextIndex].Vertex) < 179.9f)
+                if (Vector3.Angle(curr.Vertex - workVertices[prevIndex].Vertex, curr.Vertex - workVertices[nextIndex].Vertex) < 179.9f)
                 {
                     result.Vertices.Add(curr);
                 }

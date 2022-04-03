@@ -7,23 +7,26 @@ namespace Silksprite.MeshBuilder.Models
 {
     public class Pathie
     {
-        public readonly Vertie[] Vertices;
+        public IReadOnlyCollection<Vertie> Vertices => _vertices;
+
+        readonly Vertie[] _vertices;
 
         public Pathie Active => new Pathie(ActiveVertices());
 
         IEnumerable<Vertie> ActiveVertices()
         {
-            return Vertices.Where((v, index) => index == 0 || index == Vertices.Length - 1 || !v.Culled);
+            return _vertices.Where((v, index) => index == 0 || index == _vertices.Length - 1 || !v.Culled);
         }
 
-        public Vertie First => Vertices.Length > 0 ? Vertices[0] : default;
-        public Vertie Last => Vertices.Length > 0 ? Vertices[Vertices.Length - 1] : default;
+        public Vertie First => _vertices.Length > 0 ? _vertices[0] : default;
+        public Vertie Last => _vertices.Length > 0 ? _vertices[_vertices.Length - 1] : default;
         
         public Vertie Diff => Last / First;
 
+
         Pathie(Vertie[] vertices)
         {
-            Vertices = vertices;
+            _vertices = vertices;
         }
 
         Pathie() : this(Array.Empty<Vertie>()) { }
@@ -35,7 +38,7 @@ namespace Silksprite.MeshBuilder.Models
         public Pathie Modify(Func<Vertie, int, Vertie> modifier)
         {
             var result = new PathieBuilder();
-            foreach (var (vertie, i) in Vertices.Select((vertie, i) => (vertie, i)))
+            foreach (var (vertie, i) in _vertices.Select((vertie, i) => (vertie, i)))
             {
                 result.Vertices.Add(modifier(vertie, i));
             }
@@ -46,13 +49,13 @@ namespace Silksprite.MeshBuilder.Models
 
         public override string ToString()
         {
-            return $"V[{Vertices.Length}]";
+            return $"V[{_vertices.Length}]";
         }
 
         public string Dump()
         {
-            var vertices = string.Join("\n", Vertices.Select(v => v.ToString()));
-            return $"V[{Vertices.Length}]\n{vertices}";
+            var vertices = string.Join("\n", _vertices.Select(v => v.ToString()));
+            return $"V[{_vertices.Length}]\n{vertices}";
         }
         
         public static Pathie Empty() => new Pathie();
