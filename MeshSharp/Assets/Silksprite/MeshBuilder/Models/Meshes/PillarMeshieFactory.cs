@@ -20,7 +20,15 @@ namespace Silksprite.MeshBuilder.Models.Meshes
         readonly int _uvChannelBottom;
         readonly int _uvChannelTop;
         
-        public PillarMeshieFactory(IPathieFactory pathieX, IPathieFactory pathieY, MatrixMeshieFactory.OperatorKind operatorKind, LongitudeAxisKind longitudeAxisKind, bool fillBody, bool fillBottom, bool fillTop, int uvChannelBody, int uvChannelBottom, int uvChannelTop)
+        readonly int _materialIndexBody;
+        readonly int _materialIndexBottom;
+        readonly int _materialIndexTop;
+        
+        public PillarMeshieFactory(IPathieFactory pathieX, IPathieFactory pathieY,
+            MatrixMeshieFactory.OperatorKind operatorKind, LongitudeAxisKind longitudeAxisKind,
+            bool fillBody, bool fillBottom, bool fillTop,
+            int uvChannelBody, int uvChannelBottom, int uvChannelTop,
+            int materialIndexBody, int materialIndexBottom, int materialIndexTop)
         {
             _pathieX = pathieX;
             _pathieY = pathieY;
@@ -32,6 +40,9 @@ namespace Silksprite.MeshBuilder.Models.Meshes
             _uvChannelBody = uvChannelBody;
             _uvChannelBottom = uvChannelBottom;
             _uvChannelTop = uvChannelTop;
+            _materialIndexBody = materialIndexBody;
+            _materialIndexBottom = materialIndexBottom;
+            _materialIndexTop = materialIndexTop;
         }
 
         public Meshie Build(LodMaskLayer lod)
@@ -39,7 +50,7 @@ namespace Silksprite.MeshBuilder.Models.Meshes
             var builder = Meshie.Builder();
             if (_fillBody)
             {
-                builder.Concat(new MatrixMeshieFactory(_pathieX, _pathieY, _operatorKind).Build(lod), Matrix4x4.identity, _uvChannelBody);
+                builder.Concat(new MatrixMeshieFactory(_pathieX, _pathieY, _operatorKind, _materialIndexBody).Build(lod), Matrix4x4.identity, _uvChannelBody);
             }
 
             var (longitudePathie, latitudePathie) = _longitudeAxisKind == LongitudeAxisKind.Y ? (_pathieY, _pathieX) : (_pathieX, _pathieY);
@@ -47,11 +58,11 @@ namespace Silksprite.MeshBuilder.Models.Meshes
 
             if (_fillBottom)
             {
-                builder.Concat(new PolygonMeshieFactory2(latitudePathie).Build(lod), ends.First.Translation, _uvChannelBottom);
+                builder.Concat(new PolygonMeshieFactory2(latitudePathie, _materialIndexBottom).Build(lod), ends.First.Translation, _uvChannelBottom);
             }
             if (_fillTop)
             {
-                builder.Concat(new PolygonMeshieFactory2(latitudePathie).Build(lod).Apply(MeshReverse.BackOnly), ends.Last.Translation, _uvChannelTop);
+                builder.Concat(new PolygonMeshieFactory2(latitudePathie, _materialIndexTop).Build(lod).Apply(MeshReverse.BackOnly), ends.Last.Translation, _uvChannelTop);
             }
             return builder.ToMeshie();
         }

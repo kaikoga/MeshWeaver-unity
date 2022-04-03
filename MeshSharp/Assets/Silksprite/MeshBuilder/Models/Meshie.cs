@@ -27,10 +27,14 @@ namespace Silksprite.MeshBuilder.Models
 
         public void ExportToMesh(Mesh mesh)
         {
-            mesh.subMeshCount = 1;
+            var subMeshes = _gons.GroupBy(gon => gon.MaterialIndex).OrderBy(group => group.Key).ToArray();
+            mesh.subMeshCount = subMeshes.Length;
             mesh.SetVertices(_vertices.Select(v => v.Vertex).ToArray());
             mesh.SetUVs(0, _vertices.Select(v => v.Uv).ToArray());
-            mesh.SetTriangles(_gons.SelectMany(gon => gon.Indices).ToArray(), 0);
+            for (var i = 0; i < subMeshes.Length; i++)
+            {
+                mesh.SetTriangles(subMeshes[i].SelectMany(gon => gon.Indices).ToArray(), i);
+            }
             mesh.RecalculateBounds();
             mesh.RecalculateNormals();
             mesh.RecalculateTangents();
@@ -76,7 +80,7 @@ namespace Silksprite.MeshBuilder.Models
             builder.Vertices.AddRange(vertices);
             if (validateIndices)
             {
-                builder.AddTriangles(indices, 0);
+                builder.AddTriangles(indices, materialIndex);
             }
             else
             {

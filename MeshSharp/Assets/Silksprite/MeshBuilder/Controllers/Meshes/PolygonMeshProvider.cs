@@ -8,9 +8,11 @@ namespace Silksprite.MeshBuilder.Controllers.Meshes
     {
         public PathProvider pathProvider;
 
+        public int materialIndex;
+
         protected override IMeshieFactory CreateFactory()
         {
-            return new PolygonMeshieFactory2(CollectPathie(pathProvider));
+            return new PolygonMeshieFactory2(CollectPathie(pathProvider), materialIndex);
         }
     }
 }

@@ -11,12 +11,14 @@ namespace Silksprite.MeshBuilder.Models.Meshes
         readonly IPathieFactory _pathieY;
 
         readonly OperatorKind _operatorKind;
+        readonly int _materialIndex;
 
-        public MatrixMeshieFactory(IPathieFactory pathieX, IPathieFactory pathieY, OperatorKind operatorKind)
+        public MatrixMeshieFactory(IPathieFactory pathieX, IPathieFactory pathieY, OperatorKind operatorKind, int materialIndex)
         {
             _pathieX = pathieX;
             _pathieY = pathieY;
             _operatorKind = operatorKind;
+            _materialIndex = materialIndex;
         }
 
         public Meshie Build(LodMaskLayer lod)

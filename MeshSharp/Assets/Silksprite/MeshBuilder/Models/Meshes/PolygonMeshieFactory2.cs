@@ -10,10 +10,12 @@ namespace Silksprite.MeshBuilder.Models.Meshes
     public class PolygonMeshieFactory2 : IMeshieFactory
     {
         readonly IPathieFactory _pathie;
+        readonly int _materialIndex;
 
-        public PolygonMeshieFactory2(IPathieFactory pathie)
+        public PolygonMeshieFactory2(IPathieFactory pathie, int materialIndex)
         {
             _pathie = pathie;
+            _materialIndex = materialIndex;
         }
 
         public Meshie Build(LodMaskLayer lod)
@@ -80,7 +82,7 @@ namespace Silksprite.MeshBuilder.Models.Meshes
             var unusedIndices = _verticesBuffer.Select((b, index) => new KeyValuePair<int, bool>(index, b)).Where(kv => !kv.Value).Select(kv => kv.Key);
             _triangles.AddRange(unusedIndices);
 
-            return Meshie.Builder(vertices, _triangles, 0, true).ToMeshie();
+            return Meshie.Builder(vertices, _triangles, _materialIndex, true).ToMeshie();
         }
 
         /// <summary>

@@ -14,6 +14,10 @@ namespace Silksprite.MeshBuilder.Controllers.Meshes
         public int uvChannelBottom;
         public int uvChannelTop;
 
+        public int materialIndexBody;
+        public int materialIndexBottom;
+        public int materialIndexTop;
+
         public PathProvider pathProviderX;
         public PathProvider pathProviderY;
 
@@ -36,7 +40,10 @@ namespace Silksprite.MeshBuilder.Controllers.Meshes
                 fillTop,
                 uvChannelBody,
                 uvChannelBottom,
-                uvChannelTop);
+                uvChannelTop,
+                materialIndexBody,
+                materialIndexBottom,
+                materialIndexTop);
         }
     }
 }
