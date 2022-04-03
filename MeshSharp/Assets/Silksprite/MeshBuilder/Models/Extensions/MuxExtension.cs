@@ -86,5 +86,10 @@ namespace Silksprite.MeshBuilder.Models.Extensions
         {
             return new Mux<TOut>(self.Select(layer => new MuxLayer<TOut>(selector(layer.Value), layer.Channel)));
         }
+
+        public static Mux<TOut> SelectMux<TIn, TOut>(this Mux<TIn> self, Func<TIn, int, TOut> valueSelector, Func<TIn, int, int> channelSelector)
+        {
+            return new Mux<TOut>(self.Select(layer => new MuxLayer<TOut>(valueSelector(layer.Value, layer.Channel), channelSelector(layer.Value, layer.Channel))));
+        }
     }
 }
