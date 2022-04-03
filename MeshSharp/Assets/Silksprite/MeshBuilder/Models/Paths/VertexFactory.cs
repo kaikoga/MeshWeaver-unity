@@ -5,6 +5,8 @@ namespace Silksprite.MeshBuilder.Models.Paths
 {
     public class VertexFactory : IPathieFactory
     {
+        public static readonly VertexFactory Default = new VertexFactory();
+
         readonly LodMask _lodMask;
         readonly Mux<Vector2> _uvs;
 

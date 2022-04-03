@@ -42,6 +42,11 @@ namespace Silksprite.MeshBuilder.Models.Paths
                 return this;
             }
 
+            public CompositePathieFactoryBuilder ConcatVertex(Matrix4x4 translation)
+            {
+                return Concat(VertexFactory.Default, translation);
+            }
+
             public CompositePathieFactory ToFactory() => new CompositePathieFactory(_children);
         }
     }
