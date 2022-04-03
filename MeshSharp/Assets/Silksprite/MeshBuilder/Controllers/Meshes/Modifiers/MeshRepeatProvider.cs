@@ -1,6 +1,5 @@
 using Silksprite.MeshBuilder.Controllers.Base.Modifiers;
 using Silksprite.MeshBuilder.Controllers.Paths;
-using Silksprite.MeshBuilder.Models.Base;
 using Silksprite.MeshBuilder.Models.Meshes.Modifiers;
 using UnityEngine;
 

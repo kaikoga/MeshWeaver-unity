@@ -1,5 +1,4 @@
 using System.Linq;
-using Silksprite.MeshBuilder.Models.Base;
 using UnityEngine;
 
 namespace Silksprite.MeshBuilder.Models.Meshes.Modifiers

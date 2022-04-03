@@ -1,4 +1,3 @@
-using Silksprite.MeshBuilder.Models.Base;
 using UnityEngine;
 
 namespace Silksprite.MeshBuilder.Models.Paths.Modifiers

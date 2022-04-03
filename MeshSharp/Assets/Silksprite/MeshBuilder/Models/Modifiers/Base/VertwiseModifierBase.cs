@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
+using Silksprite.MeshBuilder.Models.Meshes.Modifiers;
+using Silksprite.MeshBuilder.Models.Paths.Modifiers;
 
-namespace Silksprite.MeshBuilder.Models.Base
+namespace Silksprite.MeshBuilder.Models.Modifiers.Base
 {
     public abstract class VertwiseModifierBase : IMeshieModifier, IPathieModifier
     {

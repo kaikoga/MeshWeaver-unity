@@ -1,4 +1,4 @@
-namespace Silksprite.MeshBuilder.Models.Base
+namespace Silksprite.MeshBuilder.Models.Paths.Modifiers
 {
     public interface IPathieModifier
     {

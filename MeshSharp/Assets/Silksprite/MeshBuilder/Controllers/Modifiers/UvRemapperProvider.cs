@@ -1,6 +1,6 @@
 using Silksprite.MeshBuilder.Controllers.Base.Modifiers;
-using Silksprite.MeshBuilder.Models.Base;
 using Silksprite.MeshBuilder.Models.Modifiers;
+using Silksprite.MeshBuilder.Models.Modifiers.Base;
 using UnityEngine;
 
 namespace Silksprite.MeshBuilder.Controllers.Modifiers

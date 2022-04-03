@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Silksprite.MeshBuilder.Models.Base;
 using Silksprite.MeshBuilder.Models.Extensions;
 using UnityEngine;
 

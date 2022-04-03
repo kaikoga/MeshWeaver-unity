@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
-using Silksprite.MeshBuilder.Models.Base;
 using Silksprite.MeshBuilder.Models.Extensions;
+using Silksprite.MeshBuilder.Models.Paths.Modifiers;
 
 namespace Silksprite.MeshBuilder.Models.Paths
 {
