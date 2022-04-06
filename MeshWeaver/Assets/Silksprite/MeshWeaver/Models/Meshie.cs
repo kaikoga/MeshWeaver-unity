@@ -28,7 +28,7 @@ namespace Silksprite.MeshWeaver.Models
         public void ExportToMesh(Mesh mesh)
         {
             var subMeshes = _gons.GroupBy(gon => gon.MaterialIndex).OrderBy(group => group.Key).ToArray();
-            mesh.subMeshCount = subMeshes.Length;
+            mesh.subMeshCount = Math.Min(subMeshes.Length, 1);
             mesh.SetVertices(_vertices.Select(v => v.Vertex).ToArray());
             mesh.SetUVs(0, _vertices.Select(v => v.Uv).ToArray());
             for (var i = 0; i < subMeshes.Length; i++)
