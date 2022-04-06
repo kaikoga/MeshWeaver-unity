@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using UnityEditor;
 using UnityEngine;
 
 namespace Silksprite.MeshWeaver.Controllers.Extensions
@@ -28,12 +26,6 @@ namespace Silksprite.MeshWeaver.Controllers.Extensions
             {
                 if (child.TryGetComponent<T>(out var c)) yield return c;
             }
-        }
-
-        public static void CollectDirectChildren<T>(this Component self, out List<T> property) where T : Component
-        {
-            property = self.GetComponentsInDirectChildren<T>().ToList();
-            EditorUtility.SetDirty(self);
         }
     }
 }
