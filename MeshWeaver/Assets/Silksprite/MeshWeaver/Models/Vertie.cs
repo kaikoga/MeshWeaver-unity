@@ -28,6 +28,8 @@ namespace Silksprite.MeshWeaver.Models
             Uv = Uvs.Value;
         }
 
+        public static readonly Vertie Identity = new Vertie(Matrix4x4.identity, false, Mux.Empty<Vector2>());
+
         public bool VertexEquals(Vertie other, float sqrError = 0.000001f) => (Vertex - other.Vertex).sqrMagnitude <= sqrError;
         public bool TranslationEquals(Vertie other, float error = 0.000001f)
         {

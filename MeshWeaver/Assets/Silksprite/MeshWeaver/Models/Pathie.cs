@@ -18,11 +18,10 @@ namespace Silksprite.MeshWeaver.Models
             return _vertices.Where((v, index) => index == 0 || index == _vertices.Length - 1 || !v.Culled);
         }
 
-        public Vertie First => _vertices.Length > 0 ? _vertices[0] : default;
-        public Vertie Last => _vertices.Length > 0 ? _vertices[_vertices.Length - 1] : default;
+        public Vertie First => _vertices.Length > 0 ? _vertices[0] : Vertie.Identity;
+        public Vertie Last => _vertices.Length > 0 ? _vertices[_vertices.Length - 1] : Vertie.Identity;
         
-        public Vertie Diff => Last / First;
-
+        public Vertie Diff => _vertices.Length > 0 ? Last / First : Vertie.Identity;
 
         Pathie(Vertie[] vertices)
         {
