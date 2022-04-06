@@ -187,7 +187,7 @@ namespace Silksprite.MeshWeaver.Controllers
                 collider.sharedMesh = meshBehaviourExporter.outputMeshForCollider;
             }
 
-            PrefabUtility.SaveAsPrefabAsset(prefab, projectFilePath);
+            meshBehaviourExporter.outputPrefab = PrefabUtility.SaveAsPrefabAsset(prefab, projectFilePath);
             DestroyImmediate(prefab);
         }
     }
