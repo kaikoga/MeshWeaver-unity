@@ -1,4 +1,3 @@
-using Silksprite.MeshWeaver.Models;
 using Silksprite.MeshWeaver.Models.DataObjects.Extensions;
 using Silksprite.MeshWeaver.Controllers.Base;
 using Silksprite.MeshWeaver.Models.DataObjects;
@@ -13,11 +12,12 @@ namespace Silksprite.MeshWeaver.Controllers.Paths
 {
     public class VertexProvider : PathProvider
     {
+        public bool crease;
         public Vector2MuxData[] uvs;
 
         protected override IPathieFactory CreateFactory()
         {
-            return new VertexFactory(lodMask, uvs.ToMux());
+            return new VertexFactory(lodMask, crease, uvs.ToMux());
         }
         
         #if UNITY_EDITOR
