@@ -50,9 +50,19 @@ namespace Silksprite.MeshWeaver.Models.Meshes
                         throw new ArgumentOutOfRangeException();
                 }
             }));
-            var indices = indicesY
-                .SelectMany(iY => indicesX.Select(i => i + iY * countX))
-                .SelectMany(i => new[] { i, i + countX, i + countX + 1, i, i + countX + 1, i + 1 });
+            var indices = indicesY.SelectMany(y =>
+                {
+                    return indicesX.Select(x =>
+                    {
+                        var i = x + y * countX;
+                        var a = new[] { i, i + 1, i + countX, i + countX + 1 };
+                        return new { x, y, a };
+                    });
+                }).SelectMany(xya =>
+                {
+                    var a = xya.a;
+                    return new[] { a[0], a[2], a[3], a[0], a[3], a[1] };
+                });
             return Meshie.Builder(vertices, indices, _materialIndex, true).ToMeshie();
         }
 
