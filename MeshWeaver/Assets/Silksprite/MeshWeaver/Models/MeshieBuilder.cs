@@ -70,6 +70,26 @@ namespace Silksprite.MeshWeaver.Models
             return this;
         }
 
-        public Meshie ToMeshie() => new Meshie(Vertices, Gons);
+        public Meshie ToMeshie(bool cleanupStaleVertices = false)
+        {
+            if (!cleanupStaleVertices) return new Meshie(Vertices, Gons);
+
+            var used = new bool[Vertices.Count];
+            foreach (var i in Gons.SelectMany(gon => gon.Indices))
+            {
+                used[i] = true;
+            }
+
+            var indices = new int[Vertices.Count];
+            var index = 0;
+            for (var i = 0; i < indices.Length; i++)
+            {
+                indices[i] = used[i] ? index++ : -1;
+            }
+
+            return new Meshie(
+                Vertices.Where((v, i) => used[i]),
+                Gons.Select(gon => new Gon(gon.Indices.Select(i => indices[i]).ToArray(), gon.MaterialIndex)));
+        }
     }
 }

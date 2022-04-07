@@ -113,7 +113,8 @@ namespace Silksprite.MeshWeaver.Models.Meshes
                     }
                     return CellIndices[cellForm].Select(i => xya.a[i]);
                 });
-            return Meshie.Builder(vertices, indices, _materialIndex, true).ToMeshie();
+            return Meshie.Builder(vertices, indices, _materialIndex, true)
+                .ToMeshie(_defaultCellPatternKind == CellPatternKind.None || _cellPatternOverrides.Count > 0);
         }
 
         public enum OperatorKind

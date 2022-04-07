@@ -42,7 +42,7 @@ namespace Silksprite.MeshWeaver.Models.Meshes.Modifiers
                 });
             }
 
-            return Meshie.Builder(vertices, gons).ToMeshie();
+            return Meshie.Builder(vertices, gons).ToMeshie(true);
         }
     }
 }
