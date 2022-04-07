@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Silksprite.MeshWeaver.Controllers.Base;
 using Silksprite.MeshWeaver.Models.Meshes;
 using Silksprite.MeshWeaver.Models.Paths;
@@ -10,6 +11,7 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
         public PathProvider pathProviderY;
         public MatrixMeshieFactory.OperatorKind operatorKind = MatrixMeshieFactory.OperatorKind.ApplyX;
         public MatrixMeshieFactory.CellPatternKind defaultCellPatternKind = MatrixMeshieFactory.CellPatternKind.Default;
+        public List<MatrixMeshieFactory.CellPatternOverride> cellPatternOverrides;
 
         public int materialIndex;
 
@@ -20,7 +22,7 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
         {
             LastPathieX = CollectPathie(pathProviderX);
             LastPathieY = CollectPathie(pathProviderY);
-            return new MatrixMeshieFactory(LastPathieX, LastPathieY, operatorKind, defaultCellPatternKind, materialIndex);
+            return new MatrixMeshieFactory(LastPathieX, LastPathieY, operatorKind, defaultCellPatternKind, cellPatternOverrides, materialIndex);
         }
     }
 }

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Silksprite.MeshWeaver.Models.Meshes.Modifiers;
 using Silksprite.MeshWeaver.Models.Paths;
 using UnityEngine;
@@ -11,6 +12,7 @@ namespace Silksprite.MeshWeaver.Models.Meshes
 
         readonly MatrixMeshieFactory.OperatorKind _operatorKind;
         readonly MatrixMeshieFactory.CellPatternKind _defaultCellPatternKind;
+        readonly List<MatrixMeshieFactory.CellPatternOverride> _cellPatternOverrides;
         readonly LongitudeAxisKind _longitudeAxisKind;
 
         readonly bool _fillBody;
@@ -26,7 +28,8 @@ namespace Silksprite.MeshWeaver.Models.Meshes
         readonly int _materialIndexTop;
 
         public PillarMeshieFactory(IPathieFactory pathieX, IPathieFactory pathieY,
-            MatrixMeshieFactory.OperatorKind operatorKind, MatrixMeshieFactory.CellPatternKind defaultCellPatternKind, LongitudeAxisKind longitudeAxisKind,
+            MatrixMeshieFactory.OperatorKind operatorKind, MatrixMeshieFactory.CellPatternKind defaultCellPatternKind, List<MatrixMeshieFactory.CellPatternOverride> cellPatternOverrides,
+            LongitudeAxisKind longitudeAxisKind,
             bool fillBody, bool fillBottom, bool fillTop,
             int uvChannelBody, int uvChannelBottom, int uvChannelTop,
             int materialIndexBody, int materialIndexBottom, int materialIndexTop)
@@ -35,6 +38,7 @@ namespace Silksprite.MeshWeaver.Models.Meshes
             _pathieY = pathieY;
             _operatorKind = operatorKind;
             _defaultCellPatternKind = defaultCellPatternKind;
+            _cellPatternOverrides = cellPatternOverrides;
             _longitudeAxisKind = longitudeAxisKind;
             _fillBody = fillBody;
             _fillBottom = fillBottom;
@@ -52,7 +56,7 @@ namespace Silksprite.MeshWeaver.Models.Meshes
             var builder = Meshie.Builder();
             if (_fillBody)
             {
-                builder.Concat(new MatrixMeshieFactory(_pathieX, _pathieY, _operatorKind, _defaultCellPatternKind, _materialIndexBody).Build(lod), Matrix4x4.identity, _uvChannelBody);
+                builder.Concat(new MatrixMeshieFactory(_pathieX, _pathieY, _operatorKind, _defaultCellPatternKind, _cellPatternOverrides, _materialIndexBody).Build(lod), Matrix4x4.identity, _uvChannelBody);
             }
 
             var (longitudePathie, latitudePathie) = _longitudeAxisKind == LongitudeAxisKind.Y ? (_pathieY, _pathieX) : (_pathieX, _pathieY);

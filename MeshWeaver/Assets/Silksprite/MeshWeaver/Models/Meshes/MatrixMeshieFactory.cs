@@ -13,6 +13,7 @@ namespace Silksprite.MeshWeaver.Models.Meshes
 
         readonly OperatorKind _operatorKind;
         readonly CellPatternKind _defaultCellPatternKind;
+        readonly List<CellPatternOverride> _cellPatternOverrides;
         readonly int _materialIndex;
 
         static readonly Dictionary<CellFormKind, IEnumerable<int>> CellIndices = new Dictionary<CellFormKind, IEnumerable<int>>
@@ -27,12 +28,15 @@ namespace Silksprite.MeshWeaver.Models.Meshes
             [CellFormKind.None] = Array.Empty<int>() 
         };
 
-        public MatrixMeshieFactory(IPathieFactory pathieX, IPathieFactory pathieY, OperatorKind operatorKind, CellPatternKind defaultCellPatternKind, int materialIndex)
+        public MatrixMeshieFactory(IPathieFactory pathieX, IPathieFactory pathieY,
+            OperatorKind operatorKind, CellPatternKind defaultCellPatternKind, List<CellPatternOverride> cellPatternOverrides,
+            int materialIndex)
         {
             _pathieX = pathieX;
             _pathieY = pathieY;
             _operatorKind = operatorKind;
             _defaultCellPatternKind = defaultCellPatternKind;
+            _cellPatternOverrides = cellPatternOverrides;
             _materialIndex = materialIndex;
         }
 
@@ -77,6 +81,10 @@ namespace Silksprite.MeshWeaver.Models.Meshes
                 {
                     CellPatternKind CellKindAt(int x, int y)
                     {
+                        foreach (var o in _cellPatternOverrides)
+                        {
+                            if (x >= o.xMin && x <= o.xMax && y >= o.yMin && y <= o.yMax) return o.cellPatternKind;
+                        }
                         return _defaultCellPatternKind;
                     }
 
@@ -127,6 +135,16 @@ namespace Silksprite.MeshWeaver.Models.Meshes
             TriangleTopLeft = 130,
             TriangleTopRight = 131,
             None = -1
+        }
+
+        [Serializable]
+        public struct CellPatternOverride
+        {
+            public CellPatternKind cellPatternKind;
+            public int xMin;
+            public int xMax;
+            public int yMin;
+            public int yMax;
         }
 
         enum CellFormKind
