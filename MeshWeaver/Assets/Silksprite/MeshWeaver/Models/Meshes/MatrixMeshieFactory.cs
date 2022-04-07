@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Silksprite.MeshWeaver.Models.Extensions;
 using Silksprite.MeshWeaver.Models.Paths;
@@ -11,13 +12,27 @@ namespace Silksprite.MeshWeaver.Models.Meshes
         readonly IPathieFactory _pathieY;
 
         readonly OperatorKind _operatorKind;
+        readonly CellPatternKind _defaultCellPatternKind;
         readonly int _materialIndex;
 
-        public MatrixMeshieFactory(IPathieFactory pathieX, IPathieFactory pathieY, OperatorKind operatorKind, int materialIndex)
+        static readonly Dictionary<CellFormKind, IEnumerable<int>> CellIndices = new Dictionary<CellFormKind, IEnumerable<int>>
+        {
+            [CellFormKind.Default] = new[] { 0, 2, 3, 0, 3, 1 },
+            [CellFormKind.Right] = new[] { 0, 2, 3, 0, 3, 1 }, 
+            [CellFormKind.Left] = new[] { 0, 2, 1, 1, 2, 3 }, 
+            [CellFormKind.TriangleBottomLeft] = new[] { 0, 2, 1 }, 
+            [CellFormKind.TriangleBottomRight] = new[] { 0, 3, 1 }, 
+            [CellFormKind.TriangleTopLeft] = new[] { 0, 2, 3 }, 
+            [CellFormKind.TriangleTopRight] = new[] { 1, 2, 3 }, 
+            [CellFormKind.None] = Array.Empty<int>() 
+        };
+
+        public MatrixMeshieFactory(IPathieFactory pathieX, IPathieFactory pathieY, OperatorKind operatorKind, CellPatternKind defaultCellPatternKind, int materialIndex)
         {
             _pathieX = pathieX;
             _pathieY = pathieY;
             _operatorKind = operatorKind;
+            _defaultCellPatternKind = defaultCellPatternKind;
             _materialIndex = materialIndex;
         }
 
@@ -60,8 +75,35 @@ namespace Silksprite.MeshWeaver.Models.Meshes
                     });
                 }).SelectMany(xya =>
                 {
-                    var a = xya.a;
-                    return new[] { a[0], a[2], a[3], a[0], a[3], a[1] };
+                    CellPatternKind CellKindAt(int x, int y)
+                    {
+                        return _defaultCellPatternKind;
+                    }
+
+                    var cellPattern = CellKindAt(xya.x, xya.y);
+                    CellFormKind cellForm;
+                    switch (cellPattern)
+                    {
+                        case CellPatternKind.Default:
+                        case CellPatternKind.AllRight:
+                        case CellPatternKind.AllLeft:
+                        case CellPatternKind.TriangleBottomLeft:
+                        case CellPatternKind.TriangleBottomRight:
+                        case CellPatternKind.TriangleTopLeft:
+                        case CellPatternKind.TriangleTopRight:
+                        case CellPatternKind.None:
+                            cellForm = (CellFormKind)cellPattern; 
+                            break;
+                        case CellPatternKind.CheckeredRight:
+                            cellForm = ((xya.x ^ xya.y) & 1) == 0 ? CellFormKind.Right : CellFormKind.Left; 
+                            break;
+                        case CellPatternKind.CheckeredLeft:
+                            cellForm = ((xya.x ^ xya.y) & 1) == 0 ? CellFormKind.Left : CellFormKind.Right; 
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException();
+                    }
+                    return CellIndices[cellForm].Select(i => xya.a[i]);
                 });
             return Meshie.Builder(vertices, indices, _materialIndex, true).ToMeshie();
         }
@@ -71,6 +113,32 @@ namespace Silksprite.MeshWeaver.Models.Meshes
             TranslateOnly = 0,
             ApplyX = 1,
             ApplyY = 2
+        }
+
+        public enum CellPatternKind
+        {
+            Default = 0,
+            AllRight = 2,
+            AllLeft = 3,
+            CheckeredRight = 4,
+            CheckeredLeft = 5,
+            TriangleBottomLeft = 128,
+            TriangleBottomRight = 129,
+            TriangleTopLeft = 130,
+            TriangleTopRight = 131,
+            None = -1
+        }
+
+        enum CellFormKind
+        {
+            Default = 0,
+            Right = 2,
+            Left = 3,
+            TriangleBottomLeft = 128,
+            TriangleBottomRight = 129,
+            TriangleTopLeft = 130,
+            TriangleTopRight = 131,
+            None = -1
         }
     }
 }

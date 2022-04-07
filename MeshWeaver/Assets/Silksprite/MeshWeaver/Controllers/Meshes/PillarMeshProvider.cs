@@ -22,6 +22,7 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
         public PathProvider pathProviderY;
 
         public MatrixMeshieFactory.OperatorKind operatorKind = MatrixMeshieFactory.OperatorKind.ApplyX;
+        public MatrixMeshieFactory.CellPatternKind defaultCellPatternKind = MatrixMeshieFactory.CellPatternKind.Default;
         public PillarMeshieFactory.LongitudeAxisKind longitudeAxisKind = PillarMeshieFactory.LongitudeAxisKind.Y;
 
         public IPathieFactory LastPathieX { get; private set; }
@@ -34,6 +35,7 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
             return new PillarMeshieFactory(LastPathieX,
                 LastPathieY,
                 operatorKind,
+                defaultCellPatternKind,
                 longitudeAxisKind,
                 fillBody,
                 fillBottom,
