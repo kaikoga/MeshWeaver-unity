@@ -17,21 +17,33 @@ namespace Silksprite.MeshWeaver.Controllers.Base
         bool _isExpanded;
         bool _isColliderExpanded;
 
+        Meshie _meshie;
+        Meshie _colliderMeshie;
+
+        void OnValidate()
+        {
+            _meshie = null;
+            _colliderMeshie = null;
+        }
+
         public override void OnInspectorGUI()
         {
             var meshProvider = (MeshProvider)target;
             base.OnInspectorGUI();
             
             var factory = meshProvider.LastFactory;
-            var meshie = factory?.Build(GuessCurrentLodMaskLayer());
-            var colliderMeshie = factory?.Build(LodMaskLayer.Collider);
+            if (factory != null)
+            {
+                if (_meshie == null) _meshie = factory.Build(GuessCurrentLodMaskLayer());
+                if (_colliderMeshie == null) _colliderMeshie = factory.Build(LodMaskLayer.Collider);
+            }
 
-            MeshBuilderGUI.DumpFoldout($"Mesh Dump: {meshie}",
+            MeshBuilderGUI.DumpFoldout($"Mesh Dump: {_meshie}",
                 ref _isExpanded,
-                () => meshie?.Dump());
-            MeshBuilderGUI.DumpFoldout($"Collider Mesh Dump: {colliderMeshie}",
+                () => _meshie?.Dump());
+            MeshBuilderGUI.DumpFoldout($"Collider Mesh Dump: {_colliderMeshie}",
                 ref _isColliderExpanded,
-                () => colliderMeshie?.Dump());
+                () => _colliderMeshie?.Dump());
 
             MeshModifierProviderMenus.Menu.ModifierPopup(meshProvider);
 

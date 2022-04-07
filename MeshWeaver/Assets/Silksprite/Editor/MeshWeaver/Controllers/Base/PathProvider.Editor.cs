@@ -16,6 +16,15 @@ namespace Silksprite.MeshWeaver.Controllers.Base
     {
         bool _isExpanded;
         bool _isColliderExpanded;
+        
+        Pathie _pathie;
+        Pathie _colliderPathie;
+
+        void OnValidate()
+        {
+            _pathie = null;
+            _colliderPathie = null;
+        }
 
         public override void OnInspectorGUI()
         {
@@ -23,15 +32,18 @@ namespace Silksprite.MeshWeaver.Controllers.Base
             base.OnInspectorGUI();
 
             var factory = pathProvider.LastFactory;
-            var pathie = factory?.Build(GuessCurrentLodMaskLayer());
-            var colliderPathie = factory?.Build(LodMaskLayer.Collider);
+            if (factory != null)
+            {
+                if (_pathie == null) _pathie = factory.Build(GuessCurrentLodMaskLayer());
+                if (_colliderPathie == null) _colliderPathie = factory.Build(LodMaskLayer.Collider);
+            }
 
-            MeshBuilderGUI.DumpFoldout($"Path Dump: {pathie}",
+            MeshBuilderGUI.DumpFoldout($"Path Dump: {_pathie}",
                 ref _isExpanded,
-                () => pathie?.Dump());
-            MeshBuilderGUI.DumpFoldout($"Collider Path Dump: {colliderPathie}",
+                () => _pathie?.Dump());
+            MeshBuilderGUI.DumpFoldout($"Collider Path Dump: {_colliderPathie}",
                 ref _isColliderExpanded,
-                () => colliderPathie?.Dump());
+                () => _colliderPathie?.Dump());
 
             PathModifierProviderMenus.Menu.ModifierPopup(pathProvider);
 
