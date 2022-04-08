@@ -18,7 +18,7 @@ namespace Silksprite.MeshWeaver.Models.Extensions
 
         public static Mux<TOut> ZipMux<T1, T2, TOut>(this Mux<T1> self, Mux<T2> other, Func<T1, T2, int, TOut> selector)
         {
-            return new Mux<TOut>(self.ZipMuxLayers(other, selector));
+            return Mux<TOut>.FastBuild(self.ZipMuxLayers(other, selector));
         }
 
         static IEnumerable<MuxLayer<TOut>> ZipMuxLayers<T1, T2, TOut>(this Mux<T1> self, Mux<T2> other, Func<T1, T2, int, TOut> selector)
@@ -84,7 +84,7 @@ namespace Silksprite.MeshWeaver.Models.Extensions
 
         public static Mux<TOut> SelectMuxValues<TIn, TOut>(this Mux<TIn> self, Func<TIn, TOut> selector)
         {
-            return new Mux<TOut>(self.Select(layer => new MuxLayer<TOut>(selector(layer.Value), layer.Channel)));
+            return Mux<TOut>.FastBuild(self.Select(layer => new MuxLayer<TOut>(selector(layer.Value), layer.Channel)));
         }
 
         public static Mux<TOut> SelectMux<TIn, TOut>(this Mux<TIn> self, Func<TIn, int, TOut> valueSelector, Func<TIn, int, int> channelSelector)

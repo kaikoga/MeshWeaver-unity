@@ -27,6 +27,38 @@ namespace Silksprite.MeshWeaver.Models
         }
 
         [Test]
+        public void TestShift()
+        {
+            var a = new Mux<string>(new[]
+            {
+                new MuxLayer<string>("z", -1),
+                new MuxLayer<string>("a", 0),
+                new MuxLayer<string>("b", 1),
+                new MuxLayer<string>("c", 2),
+                new MuxLayer<string>("d", 3)
+            });
+            Assert.AreEqual("a", a.Value);
+            Assert.AreEqual("a", a.ValueAt(0));
+            var b = a.Shift(1);
+            var layers = b.ToArray();
+            Assert.AreEqual("z", layers[0].Value);
+            Assert.AreEqual(-2, layers[0].Channel);
+            Assert.AreEqual("a", layers[1].Value);
+            Assert.AreEqual(-1, layers[1].Channel);
+            Assert.AreEqual("b", layers[2].Value);
+            Assert.AreEqual(0, layers[2].Channel);
+            Assert.AreEqual("c", layers[3].Value);
+            Assert.AreEqual(1, layers[3].Channel);
+            Assert.AreEqual("d", layers[4].Value);
+            Assert.AreEqual(2, layers[4].Channel);
+            Assert.AreEqual("a", b.ValueAt(-1));
+            Assert.AreEqual("b", b.ValueAt(0));
+            Assert.AreEqual("b", b.Value);
+            var c = b.Shift(1);
+            Assert.AreEqual("c", c.Value);
+        }
+
+        [Test]
         public void TestZipChannels()
         {
             var a = new Mux<string>(new[]
