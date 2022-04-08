@@ -17,6 +17,7 @@ namespace Silksprite.MeshWeaver.Controllers.Utils
             typeof(MeshSubdivisionProvider),
             typeof(MeshCutoutBoundsProvider),
             typeof(MeshCutoutUvBoundsProvider),
+            typeof(MeshCutoutColliderProvider),
             typeof(void),
             typeof(UvProjectorProvider),
             typeof(UvRemapperProvider),
