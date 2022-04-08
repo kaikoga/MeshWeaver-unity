@@ -11,6 +11,10 @@ namespace Silksprite.MeshWeaver.Models.Extensions
 {
     public static class FactoryExtension
     {
+        public static IMeshieFactory Cached(this IMeshieFactory factory) => new CachedMeshieFactory(factory);
+
+        public static IPathieFactory Cached(this IPathieFactory factory) => new CachedPathieFactory(factory);
+
         public static IMeshieFactory WithModifiers(this IMeshieFactory factory, params IMeshieModifier[] modifiers)
         {
             return modifiers.Aggregate(ModifiedMeshieFactory.Builder(factory), (builder, modifier) => builder.Concat(modifier)).ToFactory();
