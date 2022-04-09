@@ -15,7 +15,7 @@ namespace Silksprite.MeshWeaver.Models.Paths
         public VertexFactory(LodMask lodMask = LodMask.All, bool crease = false, Mux<Vector2> uvs = null)
         {
             _lodMask = lodMask;
-            _crease = false;
+            _crease = crease;
             _uvs = uvs ?? Mux.Empty<Vector2>();
         }
 
