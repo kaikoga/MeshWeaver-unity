@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using Silksprite.MeshWeaver.Models.Extensions;
 using UnityEngine;
@@ -28,7 +29,7 @@ namespace Silksprite.MeshWeaver.Models.Paths.Modifiers
                 return pathie.Modify((vertie, i) => vertie.AddUv(_min + (_max - _min) * i / iMax, _uvChannel));
             }
 
-            var lengths = new [] { 0f }.Concat(pathie.Vertices.Pairwise((a, b) => (b.Vertex - a.Vertex).magnitude).Integral()).ToArray();
+            var lengths = pathie.ToLengths().ToArray();
             var lMax = lengths[lengths.Length - 1];
 
             var vertices = pathie.Vertices.Select((vertie, i) =>

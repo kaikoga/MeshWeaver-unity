@@ -12,6 +12,7 @@ namespace Silksprite.MeshWeaver.Controllers.Utils
             typeof(PolygonMeshProvider),
             typeof(MatrixMeshProvider),
             typeof(PillarMeshProvider),
+            typeof(StitchMeshProvider),
             typeof(void),
             typeof(BakedMeshProvider)
         );

@@ -31,5 +31,16 @@ namespace Silksprite.MeshWeaver.Models.Extensions
                 .Where(abi => !equality(abi.a, abi.b))
                 .Select(abi => abi.i);
         }
+
+        public static IEnumerable<float> ToLengths(this Pathie pathie)
+        {
+            return new [] { 0f }.Concat(pathie.Vertices.Pairwise((a, b) => (b.Vertex - a.Vertex).magnitude).Integral());
+        }
+
+        public static IEnumerable<float> ToProportions(this Pathie pathie)
+        {
+            var lengths = pathie.ToLengths().ToArray();
+            return lengths.Select(v => v / lengths[lengths.Length - 1]);
+        }
     }
 }
