@@ -53,11 +53,8 @@ namespace Silksprite.MeshWeaver.Models.Meshes
                 b++;
             }
             
-            Debug.Log("aa");
-
             while (a < proportionsA.Length - 1 && b < proportionsB.Length - 1)
             {
-                Debug.Log($"{proportionsA[a + 1]}, {proportionsB[b + 1]}");
                 if (proportionsA[a + 1] > proportionsB[b + 1])
                 {
                     NextB();
