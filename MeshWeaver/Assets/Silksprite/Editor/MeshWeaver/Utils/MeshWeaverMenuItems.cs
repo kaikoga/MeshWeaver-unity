@@ -47,6 +47,14 @@ namespace Silksprite.MeshWeaver.Utils
             DoUnityThings(gameObject, menuCommand.context as GameObject);
         }
 
+        static void CreateVertex(Transform parent, Vector3 position, bool crease)
+        {
+            var gameObject = new GameObject("VertexProvider");
+            gameObject.transform.SetParent(parent, false);
+            gameObject.transform.localPosition = position;
+            gameObject.AddComponent<VertexProvider>().crease = crease;
+        }
+
         [MenuItem("GameObject/MeshWeaver/Primitives/Cube", false, 10)]
         public static void CreateCube(MenuCommand menuCommand)
         {
@@ -54,44 +62,25 @@ namespace Silksprite.MeshWeaver.Utils
             var pillar = gameObject.AddComponent<PillarMeshProvider>();
             pillar.fillBottom = true;
             pillar.fillTop = true;
-            var pathX = new GameObject("CompositePathProvider_Path X", typeof(CompositePathProvider));
-            pathX.transform.SetParent(gameObject.transform, false);
-            pillar.pathProviderX = pathX.GetComponent<CompositePathProvider>();
-
-            var x0 = new GameObject("VertexProvider", typeof(VertexProvider));
-            x0.transform.SetParent(pathX.transform, false);
-            x0.transform.localPosition = new Vector3(0, 0, 0);
-
-            var x1 = new GameObject("VertexProvider", typeof(VertexProvider));
-            x1.transform.SetParent(pathX.transform, false);
-            x1.transform.localPosition = new Vector3(1, 0, 0);
-            x1.GetComponent<VertexProvider>().crease = true;
-
-            var x2 = new GameObject("VertexProvider", typeof(VertexProvider));
-            x2.transform.SetParent(pathX.transform, false);
-            x2.transform.localPosition = new Vector3(1, 0, 1);
-            x2.GetComponent<VertexProvider>().crease = true;
-
-            var x3 = new GameObject("VertexProvider", typeof(VertexProvider));
-            x3.transform.SetParent(pathX.transform, false);
-            x3.transform.localPosition = new Vector3(0, 0, 1);
-            x3.GetComponent<VertexProvider>().crease = true;
-
-            var x4 = new GameObject("VertexProvider", typeof(VertexProvider));
-            x4.transform.SetParent(pathX.transform, false);
-            x4.transform.localPosition = new Vector3(0, 0, 0);
-
-            var pathY = new GameObject("CompositePathProvider_Path Y", typeof(CompositePathProvider));
-            pathY.transform.SetParent(gameObject.transform, false);
-            pillar.pathProviderY = pathY.GetComponent<CompositePathProvider>();
-
-            var y0 = new GameObject("VertexProvider", typeof(VertexProvider));
-            y0.transform.SetParent(pathY.transform, false);
-            y0.transform.localPosition = new Vector3(0, 0, 0);
             
-            var y1 = new GameObject("VertexProvider", typeof(VertexProvider));
-            y1.transform.SetParent(pathY.transform, false);
-            y1.transform.localPosition = new Vector3(0, 1, 0);
+            var pathXObject = new GameObject("CompositePathProvider_Path X");
+            var pathX = pathXObject.transform;
+            pathX.SetParent(gameObject.transform, false);
+            pillar.pathProviderX = pathXObject.AddComponent<CompositePathProvider>();
+
+            CreateVertex(pathX, new Vector3(0, 0, 0), false);
+            CreateVertex(pathX, new Vector3(1, 0, 0), true);
+            CreateVertex(pathX, new Vector3(1, 0, 1), true);
+            CreateVertex(pathX, new Vector3(0, 0, 1), true);
+            CreateVertex(pathX, new Vector3(0, 0, 0), false);
+
+            var pathYObject = new GameObject("CompositePathProvider_Path Y");
+            var pathY = pathYObject.transform;
+            pathY.SetParent(gameObject.transform, false);
+            pillar.pathProviderY = pathYObject.AddComponent<CompositePathProvider>();
+
+            CreateVertex(pathY, new Vector3(0, 0, 0), false);
+            CreateVertex(pathY, new Vector3(0, 1, 0), false);
 
             DoUnityThings(gameObject, menuCommand.context as GameObject);
         }
