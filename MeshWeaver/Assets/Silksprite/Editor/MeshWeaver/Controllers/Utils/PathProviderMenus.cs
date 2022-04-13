@@ -18,6 +18,7 @@ namespace Silksprite.MeshWeaver.Controllers.Utils
 
         public static readonly ChildComponentPopupMenu<PathProvider> ElementsMenu = new ChildComponentPopupMenu<PathProvider>
         (
+            typeof(CompositePathProvider),
             typeof(PathReference),
             typeof(void),
             typeof(VertexProvider),

@@ -31,6 +31,13 @@ namespace Silksprite.MeshWeaver.Controllers.Base
             return builder.ToFactory();
         }
 
+        protected static IMeshieFactory CollectMeshie(MeshProvider meshProvider)
+        {
+            if (meshProvider == null) return MeshieFactory.Empty;
+
+            return CompositeMeshieFactory.Builder().Concat(meshProvider.ToFactory(), meshProvider.Translation).ToFactory();
+        }
+
         protected static IMeshieFactory CollectMeshies(IEnumerable<MeshProvider> meshProviders)
         {
             var builder = CompositeMeshieFactory.Builder();
