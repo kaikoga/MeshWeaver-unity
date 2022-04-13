@@ -42,7 +42,7 @@ namespace Silksprite.MeshWeaver.Controllers
             return !meshBehaviour.GetComponent<MeshBehaviourExporter>();
         }
 
-        static void SetupAsMeshRenderer(CustomMeshBehaviour meshBehaviour)
+        public static void SetupAsMeshRenderer(CustomMeshBehaviour meshBehaviour)
         {
             if (!meshBehaviour.GetComponent<MeshFilter>())
             {

@@ -40,7 +40,7 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
                 LastPathieY,
                 operatorKind,
                 defaultCellPatternKind,
-                cellPatternOverrides,
+                cellPatternOverrides ?? new List<MatrixMeshieFactory.CellPatternOverride>(),
                 longitudeAxisKind,
                 reverseLids,
                 fillBody,

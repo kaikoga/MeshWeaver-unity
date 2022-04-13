@@ -22,7 +22,7 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
         {
             LastPathieX = CollectPathie(pathProviderX);
             LastPathieY = CollectPathie(pathProviderY);
-            return new MatrixMeshieFactory(LastPathieX, LastPathieY, operatorKind, defaultCellPatternKind, cellPatternOverrides, materialIndex);
+            return new MatrixMeshieFactory(LastPathieX, LastPathieY, operatorKind, defaultCellPatternKind, cellPatternOverrides ?? new List<MatrixMeshieFactory.CellPatternOverride>(), materialIndex);
         }
     }
 }
