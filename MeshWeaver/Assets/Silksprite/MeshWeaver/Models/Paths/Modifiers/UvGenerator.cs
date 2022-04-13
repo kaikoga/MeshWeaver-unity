@@ -29,7 +29,7 @@ namespace Silksprite.MeshWeaver.Models.Paths.Modifiers
                 return pathie.Modify((vertie, i) => vertie.AddUv(_min + (_max - _min) * i / iMax, _uvChannel));
             }
 
-            var lengths = pathie.ToLengths().ToArray();
+            var lengths = pathie.ToNetLengths().ToArray();
             var lMax = lengths[lengths.Length - 1];
 
             var vertices = pathie.Vertices.Select((vertie, i) =>

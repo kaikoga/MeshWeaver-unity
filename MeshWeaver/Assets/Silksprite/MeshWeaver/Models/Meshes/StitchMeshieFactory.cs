@@ -34,8 +34,8 @@ namespace Silksprite.MeshWeaver.Models.Meshes
             var countB = activeB.Vertices.Count;
             if (countB < 2) return Meshie.Empty();
 
-            var proportionsA = activeA.ToProportions().ToArray();
-            var proportionsB = activeB.ToProportions().ToArray();
+            var proportionsA = activeA.ToNetProportions().ToArray();
+            var proportionsB = activeB.ToNetProportions().ToArray();
 
             var a = 0;
             var b = 0;

@@ -6,8 +6,11 @@ namespace Silksprite.MeshWeaver.Controllers.Paths.Modifiers
 {
     public class PathSubdivisionProvider : PathModifierProviderBase
     {
-        public int count = 2;
+        [Min(1)]
+        public int maxCount = 2;
+        [Min(0f)]
+        public float maxLength = 1f;
 
-        public override IPathieModifier PathieModifier => new PathieSubdivision(count);
+        public override IPathieModifier PathieModifier => new PathSubdivision(maxCount, maxLength);
     }
 }

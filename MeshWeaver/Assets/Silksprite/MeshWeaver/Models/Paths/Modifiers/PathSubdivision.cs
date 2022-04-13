@@ -1,28 +1,32 @@
 using System.Collections.Generic;
 using System.Linq;
 using Silksprite.MeshWeaver.Models.Extensions;
+using UnityEngine;
 
 namespace Silksprite.MeshWeaver.Models.Paths.Modifiers
 {
-    public class PathieSubdivision : IPathieModifier
+    public class PathSubdivision : IPathieModifier
     {
-        readonly int _count;
+        readonly int _maxCount;
+        readonly float _maxLength;
 
-        public PathieSubdivision(int count)
+        public PathSubdivision(int maxCount, float maxLength)
         {
-            _count = count;
+            _maxCount = maxCount;
+            _maxLength = maxLength;
         }
 
         public Pathie Modify(Pathie pathie)
         {
             if (pathie.Vertices.Count <= 1) return pathie;
-            if (_count <= 1) return pathie;
+            if (_maxCount <= 1) return pathie;
 
             IEnumerable<Vertie> SubdivideNextEdge(Vertie a, Vertie b)
             {
-                for (var i = 1; i < _count; i++)
+                var count = _maxLength <= 0 ? _maxCount : Mathf.Clamp(Mathf.CeilToInt((b.Vertex - a.Vertex).magnitude / _maxLength), 1, _maxCount);
+                for (var i = 1; i < count; i++)
                 {
-                    var f = (float)i / _count;
+                    var f = (float)i / count;
                     yield return a * (1 - f) + b * f;
                 }
                 yield return b;

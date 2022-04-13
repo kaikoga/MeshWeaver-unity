@@ -32,14 +32,19 @@ namespace Silksprite.MeshWeaver.Models.Extensions
                 .Select(abi => abi.i);
         }
 
-        public static IEnumerable<float> ToLengths(this Pathie pathie)
+        static IEnumerable<float> ToLengths(this Pathie pathie)
         {
-            return new [] { 0f }.Concat(pathie.Vertices.Pairwise((a, b) => (b.Vertex - a.Vertex).magnitude).Integral());
+            return pathie.Vertices.Pairwise((a, b) => (b.Vertex - a.Vertex).magnitude);
         }
 
-        public static IEnumerable<float> ToProportions(this Pathie pathie)
+        public static IEnumerable<float> ToNetLengths(this Pathie pathie)
         {
-            var lengths = pathie.ToLengths().ToArray();
+            return new [] { 0f }.Concat(pathie.ToLengths().Integral());
+        }
+
+        public static IEnumerable<float> ToNetProportions(this Pathie pathie)
+        {
+            var lengths = pathie.ToNetLengths().ToArray();
             return lengths.Select(v => v / lengths[lengths.Length - 1]);
         }
     }
