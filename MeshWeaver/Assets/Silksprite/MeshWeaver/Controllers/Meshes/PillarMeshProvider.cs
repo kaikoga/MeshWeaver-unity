@@ -27,6 +27,7 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
         public List<MatrixMeshieFactory.CellPatternOverride> cellPatternOverrides;
 
         public PillarMeshieFactory.LongitudeAxisKind longitudeAxisKind = PillarMeshieFactory.LongitudeAxisKind.Y;
+        public bool reverseLids;
 
         public IPathieFactory LastPathieX { get; private set; }
         public IPathieFactory LastPathieY { get; private set; }
@@ -41,6 +42,7 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
                 defaultCellPatternKind,
                 cellPatternOverrides,
                 longitudeAxisKind,
+                reverseLids,
                 fillBody,
                 fillBottom,
                 fillTop,

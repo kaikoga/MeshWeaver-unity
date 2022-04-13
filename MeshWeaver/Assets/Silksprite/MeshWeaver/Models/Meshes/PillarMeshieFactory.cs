@@ -14,6 +14,7 @@ namespace Silksprite.MeshWeaver.Models.Meshes
         readonly MatrixMeshieFactory.CellPatternKind _defaultCellPatternKind;
         readonly List<MatrixMeshieFactory.CellPatternOverride> _cellPatternOverrides;
         readonly LongitudeAxisKind _longitudeAxisKind;
+        readonly bool _reverseLids;
 
         readonly bool _fillBody;
         readonly bool _fillBottom;
@@ -29,7 +30,7 @@ namespace Silksprite.MeshWeaver.Models.Meshes
 
         public PillarMeshieFactory(IPathieFactory pathieX, IPathieFactory pathieY,
             MatrixMeshieFactory.OperatorKind operatorKind, MatrixMeshieFactory.CellPatternKind defaultCellPatternKind, List<MatrixMeshieFactory.CellPatternOverride> cellPatternOverrides,
-            LongitudeAxisKind longitudeAxisKind,
+            LongitudeAxisKind longitudeAxisKind, bool reverseLids,
             bool fillBody, bool fillBottom, bool fillTop,
             int uvChannelBody, int uvChannelBottom, int uvChannelTop,
             int materialIndexBody, int materialIndexBottom, int materialIndexTop)
@@ -40,6 +41,7 @@ namespace Silksprite.MeshWeaver.Models.Meshes
             _defaultCellPatternKind = defaultCellPatternKind;
             _cellPatternOverrides = cellPatternOverrides;
             _longitudeAxisKind = longitudeAxisKind;
+            _reverseLids = reverseLids;
             _fillBody = fillBody;
             _fillBottom = fillBottom;
             _fillTop = fillTop;
@@ -64,11 +66,15 @@ namespace Silksprite.MeshWeaver.Models.Meshes
 
             if (_fillBottom)
             {
-                builder.Concat(new PolygonMeshieFactory2(latitudePathie, _materialIndexBottom).Build(lod), ends.First.Translation, _uvChannelBottom);
+                var bottomMeshie = new PolygonMeshieFactory2(latitudePathie, _materialIndexBottom).Build(lod);
+                if (_reverseLids) bottomMeshie = bottomMeshie.Apply(MeshReverse.BackOnly);
+                builder.Concat(bottomMeshie, ends.First.Translation, _uvChannelBottom);
             }
             if (_fillTop)
             {
-                builder.Concat(new PolygonMeshieFactory2(latitudePathie, _materialIndexTop).Build(lod).Apply(MeshReverse.BackOnly), ends.Last.Translation, _uvChannelTop);
+                var topMeshie = new PolygonMeshieFactory2(latitudePathie, _materialIndexTop).Build(lod);
+                if (!_reverseLids) topMeshie = topMeshie.Apply(MeshReverse.BackOnly);
+                builder.Concat(topMeshie, ends.Last.Translation, _uvChannelTop);
             }
             return builder.ToMeshie();
         }
