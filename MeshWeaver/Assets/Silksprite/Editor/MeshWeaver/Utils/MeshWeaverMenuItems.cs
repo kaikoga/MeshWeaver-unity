@@ -13,6 +13,7 @@ namespace Silksprite.MeshWeaver.Utils
         {
             var gameObject = new GameObject("Mesh Behaviour");
             var meshBehaviour = gameObject.AddComponent<MeshBehaviour>();
+            meshBehaviour.materials = new[] { UnityAssetLocator.DefaultMaterial() };
             meshBehaviour.autoUpdate = true;
 
             DoUnityThings(gameObject, menuCommand.context as GameObject);
@@ -23,6 +24,7 @@ namespace Silksprite.MeshWeaver.Utils
         {
             var gameObject = new GameObject("Mesh Behaviour");
             var meshBehaviour = gameObject.AddComponent<MeshBehaviour>();
+            meshBehaviour.materials = new[] { UnityAssetLocator.DefaultMaterial() };
             meshBehaviour.autoUpdate = true;
             CustomMeshBehaviourEditor.SetupAsMeshRenderer(meshBehaviour);
 
