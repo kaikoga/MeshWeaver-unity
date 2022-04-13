@@ -15,10 +15,10 @@ namespace Silksprite.MeshWeaver.Models.Modifiers.Base
             return result.ToMeshie();
         }
 
-        public Pathie Modify(Pathie meshie)
+        public Pathie Modify(Pathie pathie)
         {
             var result = Pathie.Builder();
-            result.Vertices.AddRange(meshie.Vertices.Select(Modify));
+            result.Vertices.AddRange(Modify(pathie.Vertices));
             return result.ToPathie();
         }
 
