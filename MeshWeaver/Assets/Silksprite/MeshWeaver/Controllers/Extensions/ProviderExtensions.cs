@@ -12,5 +12,13 @@ namespace Silksprite.MeshWeaver.Controllers.Extensions
             gameObject.transform.localPosition = position;
             gameObject.AddComponent<VertexProvider>().crease = crease;
         }
+        
+        public static CompositePathProvider CreateChildPathProvider(this CompositePathProvider parent, Vector3 position = default)
+        {
+            var gameObject = new GameObject("CompositePathProvider");
+            gameObject.transform.SetParent(parent.transform, false);
+            gameObject.transform.localPosition = position;
+            return gameObject.AddComponent<CompositePathProvider>();
+        }
     }
 }
