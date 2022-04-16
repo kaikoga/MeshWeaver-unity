@@ -17,6 +17,7 @@ namespace Silksprite.MeshWeaver.Controllers.Utils
             typeof(PathSubdivisionProvider),
             typeof(PathOptimizeProvider),
             typeof(PathBevelProvider),
+            typeof(PathChainProvider),
             typeof(void),
             typeof(UvGeneratorProvider),
             typeof(UvProjectorProvider),

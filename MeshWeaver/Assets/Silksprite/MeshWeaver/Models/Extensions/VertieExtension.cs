@@ -9,6 +9,11 @@ namespace Silksprite.MeshWeaver.Models.Extensions
             return new Vertie(translation, v.Culled, v.Uvs);
         }
 
+        public static Vertie WithCulled(this Vertie v, bool culled)
+        {
+            return new Vertie(v.Translation, culled, v.Uvs);
+        }
+
         public static Vertie WithUvs(this Vertie v, Mux<Vector2> uvs)
         {
             return new Vertie(v.Translation, v.Culled, uvs);

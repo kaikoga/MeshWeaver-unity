@@ -32,12 +32,7 @@ namespace Silksprite.MeshWeaver.Models.Modifiers
             
             Vertie SimpleModifier(Vertie vertie)
             {
-                var t = m;
-                var v = vertie.Vertex;
-                t.m03 = v.x;
-                t.m13 = v.y;
-                t.m23 = v.z;
-                return vertie.WithTranslation(t);
+                return vertie.WithTranslation(m.WithPosition(vertie.Vertex));
             }
             Vertie Modifier(Vertie vertie)
             {

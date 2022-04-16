@@ -24,7 +24,7 @@ namespace Silksprite.MeshWeaver.Models
 
             Uvs = uvs;
 
-            Vertex = new Vector3(translation.m03, translation.m13, translation.m23);
+            Vertex = translation.GetPosition();
             Uv = Uvs.Value;
         }
 
