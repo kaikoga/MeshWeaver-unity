@@ -6,6 +6,8 @@ namespace Silksprite.MeshWeaver.Controllers.Paths.Modifiers
 {
     public class PathChainProvider : PathModifierProviderBase
     {
-        public override IPathieModifier PathieModifier => new PathChain();
+        public float rolling = 0f;
+
+        public override IPathieModifier PathieModifier => new PathChain(rolling);
     }
 }
