@@ -16,7 +16,8 @@ namespace Silksprite.MeshWeaver.Models.Paths.Modifiers
             var vertices = activeVertices.Pairwise((a, b) =>
                 {
                     var d = b.Vertex - a.Vertex;
-                    var m = Matrix4x4.TRS(a.Vertex, Quaternion.LookRotation(d), new Vector3(1, 1, d.magnitude));
+                    var mag = d.magnitude;
+                    var m = Matrix4x4.TRS(a.Vertex, mag == 0 ? Quaternion.identity : Quaternion.LookRotation(d), new Vector3(1, 1, mag));
                     return new Vertie(m, b.Culled, b.Uvs);
                 }).Concat(Enumerable.Repeat(last, 1));
             return new Pathie(vertices);
