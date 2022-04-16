@@ -183,7 +183,7 @@ namespace Silksprite.MeshWeaver.Utils
             child.CreateVertex(new Vector3(1f, 1f, 0f), false);
             var repeat = child.gameObject.AddComponent<PathRepeatProvider>();
             repeat.count = 8;
-            repeat.fromPath = true;
+            repeat.offsetByPath = true;
             var normalize = child.gameObject.AddComponent<VertwiseNormalizeProvider>();
             normalize.min = new Vector3(0f, 0f, 0f);
             normalize.max = new Vector3(1f, 1f, 1f);

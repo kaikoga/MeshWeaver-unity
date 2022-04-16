@@ -1,6 +1,7 @@
 using Silksprite.MeshWeaver.Controllers.Base.Modifiers;
 using Silksprite.MeshWeaver.Models.Paths.Modifiers;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Silksprite.MeshWeaver.Controllers.Paths.Modifiers
 {
@@ -8,19 +9,19 @@ namespace Silksprite.MeshWeaver.Controllers.Paths.Modifiers
     {
         public int count = 2;
         public Vector3 offset;
-        public VertexProvider referenceTranslation;
-        public bool fromPath = true;
+        public VertexProvider offsetByReference;
+        public bool offsetByPath = true;
 
         Matrix4x4 Translation
         {
             get
             {
                 var translation = Matrix4x4.Translate(offset);
-                if (referenceTranslation) translation = referenceTranslation.Translation * translation;
+                if (offsetByReference) translation = offsetByReference.Translation * translation;
                 return translation;
             }
         }
 
-        public override IPathieModifier PathieModifier => new PathRepeat(count, Translation, fromPath);
+        public override IPathieModifier PathieModifier => new PathRepeat(count, Translation, offsetByPath);
     }
 }

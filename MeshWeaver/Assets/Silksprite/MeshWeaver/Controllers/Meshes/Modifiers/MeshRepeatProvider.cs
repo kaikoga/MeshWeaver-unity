@@ -9,14 +9,14 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes.Modifiers
     {
         public int count = 2;
         public Vector3 offset;
-        public VertexProvider referenceTranslation;
+        public VertexProvider offsetByReference;
        
         Matrix4x4 Translation
         {
             get
             {
                 var translation = Matrix4x4.Translate(offset);
-                if (referenceTranslation) translation = referenceTranslation.Translation * translation;
+                if (offsetByReference) translation = offsetByReference.Translation * translation;
                 return translation;
             }
         }
