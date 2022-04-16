@@ -12,6 +12,7 @@ namespace Silksprite.MeshWeaver.Controllers.Utils
             typeof(VertwiseNormalizeProvider),
             typeof(VertwiseTranslateProvider),
             typeof(VertwiseAlignProvider),
+            typeof(VertwiseResetProvider),
             typeof(void),
             typeof(PathRepeatProvider),
             typeof(PathSubdivisionProvider),
