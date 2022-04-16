@@ -42,6 +42,14 @@ namespace Silksprite.MeshWeaver.Utils
             DoUnityThings(gameObject, menuCommand.context as GameObject);
         }
 
+        [MenuItem("GameObject/MeshWeaver/Empty/Vertex Provider", false, 10)]
+        public static void CreateVertexProvider(MenuCommand menuCommand)
+        {
+            var gameObject = new GameObject("Vertex Provider");
+            gameObject.AddComponent<VertexProvider>();
+            DoUnityThings(gameObject, menuCommand.context as GameObject);
+        }
+
         [MenuItem("GameObject/MeshWeaver/Primitives/Quad XY", false, 10)]
         public static void CreateQuadXY(MenuCommand menuCommand)
         {
