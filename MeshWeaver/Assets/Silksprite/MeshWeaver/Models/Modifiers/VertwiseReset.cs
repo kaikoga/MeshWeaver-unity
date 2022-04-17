@@ -25,7 +25,7 @@ namespace Silksprite.MeshWeaver.Models.Modifiers
             var first = vertices.FirstOrDefault();
             if (first == null) return vertices;
 
-            var m = first.Translation;
+            var m = Matrix4x4.identity;
             var firstPosition = Vector3.zero;
             var firstRotation = Quaternion.identity;
             var firstScale = Vector3.one;
