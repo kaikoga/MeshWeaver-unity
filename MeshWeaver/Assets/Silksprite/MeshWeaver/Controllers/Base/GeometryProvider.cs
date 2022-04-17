@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Silksprite.MeshWeaver.Controllers.Extensions;
 using Silksprite.MeshWeaver.Models;
 using Silksprite.MeshWeaver.Models.Meshes;
 using Silksprite.MeshWeaver.Models.Paths;
@@ -10,7 +11,7 @@ namespace Silksprite.MeshWeaver.Controllers.Base
     [DisallowMultipleComponent]
     public class GeometryProvider : MonoBehaviour
     {
-        public Matrix4x4 Translation => Matrix4x4.TRS(transform.localPosition, transform.localRotation, transform.localScale);
+        public Matrix4x4 Translation => transform.ToLocalMatrix();
 
         protected static IPathieFactory CollectPathie(PathProvider pathProvider)
         {
