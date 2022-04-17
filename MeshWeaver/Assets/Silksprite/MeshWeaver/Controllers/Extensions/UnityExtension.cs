@@ -6,17 +6,13 @@ namespace Silksprite.MeshWeaver.Controllers.Extensions
 {
     public static class UnityEditorExtension
     {
-        public static T AddChildComponent<T>(this Component self, string name = null) where T : Component
-        {
-            var gameObject = new GameObject(name ?? typeof(T).Name);
-            gameObject.transform.SetParent(self.transform, false);
-            return gameObject.AddComponent<T>();
-        }
+        public static T AddChildComponent<T>(this Component self, string name = null) where T : Component => self.AddChildComponent<T>(typeof(T), name);
 
         public static T AddChildComponent<T>(this Component self, Type type, string name = null) where T : Component
         {
             var gameObject = new GameObject(name ?? type.Name);
             gameObject.transform.SetParent(self.transform, false);
+            if (type == typeof(Transform)) return (T)(Component)gameObject.transform;
             return (T)gameObject.AddComponent(type);
         }
 
