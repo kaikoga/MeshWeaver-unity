@@ -11,7 +11,7 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes.Modifiers
         {
             base.OnInspectorGUI();
             var meshRepeatProvider = (MeshRepeatProvider)target;
-            PathProviderMenus.VertexMenu.PropertyField(meshRepeatProvider, "Offset By Reference", ref meshRepeatProvider.offsetByReference);
+            TransformMenus.Menu.PropertyField(meshRepeatProvider, "Offset By Reference", ref meshRepeatProvider.offsetByReference);
         }
     }
 }

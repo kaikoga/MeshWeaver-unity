@@ -1,4 +1,5 @@
 using Silksprite.MeshWeaver.Controllers.Base.Modifiers;
+using Silksprite.MeshWeaver.Controllers.Extensions;
 using Silksprite.MeshWeaver.Controllers.Paths;
 using Silksprite.MeshWeaver.Models.Modifiers;
 using Silksprite.MeshWeaver.Models.Modifiers.Base;
@@ -8,7 +9,7 @@ namespace Silksprite.MeshWeaver.Controllers.Modifiers
 {
     public class UvProjectorProvider : VertwiseModifierProviderBase
     {
-        public VertexProvider referenceTranslation;
+        public Transform referenceTranslation;
         public int uvChannel;
 
         Matrix4x4 Translation
@@ -16,7 +17,7 @@ namespace Silksprite.MeshWeaver.Controllers.Modifiers
             get
             {
                 var translation = Matrix4x4.identity;
-                if (referenceTranslation) translation = referenceTranslation.Translation;
+                if (referenceTranslation) translation = referenceTranslation.ToLocalMatrix();
                 return translation;
             }
         }

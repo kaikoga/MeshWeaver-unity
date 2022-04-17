@@ -1,4 +1,5 @@
 using Silksprite.MeshWeaver.Controllers.Base.Modifiers;
+using Silksprite.MeshWeaver.Controllers.Extensions;
 using Silksprite.MeshWeaver.Controllers.Paths;
 using Silksprite.MeshWeaver.Models.Meshes.Modifiers;
 using UnityEngine;
@@ -9,14 +10,14 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes.Modifiers
     {
         public int count = 2;
         public Vector3 offset;
-        public VertexProvider offsetByReference;
+        public Transform offsetByReference;
        
         Matrix4x4 Translation
         {
             get
             {
                 var translation = Matrix4x4.Translate(offset);
-                if (offsetByReference) translation = offsetByReference.Translation * translation;
+                if (offsetByReference) translation = offsetByReference.ToLocalMatrix() * translation;
                 return translation;
             }
         }

@@ -1,6 +1,7 @@
 using Silksprite.MeshWeaver.Controllers.Base;
 using Silksprite.MeshWeaver.Controllers.Paths;
 using Silksprite.MeshWeaver.Utils;
+using UnityEngine;
 
 namespace Silksprite.MeshWeaver.Controllers.Utils
 {
@@ -26,11 +27,6 @@ namespace Silksprite.MeshWeaver.Controllers.Utils
             typeof(RevolutionPathProvider),
             typeof(void),
             typeof(BakedPathProvider)
-        );
-
-        public static readonly ChildComponentPopupMenu<VertexProvider> VertexMenu = new ChildComponentPopupMenu<VertexProvider>
-        (
-            typeof(VertexProvider)
         );
     }
 }
