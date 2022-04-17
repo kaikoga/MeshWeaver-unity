@@ -7,11 +7,20 @@ namespace Silksprite.MeshWeaver.Models.Modifiers.Base
 {
     public abstract class VertwiseModifierBase : IMeshieModifier, IPathieModifier
     {
+        protected virtual bool ValidateTriangles => false;
+
         public Meshie Modify(Meshie meshie)
         {
             var result = Meshie.Builder();
             result.Vertices.AddRange(Modify(meshie.Vertices));
-            result.Gons.AddRange(meshie.Gons);
+            if (ValidateTriangles)
+            {
+                result.AddTriangles(meshie.Gons);
+            }
+            else
+            {
+                result.Gons.AddRange(meshie.Gons);
+            }
             return result.ToMeshie();
         }
 

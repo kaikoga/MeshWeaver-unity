@@ -9,6 +9,8 @@ namespace Silksprite.MeshWeaver.Models.Modifiers
 {
     public class VertwiseReset : VertwiseModifierBase
     {
+        protected override bool ValidateTriangles => _resetScale;
+
         readonly bool _resetPosition;
         readonly bool _resetRotation;
         readonly bool _resetScale;

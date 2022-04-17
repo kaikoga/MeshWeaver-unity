@@ -9,6 +9,8 @@ namespace Silksprite.MeshWeaver.Models.Modifiers
 {
     public class VertwiseAlign : VertwiseModifierBase
     {
+        protected override bool ValidateTriangles => _alignScale;
+
         readonly bool _alignPosition;
         readonly bool _alignRotation;
         readonly bool _alignScale;

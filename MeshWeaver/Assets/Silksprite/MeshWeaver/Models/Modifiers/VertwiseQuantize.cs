@@ -6,6 +6,8 @@ namespace Silksprite.MeshWeaver.Models.Modifiers
 {
     public class VertwiseQuantize : VertwiseModifierBase
     {
+        protected override bool ValidateTriangles => true;
+
         readonly int _denominator;
 
         public VertwiseQuantize(int denominator)
