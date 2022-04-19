@@ -13,7 +13,13 @@ namespace Silksprite.MeshWeaver.Models
 
         public enum NormalGeneratorKind
         {
-            Default
+            Default = 0,
+            Up = 1,
+            Down = 2,
+            Sphere = 3,
+            Cylinder = 4,
+            Smooth = 64,
+            SmoothHigh = 65,
         }
     }
 }
