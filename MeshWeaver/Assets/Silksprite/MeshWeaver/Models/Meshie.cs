@@ -25,19 +25,9 @@ namespace Silksprite.MeshWeaver.Models
 
         public Meshie(IEnumerable<Vertie> vertices, IEnumerable<Gon> gons) : this(vertices.ToArray(), gons.ToArray()) { }
 
-        public void ExportToMesh(Mesh mesh)
+        public void ExportToMesh(Mesh mesh, MeshExportSettings settings)
         {
-            var subMeshes = _gons.GroupBy(gon => gon.MaterialIndex).OrderBy(group => group.Key).ToArray();
-            mesh.subMeshCount = Math.Max(subMeshes.Length, 1);
-            mesh.SetVertices(_vertices.Select(v => v.Vertex).ToArray());
-            mesh.SetUVs(0, _vertices.Select(v => v.Uv).ToArray());
-            for (var i = 0; i < subMeshes.Length; i++)
-            {
-                mesh.SetTriangles(subMeshes[i].SelectMany(gon => gon.Indices).ToArray(), i);
-            }
-            mesh.RecalculateBounds();
-            mesh.RecalculateNormals();
-            mesh.RecalculateTangents();
+            new MeshExporter(mesh, settings, _vertices, _gons).Export();
         }
 
         public Meshie Apply(IMeshieModifier modifier) => modifier.Modify(this);

@@ -10,6 +10,9 @@ namespace Silksprite.MeshWeaver.Controllers
     {
         public LodMaskLayer lodMaskLayer = LodMaskLayer.LOD0;
         public bool autoUpdate;
+
+        public MeshExportSettings.NormalGeneratorKind exportedNormalGeneratorKind;
+        public float exportedNormalGeneratorAngle;
         
         public Material[] materials;
 
@@ -69,7 +72,7 @@ namespace Silksprite.MeshWeaver.Controllers
         {
             mesh.Clear();
             var meshie = OnPopulateMesh(lodMask);
-            meshie.ExportToMesh(mesh);
+            meshie.ExportToMesh(mesh, new MeshExportSettings(exportedNormalGeneratorKind, exportedNormalGeneratorAngle));
         }
 
         protected virtual Meshie OnPopulateMesh(LodMaskLayer lodMask)

@@ -6,6 +6,11 @@ namespace Silksprite.MeshWeaver.Models.Extensions
 {
     public static class EnumerableExtension
     {
+        public static IEnumerable<IGrouping<TKey, TValue>> RoughlyGroupBy<TKey, TValue>(this IEnumerable<TValue> e, Func<TValue, TKey> keySelector, Func<TKey, TKey, bool> equality)
+        {
+            return e.GroupBy(keySelector);
+        }
+
         public static IEnumerable<float> Integral(this IEnumerable<float> e)
         {
             var value = 0f;
