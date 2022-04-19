@@ -123,7 +123,7 @@ namespace Silksprite.MeshWeaver.Models
                 // vertNormals[triangles[face + 2]] += faceNormal;
             }
             
-            _mesh.SetNormals(_mesh.vertices.Select(v => vertNormals[VertexValueToNormalIndex(v)].normalized).ToArray());
+            _mesh.SetNormals(vertices.Select(v => vertNormals[VertexValueToNormalIndex(v)].normalized).ToArray());
             // _mesh.SetNormals(vertNormals.Select(v => v.normalized).ToArray());
         }
     }
