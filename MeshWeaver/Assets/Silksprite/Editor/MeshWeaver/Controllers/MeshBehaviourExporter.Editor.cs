@@ -16,6 +16,11 @@ namespace Silksprite.MeshWeaver.Controllers
             base.OnInspectorGUI();
             var meshBehaviourExporter = (MeshBehaviourExporter)target;
             var meshBehaviour = meshBehaviourExporter.GetComponent<CustomMeshBehaviour>();
+            if (GUILayout.Button("Copy Materials from MeshBehaviour"))
+            {
+                meshBehaviourExporter.materials = meshBehaviour.materials.ToArray();
+            }
+
             if (GUILayout.Button("Create Mesh Asset"))
             {
                 var projectFilePath = EditorUtility.SaveFilePanelInProject("Export Mesh Asset",  meshBehaviourExporter.gameObject.name, "mesh", "");
