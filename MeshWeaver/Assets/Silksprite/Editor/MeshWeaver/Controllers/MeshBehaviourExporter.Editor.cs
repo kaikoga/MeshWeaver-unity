@@ -122,7 +122,7 @@ namespace Silksprite.MeshWeaver.Controllers
 
             RefreshMeshReferences(AssetDatabase.GetAssetPath(meshBehaviourExporter.outputMesh), meshBehaviourExporter, false);
 
-            var material = meshBehaviourExporter.materials.FirstOrDefault();
+            var materials = meshBehaviourExporter.materials;
 
             var baseName = Path.GetFileNameWithoutExtension(projectFilePath);
             var prefab = new GameObject(baseName);
@@ -132,7 +132,7 @@ namespace Silksprite.MeshWeaver.Controllers
                 var meshFilter = gameObject.AddComponent<MeshFilter>();
                 meshFilter.sharedMesh = mesh;
                 var meshRenderer = gameObject.AddComponent<MeshRenderer>();
-                meshRenderer.sharedMaterial = material;
+                meshRenderer.sharedMaterials = materials;
                 return meshRenderer;
             }
 
