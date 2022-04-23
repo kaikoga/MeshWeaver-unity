@@ -34,8 +34,9 @@ namespace Silksprite.MeshWeaver.Models.Extensions
         public static IEnumerable<T> Dedup<T>(this IEnumerable<T> e, Func<T, T, bool> equality)
         {
             return e.Take(1).Concat(
-                e.Pairwise((a, b) => equality(a, b) ? Enumerable.Empty<T>() : Enumerable.Repeat(b, 1))
-                    .SelectMany(x => x));
+                e.Pairwise((a, b) => (a, b))
+                    .Where(ab => !equality(ab.a, ab.b))
+                    .Select(ab => ab.b));
         }
 
         public static IEnumerable<T> DedupLoop<T>(this IEnumerable<T> e, Func<T, T, bool> equality)
