@@ -26,9 +26,7 @@ namespace Silksprite.MeshWeaver.Models.Modifiers
         {
             var random = new Random(_seed);
             foreach (var vertie in vertices) yield return vertie.WithUvs(
-                vertie.Uvs.SelectMux(
-                    (uv, ch) => ch != _uvChannel ? uv : _base + new Vector2(_range.x * (float)random.NextDouble(), _range.y * (float)random.NextDouble()),
-                    (uv, ch) => ch));
+                vertie.Uvs.WithMuxChannelValue(_uvChannel, uv => uv + _base + new Vector2(_range.x * (float)random.NextDouble(), _range.y * (float)random.NextDouble())));
         }
     }
 }

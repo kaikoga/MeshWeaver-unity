@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using Silksprite.MeshWeaver.Models.Extensions;
 using Silksprite.MeshWeaver.Models.Modifiers.Base;
 using UnityEngine;

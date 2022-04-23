@@ -91,5 +91,12 @@ namespace Silksprite.MeshWeaver.Models.Extensions
         {
             return new Mux<TOut>(self.Select(layer => new MuxLayer<TOut>(valueSelector(layer.Value, layer.Channel), channelSelector(layer.Value, layer.Channel))));
         }
+
+        public static Mux<T> WithMuxChannelValue<T>(this Mux<T> self, int channel, Func<T, T> selector)
+        {
+            return self.SelectMux(
+                (value, ch) => ch != channel ? value : selector(value),
+                (value, ch) => ch);
+        }
     }
 }
