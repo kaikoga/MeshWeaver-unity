@@ -25,7 +25,9 @@ namespace Silksprite.MeshWeaver.Controllers.Utils
             typeof(void),
             typeof(UvProjectorProvider),
             typeof(UvRemapperProvider),
-            typeof(UvChannelRemapperProvider)
+            typeof(UvChannelRemapperProvider),
+            typeof(UvRandomizerProvider),
+            typeof(UvChannelRandomizerProvider)
         );
     }
 }
