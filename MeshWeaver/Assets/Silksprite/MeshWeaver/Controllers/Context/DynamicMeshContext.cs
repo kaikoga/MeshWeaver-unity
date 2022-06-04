@@ -1,11 +1,15 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Silksprite.MeshWeaver.Controllers.Context
 {
     public class DynamicMeshContext : IMeshContext
     {
-        readonly List<Material> _materials = new List<Material>();
+        readonly List<Material> _materials;
+
+        public DynamicMeshContext() => _materials = new List<Material>();
+        public DynamicMeshContext(IEnumerable<Material> materials) => _materials = materials.ToList();
 
         public Material[] ToMaterials() => _materials.ToArray();
 

@@ -79,5 +79,13 @@ namespace Silksprite.MeshWeaver.Controllers
         {
             return Meshie.Empty();
         }
+
+        public void CollectMaterials()
+        {
+            OnCollectMaterials();
+            Compile();
+        }
+
+        protected virtual void OnCollectMaterials() { }
     }
 }

@@ -15,6 +15,11 @@ namespace Silksprite.MeshWeaver.Controllers
             {
                 MeshProviderMenus.Menu.ChildPopup(meshBehaviour);
             }
+
+            if (GUILayout.Button("Collect Materials"))
+            {
+                meshBehaviour.CollectMaterials();
+            }
             if (GUILayout.Button("Compile"))
             {
                 meshBehaviour.Compile();

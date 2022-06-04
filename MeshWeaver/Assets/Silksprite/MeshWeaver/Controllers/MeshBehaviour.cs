@@ -14,5 +14,12 @@ namespace Silksprite.MeshWeaver.Controllers
             var context = new StaticMeshContext(materials);
             return CollectMeshies(context, this.GetComponentsInDirectChildren<MeshProvider>()).Build(lod);
         }
+
+        protected override void OnCollectMaterials()
+        {
+            var context = new DynamicMeshContext(materials);
+            CollectMeshies(context, this.GetComponentsInDirectChildren<MeshProvider>());
+            materials = context.ToMaterials();
+        }
     }
 }
