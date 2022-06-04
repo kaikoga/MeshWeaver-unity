@@ -1,4 +1,5 @@
 using System.Linq;
+using Silksprite.MeshWeaver.Controllers.Context;
 using Silksprite.MeshWeaver.Controllers.Extensions;
 using Silksprite.MeshWeaver.Controllers.Paths;
 using Silksprite.MeshWeaver.Controllers.Utils;
@@ -58,6 +59,16 @@ namespace Silksprite.MeshWeaver.Controllers.Base
                 bakedTransform.localRotation = transform.localRotation;
                 bakedTransform.localScale = transform.localScale;
             }
+        }
+        
+        protected bool HasFrameBounds() => true;
+
+        protected Bounds OnGetFrameBounds()
+        {
+            var pathProvider = (PathProvider)target;
+            var globalVertices = pathProvider.ToFactory().Build(LodMaskLayer.Collider)
+                .Vertices.Select(v => pathProvider.transform.TransformPoint(v.Vertex));
+            return BoundsUtil.CalculateBounds(globalVertices);
         }
     }
 }

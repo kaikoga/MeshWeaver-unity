@@ -62,5 +62,15 @@ namespace Silksprite.MeshWeaver.Controllers.Base
                 bakedTransform.localScale = transform.localScale;
             }
         }
+        
+        protected bool HasFrameBounds() => true;
+
+        protected Bounds OnGetFrameBounds()
+        {
+            var meshProvider = (MeshProvider)target;
+            var globalVertices = meshProvider.ToFactory(NullMeshContext.Instance).Build(LodMaskLayer.Collider)
+                .Vertices.Select(v => meshProvider.transform.TransformPoint(v.Vertex));
+            return BoundsUtil.CalculateBounds(globalVertices);
+        }
     }
 }
