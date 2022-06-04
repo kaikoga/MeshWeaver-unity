@@ -3,6 +3,7 @@ using Silksprite.MeshWeaver.Controllers.Base;
 using Silksprite.MeshWeaver.Controllers.Context;
 using Silksprite.MeshWeaver.Models.Meshes;
 using Silksprite.MeshWeaver.Models.Paths;
+using UnityEngine;
 
 namespace Silksprite.MeshWeaver.Controllers.Meshes
 {
@@ -14,7 +15,7 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
         public MatrixMeshieFactory.CellPatternKind defaultCellPatternKind = MatrixMeshieFactory.CellPatternKind.Default;
         public List<MatrixMeshieFactory.CellPatternOverride> cellPatternOverrides;
 
-        public int materialIndex;
+        public Material material;
 
         public IPathieFactory LastPathieX { get; private set; }
         public IPathieFactory LastPathieY { get; private set; }
@@ -23,7 +24,12 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
         {
             LastPathieX = CollectPathie(pathProviderX);
             LastPathieY = CollectPathie(pathProviderY);
-            return new MatrixMeshieFactory(LastPathieX, LastPathieY, operatorKind, defaultCellPatternKind, cellPatternOverrides ?? new List<MatrixMeshieFactory.CellPatternOverride>(), materialIndex);
+            return new MatrixMeshieFactory(LastPathieX,
+                LastPathieY,
+                operatorKind,
+                defaultCellPatternKind,
+                cellPatternOverrides ?? new List<MatrixMeshieFactory.CellPatternOverride>(),
+                context.GetMaterialIndex(material));
         }
     }
 }

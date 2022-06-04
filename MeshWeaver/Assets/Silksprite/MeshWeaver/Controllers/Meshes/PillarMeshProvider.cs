@@ -3,6 +3,7 @@ using Silksprite.MeshWeaver.Controllers.Base;
 using Silksprite.MeshWeaver.Controllers.Context;
 using Silksprite.MeshWeaver.Models.Meshes;
 using Silksprite.MeshWeaver.Models.Paths;
+using UnityEngine;
 
 namespace Silksprite.MeshWeaver.Controllers.Meshes
 {
@@ -16,9 +17,9 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
         public int uvChannelBottom;
         public int uvChannelTop;
 
-        public int materialIndexBody;
-        public int materialIndexBottom;
-        public int materialIndexTop;
+        public Material materialBody;
+        public Material materialBottom;
+        public Material materialTop;
 
         public PathProvider pathProviderX;
         public PathProvider pathProviderY;
@@ -50,9 +51,9 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
                 uvChannelBody,
                 uvChannelBottom,
                 uvChannelTop,
-                materialIndexBody,
-                materialIndexBottom,
-                materialIndexTop);
+                context.GetMaterialIndex(materialBody),
+                context.GetMaterialIndex(materialBottom),
+                context.GetMaterialIndex(materialTop));
         }
     }
 }
