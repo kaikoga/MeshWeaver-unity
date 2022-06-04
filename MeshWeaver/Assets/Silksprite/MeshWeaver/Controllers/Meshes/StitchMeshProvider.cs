@@ -1,4 +1,5 @@
 using Silksprite.MeshWeaver.Controllers.Base;
+using Silksprite.MeshWeaver.Controllers.Context;
 using Silksprite.MeshWeaver.Models.Meshes;
 using Silksprite.MeshWeaver.Models.Paths;
 
@@ -14,7 +15,7 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
         public IPathieFactory LastPathieA { get; private set; }
         public IPathieFactory LastPathieB { get; private set; }
 
-        protected override IMeshieFactory CreateFactory()
+        protected override IMeshieFactory CreateFactory(IMeshContext context)
         {
             LastPathieA = CollectPathie(pathProviderA);
             LastPathieB = CollectPathie(pathProviderB);

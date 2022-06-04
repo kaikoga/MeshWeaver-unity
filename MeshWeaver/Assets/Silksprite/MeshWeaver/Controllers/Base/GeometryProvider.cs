@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Silksprite.MeshWeaver.Controllers.Context;
 using Silksprite.MeshWeaver.Controllers.Extensions;
 using Silksprite.MeshWeaver.Models;
 using Silksprite.MeshWeaver.Models.Meshes;
@@ -32,20 +33,20 @@ namespace Silksprite.MeshWeaver.Controllers.Base
             return builder.ToFactory();
         }
 
-        protected static IMeshieFactory CollectMeshie(MeshProvider meshProvider)
+        protected static IMeshieFactory CollectMeshie(IMeshContext context, MeshProvider meshProvider)
         {
             if (meshProvider == null) return MeshieFactory.Empty;
 
-            return CompositeMeshieFactory.Builder().Concat(meshProvider.ToFactory(), meshProvider.Translation).ToFactory();
+            return CompositeMeshieFactory.Builder().Concat(meshProvider.ToFactory(context), meshProvider.Translation).ToFactory();
         }
 
-        protected static IMeshieFactory CollectMeshies(IEnumerable<MeshProvider> meshProviders)
+        protected static IMeshieFactory CollectMeshies(IMeshContext context, IEnumerable<MeshProvider> meshProviders)
         {
             var builder = CompositeMeshieFactory.Builder();
 
             foreach (var meshProvider in meshProviders.Where(c => c != null && c.gameObject.activeSelf))
             {
-                builder.Concat(meshProvider.ToFactory(), meshProvider.Translation);
+                builder.Concat(meshProvider.ToFactory(context), meshProvider.Translation);
             }
 
             return builder.ToFactory();
