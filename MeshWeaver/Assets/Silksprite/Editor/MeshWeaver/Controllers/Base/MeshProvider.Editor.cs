@@ -54,7 +54,8 @@ namespace Silksprite.MeshWeaver.Controllers.Base
                 var baked = transform.parent.AddChildComponent<BakedMeshProvider>();
                 var context = new DynamicMeshContext();
                 baked.lodMaskLayers = LodMaskLayers.Values;
-                baked.meshData = LodMaskLayers.Values.Select(lod => MeshieData.FromMeshie(meshProvider.ToFactory(context).Build(lod))).ToArray();
+                baked.meshData = LodMaskLayers.Values.Select(lod => MeshieData.FromMeshie(meshProvider.ToFactory(context).Build(lod), i => i)).ToArray();
+                baked.materials = context.ToMaterials();
                 var bakedTransform = baked.transform;
                 bakedTransform.localPosition = transform.localPosition;
                 bakedTransform.localRotation = transform.localRotation;

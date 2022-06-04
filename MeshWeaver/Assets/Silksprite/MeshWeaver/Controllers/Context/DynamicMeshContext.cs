@@ -11,9 +11,10 @@ namespace Silksprite.MeshWeaver.Controllers.Context
 
         public int GetMaterialIndex(Material material)
         {
+            if (!material) return 0;
+
             var index = _materials.IndexOf(material);
-            if (index >= 0)
-                return index;
+            if (index >= 0) return index;
 
             _materials.Add(material);
             return _materials.Count - 1;
