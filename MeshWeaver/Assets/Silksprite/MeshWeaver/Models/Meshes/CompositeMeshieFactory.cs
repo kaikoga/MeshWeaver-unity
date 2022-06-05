@@ -20,6 +20,8 @@ namespace Silksprite.MeshWeaver.Models.Meshes
             return _children.Aggregate(Meshie.Builder(), (builder, factory) => builder.Concat(factory.MeshieFactory.Build(lod), factory.Translation, 0)).ToMeshie();
         }
 
+        public Pathie Extract(string pathName, LodMaskLayer lod) => Pathie.Empty();
+
         public static CompositeMeshieFactoryBuilder Builder() => new CompositeMeshieFactoryBuilder();
 
         class ChildMeshieFactory

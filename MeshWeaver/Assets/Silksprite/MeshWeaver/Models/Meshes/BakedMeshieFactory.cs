@@ -33,5 +33,7 @@ namespace Silksprite.MeshWeaver.Models.Meshes
 
             return data.ToMeshie(_materialMapping);
         }
+
+        public Pathie Extract(string pathName, LodMaskLayer lod) => Pathie.Empty();
     }
 }

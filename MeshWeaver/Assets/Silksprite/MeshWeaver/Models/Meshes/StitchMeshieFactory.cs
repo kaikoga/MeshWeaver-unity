@@ -1,9 +1,7 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Silksprite.MeshWeaver.Models.Extensions;
 using Silksprite.MeshWeaver.Models.Paths;
-using UnityEngine;
 
 namespace Silksprite.MeshWeaver.Models.Meshes
 {
@@ -71,6 +69,25 @@ namespace Silksprite.MeshWeaver.Models.Meshes
 
 
             return Meshie.Builder(activeA.Vertices.Concat(activeB.Vertices), gons).ToMeshie();
+        }
+
+        public Pathie Extract(string pathName, LodMaskLayer lod)
+        {
+            switch (pathName)
+            {
+                case PathNames.A:
+                    return _pathieA.Build(lod);
+                case PathNames.B:
+                    return _pathieB.Build(lod);
+                default:
+                    return Pathie.Empty();
+            }
+        }
+
+        public static class PathNames
+        {
+            public const string A = "A";
+            public const string B = "B";
         }
     }
 }

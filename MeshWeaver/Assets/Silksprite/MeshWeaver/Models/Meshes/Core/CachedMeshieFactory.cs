@@ -10,5 +10,6 @@ namespace Silksprite.MeshWeaver.Models.Meshes.Core
         public CachedMeshieFactory(IMeshieFactory factory) => _factory = factory;
 
         public Meshie Build(LodMaskLayer lod) => _cache.GetOrAdd(lod, l => _factory.Build(l));
+        public Pathie Extract(string pathName, LodMaskLayer lod) => _factory.Extract(pathName, lod);
     }
 }

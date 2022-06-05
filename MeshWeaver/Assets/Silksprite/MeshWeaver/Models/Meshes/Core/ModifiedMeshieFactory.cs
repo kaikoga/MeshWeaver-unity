@@ -23,6 +23,8 @@ namespace Silksprite.MeshWeaver.Models.Meshes.Core
                 .Aggregate(result, (current, modifier) => modifier.Modifier.Modify(current));
         }
 
+        public Pathie Extract(string pathName, LodMaskLayer lod) => _factory.Extract(pathName, lod);
+
         public static ModifiedMeshieFactoryBuilder Builder(IMeshieFactory factory) => new ModifiedMeshieFactoryBuilder(factory);
 
         class ChildModifier

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Silksprite.MeshWeaver.Models.Extensions;
+using Silksprite.MeshWeaver.Models.Modifiers;
 using Silksprite.MeshWeaver.Models.Paths;
 
 namespace Silksprite.MeshWeaver.Models.Meshes
@@ -115,6 +116,44 @@ namespace Silksprite.MeshWeaver.Models.Meshes
                 });
             return Meshie.Builder(vertices, indices, _materialIndex, true)
                 .ToMeshie(_defaultCellPatternKind == CellPatternKind.None || _cellPatternOverrides.Count > 0);
+        }
+
+        public Pathie Extract(string pathName, LodMaskLayer lod)
+        {
+            Pathie DoExtract(IPathieFactory longitude, IPathieFactory latitude, bool isEnd)
+            {
+                var ends = longitude.Build(lod);
+                var translation = isEnd ? ends.Last : ends.First;
+                return latitude.WithModifiers(new VertwiseTranslate(translation.Translation)).Build(lod);
+            }
+
+            switch (pathName)
+            {
+                case PathNames.XFirst:
+                    return DoExtract(_pathieY, _pathieX, false);
+                case PathNames.XLast:
+                    return DoExtract(_pathieY, _pathieX, true);
+                case PathNames.YFirst:
+                    return DoExtract(_pathieX, _pathieY, false);
+                case PathNames.YLast:
+                    return DoExtract(_pathieX, _pathieY, true);
+                case PathNames.X:
+                    return _pathieX.Build(lod);
+                case PathNames.Y:
+                    return _pathieY.Build(lod);
+                default:
+                    return Pathie.Empty();
+            }
+        }
+
+        public static class PathNames
+        {
+            public const string X = "X";
+            public const string Y = "Y";
+            public const string XFirst = "X.First";
+            public const string XLast = "X.Last";
+            public const string YFirst = "Y.First";
+            public const string YLast = "Y.Last";
         }
 
         public enum OperatorKind

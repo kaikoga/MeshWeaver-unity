@@ -23,6 +23,8 @@ namespace Silksprite.MeshWeaver.Models.Meshes
             return BuildInternal(lod);
         }
 
+        public Pathie Extract(string pathName, LodMaskLayer lod) => _pathie.Build(lod);
+
         readonly List<int> _triangles = new List<int>();
         readonly List<Vector3> _vertices = new List<Vector3>();
         readonly List<bool> _verticesBuffer = new List<bool>();

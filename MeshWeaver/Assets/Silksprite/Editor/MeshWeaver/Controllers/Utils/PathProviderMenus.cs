@@ -10,6 +10,7 @@ namespace Silksprite.MeshWeaver.Controllers.Utils
         public static readonly ChildComponentPopupMenu<PathProvider> CollectionsMenu = new ChildComponentPopupMenu<PathProvider>(
             typeof(CompositePathProvider),
             typeof(PathReference),
+            typeof(ExtractPathProvider),
             typeof(void),
             typeof(ShapePathProvider),
             typeof(RevolutionPathProvider),
@@ -21,6 +22,7 @@ namespace Silksprite.MeshWeaver.Controllers.Utils
         (
             typeof(CompositePathProvider),
             typeof(PathReference),
+            typeof(ExtractPathProvider),
             typeof(void),
             typeof(VertexProvider),
             typeof(ShapePathProvider),

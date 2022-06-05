@@ -24,5 +24,7 @@ namespace Silksprite.MeshWeaver.Models.Meshes
             var gons = Enumerable.Range(1, vertices.Length - 2).Select(i => new Gon(new []{ 0, i, i + 1 }, _materialIndex));
             return Meshie.Builder(vertices, gons, true).ToMeshie();
         }
+
+        public Pathie Extract(string pathName, LodMaskLayer lod) => _pathie.Build(lod);
     }
 }

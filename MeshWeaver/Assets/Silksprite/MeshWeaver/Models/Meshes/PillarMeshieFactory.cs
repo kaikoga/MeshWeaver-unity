@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using Silksprite.MeshWeaver.Models.Extensions;
 using Silksprite.MeshWeaver.Models.Meshes.Modifiers;
+using Silksprite.MeshWeaver.Models.Modifiers;
 using Silksprite.MeshWeaver.Models.Paths;
 using UnityEngine;
 
@@ -78,7 +80,12 @@ namespace Silksprite.MeshWeaver.Models.Meshes
             }
             return builder.ToMeshie();
         }
-        
+
+        public Pathie Extract(string pathName, LodMaskLayer lod)
+        {
+            return new MatrixMeshieFactory(_pathieX, _pathieY, _operatorKind, _defaultCellPatternKind, _cellPatternOverrides, _materialIndexBody).Extract(pathName, lod);
+        }
+
         public enum LongitudeAxisKind
         {
             X = 1,
