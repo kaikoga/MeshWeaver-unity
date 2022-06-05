@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace Silksprite.MeshWeaver.Utils
+namespace Silksprite.MeshWeaver.Models.Utils
 {
     public static class BoundsUtil
     {
@@ -14,8 +14,6 @@ namespace Silksprite.MeshWeaver.Utils
                 bounds.Encapsulate(point);
             }
 
-            var magnitude = bounds.extents.magnitude;
-            if (magnitude < 2f) bounds.Expand(2f - bounds.extents.magnitude);
             return bounds;
         }
     }

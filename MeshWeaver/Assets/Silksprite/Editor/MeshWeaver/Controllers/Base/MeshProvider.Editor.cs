@@ -70,7 +70,7 @@ namespace Silksprite.MeshWeaver.Controllers.Base
             var meshProvider = (MeshProvider)target;
             var globalVertices = meshProvider.ToFactory(NullMeshContext.Instance).Build(LodMaskLayer.Collider)
                 .Vertices.Select(v => meshProvider.transform.TransformPoint(v.Vertex));
-            return BoundsUtil.CalculateBounds(globalVertices);
+            return EditorBoundsUtil.CalculateFrameBounds(globalVertices);
         }
     }
 }
