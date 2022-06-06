@@ -46,7 +46,7 @@ namespace Silksprite.MeshWeaver.Utils
             var uvProjector = pathProvider.gameObject.AddComponent<UvProjectorProvider>();
             uvProjector.uvChannel = uvChannel;
             var reference = new GameObject("ReferenceTranslation");
-            var referenceTransform = reference.AddComponent<Transform>();
+            var referenceTransform = reference.transform;
             referenceTransform.SetParent(uvProjector.transform, false);
             uvProjector.referenceTranslation = referenceTransform;
             return uvProjector;
