@@ -54,14 +54,14 @@ namespace Silksprite.MeshWeaver.Models.Modifiers
                 var bounds = BoundsUtil.CalculateBounds(vertices.Select(v => v.Vertex));
                 var pivot = bounds.min;
                 var size = bounds.size;
-                var invSize = new Vector3(1f / size.x, 1f / size.y, 1f / size.z); 
+                var invSize = new Vector3(size.x == 0f ? 1f : 1f / size.x, size.y == 0f ? 1f : 1f / size.y, size.z == 0f ? 1f : 1f / size.z); 
                 pivot.Scale(invSize);
                 switch (_axis)
                 {
                     case ProjectionAxisKind.XY:
-                        return CreateMatrix(pivot, new Vector3(invSize.x, 0f, 0f), new Vector3(0, invSize.y, 0f));
+                        return CreateMatrix(pivot, new Vector3(invSize.x, 0f, 0f), new Vector3(0f, invSize.y, 0f));
                     case ProjectionAxisKind.XZ:
-                        return CreateMatrix(pivot, new Vector3(invSize.x, 0f, 0f), new Vector3(0, 0f, invSize.z));
+                        return CreateMatrix(pivot, new Vector3(invSize.x, 0f, 0f), new Vector3(0f, 0f, invSize.z));
                     case ProjectionAxisKind.YX:
                         return CreateMatrix(pivot, new Vector3(0f, invSize.y, 0f), new Vector3(invSize.x, 0f, 0f));
                     case ProjectionAxisKind.YZ:
@@ -69,7 +69,7 @@ namespace Silksprite.MeshWeaver.Models.Modifiers
                     case ProjectionAxisKind.ZX:
                         return CreateMatrix(pivot, new Vector3(0f, 0f, invSize.z), new Vector3(invSize.x, 0f, 0f));
                     case ProjectionAxisKind.ZY:
-                        return CreateMatrix(pivot, new Vector3(0f, 0f, invSize.z), new Vector3(0, invSize.y, 0f));
+                        return CreateMatrix(pivot, new Vector3(0f, 0f, invSize.z), new Vector3(0f, invSize.y, 0f));
                     default:
                         return Matrix4x4.identity;
                 }
@@ -80,9 +80,9 @@ namespace Silksprite.MeshWeaver.Models.Modifiers
                 switch (_axis)
                 {
                     case ProjectionAxisKind.XY:
-                        return CreateMatrix(Vector3.zero, new Vector3(1f, 0f, 0f), new Vector3(0, 1f, 0f));
+                        return CreateMatrix(Vector3.zero, new Vector3(1f, 0f, 0f), new Vector3(0f, 1f, 0f));
                     case ProjectionAxisKind.XZ:
-                        return CreateMatrix(Vector3.zero, new Vector3(1f, 0f, 0f), new Vector3(0, 0f, 1f));
+                        return CreateMatrix(Vector3.zero, new Vector3(1f, 0f, 0f), new Vector3(0f, 0f, 1f));
                     case ProjectionAxisKind.YX:
                         return CreateMatrix(Vector3.zero, new Vector3(0f, 1f, 0f), new Vector3(1f, 0f, 0f));
                     case ProjectionAxisKind.YZ:
@@ -90,7 +90,7 @@ namespace Silksprite.MeshWeaver.Models.Modifiers
                     case ProjectionAxisKind.ZX:
                         return CreateMatrix(Vector3.zero, new Vector3(0f, 0f, 1f), new Vector3(1f, 0f, 0f));
                     case ProjectionAxisKind.ZY:
-                        return CreateMatrix(Vector3.zero, new Vector3(0f, 0f, 1f), new Vector3(0, 1f, 0f));
+                        return CreateMatrix(Vector3.zero, new Vector3(0f, 0f, 1f), new Vector3(0f, 1f, 0f));
                     default:
                         return Matrix4x4.identity;
                 }
