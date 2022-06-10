@@ -20,9 +20,23 @@ namespace Silksprite.MeshWeaver.Models
         }
 
         public Vertie First => _vertices.Length > 0 ? _vertices[0] : Vertie.Identity;
-        public Vertie Last => _vertices.Length > 0 ? _vertices[_vertices.Length - 1] : Vertie.Identity;
-        
-        public Vertie Diff => _vertices.Length > 0 ? Last / First : Vertie.Identity;
+        public Vertie Last
+        {
+            get
+            {
+                if (isLoop) return First;
+                return _vertices.Length > 0 ? _vertices[_vertices.Length - 1] : Vertie.Identity;
+            }
+        }
+
+        public Vertie Diff
+        {
+            get
+            {
+                if (isLoop) return Vertie.Identity;
+                return _vertices.Length > 0 ? Last / First : Vertie.Identity;
+            }
+        }
 
         Pathie(Vertie[] vertices, bool isLoop)
         {

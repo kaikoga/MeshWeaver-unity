@@ -27,7 +27,7 @@ namespace Silksprite.MeshWeaver.Models.Paths
         public Pathie Build(LodMaskLayer lod)
         {
             var drs = Enumerable.Range(0, _steps)
-                .Select(i => _min + (_max - _min) * i / (_steps - 1))
+                .Select(i => _min + (_max - _min) * i / (_steps - (_isLoop ? 0 : 1)))
                 .Select(deg => new { deg, rad = deg * Mathf.Deg2Rad });
             IEnumerable<Matrix4x4> mm;
             
