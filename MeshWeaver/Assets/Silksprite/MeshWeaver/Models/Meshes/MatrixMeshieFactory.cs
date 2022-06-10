@@ -53,9 +53,6 @@ namespace Silksprite.MeshWeaver.Models.Meshes
             var countY = activeY.Vertices.Count;
             if (countY < 2) return Meshie.Empty();
 
-            var indicesX = pathieX.ChangingIndices((a, b) => a.TranslationEquals(b, 0f));
-            var indicesY = pathieY.ChangingIndices((a, b) => a.TranslationEquals(b, 0f));
-
             var vertices = activeY.Vertices.SelectMany(pY => activeX.Vertices.Select(pX =>
             {
                 switch (_operatorKind)
@@ -70,13 +67,33 @@ namespace Silksprite.MeshWeaver.Models.Meshes
                         throw new ArgumentOutOfRangeException();
                 }
             }));
-            var indices = indicesY.SelectMany(y =>
+
+            var vertiesXWithIndex = pathieX.Active.Vertices.Select((v, i) => (v, i)).ToList();
+            if (pathieX.isLoop) vertiesXWithIndex.Add(vertiesXWithIndex.First());
+            var indexPairsX = vertiesXWithIndex
+                .Pairwise((a, b) => (a: a.v, b: b.v, i: (a: a.i, b: b.i)))
+                .Where(ab => !ab.a.TranslationEquals(ab.b, 0f))
+                .Select(ab => ab.i);
+
+            var vertiesYWithIndex = pathieY.Active.Vertices.Select((v, i) => (v, i)).ToList();
+            if (pathieY.isLoop) vertiesYWithIndex.Add(vertiesYWithIndex.First());
+            var indexPairsY = vertiesYWithIndex
+                .Pairwise((a, b) => (a: a.v, b: b.v, i: (a: a.i, b: b.i)))
+                .Where(ab => !ab.a.TranslationEquals(ab.b, 0f))
+                .Select(ab => ab.i);
+            
+            var indices = indexPairsY.SelectMany(y =>
                 {
-                    return indicesX.Select(x =>
+                    return indexPairsX.Select(x =>
                     {
-                        var i = x + y * countX;
-                        var a = new[] { i, i + 1, i + countX, i + countX + 1 };
-                        return new { x, y, a };
+                        var a = new[]
+                        {
+                            x.a + y.a * countX,
+                            x.b + y.a * countX,
+                            x.a + y.b * countX,
+                            x.b + y.b * countX 
+                        };
+                        return (x: x.a, y: y.a, a);
                     });
                 }).SelectMany(xya =>
                 {

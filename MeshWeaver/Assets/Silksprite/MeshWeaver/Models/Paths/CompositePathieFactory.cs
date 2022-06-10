@@ -47,10 +47,8 @@ namespace Silksprite.MeshWeaver.Models.Paths
                 return this;
             }
 
-            public CompositePathieFactoryBuilder ConcatVertex(Matrix4x4 translation)
-            {
-                return Concat(VertexFactory.Default, translation);
-            }
+            public CompositePathieFactoryBuilder ConcatVertex(Matrix4x4 translation) => Concat(VertexFactory.Default, translation);
+            public CompositePathieFactoryBuilder ConcatVertex(Vector3 vertex) => Concat(VertexFactory.Default, Matrix4x4.Translate(vertex));
 
             public CompositePathieFactory ToFactory() => new CompositePathieFactory(_children, _isLoop);
         }

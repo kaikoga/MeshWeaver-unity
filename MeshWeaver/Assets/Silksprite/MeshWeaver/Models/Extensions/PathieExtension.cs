@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security;
 
 namespace Silksprite.MeshWeaver.Models.Extensions
 {
@@ -17,19 +18,6 @@ namespace Silksprite.MeshWeaver.Models.Extensions
             if (vertices.Count < 2) return vertices;
             var enumerable = equality(e.First, e.Last) ? vertices.Skip(1) : vertices;
             return enumerable.Dedup(equality);
-        }
-
-        public static IEnumerable<int> ChangingIndices(this Pathie e)
-        {
-            return e.ChangingIndices((a, b) => a.TranslationEquals(b));
-        }
-
-        public static IEnumerable<int> ChangingIndices(this Pathie e, Func<Vertie, Vertie, bool> equality)
-        {
-            return e.Active.Vertices.Pairwise((a, b) => (a, b))
-                .Select((ab, i) => (ab.a, ab.b, i))
-                .Where(abi => !equality(abi.a, abi.b))
-                .Select(abi => abi.i);
         }
 
         static IEnumerable<float> ToLengths(this Pathie pathie)
