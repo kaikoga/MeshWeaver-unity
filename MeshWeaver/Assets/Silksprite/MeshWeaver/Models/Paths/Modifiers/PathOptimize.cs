@@ -17,7 +17,7 @@ namespace Silksprite.MeshWeaver.Models.Paths.Modifiers
             var workVertices = pathie.Vertices.ToArray();
             var verticesCount = workVertices.Length;
 
-            var result = Pathie.Builder();
+            var result = Pathie.Builder(pathie.isLoop);
             for (var i = 0; i < verticesCount; i++)
             {
                 var curr = workVertices[i];

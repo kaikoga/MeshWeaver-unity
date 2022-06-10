@@ -60,7 +60,7 @@ namespace Silksprite.MeshWeaver.Models.Paths.Modifiers
                 yield return Curve(c, b, a, 1f);
             }
 
-            var builder = Pathie.Builder();
+            var builder = Pathie.Builder(pathie.isLoop);
             builder.Vertices.Add(workVertices[0]);
             builder.Vertices.AddRange(workVertices.EachSlidingTrio(Bevel).SelectMany(v => v));
             builder.Vertices.Add(workVertices[workVertices.Length - 1]);

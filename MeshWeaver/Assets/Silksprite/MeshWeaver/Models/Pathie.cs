@@ -8,10 +8,11 @@ namespace Silksprite.MeshWeaver.Models
     public class Pathie
     {
         public IReadOnlyCollection<Vertie> Vertices => _vertices;
+        public readonly bool isLoop;
 
         readonly Vertie[] _vertices;
 
-        public Pathie Active => new Pathie(ActiveVertices());
+        public Pathie Active => new Pathie(ActiveVertices(), isLoop);
 
         IEnumerable<Vertie> ActiveVertices()
         {
@@ -23,20 +24,21 @@ namespace Silksprite.MeshWeaver.Models
         
         public Vertie Diff => _vertices.Length > 0 ? Last / First : Vertie.Identity;
 
-        Pathie(Vertie[] vertices)
+        Pathie(Vertie[] vertices, bool isLoop)
         {
             _vertices = vertices;
+            this.isLoop = isLoop;
         }
 
-        Pathie() : this(Array.Empty<Vertie>()) { }
+        Pathie() : this(Array.Empty<Vertie>(), true) { }
 
-        public Pathie(Vertie soleVertex) : this(new List<Vertie> { soleVertex }) { }
+        public Pathie(Vertie soleVertex) : this(new List<Vertie> { soleVertex }, true) { }
 
-        public Pathie(IEnumerable<Vertie> vertices) : this(vertices.ToArray()) { }
+        public Pathie(IEnumerable<Vertie> vertices, bool isLoop) : this(vertices.ToArray(), isLoop) { }
 
         public Pathie Modify(Func<Vertie, int, Vertie> modifier)
         {
-            var result = new PathieBuilder();
+            var result = new PathieBuilder(isLoop);
             foreach (var (vertie, i) in _vertices.Select((vertie, i) => (vertie, i)))
             {
                 result.Vertices.Add(modifier(vertie, i));
@@ -54,17 +56,17 @@ namespace Silksprite.MeshWeaver.Models
         public string Dump()
         {
             var vertices = string.Join("\n", _vertices.Select(v => v.ToString()));
-            return $"V[{_vertices.Length}]\n{vertices}";
+            return $"V[{_vertices.Length}]{(isLoop ? "L" : "")}\n{vertices}";
         }
         
         public static Pathie Empty() => new Pathie();
 
-        public static PathieBuilder Builder() => new PathieBuilder();
-        public static PathieBuilder Builder(Pathie pathie) => new PathieBuilder(pathie);
+        public static PathieBuilder Builder(bool isLoop) => new PathieBuilder(isLoop);
+        public static PathieBuilder Builder(Pathie pathie, bool isLoop) => new PathieBuilder(pathie, isLoop);
 
-        public static PathieBuilder Builder(IEnumerable<Vertie> vertices)
+        public static PathieBuilder Builder(IEnumerable<Vertie> vertices, bool isLoop)
         {
-            var builder = new PathieBuilder();
+            var builder = new PathieBuilder(isLoop);
             builder.Vertices.AddRange(vertices);
             return builder;
         }

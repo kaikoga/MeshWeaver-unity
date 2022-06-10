@@ -35,7 +35,7 @@ namespace Silksprite.MeshWeaver.Models.Paths.Modifiers
             var active = pathie.Active;
             var vertices = active.Vertices.Take(1)
                 .Concat(active.Vertices.Pairwise(SubdivideNextEdge).SelectMany(v => v));
-            return new Pathie(vertices);
+            return new Pathie(vertices, pathie.isLoop);
         }
     }
 }

@@ -28,8 +28,7 @@ namespace Silksprite.MeshWeaver.Models.Paths
                 if (data == null) return Pathie.Empty();
             }
 
-            var vertices = data.vertices.Select(v => v.ToVertie());
-            return new Pathie(vertices);
+            return data.ToPathie();
         }
     }
 

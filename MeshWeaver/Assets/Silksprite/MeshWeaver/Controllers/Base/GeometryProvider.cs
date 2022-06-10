@@ -4,7 +4,9 @@ using Silksprite.MeshWeaver.Controllers.Context;
 using Silksprite.MeshWeaver.Controllers.Extensions;
 using Silksprite.MeshWeaver.Models;
 using Silksprite.MeshWeaver.Models.Meshes;
+using Silksprite.MeshWeaver.Models.Modifiers;
 using Silksprite.MeshWeaver.Models.Paths;
+using Silksprite.MeshWeaver.Models.Paths.Core;
 using UnityEngine;
 
 namespace Silksprite.MeshWeaver.Controllers.Base
@@ -18,12 +20,12 @@ namespace Silksprite.MeshWeaver.Controllers.Base
         {
             if (pathProvider == null) return PathieFactory.Empty;
 
-            return CompositePathieFactory.Builder().Concat(pathProvider.ToFactory(), pathProvider.Translation).ToFactory();
+            return ModifiedPathieFactory.Builder(pathProvider.ToFactory()).Concat(new VertwiseTranslate(pathProvider.Translation)).ToFactory();
         }
 
-        protected static IPathieFactory CollectPathies(IEnumerable<PathProvider> pathProviders)
+        protected static IPathieFactory CollectPathies(IEnumerable<PathProvider> pathProviders, bool isLoop)
         {
-            var builder = CompositePathieFactory.Builder();
+            var builder = CompositePathieFactory.Builder(isLoop);
             
             foreach (var pathProvider in pathProviders.Where(c => c != null && c.gameObject.activeSelf))
             {

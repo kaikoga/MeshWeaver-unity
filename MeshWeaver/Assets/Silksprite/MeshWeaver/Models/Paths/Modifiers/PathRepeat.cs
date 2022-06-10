@@ -20,7 +20,7 @@ namespace Silksprite.MeshWeaver.Models.Paths.Modifiers
         public Pathie Modify(Pathie pathie)
         {
             if (_count <= 1) return pathie;
-            var builder = Pathie.Builder();
+            var builder = Pathie.Builder(pathie.isLoop);
             var t = Matrix4x4.identity;
             var dt = _fromPath ? pathie.Diff.Translation : _translation; 
             for (var i = 0; i < _count; i++)

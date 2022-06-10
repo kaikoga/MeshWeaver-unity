@@ -12,14 +12,16 @@ namespace Silksprite.MeshWeaver.Models.Paths
         readonly float _radius;
         readonly int _steps;
         readonly Axis _axis;
+        readonly bool _isLoop;
 
-        public RevolutionPathieFactory(float min, float max, float radius, int steps, Axis axis)
+        public RevolutionPathieFactory(float min, float max, float radius, int steps, Axis axis, bool isLoop)
         {
             _min = min;
             _max = max;
             _radius = radius;
             _steps = steps;
             _axis = axis;
+            _isLoop = isLoop;
         }
 
         public Pathie Build(LodMaskLayer lod)
@@ -65,7 +67,7 @@ namespace Silksprite.MeshWeaver.Models.Paths
             }
 
             var vertices = mm.Select(m => new Vertie(m));
-            return new Pathie(vertices);
+            return new Pathie(vertices, _isLoop);
         }
         
         

@@ -28,7 +28,7 @@ namespace Silksprite.MeshWeaver.Models.Paths.Modifiers
                     var m = Matrix4x4.TRS(a.Vertex, mag == 0 ? Quaternion.identity : Quaternion.LookRotation(d) * Quaternion.AngleAxis(_rolling * i, Vector3.forward), new Vector3(1, 1, mag));
                     return new Vertie(m, b.Culled, b.Uvs);
                 }).Concat(Enumerable.Repeat(last, 1));
-            return new Pathie(vertices);
+            return new Pathie(vertices, pathie.isLoop);
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Silksprite.MeshWeaver.Models.Paths.Shapes
                 Vector3.right / 2,
                 Vector3.right
             }.Select(v => new Vertie(v));
-            return new Pathie(vertices);
+            return new Pathie(vertices, false);
         }
     }
 }

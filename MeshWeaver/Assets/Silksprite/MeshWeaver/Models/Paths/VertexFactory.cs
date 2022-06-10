@@ -31,7 +31,7 @@ namespace Silksprite.MeshWeaver.Models.Paths
 
             if (_crease)
             {
-                return new Pathie(CreateVerties());
+                return new Pathie(CreateVerties(), true);
             }
             else
             {

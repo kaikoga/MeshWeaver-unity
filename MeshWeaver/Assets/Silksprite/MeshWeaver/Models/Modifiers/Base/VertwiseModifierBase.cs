@@ -26,7 +26,7 @@ namespace Silksprite.MeshWeaver.Models.Modifiers.Base
 
         public Pathie Modify(Pathie pathie)
         {
-            var result = Pathie.Builder();
+            var result = Pathie.Builder(pathie.isLoop);
             result.Vertices.AddRange(Modify(pathie.Vertices));
             return result.ToPathie();
         }

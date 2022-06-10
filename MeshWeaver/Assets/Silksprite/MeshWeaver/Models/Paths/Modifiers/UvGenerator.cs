@@ -46,7 +46,7 @@ namespace Silksprite.MeshWeaver.Models.Paths.Modifiers
                 var t = ordinal * (1 - _topologicalWeight) + topological * _topologicalWeight;
                 return vertie.AddUv(_min + (_max - _min) * (scale * t), _uvChannel);
             });
-            return new Pathie(vertices);
+            return new Pathie(vertices, pathie.isLoop);
         }
     }
 }
