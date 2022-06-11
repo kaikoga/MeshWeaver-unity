@@ -6,6 +6,7 @@ using Silksprite.MeshWeaver.Controllers.Modifiers;
 using Silksprite.MeshWeaver.Controllers.Paths;
 using Silksprite.MeshWeaver.Controllers.Paths.Modifiers;
 using Silksprite.MeshWeaver.Models.Meshes;
+using Silksprite.MeshWeaver.Models.Modifiers;
 using Silksprite.MeshWeaver.Models.Paths;
 using UnityEngine;
 
@@ -44,11 +45,8 @@ namespace Silksprite.MeshWeaver.Utils
         static UvProjectorProvider AddUvProjectorProvider(PathProvider pathProvider, int uvChannel)
         {
             var uvProjector = pathProvider.gameObject.AddComponent<UvProjectorProvider>();
+            uvProjector.projection = UvProjector.ProjectionKind.Normalized;
             uvProjector.uvChannel = uvChannel;
-            var reference = new GameObject("ReferenceTranslation");
-            var referenceTransform = reference.transform;
-            referenceTransform.SetParent(uvProjector.transform, false);
-            uvProjector.referenceTranslation = referenceTransform;
             return uvProjector;
         }
 
@@ -139,7 +137,8 @@ namespace Silksprite.MeshWeaver.Utils
             pathX.CreateVertex(new Vector3(0f, 0f, 0f), false);
             AddUvGeneratorProvider(pathX, new Vector2(0f, 0f), new Vector2(4f, 0f), 0);
             var uvX2 = AddUvProjectorProvider(pathX, 1);
-            uvX2.referenceTranslation.transform.rotation = Quaternion.Euler(90f, 0f, 0f);
+            uvX2.axisX = UvProjector.ProjectionAxisKind.XPlus;
+            uvX2.axisY = UvProjector.ProjectionAxisKind.ZPlus;
 
             var pathY = pillar.AddChildComponent<CompositePathProvider>("CompositePathProvider_Path Y");
             pillar.pathProviderY = pathY;
@@ -169,6 +168,7 @@ namespace Silksprite.MeshWeaver.Utils
             pathY.max = 180f;
             pathY.radius = 0.5f;
             pathY.steps = 9;
+            pathY.isLoop = false;
             matrix.pathProviderY = pathY;
             AddUvGeneratorProvider(pathY, new Vector2(0f, 1f), new Vector2(0f, 0f), 0);
 
@@ -194,8 +194,8 @@ namespace Silksprite.MeshWeaver.Utils
             pillar.pathProviderX = pathX;
             AddUvGeneratorProvider(pathX, new Vector2(0f, 0f), new Vector2(2f, 0f), 0);
             var uvX2 = AddUvProjectorProvider(pathX, 1);
-            uvX2.referenceTranslation.transform.position = new Vector3(-0.5f, -0.5f, 0f);
-            uvX2.referenceTranslation.transform.rotation = Quaternion.Euler(90f, 0f, 0f);
+            uvX2.axisX = UvProjector.ProjectionAxisKind.XPlus;
+            uvX2.axisY = UvProjector.ProjectionAxisKind.ZPlus;
 
             var pathY = pillar.AddChildComponent<CompositePathProvider>("CompositePathProvider_Path Y");
             pathY.CreateVertex(new Vector3(0f, 0f, 0f), false);
