@@ -7,6 +7,7 @@ namespace Silksprite.MeshWeaver.Controllers.Base
     {
         LodMaskLayer? _lodMaskLayer;
 
+        // FIXME: I think this should be replaced by global editingLodMaskLayer and renderLodMaskLayer 
         protected LodMaskLayer GuessCurrentLodMaskLayer()
         {
             if (!_lodMaskLayer.HasValue)
