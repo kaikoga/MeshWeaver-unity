@@ -3,11 +3,10 @@ using Silksprite.MeshWeaver.Controllers.Base.Modifiers;
 using Silksprite.MeshWeaver.Models;
 using Silksprite.MeshWeaver.Models.Paths;
 using Silksprite.MeshWeaver.Models.Paths.Core;
-using UnityEngine;
 
 namespace Silksprite.MeshWeaver.Controllers.Base
 {
-    public abstract class PathProvider : GeometryProvider
+    public abstract partial class PathProvider : GeometryProvider
     {
         public LodMask lodMask = LodMask.All;
 
@@ -24,10 +23,5 @@ namespace Silksprite.MeshWeaver.Controllers.Base
         }
 
         protected abstract IPathieFactory CreateFactory();
-
-        void OnDrawGizmosSelected()
-        {
-            Gizmos.DrawIcon(transform.position, "curvekeyframeselected", false); // it works!
-        }
     }
 }
