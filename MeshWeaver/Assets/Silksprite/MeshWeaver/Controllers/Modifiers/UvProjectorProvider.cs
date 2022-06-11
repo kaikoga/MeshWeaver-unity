@@ -12,7 +12,7 @@ namespace Silksprite.MeshWeaver.Controllers.Modifiers
         public Transform referenceTranslation;
         public UvProjector.ProjectionAxisKind axisX = UvProjector.ProjectionAxisKind.XPlus;
         public UvProjector.ProjectionAxisKind axisY = UvProjector.ProjectionAxisKind.YPlus;
-        public Rect remapArea = new Rect(0, 0, 1f, 1f);
+        public Rect uvArea = new Rect(0, 0, 1f, 1f);
         public int uvChannel;
 
         Matrix4x4 Translation
@@ -25,6 +25,6 @@ namespace Silksprite.MeshWeaver.Controllers.Modifiers
             }
         }
 
-        protected override VertwiseModifierBase VertwiseModifier => new UvProjector(projection, Translation, axisX, axisY, remapArea, uvChannel);
+        protected override VertwiseModifierBase VertwiseModifier => new UvProjector(projection, Translation, axisX, axisY, uvArea, uvChannel);
     }
 }
