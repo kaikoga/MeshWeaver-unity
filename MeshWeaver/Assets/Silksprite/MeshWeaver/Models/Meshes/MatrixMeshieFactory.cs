@@ -4,6 +4,7 @@ using System.Linq;
 using Silksprite.MeshWeaver.Models.Extensions;
 using Silksprite.MeshWeaver.Models.Modifiers;
 using Silksprite.MeshWeaver.Models.Paths;
+using UnityEngine;
 
 namespace Silksprite.MeshWeaver.Models.Meshes
 {
@@ -101,7 +102,7 @@ namespace Silksprite.MeshWeaver.Models.Meshes
                     {
                         foreach (var o in _cellPatternOverrides)
                         {
-                            if (x >= o.xMin && x <= o.xMax && y >= o.yMin && y <= o.yMax) return o.cellPatternKind;
+                            if (x >= o.cellRange.xMin && x < o.cellRange.xMax && y >= o.cellRange.yMin && y < o.cellRange.yMax) return o.cellPatternKind;
                         }
                         return _defaultCellPatternKind;
                     }
@@ -198,10 +199,7 @@ namespace Silksprite.MeshWeaver.Models.Meshes
         public struct CellPatternOverride
         {
             public CellPatternKind cellPatternKind;
-            public int xMin;
-            public int xMax;
-            public int yMin;
-            public int yMax;
+            public RectInt cellRange;
         }
 
         enum CellFormKind
