@@ -13,7 +13,7 @@ namespace Silksprite.MeshWeaver.Models.Modifiers
         readonly Matrix4x4 _translation;
         readonly ProjectionAxisKind _axisX;
         readonly ProjectionAxisKind _axisY;
-        readonly Rect _remapArea;
+        readonly Rect _uvArea;
         readonly int _uvChannel;
 
         static Vector3 VectorAxis(ProjectionAxisKind axis)
@@ -40,13 +40,13 @@ namespace Silksprite.MeshWeaver.Models.Modifiers
         Vector3 VectorX => VectorAxis(_axisX);
         Vector3 VectorY => VectorAxis(_axisY);
             
-        public UvProjector(ProjectionKind projection, Matrix4x4 translation, ProjectionAxisKind axisX, ProjectionAxisKind axisY, Rect remapArea, int uvChannel)
+        public UvProjector(ProjectionKind projection, Matrix4x4 translation, ProjectionAxisKind axisX, ProjectionAxisKind axisY, Rect uvArea, int uvChannel)
         {
             _projection = projection;
             _translation = translation;
             _axisX = axisX;
             _axisY = axisY;
-            _remapArea = remapArea;
+            _uvArea = uvArea;
             _uvChannel = uvChannel;
         }
 
@@ -56,20 +56,20 @@ namespace Silksprite.MeshWeaver.Models.Modifiers
             {
                 var matrix = new Matrix4x4
                 {
-                    m00 = invOneX.x * _remapArea.width,
-                    m10 = invOneY.x * _remapArea.height,
+                    m00 = invOneX.x * _uvArea.width,
+                    m10 = invOneY.x * _uvArea.height,
                     m20 = 0f,
                     m30 = 0f,
-                    m01 = invOneX.y * _remapArea.width,
-                    m11 = invOneY.y * _remapArea.height,
+                    m01 = invOneX.y * _uvArea.width,
+                    m11 = invOneY.y * _uvArea.height,
                     m21 = 0f,
                     m31 = 0f,
-                    m02 = invOneX.z * _remapArea.width,
-                    m12 = invOneY.z * _remapArea.height,
+                    m02 = invOneX.z * _uvArea.width,
+                    m12 = invOneY.z * _uvArea.height,
                     m22 = 0f,
                     m32 = 0f,
-                    m03 = -pivot.x + _remapArea.x,
-                    m13 = -pivot.y + _remapArea.y,
+                    m03 = -pivot.x + _uvArea.x,
+                    m13 = -pivot.y + _uvArea.y,
                     m23 = -pivot.z,
                     m33 = 1f
                 };

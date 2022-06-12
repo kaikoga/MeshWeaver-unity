@@ -7,9 +7,8 @@ namespace Silksprite.MeshWeaver.Controllers.Modifiers
 {
     public class UvRemapperProvider : VertwiseModifierProviderBase
     {
-        public Vector2 min = Vector2.zero;
-        public Vector2 max = Vector2.one;
+        public Rect uvArea = new Rect(0f, 0f, 1f, 1f);
 
-        protected override VertwiseModifierBase VertwiseModifier => new UvRemapper(min, max);
+        protected override VertwiseModifierBase VertwiseModifier => new UvRemapper(uvArea);
     }
 }

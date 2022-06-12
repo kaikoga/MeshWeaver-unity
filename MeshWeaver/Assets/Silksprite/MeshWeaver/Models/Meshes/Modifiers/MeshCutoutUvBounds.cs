@@ -6,16 +6,14 @@ namespace Silksprite.MeshWeaver.Models.Meshes.Modifiers
 {
     public class MeshCutoutUvBounds : IMeshieModifier
     {
-        readonly Vector2 _min;
-        readonly Vector2 _max;
+        readonly Rect _uvArea;
         readonly int _uvChannel;
         readonly bool _inside;
         readonly int _numVertex;
 
-        public MeshCutoutUvBounds(Vector2 min, Vector2 max, int uvChannel, bool inside, int numVertex)
+        public MeshCutoutUvBounds(Rect uvArea, int uvChannel, bool inside, int numVertex)
         {
-            _min = min;
-            _max = max;
+            _uvArea = uvArea;
             _uvChannel = uvChannel;
             _inside = inside;
             _numVertex = numVertex;
@@ -24,8 +22,9 @@ namespace Silksprite.MeshWeaver.Models.Meshes.Modifiers
         public Meshie Modify(Meshie meshie)
         {
             var vertices = meshie.Vertices.ToArray();
+            var uvArea = _uvArea;
 
-            bool Predicate(Vector2 uv) => _inside ? new Rect(_min, _max).Contains(uv) : !new Rect(_min, _max).Contains(uv);
+            bool Predicate(Vector2 uv) => _inside ? uvArea.Contains(uv) : !uvArea.Contains(uv);
 
             IEnumerable<Gon> gons;
             if (_numVertex == 0)

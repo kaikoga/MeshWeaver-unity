@@ -6,20 +6,18 @@ namespace Silksprite.MeshWeaver.Models.Modifiers
 {
     public class UvChannelRemapper : VertwiseModifierBase
     {
-        readonly Vector2 _min;
-        readonly Vector2 _max;
+        readonly Rect _uvArea;
         readonly int _uvChannel;
 
-        public UvChannelRemapper(Vector2 min, Vector2 max, int uvChannel)
+        public UvChannelRemapper(Rect uvArea, int uvChannel)
         {
-            _min = min;
-            _max = max;
+            _uvArea = uvArea;
             _uvChannel = uvChannel;
         }
 
         protected override Vertie Modify(Vertie vertie)
         {
-            return vertie.WithUvs(vertie.Uvs.WithMuxChannelValue(_uvChannel, uv => _min * (Vector2.one - uv) + (_max - _min) * uv));
+            return vertie.WithUvs(vertie.Uvs.WithMuxChannelValue(_uvChannel, uv => _uvArea.min * (Vector2.one - uv) + _uvArea.size * uv));
         }
     }
 }
