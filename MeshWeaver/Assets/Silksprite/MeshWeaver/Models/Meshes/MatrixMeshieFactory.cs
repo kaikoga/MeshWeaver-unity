@@ -196,10 +196,10 @@ namespace Silksprite.MeshWeaver.Models.Meshes
         }
 
         [Serializable]
-        public struct CellPatternOverride
+        public class CellPatternOverride
         {
             public CellPatternKind cellPatternKind;
-            public RectInt cellRange;
+            public RectInt cellRange = new RectInt(0, 0, 1, 1);
         }
 
         enum CellFormKind
