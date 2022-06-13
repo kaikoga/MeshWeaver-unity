@@ -8,13 +8,11 @@ namespace Silksprite.MeshWeaver.Models.Modifiers
 {
     public class VertwiseNormalize : VertwiseModifierBase
     {
-        readonly Vector3 _min;
-        readonly Vector3 _max;
+        readonly Bounds _bounds;
 
-        public VertwiseNormalize(Vector3 min, Vector3 max)
+        public VertwiseNormalize(Bounds bounds)
         {
-            _min = min;
-            _max = max;
+            _bounds = bounds;
         }
 
         protected override IEnumerable<Vertie> Modify(IEnumerable<Vertie> vertices)
@@ -35,7 +33,7 @@ namespace Silksprite.MeshWeaver.Models.Modifiers
             if (diff.x == 0f) diff.x = 1f;
             if (diff.y == 0f) diff.y = 1f;
             if (diff.z == 0f) diff.z = 1f;
-            var translation = Matrix4x4.Translate(_min) * Matrix4x4.Scale(_max - _min) * Matrix4x4.Scale(diff).inverse * Matrix4x4.Translate(-min);
+            var translation = Matrix4x4.Translate(_bounds.min) * Matrix4x4.Scale(_bounds.size) * Matrix4x4.Scale(diff).inverse * Matrix4x4.Translate(-min);
             
             return verts.Select(v => v.WithTranslation(translation * v.Translation));
         }

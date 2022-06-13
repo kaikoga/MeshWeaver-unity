@@ -228,8 +228,7 @@ namespace Silksprite.MeshWeaver.Utils
             repeat.count = 8;
             repeat.offsetByPath = true;
             var normalize = child.gameObject.AddComponent<VertwiseNormalizeProvider>();
-            normalize.min = new Vector3(0f, 0f, 0f);
-            normalize.max = new Vector3(1f, 1f, 1f);
+            normalize.bounds = new Bounds(new Vector3(0.5f, 0.5f, 0.5f), new Vector3(1f, 1f, 1f));
             pathX.CreateVertex(new Vector3(1f, 1f, 0f), true);
             pathX.CreateVertex(new Vector3(1f, 0f, 0f), true);
             pathX.CreateVertex(new Vector3(0f, 0f, 0f), false);

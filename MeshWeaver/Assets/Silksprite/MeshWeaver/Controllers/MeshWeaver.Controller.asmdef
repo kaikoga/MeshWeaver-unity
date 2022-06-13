@@ -1,7 +1,8 @@
 {
     "name": "MeshWeaver.Controller",
     "references": [
-        "MeshWeaver.Model"
+        "MeshWeaver.Model",
+        "MeshWeaver.CustomDrawers"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

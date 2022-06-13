@@ -2,7 +2,8 @@
     "name": "MeshWeaver.Editor",
     "references": [
         "MeshWeaver.Model",
-        "MeshWeaver.Controller"
+        "MeshWeaver.Controller",
+        "MeshWeaver.CustomDrawers"
     ],
     "includePlatforms": [
         "Editor"
