@@ -38,10 +38,10 @@ namespace Silksprite.MeshWeaver.Controllers.Base
                 if (_colliderPathie == null) _colliderPathie = factory.Build(LodMaskLayer.Collider);
             }
 
-            MeshBuilderGUI.DumpFoldout($"Path Dump: {_pathie}",
+            MeshWeaverGUI.DumpFoldout($"Path Dump: {_pathie}",
                 ref _isExpanded,
                 () => _pathie?.Dump());
-            MeshBuilderGUI.DumpFoldout($"Collider Path Dump: {_colliderPathie}",
+            MeshWeaverGUI.DumpFoldout($"Collider Path Dump: {_colliderPathie}",
                 ref _isColliderExpanded,
                 () => _colliderPathie?.Dump());
 

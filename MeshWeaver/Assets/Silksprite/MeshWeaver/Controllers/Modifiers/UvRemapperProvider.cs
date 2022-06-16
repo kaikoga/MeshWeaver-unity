@@ -8,6 +8,7 @@ namespace Silksprite.MeshWeaver.Controllers.Modifiers
 {
     public class UvRemapperProvider : VertwiseModifierProviderBase
     {
+        [RectCustom]
         public Rect uvArea = new Rect(0f, 0f, 1f, 1f);
 
         protected override VertwiseModifierBase VertwiseModifier => new UvRemapper(uvArea);
