@@ -1,5 +1,6 @@
 using Silksprite.MeshWeaver.Controllers.Base.Modifiers;
 using Silksprite.MeshWeaver.Controllers.Extensions;
+using Silksprite.MeshWeaver.CustomDrawers;
 using Silksprite.MeshWeaver.Models.Modifiers;
 using Silksprite.MeshWeaver.Models.Modifiers.Base;
 using UnityEngine;
@@ -12,6 +13,7 @@ namespace Silksprite.MeshWeaver.Controllers.Modifiers
         public Transform referenceTranslation;
         public UvProjector.ProjectionAxisKind axisX = UvProjector.ProjectionAxisKind.XPlus;
         public UvProjector.ProjectionAxisKind axisY = UvProjector.ProjectionAxisKind.YPlus;
+        [RectCustom]
         public Rect uvArea = new Rect(0, 0, 1f, 1f);
         public int uvChannel;
 
