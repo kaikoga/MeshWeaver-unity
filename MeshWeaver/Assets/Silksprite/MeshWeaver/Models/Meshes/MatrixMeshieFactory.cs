@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Silksprite.MeshWeaver.CustomDrawers;
 using Silksprite.MeshWeaver.Models.Extensions;
 using Silksprite.MeshWeaver.Models.Modifiers;
 using Silksprite.MeshWeaver.Models.Paths;
@@ -199,6 +200,7 @@ namespace Silksprite.MeshWeaver.Models.Meshes
         public class CellPatternOverride
         {
             public CellPatternKind cellPatternKind;
+            [RectIntCustom]
             public RectInt cellRange = new RectInt(0, 0, 1, 1);
         }
 

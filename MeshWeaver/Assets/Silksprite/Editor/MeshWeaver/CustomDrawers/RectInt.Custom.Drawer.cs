@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace Silksprite.MeshWeaver.CustomDrawers
 {
-    [CustomPropertyDrawer(typeof(RectCustomAttribute))]
-    public class RectCustomDrawer : PropertyDrawer
+    [CustomPropertyDrawer(typeof(RectIntCustomAttribute))]
+    public class RectIntCustomDrawer : PropertyDrawer
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
@@ -23,7 +23,7 @@ namespace Silksprite.MeshWeaver.CustomDrawers
                         GUI.Label(new Rect(firstLine.x - 40f, firstLine.y, 40f, firstLine.height), new GUIContent("Min"));
                         GUI.Label(new Rect(secondLine.x - 40f, secondLine.y, 40f, secondLine.height), new GUIContent("Max"));
 
-                        var rect = property.rectValue;
+                        var rectInt = property.rectIntValue;
                         using (var changeCheck = new EditorGUI.ChangeCheckScope())
                         {
                             MeshWeaverGUI.HorizontalPropertyFields(firstLine, new[] { new GUIContent("X"), new GUIContent("Y") }, 12f,
@@ -33,11 +33,11 @@ namespace Silksprite.MeshWeaver.CustomDrawers
                                     {
                                         case 0:
                                             using (new EditorGUI.PropertyScope(pos, null, property.FindPropertyRelative("x")))
-                                                rect.xMin = EditorGUI.FloatField(pos, lbl, rect.xMin);
+                                                rectInt.xMin = EditorGUI.IntField(pos, lbl, rectInt.xMin);
                                             break;
                                         case 1:
                                             using (new EditorGUI.PropertyScope(pos, null, property.FindPropertyRelative("y")))
-                                                rect.yMin = EditorGUI.FloatField(pos, lbl, rect.yMin);
+                                                rectInt.yMin = EditorGUI.IntField(pos, lbl, rectInt.yMin);
                                             break;
                                     }
                                 });
@@ -48,17 +48,17 @@ namespace Silksprite.MeshWeaver.CustomDrawers
                                     {
                                         case 0:
                                             using (new EditorGUI.PropertyScope(pos, null, property.FindPropertyRelative("width")))
-                                                rect.xMax = EditorGUI.FloatField(pos, lbl, rect.xMax);
+                                                rectInt.xMax = EditorGUI.IntField(pos, lbl, rectInt.xMax);
                                             break;
                                         case 1:
                                             using (new EditorGUI.PropertyScope(pos, null, property.FindPropertyRelative("height")))
-                                                rect.yMax = EditorGUI.FloatField(pos, lbl, rect.yMax);
+                                                rectInt.yMax = EditorGUI.IntField(pos, lbl, rectInt.yMax);
                                             break;
                                     }
                                 });
                             if (changeCheck.changed)
                             {
-                                property.rectValue = rect;
+                                property.rectIntValue = rectInt;
                             }
                         }
                     }

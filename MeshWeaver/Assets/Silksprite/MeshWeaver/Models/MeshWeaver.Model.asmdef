@@ -1,3 +1,4 @@
 ﻿{
-	"name": "MeshWeaver.Model"
+	"name": "MeshWeaver.Model",
+	"references":[ "GUID:d094028dbbb2430faf2e25e766a697bc" ]
 }
