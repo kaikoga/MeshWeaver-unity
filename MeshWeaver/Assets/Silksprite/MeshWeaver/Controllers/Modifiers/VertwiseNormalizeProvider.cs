@@ -8,7 +8,7 @@ namespace Silksprite.MeshWeaver.Controllers.Modifiers
 {
     public class VertwiseNormalizeProvider : VertwiseModifierProviderBase
     {
-        [BoundsCustom]
+        [BoundsCustom(true)]
         public Bounds bounds = new Bounds(new Vector3(0.5f, 0.5f, 0.5f), new Vector3(1f, 1f, 1f));
 
         protected override VertwiseModifierBase VertwiseModifier => new VertwiseNormalize(bounds);

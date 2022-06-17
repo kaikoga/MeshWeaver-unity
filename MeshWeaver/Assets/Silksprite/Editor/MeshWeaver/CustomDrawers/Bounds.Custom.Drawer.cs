@@ -9,6 +9,8 @@ namespace Silksprite.MeshWeaver.CustomDrawers
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
+            var preferMinMax = ((BoundsCustomAttribute)attribute).preferMinMax;
+
             using (new EditorGUI.PropertyScope(position, label, property))
             {
                 position = EditorGUI.PrefixLabel(position, label);
@@ -17,8 +19,14 @@ namespace Silksprite.MeshWeaver.CustomDrawers
                     var firstLine = new Rect(position.x, position.y + EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing, position.width, EditorGUIUtility.singleLineHeight);
                     var secondLine = new Rect(position.x, position.y + (EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing) * 2, position.width, EditorGUIUtility.singleLineHeight);
 
-                    property.isExpanded = EditorGUI.ToggleLeft(new Rect(position.xMax - 70f, position.y, 70f, EditorGUIUtility.singleLineHeight), "MinMax", property.isExpanded);
-                    if (property.isExpanded)
+                    var minMax = property.isExpanded != preferMinMax;
+                    using (var changeCheck = new EditorGUI.ChangeCheckScope())
+                    {
+                        minMax = EditorGUI.ToggleLeft(new Rect(position.xMax - 70f, position.y, 70f, EditorGUIUtility.singleLineHeight), "MinMax", minMax);
+                        if (changeCheck.changed) property.isExpanded = minMax != preferMinMax;
+                    }
+
+                    if (minMax)
                     {
                         GUI.Label(new Rect(firstLine.x - 60f, firstLine.y, 60f, firstLine.height), new GUIContent("Min"));
                         GUI.Label(new Rect(secondLine.x - 60f, secondLine.y, 60f, secondLine.height), new GUIContent("Max"));
