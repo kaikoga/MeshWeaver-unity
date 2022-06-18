@@ -8,8 +8,6 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
 {
     public class MeshReference : MeshProvider
     {
-        protected override bool RefreshAlways => true;
-
         public List<MeshProvider> meshProviders = new List<MeshProvider>();
 
         protected override IMeshieFactory CreateFactory(IMeshContext context)

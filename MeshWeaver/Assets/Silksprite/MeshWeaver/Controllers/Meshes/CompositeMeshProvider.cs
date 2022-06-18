@@ -7,8 +7,6 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
 {
     public class CompositeMeshProvider : MeshProvider
     {
-        protected override bool RefreshOnHierarchyChanged => true;
-
         protected override IMeshieFactory CreateFactory(IMeshContext context)
         {
             return this.GetComponentsInDirectChildren<MeshProvider>().CollectMeshies(context);

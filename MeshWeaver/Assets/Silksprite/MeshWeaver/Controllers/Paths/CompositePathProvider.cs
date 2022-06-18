@@ -6,8 +6,6 @@ namespace Silksprite.MeshWeaver.Controllers.Paths
 {
     public class CompositePathProvider : PathProvider
     {
-        protected override bool RefreshOnHierarchyChanged => true;
-
         public bool isLoop;
 
         protected override IPathieFactory CreateFactory()
