@@ -1,6 +1,5 @@
 using Silksprite.MeshWeaver.Controllers.Base.Modifiers;
 using Silksprite.MeshWeaver.Controllers.Extensions;
-using Silksprite.MeshWeaver.Controllers.Paths;
 using Silksprite.MeshWeaver.Models.Meshes.Modifiers;
 using UnityEngine;
 
@@ -23,5 +22,7 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes.Modifiers
         }
 
         protected override IMeshieModifier CreateModifier() => new MeshRepeat(count, Translation);
+
+        protected override void RefreshUnityReferences() => AddUnityReference(offsetByReference);
     }
 }

@@ -24,5 +24,7 @@ namespace Silksprite.MeshWeaver.Controllers.Paths.Modifiers
         }
 
         protected override IPathieModifier CreateModifier() => new PathRepeat(count, Translation, offsetByPath);
+        
+        protected override void RefreshUnityReferences() => AddUnityReference(offsetByReference);
     }
 }

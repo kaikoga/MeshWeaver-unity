@@ -28,5 +28,7 @@ namespace Silksprite.MeshWeaver.Controllers.Modifiers
         }
 
         protected override VertwiseModifierBase CreateModifier() => new UvProjector(projection, Translation, axisX, axisY, uvArea, uvChannel);
+
+        protected override void RefreshUnityReferences() => AddUnityReference(referenceTranslation);
     }
 }

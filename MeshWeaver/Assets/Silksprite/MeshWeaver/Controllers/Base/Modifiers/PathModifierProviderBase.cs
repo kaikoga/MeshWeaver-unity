@@ -2,18 +2,8 @@ using Silksprite.MeshWeaver.Models.Paths.Modifiers;
 
 namespace Silksprite.MeshWeaver.Controllers.Base.Modifiers
 {
-    public abstract class PathModifierProviderBase : ModifierProviderBase, IPathModifierProvider
+    public abstract class PathModifierProviderBase : ModifierProviderBase<IPathieModifier>, IPathModifierProvider
     {
-        IPathieModifier _pathieModifier;
-        public IPathieModifier PathieModifier
-        {
-            get
-            {
-                if (IsDirty()) _pathieModifier = null;
-                return _pathieModifier ?? (_pathieModifier = CreateModifier());
-            }
-        }
-
-        protected abstract IPathieModifier CreateModifier();
+        public IPathieModifier PathieModifier => CachedModifier;
     }
 }

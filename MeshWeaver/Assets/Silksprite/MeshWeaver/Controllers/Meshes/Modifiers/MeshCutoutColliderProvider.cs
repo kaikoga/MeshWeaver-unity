@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Silksprite.MeshWeaver.Controllers.Base.Modifiers;
 using Silksprite.MeshWeaver.Models.Meshes.Modifiers;
 using UnityEngine;
@@ -22,5 +23,7 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes.Modifiers
                 return predicate.ClosestPoint(local) == local;
             }, inside, numVertex);
         }
+
+        protected override void RefreshUnityReferences() => AddUnityReference(predicate);
     }
 }

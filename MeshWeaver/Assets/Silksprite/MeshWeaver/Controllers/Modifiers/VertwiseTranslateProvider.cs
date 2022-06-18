@@ -1,6 +1,5 @@
 using Silksprite.MeshWeaver.Controllers.Base.Modifiers;
 using Silksprite.MeshWeaver.Controllers.Extensions;
-using Silksprite.MeshWeaver.Controllers.Paths;
 using Silksprite.MeshWeaver.Models.Modifiers;
 using Silksprite.MeshWeaver.Models.Modifiers.Base;
 using UnityEngine;
@@ -23,5 +22,7 @@ namespace Silksprite.MeshWeaver.Controllers.Modifiers
         }
 
         protected override VertwiseModifierBase CreateModifier() => new VertwiseTranslate(Translation);
+        
+        protected override void RefreshUnityReferences() => AddUnityReference(referenceTranslation);
     }
 }
