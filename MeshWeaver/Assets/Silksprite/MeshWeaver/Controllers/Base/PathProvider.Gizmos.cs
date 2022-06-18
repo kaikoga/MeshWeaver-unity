@@ -13,18 +13,33 @@ namespace Silksprite.MeshWeaver.Controllers.Base
         void OnDrawGizmos()
         {
             if (!(Selection.activeTransform is Transform activeTransform)) return;
-            if (transform == activeTransform || transform.parent == activeTransform)
+            if (transform == activeTransform)
             {
-                DoDrawGizmos();
+                // DoDrawGizmos(true);
+                return;
+            }
+            if (transform.parent == activeTransform)
+            {
+                DoDrawGizmos(false);
+                return;
             }
             if (!(activeTransform.parent is Transform activeParent)) return;
             if (transform == activeParent || transform.parent == activeParent)
             {
-                DoDrawGizmos();
+                DoDrawGizmos(false);
             }
         }
 
-        void DoDrawGizmos()
+        void OnDrawGizmosSelected()
+        {
+            if (!(Selection.activeTransform is Transform activeTransform)) return;
+            if (transform == activeTransform)
+            {
+                DoDrawGizmos(true);
+            }
+        }
+
+        void DoDrawGizmos(bool selected)
         {
             void DrawPath(Vector3[] vertices, Color color, float width)
             {
@@ -41,12 +56,20 @@ namespace Silksprite.MeshWeaver.Controllers.Base
             Gizmos.matrix = Matrix4x4.identity;
             if (this is VertexProvider)
             {
-                Gizmos.DrawIcon(transform.position, "curvekeyframeweighted", false); // it works!
+                Gizmos.DrawIcon(transform.position, selected ? "curvekeyframeselected" : "curvekeyframeweighted", false);
             }
             else
             {
-                DrawPath(points, Color.black, 5f);
-                DrawPath(points, Color.white, 3f);
+                if (selected)
+                {
+                    DrawPath(points, Color.black, 4f);
+                    DrawPath(points, Color.white, 2f);
+                }
+                else
+                {
+                    DrawPath(points, Color.gray * 0.5f, 3f);
+                    DrawPath(points, Color.gray * 1.5f, 1f);
+                }
             }
         }
     }
