@@ -5,6 +5,7 @@ using UnityEngine;
 namespace Silksprite.MeshWeaver.Controllers
 {
     [CustomEditor(typeof(CustomMeshBehaviour), true, isFallback = true)]
+    [CanEditMultipleObjects]
     public class CustomMeshBehaviourEditor : Editor
     {
         public override void OnInspectorGUI()
