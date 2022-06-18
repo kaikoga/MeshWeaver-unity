@@ -23,7 +23,7 @@ namespace Silksprite.MeshWeaver.Controllers.Base
             return LastFactory;
         }
 
-        protected sealed override IMeshieFactory CreateFactory() => null; // FIXME
+        protected sealed override IMeshieFactory CreateObject(IMeshContext context) => CreateFactory(context);
         protected abstract IMeshieFactory CreateFactory(IMeshContext context);
     }
 

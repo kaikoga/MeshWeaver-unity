@@ -4,9 +4,9 @@ using UnityEngine;
 
 namespace Silksprite.MeshWeaver.Controllers.Context
 {
-    public class DynamicMeshContext : IMeshContext
+    public sealed class DynamicMeshContext : IMeshContext
     {
-        readonly List<Material> _materials;
+        List<Material> _materials;
 
         public DynamicMeshContext() => _materials = new List<Material>();
 
@@ -22,5 +22,7 @@ namespace Silksprite.MeshWeaver.Controllers.Context
             _materials.Add(material);
             return _materials.Count - 1;
         }
+
+        public void Dispose() => _materials = null;
     }
 }

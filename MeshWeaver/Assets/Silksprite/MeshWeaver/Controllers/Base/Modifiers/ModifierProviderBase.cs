@@ -1,3 +1,4 @@
+using Silksprite.MeshWeaver.Controllers.Context;
 using Silksprite.MeshWeaver.Models;
 
 namespace Silksprite.MeshWeaver.Controllers.Base.Modifiers
@@ -19,7 +20,7 @@ namespace Silksprite.MeshWeaver.Controllers.Base.Modifiers
             // The sole reason for this empty method is for showing enabled checkbox
         }
         
-        protected sealed override T CreateObject() => CreateModifier();
+        protected sealed override T CreateObject(IMeshContext context) => CreateModifier();
 
         protected abstract T CreateModifier();
     }

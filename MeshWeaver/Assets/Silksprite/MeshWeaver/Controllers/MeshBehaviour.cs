@@ -11,15 +11,19 @@ namespace Silksprite.MeshWeaver.Controllers
     {
         protected override Meshie OnPopulateMesh(LodMaskLayer lod)
         {
-            var context = new StaticMeshContext(materials);
-            return this.GetComponentsInDirectChildren<MeshProvider>().CollectMeshies(context).Build(lod);
+            using (var context = new StaticMeshContext(materials))
+            {
+                return this.GetComponentsInDirectChildren<MeshProvider>().CollectMeshies(context).Build(lod);
+            }
         }
 
         protected override void OnCollectMaterials()
         {
-            var context = new DynamicMeshContext();
-            this.GetComponentsInDirectChildren<MeshProvider>().CollectMeshies(context);
-            materials = context.ToMaterials();
+            using (var context = new DynamicMeshContext())
+            {
+                this.GetComponentsInDirectChildren<MeshProvider>().CollectMeshies(context);
+                materials = context.ToMaterials();
+            }
         }
     }
 }

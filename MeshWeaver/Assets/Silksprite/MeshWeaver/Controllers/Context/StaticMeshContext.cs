@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace Silksprite.MeshWeaver.Controllers.Context
 {
-    public class StaticMeshContext : IMeshContext
+    public sealed class StaticMeshContext : IMeshContext
     {
-        readonly Material[] _materials;
+        Material[] _materials;
 
         public StaticMeshContext(Material[] materials) => _materials = materials;
 
@@ -14,5 +14,7 @@ namespace Silksprite.MeshWeaver.Controllers.Context
             var index = Array.IndexOf(_materials, material);
             return index >= 0 ? index : 0;
         }
+
+        public void Dispose() => _materials = null;
     }
 }
