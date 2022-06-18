@@ -9,7 +9,7 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
     {
         protected override IMeshieFactory CreateFactory(IMeshContext context)
         {
-            return CollectMeshies(context, this.GetComponentsInDirectChildren<MeshProvider>());
+            return this.GetComponentsInDirectChildren<MeshProvider>().CollectMeshies(context);
         }
     }
 }

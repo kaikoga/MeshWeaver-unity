@@ -10,7 +10,7 @@ namespace Silksprite.MeshWeaver.Controllers.Paths
 
         protected override IPathieFactory CreateFactory()
         {
-            return CollectPathies(this.GetComponentsInDirectChildren<PathProvider>(), isLoop);
+            return this.GetComponentsInDirectChildren<PathProvider>().CollectPathies(isLoop);
         }
     }
 }

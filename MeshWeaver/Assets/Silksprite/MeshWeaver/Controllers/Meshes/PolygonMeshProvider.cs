@@ -1,6 +1,7 @@
 using Silksprite.MeshWeaver.Models;
 using Silksprite.MeshWeaver.Controllers.Base;
 using Silksprite.MeshWeaver.Controllers.Context;
+using Silksprite.MeshWeaver.Controllers.Extensions;
 using Silksprite.MeshWeaver.Models.Meshes;
 using UnityEngine;
 
@@ -14,7 +15,7 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
 
         protected override IMeshieFactory CreateFactory(IMeshContext context)
         {
-            return new PolygonMeshieFactory2(CollectPathie(pathProvider), context.GetMaterialIndex(material));
+            return new PolygonMeshieFactory2(pathProvider.CollectPathie(), context.GetMaterialIndex(material));
         }
     }
 }

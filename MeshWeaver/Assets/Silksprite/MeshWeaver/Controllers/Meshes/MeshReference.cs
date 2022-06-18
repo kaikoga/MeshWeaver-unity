@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Silksprite.MeshWeaver.Controllers.Base;
 using Silksprite.MeshWeaver.Controllers.Context;
+using Silksprite.MeshWeaver.Controllers.Extensions;
 using Silksprite.MeshWeaver.Models.Meshes;
 
 namespace Silksprite.MeshWeaver.Controllers.Meshes
@@ -11,7 +12,7 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
 
         protected override IMeshieFactory CreateFactory(IMeshContext context)
         {
-            return CollectMeshies(context, meshProviders);
+            return meshProviders.CollectMeshies(context);
         }
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Silksprite.MeshWeaver.Controllers.Base;
+using Silksprite.MeshWeaver.Controllers.Extensions;
 using Silksprite.MeshWeaver.Models.Paths;
 
 namespace Silksprite.MeshWeaver.Controllers.Paths
@@ -11,7 +12,7 @@ namespace Silksprite.MeshWeaver.Controllers.Paths
 
         protected override IPathieFactory CreateFactory()
         {
-            return CollectPathies(pathProviders, isLoop);
+            return pathProviders.CollectPathies(isLoop);
         }
     }
 }

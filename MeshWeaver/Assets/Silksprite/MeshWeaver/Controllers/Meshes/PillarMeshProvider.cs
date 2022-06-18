@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Silksprite.MeshWeaver.Controllers.Base;
 using Silksprite.MeshWeaver.Controllers.Context;
+using Silksprite.MeshWeaver.Controllers.Extensions;
 using Silksprite.MeshWeaver.Models.Meshes;
 using Silksprite.MeshWeaver.Models.Paths;
 using UnityEngine;
@@ -36,8 +37,8 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
 
         protected override IMeshieFactory CreateFactory(IMeshContext context)
         {
-            LastPathieX = CollectPathie(pathProviderX);
-            LastPathieY = CollectPathie(pathProviderY);
+            LastPathieX = pathProviderX.CollectPathie();
+            LastPathieY = pathProviderY.CollectPathie();
             return new PillarMeshieFactory(LastPathieX,
                 LastPathieY,
                 operatorKind,

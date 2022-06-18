@@ -1,5 +1,6 @@
 using Silksprite.MeshWeaver.Controllers.Base;
 using Silksprite.MeshWeaver.Controllers.Context;
+using Silksprite.MeshWeaver.Controllers.Extensions;
 using Silksprite.MeshWeaver.Models.Meshes;
 using Silksprite.MeshWeaver.Models.Paths;
 using UnityEngine;
@@ -16,8 +17,8 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
 
         protected override IMeshieFactory CreateFactory(IMeshContext context)
         {
-            LastMeshie = CollectMeshie(context, meshProvider);
-            LastPathie = CollectPathie(pathProvider);
+            LastMeshie = meshProvider.CollectMeshie(context);
+            LastPathie = pathProvider.CollectPathie();
             return new StampMeshieFactory(LastMeshie, LastPathie);
         }
     }
