@@ -1,3 +1,4 @@
+using System.Linq;
 using Silksprite.MeshWeaver.Controllers.Extensions;
 using Silksprite.MeshWeaver.Controllers.Base;
 using Silksprite.MeshWeaver.Controllers.Context;
@@ -9,12 +10,19 @@ namespace Silksprite.MeshWeaver.Controllers
     [ExecuteAlways]
     public class MeshBehaviour : CustomMeshBehaviour
     {
+        StaticMeshContext _staticContext;
+        Material[] _lastMaterials = { };
+
         protected override Meshie OnPopulateMesh(LodMaskLayer lod)
         {
-            using (var context = new StaticMeshContext(materials))
+            if (!_lastMaterials.SequenceEqual(materials))
             {
-                return this.GetComponentsInDirectChildren<MeshProvider>().CollectMeshies(context).Build(lod);
+                _staticContext?.Dispose();
+                _lastMaterials = materials.ToArray();
+                _staticContext = new StaticMeshContext(_lastMaterials);
             }
+
+            return this.GetComponentsInDirectChildren<MeshProvider>().CollectMeshies(_staticContext).Build(lod);
         }
 
         protected override void OnCollectMaterials()
