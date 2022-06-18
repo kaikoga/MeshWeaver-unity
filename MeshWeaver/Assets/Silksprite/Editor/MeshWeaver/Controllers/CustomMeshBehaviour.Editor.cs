@@ -25,6 +25,10 @@ namespace Silksprite.MeshWeaver.Controllers
             {
                 meshBehaviour.Compile();
             }
+            if (GUILayout.Button("Compile All Active"))
+            {
+                foreach (var m in FindObjectsOfType<CustomMeshBehaviour>()) m.Compile();
+            }
             if (HasSetupAsMeshRendererButton(meshBehaviour) && GUILayout.Button("I am Mesh Renderer"))
             {
                 SetupAsMeshRenderer(meshBehaviour);

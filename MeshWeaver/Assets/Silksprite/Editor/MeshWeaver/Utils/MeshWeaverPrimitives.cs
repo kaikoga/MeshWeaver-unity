@@ -19,7 +19,6 @@ namespace Silksprite.MeshWeaver.Utils
             var gameObject = new GameObject("Mesh Behaviour");
             var meshBehaviour = gameObject.AddComponent<MeshBehaviour>();
             meshBehaviour.materials = new[] { UnityAssetLocator.DefaultMaterial() };
-            meshBehaviour.autoUpdate = true;
             if (renderer) CustomMeshBehaviourEditor.SetupAsMeshRenderer(meshBehaviour);
             return meshBehaviour;
         }

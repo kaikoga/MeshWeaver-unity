@@ -1,7 +1,10 @@
 using System.Linq;
-using Silksprite.MeshWeaver.Controllers.Base;
 using Silksprite.MeshWeaver.Models;
 using UnityEngine;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 namespace Silksprite.MeshWeaver.Controllers
 {
@@ -9,7 +12,7 @@ namespace Silksprite.MeshWeaver.Controllers
     public abstract class CustomMeshBehaviour : MonoBehaviour
     {
         public LodMaskLayer lodMaskLayer = LodMaskLayer.LOD0;
-        public bool autoUpdate;
+        public bool updatesEveryFrame;
 
         public MeshExportSettings.NormalGeneratorKind exportedNormalGeneratorKind;
         public float exportedNormalGeneratorAngle;
@@ -24,10 +27,17 @@ namespace Silksprite.MeshWeaver.Controllers
 
         void Update()
         {
-            if (_runtimeMesh == null || autoUpdate)
+            if (_runtimeMesh == null || updatesEveryFrame)
             {
                 Compile();
             }
+#if UNITY_EDITOR
+            else
+            {
+                var activeSelection = Selection.activeTransform; 
+                if (activeSelection && activeSelection.IsChildOf(transform)) Compile();
+            }
+#endif
         }
 
         public void Compile()
