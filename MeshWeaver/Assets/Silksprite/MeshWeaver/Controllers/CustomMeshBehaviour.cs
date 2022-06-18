@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Silksprite.MeshWeaver.Controllers
 {
     [ExecuteAlways]
-    public abstract class CustomMeshBehaviour : GeometryProvider
+    public abstract class CustomMeshBehaviour : MonoBehaviour
     {
         public LodMaskLayer lodMaskLayer = LodMaskLayer.LOD0;
         public bool autoUpdate;

@@ -1,9 +1,10 @@
 using Silksprite.MeshWeaver.Models;
 using UnityEditor;
+using UnityEngine;
 
 namespace Silksprite.MeshWeaver.Controllers.Base
 {
-    public class GeometryProviderEditor : Editor
+    public abstract class GeometryProviderEditor : Editor
     {
         LodMaskLayer? _lodMaskLayer;
 
@@ -12,7 +13,7 @@ namespace Silksprite.MeshWeaver.Controllers.Base
         {
             if (!_lodMaskLayer.HasValue)
             {
-                var geometryProvider = (GeometryProvider)target;
+                var geometryProvider = (MonoBehaviour)target;
                 var meshBehaviour = geometryProvider.GetComponentInParent<CustomMeshBehaviour>();
                 _lodMaskLayer = meshBehaviour != null ? meshBehaviour.lodMaskLayer : LodMaskLayer.LOD0;
             }

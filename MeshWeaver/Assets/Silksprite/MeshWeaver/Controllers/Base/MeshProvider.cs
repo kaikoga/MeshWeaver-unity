@@ -7,7 +7,7 @@ using Silksprite.MeshWeaver.Models.Meshes.Core;
 
 namespace Silksprite.MeshWeaver.Controllers.Base
 {
-    public abstract class MeshProvider : GeometryProvider
+    public abstract class MeshProvider : GeometryProvider<IMeshieFactory>
     {
         public LodMask lodMask = LodMask.All;
 

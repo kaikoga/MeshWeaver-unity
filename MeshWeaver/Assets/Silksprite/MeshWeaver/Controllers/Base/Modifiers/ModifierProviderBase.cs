@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Silksprite.MeshWeaver.Controllers.Base.Modifiers
 {
-    public abstract class ModifierProviderBase<T> : MonoBehaviour
+    public abstract class ModifierProviderBase<T> : ProviderBase<T>
     where T : class
     {
         public LodMask lodMask = LodMask.All;

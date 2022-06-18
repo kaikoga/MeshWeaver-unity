@@ -6,7 +6,7 @@ using Silksprite.MeshWeaver.Models.Paths.Core;
 
 namespace Silksprite.MeshWeaver.Controllers.Base
 {
-    public abstract partial class PathProvider : GeometryProvider
+    public abstract partial class PathProvider : GeometryProvider<IPathieFactory>
     {
         public LodMask lodMask = LodMask.All;
 

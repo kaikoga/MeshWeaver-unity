@@ -2,8 +2,7 @@ using UnityEngine;
 
 namespace Silksprite.MeshWeaver.Controllers.Base
 {
-    [DisallowMultipleComponent]
-    public class GeometryProvider<T> : ProviderBase<T>
+    public class ProviderBase<T> : MonoBehaviour
     where T : class
     {
     }
