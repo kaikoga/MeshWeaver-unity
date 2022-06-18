@@ -10,6 +10,6 @@ namespace Silksprite.MeshWeaver.Controllers.Modifiers
         public bool resetRotation = true;
         public bool resetScale = true;
 
-        protected override VertwiseModifierBase VertwiseModifier => new VertwiseReset(resetPosition, resetRotation, resetScale);
+        protected override VertwiseModifierBase CreateModifier() => new VertwiseReset(resetPosition, resetRotation, resetScale);
     }
 }

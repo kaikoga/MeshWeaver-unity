@@ -9,6 +9,16 @@ namespace Silksprite.MeshWeaver.Controllers.Base.Modifiers
         public IMeshieModifier MeshieModifier => VertwiseModifier;
         public IPathieModifier PathieModifier => VertwiseModifier;
 
-        protected abstract VertwiseModifierBase VertwiseModifier { get; }
+        VertwiseModifierBase _vertwiseModifier;
+        VertwiseModifierBase VertwiseModifier
+        {
+            get
+            {
+                if (IsDirty()) _vertwiseModifier = null;
+                return _vertwiseModifier ?? (_vertwiseModifier = CreateModifier());
+            }
+        }
+
+        protected abstract VertwiseModifierBase CreateModifier();
     }
 }

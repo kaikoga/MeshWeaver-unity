@@ -8,6 +8,6 @@ namespace Silksprite.MeshWeaver.Controllers.Paths.Modifiers
     {
         public float rolling = 0f;
 
-        public override IPathieModifier PathieModifier => new PathChain(rolling);
+        protected override IPathieModifier CreateModifier() => new PathChain(rolling);
     }
 }

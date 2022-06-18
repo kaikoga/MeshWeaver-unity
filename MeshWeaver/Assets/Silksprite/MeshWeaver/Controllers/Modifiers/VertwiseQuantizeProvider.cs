@@ -10,6 +10,6 @@ namespace Silksprite.MeshWeaver.Controllers.Modifiers
         [Min(1)]
         public int denominator = 1;
 
-        protected override VertwiseModifierBase VertwiseModifier => new VertwiseQuantize(denominator);
+        protected override VertwiseModifierBase CreateModifier() => new VertwiseQuantize(denominator);
     }
 }

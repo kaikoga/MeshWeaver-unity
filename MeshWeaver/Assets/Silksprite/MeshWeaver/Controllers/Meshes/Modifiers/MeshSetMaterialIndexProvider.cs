@@ -7,6 +7,6 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes.Modifiers
     {
         public int materialIndex;
 
-        public override IMeshieModifier MeshieModifier => new MeshSetMaterialIndex(materialIndex);
+        protected override IMeshieModifier CreateModifier() => new MeshSetMaterialIndex(materialIndex);
     }
 }

@@ -23,6 +23,6 @@ namespace Silksprite.MeshWeaver.Controllers.Paths.Modifiers
             }
         }
 
-        public override IPathieModifier PathieModifier => new PathRepeat(count, Translation, offsetByPath);
+        protected override IPathieModifier CreateModifier() => new PathRepeat(count, Translation, offsetByPath);
     }
 }

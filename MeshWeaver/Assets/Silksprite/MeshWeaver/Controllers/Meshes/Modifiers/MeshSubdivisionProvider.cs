@@ -7,6 +7,6 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes.Modifiers
     {
         public int count = 1;
 
-        public override IMeshieModifier MeshieModifier => new MeshSubdivision(count);
+        protected override IMeshieModifier CreateModifier() => new MeshSubdivision(count);
     }
 }

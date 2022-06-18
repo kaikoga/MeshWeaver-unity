@@ -10,6 +10,6 @@ namespace Silksprite.MeshWeaver.Controllers.Modifiers
         public bool alignRotation = true;
         public bool alignScale = true;
 
-        protected override VertwiseModifierBase VertwiseModifier => new VertwiseAlign(alignPosition, alignRotation, alignScale);
+        protected override VertwiseModifierBase CreateModifier() => new VertwiseAlign(alignPosition, alignRotation, alignScale);
     }
 }

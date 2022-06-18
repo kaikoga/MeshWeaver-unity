@@ -18,5 +18,7 @@ namespace Silksprite.MeshWeaver.Controllers.Base.Modifiers
         {
             // The sole reason for this empty method is for showing enabled checkbox
         }
+
+        protected bool IsDirty() => true;
     }
 }

@@ -11,6 +11,6 @@ namespace Silksprite.MeshWeaver.Controllers.Modifiers
         public Vector2 range = Vector2.one;
         public int seed;
 
-        protected override VertwiseModifierBase VertwiseModifier => new UvRandomizer(@base, range, seed);
+        protected override VertwiseModifierBase CreateModifier() => new UvRandomizer(@base, range, seed);
     }
 }

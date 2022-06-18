@@ -27,6 +27,6 @@ namespace Silksprite.MeshWeaver.Controllers.Modifiers
             }
         }
 
-        protected override VertwiseModifierBase VertwiseModifier => new UvProjector(projection, Translation, axisX, axisY, uvArea, uvChannel);
+        protected override VertwiseModifierBase CreateModifier() => new UvProjector(projection, Translation, axisX, axisY, uvArea, uvChannel);
     }
 }

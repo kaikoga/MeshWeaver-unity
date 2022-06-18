@@ -22,6 +22,6 @@ namespace Silksprite.MeshWeaver.Controllers.Modifiers
             }
         }
 
-        protected override VertwiseModifierBase VertwiseModifier => new VertwiseTranslate(Translation);
+        protected override VertwiseModifierBase CreateModifier() => new VertwiseTranslate(Translation);
     }
 }

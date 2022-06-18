@@ -8,6 +8,6 @@ namespace Silksprite.MeshWeaver.Controllers.Paths.Modifiers
 {
     public class PathReverseProvider : PathModifierProviderBase
     {
-        public override IPathieModifier PathieModifier => new PathReverse();
+        protected override IPathieModifier CreateModifier() => new PathReverse();
     }
 }

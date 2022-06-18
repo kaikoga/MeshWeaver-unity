@@ -13,6 +13,6 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes.Modifiers
         [Range(0, 3)]
         public int numVertex = 1;
 
-        public override IMeshieModifier MeshieModifier => new MeshCutoutBounds(bounds, inside, numVertex);
+        protected override IMeshieModifier CreateModifier() => new MeshCutoutBounds(bounds, inside, numVertex);
     }
 }

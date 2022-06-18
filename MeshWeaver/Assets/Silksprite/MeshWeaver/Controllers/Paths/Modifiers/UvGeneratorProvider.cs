@@ -13,6 +13,6 @@ namespace Silksprite.MeshWeaver.Controllers.Paths.Modifiers
         public float topologicalWeight;
         public int uvChannel;
 
-        public override IPathieModifier PathieModifier => new UvGenerator(uvArea, absoluteScale, topologicalWeight, uvChannel);
+        protected override IPathieModifier CreateModifier() => new UvGenerator(uvArea, absoluteScale, topologicalWeight, uvChannel);
     }
 }

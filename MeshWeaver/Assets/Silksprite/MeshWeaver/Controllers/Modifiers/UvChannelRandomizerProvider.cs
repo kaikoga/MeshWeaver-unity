@@ -12,6 +12,6 @@ namespace Silksprite.MeshWeaver.Controllers.Modifiers
         public int seed;
         public int uvChannel;
 
-        protected override VertwiseModifierBase VertwiseModifier => new UvChannelRandomizer(@base, range, seed, uvChannel);
+        protected override VertwiseModifierBase CreateModifier() => new UvChannelRandomizer(@base, range, seed, uvChannel);
     }
 }

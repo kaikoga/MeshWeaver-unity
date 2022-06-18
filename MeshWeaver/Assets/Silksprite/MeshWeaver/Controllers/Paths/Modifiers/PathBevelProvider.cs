@@ -13,6 +13,6 @@ namespace Silksprite.MeshWeaver.Controllers.Paths.Modifiers
         [Range(-1f, 1f)]
         public float strength = 0.5f;
 
-        public override IPathieModifier PathieModifier => new PathBevel(subdivision, size, strength);
+        protected override IPathieModifier CreateModifier() => new PathBevel(subdivision, size, strength);
     }
 }

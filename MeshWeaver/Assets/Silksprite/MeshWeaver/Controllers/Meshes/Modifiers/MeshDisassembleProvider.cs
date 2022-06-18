@@ -7,6 +7,6 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes.Modifiers
 {
     public class MeshDisassembleProvider : MeshModifierProviderBase
     {
-        public override IMeshieModifier MeshieModifier => new MeshDisassemble();
+        protected override IMeshieModifier CreateModifier() => new MeshDisassemble();
     }
 }

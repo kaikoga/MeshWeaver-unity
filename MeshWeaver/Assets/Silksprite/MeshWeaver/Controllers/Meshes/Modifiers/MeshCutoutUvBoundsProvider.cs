@@ -14,6 +14,6 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes.Modifiers
         [Range(0, 3)]
         public int numVertex = 1;
 
-        public override IMeshieModifier MeshieModifier => new MeshCutoutUvBounds(uvArea, uvChannel, inside, numVertex);
+        protected override IMeshieModifier CreateModifier() => new MeshCutoutUvBounds(uvArea, uvChannel, inside, numVertex);
     }
 }

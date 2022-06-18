@@ -11,6 +11,6 @@ namespace Silksprite.MeshWeaver.Controllers.Paths.Modifiers
         [Min(0f)]
         public float maxLength = 1f;
 
-        public override IPathieModifier PathieModifier => new PathSubdivision(maxCount, maxLength);
+        protected override IPathieModifier CreateModifier() => new PathSubdivision(maxCount, maxLength);
     }
 }
