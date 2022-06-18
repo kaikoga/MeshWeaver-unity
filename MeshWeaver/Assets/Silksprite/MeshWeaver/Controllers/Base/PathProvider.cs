@@ -11,19 +11,19 @@ namespace Silksprite.MeshWeaver.Controllers.Base
     {
         public LodMask lodMask = LodMask.All;
 
-        public IPathieFactory LastFactory { get; private set; }
+        public IPathieFactory LastFactory => CachedObject;
 
-        public IPathieFactory ToFactory()
+        public IPathieFactory ToFactory() => FindOrCreateObject(null);
+
+        protected sealed override IPathieFactory CreateObject(IMeshContext context)
         {
             var providers = GetComponents<IPathModifierProvider>()
                 .Where(provider => provider.enabled);
-            LastFactory = providers.Aggregate(ModifiedPathieFactory.Builder(CreateFactory()),
-                (builder, provider) => builder.Concat(provider.PathieModifier, provider.LodMask))
+            return providers.Aggregate(ModifiedPathieFactory.Builder(CreateFactory()),
+                    (builder, provider) => builder.Concat(provider.PathieModifier, provider.LodMask))
                 .ToFactory();
-            return LastFactory;
         }
 
-        protected sealed override IPathieFactory CreateObject(IMeshContext context) => CreateFactory();
         protected abstract IPathieFactory CreateFactory();
 
     }

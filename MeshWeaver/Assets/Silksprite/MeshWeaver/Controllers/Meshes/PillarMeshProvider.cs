@@ -10,6 +10,8 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
 {
     public class PillarMeshProvider : MeshProvider
     {
+        protected override bool RefreshAlways => true;
+
         public bool fillBody = true;
         public bool fillBottom;
         public bool fillTop;

@@ -10,7 +10,7 @@ namespace Silksprite.MeshWeaver.Controllers
     [ExecuteAlways]
     public class MeshBehaviour : CustomMeshBehaviour
     {
-        StaticMeshContext _staticContext;
+        StaticMeshContext _staticContext = new StaticMeshContext(new Material[]{});
         Material[] _lastMaterials = { };
 
         protected override Meshie OnPopulateMesh(LodMaskLayer lod)

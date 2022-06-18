@@ -1,23 +1,56 @@
 using System.Collections.Generic;
 using Silksprite.MeshWeaver.Controllers.Context;
+using UnityEditor;
 using UnityEngine;
 
 namespace Silksprite.MeshWeaver.Controllers.Base
 {
+    internal static class ProviderBase
+    {
+        public static int Version { get; private set; }
+
+        static ProviderBase()
+        {
+            EditorApplication.hierarchyChanged += OnHierarchyChanged;
+        }
+
+        static void OnHierarchyChanged()
+        {
+            Version++;
+        }
+    }
+    
+
     public abstract class ProviderBase<T> : MonoBehaviour
     where T : class
     {
+        protected virtual bool RefreshAlways => false;
+        protected virtual bool RefreshOnHierarchyChanged => false;
+        
         T _cachedObject;
+        int _lastVersion;
         IMeshContext _lastContext;
+
+        protected T CachedObject => _cachedObject;
 
         protected T FindOrCreateObject(IMeshContext context)
         {
+            if (RefreshAlways)
+            {
+                return _cachedObject = CreateObject(context);
+            }
+
+            if (RefreshOnHierarchyChanged && _lastVersion != ProviderBase.Version)
+            {
+                _cachedObject = null;
+                _lastVersion = ProviderBase.Version;
+            }
             if (_lastContext != context)
             {
                 _cachedObject = null;
                 _lastContext = context;
             }
-            else
+            if (_cachedObject != null)
             {
                 foreach (var obj in _unityReferences)
                 {

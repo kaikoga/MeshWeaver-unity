@@ -9,6 +9,8 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
 {
     public class StitchMeshProvider : MeshProvider
     {
+        protected override bool RefreshAlways => true;
+
         public PathProvider pathProviderA;
         public PathProvider pathProviderB;
 
