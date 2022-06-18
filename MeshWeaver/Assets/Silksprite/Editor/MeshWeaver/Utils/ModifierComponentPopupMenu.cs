@@ -6,7 +6,6 @@ using UnityEngine;
 namespace Silksprite.MeshWeaver.Utils
 {
     public class ModifierComponentPopupMenu<T>
-    where T : Component
     {
         readonly Type[] _types;
         readonly string[] _menuOptions;
@@ -20,9 +19,9 @@ namespace Silksprite.MeshWeaver.Utils
         public T ModifierPopup(Component self)
         {
             var index = EditorGUILayout.Popup(0, _menuOptions);
-            if (index <= 0) return null;
+            if (index <= 0) return default;
 
-            return (T)self.gameObject.AddComponent(_types[index]);
+            return (T)(object)self.gameObject.AddComponent(_types[index]);
         }
     }
 }

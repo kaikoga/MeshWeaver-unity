@@ -7,7 +7,7 @@ namespace Silksprite.MeshWeaver.Controllers.Utils
 {
     public static class MeshModifierProviderMenus
     {
-        public static readonly ModifierComponentPopupMenu<MeshModifierProviderBase> Menu = new ModifierComponentPopupMenu<MeshModifierProviderBase>
+        public static readonly ModifierComponentPopupMenu<IMeshModifierProvider> Menu = new ModifierComponentPopupMenu<IMeshModifierProvider>
         (
             typeof(VertwiseNormalizeProvider),
             typeof(VertwiseTranslateProvider),
