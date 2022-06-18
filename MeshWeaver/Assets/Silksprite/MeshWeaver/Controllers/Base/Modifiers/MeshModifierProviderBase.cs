@@ -4,6 +4,6 @@ namespace Silksprite.MeshWeaver.Controllers.Base.Modifiers
 {
     public abstract class MeshModifierProviderBase : ModifierProviderBase<IMeshieModifier>, IMeshModifierProvider
     {
-        public IMeshieModifier MeshieModifier => CachedModifier;
+        public IMeshieModifier MeshieModifier => CachedObject;
     }
 }

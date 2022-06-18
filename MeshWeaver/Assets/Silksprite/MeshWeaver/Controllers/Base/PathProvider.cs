@@ -21,7 +21,5 @@ namespace Silksprite.MeshWeaver.Controllers.Base
                 .ToFactory();
             return LastFactory;
         }
-
-        protected abstract IPathieFactory CreateFactory();
     }
 }

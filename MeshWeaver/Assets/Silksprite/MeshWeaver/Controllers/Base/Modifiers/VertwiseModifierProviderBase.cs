@@ -9,6 +9,6 @@ namespace Silksprite.MeshWeaver.Controllers.Base.Modifiers
         public IMeshieModifier MeshieModifier => VertwiseModifier;
         public IPathieModifier PathieModifier => VertwiseModifier;
 
-        VertwiseModifierBase VertwiseModifier => CachedModifier;
+        VertwiseModifierBase VertwiseModifier => CachedObject;
     }
 }
