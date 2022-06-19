@@ -8,7 +8,7 @@ namespace Silksprite.MeshWeaver.Models.Extensions
     {
         public static Mux<T> AddLayer<T>(this Mux<T> self, T value, int channel)
         {
-            return new Mux<T>(self.Concat(new[] { new MuxLayer<T>(value, channel) }));
+            return Mux<T>.Build(self.Concat(new[] { new MuxLayer<T>(value, channel) }));
         }
 
         public static Mux<TOut> ZipMux<T1, T2, TOut>(this Mux<T1> self, Mux<T2> other, Func<T1, T2, TOut> selector)
@@ -79,7 +79,7 @@ namespace Silksprite.MeshWeaver.Models.Extensions
 
         public static Mux<T> SelectMuxChannels<T>(this Mux<T> self, Func<int, int> selector)
         {
-            return new Mux<T>(self.Select(layer => new MuxLayer<T>(layer.Value, selector(layer.Channel))));
+            return Mux<T>.Build(self.Select(layer => new MuxLayer<T>(layer.Value, selector(layer.Channel))));
         }
 
         public static Mux<TOut> SelectMuxValues<TIn, TOut>(this Mux<TIn> self, Func<TIn, TOut> selector)
@@ -89,7 +89,7 @@ namespace Silksprite.MeshWeaver.Models.Extensions
 
         public static Mux<TOut> SelectMux<TIn, TOut>(this Mux<TIn> self, Func<TIn, int, TOut> valueSelector, Func<TIn, int, int> channelSelector)
         {
-            return new Mux<TOut>(self.Select(layer => new MuxLayer<TOut>(valueSelector(layer.Value, layer.Channel), channelSelector(layer.Value, layer.Channel))));
+            return Mux<TOut>.Build(self.Select(layer => new MuxLayer<TOut>(valueSelector(layer.Value, layer.Channel), channelSelector(layer.Value, layer.Channel))));
         }
 
         public static Mux<T> WithMuxChannelValue<T>(this Mux<T> self, int channel, Func<T, T> selector)

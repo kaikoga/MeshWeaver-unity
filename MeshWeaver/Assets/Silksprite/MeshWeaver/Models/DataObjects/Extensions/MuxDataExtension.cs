@@ -8,7 +8,7 @@ namespace Silksprite.MeshWeaver.Models.DataObjects.Extensions
         public static Mux<T> ToMux<T>(this IEnumerable<MuxData<T>> self)
         {
             if (self == null) return Mux.Empty<T>();
-            return new Mux<T>(self.Select(data => data.ToMuxLayer()));
+            return Mux.Build(self.Select(data => data.ToMuxLayer()));
         }
     }
 }

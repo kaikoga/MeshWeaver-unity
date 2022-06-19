@@ -10,6 +10,8 @@ namespace Silksprite.MeshWeaver.Models
         public static Mux<T> Empty<T>() => Mux<T>.FastBuild();
 
         public static Mux<T> Single<T>(T singleValue) => Mux<T>.FastBuild(new MuxLayer<T>(singleValue, 0));
+
+        public static Mux<T> Build<T>(IEnumerable<MuxLayer<T>> layers) => Mux<T>.Build(layers);
     }
 
     public class Mux<T> : IEnumerable<MuxLayer<T>>
@@ -30,7 +32,10 @@ namespace Silksprite.MeshWeaver.Models
             _offset = offset;
         }
 
-        public Mux(IEnumerable<MuxLayer<T>> layers) : this(layers.GroupBy(layer => layer.Channel).Select(g => g.Last()).ToArray(), 0) { }
+        public static Mux<T> Build(IEnumerable<MuxLayer<T>> layers)
+        {
+            return new Mux<T>(layers.GroupBy(layer => layer.Channel).Select(g => g.Last()).ToArray(), 0);
+        }
 
         public static Mux<T> FastBuild() => new Mux<T>(new MuxLayer<T>[] { }, 0);
         public static Mux<T> FastBuild(MuxLayer<T> singleLayer) => new Mux<T>(new[] { singleLayer }, 0 );

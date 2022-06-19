@@ -9,7 +9,7 @@ namespace Silksprite.MeshWeaver.Models
         [Test]
         public void TestValue()
         {
-            var a = new Mux<string>(new[]
+            var a = Mux.Build(new[]
             {
                 new MuxLayer<string>("a", 0),
                 new MuxLayer<string>("b", 0),
@@ -29,7 +29,7 @@ namespace Silksprite.MeshWeaver.Models
         [Test]
         public void TestShift()
         {
-            var a = new Mux<string>(new[]
+            var a = Mux.Build(new[]
             {
                 new MuxLayer<string>("z", -1),
                 new MuxLayer<string>("a", 0),
@@ -61,14 +61,14 @@ namespace Silksprite.MeshWeaver.Models
         [Test]
         public void TestZipChannels()
         {
-            var a = new Mux<string>(new[]
+            var a = Mux.Build(new[]
             {
                 new MuxLayer<string>("(0-19)", 0),
                 new MuxLayer<string>("(20-29)", 20),
                 new MuxLayer<string>("(30-49)", 30),
                 new MuxLayer<string>("(50-)", 50)
             });
-            var b = new Mux<string>(new[]
+            var b = Mux.Build(new[]
             {
                 new MuxLayer<string>("[0-9]", 0),
                 new MuxLayer<string>("[10-29]", 10),
