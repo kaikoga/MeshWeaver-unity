@@ -5,6 +5,7 @@ namespace Silksprite.MeshWeaver.Controllers
     [RequireComponent(typeof(CustomMeshBehaviour))]
     public class MeshBehaviourExporter : MonoBehaviour
     {
+        public bool overrideMaterials;
         public Material[] materials;
 
         public Mesh outputMesh;

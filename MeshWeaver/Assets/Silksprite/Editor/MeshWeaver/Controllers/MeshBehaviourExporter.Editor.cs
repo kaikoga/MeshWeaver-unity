@@ -27,30 +27,38 @@ namespace Silksprite.MeshWeaver.Controllers
                 ExportMeshAsset(projectFilePath, meshBehaviourExporter, meshBehaviour);
             }
 
-            if (GUILayout.Button("Update Mesh Asset"))
-            {
-                if (!AssetDatabase.IsMainAsset(meshBehaviourExporter.outputMesh))
-                {
-                    throw new InvalidOperationException();
-                }
-                var projectFilePath = AssetDatabase.GetAssetPath(meshBehaviourExporter.outputMesh);
-                ExportMeshAsset(projectFilePath, meshBehaviourExporter, meshBehaviour);
-            }
-
             if (GUILayout.Button("Create Mesh Prefab"))
             {
                 var projectFilePath = EditorUtility.SaveFilePanelInProject("Export Mesh Prefab",  meshBehaviourExporter.gameObject.name, "prefab", "");
-                ExportMeshPrefab(projectFilePath, meshBehaviourExporter);
+                ExportMeshPrefab(projectFilePath, meshBehaviourExporter, meshBehaviour);
             }
 
-            if (GUILayout.Button("Update Mesh Prefab"))
+            if (GUILayout.Button("Update Exported Assets"))
             {
-                if (!AssetDatabase.IsMainAsset(meshBehaviourExporter.outputPrefab))
+                OnValidate();
+                if (AssetDatabase.IsMainAsset(meshBehaviourExporter.outputMesh))
                 {
-                    throw new InvalidOperationException();
+                    var projectFilePath = AssetDatabase.GetAssetPath(meshBehaviourExporter.outputMesh);
+                    ExportMeshAsset(projectFilePath, meshBehaviourExporter, meshBehaviour);
                 }
-                var projectFilePath = AssetDatabase.GetAssetPath(meshBehaviourExporter.outputPrefab);
-                ExportMeshPrefab(projectFilePath, meshBehaviourExporter);
+                if (AssetDatabase.IsMainAsset(meshBehaviourExporter.outputPrefab))
+                {
+                    var projectFilePath = AssetDatabase.GetAssetPath(meshBehaviourExporter.outputPrefab);
+                    ExportMeshPrefab(projectFilePath, meshBehaviourExporter, meshBehaviour);
+                }
+            }
+        }
+
+        void OnValidate()
+        {
+            var meshBehaviourExporter = (MeshBehaviourExporter)target;
+            if (!AssetDatabase.IsMainAsset(meshBehaviourExporter.outputMesh))
+            {
+                meshBehaviourExporter.outputMesh = null;
+            }
+            if (!AssetDatabase.IsMainAsset(meshBehaviourExporter.outputPrefab))
+            {
+                meshBehaviourExporter.outputPrefab = null;
             }
         }
 
@@ -118,7 +126,7 @@ namespace Silksprite.MeshWeaver.Controllers
             AssetDatabase.SaveAssets();
         }
 
-        static void ExportMeshPrefab(string projectFilePath, MeshBehaviourExporter meshBehaviourExporter)
+        static void ExportMeshPrefab(string projectFilePath, MeshBehaviourExporter meshBehaviourExporter, CustomMeshBehaviour meshBehaviour)
         {
             if (string.IsNullOrEmpty(projectFilePath))
             {
@@ -127,7 +135,7 @@ namespace Silksprite.MeshWeaver.Controllers
 
             RefreshMeshReferences(AssetDatabase.GetAssetPath(meshBehaviourExporter.outputMesh), meshBehaviourExporter, false);
 
-            var materials = meshBehaviourExporter.materials;
+            var materials = meshBehaviourExporter.overrideMaterials ? meshBehaviourExporter.materials : meshBehaviour.materials.ToArray();
 
             var baseName = Path.GetFileNameWithoutExtension(projectFilePath);
             var prefab = new GameObject(baseName);
