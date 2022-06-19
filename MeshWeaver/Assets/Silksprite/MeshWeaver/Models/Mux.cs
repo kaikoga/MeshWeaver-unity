@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,17 +15,21 @@ namespace Silksprite.MeshWeaver.Models
 
     public class Mux<T> : IEnumerable<MuxLayer<T>>
     {
-        readonly MuxLayer<T>[] _layers;
+        readonly SortedList<int, T> _layers;
         readonly int _offset;
 
         public T Value => ValueAt(0);
         public T ValueAt(int channel)
         {
             channel += _offset;
-            return _layers.LastOrDefault(layer => layer.Channel <= channel).Value;
+            return _layers.LastOrDefault(layer => layer.Key <= channel).Value;
         }
 
-        Mux(MuxLayer<T>[] layers, int offset)
+        public int Count => _layers.Count;
+        public int ChannelAtIndex(int index) => _layers.Keys[index];
+        public MuxLayer<T> MuxLayerAtIndex(int index) => new MuxLayer<T>(_layers.Values[index], _layers.Keys[index]);
+
+        Mux(SortedList<int, T> layers, int offset)
         {
             _layers = layers;
             _offset = offset;
@@ -34,22 +37,19 @@ namespace Silksprite.MeshWeaver.Models
 
         public static Mux<T> Build(IEnumerable<MuxLayer<T>> layers)
         {
-            return new Mux<T>(layers.GroupBy(layer => layer.Channel).Select(g => g.Last()).ToArray(), 0);
+            var sortedList = new SortedList<int, T>();
+            foreach (var layer in layers) sortedList[layer.Channel] = layer.Value; 
+            return new Mux<T>(sortedList, 0);
         }
 
-        public static Mux<T> FastBuild() => new Mux<T>(new MuxLayer<T>[] { }, 0);
-        public static Mux<T> FastBuild(MuxLayer<T> singleLayer) => new Mux<T>(new[] { singleLayer }, 0 );
+        public static Mux<T> FastBuild() => new Mux<T>(new SortedList<int, T>(), 0);
+        public static Mux<T> FastBuild(MuxLayer<T> singleLayer) => new Mux<T>(new SortedList<int, T> { [singleLayer.Channel] = singleLayer.Value }, 0 );
 
         public static Mux<T> FastBuild(IEnumerable<MuxLayer<T>> layers)
         {
-            var array = layers.ToArray();
-            for (var i = 0; i < array.Length; i++)
-            for (var j = i; j < array.Length; j++)
-            {
-                if (i == j) continue;
-                if (array[i].Channel == array[j].Channel) throw new ArgumentException("Duplicate channel found in Mux<T>.FastBuild()");
-            }
-            return new Mux<T>(array, 0);
+            var sortedList = new SortedList<int, T>();
+            foreach (var layer in layers) sortedList.Add(layer.Channel, layer.Value); 
+            return new Mux<T>(sortedList, 0);
         }
 
         public Mux<T> Shift(int deltaChannel)
@@ -59,12 +59,12 @@ namespace Silksprite.MeshWeaver.Models
 
         public IEnumerator<MuxLayer<T>> GetEnumerator()
         {
-            return _offset == 0 ? ((IEnumerable<MuxLayer<T>>)_layers).GetEnumerator() : _layers.Select(layer => new MuxLayer<T>(layer.Value, layer.Channel - _offset)).GetEnumerator();
+            return _layers.Select(layer => new MuxLayer<T>(layer.Value, layer.Key - _offset)).GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return _offset == 0 ? _layers.GetEnumerator() : _layers.Select(layer => new MuxLayer<T>(layer.Value, layer.Channel - _offset)).GetEnumerator();
+            return _layers.Select(layer => new MuxLayer<T>(layer.Value, layer.Key - _offset)).GetEnumerator();
         }
     }
 

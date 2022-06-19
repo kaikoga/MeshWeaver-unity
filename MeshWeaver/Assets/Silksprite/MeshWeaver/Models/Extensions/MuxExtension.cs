@@ -29,51 +29,49 @@ namespace Silksprite.MeshWeaver.Models.Extensions
                 return new MuxLayer<TOut>(selector(curSelf.Value, curOther.Value, channel), channel);
             }
 
-            using (var itSelf = self.OrderBy(layer => layer.Channel).GetEnumerator())
-            using (var itOther = other.OrderBy(layer => layer.Channel).GetEnumerator())
+            var countSelf = self.Count;
+            var countOther = other.Count;
+            var indexSelf = 0;
+            var indexOther = 0;
+            var hasSelf = indexSelf < countSelf;
+            var hasOther = indexOther < countOther;
+            var lastSelf = hasSelf ? self.MuxLayerAtIndex(0) : default;
+            var lastOther = hasOther ? other.MuxLayerAtIndex(0) : default;
+            while (hasSelf && hasOther)
             {
-                MuxLayer<T1> lastSelf = default;
-                MuxLayer<T2> lastOther = default;
-                var hasSelf = itSelf.MoveNext();
-                var hasOther = itOther.MoveNext();
-                while (hasSelf || hasOther)
+                var compare = self.ChannelAtIndex(indexSelf) - other.ChannelAtIndex(indexOther); 
+                if (compare < 0) // self.ChannelAtIndex(indexSelf) < other.ChannelAtIndex(indexOther)
                 {
-                    if (!hasSelf)
-                    {
-                        lastOther = itOther.Current;
-                        hasOther = itOther.MoveNext();
-                        yield return ZipChannel(lastSelf, lastOther);
-                        continue;
-                    }
-                    if (!hasOther)
-                    {
-                        lastSelf = itSelf.Current;
-                        hasSelf = itSelf.MoveNext();
-                        yield return ZipChannel(lastSelf, lastOther);
-                        continue;
-                    }
-
-                    if (itSelf.Current.Channel < itOther.Current.Channel)
-                    {
-                        lastSelf = itSelf.Current;
-                        hasSelf = itSelf.MoveNext();
-                        yield return ZipChannel(lastSelf, lastOther);
-                    }
-                    else if (itSelf.Current.Channel > itOther.Current.Channel)
-                    {
-                        lastOther = itOther.Current;
-                        hasOther = itOther.MoveNext();
-                        yield return ZipChannel(lastSelf, lastOther);
-                    }
-                    else
-                    {
-                        lastSelf = itSelf.Current;
-                        hasSelf = itSelf.MoveNext();
-                        lastOther = itOther.Current;
-                        hasOther = itOther.MoveNext();
-                        yield return ZipChannel(lastSelf, lastOther);
-                    }
+                    lastSelf = self.MuxLayerAtIndex(indexSelf++);
+                    hasSelf = indexSelf < countSelf;
+                    yield return ZipChannel(lastSelf, lastOther);
                 }
+                else if (compare > 0) // self.ChannelAtIndex(indexSelf) > other.ChannelAtIndex(indexOther)
+                {
+                    lastOther = other.MuxLayerAtIndex(indexOther++);
+                    hasOther = indexOther < countOther;
+                    yield return ZipChannel(lastSelf, lastOther);
+                }
+                else
+                {
+                    lastSelf = self.MuxLayerAtIndex(indexSelf++);
+                    hasSelf = indexSelf < countSelf;
+                    lastOther = other.MuxLayerAtIndex(indexOther++);
+                    hasOther = indexOther < countOther;
+                    yield return ZipChannel(lastSelf, lastOther);
+                }
+            }
+            while (hasOther)
+            {
+                lastOther = other.MuxLayerAtIndex(indexOther++);
+                hasOther = indexOther < countOther;
+                yield return ZipChannel(lastSelf, lastOther);
+            }
+            while (hasSelf)
+            {
+                lastSelf = self.MuxLayerAtIndex(indexSelf++);
+                hasSelf = indexSelf < countSelf;
+                yield return ZipChannel(lastSelf, lastOther);
             }
         }
 
