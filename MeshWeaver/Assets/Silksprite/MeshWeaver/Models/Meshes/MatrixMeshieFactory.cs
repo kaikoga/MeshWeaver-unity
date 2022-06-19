@@ -69,40 +69,33 @@ namespace Silksprite.MeshWeaver.Models.Meshes
                         throw new ArgumentOutOfRangeException();
                 }
             }));
+            var gons = new List<Gon>();
 
             var vertiesXWithIndex = pathieX.Active.Vertices.Select((v, i) => (v, i)).ToList();
             if (pathieX.isLoop) vertiesXWithIndex.Add(vertiesXWithIndex.First());
-            var indexPairsX = vertiesXWithIndex
-                .Pairwise((a, b) => (a: a.v, b: b.v, i: (a: a.i, b: b.i)))
-                .Where(ab => !ab.a.TranslationEquals(ab.b, 0f))
-                .Select(ab => ab.i);
 
             var vertiesYWithIndex = pathieY.Active.Vertices.Select((v, i) => (v, i)).ToList();
             if (pathieY.isLoop) vertiesYWithIndex.Add(vertiesYWithIndex.First());
-            var indexPairsY = vertiesYWithIndex
-                .Pairwise((a, b) => (a: a.v, b: b.v, i: (a: a.i, b: b.i)))
-                .Where(ab => !ab.a.TranslationEquals(ab.b, 0f))
-                .Select(ab => ab.i);
-            
-            var gons = indexPairsY.SelectMany(y =>
+
+            var a = new int[4];
+            for (int y = 0, yi = 1; yi < vertiesYWithIndex.Count; y++, yi++)
+            {
+                var ya = vertiesYWithIndex[y]; 
+                var yb = vertiesYWithIndex[yi]; 
+                if (ya.v.TranslationEquals(yb.v, 0f)) continue;
+                for (int x = 0, xi = 1; xi < vertiesXWithIndex.Count; x++, xi++)
                 {
-                    return indexPairsX.Select(x =>
-                    {
-                        var a = new[]
-                        {
-                            x.a + y.a * countX,
-                            x.b + y.a * countX,
-                            x.a + y.b * countX,
-                            x.b + y.b * countX 
-                        };
-                        return (x: x.a, y: y.a, a);
-                    });
-                }).SelectMany(xya =>
-                {
+                    var xa = vertiesXWithIndex[x]; 
+                    var xb = vertiesXWithIndex[xi]; 
+                    if (xa.v.TranslationEquals(xb.v, 0f)) continue;
+
+                    a[0] = xa.i + ya.i * countX;
+                    a[1] = xb.i + ya.i * countX;
+                    a[2] = xa.i + yb.i * countX;
+                    a[3] = xb.i + yb.i * countX;
+
                     var cellPattern = _defaultCellPatternKind;
                     var cellMaterialIndex = _materialIndex;
-                    var x = xya.x;
-                    var y = xya.y;
                     foreach (var o in _cellPatternOverrides)
                     {
                         if (x < o.cellRange.xMin || x >= o.cellRange.xMax || y < o.cellRange.yMin || y >= o.cellRange.yMax) continue;
@@ -122,20 +115,22 @@ namespace Silksprite.MeshWeaver.Models.Meshes
                         case CellPatternKind.TriangleTopLeft:
                         case CellPatternKind.TriangleTopRight:
                         case CellPatternKind.None:
-                            cellForm = (CellFormKind)cellPattern; 
+                            cellForm = (CellFormKind)cellPattern;
                             break;
                         case CellPatternKind.CheckeredRight:
-                            cellForm = ((xya.x ^ xya.y) & 1) == 0 ? CellFormKind.Right : CellFormKind.Left; 
+                            cellForm = ((x ^ y) & 1) == 0 ? CellFormKind.Right : CellFormKind.Left;
                             break;
                         case CellPatternKind.CheckeredLeft:
-                            cellForm = ((xya.x ^ xya.y) & 1) == 0 ? CellFormKind.Left : CellFormKind.Right; 
+                            cellForm = ((x ^ y) & 1) == 0 ? CellFormKind.Left : CellFormKind.Right;
                             break;
                         default:
                             throw new ArgumentOutOfRangeException();
                     }
 
-                    return CellIndices[cellForm].Select(indices => new Gon(indices.Select(i => xya.a[i]).ToArray(), cellMaterialIndex));
-                });
+                    gons.AddRange(CellIndices[cellForm].Select(cellIndices => new Gon(cellIndices.Select(i => a[i]).ToArray(), cellMaterialIndex)));
+                }
+            }
+
             return Meshie.Builder(vertices, gons, true)
                 .ToMeshie(_defaultCellPatternKind == CellPatternKind.None || _cellPatternOverrides.Count > 0);
         }

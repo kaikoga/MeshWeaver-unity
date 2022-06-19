@@ -22,7 +22,12 @@ namespace Silksprite.MeshWeaver.Models
         public T ValueAt(int channel)
         {
             channel += _offset;
-            return _layers.LastOrDefault(layer => layer.Key <= channel).Value;
+            var value = default(T);
+            for (var i = 0; i < _layers.Count; i++)
+            {
+                if (_layers.Keys[i] <= channel) value = _layers.Values[i];
+            }
+            return value;
         }
 
         public int Count => _layers.Count;

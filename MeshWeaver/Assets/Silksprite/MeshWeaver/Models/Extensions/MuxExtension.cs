@@ -13,20 +13,15 @@ namespace Silksprite.MeshWeaver.Models.Extensions
 
         public static Mux<TOut> ZipMux<T1, T2, TOut>(this Mux<T1> self, Mux<T2> other, Func<T1, T2, TOut> selector)
         {
-            return self.ZipMux(other, (a, b, _) => selector(a, b));
-        }
-
-        public static Mux<TOut> ZipMux<T1, T2, TOut>(this Mux<T1> self, Mux<T2> other, Func<T1, T2, int, TOut> selector)
-        {
             return Mux<TOut>.FastBuild(self.ZipMuxLayers(other, selector));
         }
 
-        static IEnumerable<MuxLayer<TOut>> ZipMuxLayers<T1, T2, TOut>(this Mux<T1> self, Mux<T2> other, Func<T1, T2, int, TOut> selector)
+        static IEnumerable<MuxLayer<TOut>> ZipMuxLayers<T1, T2, TOut>(this Mux<T1> self, Mux<T2> other, Func<T1, T2, TOut> selector)
         {
             MuxLayer<TOut> ZipChannel(MuxLayer<T1> curSelf, MuxLayer<T2> curOther)
             {
                 var channel = Math.Max(curSelf.Channel, curOther.Channel);
-                return new MuxLayer<TOut>(selector(curSelf.Value, curOther.Value, channel), channel);
+                return new MuxLayer<TOut>(selector(curSelf.Value, curOther.Value), channel);
             }
 
             var countSelf = self.Count;
