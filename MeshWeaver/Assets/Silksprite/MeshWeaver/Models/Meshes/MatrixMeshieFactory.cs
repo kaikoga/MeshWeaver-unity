@@ -16,23 +16,23 @@ namespace Silksprite.MeshWeaver.Models.Meshes
 
         readonly OperatorKind _operatorKind;
         readonly CellPatternKind _defaultCellPatternKind;
-        readonly List<CellPatternOverride> _cellPatternOverrides;
+        readonly List<CellOverride> _cellPatternOverrides;
         readonly int _materialIndex;
 
-        static readonly Dictionary<CellFormKind, IEnumerable<int>> CellIndices = new Dictionary<CellFormKind, IEnumerable<int>>
+        static readonly Dictionary<CellFormKind, int[][]> CellIndices = new Dictionary<CellFormKind, int[][]>
         {
-            [CellFormKind.Default] = new[] { 0, 2, 3, 0, 3, 1 },
-            [CellFormKind.Right] = new[] { 0, 2, 3, 0, 3, 1 }, 
-            [CellFormKind.Left] = new[] { 0, 2, 1, 1, 2, 3 }, 
-            [CellFormKind.TriangleBottomLeft] = new[] { 0, 2, 1 }, 
-            [CellFormKind.TriangleBottomRight] = new[] { 0, 3, 1 }, 
-            [CellFormKind.TriangleTopLeft] = new[] { 0, 2, 3 }, 
-            [CellFormKind.TriangleTopRight] = new[] { 1, 2, 3 }, 
-            [CellFormKind.None] = Array.Empty<int>() 
+            [CellFormKind.Default] = new[] { new []{0, 2, 3}, new []{0, 3, 1} },
+            [CellFormKind.Right] = new[] { new []{0, 2, 3}, new []{0, 3, 1} }, 
+            [CellFormKind.Left] = new[] { new []{0, 2, 1}, new []{1, 2, 3} }, 
+            [CellFormKind.TriangleBottomLeft] = new[] { new []{0, 2, 1} }, 
+            [CellFormKind.TriangleBottomRight] = new[] { new []{0, 3, 1} }, 
+            [CellFormKind.TriangleTopLeft] = new[] { new []{0, 2, 3} }, 
+            [CellFormKind.TriangleTopRight] = new[] { new []{1, 2, 3} }, 
+            [CellFormKind.None] = Array.Empty<int[]>() 
         };
 
         public MatrixMeshieFactory(IPathieFactory pathieX, IPathieFactory pathieY,
-            OperatorKind operatorKind, CellPatternKind defaultCellPatternKind, List<CellPatternOverride> cellPatternOverrides,
+            OperatorKind operatorKind, CellPatternKind defaultCellPatternKind, List<CellOverride> cellPatternOverrides,
             int materialIndex)
         {
             _pathieX = pathieX;
@@ -84,7 +84,7 @@ namespace Silksprite.MeshWeaver.Models.Meshes
                 .Where(ab => !ab.a.TranslationEquals(ab.b, 0f))
                 .Select(ab => ab.i);
             
-            var indices = indexPairsY.SelectMany(y =>
+            var gons = indexPairsY.SelectMany(y =>
                 {
                     return indexPairsX.Select(x =>
                     {
@@ -99,16 +99,18 @@ namespace Silksprite.MeshWeaver.Models.Meshes
                     });
                 }).SelectMany(xya =>
                 {
-                    CellPatternKind CellKindAt(int x, int y)
+                    var cellPattern = _defaultCellPatternKind;
+                    var cellMaterialIndex = _materialIndex;
+                    var x = xya.x;
+                    var y = xya.y;
+                    foreach (var o in _cellPatternOverrides)
                     {
-                        foreach (var o in _cellPatternOverrides)
-                        {
-                            if (x >= o.cellRange.xMin && x < o.cellRange.xMax && y >= o.cellRange.yMin && y < o.cellRange.yMax) return o.cellPatternKind;
-                        }
-                        return _defaultCellPatternKind;
+                        if (x < o.cellRange.xMin || x >= o.cellRange.xMax || y < o.cellRange.yMin || y >= o.cellRange.yMax) continue;
+                        cellPattern = o.cellPatternKind;
+                        if (o.materialIndex > -1) cellMaterialIndex = o.materialIndex;
+                        break;
                     }
 
-                    var cellPattern = CellKindAt(xya.x, xya.y);
                     CellFormKind cellForm;
                     switch (cellPattern)
                     {
@@ -131,9 +133,10 @@ namespace Silksprite.MeshWeaver.Models.Meshes
                         default:
                             throw new ArgumentOutOfRangeException();
                     }
-                    return CellIndices[cellForm].Select(i => xya.a[i]);
+
+                    return CellIndices[cellForm].Select(indices => new Gon(indices.Select(i => xya.a[i]).ToArray(), cellMaterialIndex));
                 });
-            return Meshie.Builder(vertices, indices, _materialIndex, true)
+            return Meshie.Builder(vertices, gons, true)
                 .ToMeshie(_defaultCellPatternKind == CellPatternKind.None || _cellPatternOverrides.Count > 0);
         }
 
@@ -197,11 +200,13 @@ namespace Silksprite.MeshWeaver.Models.Meshes
         }
 
         [Serializable]
-        public class CellPatternOverride
+        public class CellOverride
         {
             public CellPatternKind cellPatternKind;
             [RectIntCustom]
             public RectInt cellRange = new RectInt(0, 0, 1, 1);
+
+            public int materialIndex;
         }
 
         enum CellFormKind

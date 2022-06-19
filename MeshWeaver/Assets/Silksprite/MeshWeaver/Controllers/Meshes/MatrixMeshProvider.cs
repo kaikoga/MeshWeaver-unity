@@ -1,7 +1,10 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using Silksprite.MeshWeaver.Controllers.Base;
 using Silksprite.MeshWeaver.Controllers.Context;
 using Silksprite.MeshWeaver.Controllers.Extensions;
+using Silksprite.MeshWeaver.CustomDrawers;
 using Silksprite.MeshWeaver.Models.Meshes;
 using Silksprite.MeshWeaver.Models.Paths;
 using UnityEngine;
@@ -16,7 +19,7 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
         public PathProvider pathProviderY;
         public MatrixMeshieFactory.OperatorKind operatorKind = MatrixMeshieFactory.OperatorKind.ApplyX;
         public MatrixMeshieFactory.CellPatternKind defaultCellPatternKind = MatrixMeshieFactory.CellPatternKind.Default;
-        public List<MatrixMeshieFactory.CellPatternOverride> cellPatternOverrides;
+        public List<CellOverrideData> cellPatternOverrides;
 
         public Material material;
 
@@ -31,8 +34,33 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
                 LastPathieY,
                 operatorKind,
                 defaultCellPatternKind,
-                cellPatternOverrides ?? new List<MatrixMeshieFactory.CellPatternOverride>(),
+                ResolveCellPatternOverrides(cellPatternOverrides, context),
                 context.GetMaterialIndex(material));
+        }
+
+        public static List<MatrixMeshieFactory.CellOverride> ResolveCellPatternOverrides(IEnumerable<CellOverrideData> data, IMeshContext context)
+        {
+            return data == null ? new List<MatrixMeshieFactory.CellOverride>() : data.Select(cell => cell.ResolveMaterials(context)).ToList();
+        }
+
+        [Serializable]
+        public class CellOverrideData
+        {
+            public MatrixMeshieFactory.CellPatternKind cellPatternKind;
+            [RectIntCustom]
+            public RectInt cellRange = new RectInt(0, 0, 1, 1);
+
+            public Material material;
+
+            public MatrixMeshieFactory.CellOverride ResolveMaterials(IMeshContext context)
+            {
+                return new MatrixMeshieFactory.CellOverride
+                {
+                    cellPatternKind = cellPatternKind,
+                    cellRange = cellRange,
+                    materialIndex = material ? context.GetMaterialIndex(material) : -1,
+                };
+            }
         }
     }
 }

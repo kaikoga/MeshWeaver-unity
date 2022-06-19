@@ -45,7 +45,7 @@ namespace Tests.Silksprite.MeshWeaver.Models.Meshes
         static MatrixMeshieFactory SimpleFactory(IPathieFactory pathieX, IPathieFactory pathieY)
         {
             return new MatrixMeshieFactory(pathieX, pathieY,
-                MatrixMeshieFactory.OperatorKind.TranslateOnly, MatrixMeshieFactory.CellPatternKind.Default, new List<MatrixMeshieFactory.CellPatternOverride>(),
+                MatrixMeshieFactory.OperatorKind.TranslateOnly, MatrixMeshieFactory.CellPatternKind.Default, new List<MatrixMeshieFactory.CellOverride>(),
                 0);
         }
     }

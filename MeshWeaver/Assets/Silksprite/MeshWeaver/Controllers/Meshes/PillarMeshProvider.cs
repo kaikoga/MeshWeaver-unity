@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Silksprite.MeshWeaver.Controllers.Base;
 using Silksprite.MeshWeaver.Controllers.Context;
 using Silksprite.MeshWeaver.Controllers.Extensions;
@@ -29,7 +30,7 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
 
         public MatrixMeshieFactory.OperatorKind operatorKind = MatrixMeshieFactory.OperatorKind.ApplyX;
         public MatrixMeshieFactory.CellPatternKind defaultCellPatternKind = MatrixMeshieFactory.CellPatternKind.Default;
-        public List<MatrixMeshieFactory.CellPatternOverride> cellPatternOverrides;
+        public List<MatrixMeshProvider.CellOverrideData> cellPatternOverrides;
 
         public PillarMeshieFactory.LongitudeAxisKind longitudeAxisKind = PillarMeshieFactory.LongitudeAxisKind.Y;
         public bool reverseLids;
@@ -45,7 +46,7 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
                 LastPathieY,
                 operatorKind,
                 defaultCellPatternKind,
-                cellPatternOverrides ?? new List<MatrixMeshieFactory.CellPatternOverride>(),
+                MatrixMeshProvider.ResolveCellPatternOverrides(cellPatternOverrides, context),
                 longitudeAxisKind,
                 reverseLids,
                 fillBody,
