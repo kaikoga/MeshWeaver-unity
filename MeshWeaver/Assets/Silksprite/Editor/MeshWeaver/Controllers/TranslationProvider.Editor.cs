@@ -38,23 +38,28 @@ namespace Silksprite.MeshWeaver.Controllers
         void OnSceneGUI()
         {
             var provider = (TranslationProvider)target;
-            var globalPosition = provider.transform.position;
+            var transform = provider.transform;
+            var worldRotation = transform.rotation;
 
             var eventType = Event.current.type;
             switch (eventType)
             {
                 case EventType.Repaint:
                 case EventType.Layout:
+                    var globalPosition = transform.position;
                     var handleSize = HandleUtility.GetHandleSize(globalPosition) * 0.125f;
                     Handles.color = Handles.xAxisColor;
-                    Handles.CubeHandleCap(_controlIdX, globalPosition + provider.oneX, Quaternion.identity, handleSize, eventType);
-                    Handles.DrawLine(globalPosition, globalPosition + provider.oneX);
+                    var globalOneX = transform.TransformPoint(provider.oneX);
+                    Handles.CubeHandleCap(_controlIdX, globalOneX, worldRotation, handleSize, eventType);
+                    Handles.DrawLine(globalPosition, globalOneX);
                     Handles.color = Handles.yAxisColor;
-                    Handles.CubeHandleCap(_controlIdY, globalPosition + provider.oneY, Quaternion.identity, handleSize, eventType);
-                    Handles.DrawLine(globalPosition, globalPosition + provider.oneY);
+                    var globalOneY = transform.TransformPoint(provider.oneY);
+                    Handles.CubeHandleCap(_controlIdY, globalOneY, worldRotation, handleSize, eventType);
+                    Handles.DrawLine(globalPosition, globalOneY);
                     Handles.color = Handles.zAxisColor;
-                    Handles.CubeHandleCap(_controlIdZ, globalPosition + provider.oneZ, Quaternion.identity, handleSize, eventType);
-                    Handles.DrawLine(globalPosition, globalPosition + provider.oneZ);
+                    var globalOneZ = transform.TransformPoint(provider.oneZ);
+                    Handles.CubeHandleCap(_controlIdZ, globalOneZ, worldRotation, handleSize, eventType);
+                    Handles.DrawLine(globalPosition, globalOneZ);
                     break;
                 case EventType.MouseDown:
                     var nearestControl = HandleUtility.nearestControl;
@@ -78,32 +83,32 @@ namespace Silksprite.MeshWeaver.Controllers
                 case Axis.X:
                 {
                     EditorGUI.BeginChangeCheck();
-                    var oneXGlobal = Handles.PositionHandle(provider.oneX + globalPosition, Quaternion.identity);
+                    var oneXGlobal = Handles.PositionHandle(transform.TransformPoint(provider.oneX), worldRotation);
                     if (EditorGUI.EndChangeCheck())
                     {
                         Undo.RecordObject(provider, "Change OneX TranslationProvider");
-                        provider.oneX = oneXGlobal - globalPosition;
+                        provider.oneX = transform.InverseTransformPoint(oneXGlobal);
                         EditorUtility.SetDirty(provider);
                     }
                     break;
                 }
                 case Axis.Y:
                     EditorGUI.BeginChangeCheck();
-                    var oneYGlobal = Handles.PositionHandle(provider.oneY + globalPosition, Quaternion.identity);
+                    var oneYGlobal = Handles.PositionHandle(transform.TransformPoint(provider.oneY), worldRotation);
                     if (EditorGUI.EndChangeCheck())
                     {
                         Undo.RecordObject(provider, "Change OneY TranslationProvider");
-                        provider.oneY = oneYGlobal - globalPosition;
+                        provider.oneY = transform.InverseTransformPoint(oneYGlobal);
                         EditorUtility.SetDirty(provider);
                     }
                     break;
                 case Axis.Z:
                     EditorGUI.BeginChangeCheck();
-                    var oneZGlobal = Handles.PositionHandle(provider.oneZ + globalPosition, Quaternion.identity);
+                    var oneZGlobal = Handles.PositionHandle(transform.TransformPoint(provider.oneZ), worldRotation);
                     if (EditorGUI.EndChangeCheck())
                     {
                         Undo.RecordObject(provider, "Change OneZ TranslationProvider");
-                        provider.oneZ = oneZGlobal - globalPosition;
+                        provider.oneZ = transform.InverseTransformPoint(oneZGlobal);
                         EditorUtility.SetDirty(provider);
                     }
                     break;

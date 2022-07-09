@@ -21,7 +21,7 @@ namespace Silksprite.MeshWeaver.Controllers.Extensions
             var oneX = translation.oneX;
             var oneY = translation.oneY;
             var oneZ = translation.oneZ;
-            return new Matrix4x4
+            return localMatrix * new Matrix4x4
             {
                 m00 = oneX.x,
                 m10 = oneX.y,
@@ -35,10 +35,10 @@ namespace Silksprite.MeshWeaver.Controllers.Extensions
                 m12 = oneZ.y,
                 m22 = oneZ.z,
                 m32 = 0,
-                m03 = localMatrix.m03,
-                m13 = localMatrix.m13,
-                m23 = localMatrix.m23,
-                m33 = localMatrix.m33
+                m03 = 0,
+                m13 = 0,
+                m23 = 0,
+                m33 = 1
             };
         }
 
