@@ -14,6 +14,34 @@ namespace Silksprite.MeshWeaver.Controllers.Extensions
 {
     public static class ProviderExtensions
     {
+        static Matrix4x4 ToLocalTranslation(this Component geometryProvider)
+        {
+            var localMatrix = geometryProvider.transform.ToLocalMatrix();
+            if (!geometryProvider.TryGetComponent<TranslationProvider>(out var translation)) return localMatrix;
+            var oneX = translation.oneX;
+            var oneY = translation.oneY;
+            var oneZ = translation.oneZ;
+            return new Matrix4x4
+            {
+                m00 = oneX.x,
+                m10 = oneX.y,
+                m20 = oneX.z,
+                m30 = 0,
+                m01 = oneY.x,
+                m11 = oneY.y,
+                m21 = oneY.z,
+                m31 = 0,
+                m02 = oneZ.x,
+                m12 = oneZ.y,
+                m22 = oneZ.z,
+                m32 = 0,
+                m03 = localMatrix.m03,
+                m13 = localMatrix.m13,
+                m23 = localMatrix.m23,
+                m33 = localMatrix.m33
+            };
+        }
+
         public static VertexProvider CreateVertex(this CompositePathProvider parent, Vector3 position, bool crease)
         {
             var gameObject = new GameObject("VertexProvider");
@@ -43,7 +71,7 @@ namespace Silksprite.MeshWeaver.Controllers.Extensions
         {
             if (pathProvider == null) return PathieFactory.Empty;
 
-            var localTranslation = pathProvider.transform.ToLocalMatrix();
+            var localTranslation = pathProvider.ToLocalTranslation();
             return ModifiedPathieFactory.Builder(pathProvider.ToFactory()).Concat(new VertwiseTranslate(localTranslation)).ToFactory();
         }
 
@@ -53,7 +81,7 @@ namespace Silksprite.MeshWeaver.Controllers.Extensions
             
             foreach (var pathProvider in pathProviders.Where(c => c != null && c.gameObject.activeSelf))
             {
-                var localTranslation = pathProvider.transform.ToLocalMatrix();
+                var localTranslation = pathProvider.ToLocalTranslation();
                 builder.Concat(pathProvider.ToFactory(), localTranslation);
             }
 
@@ -64,7 +92,7 @@ namespace Silksprite.MeshWeaver.Controllers.Extensions
         {
             if (meshProvider == null) return MeshieFactory.Empty;
 
-            var localTranslation = meshProvider.transform.ToLocalMatrix();
+            var localTranslation = meshProvider.ToLocalTranslation();
             return CompositeMeshieFactory.Builder().Concat(meshProvider.ToFactory(context), localTranslation).ToFactory();
         }
 
@@ -74,7 +102,7 @@ namespace Silksprite.MeshWeaver.Controllers.Extensions
 
             foreach (var meshProvider in meshProviders.Where(c => c != null && c.gameObject.activeSelf))
             {
-                var localTranslation = meshProvider.transform.ToLocalMatrix();
+                var localTranslation = meshProvider.ToLocalTranslation();
                 builder.Concat(meshProvider.ToFactory(context), localTranslation);
             }
 
