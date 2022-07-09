@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace Silksprite.MeshWeaver.Controllers
 {
+    [DisallowMultipleComponent]
     public class TranslationProvider : MonoBehaviour
     {
         public Vector3 oneX = Vector3.right;
