@@ -16,7 +16,7 @@ namespace Silksprite.MeshWeaver.Models.Extensions
         {
             var vertices = e.Active.Vertices;
             if (vertices.Count < 2) return vertices;
-            var enumerable = equality(e.First, e.Last) ? vertices.Skip(1) : vertices;
+            var enumerable = !e.isLoop && equality(e.First, e.Last) ? vertices.Skip(1) : vertices;
             return enumerable.Dedup(equality);
         }
 
