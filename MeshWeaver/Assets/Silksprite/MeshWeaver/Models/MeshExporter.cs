@@ -70,10 +70,10 @@ namespace Silksprite.MeshWeaver.Models
                     #if UNITY_EDITOR
                     UnityEditor.Unwrapping.GenerateSecondaryUVSet(_mesh, new UnityEditor.UnwrapParam
                     {
-                        angleError = 0.05f,
-                        areaError = 0.1f,
-                        hardAngle = 88,
-                        packMargin = 0.0625f
+                        angleError = 0.08f,
+                        areaError = 0.15f,
+                        hardAngle = 88f,
+                        packMargin = 0.03125f // 1/32
                     });
                     #endif
                     break;
