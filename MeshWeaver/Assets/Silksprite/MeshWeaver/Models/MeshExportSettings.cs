@@ -4,11 +4,13 @@ namespace Silksprite.MeshWeaver.Models
     {
         public readonly NormalGeneratorKind NormalGenerator;
         public readonly float NormalAngle;
+        public readonly LightmapGeneratorKind LightmapGenerator;
 
-        public MeshExportSettings(NormalGeneratorKind normalGenerator, float normalAngle)
+        public MeshExportSettings(NormalGeneratorKind normalGenerator, float normalAngle, LightmapGeneratorKind lightmapGenerator)
         {
             NormalGenerator = normalGenerator;
             NormalAngle = normalAngle;
+            LightmapGenerator = lightmapGenerator;
         }
 
         public enum NormalGeneratorKind
@@ -20,6 +22,13 @@ namespace Silksprite.MeshWeaver.Models
             Cylinder = 4,
             Smooth = 64,
             SmoothHigh = 65,
+            None = -1,
+        }
+        
+        public enum LightmapGeneratorKind
+        {
+            Default = 0,
+            None = -1,
         }
     }
 }

@@ -55,11 +55,29 @@ namespace Silksprite.MeshWeaver.Models
                 case MeshExportSettings.NormalGeneratorKind.SmoothHigh:
                     RecalculateNormals(true);
                     break;
+                case MeshExportSettings.NormalGeneratorKind.None:
+                    break;
                 default:
                     _mesh.RecalculateNormals();
                     break;
             }
             _mesh.RecalculateTangents();
+            switch (_settings.LightmapGenerator)
+            {
+                case MeshExportSettings.LightmapGeneratorKind.None:
+                    break;
+                default:
+                    #if UNITY_EDITOR
+                    UnityEditor.Unwrapping.GenerateSecondaryUVSet(_mesh, new UnityEditor.UnwrapParam
+                    {
+                        angleError = 0.05f,
+                        areaError = 0.1f,
+                        hardAngle = 88,
+                        packMargin = 0.0625f
+                    });
+                    #endif
+                    break;
+            }
         }
 
         void ProjectSphereNormals()

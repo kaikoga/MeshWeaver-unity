@@ -16,6 +16,7 @@ namespace Silksprite.MeshWeaver.Controllers
 
         public MeshExportSettings.NormalGeneratorKind exportedNormalGeneratorKind;
         public float exportedNormalGeneratorAngle;
+        public MeshExportSettings.LightmapGeneratorKind exportedLightmapGeneratorKind;
         
         public Material[] materials;
 
@@ -43,7 +44,7 @@ namespace Silksprite.MeshWeaver.Controllers
         public void Compile()
         {
             if (_runtimeMesh == null) _runtimeMesh = new Mesh();
-            OnPopulateMesh(lodMaskLayer, _runtimeMesh);
+            OnPopulateMesh(lodMaskLayer, _runtimeMesh, true, true);
 
             var sharedMaterials = (materials?.Length ?? 0) > 0 ? materials : null;
 
@@ -64,7 +65,7 @@ namespace Silksprite.MeshWeaver.Controllers
             else
             {
                 if (_runtimeColliderMesh == null) _runtimeColliderMesh = new Mesh();
-                OnPopulateMesh(LodMaskLayer.Collider, _runtimeColliderMesh);
+                OnPopulateMesh(LodMaskLayer.Collider, _runtimeColliderMesh, false, false);
                 runtimeColliderMesh = _runtimeColliderMesh;
             }
             foreach (var meshCollider in meshColliders ?? Enumerable.Empty<MeshCollider>())
@@ -73,16 +74,19 @@ namespace Silksprite.MeshWeaver.Controllers
             }
         }
 
-        public void ExportMesh(LodMaskLayer lodMask, Mesh mesh)
+        public void ExportMesh(LodMaskLayer lodMask, Mesh mesh, bool normals, bool lightmaps)
         {
-            OnPopulateMesh(lodMask, mesh);
+            OnPopulateMesh(lodMask, mesh, normals, lightmaps);
         }
 
-        protected virtual void OnPopulateMesh(LodMaskLayer lodMask, Mesh mesh)
+        protected virtual void OnPopulateMesh(LodMaskLayer lodMask, Mesh mesh, bool normals, bool lightmaps)
         {
             mesh.Clear();
             var meshie = OnPopulateMesh(lodMask);
-            meshie.ExportToMesh(mesh, new MeshExportSettings(exportedNormalGeneratorKind, exportedNormalGeneratorAngle));
+            meshie.ExportToMesh(mesh, new MeshExportSettings(
+                normals ? exportedNormalGeneratorKind : MeshExportSettings.NormalGeneratorKind.None,
+                exportedNormalGeneratorAngle,
+                lightmaps ? exportedLightmapGeneratorKind : MeshExportSettings.LightmapGeneratorKind.None));
         }
 
         protected virtual Meshie OnPopulateMesh(LodMaskLayer lodMask)
