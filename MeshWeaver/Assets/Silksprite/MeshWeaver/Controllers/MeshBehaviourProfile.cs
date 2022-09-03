@@ -26,5 +26,23 @@ namespace Silksprite.MeshWeaver.Controllers
         public bool useLod1;
         public bool useLod2;
         public bool useCollider = true;
+        [SerializeField] StaticEditorFlags staticEditorFlags;
+        
+#if UNITY_EDITOR
+        public UnityEditor.StaticEditorFlags EditorStaticEditorFlags => (UnityEditor.StaticEditorFlags)staticEditorFlags;
+#endif
+        
+        // NOTE: copy of UnityEditor.StaticEditorFlags
+        [Flags]
+        enum StaticEditorFlags
+        {
+            ContributeGI = 1,
+            OccluderStatic = 2,
+            OccludeeStatic = 16,
+            BatchingStatic = 4,
+            NavigationStatic = 8,
+            OffMeshLinkGeneration = 32,
+            ReflectionProbeStatic = 64,
+        }
     }
 }
