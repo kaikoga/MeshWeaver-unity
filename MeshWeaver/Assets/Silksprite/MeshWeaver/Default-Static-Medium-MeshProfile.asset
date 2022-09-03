@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9896157ae28548648e9b647aa4ec4908, type: 3}
-  m_Name: Default-Static-Small-MeshProfile
+  m_Name: Default-Static-Medium-MeshProfile
   m_EditorClassIdentifier: 
   data:
     exportedNormalGeneratorKind: 0
@@ -19,6 +19,6 @@ MonoBehaviour:
     useLod: 0
     useLod1: 0
     useLod2: 0
-    useCollider: 0
+    useCollider: 1
     useLightmap: 0
     staticEditorFlags: 120
