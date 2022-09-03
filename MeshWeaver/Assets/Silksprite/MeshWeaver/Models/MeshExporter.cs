@@ -67,15 +67,18 @@ namespace Silksprite.MeshWeaver.Models
                 case MeshExportSettings.LightmapGeneratorKind.None:
                     break;
                 default:
-                    #if UNITY_EDITOR
-                    UnityEditor.Unwrapping.GenerateSecondaryUVSet(_mesh, new UnityEditor.UnwrapParam
+#if UNITY_EDITOR
+                    if (_mesh.vertexCount > 0)
                     {
-                        angleError = 0.08f,
-                        areaError = 0.15f,
-                        hardAngle = 88f,
-                        packMargin = 0.03125f // 1/32
-                    });
-                    #endif
+                        UnityEditor.Unwrapping.GenerateSecondaryUVSet(_mesh, new UnityEditor.UnwrapParam
+                        {
+                            angleError = 0.08f,
+                            areaError = 0.15f,
+                            hardAngle = 88f,
+                            packMargin = 0.03125f // 1/32
+                        });
+                    }
+#endif
                     break;
             }
         }
