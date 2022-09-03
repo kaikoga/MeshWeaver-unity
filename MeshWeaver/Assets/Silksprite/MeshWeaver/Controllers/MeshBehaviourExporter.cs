@@ -11,11 +11,9 @@ namespace Silksprite.MeshWeaver.Controllers
         public Mesh outputMesh;
         public GameObject outputPrefab;
 
-        public bool useLod;
-        public bool useLod1;
-        public bool useLod2;
-        public bool useCollider = true;
-        
+        [SerializeField] MeshBehaviourProfile profile;
+        public MeshBehaviourProfileData ProfileData => profile ? profile.data : MeshBehaviourProfileData.Default;
+
         public Mesh outputMeshLod1;
         public Mesh outputMeshLod2;
         public Mesh outputMeshForCollider;

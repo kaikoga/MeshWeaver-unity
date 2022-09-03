@@ -118,10 +118,10 @@ namespace Silksprite.MeshWeaver.Controllers
 
             RefreshMeshReferences(projectFilePath, meshBehaviourExporter, true);
 
-            meshBehaviour.ExportMesh(LodMaskLayer.LOD0, meshBehaviourExporter.outputMesh, true, true);
-            meshBehaviour.ExportMesh(LodMaskLayer.LOD1, meshBehaviourExporter.outputMeshLod1, true, true);
-            meshBehaviour.ExportMesh(LodMaskLayer.LOD2, meshBehaviourExporter.outputMeshLod2, true, true);
-            meshBehaviour.ExportMesh(LodMaskLayer.Collider, meshBehaviourExporter.outputMeshForCollider, true, true);
+            meshBehaviour.ExportMesh(LodMaskLayer.LOD0, meshBehaviourExporter.outputMesh);
+            meshBehaviour.ExportMesh(LodMaskLayer.LOD1, meshBehaviourExporter.outputMeshLod1);
+            meshBehaviour.ExportMesh(LodMaskLayer.LOD2, meshBehaviourExporter.outputMeshLod2);
+            meshBehaviour.ExportMesh(LodMaskLayer.Collider, meshBehaviourExporter.outputMeshForCollider);
 
             AssetDatabase.SaveAssets();
         }
@@ -135,6 +135,7 @@ namespace Silksprite.MeshWeaver.Controllers
 
             RefreshMeshReferences(AssetDatabase.GetAssetPath(meshBehaviourExporter.outputMesh), meshBehaviourExporter, false);
 
+            var profileData = meshBehaviourExporter.ProfileData;
             var materials = meshBehaviourExporter.overrideMaterials ? meshBehaviourExporter.materials : meshBehaviour.materials.ToArray();
 
             var baseName = Path.GetFileNameWithoutExtension(projectFilePath);
@@ -149,7 +150,7 @@ namespace Silksprite.MeshWeaver.Controllers
                 return meshRenderer;
             }
 
-            if (!meshBehaviourExporter.useLod)
+            if (!profileData.useLod)
             {
                 SetupRenderer(prefab, meshBehaviourExporter.outputMesh);
             }
@@ -175,15 +176,15 @@ namespace Silksprite.MeshWeaver.Controllers
                 var lods = new List<LOD>();
 
                 var meshRenderer0 = CreateChildRenderer(baseName + "_LOD0", meshBehaviourExporter.outputMesh);
-                lods.Add(CreateLOD(meshRenderer0, meshBehaviourExporter.useLod1 ? 0.6f : meshBehaviourExporter.useLod2 ? 0.3f : 0.1f));
+                lods.Add(CreateLOD(meshRenderer0, profileData.useLod1 ? 0.6f : profileData.useLod2 ? 0.3f : 0.1f));
 
-                if (meshBehaviourExporter.useLod1)
+                if (profileData.useLod1)
                 {
                     var meshRenderer1 = CreateChildRenderer(baseName + "_LOD1", meshBehaviourExporter.outputMeshLod1);
-                    lods.Add(CreateLOD(meshRenderer1, meshBehaviourExporter.useLod2 ? 0.3f : 0.1f));
+                    lods.Add(CreateLOD(meshRenderer1, profileData.useLod2 ? 0.3f : 0.1f));
                 }
 
-                if (meshBehaviourExporter.useLod2)
+                if (profileData.useLod2)
                 {
                     var meshRenderer2 = CreateChildRenderer(baseName + "_LOD2", meshBehaviourExporter.outputMeshLod2);
                     lods.Add(CreateLOD(meshRenderer2, 0.1f));
@@ -192,7 +193,7 @@ namespace Silksprite.MeshWeaver.Controllers
                 prefab.AddComponent<LODGroup>().SetLODs(lods.ToArray());
             }
 
-            if (meshBehaviourExporter.useCollider)
+            if (profileData.useCollider)
             {
                 var gameObject9 = new GameObject(baseName + "_Collider");
                 gameObject9.transform.SetParent(prefab.transform, false);

@@ -1,3 +1,17 @@
 fileFormatVersion: 2
 guid: 3ea075f2ae8a40fba3d6238f5cacd99a
-timeCreated: 1647567438
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - outputMesh: {instanceID: 0}
+  - outputPrefab: {instanceID: 0}
+  - profile: {fileID: 11400000, guid: f8b92c3cf4d33453fa78527ae8f64b94, type: 2}
+  - outputMeshLod1: {instanceID: 0}
+  - outputMeshLod2: {instanceID: 0}
+  - outputMeshForCollider: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
