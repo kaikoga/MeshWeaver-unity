@@ -147,6 +147,7 @@ namespace Silksprite.MeshWeaver.Controllers
                 meshFilter.sharedMesh = mesh;
                 var meshRenderer = gameObject.AddComponent<MeshRenderer>();
                 meshRenderer.sharedMaterials = materials;
+                meshRenderer.receiveGI = profileData.useLightmap ? ReceiveGI.Lightmaps : ReceiveGI.LightProbes;
                 return meshRenderer;
             }
 

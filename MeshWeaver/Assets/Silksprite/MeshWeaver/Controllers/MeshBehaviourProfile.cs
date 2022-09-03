@@ -26,6 +26,7 @@ namespace Silksprite.MeshWeaver.Controllers
         public bool useLod1;
         public bool useLod2;
         public bool useCollider = true;
+        public bool useLightmap = true;
         [SerializeField] StaticEditorFlags staticEditorFlags;
         
 #if UNITY_EDITOR
