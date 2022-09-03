@@ -135,7 +135,7 @@ namespace Silksprite.MeshWeaver.Controllers
 
             RefreshMeshReferences(AssetDatabase.GetAssetPath(meshBehaviourExporter.outputMesh), meshBehaviourExporter, false);
 
-            var profileData = meshBehaviourExporter.ProfileData;
+            var profileData = meshBehaviour.ProfileData;
             var materials = meshBehaviourExporter.overrideMaterials ? meshBehaviourExporter.materials : meshBehaviour.materials.ToArray();
 
             var baseName = Path.GetFileNameWithoutExtension(projectFilePath);

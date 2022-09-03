@@ -20,3 +20,4 @@ MonoBehaviour:
     useLod1: 0
     useLod2: 0
     useCollider: 0
+    staticEditorFlags: 0
