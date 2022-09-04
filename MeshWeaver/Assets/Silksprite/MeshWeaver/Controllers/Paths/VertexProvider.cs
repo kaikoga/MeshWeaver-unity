@@ -1,5 +1,6 @@
 using Silksprite.MeshWeaver.Models.DataObjects.Extensions;
 using Silksprite.MeshWeaver.Controllers.Base;
+using Silksprite.MeshWeaver.Models;
 using Silksprite.MeshWeaver.Models.DataObjects;
 using Silksprite.MeshWeaver.Models.Paths;
 
@@ -12,7 +13,7 @@ namespace Silksprite.MeshWeaver.Controllers.Paths
 
         protected override IPathieFactory CreateFactory()
         {
-            return new VertexFactory(lodMask, crease, uvs.ToMux());
+            return new VertexFactory(LodMask.All, crease, uvs.ToMux());
         }
     }
 }

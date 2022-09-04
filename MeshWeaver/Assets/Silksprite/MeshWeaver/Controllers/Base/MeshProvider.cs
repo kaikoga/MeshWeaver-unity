@@ -19,7 +19,7 @@ namespace Silksprite.MeshWeaver.Controllers.Base
         {
             var providers = GetComponents<IMeshModifierProvider>()
                 .Where(provider => provider.enabled);
-            return providers.Aggregate(ModifiedMeshieFactory.Builder(CreateFactory(context)),
+            return providers.Aggregate(ModifiedMeshieFactory.Builder(CreateFactory(context), lodMask),
                     (builder, provider) => builder.Concat(provider.MeshieModifier, provider.LodMask))
                 .ToFactory();
         }

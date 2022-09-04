@@ -72,7 +72,8 @@ namespace Silksprite.MeshWeaver.Controllers.Extensions
             if (pathProvider == null) return PathieFactory.Empty;
 
             var localTranslation = pathProvider.ToLocalTranslation();
-            return ModifiedPathieFactory.Builder(pathProvider.ToFactory()).Concat(new VertwiseTranslate(localTranslation)).ToFactory();
+            // FIXME: maybe we want to cleanup Pathie.isLoop and fix this 
+            return ModifiedPathieFactory.Builder(pathProvider.ToFactory(), pathProvider.lodMask).Concat(new VertwiseTranslate(localTranslation)).ToFactory();
         }
 
         public static IPathieFactory CollectPathies(this IEnumerable<PathProvider> pathProviders, bool isLoop)

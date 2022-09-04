@@ -15,24 +15,30 @@ namespace Silksprite.MeshWeaver.Models.Extensions
 
         public static IPathieFactory Cached(this IPathieFactory factory) => new CachedPathieFactory(factory);
 
-        public static IMeshieFactory WithModifiers(this IMeshieFactory factory, params IMeshieModifier[] modifiers)
+        public static IMeshieFactory WithLodAndModifiers(this IMeshieFactory factory, LodMask lodMask, params IMeshieModifier[] modifiers)
         {
-            return modifiers.Aggregate(ModifiedMeshieFactory.Builder(factory), (builder, modifier) => builder.Concat(modifier)).ToFactory();
+            return modifiers.Aggregate(ModifiedMeshieFactory.Builder(factory, lodMask), (builder, modifier) => builder.Concat(modifier)).ToFactory();
         }
 
-        public static IMeshieFactory WithModifiers(this IMeshieFactory factory, IEnumerable<IMeshieModifier> modifiers)
+        public static IMeshieFactory WithLodAndModifiers(this IMeshieFactory factory, LodMask lodMask, IEnumerable<IMeshieModifier> modifiers)
         {
-            return modifiers.Aggregate(ModifiedMeshieFactory.Builder(factory), (builder, modifier) => builder.Concat(modifier)).ToFactory();
+            return modifiers.Aggregate(ModifiedMeshieFactory.Builder(factory, lodMask), (builder, modifier) => builder.Concat(modifier)).ToFactory();
         }
 
-        public static IPathieFactory WithModifiers(this IPathieFactory factory, params IPathieModifier[] modifiers)
+        public static IMeshieFactory WithModifiers(this IMeshieFactory factory, params IMeshieModifier[] modifiers) => WithLodAndModifiers(factory, LodMask.All, modifiers);
+        public static IMeshieFactory WithModifiers(this IMeshieFactory factory, IEnumerable<IMeshieModifier> modifiers) => WithLodAndModifiers(factory, LodMask.All, modifiers);
+
+        public static IPathieFactory WithLodAndModifiers(this IPathieFactory factory, LodMask lodMask, params IPathieModifier[] modifiers)
         {
-            return modifiers.Aggregate(ModifiedPathieFactory.Builder(factory), (builder, modifier) => builder.Concat(modifier)).ToFactory();
+            return modifiers.Aggregate(ModifiedPathieFactory.Builder(factory, lodMask), (builder, modifier) => builder.Concat(modifier)).ToFactory();
         }
 
-        public static IPathieFactory WithModifiers(this IPathieFactory factory, IEnumerable<IPathieModifier> modifiers)
+        public static IPathieFactory WithLodAndModifiers(this IPathieFactory factory, LodMask lodMask, IEnumerable<IPathieModifier> modifiers)
         {
-            return modifiers.Aggregate(ModifiedPathieFactory.Builder(factory), (builder, modifier) => builder.Concat(modifier)).ToFactory();
+            return modifiers.Aggregate(ModifiedPathieFactory.Builder(factory, lodMask), (builder, modifier) => builder.Concat(modifier)).ToFactory();
         }
+
+        public static IPathieFactory WithModifiers(this IPathieFactory factory, params IPathieModifier[] modifiers) => WithLodAndModifiers(factory, LodMask.All, modifiers);
+        public static IPathieFactory WithModifiers(this IPathieFactory factory, IEnumerable<IPathieModifier> modifiers) => WithLodAndModifiers(factory, LodMask.All, modifiers);
     }
 }
