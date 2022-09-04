@@ -19,7 +19,7 @@ namespace Silksprite.MeshWeaver.Models.Paths
 
         public Pathie Build(LodMaskLayer lod)
         {
-            Vertie CreateVertie() => new Vertie(Matrix4x4.identity, false, _uvs);
+            Vertie CreateVertie() => new Vertie(Matrix4x4.identity, _uvs);
 
             IEnumerable<Vertie> CreateVerties()
             {

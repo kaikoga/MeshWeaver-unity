@@ -7,20 +7,18 @@ namespace Silksprite.MeshWeaver.Models
     public class Vertie
     {
         public readonly Matrix4x4 Translation;
-        public readonly bool Culled;
         
         public readonly Mux<Vector2> Uvs;
 
         public readonly Vector3 Vertex;
         public readonly Vector2 Uv;
 
-        public Vertie(Vector3 vertex) : this(Matrix4x4.Translate(vertex), false, Mux.Single(Vector2.zero)) { }
-        public Vertie(Matrix4x4 translation) : this(translation, false, Mux.Single(Vector2.zero)) { }
+        public Vertie(Vector3 vertex) : this(Matrix4x4.Translate(vertex), Mux.Single(Vector2.zero)) { }
+        public Vertie(Matrix4x4 translation) : this(translation, Mux.Single(Vector2.zero)) { }
 
-        public Vertie(Matrix4x4 translation, bool culled, Mux<Vector2> uvs)
+        public Vertie(Matrix4x4 translation, Mux<Vector2> uvs)
         {
             Translation = translation;
-            Culled = culled;
 
             Uvs = uvs;
 
@@ -28,7 +26,7 @@ namespace Silksprite.MeshWeaver.Models
             Uv = Uvs.Value;
         }
 
-        public static readonly Vertie Identity = new Vertie(Matrix4x4.identity, false, Mux.Empty<Vector2>());
+        public static readonly Vertie Identity = new Vertie(Matrix4x4.identity, Mux.Empty<Vector2>());
 
         public bool VertexEquals(Vertie other, float sqrError = 0.000001f) => (Vertex - other.Vertex).sqrMagnitude <= sqrError;
         public bool TranslationEquals(Vertie other, float error = 0.000001f)
@@ -43,40 +41,40 @@ namespace Silksprite.MeshWeaver.Models
 
         public Vertie MultiplyPoint(Matrix4x4 translation)
         {
-            return new Vertie(translation * Translation, Culled, Uvs);
+            return new Vertie(translation * Translation, Uvs);
         }
 
         public static Vertie operator +(Vertie a, Vector3 vertex)
         {
-            return new Vertie(Matrix4x4.Translate(vertex) * a.Translation, a.Culled, a.Uvs);
+            return new Vertie(Matrix4x4.Translate(vertex) * a.Translation, a.Uvs);
         }
 
         public static Vertie operator +(Vertie a, Vertie b)
         {
             // Use this for blending only. Perhaps another type?
-            return new Vertie(ComponentWiseAdd(a.Translation, b.Translation), a.Culled && b.Culled, a.Uvs.ZipMux(b.Uvs, (x, y) => x + y));
+            return new Vertie(ComponentWiseAdd(a.Translation, b.Translation), a.Uvs.ZipMux(b.Uvs, (x, y) => x + y));
         }
 
         public static Vertie operator -(Vertie a, Vertie b)
         {
             // Use this for blending only. Perhaps another type?
-            return new Vertie(ComponentWiseSubtract(a.Translation, b.Translation), a.Culled && b.Culled, a.Uvs.ZipMux(b.Uvs, (x, y) => x - y));
+            return new Vertie(ComponentWiseSubtract(a.Translation, b.Translation), a.Uvs.ZipMux(b.Uvs, (x, y) => x - y));
         }
 
         public static Vertie operator *(Vertie a, Vertie b)
         {
-            return new Vertie(a.Translation * b.Translation, a.Culled && b.Culled, a.Uvs.ZipMux(b.Uvs, (x, y) => x + y));
+            return new Vertie(a.Translation * b.Translation, a.Uvs.ZipMux(b.Uvs, (x, y) => x + y));
         }
 
         public static Vertie operator /(Vertie a, Vertie b)
         {
             // I don't think this is correct, Translation part in particular, but we need the Vertex part at least
-            return new Vertie(a.Translation * b.Translation.inverse, a.Culled && b.Culled, a.Uvs.ZipMux(b.Uvs, (x, y) => x - y));
+            return new Vertie(a.Translation * b.Translation.inverse, a.Uvs.ZipMux(b.Uvs, (x, y) => x - y));
         }
 
         public static Vertie operator *(Vertie a, float f)
         {
-            return new Vertie(ComponentWiseMultiply(a.Translation, f), a.Culled, a.Uvs.SelectMuxValues(uv => uv * f));
+            return new Vertie(ComponentWiseMultiply(a.Translation, f), a.Uvs.SelectMuxValues(uv => uv * f));
         }
 
         static Matrix4x4 ComponentWiseAdd(Matrix4x4 a, Matrix4x4 b)
@@ -105,7 +103,7 @@ namespace Silksprite.MeshWeaver.Models
             var scale = translation.lossyScale;
             translation.rotation.ToAngleAxis(out var angle, out _);
             var uvs = string.Join(", ", Uvs.Select(uv => $"[{uv.Channel}] : {uv.Value.x:G3}, {uv.Value.y:G3}"));
-            return $"[{(Culled ? "?" : "")} {Vertex.x:G3}, {Vertex.y:G3}, {Vertex.z:G3}] ({scale.x:G3}, {scale.y:G3}, {scale.z:G3} : {angle:G3}) <{uvs}> ";
+            return $"[{Vertex.x:G3}, {Vertex.y:G3}, {Vertex.z:G3}] ({scale.x:G3}, {scale.y:G3}, {scale.z:G3} : {angle:G3}) <{uvs}> ";
         }
     }
 }

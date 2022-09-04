@@ -21,7 +21,7 @@ namespace Silksprite.MeshWeaver.Models.Paths
 
         public Pathie Build(LodMaskLayer lod)
         {
-            Vertie CreateVertie() => new Vertie(Matrix4x4.identity, !_lodMask.HasLayer(lod), _uvs);
+            Vertie CreateVertie() => new Vertie(Matrix4x4.identity, _uvs);
 
             IEnumerable<Vertie> CreateVerties()
             {
@@ -29,6 +29,7 @@ namespace Silksprite.MeshWeaver.Models.Paths
                 yield return CreateVertie();
             }
 
+            if (!_lodMask.HasLayer(lod)) return Pathie.Empty();
             if (_crease)
             {
                 return new Pathie(CreateVerties(), true);
