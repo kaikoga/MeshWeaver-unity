@@ -13,7 +13,7 @@ namespace Silksprite.MeshWeaver.Controllers.Paths
 
         protected override IPathieFactory CreateFactory()
         {
-            return new VertexFactory(LodMask.All, crease, uvs.ToMux());
+            return new VertexFactory(crease, uvs.ToMux());
         }
     }
 }

@@ -4,22 +4,24 @@ using UnityEngine;
 
 namespace Silksprite.MeshWeaver.Models.Paths
 {
-    public class VertexFactory : IPathieFactory
+    public class LodVertexFactory : IPathieFactory
     {
-        public static readonly VertexFactory Default = new VertexFactory();
+        public static readonly LodVertexFactory Default = new LodVertexFactory(LodMask.All);
 
+        readonly LodMask _lodMask;
         readonly bool _crease;
         readonly Mux<Vector2> _uvs;
 
-        public VertexFactory(bool crease = false, Mux<Vector2> uvs = null)
+        public LodVertexFactory(LodMask lodMask, bool crease = false, Mux<Vector2> uvs = null)
         {
+            _lodMask = lodMask;
             _crease = crease;
             _uvs = uvs ?? Mux.Empty<Vector2>();
         }
 
         public Pathie Build(LodMaskLayer lod)
         {
-            Vertie CreateVertie() => new Vertie(Matrix4x4.identity, false, _uvs);
+            Vertie CreateVertie() => new Vertie(Matrix4x4.identity, !_lodMask.HasLayer(lod), _uvs);
 
             IEnumerable<Vertie> CreateVerties()
             {
