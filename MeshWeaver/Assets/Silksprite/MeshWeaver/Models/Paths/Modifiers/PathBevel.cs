@@ -20,7 +20,7 @@ namespace Silksprite.MeshWeaver.Models.Paths.Modifiers
 
         public Pathie Modify(Pathie pathie)
         {
-            var vertices = pathie.Active.Vertices;
+            var vertices = pathie.Vertices;
             if (vertices.Count < 2) return pathie;
             var workVertices = vertices.ToArray();
 

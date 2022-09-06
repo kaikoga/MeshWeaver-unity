@@ -14,7 +14,7 @@ namespace Silksprite.MeshWeaver.Models.Extensions
 
         public static IEnumerable<Vertie> DedupLoop(this Pathie e, Func<Vertie, Vertie, bool> equality)
         {
-            var vertices = e.Active.Vertices;
+            var vertices = e.Vertices;
             if (vertices.Count < 2) return vertices;
             var enumerable = !e.isLoop && equality(e.First, e.Last) ? vertices.Skip(1) : vertices;
             return enumerable.Dedup(equality);

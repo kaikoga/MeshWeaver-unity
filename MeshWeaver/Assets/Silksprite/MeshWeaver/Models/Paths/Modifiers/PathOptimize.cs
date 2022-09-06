@@ -12,7 +12,7 @@ namespace Silksprite.MeshWeaver.Models.Paths.Modifiers
 
         public Pathie Modify(Pathie pathie)
         {
-            if (pathie.Active.Vertices.Pairwise((a, b) => (a, b)).All(ab => ab.a.TranslationEquals(ab.b))) return pathie;
+            if (pathie.Vertices.Pairwise((a, b) => (a, b)).All(ab => ab.a.TranslationEquals(ab.b))) return pathie;
 
             var workVertices = pathie.Vertices.ToArray();
             var verticesCount = workVertices.Length;

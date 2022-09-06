@@ -48,14 +48,12 @@ namespace Silksprite.MeshWeaver.Models.Meshes
             var pathieX = _pathieX.Build(lod);
             var pathieY = _pathieY.Build(lod);
 
-            var activeX = pathieX.Active;
-            var countX = activeX.Vertices.Count;
+            var countX = pathieX.Vertices.Count;
             if (countX < 2) return Meshie.Empty();
-            var activeY = pathieY.Active;
-            var countY = activeY.Vertices.Count;
+            var countY = pathieY.Vertices.Count;
             if (countY < 2) return Meshie.Empty();
 
-            var vertices = activeY.Vertices.SelectMany(pY => activeX.Vertices.Select(pX =>
+            var vertices = pathieY.Vertices.SelectMany(pY => pathieX.Vertices.Select(pX =>
             {
                 switch (_operatorKind)
                 {
@@ -71,10 +69,10 @@ namespace Silksprite.MeshWeaver.Models.Meshes
             }));
             var gons = new List<Gon>();
 
-            var vertiesXWithIndex = pathieX.Active.Vertices.Select((v, i) => (v, i)).ToList();
+            var vertiesXWithIndex = pathieX.Vertices.Select((v, i) => (v, i)).ToList();
             if (pathieX.isLoop) vertiesXWithIndex.Add(vertiesXWithIndex.First());
 
-            var vertiesYWithIndex = pathieY.Active.Vertices.Select((v, i) => (v, i)).ToList();
+            var vertiesYWithIndex = pathieY.Vertices.Select((v, i) => (v, i)).ToList();
             if (pathieY.isLoop) vertiesYWithIndex.Add(vertiesYWithIndex.First());
 
             var a = new int[4];

@@ -25,15 +25,13 @@ namespace Silksprite.MeshWeaver.Models.Meshes
             var pathieA = _pathieA.Build(lod);
             var pathieB = _pathieB.Build(lod);
 
-            var activeA = pathieA.Active;
-            var countA = activeA.Vertices.Count;
+            var countA = pathieA.Vertices.Count;
             if (countA < 2) return Meshie.Empty();
-            var activeB = pathieB.Active;
-            var countB = activeB.Vertices.Count;
+            var countB = pathieB.Vertices.Count;
             if (countB < 2) return Meshie.Empty();
 
-            var proportionsA = activeA.ToNetProportions().ToArray();
-            var proportionsB = activeB.ToNetProportions().ToArray();
+            var proportionsA = pathieA.ToNetProportions().ToArray();
+            var proportionsB = pathieB.ToNetProportions().ToArray();
 
             var a = 0;
             var b = 0;
@@ -68,7 +66,7 @@ namespace Silksprite.MeshWeaver.Models.Meshes
             while (b < proportionsB.Length - 1) NextB();
 
 
-            return Meshie.Builder(activeA.Vertices.Concat(activeB.Vertices), gons).ToMeshie();
+            return Meshie.Builder(pathieA.Vertices.Concat(pathieB.Vertices), gons).ToMeshie();
         }
 
         public Pathie Extract(string pathName, LodMaskLayer lod)

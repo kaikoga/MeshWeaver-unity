@@ -12,11 +12,6 @@ namespace Silksprite.MeshWeaver.Models
 
         readonly Vertie[] _vertices;
 
-        [Obsolete("Active is unnecessary because culling is removed")] // FIXME 
-        public Pathie Active => new Pathie(ActiveVertices(), isLoop);
-
-        IEnumerable<Vertie> ActiveVertices() => _vertices;
-
         public Vertie First => _vertices.Length > 0 ? _vertices[0] : Vertie.Identity;
         public Vertie Last
         {
