@@ -6,7 +6,7 @@ namespace Silksprite.MeshWeaver.Controllers.Paths.Modifiers
 {
     public class PathBevelProvider : PathModifierProviderBase
     {
-        [Min(2)]
+        [Min(1)]
         public int subdivision = 3;
         [Range(0f, 1f)]
         public float size = 0.5f;

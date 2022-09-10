@@ -45,7 +45,7 @@ namespace Silksprite.MeshWeaver.Models.Paths.Modifiers
             IEnumerable<Vertie> Bevel(Vertie a, Vertie b, Vertie c)
             {
                 yield return Curve(a, b, c, 1f);
-                for (var i = 1; i < _subdivision - 1; i++)
+                for (var i = 1; i < _subdivision; i++)
                 {
                     var t = i * 2f / _subdivision - 1f;
                     if (t < 0f)
