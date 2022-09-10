@@ -21,7 +21,8 @@ namespace Silksprite.MeshWeaver.Models.Paths.Modifiers
         public Pathie Modify(Pathie pathie)
         {
             var vertices = pathie.Vertices;
-            if (vertices.Count < 2) return pathie;
+            var count = vertices.Count; 
+            if (count < 3) return pathie;
             var workVertices = vertices.ToArray();
 
             var halfSize = _size / 2;
@@ -61,9 +62,18 @@ namespace Silksprite.MeshWeaver.Models.Paths.Modifiers
             }
 
             var builder = Pathie.Builder(pathie.isLoop);
-            builder.Vertices.Add(workVertices[0]);
-            builder.Vertices.AddRange(workVertices.EachSlidingTrio(Bevel).SelectMany(v => v));
-            builder.Vertices.Add(workVertices[workVertices.Length - 1]);
+            if (pathie.isLoop)
+            {
+                builder.Vertices.AddRange(Bevel(workVertices[count - 1], workVertices[0], workVertices[1]));
+                builder.Vertices.AddRange(workVertices.EachSlidingTrio(Bevel).SelectMany(v => v));
+                builder.Vertices.AddRange(Bevel(workVertices[count - 2], workVertices[count - 1], workVertices[0]));
+            }
+            else
+            {
+                builder.Vertices.Add(workVertices[0]);
+                builder.Vertices.AddRange(workVertices.EachSlidingTrio(Bevel).SelectMany(v => v));
+                builder.Vertices.Add(workVertices[count - 1]);
+            }
             return builder.ToPathie();
         }
     }
