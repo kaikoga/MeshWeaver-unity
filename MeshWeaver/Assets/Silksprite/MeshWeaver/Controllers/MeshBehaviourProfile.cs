@@ -16,7 +16,12 @@ namespace Silksprite.MeshWeaver.Controllers
         static MeshBehaviourProfileData _default;
         public static MeshBehaviourProfileData Default => _default = _default ?? new MeshBehaviourProfileData();
 
-        [Header("Mesh Generator Settings")]
+        [Header("Realtime Mesh Generator Settings")]
+        public MeshExportSettings.NormalGeneratorKind realtimeNormalGeneratorKind;
+        public float realtimeNormalGeneratorAngle;
+        public MeshExportSettings.LightmapGeneratorKind realtimeLightmapGeneratorKind;
+
+        [Header("Exported Mesh Generator Settings")]
         public MeshExportSettings.NormalGeneratorKind exportedNormalGeneratorKind;
         public float exportedNormalGeneratorAngle;
         public MeshExportSettings.LightmapGeneratorKind exportedLightmapGeneratorKind;

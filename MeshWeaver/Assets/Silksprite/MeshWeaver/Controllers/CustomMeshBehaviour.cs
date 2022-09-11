@@ -43,7 +43,7 @@ namespace Silksprite.MeshWeaver.Controllers
         public void Compile()
         {
             if (_runtimeMesh == null) _runtimeMesh = new Mesh();
-            OnPopulateMesh(lodMaskLayer, _runtimeMesh);
+            OnPopulateMesh(lodMaskLayer, _runtimeMesh, true);
 
             var sharedMaterials = (materials?.Length ?? 0) > 0 ? materials : null;
 
@@ -64,7 +64,7 @@ namespace Silksprite.MeshWeaver.Controllers
             else
             {
                 if (_runtimeColliderMesh == null) _runtimeColliderMesh = new Mesh();
-                OnPopulateMesh(LodMaskLayer.Collider, _runtimeColliderMesh);
+                OnPopulateMesh(LodMaskLayer.Collider, _runtimeColliderMesh, true);
                 runtimeColliderMesh = _runtimeColliderMesh;
             }
             foreach (var meshCollider in meshColliders ?? Enumerable.Empty<MeshCollider>())
@@ -73,21 +73,31 @@ namespace Silksprite.MeshWeaver.Controllers
             }
         }
 
-        public void ExportMesh(LodMaskLayer lodMask, Mesh mesh)
+        public void ExportMesh(LodMaskLayer lodMask, Mesh mesh, bool realtime)
         {
-            OnPopulateMesh(lodMask, mesh);
+            OnPopulateMesh(lodMask, mesh, realtime);
         }
 
-        protected virtual void OnPopulateMesh(LodMaskLayer lodMask, Mesh mesh)
+        protected virtual void OnPopulateMesh(LodMaskLayer lodMask, Mesh mesh, bool realtime)
         {
             mesh.Clear();
             var profileData = ProfileData;
             var meshie = OnPopulateMesh(lodMask);
             var forCollider = lodMask == LodMaskLayer.Collider;
-            meshie.ExportToMesh(mesh, new MeshExportSettings(
-                forCollider ? MeshExportSettings.NormalGeneratorKind.None : profileData.exportedNormalGeneratorKind,
-                profileData.exportedNormalGeneratorAngle,
-                forCollider ? MeshExportSettings.LightmapGeneratorKind.None : profileData.exportedLightmapGeneratorKind));
+            if (realtime)
+            {
+                meshie.ExportToMesh(mesh, new MeshExportSettings(
+                    forCollider ? MeshExportSettings.NormalGeneratorKind.None : profileData.realtimeNormalGeneratorKind,
+                    profileData.realtimeNormalGeneratorAngle,
+                    forCollider ? MeshExportSettings.LightmapGeneratorKind.None : profileData.realtimeLightmapGeneratorKind));
+            }
+            else
+            {
+                meshie.ExportToMesh(mesh, new MeshExportSettings(
+                    forCollider ? MeshExportSettings.NormalGeneratorKind.None : profileData.exportedNormalGeneratorKind,
+                    profileData.exportedNormalGeneratorAngle,
+                    forCollider ? MeshExportSettings.LightmapGeneratorKind.None : profileData.exportedLightmapGeneratorKind));
+            }
         }
 
         protected virtual Meshie OnPopulateMesh(LodMaskLayer lodMask)

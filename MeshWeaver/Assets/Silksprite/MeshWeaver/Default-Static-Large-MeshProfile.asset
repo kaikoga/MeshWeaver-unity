@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: Default-Static-Large-MeshProfile
   m_EditorClassIdentifier: 
   data:
+    realtimeNormalGeneratorKind: 0
+    realtimeNormalGeneratorAngle: 0
+    realtimeLightmapGeneratorKind: -1
     exportedNormalGeneratorKind: 0
     exportedNormalGeneratorAngle: 0
     exportedLightmapGeneratorKind: 0
@@ -20,4 +23,5 @@ MonoBehaviour:
     useLod1: 0
     useLod2: 0
     useCollider: 1
+    useLightmap: 1
     staticEditorFlags: -1

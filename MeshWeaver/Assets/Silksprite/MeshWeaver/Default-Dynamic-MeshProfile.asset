@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: Default-Dynamic-MeshProfile
   m_EditorClassIdentifier: 
   data:
+    realtimeNormalGeneratorKind: 0
+    realtimeNormalGeneratorAngle: 0
+    realtimeLightmapGeneratorKind: -1
     exportedNormalGeneratorKind: 0
     exportedNormalGeneratorAngle: 0
     exportedLightmapGeneratorKind: -1
