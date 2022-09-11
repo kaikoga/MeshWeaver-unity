@@ -22,7 +22,7 @@ namespace Silksprite.MeshWeaver.Models.Modifiers
             _resetScale = resetScale;
         }
 
-        protected override IEnumerable<Vertie> Modify(IEnumerable<Vertie> vertices)
+        protected override IEnumerable<Vertie> Modify(IReadOnlyList<Vertie> vertices)
         {
             var first = vertices.FirstOrDefault();
             if (first == null) return vertices;

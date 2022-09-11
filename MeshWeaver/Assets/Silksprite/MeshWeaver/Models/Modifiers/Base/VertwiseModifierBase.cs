@@ -31,7 +31,7 @@ namespace Silksprite.MeshWeaver.Models.Modifiers.Base
             return result.ToPathie();
         }
 
-        protected virtual IEnumerable<Vertie> Modify(IEnumerable<Vertie> vertices)
+        protected virtual IEnumerable<Vertie> Modify(IReadOnlyList<Vertie> vertices)
         {
             return vertices.Select(Modify);
         }

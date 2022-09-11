@@ -19,7 +19,7 @@ namespace Silksprite.MeshWeaver.Models.Modifiers
             _seed = seed;
         }
 
-        protected override IEnumerable<Vertie> Modify(IEnumerable<Vertie> vertices)
+        protected override IEnumerable<Vertie> Modify(IReadOnlyList<Vertie> vertices)
         {
             var random = new Random(_seed);
             foreach (var vertie in vertices) yield return vertie.WithUvs(

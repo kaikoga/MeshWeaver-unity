@@ -50,7 +50,7 @@ namespace Silksprite.MeshWeaver.Models.Modifiers
             _uvChannel = uvChannel;
         }
 
-        protected override IEnumerable<Vertie> Modify(IEnumerable<Vertie> vertices)
+        protected override IEnumerable<Vertie> Modify(IReadOnlyList<Vertie> vertices)
         {
             Matrix4x4 CreateMatrix(Vector3 pivot, Vector3 invOneX, Vector3 invOneY)
             {
@@ -78,7 +78,6 @@ namespace Silksprite.MeshWeaver.Models.Modifiers
 
             Matrix4x4 AutoProjection()
             {
-                vertices = vertices.ToArray();
                 var bounds = BoundsUtil.CalculateBounds(vertices.Select(v => v.Vertex));
                 var pivot = bounds.min;
                 var size = bounds.size;
