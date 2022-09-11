@@ -44,6 +44,14 @@ namespace Silksprite.MeshWeaver.Models.Extensions
             return equality(e.First(), e.Last()) ? e.Skip(1).Dedup(equality) : e.Dedup(equality);
         }
 
+        public static IEnumerable<T> CloseLoop<T>(this IEnumerable<T> e, bool isLoop) => isLoop ? CloseLoop(e) : e;
+
+        public static IEnumerable<T> CloseLoop<T>(this IEnumerable<T> e)
+        {
+            foreach (var v in e) yield return v;
+            yield return e.First();
+        }
+
         public static IEnumerable<TResult> Pairwise<TSource, TResult>(this IEnumerable<TSource> e, Func<TSource, TSource, TResult> selector)
         {
             return e.Zip(e.Skip(1), selector);

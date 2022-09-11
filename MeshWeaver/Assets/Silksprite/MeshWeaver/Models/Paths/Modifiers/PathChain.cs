@@ -15,10 +15,10 @@ namespace Silksprite.MeshWeaver.Models.Paths.Modifiers
 
         public Pathie Modify(Pathie pathie)
         {
-            var vertices = pathie.Vertices;
+            if (pathie.Vertices.Count <= 1) return pathie;
 
-            if (vertices.Count <= 1) return pathie;
-
+            var vertices = pathie.Vertices.CloseLoop(pathie.isLoop);
+            
             var chain = vertices.Pairwise((a, b) => (a, b)).Select((ab, i) =>
                 {
                     var (a, b) = ab;
