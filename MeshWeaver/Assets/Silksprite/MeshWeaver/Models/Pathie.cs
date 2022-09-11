@@ -7,9 +7,10 @@ namespace Silksprite.MeshWeaver.Models
 {
     public class Pathie
     {
-        public IReadOnlyCollection<Vertie> Vertices => _vertices;
+        public IReadOnlyList<Vertie> Vertices => _vertices;
         public readonly bool isLoop;
 
+        // TODO: We can expose implementation when we have ImmutableArray
         readonly Vertie[] _vertices;
 
         public Vertie First => _vertices.Length > 0 ? _vertices[0] : Vertie.Identity;

@@ -12,8 +12,9 @@ namespace Silksprite.MeshWeaver.Models
         readonly Vertie[] _vertices;
         readonly Gon[] _gons;
 
-        public IReadOnlyCollection<Vertie> Vertices => _vertices;
-        public IReadOnlyCollection<Gon> Gons => _gons;
+        // TODO: We can expose implementation when we have ImmutableArray
+        public IReadOnlyList<Vertie> Vertices => _vertices;
+        public IReadOnlyList<Gon> Gons => _gons;
 
         Meshie(Vertie[] vertices, Gon[] gons)
         {
