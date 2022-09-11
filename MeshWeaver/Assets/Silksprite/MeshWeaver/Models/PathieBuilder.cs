@@ -20,7 +20,8 @@ namespace Silksprite.MeshWeaver.Models
 
         public PathieBuilder Concat(Pathie other, Matrix4x4 matrix4x4)
         {
-            Vertices.AddRange(other.Vertices.Select(v => v.MultiplyPoint(matrix4x4)));
+            var vertices = matrix4x4 != Matrix4x4.identity ? other.Vertices.Select(v => v.MultiplyPoint(matrix4x4)) : other.Vertices;
+            Vertices.AddRange(vertices);
             return this;
         }
 

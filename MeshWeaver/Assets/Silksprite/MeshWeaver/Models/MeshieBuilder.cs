@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Silksprite.MeshWeaver.Models.Extensions;
@@ -22,7 +23,18 @@ namespace Silksprite.MeshWeaver.Models
         public MeshieBuilder Concat(Meshie meshie, Matrix4x4 matrix4x4, int uvIndex)
         {
             var offset = Vertices.Count;
-            Vertices.AddRange(meshie.Vertices.Select(v => v.MultiplyPoint(matrix4x4).ShiftUvChannel(uvIndex)));
+            IEnumerable<Vertie> vertices;
+            if (matrix4x4 != Matrix4x4.identity)
+            {
+                var selector = uvIndex != 0 ? (Func<Vertie, Vertie>)(v => v.MultiplyPoint(matrix4x4).ShiftUvChannel(uvIndex)) : v => v.MultiplyPoint(matrix4x4);
+                vertices = meshie.Vertices.Select(selector);
+            }
+            else
+            {
+                vertices = uvIndex != 0 ? meshie.Vertices.Select(v => v.ShiftUvChannel(uvIndex)) : meshie.Vertices;
+            }
+
+            Vertices.AddRange(vertices);
             Gons.AddRange(meshie.Gons.Select(gon => gon + offset));
             return this;
         }
