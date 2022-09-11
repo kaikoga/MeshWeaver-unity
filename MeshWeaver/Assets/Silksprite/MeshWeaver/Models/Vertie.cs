@@ -10,8 +10,8 @@ namespace Silksprite.MeshWeaver.Models
         
         public readonly Mux<Vector2> Uvs;
 
-        public readonly Vector3 Vertex;
-        public readonly Vector2 Uv;
+        public Vector3 Vertex => Translation.GetPosition();
+        public Vector2 Uv => Uvs.Value;
 
         public Vertie(Vector3 vertex) : this(Matrix4x4.Translate(vertex), Mux.Single(Vector2.zero)) { }
         public Vertie(Matrix4x4 translation) : this(translation, Mux.Single(Vector2.zero)) { }
@@ -19,11 +19,7 @@ namespace Silksprite.MeshWeaver.Models
         public Vertie(Matrix4x4 translation, Mux<Vector2> uvs)
         {
             Translation = translation;
-
             Uvs = uvs;
-
-            Vertex = translation.GetPosition();
-            Uv = Uvs.Value;
         }
 
         public static readonly Vertie Identity = new Vertie(Matrix4x4.identity, Mux.Empty<Vector2>());
