@@ -22,7 +22,14 @@ namespace Silksprite.MeshWeaver.Models
 
         public static Gon operator +(Gon gon, int offset)
         {
-            return new Gon(gon._indices.Select(i => i + offset).ToArray(), gon.MaterialIndex);
+            // return new Gon(gon._indices.Select(i => i + offset).ToArray(), gon.MaterialIndex);
+
+            var gonIndices = gon._indices;
+            var gonSize = gonIndices.Length;
+            var indices = new int[gonSize];
+            for (var i = 0; i < gonSize; i++) indices[i] = gonIndices[i] + offset;
+            return new Gon(indices, gon.MaterialIndex);
+
         }
 
         public override string ToString()
