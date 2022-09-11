@@ -7,7 +7,7 @@ namespace Silksprite.MeshWeaver.Models.Meshes.Modifiers
     {
         public Meshie Modify(Meshie meshie)
         {
-            var vertices = meshie.Vertices.ToArray(); 
+            var vertices = meshie.Vertices; 
             var gons = new List<Gon>();
             var index = 0;
             foreach (var gon in meshie.Gons)

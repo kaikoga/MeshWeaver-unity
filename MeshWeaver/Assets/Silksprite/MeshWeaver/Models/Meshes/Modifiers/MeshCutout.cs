@@ -20,7 +20,7 @@ namespace Silksprite.MeshWeaver.Models.Meshes.Modifiers
 
         public Meshie Modify(Meshie meshie)
         {
-            var vertices = meshie.Vertices.ToArray();
+            var vertices = meshie.Vertices;
 
             bool Predicate(Vector3 point) => _inside == _predicate(point);
 

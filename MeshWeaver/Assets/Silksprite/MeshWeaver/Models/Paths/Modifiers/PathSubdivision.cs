@@ -32,8 +32,20 @@ namespace Silksprite.MeshWeaver.Models.Paths.Modifiers
                 yield return b;
             }
 
-            var vertices = pathie.Vertices.Take(1)
-                .Concat(pathie.Vertices.Pairwise(SubdivideNextEdge).SelectMany(v => v));
+            IEnumerable<Vertie> vertices;
+            if (pathie.isLoop)
+            {
+                var verties = pathie.Vertices.Take(1)
+                    .Concat(pathie.Vertices.Pairwise(SubdivideNextEdge).SelectMany(v => v))
+                    .Concat(SubdivideNextEdge(pathie.Vertices[pathie.Vertices.Count - 1], pathie.First)).ToList();
+                verties.RemoveAt(verties.Count - 1);
+                vertices = verties;
+            }
+            else
+            {
+                vertices = pathie.Vertices.Take(1)
+                    .Concat(pathie.Vertices.Pairwise(SubdivideNextEdge).SelectMany(v => v));
+            }
             return new Pathie(vertices, pathie.isLoop);
         }
     }

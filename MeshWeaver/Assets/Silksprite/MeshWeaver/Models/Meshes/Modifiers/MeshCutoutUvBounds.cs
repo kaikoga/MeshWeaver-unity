@@ -21,7 +21,7 @@ namespace Silksprite.MeshWeaver.Models.Meshes.Modifiers
 
         public Meshie Modify(Meshie meshie)
         {
-            var vertices = meshie.Vertices.ToArray();
+            var vertices = meshie.Vertices;
             var uvArea = _uvArea;
 
             bool Predicate(Vector2 uv) => _inside ? uvArea.Contains(uv) : !uvArea.Contains(uv);
