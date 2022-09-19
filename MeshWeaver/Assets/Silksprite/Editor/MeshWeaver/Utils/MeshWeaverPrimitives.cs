@@ -69,7 +69,7 @@ namespace Silksprite.MeshWeaver.Utils
             path.CreateVertex(new Vector3(0f, 1f, 0f), false, new Vector2(0f, 1f));
             path.CreateVertex(new Vector3(1f, 1f, 0f), false, new Vector2(1f, 1f));
             path.CreateVertex(new Vector3(1f, 0f, 0f), false, new Vector2(1f, 0f));
-            path.CreateVertex(new Vector3(0f, 0f, 0f), false, new Vector2(0f, 0f));
+            path.isLoop = true;
 
             return polygon;
         }
@@ -86,7 +86,7 @@ namespace Silksprite.MeshWeaver.Utils
             path.CreateVertex(new Vector3(0f, 0f, 1f), false, new Vector2(0f, 1f));
             path.CreateVertex(new Vector3(1f, 0f, 1f), false, new Vector2(1f, 1f));
             path.CreateVertex(new Vector3(1f, 0f, 0f), false, new Vector2(1f, 0f));
-            path.CreateVertex(new Vector3(0f, 0f, 0f), false, new Vector2(0f, 0f));
+            path.isLoop = true;
 
             return polygon;
         }
