@@ -22,7 +22,7 @@ namespace Silksprite.MeshWeaver.Models.Extensions
 
         static IEnumerable<float> ToLengths(this Pathie pathie)
         {
-            return pathie.Vertices.Pairwise((a, b) => (b.Vertex - a.Vertex).magnitude);
+            return pathie.Vertices.CloseLoop(pathie.isLoop).Pairwise((a, b) => (b.Vertex - a.Vertex).magnitude);
         }
 
         public static IEnumerable<float> ToNetLengths(this Pathie pathie)

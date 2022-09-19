@@ -30,6 +30,8 @@ namespace Silksprite.MeshWeaver.Models.Meshes
             var countB = pathieB.Vertices.Count;
             if (countB < 2) return Meshie.Empty();
 
+            var maxA = countA + (pathieA.isLoop ? 0 : -1);
+            var maxB = countB + (pathieB.isLoop ? 0 : -1);
             var proportionsA = pathieA.ToNetProportions().ToArray();
             var proportionsB = pathieB.ToNetProportions().ToArray();
 
@@ -39,17 +41,17 @@ namespace Silksprite.MeshWeaver.Models.Meshes
 
             void NextA()
             {
-                gons.Add(new Gon(new[] { a, countA + b, a + 1 }, _materialIndex));
+                gons.Add(new Gon(new[] { a, countA + b % countB, (a + 1) % countA }, _materialIndex));
                 a++;
             }
 
             void NextB()
             {
-                gons.Add(new Gon(new[] { a, countA + b, countA + b + 1 }, _materialIndex));
+                gons.Add(new Gon(new[] { a % countA, countA + b, countA + (b + 1) % countB }, _materialIndex));
                 b++;
             }
             
-            while (a < proportionsA.Length - 1 && b < proportionsB.Length - 1)
+            while (a < maxA && b < maxB)
             {
                 if (proportionsA[a + 1] > proportionsB[b + 1])
                 {
@@ -61,9 +63,9 @@ namespace Silksprite.MeshWeaver.Models.Meshes
                 }
             }
 
-            while (a < proportionsA.Length - 1) NextA();
+            while (a < maxA) NextA();
 
-            while (b < proportionsB.Length - 1) NextB();
+            while (b < maxB) NextB();
 
 
             return Meshie.Builder(pathieA.Vertices.Concat(pathieB.Vertices), gons).ToMeshie();
