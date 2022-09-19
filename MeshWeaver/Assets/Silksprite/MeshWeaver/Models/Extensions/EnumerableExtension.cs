@@ -52,6 +52,24 @@ namespace Silksprite.MeshWeaver.Models.Extensions
             yield return e.First();
         }
 
+        public static IEnumerable<(T, int)> CloseLoopWithIndex<T>(this IEnumerable<T> e, bool isLoop) => isLoop ? CloseLoopWithIndex(e) : e.Select((x, i) => (x, i));
+
+        public static IEnumerable<(T, int)> CloseLoopWithIndex<T>(this IEnumerable<T> e)
+        {
+            var i = 0;
+            foreach (var v in e) yield return (v, i++);
+            yield return (e.First(), 0);
+        }
+
+        public static IEnumerable<int> CloseLoopIndex<T>(this IEnumerable<T> e, bool isLoop) => isLoop ? CloseLoopIndex(e) : e.Select((x, i) => i);
+
+        public static IEnumerable<int> CloseLoopIndex<T>(this IEnumerable<T> e)
+        {
+            var i = 0;
+            foreach (var v in e) yield return i++;
+            yield return 0;
+        }
+
         public static IEnumerable<TResult> Pairwise<TSource, TResult>(this IEnumerable<TSource> e, Func<TSource, TSource, TResult> selector)
         {
             return e.Zip(e.Skip(1), selector);
