@@ -8,21 +8,23 @@ namespace Silksprite.MeshWeaver.Models.Paths
     {
         readonly ChildPathieFactory[] _children;
         readonly bool _isLoop;
+        readonly bool _smoothJoin;
 
-        CompositePathieFactory(ChildPathieFactory[] children, bool isLoop)
+        CompositePathieFactory(ChildPathieFactory[] children, bool isLoop, bool smoothJoin)
         {
             _children = children;
             _isLoop = isLoop;
+            _smoothJoin = smoothJoin;
         }
 
-        CompositePathieFactory(IEnumerable<ChildPathieFactory> children, bool isLoop) : this(children.ToArray(), isLoop) { }
+        CompositePathieFactory(IEnumerable<ChildPathieFactory> children, bool isLoop, bool smoothJoin) : this(children.ToArray(), isLoop, smoothJoin) { }
 
         public Pathie Build(LodMaskLayer lod)
         {
-            return _children.Aggregate(Pathie.Builder(_isLoop), (builder, factory) => builder.Concat(factory.PathieFactory.Build(lod), factory.Translation)).ToPathie();
+            return _children.Aggregate(Pathie.Builder(_isLoop, _smoothJoin), (builder, factory) => builder.Concat(factory.PathieFactory.Build(lod), factory.Translation)).ToPathie();
         }
 
-        public static CompositePathieFactoryBuilder Builder(bool isLoop) => new CompositePathieFactoryBuilder(isLoop);
+        public static CompositePathieFactoryBuilder Builder(bool isLoop, bool smoothJoin = false) => new CompositePathieFactoryBuilder(isLoop, smoothJoin);
 
         class ChildPathieFactory
         {
@@ -34,8 +36,13 @@ namespace Silksprite.MeshWeaver.Models.Paths
         {
             readonly List<ChildPathieFactory> _children = new List<ChildPathieFactory>();
             readonly bool _isLoop;
+            readonly bool _smoothJoin;
 
-            public CompositePathieFactoryBuilder(bool isLoop) => _isLoop = isLoop;
+            public CompositePathieFactoryBuilder(bool isLoop, bool smoothJoin = false)
+            {
+                _isLoop = isLoop;
+                _smoothJoin = smoothJoin;
+            }
 
             public CompositePathieFactoryBuilder Concat(IPathieFactory pathieFactory, Matrix4x4 translation)
             {
@@ -50,7 +57,7 @@ namespace Silksprite.MeshWeaver.Models.Paths
             public CompositePathieFactoryBuilder ConcatVertex(Matrix4x4 translation) => Concat(VertexFactory.Default, translation);
             public CompositePathieFactoryBuilder ConcatVertex(Vector3 vertex) => Concat(VertexFactory.Default, Matrix4x4.Translate(vertex));
 
-            public CompositePathieFactory ToFactory() => new CompositePathieFactory(_children, _isLoop);
+            public CompositePathieFactory ToFactory() => new CompositePathieFactory(_children, _isLoop, _smoothJoin);
         }
     }
 }

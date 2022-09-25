@@ -69,12 +69,12 @@ namespace Silksprite.MeshWeaver.Models
         
         public static Pathie Empty() => new Pathie();
 
-        public static PathieBuilder Builder(bool isLoop) => new PathieBuilder(isLoop);
-        public static PathieBuilder Builder(Pathie pathie, bool isLoop) => new PathieBuilder(pathie, isLoop);
+        public static PathieBuilder Builder(bool isLoop, bool smoothJoin = false) => new PathieBuilder(isLoop, smoothJoin);
+        public static PathieBuilder Builder(Pathie pathie, bool isLoop, bool smoothJoin = false) => new PathieBuilder(pathie, isLoop, smoothJoin);
 
-        public static PathieBuilder Builder(IEnumerable<Vertie> vertices, bool isLoop)
+        public static PathieBuilder Builder(IEnumerable<Vertie> vertices, bool isLoop, bool smoothJoin = false)
         {
-            var builder = new PathieBuilder(isLoop);
+            var builder = new PathieBuilder(isLoop, smoothJoin);
             builder.Vertices.AddRange(vertices);
             return builder;
         }

@@ -55,9 +55,9 @@ namespace Silksprite.MeshWeaver.Controllers.Extensions
             return ModifiedPathieFactory.Builder(pathProvider.ToFactory(), pathProvider.lodMask).Concat(new VertwiseTranslate(localTranslation)).ToFactory();
         }
 
-        public static IPathieFactory CollectPathies(this IEnumerable<PathProvider> pathProviders, bool isLoop)
+        public static IPathieFactory CollectPathies(this IEnumerable<PathProvider> pathProviders, bool isLoop, bool smoothJoin)
         {
-            var builder = CompositePathieFactory.Builder(isLoop);
+            var builder = CompositePathieFactory.Builder(isLoop, smoothJoin);
             
             foreach (var pathProvider in pathProviders.Where(c => c != null && c.gameObject.activeSelf))
             {

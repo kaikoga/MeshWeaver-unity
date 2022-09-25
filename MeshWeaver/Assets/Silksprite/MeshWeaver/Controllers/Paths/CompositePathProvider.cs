@@ -7,10 +7,11 @@ namespace Silksprite.MeshWeaver.Controllers.Paths
     public class CompositePathProvider : PathProvider
     {
         public bool isLoop;
+        public bool smoothJoin;
 
         protected override IPathieFactory CreateFactory()
         {
-            return this.GetComponentsInDirectChildren<PathProvider>().CollectPathies(isLoop);
+            return this.GetComponentsInDirectChildren<PathProvider>().CollectPathies(isLoop, smoothJoin);
         }
     }
 }

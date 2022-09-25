@@ -12,6 +12,7 @@ namespace Silksprite.MeshWeaver.Controllers.Paths.Modifiers
         public Vector3 offset;
         public Transform offsetByReference;
         public bool offsetByPath = true;
+        public bool smoothJoin = false;
 
         Matrix4x4 Translation
         {
@@ -23,7 +24,7 @@ namespace Silksprite.MeshWeaver.Controllers.Paths.Modifiers
             }
         }
 
-        protected override IPathieModifier CreateModifier() => new PathRepeat(count, Translation, offsetByPath);
+        protected override IPathieModifier CreateModifier() => new PathRepeat(count, Translation, offsetByPath, smoothJoin);
         
         protected override void RefreshUnityReferences() => AddUnityReference(offsetByReference);
     }

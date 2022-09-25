@@ -9,10 +9,11 @@ namespace Silksprite.MeshWeaver.Controllers.Paths
     {
         public List<PathProvider> pathProviders = new List<PathProvider>();
         public bool isLoop;
+        public bool smoothJoin;
 
         protected override IPathieFactory CreateFactory()
         {
-            return pathProviders.CollectPathies(isLoop);
+            return pathProviders.CollectPathies(isLoop, smoothJoin);
         }
     }
 }
