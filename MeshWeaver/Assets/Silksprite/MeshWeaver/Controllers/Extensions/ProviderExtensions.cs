@@ -18,28 +18,7 @@ namespace Silksprite.MeshWeaver.Controllers.Extensions
         {
             var localMatrix = geometryProvider.transform.ToLocalMatrix();
             if (!geometryProvider.TryGetComponent<TranslationProvider>(out var translation)) return localMatrix;
-            var oneX = translation.oneX;
-            var oneY = translation.oneY;
-            var oneZ = translation.oneZ;
-            return localMatrix * new Matrix4x4
-            {
-                m00 = oneX.x,
-                m10 = oneX.y,
-                m20 = oneX.z,
-                m30 = 0,
-                m01 = oneY.x,
-                m11 = oneY.y,
-                m21 = oneY.z,
-                m31 = 0,
-                m02 = oneZ.x,
-                m12 = oneZ.y,
-                m22 = oneZ.z,
-                m32 = 0,
-                m03 = 0,
-                m13 = 0,
-                m23 = 0,
-                m33 = 1
-            };
+            return localMatrix * translation.translation;
         }
 
         public static VertexProvider CreateVertex(this CompositePathProvider parent, Vector3 position, bool crease)

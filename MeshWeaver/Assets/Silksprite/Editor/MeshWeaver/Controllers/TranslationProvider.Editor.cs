@@ -23,14 +23,38 @@ namespace Silksprite.MeshWeaver.Controllers
 
         public override void OnInspectorGUI()
         {
-            base.OnInspectorGUI();
+            var provider = (TranslationProvider)target;
+            EditorGUI.BeginChangeCheck();
+            var oneX = EditorGUILayout.Vector3Field("One X", provider.OneX);
+            if (EditorGUI.EndChangeCheck())
+            {
+                Undo.RecordObject(provider, "Change OneX TranslationProvider");
+                provider.OneX = oneX;
+                EditorUtility.SetDirty(provider);
+            }
+
+            EditorGUI.BeginChangeCheck();
+            var oneY = EditorGUILayout.Vector3Field("One Y", provider.OneY);
+            if (EditorGUI.EndChangeCheck())
+            {
+                Undo.RecordObject(provider, "Change OneY TranslationProvider");
+                provider.OneY = oneY;
+                EditorUtility.SetDirty(provider);
+            }
+
+            EditorGUI.BeginChangeCheck();
+            var oneZ = EditorGUILayout.Vector3Field("One Z", provider.OneZ);
+            if (EditorGUI.EndChangeCheck())
+            {
+                Undo.RecordObject(provider, "Change OneZ TranslationProvider");
+                provider.OneZ = oneZ;
+                EditorUtility.SetDirty(provider);
+            }
+
             if (GUILayout.Button("Reset"))
             {
-                var provider = (TranslationProvider)target;
                 Undo.RecordObject(provider, "Reset TranslationProvider");
-                provider.oneX = Vector3.right;
-                provider.oneY = Vector3.up;
-                provider.oneZ = Vector3.forward;
+                provider.translation = Matrix4x4.identity;
                 EditorUtility.SetDirty(provider);
             }
         }
@@ -49,15 +73,15 @@ namespace Silksprite.MeshWeaver.Controllers
                     var globalPosition = transform.position;
                     var handleSize = HandleUtility.GetHandleSize(globalPosition) * 0.125f;
                     Handles.color = Handles.xAxisColor;
-                    var globalOneX = transform.TransformPoint(provider.oneX);
+                    var globalOneX = transform.TransformPoint(provider.OneX);
                     Handles.CubeHandleCap(_controlIdX, globalOneX, worldRotation, handleSize, eventType);
                     Handles.DrawLine(globalPosition, globalOneX);
                     Handles.color = Handles.yAxisColor;
-                    var globalOneY = transform.TransformPoint(provider.oneY);
+                    var globalOneY = transform.TransformPoint(provider.OneY);
                     Handles.CubeHandleCap(_controlIdY, globalOneY, worldRotation, handleSize, eventType);
                     Handles.DrawLine(globalPosition, globalOneY);
                     Handles.color = Handles.zAxisColor;
-                    var globalOneZ = transform.TransformPoint(provider.oneZ);
+                    var globalOneZ = transform.TransformPoint(provider.OneZ);
                     Handles.CubeHandleCap(_controlIdZ, globalOneZ, worldRotation, handleSize, eventType);
                     Handles.DrawLine(globalPosition, globalOneZ);
                     break;
@@ -83,32 +107,32 @@ namespace Silksprite.MeshWeaver.Controllers
                 case Axis.X:
                 {
                     EditorGUI.BeginChangeCheck();
-                    var oneXGlobal = Handles.PositionHandle(transform.TransformPoint(provider.oneX), worldRotation);
+                    var oneXGlobal = Handles.PositionHandle(transform.TransformPoint(provider.OneX), worldRotation);
                     if (EditorGUI.EndChangeCheck())
                     {
                         Undo.RecordObject(provider, "Change OneX TranslationProvider");
-                        provider.oneX = transform.InverseTransformPoint(oneXGlobal);
+                        provider.OneX = transform.InverseTransformPoint(oneXGlobal);
                         EditorUtility.SetDirty(provider);
                     }
                     break;
                 }
                 case Axis.Y:
                     EditorGUI.BeginChangeCheck();
-                    var oneYGlobal = Handles.PositionHandle(transform.TransformPoint(provider.oneY), worldRotation);
+                    var oneYGlobal = Handles.PositionHandle(transform.TransformPoint(provider.OneY), worldRotation);
                     if (EditorGUI.EndChangeCheck())
                     {
                         Undo.RecordObject(provider, "Change OneY TranslationProvider");
-                        provider.oneY = transform.InverseTransformPoint(oneYGlobal);
+                        provider.OneY = transform.InverseTransformPoint(oneYGlobal);
                         EditorUtility.SetDirty(provider);
                     }
                     break;
                 case Axis.Z:
                     EditorGUI.BeginChangeCheck();
-                    var oneZGlobal = Handles.PositionHandle(transform.TransformPoint(provider.oneZ), worldRotation);
+                    var oneZGlobal = Handles.PositionHandle(transform.TransformPoint(provider.OneZ), worldRotation);
                     if (EditorGUI.EndChangeCheck())
                     {
                         Undo.RecordObject(provider, "Change OneZ TranslationProvider");
-                        provider.oneZ = transform.InverseTransformPoint(oneZGlobal);
+                        provider.OneZ = transform.InverseTransformPoint(oneZGlobal);
                         EditorUtility.SetDirty(provider);
                     }
                     break;

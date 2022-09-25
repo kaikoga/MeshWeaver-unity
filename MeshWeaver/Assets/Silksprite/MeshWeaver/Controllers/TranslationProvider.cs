@@ -1,12 +1,63 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Silksprite.MeshWeaver.Controllers
 {
     [DisallowMultipleComponent]
     public class TranslationProvider : MonoBehaviour
     {
-        public Vector3 oneX = Vector3.right;
-        public Vector3 oneY = Vector3.up;
-        public Vector3 oneZ = Vector3.forward;
+        [SerializeField] [HideInInspector] bool hasLegacyOneVectors = true;
+        [FormerlySerializedAs("oneX")]
+        [SerializeField] [HideInInspector] Vector3 legacyOneX = Vector3.right;
+        [FormerlySerializedAs("oneY")]
+        [SerializeField] [HideInInspector] Vector3 legacyOneY = Vector3.up;
+        [FormerlySerializedAs("oneZ")]
+        [SerializeField] [HideInInspector] Vector3 legacyOneZ = Vector3.forward;
+
+        public Matrix4x4 translation = Matrix4x4.identity;
+
+        void OnValidate()
+        {
+            if (hasLegacyOneVectors)
+            {
+                OneX = legacyOneX;
+                OneY = legacyOneY;
+                OneZ = legacyOneZ;
+                hasLegacyOneVectors = false;
+            }
+        }
+
+        public Vector3 OneX
+        {
+            get => translation.GetColumn(0);
+            set
+            {
+                var m = translation;
+                m.SetColumn(0, value);
+                translation = m;
+            }
+        }
+
+        public Vector3 OneY
+        {
+            get => translation.GetColumn(1);
+            set
+            {
+                var m = translation;
+                m.SetColumn(1, value);
+                translation = m;
+            }
+        }
+
+        public Vector3 OneZ
+        {
+            get => translation.GetColumn(2);
+            set
+            {
+                var m = translation;
+                m.SetColumn(2, value);
+                translation = m;
+            }
+        }
     }
 }
