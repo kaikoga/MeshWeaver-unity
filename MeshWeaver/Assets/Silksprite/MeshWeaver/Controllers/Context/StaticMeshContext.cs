@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Silksprite.MeshWeaver.Controllers.Context
@@ -7,7 +9,9 @@ namespace Silksprite.MeshWeaver.Controllers.Context
     {
         Material[] _materials;
 
-        public StaticMeshContext(Material[] materials) => _materials = materials;
+        public StaticMeshContext(IEnumerable<Material> materials) => _materials = materials.ToArray();
+
+        public bool SequenceEqual(IEnumerable<Material> materials) => materials.SequenceEqual(_materials);
 
         public int GetMaterialIndex(Material material)
         {

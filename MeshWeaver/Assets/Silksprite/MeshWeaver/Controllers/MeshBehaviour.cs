@@ -11,15 +11,13 @@ namespace Silksprite.MeshWeaver.Controllers
     public class MeshBehaviour : CustomMeshBehaviour
     {
         StaticMeshContext _staticContext = new StaticMeshContext(new Material[]{});
-        Material[] _lastMaterials = { };
 
         protected override Meshie OnPopulateMesh(LodMaskLayer lod)
         {
-            if (!_lastMaterials.SequenceEqual(materials))
+            if (!_staticContext.SequenceEqual(materials))
             {
                 _staticContext?.Dispose();
-                _lastMaterials = materials.ToArray();
-                _staticContext = new StaticMeshContext(_lastMaterials);
+                _staticContext = new StaticMeshContext(materials);
             }
 
             return this.GetComponentsInDirectChildren<MeshProvider>().CollectMeshies(_staticContext).Build(lod);
