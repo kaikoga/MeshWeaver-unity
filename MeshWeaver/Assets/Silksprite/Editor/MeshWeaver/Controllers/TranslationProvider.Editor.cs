@@ -23,6 +23,8 @@ namespace Silksprite.MeshWeaver.Controllers
 
         public override void OnInspectorGUI()
         {
+            base.OnInspectorGUI();
+
             var provider = (TranslationProvider)target;
             EditorGUI.BeginChangeCheck();
             var oneX = EditorGUILayout.Vector3Field("One X", provider.OneX);

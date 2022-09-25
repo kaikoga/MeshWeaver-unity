@@ -1,3 +1,4 @@
+using Silksprite.MeshWeaver.CustomDrawers;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -14,6 +15,7 @@ namespace Silksprite.MeshWeaver.Controllers
         [FormerlySerializedAs("oneZ")]
         [SerializeField] [HideInInspector] Vector3 legacyOneZ = Vector3.forward;
 
+        [Matrix4x4Custom]
         public Matrix4x4 translation = Matrix4x4.identity;
 
         void OnValidate()
