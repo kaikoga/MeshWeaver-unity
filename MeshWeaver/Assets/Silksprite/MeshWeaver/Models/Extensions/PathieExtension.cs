@@ -20,6 +20,11 @@ namespace Silksprite.MeshWeaver.Models.Extensions
             return enumerable.Dedup(equality);
         }
 
+        public static Pathie CloseLoop(Pathie pathie)
+        {
+            return new Pathie(pathie.Vertices.CloseLoop(), false);
+        }
+
         static IEnumerable<float> ToLengths(this Pathie pathie)
         {
             return pathie.Vertices.CloseLoop(pathie.isLoop).Pairwise((a, b) => (b.Vertex - a.Vertex).magnitude);

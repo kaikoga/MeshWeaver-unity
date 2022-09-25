@@ -22,6 +22,12 @@ namespace Silksprite.MeshWeaver.Models.Paths.Modifiers
 
         public Pathie Modify(Pathie pathie)
         {
+            if (pathie.isLoop)
+            {
+                var p = PathieExtension.CloseLoop(pathie);
+                pathie = p;
+            }
+
             var iMax = pathie.Vertices.Count - 1;
             if (_topologicalWeight == 0 && !_absoluteScale)
             {
@@ -44,7 +50,7 @@ namespace Silksprite.MeshWeaver.Models.Paths.Modifiers
                 var t = ordinal * (1 - _topologicalWeight) + topological * _topologicalWeight;
                 return vertie.AddUv(_uvArea.min + _uvArea.size * (scale * t), _uvChannel);
             });
-            return new Pathie(vertices, pathie.isLoop);
+            return new Pathie(vertices, false);
         }
     }
 }
