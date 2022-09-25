@@ -39,6 +39,7 @@ namespace Silksprite.MeshWeaver.CustomDrawers
                     if (isTRS)
                     {
                         var t = (Vector3)matrix4x4.GetRow(3);
+                        matrix4x4.SetRow(3, new Vector4(0f, 0f, 0f, 1f)); // mimic ValidTRS() because rotation and lossyScale requires it
                         var er = matrix4x4.rotation.eulerAngles;
                         var s = matrix4x4.lossyScale;
 
