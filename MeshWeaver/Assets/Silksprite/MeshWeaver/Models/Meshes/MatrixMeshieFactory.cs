@@ -16,7 +16,7 @@ namespace Silksprite.MeshWeaver.Models.Meshes
 
         readonly OperatorKind _operatorKind;
         readonly CellPatternKind _defaultCellPatternKind;
-        readonly List<CellOverride> _cellPatternOverrides;
+        readonly CellOverride[] _cellPatternOverrides;
         readonly int _materialIndex;
 
         static readonly Dictionary<CellFormKind, int[][]> CellIndices = new Dictionary<CellFormKind, int[][]>
@@ -32,7 +32,7 @@ namespace Silksprite.MeshWeaver.Models.Meshes
         };
 
         public MatrixMeshieFactory(IPathieFactory pathieX, IPathieFactory pathieY,
-            OperatorKind operatorKind, CellPatternKind defaultCellPatternKind, List<CellOverride> cellPatternOverrides,
+            OperatorKind operatorKind, CellPatternKind defaultCellPatternKind, CellOverride[] cellPatternOverrides,
             int materialIndex)
         {
             _pathieX = pathieX;
@@ -130,7 +130,7 @@ namespace Silksprite.MeshWeaver.Models.Meshes
             }
 
             return Meshie.Builder(vertices, gons, true)
-                .ToMeshie(_defaultCellPatternKind == CellPatternKind.None || _cellPatternOverrides.Count > 0);
+                .ToMeshie(_defaultCellPatternKind == CellPatternKind.None || _cellPatternOverrides.Length > 0);
         }
 
         public Pathie Extract(string pathName, LodMaskLayer lod)

@@ -14,7 +14,7 @@ namespace Silksprite.MeshWeaver.Models.Meshes
 
         readonly MatrixMeshieFactory.OperatorKind _operatorKind;
         readonly MatrixMeshieFactory.CellPatternKind _defaultCellPatternKind;
-        readonly List<MatrixMeshieFactory.CellOverride> _cellPatternOverrides;
+        readonly MatrixMeshieFactory.CellOverride[] _cellPatternOverrides;
         readonly LongitudeAxisKind _longitudeAxisKind;
         readonly bool _reverseLids;
 
@@ -31,7 +31,7 @@ namespace Silksprite.MeshWeaver.Models.Meshes
         readonly int _materialIndexTop;
 
         public PillarMeshieFactory(IPathieFactory pathieX, IPathieFactory pathieY,
-            MatrixMeshieFactory.OperatorKind operatorKind, MatrixMeshieFactory.CellPatternKind defaultCellPatternKind, List<MatrixMeshieFactory.CellOverride> cellPatternOverrides,
+            MatrixMeshieFactory.OperatorKind operatorKind, MatrixMeshieFactory.CellPatternKind defaultCellPatternKind, MatrixMeshieFactory.CellOverride[] cellPatternOverrides,
             LongitudeAxisKind longitudeAxisKind, bool reverseLids,
             bool fillBody, bool fillBottom, bool fillTop,
             int uvChannelBody, int uvChannelBottom, int uvChannelTop,

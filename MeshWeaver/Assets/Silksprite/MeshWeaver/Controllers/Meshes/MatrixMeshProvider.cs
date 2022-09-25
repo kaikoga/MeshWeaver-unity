@@ -38,9 +38,13 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
                 context.GetMaterialIndex(material));
         }
 
-        public static List<MatrixMeshieFactory.CellOverride> ResolveCellPatternOverrides(IEnumerable<CellOverrideData> data, IMeshContext context)
+        public static MatrixMeshieFactory.CellOverride[] ResolveCellPatternOverrides(IReadOnlyCollection<CellOverrideData> data, IMeshContext context)
         {
-            return data == null ? new List<MatrixMeshieFactory.CellOverride>() : data.Select(cell => cell.ResolveMaterials(context)).ToList();
+            if (data == null || data.Count == 0)
+            {
+                return Array.Empty<MatrixMeshieFactory.CellOverride>();
+            }
+            return data.Select(cell => cell.ResolveMaterials(context)).ToArray();
         }
 
         [Serializable]

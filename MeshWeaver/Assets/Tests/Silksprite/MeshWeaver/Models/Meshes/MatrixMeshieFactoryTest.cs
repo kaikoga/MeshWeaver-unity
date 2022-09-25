@@ -1,11 +1,9 @@
-using System.Collections.Generic;
+using Array = System.Array;
 using NUnit.Framework;
-using Silksprite.MeshWeaver.Models;
-using Silksprite.MeshWeaver.Models.Meshes;
 using Silksprite.MeshWeaver.Models.Paths;
-using Vector3 = UnityEngine.Vector3;
+using UnityEngine;
 
-namespace Tests.Silksprite.MeshWeaver.Models.Meshes
+namespace Silksprite.MeshWeaver.Models.Meshes
 {
     public class MatrixMeshieFactoryTest
     {
@@ -45,7 +43,7 @@ namespace Tests.Silksprite.MeshWeaver.Models.Meshes
         static MatrixMeshieFactory SimpleFactory(IPathieFactory pathieX, IPathieFactory pathieY)
         {
             return new MatrixMeshieFactory(pathieX, pathieY,
-                MatrixMeshieFactory.OperatorKind.TranslateOnly, MatrixMeshieFactory.CellPatternKind.Default, new List<MatrixMeshieFactory.CellOverride>(),
+                MatrixMeshieFactory.OperatorKind.TranslateOnly, MatrixMeshieFactory.CellPatternKind.Default, Array.Empty<MatrixMeshieFactory.CellOverride>(),
                 0);
         }
     }
