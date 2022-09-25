@@ -21,46 +21,6 @@ namespace Silksprite.MeshWeaver.Controllers
             _controlIdZ = GUIUtility.GetControlID(FocusType.Passive);
         }
 
-        public override void OnInspectorGUI()
-        {
-            base.OnInspectorGUI();
-
-            var provider = (TranslationProvider)target;
-            EditorGUI.BeginChangeCheck();
-            var oneX = EditorGUILayout.Vector3Field("One X", provider.OneX);
-            if (EditorGUI.EndChangeCheck())
-            {
-                Undo.RecordObject(provider, "Change OneX TranslationProvider");
-                provider.OneX = oneX;
-                EditorUtility.SetDirty(provider);
-            }
-
-            EditorGUI.BeginChangeCheck();
-            var oneY = EditorGUILayout.Vector3Field("One Y", provider.OneY);
-            if (EditorGUI.EndChangeCheck())
-            {
-                Undo.RecordObject(provider, "Change OneY TranslationProvider");
-                provider.OneY = oneY;
-                EditorUtility.SetDirty(provider);
-            }
-
-            EditorGUI.BeginChangeCheck();
-            var oneZ = EditorGUILayout.Vector3Field("One Z", provider.OneZ);
-            if (EditorGUI.EndChangeCheck())
-            {
-                Undo.RecordObject(provider, "Change OneZ TranslationProvider");
-                provider.OneZ = oneZ;
-                EditorUtility.SetDirty(provider);
-            }
-
-            if (GUILayout.Button("Reset"))
-            {
-                Undo.RecordObject(provider, "Reset TranslationProvider");
-                provider.translation = Matrix4x4.identity;
-                EditorUtility.SetDirty(provider);
-            }
-        }
-
         void OnSceneGUI()
         {
             var provider = (TranslationProvider)target;

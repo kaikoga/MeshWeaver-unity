@@ -31,7 +31,7 @@ namespace Silksprite.MeshWeaver.CustomDrawers
 
                     if (GUI.Button(new Rect(position.xMax - 150f, position.y, 70f, EditorGUIUtility.singleLineHeight), "Reset"))
                     {
-                        // TODO: Record undo
+                        Undo.RecordObject(property.serializedObject.targetObject, $"Reset {property.displayName}"); // XXX: Why am I able to record undo but failing to record action title?
                         matrix4x4 = Matrix4x4.identity;
                         property.SetMatrix4x4Value(matrix4x4);
                     }
@@ -42,18 +42,24 @@ namespace Silksprite.MeshWeaver.CustomDrawers
                         var er = matrix4x4.rotation.eulerAngles;
                         var s = matrix4x4.lossyScale;
 
-                        using (var changeCheck = new EditorGUI.ChangeCheckScope())
+                        EditorGUI.BeginChangeCheck();
+                        t = EditorGUI.Vector3Field(firstLine, "Position", t);
+                        if (EditorGUI.EndChangeCheck()) UpdateTRS($"Inspector Position {property.displayName}");
+
+                        EditorGUI.BeginChangeCheck();
+                        er = EditorGUI.Vector3Field(secondLine, "Rotation", er);
+                        if (EditorGUI.EndChangeCheck()) UpdateTRS($"Inspector Rotation {property.displayName}");
+
+                        EditorGUI.BeginChangeCheck();
+                        s = EditorGUI.Vector3Field(thirdLine, "Scale", s);
+                        if (EditorGUI.EndChangeCheck()) UpdateTRS($"Inspector Scale {property.displayName}");
+
+                        void UpdateTRS(string name)
                         {
-                            t = EditorGUI.Vector3Field(firstLine, "Position", t);
-                            er = EditorGUI.Vector3Field(secondLine, "Rotation", er);
-                            s = EditorGUI.Vector3Field(thirdLine, "Scale", s);
-                            if (changeCheck.changed)
-                            {
-                                // TODO: Record undo
-                                matrix4x4.SetTRS(Vector3.zero, Quaternion.Euler(er), s);
-                                matrix4x4.SetRow(3, new Vector4(t.x, t.y, t.z, 1f));
-                                property.SetMatrix4x4Value(matrix4x4);
-                            }
+                            Undo.RecordObject(property.serializedObject.targetObject, name); // XXX: Why am I able to record undo but failing to record action title?
+                            matrix4x4.SetTRS(Vector3.zero, Quaternion.Euler(er), s);
+                            matrix4x4.SetRow(3, new Vector4(t.x, t.y, t.z, 1f));
+                            property.SetMatrix4x4Value(matrix4x4);
                         }
                     }
                     else
@@ -62,23 +68,28 @@ namespace Silksprite.MeshWeaver.CustomDrawers
                         var oneY = (Vector3)matrix4x4.GetRow(1);
                         var oneZ = (Vector3)matrix4x4.GetRow(2);
 
-                        using (var changeCheck = new EditorGUI.ChangeCheckScope())
+                        EditorGUI.BeginChangeCheck();
+                        oneX = EditorGUI.Vector3Field(firstLine, "One X", oneX);
+                        if (EditorGUI.EndChangeCheck()) UpdateOneVectors($"Inspector OneX {property.displayName}");
+
+                        EditorGUI.BeginChangeCheck();
+                        oneY = EditorGUI.Vector3Field(secondLine, "One Y", oneY);
+                        if (EditorGUI.EndChangeCheck()) UpdateOneVectors($"Inspector OneY {property.displayName}");
+
+                        EditorGUI.BeginChangeCheck();
+                        oneZ = EditorGUI.Vector3Field(thirdLine, "One Z", oneZ);
+                        if (EditorGUI.EndChangeCheck()) UpdateOneVectors($"Inspector OneZ {property.displayName}");
+
+                        void UpdateOneVectors(string name)
                         {
-                            oneX = EditorGUI.Vector3Field(firstLine, "One X", oneX);
-                            oneY = EditorGUI.Vector3Field(secondLine, "One Y", oneY);
-                            oneZ = EditorGUI.Vector3Field(thirdLine, "One Z", oneZ);
-                            if (changeCheck.changed)
-                            {
-                                // TODO: Record undo
-                                matrix4x4.SetRow(0, oneX);
-                                matrix4x4.SetRow(1, oneY);
-                                matrix4x4.SetRow(2, oneZ);
-                                property.SetMatrix4x4Value(matrix4x4);
-                            }
+                            Undo.RecordObject(property.serializedObject.targetObject, name); // XXX: Why am I able to record undo but failing to record action title?
+                            matrix4x4.SetRow(0, oneX);
+                            matrix4x4.SetRow(1, oneY);
+                            matrix4x4.SetRow(2, oneZ);
+                            property.SetMatrix4x4Value(matrix4x4);
                         }
                     }
                 }
-
             }
         }
 
