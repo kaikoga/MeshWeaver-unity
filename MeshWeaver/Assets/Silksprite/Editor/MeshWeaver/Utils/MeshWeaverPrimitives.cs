@@ -155,8 +155,9 @@ namespace Silksprite.MeshWeaver.Utils
             pathX.axis = RevolutionPathieFactory.Axis.Y;
             pathX.min = 0f;
             pathX.max = 360f;
-            pathX.radius = 0f;
+            pathX.vector = Vector3.zero;
             pathX.subdivision = 16;
+            pathX.hasLegacyRadius = false;
             matrix.pathProviderX = pathX;
             AddUvGeneratorProvider(pathX, new Rect(0f, 0f, 2f, 0f), 0, 0f);
 
@@ -164,9 +165,10 @@ namespace Silksprite.MeshWeaver.Utils
             pathY.axis = RevolutionPathieFactory.Axis.X;
             pathY.min = 0f;
             pathY.max = 180f;
-            pathY.radius = 0.5f;
+            pathY.vector = Vector3.up * 0.5f;
             pathY.subdivision = 8;
             pathY.isLoop = false;
+            pathY.hasLegacyRadius = false;
             matrix.pathProviderY = pathY;
             AddUvGeneratorProvider(pathY, new Rect(0f, 1f, 0f, 0f), 0);
 
@@ -187,8 +189,9 @@ namespace Silksprite.MeshWeaver.Utils
             pathX.axis = RevolutionPathieFactory.Axis.Y;
             pathX.min = 360f;
             pathX.max = 0f;
-            pathX.radius = 0.5f;
-            pathX.subdivision = 8;
+            pathX.vector = Vector3.forward * 0.5f;
+            pathX.subdivision = 16;
+            pathX.hasLegacyRadius = false;
             pillar.pathProviderX = pathX;
             AddUvGeneratorProvider(pathX, new Rect(0f, 0f, 2f, 0f), 0);
             var uvX2 = AddUvProjectorProvider(pathX, 1);

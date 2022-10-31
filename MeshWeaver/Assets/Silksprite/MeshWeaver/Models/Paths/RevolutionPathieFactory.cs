@@ -9,17 +9,17 @@ namespace Silksprite.MeshWeaver.Models.Paths
     {
         readonly float _min;
         readonly float _max;
-        readonly float _radius;
+        readonly Vector3 _vector;
         readonly int _subdivision;
         readonly Axis _axis;
         readonly bool _isLoop;
         readonly bool _fullCircle;
 
-        public RevolutionPathieFactory(float min, float max, float radius, int subdivision, Axis axis, bool isLoop)
+        public RevolutionPathieFactory(float min, float max, Vector3 vector, int subdivision, Axis axis, bool isLoop)
         {
             _min = min;
             _max = max;
-            _radius = radius;
+            _vector = vector;
             _subdivision = subdivision;
             _axis = axis;
             _isLoop = isLoop;
@@ -28,41 +28,20 @@ namespace Silksprite.MeshWeaver.Models.Paths
 
         public Pathie Build(LodMaskLayer lod)
         {
-            var drs = Enumerable.Range(0, _subdivision + (_fullCircle ? 0 : 1))
-                .Select(i =>
-                {
-                    var deg = _min + (_max - _min) * i / _subdivision;
-                    return (deg, rad: deg * Mathf.Deg2Rad);
-                });
+            var degs = Enumerable.Range(0, _subdivision + (_fullCircle ? 0 : 1))
+                .Select(i => _min + (_max - _min) * i / _subdivision);
             IEnumerable<Matrix4x4> mm;
-            
-            Matrix4x4 TRS(Vector3 pos, Quaternion q)
-            {
-                return Matrix4x4.Translate(pos) * Matrix4x4.Rotate(q);
-            }
 
             switch (_axis)
             {
                 case Axis.X:
-                    mm = drs.Select(dr =>
-                    {
-                        var (deg, rad) = dr;
-                        return TRS(new Vector3(0, Mathf.Cos(rad), Mathf.Sin(rad)) * _radius, Quaternion.Euler(deg, 0, 0));
-                    });
+                    mm = degs.Select(deg => Matrix4x4.Rotate(Quaternion.Euler(deg, 0, 0)) * Matrix4x4.Translate(_vector));
                     break;
                 case Axis.Y:
-                    mm = drs.Select(dr =>
-                    {
-                        var (deg, rad) = dr;
-                        return TRS(new Vector3(Mathf.Sin(rad), 0, Mathf.Cos(rad)) * _radius, Quaternion.Euler(0, deg, 0));
-                    });
+                    mm = degs.Select(deg => Matrix4x4.Rotate(Quaternion.Euler(0, deg, 0)) * Matrix4x4.Translate(_vector));
                     break;
                 case Axis.Z:
-                    mm = drs.Select(dr =>
-                    {
-                        var (deg, rad) = dr;
-                        return TRS(new Vector3(Mathf.Cos(rad), Mathf.Sin(rad), 0) * _radius, Quaternion.Euler(0, 0, deg));
-                    });
+                    mm = degs.Select(deg => Matrix4x4.Rotate(Quaternion.Euler(0, 0, deg)) * Matrix4x4.Translate(_vector));
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
