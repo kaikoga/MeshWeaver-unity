@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Silksprite.MeshWeaver.Controllers.Context;
-using UnityEditor;
 using UnityEngine;
 
 namespace Silksprite.MeshWeaver.Controllers.Base
@@ -8,6 +7,10 @@ namespace Silksprite.MeshWeaver.Controllers.Base
     public abstract class ProviderBase<T> : MonoBehaviour
     where T : class
     {
+        const int CurrentSerializedFormat = 1;
+
+        [SerializeField] int serializedFormat = CurrentSerializedFormat;
+
         protected virtual bool RefreshAlways => false;
 
         IMeshContext _lastContext;
@@ -48,6 +51,14 @@ namespace Silksprite.MeshWeaver.Controllers.Base
         {
             // NOTE: This only work for ModiferProviders, because GeometryProviders refer Hierarchy structures
             CachedObject = null;
+            if (serializedFormat != CurrentSerializedFormat)
+            {
+                Upgrade(serializedFormat, CurrentSerializedFormat);
+                serializedFormat = CurrentSerializedFormat;
+#if UNITY_EDITOR
+                UnityEditor.EditorUtility.SetDirty(this);
+#endif
+            }
         }
 
         protected void AddUnityReference(Object obj)
@@ -58,5 +69,8 @@ namespace Silksprite.MeshWeaver.Controllers.Base
         protected abstract T CreateObject(IMeshContext context);
 
         protected virtual void RefreshUnityReferences() { }
+        
+        protected virtual void Upgrade(int oldVersion, int newVersion) { }
+
     }
 }
