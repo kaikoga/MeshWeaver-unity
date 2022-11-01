@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.needle.upm-in-unitypackage": {
+      "version": "0.6.2",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://package.openupm.com"
+    },
     "com.unity.ext.nunit": {
       "version": "1.0.6",
       "depth": 1,
@@ -72,6 +79,12 @@
         "com.unity.modules.ui": "1.0.0",
         "com.unity.modules.imgui": "1.0.0"
       }
+    },
+    "net.kaikoga.meshweaver": {
+      "version": "file:net.kaikoga.meshweaver",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
     },
     "com.unity.modules.ai": {
       "version": "1.0.0",
