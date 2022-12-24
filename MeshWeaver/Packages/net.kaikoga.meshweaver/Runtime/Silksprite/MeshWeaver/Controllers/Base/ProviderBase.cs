@@ -9,6 +9,7 @@ namespace Silksprite.MeshWeaver.Controllers.Base
     {
         const int CurrentSerializedFormat = 1;
 
+        [HideInInspector]
         [SerializeField] int serializedFormat = CurrentSerializedFormat;
 
         protected virtual bool RefreshAlways => false;
