@@ -14,7 +14,7 @@ namespace Silksprite.MeshWeaver.Controllers
 
         protected override Meshie OnPopulateMesh(LodMaskLayer lod)
         {
-            if (!_staticContext.SequenceEqual(materials))
+            if (materials == null || !_staticContext.SequenceEqual(materials))
             {
                 _staticContext?.Dispose();
                 _staticContext = new StaticMeshContext(materials);
