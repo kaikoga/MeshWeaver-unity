@@ -1,6 +1,7 @@
 #if UNITY_EDITOR
 
 using System.Linq;
+using Silksprite.MeshWeaver.Controllers.Extensions;
 using Silksprite.MeshWeaver.Controllers.Paths;
 using Silksprite.MeshWeaver.Models;
 using UnityEditor;
@@ -48,7 +49,7 @@ namespace Silksprite.MeshWeaver.Controllers.Base
                 Handles.DrawAAPolyLine(Texture2D.whiteTexture, width, vertices);
                 Handles.color = oldColor;
             }
-            var containerMatrix = transform.localToWorldMatrix;
+            var containerMatrix = transform.localToWorldMatrix * transform.ToLocalTranslation();
 
             var pathie = ToFactory().Build(LodMaskLayer.LOD0); // FIXME: I think this should use global editingLodMaskLayer
             var points = pathie.Vertices.Select(v => containerMatrix.MultiplyPoint3x4(v.Vertex)).ToArray();

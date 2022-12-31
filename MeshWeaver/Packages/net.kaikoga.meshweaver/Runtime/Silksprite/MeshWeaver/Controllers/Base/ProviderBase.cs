@@ -5,7 +5,6 @@ using UnityEngine;
 namespace Silksprite.MeshWeaver.Controllers.Base
 {
     public abstract class ProviderBase<T> : MonoBehaviour
-    where T : class
     {
         const int CurrentSerializedFormat = 1;
 
@@ -16,6 +15,7 @@ namespace Silksprite.MeshWeaver.Controllers.Base
 
         IMeshContext _lastContext;
 
+        bool _hasCachedObject;
         protected T CachedObject { get; private set; }
 
         protected T FindOrCreateObject(IMeshContext context)
@@ -27,22 +27,25 @@ namespace Silksprite.MeshWeaver.Controllers.Base
 
             if (_lastContext != context)
             {
-                CachedObject = null;
+                CachedObject = default; 
+                _hasCachedObject = false;
                 _lastContext = context;
             }
-            if (CachedObject != null)
+            if (_hasCachedObject)
             {
                 foreach (var obj in _unityReferences)
                 {
                     if (obj) continue;
-                    CachedObject = null;
+                    CachedObject = default;
+                    _hasCachedObject = false;
                     break;
                 }
             }
 
-            if (CachedObject != null) return CachedObject;
+            if (_hasCachedObject) return CachedObject;
             _unityReferences.Clear();
             RefreshUnityReferences();
+            _hasCachedObject = true;
             return CachedObject = CreateObject(context);
         }
 
@@ -51,7 +54,8 @@ namespace Silksprite.MeshWeaver.Controllers.Base
         void OnValidate()
         {
             // NOTE: This only work for ModiferProviders, because GeometryProviders refer Hierarchy structures
-            CachedObject = null;
+            CachedObject = default;
+            _hasCachedObject = false;
             if (serializedFormat != CurrentSerializedFormat)
             {
                 Upgrade(serializedFormat, CurrentSerializedFormat);

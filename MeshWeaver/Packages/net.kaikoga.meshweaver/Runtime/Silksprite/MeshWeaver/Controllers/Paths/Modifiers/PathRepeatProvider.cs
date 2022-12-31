@@ -19,7 +19,7 @@ namespace Silksprite.MeshWeaver.Controllers.Paths.Modifiers
             get
             {
                 var translation = Matrix4x4.Translate(offset);
-                if (offsetByReference) translation = offsetByReference.ToLocalMatrix() * translation;
+                if (offsetByReference) translation = offsetByReference.ToLocalTranslation() * translation;
                 return translation;
             }
         }

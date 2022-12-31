@@ -22,7 +22,7 @@ namespace Silksprite.MeshWeaver.Controllers.Modifiers
             get
             {
                 var translation = Matrix4x4.identity;
-                if (referenceTranslation) translation = referenceTranslation.ToLocalMatrix();
+                if (referenceTranslation) translation = referenceTranslation.ToLocalTranslation();
                 return translation;
             }
         }
