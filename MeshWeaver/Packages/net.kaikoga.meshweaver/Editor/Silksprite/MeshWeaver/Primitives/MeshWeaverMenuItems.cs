@@ -1,12 +1,11 @@
-using Silksprite.MeshWeaver.Controllers;
 using Silksprite.MeshWeaver.Controllers.Meshes;
 using Silksprite.MeshWeaver.Controllers.Paths;
 using UnityEditor;
 using UnityEngine;
 
-namespace Silksprite.MeshWeaver.Utils
+namespace Silksprite.MeshWeaver.Primitives
 {
-    public static class MeshBuilderMenus
+    public static class MeshWeaverMenuItems
     {
         [MenuItem("GameObject/MeshWeaver/Mesh Behaviour", false, 10)]
         public static void CreateMeshBehaviour(MenuCommand menuCommand)

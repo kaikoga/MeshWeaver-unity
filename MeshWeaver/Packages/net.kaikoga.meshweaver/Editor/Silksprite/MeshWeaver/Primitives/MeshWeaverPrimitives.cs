@@ -8,9 +8,10 @@ using Silksprite.MeshWeaver.Controllers.Paths.Modifiers;
 using Silksprite.MeshWeaver.Models.Meshes;
 using Silksprite.MeshWeaver.Models.Modifiers;
 using Silksprite.MeshWeaver.Models.Paths;
+using Silksprite.MeshWeaver.Utils;
 using UnityEngine;
 
-namespace Silksprite.MeshWeaver.Utils
+namespace Silksprite.MeshWeaver.Primitives
 {
     public static class MeshWeaverPrimitives
     {
