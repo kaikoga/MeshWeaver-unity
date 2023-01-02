@@ -12,15 +12,20 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
         bool _isExpandedMesh;
         bool _isExpandedPath;
 
-        public override void OnInspectorGUI()
+        protected override void OnPropertiesGUI()
         {
-            base.OnInspectorGUI();
+            base.OnPropertiesGUI();
             var stampMeshProvider = (StampMeshProvider)target;
             MeshProviderMenus.Menu.PropertyField(stampMeshProvider, "Stamp Mesh", "Mesh", ref stampMeshProvider.meshProvider);
             PathProviderMenus.ElementsMenu.PropertyField(stampMeshProvider, "Stamp Along Path", "Path", ref stampMeshProvider.pathProvider);
+        }
 
-            MeshWeaverGUI.DumpFoldout("Mesh data", ref _isExpandedMesh, () => stampMeshProvider.LastMeshie.Build(MeshWeaverSettings.Current.currentLodMaskLayer));
-            MeshWeaverGUI.DumpFoldout("Path data", ref _isExpandedPath, () => stampMeshProvider.LastPathie.Build(MeshWeaverSettings.Current.currentLodMaskLayer));
+        protected override void OnDumpGUI()
+        {
+            base.OnDumpGUI();
+            var stampMeshProvider = (StampMeshProvider)target;
+            MeshWeaverGUI.DumpFoldout("Mesh data", ref _isExpandedMesh, () => stampMeshProvider.LastMeshie.Build(MeshWeaverSettings.Current.currentLodMaskLayer)?.Dump());
+            MeshWeaverGUI.DumpFoldout("Path data", ref _isExpandedPath, () => stampMeshProvider.LastPathie.Build(MeshWeaverSettings.Current.currentLodMaskLayer)?.Dump());
         }
     }
 }

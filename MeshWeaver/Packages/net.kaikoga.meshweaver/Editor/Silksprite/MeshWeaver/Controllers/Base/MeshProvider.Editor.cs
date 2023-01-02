@@ -27,27 +27,11 @@ namespace Silksprite.MeshWeaver.Controllers.Base
             _colliderMeshie = null;
         }
 
-        public override void OnInspectorGUI()
+        public sealed override void OnInspectorGUI()
         {
+            OnPropertiesGUI();
+
             var meshProvider = (MeshProvider)target;
-            base.OnInspectorGUI();
-            
-            var factory = meshProvider.LastFactory;
-            if (factory != null)
-            {
-                if (_meshie == null) _meshie = factory.Build(MeshWeaverSettings.Current.currentLodMaskLayer);
-                if (_colliderMeshie == null) _colliderMeshie = factory.Build(LodMaskLayer.Collider);
-            }
-
-            MeshWeaverGUI.DumpFoldout($"Mesh Dump: {_meshie}",
-                ref _isExpanded,
-                () => _meshie?.Dump());
-            MeshWeaverGUI.DumpFoldout($"Collider Mesh Dump: {_colliderMeshie}",
-                ref _isColliderExpanded,
-                () => _colliderMeshie?.Dump());
-
-            MeshModifierProviderMenus.Menu.ModifierPopup(meshProvider);
-
             if (GUILayout.Button("Bake"))
             {
                 var transform = meshProvider.transform;
@@ -63,8 +47,38 @@ namespace Silksprite.MeshWeaver.Controllers.Base
                 bakedTransform.localRotation = transform.localRotation;
                 bakedTransform.localScale = transform.localScale;
             }
+
+            OnDumpGUI();
         }
-        
+
+        protected virtual void OnPropertiesGUI()
+        {
+            var meshProvider = (MeshProvider)target;
+            MeshModifierProviderMenus.Menu.ModifierPopup(meshProvider);
+
+            base.OnInspectorGUI();
+
+        }
+
+        protected virtual void OnDumpGUI()
+        {
+            var meshProvider = (MeshProvider)target;
+            var factory = meshProvider.LastFactory;
+            if (factory != null)
+            {
+                if (_meshie == null) _meshie = factory.Build(MeshWeaverSettings.Current.currentLodMaskLayer);
+                if (_colliderMeshie == null) _colliderMeshie = factory.Build(LodMaskLayer.Collider);
+            }
+
+            MeshWeaverGUI.DumpFoldout($"Mesh Dump: {_meshie}",
+                ref _isExpanded,
+                () => _meshie?.Dump());
+            MeshWeaverGUI.DumpFoldout($"Collider Mesh Dump: {_colliderMeshie}",
+                ref _isColliderExpanded,
+                () => _colliderMeshie?.Dump());
+
+        }
+
         protected bool HasFrameBounds() => true;
 
         protected Bounds OnGetFrameBounds()

@@ -12,15 +12,20 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
         bool _isExpandedA;
         bool _isExpandedB;
 
-        public override void OnInspectorGUI()
+        protected override void OnPropertiesGUI()
         {
-            base.OnInspectorGUI();
+            base.OnPropertiesGUI();
             var stitchMeshProvider = (StitchMeshProvider)target;
             PathProviderMenus.CollectionsMenu.PropertyField(stitchMeshProvider, "Path A", "Path A", ref stitchMeshProvider.pathProviderA);
             PathProviderMenus.CollectionsMenu.PropertyField(stitchMeshProvider, "Path B", "Path B", ref stitchMeshProvider.pathProviderB);
+        }
 
-            MeshWeaverGUI.DumpFoldout("Path data A", ref _isExpandedA, () => stitchMeshProvider.LastPathieA.Build(MeshWeaverSettings.Current.currentLodMaskLayer));
-            MeshWeaverGUI.DumpFoldout("Path data B", ref _isExpandedB, () => stitchMeshProvider.LastPathieB.Build(MeshWeaverSettings.Current.currentLodMaskLayer));
+        protected override void OnDumpGUI()
+        {
+            base.OnDumpGUI();
+            var stitchMeshProvider = (StitchMeshProvider)target;
+            MeshWeaverGUI.DumpFoldout("Path data A", ref _isExpandedA, () => stitchMeshProvider.LastPathieA.Build(MeshWeaverSettings.Current.currentLodMaskLayer)?.Dump());
+            MeshWeaverGUI.DumpFoldout("Path data B", ref _isExpandedB, () => stitchMeshProvider.LastPathieB.Build(MeshWeaverSettings.Current.currentLodMaskLayer)?.Dump());
         }
     }
 }

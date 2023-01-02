@@ -8,9 +8,9 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
     [CanEditMultipleObjects]
     public class PolygonMeshProviderEditor : MeshProviderEditor
     {
-        public override void OnInspectorGUI()
+        protected override void OnPropertiesGUI()
         {
-            base.OnInspectorGUI();
+            base.OnPropertiesGUI();
             var polygonMeshProvider = (PolygonMeshProvider)target;
             PathProviderMenus.CollectionsMenu.PropertyField(polygonMeshProvider, "Path", "Path", ref polygonMeshProvider.pathProvider);
         }

@@ -8,9 +8,9 @@ namespace Silksprite.MeshWeaver.Controllers.Paths
     [CanEditMultipleObjects]
     public class CompositePathProviderEditor : PathProviderEditor
     {
-        public override void OnInspectorGUI()
+        protected override void OnPropertiesGUI()
         {
-            base.OnInspectorGUI();
+            base.OnPropertiesGUI();
             var compositePathProvider = (CompositePathProvider)target;
             PathProviderMenus.ElementsMenu.ChildPopup(compositePathProvider, "Path Providers");
         }

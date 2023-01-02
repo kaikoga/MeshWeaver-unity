@@ -8,9 +8,9 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
     [CanEditMultipleObjects]
     public class CompositeMeshProviderEditor : MeshProviderEditor
     {
-        public override void OnInspectorGUI()
+        protected override void OnPropertiesGUI()
         {
-            base.OnInspectorGUI();
+            base.OnPropertiesGUI();
             var compositeMeshProvider = (CompositeMeshProvider)target;
             MeshProviderMenus.Menu.ChildPopup(compositeMeshProvider, "Mesh Providers");
         }

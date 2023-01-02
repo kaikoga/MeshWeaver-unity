@@ -12,15 +12,20 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
         bool _isExpandedX;
         bool _isExpandedY;
 
-        public override void OnInspectorGUI()
+        protected override void OnPropertiesGUI()
         {
-            base.OnInspectorGUI();
+            base.OnPropertiesGUI();
             var pillarMeshProvider = (PillarMeshProvider)target;
             PathProviderMenus.CollectionsMenu.PropertyField(pillarMeshProvider, "Path X", "Path X", ref pillarMeshProvider.pathProviderX);
             PathProviderMenus.CollectionsMenu.PropertyField(pillarMeshProvider, "Path Y", "Path Y", ref pillarMeshProvider.pathProviderY);
+        }
 
-            MeshWeaverGUI.DumpFoldout("Path data X", ref _isExpandedX, () => pillarMeshProvider.LastPathieX.Build(MeshWeaverSettings.Current.currentLodMaskLayer));
-            MeshWeaverGUI.DumpFoldout("Path data Y", ref _isExpandedY, () => pillarMeshProvider.LastPathieY.Build(MeshWeaverSettings.Current.currentLodMaskLayer));
+        protected override void OnDumpGUI()
+        {
+            base.OnDumpGUI();
+            var pillarMeshProvider = (PillarMeshProvider)target;
+            MeshWeaverGUI.DumpFoldout("Path data X", ref _isExpandedX, () => pillarMeshProvider.LastPathieX.Build(MeshWeaverSettings.Current.currentLodMaskLayer)?.Dump());
+            MeshWeaverGUI.DumpFoldout("Path data Y", ref _isExpandedY, () => pillarMeshProvider.LastPathieY.Build(MeshWeaverSettings.Current.currentLodMaskLayer)?.Dump());
         }
     }
 }

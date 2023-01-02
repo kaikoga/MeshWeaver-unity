@@ -26,11 +26,37 @@ namespace Silksprite.MeshWeaver.Controllers.Base
             _colliderPathie = null;
         }
 
-        public override void OnInspectorGUI()
+        public sealed override void OnInspectorGUI()
+        {
+            OnPropertiesGUI();
+            var pathProvider = (PathProvider)target;
+
+            if (GUILayout.Button("Bake"))
+            {
+                var transform = pathProvider.transform;
+                var baked = transform.parent.AddChildComponent<BakedPathProvider>();
+                baked.lodMaskLayers = LodMaskLayers.Values;
+                baked.pathData = LodMaskLayers.Values.Select(lod => PathieData.FromPathie(pathProvider.ToFactory().Build(lod))).ToArray();
+                var bakedTransform = baked.transform;
+                bakedTransform.localPosition = transform.localPosition;
+                bakedTransform.localRotation = transform.localRotation;
+                bakedTransform.localScale = transform.localScale;
+            }
+
+            OnDumpGUI();
+        }
+
+        protected virtual void OnPropertiesGUI()
         {
             var pathProvider = (PathProvider)target;
             base.OnInspectorGUI();
 
+            PathModifierProviderMenus.Menu.ModifierPopup(pathProvider);
+        }
+
+        protected virtual void OnDumpGUI()
+        {
+            var pathProvider = (PathProvider)target;
             var factory = pathProvider.LastFactory;
             if (factory != null)
             {
@@ -45,21 +71,8 @@ namespace Silksprite.MeshWeaver.Controllers.Base
                 ref _isColliderExpanded,
                 () => _colliderPathie?.Dump());
 
-            PathModifierProviderMenus.Menu.ModifierPopup(pathProvider);
-
-            if (GUILayout.Button("Bake"))
-            {
-                var transform = pathProvider.transform;
-                var baked = transform.parent.AddChildComponent<BakedPathProvider>();
-                baked.lodMaskLayers = LodMaskLayers.Values;
-                baked.pathData = LodMaskLayers.Values.Select(lod => PathieData.FromPathie(pathProvider.ToFactory().Build(lod))).ToArray();
-                var bakedTransform = baked.transform;
-                bakedTransform.localPosition = transform.localPosition;
-                bakedTransform.localRotation = transform.localRotation;
-                bakedTransform.localScale = transform.localScale;
-            }
         }
-        
+
         protected bool HasFrameBounds() => true;
 
         protected Bounds OnGetFrameBounds()
