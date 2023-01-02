@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Silksprite.MeshWeaver.Models
 {
-    public class Meshie
+    public class Meshie : IDump
     {
         readonly Vertie[] _vertices;
         readonly Gon[] _gons;

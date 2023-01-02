@@ -20,19 +20,21 @@ namespace Silksprite.MeshWeaver.Controllers.Base
         Pathie _pathie;
         Pathie _colliderPathie;
 
-        void OnValidate()
-        {
-            _pathie = null;
-            _colliderPathie = null;
-        }
-
         public sealed override void OnInspectorGUI()
         {
-            OnPropertiesGUI();
-            var pathProvider = (PathProvider)target;
+            using (var changedScope = new EditorGUI.ChangeCheckScope())
+            {
+                OnPropertiesGUI();
+                if (changedScope.changed)
+                {
+                    _pathie = null;
+                    _colliderPathie = null;
+                }
+            }
 
             if (GUILayout.Button("Bake"))
             {
+                var pathProvider = (PathProvider)target;
                 var transform = pathProvider.transform;
                 var baked = transform.parent.AddChildComponent<BakedPathProvider>();
                 baked.lodMaskLayers = LodMaskLayers.Values;
@@ -48,9 +50,9 @@ namespace Silksprite.MeshWeaver.Controllers.Base
 
         protected virtual void OnPropertiesGUI()
         {
-            var pathProvider = (PathProvider)target;
             base.OnInspectorGUI();
 
+            var pathProvider = (PathProvider)target;
             PathModifierProviderMenus.Menu.ModifierPopup(pathProvider);
         }
 
@@ -64,12 +66,8 @@ namespace Silksprite.MeshWeaver.Controllers.Base
                 if (_colliderPathie == null) _colliderPathie = factory.Build(LodMaskLayer.Collider);
             }
 
-            MeshWeaverGUI.DumpFoldout($"Path Dump: {_pathie}",
-                ref _isExpanded,
-                () => _pathie?.Dump());
-            MeshWeaverGUI.DumpFoldout($"Collider Path Dump: {_colliderPathie}",
-                ref _isColliderExpanded,
-                () => _colliderPathie?.Dump());
+            MeshWeaverGUI.DumpFoldout("Path Dump", ref _isExpanded, () => _pathie);
+            MeshWeaverGUI.DumpFoldout("Collider Path Dump", ref _isColliderExpanded, () => _colliderPathie);
 
         }
 

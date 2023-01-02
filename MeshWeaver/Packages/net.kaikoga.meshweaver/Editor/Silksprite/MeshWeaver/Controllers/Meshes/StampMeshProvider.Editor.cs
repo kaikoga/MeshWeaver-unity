@@ -24,8 +24,8 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
         {
             base.OnDumpGUI();
             var stampMeshProvider = (StampMeshProvider)target;
-            MeshWeaverGUI.DumpFoldout("Mesh data", ref _isExpandedMesh, () => stampMeshProvider.LastMeshie.Build(MeshWeaverSettings.Current.currentLodMaskLayer)?.Dump());
-            MeshWeaverGUI.DumpFoldout("Path data", ref _isExpandedPath, () => stampMeshProvider.LastPathie.Build(MeshWeaverSettings.Current.currentLodMaskLayer)?.Dump());
+            MeshWeaverGUI.DumpFoldout("Mesh data", ref _isExpandedMesh, () => stampMeshProvider.LastMeshie.Build(MeshWeaverSettings.Current.currentLodMaskLayer));
+            MeshWeaverGUI.DumpFoldout("Path data", ref _isExpandedPath, () => stampMeshProvider.LastPathie.Build(MeshWeaverSettings.Current.currentLodMaskLayer));
         }
     }
 }

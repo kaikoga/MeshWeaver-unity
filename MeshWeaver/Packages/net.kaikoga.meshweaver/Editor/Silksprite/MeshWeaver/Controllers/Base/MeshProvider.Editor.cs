@@ -21,19 +21,21 @@ namespace Silksprite.MeshWeaver.Controllers.Base
         Meshie _meshie;
         Meshie _colliderMeshie;
 
-        void OnValidate()
-        {
-            _meshie = null;
-            _colliderMeshie = null;
-        }
-
         public sealed override void OnInspectorGUI()
         {
-            OnPropertiesGUI();
+            using (var changedScope = new EditorGUI.ChangeCheckScope())
+            {
+                OnPropertiesGUI();
+                if (changedScope.changed)
+                {
+                    _meshie = null;
+                    _colliderMeshie = null;
+                }
+            }
 
-            var meshProvider = (MeshProvider)target;
             if (GUILayout.Button("Bake"))
             {
+                var meshProvider = (MeshProvider)target;
                 var transform = meshProvider.transform;
                 var baked = transform.parent.AddChildComponent<BakedMeshProvider>();
                 using (var context = new DynamicMeshContext())
@@ -53,11 +55,10 @@ namespace Silksprite.MeshWeaver.Controllers.Base
 
         protected virtual void OnPropertiesGUI()
         {
-            var meshProvider = (MeshProvider)target;
-            MeshModifierProviderMenus.Menu.ModifierPopup(meshProvider);
-
             base.OnInspectorGUI();
 
+            var meshProvider = (MeshProvider)target;
+            MeshModifierProviderMenus.Menu.ModifierPopup(meshProvider);
         }
 
         protected virtual void OnDumpGUI()
@@ -70,13 +71,8 @@ namespace Silksprite.MeshWeaver.Controllers.Base
                 if (_colliderMeshie == null) _colliderMeshie = factory.Build(LodMaskLayer.Collider);
             }
 
-            MeshWeaverGUI.DumpFoldout($"Mesh Dump: {_meshie}",
-                ref _isExpanded,
-                () => _meshie?.Dump());
-            MeshWeaverGUI.DumpFoldout($"Collider Mesh Dump: {_colliderMeshie}",
-                ref _isColliderExpanded,
-                () => _colliderMeshie?.Dump());
-
+            MeshWeaverGUI.DumpFoldout("Mesh Dump", ref _isExpanded, () => _meshie);
+            MeshWeaverGUI.DumpFoldout("Collider Mesh Dump", ref _isColliderExpanded, () => _colliderMeshie);
         }
 
         protected bool HasFrameBounds() => true;

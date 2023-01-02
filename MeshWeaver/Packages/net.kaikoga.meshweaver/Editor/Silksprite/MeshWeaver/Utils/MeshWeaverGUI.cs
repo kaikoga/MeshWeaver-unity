@@ -1,4 +1,5 @@
 using System;
+using Silksprite.MeshWeaver.Models;
 using UnityEditor;
 using UnityEngine;
 
@@ -6,12 +7,13 @@ namespace Silksprite.MeshWeaver.Utils
 {
     public static class MeshWeaverGUI
     {
-        public static void DumpFoldout(string title, ref bool isExpanded, Func<object> dump)
+        public static void DumpFoldout(string titlePrefix, ref bool isExpanded, Func<IDump> dump)
         {
-            isExpanded = EditorGUILayout.Foldout(isExpanded, title);
+            var dumped = dump();
+            isExpanded = EditorGUILayout.Foldout(isExpanded, $"{titlePrefix}: {dumped}");
             if (isExpanded)
             {
-                EditorGUILayout.TextArea(dump()?.ToString() ?? "null");
+                EditorGUILayout.TextArea(dumped?.Dump() ?? "null");
             }
         }
 

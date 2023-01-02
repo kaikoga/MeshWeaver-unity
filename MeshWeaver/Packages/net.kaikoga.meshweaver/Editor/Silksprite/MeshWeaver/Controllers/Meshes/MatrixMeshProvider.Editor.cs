@@ -24,8 +24,8 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
         {
             base.OnDumpGUI();
             var matrixMeshProvider = (MatrixMeshProvider)target;
-            MeshWeaverGUI.DumpFoldout("Path data X", ref _isExpandedX, () => matrixMeshProvider.LastPathieX.Build(MeshWeaverSettings.Current.currentLodMaskLayer)?.Dump());
-            MeshWeaverGUI.DumpFoldout("Path data Y", ref _isExpandedY, () => matrixMeshProvider.LastPathieY.Build(MeshWeaverSettings.Current.currentLodMaskLayer)?.Dump());
+            MeshWeaverGUI.DumpFoldout("Path data X", ref _isExpandedX, () => matrixMeshProvider.LastPathieX.Build(MeshWeaverSettings.Current.currentLodMaskLayer));
+            MeshWeaverGUI.DumpFoldout("Path data Y", ref _isExpandedY, () => matrixMeshProvider.LastPathieY.Build(MeshWeaverSettings.Current.currentLodMaskLayer));
         }
     }
 }
