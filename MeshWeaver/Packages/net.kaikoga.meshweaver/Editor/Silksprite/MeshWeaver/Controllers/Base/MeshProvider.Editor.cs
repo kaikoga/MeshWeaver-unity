@@ -25,6 +25,7 @@ namespace Silksprite.MeshWeaver.Controllers.Base
         {
             using (var changedScope = new EditorGUI.ChangeCheckScope())
             {
+                MeshWeaverControllerGUI.LodSelectorGUI(target);
                 OnPropertiesGUI();
                 if (changedScope.changed)
                 {
