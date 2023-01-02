@@ -23,7 +23,7 @@ namespace Silksprite.MeshWeaver.Controllers
             var meshBehaviour = (CustomMeshBehaviour)target;
             if (meshBehaviour is MeshBehaviour)
             {
-                MeshProviderMenus.Menu.ChildPopup(meshBehaviour);
+                MeshProviderMenus.Menu.ChildPopup(meshBehaviour, "Mesh Providers");
             }
 
             if (GUILayout.Button("Collect Materials"))

@@ -13,7 +13,7 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes.Modifiers
             base.OnInspectorGUI();
             var meshCutoutColliderProvider = (MeshCutoutColliderProvider)target;
             Collider predicate = null;
-            ColliderMenus.Menu.PropertyField(meshCutoutColliderProvider, "Predicate", ref predicate);
+            ColliderMenus.Menu.PropertyField(meshCutoutColliderProvider, "Predicate", "Predicate", ref predicate);
             if (predicate)
             {
                 meshCutoutColliderProvider.predicates.Add(predicate);

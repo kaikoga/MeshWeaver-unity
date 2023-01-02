@@ -12,7 +12,7 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
         {
             base.OnInspectorGUI();
             var compositeMeshProvider = (CompositeMeshProvider)target;
-            MeshProviderMenus.Menu.ChildPopup(compositeMeshProvider);
+            MeshProviderMenus.Menu.ChildPopup(compositeMeshProvider, "Mesh Providers");
         }
     }
 }

@@ -12,7 +12,7 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
         {
             base.OnInspectorGUI();
             var polygonMeshProvider = (PolygonMeshProvider)target;
-            PathProviderMenus.CollectionsMenu.PropertyField(polygonMeshProvider, "Path", ref polygonMeshProvider.pathProvider);
+            PathProviderMenus.CollectionsMenu.PropertyField(polygonMeshProvider, "Path", "Path", ref polygonMeshProvider.pathProvider);
         }
     }
 }

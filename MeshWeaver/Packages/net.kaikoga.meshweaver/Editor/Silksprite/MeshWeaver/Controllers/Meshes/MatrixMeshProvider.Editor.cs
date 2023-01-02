@@ -16,8 +16,8 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
         {
             base.OnInspectorGUI();
             var matrixMeshProvider = (MatrixMeshProvider)target;
-            PathProviderMenus.CollectionsMenu.PropertyField(matrixMeshProvider, "Path X", ref matrixMeshProvider.pathProviderX);
-            PathProviderMenus.CollectionsMenu.PropertyField(matrixMeshProvider, "Path Y", ref matrixMeshProvider.pathProviderY);
+            PathProviderMenus.CollectionsMenu.PropertyField(matrixMeshProvider, "Path X", "Path X", ref matrixMeshProvider.pathProviderX);
+            PathProviderMenus.CollectionsMenu.PropertyField(matrixMeshProvider, "Path Y", "Path Y", ref matrixMeshProvider.pathProviderY);
 
             MeshWeaverGUI.DumpFoldout("Path data X", ref _isExpandedX, () => matrixMeshProvider.LastPathieX.Build(MeshWeaverSettings.Current.currentLodMaskLayer));
             MeshWeaverGUI.DumpFoldout("Path data Y", ref _isExpandedY, () => matrixMeshProvider.LastPathieY.Build(MeshWeaverSettings.Current.currentLodMaskLayer));

@@ -16,9 +16,9 @@ namespace Silksprite.MeshWeaver.Utils
             _menuOptions = new [] { "Add Modifier...", "" }.Concat(types.Select(type => type == typeof(void) ? "" : type.Name)).ToArray();
         }
 
-        public T ModifierPopup(Component self)
+        public T ModifierPopup(Component self, string label = "Modifiers")
         {
-            var index = EditorGUILayout.Popup(0, _menuOptions);
+            var index = EditorGUILayout.Popup(label, 0, _menuOptions);
             if (index <= 0) return default;
 
             return (T)(object)self.gameObject.AddComponent(_types[index]);
