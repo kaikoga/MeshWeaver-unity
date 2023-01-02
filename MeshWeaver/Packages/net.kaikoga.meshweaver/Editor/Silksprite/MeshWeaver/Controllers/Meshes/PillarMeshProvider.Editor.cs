@@ -19,8 +19,8 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
             PathProviderMenus.CollectionsMenu.PropertyField(pillarMeshProvider, "Path X", ref pillarMeshProvider.pathProviderX);
             PathProviderMenus.CollectionsMenu.PropertyField(pillarMeshProvider, "Path Y", ref pillarMeshProvider.pathProviderY);
 
-            MeshWeaverGUI.DumpFoldout("Path data X", ref _isExpandedX, () => pillarMeshProvider.LastPathieX.Build(GuessCurrentLodMaskLayer()));
-            MeshWeaverGUI.DumpFoldout("Path data Y", ref _isExpandedY, () => pillarMeshProvider.LastPathieY.Build(GuessCurrentLodMaskLayer()));
+            MeshWeaverGUI.DumpFoldout("Path data X", ref _isExpandedX, () => pillarMeshProvider.LastPathieX.Build(MeshWeaverSettings.Current.currentLodMaskLayer));
+            MeshWeaverGUI.DumpFoldout("Path data Y", ref _isExpandedY, () => pillarMeshProvider.LastPathieY.Build(MeshWeaverSettings.Current.currentLodMaskLayer));
         }
     }
 }

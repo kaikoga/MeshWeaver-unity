@@ -35,7 +35,7 @@ namespace Silksprite.MeshWeaver.Controllers.Base
             var factory = meshProvider.LastFactory;
             if (factory != null)
             {
-                if (_meshie == null) _meshie = factory.Build(GuessCurrentLodMaskLayer());
+                if (_meshie == null) _meshie = factory.Build(MeshWeaverSettings.Current.currentLodMaskLayer);
                 if (_colliderMeshie == null) _colliderMeshie = factory.Build(LodMaskLayer.Collider);
             }
 

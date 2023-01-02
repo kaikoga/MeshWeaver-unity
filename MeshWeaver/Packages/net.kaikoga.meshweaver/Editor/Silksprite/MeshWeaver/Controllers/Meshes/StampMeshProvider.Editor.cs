@@ -19,8 +19,8 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
             MeshProviderMenus.Menu.PropertyField(stampMeshProvider, "Mesh", ref stampMeshProvider.meshProvider);
             PathProviderMenus.ElementsMenu.PropertyField(stampMeshProvider, "Path", ref stampMeshProvider.pathProvider);
 
-            MeshWeaverGUI.DumpFoldout("Mesh data", ref _isExpandedMesh, () => stampMeshProvider.LastMeshie.Build(GuessCurrentLodMaskLayer()));
-            MeshWeaverGUI.DumpFoldout("Path data", ref _isExpandedPath, () => stampMeshProvider.LastPathie.Build(GuessCurrentLodMaskLayer()));
+            MeshWeaverGUI.DumpFoldout("Mesh data", ref _isExpandedMesh, () => stampMeshProvider.LastMeshie.Build(MeshWeaverSettings.Current.currentLodMaskLayer));
+            MeshWeaverGUI.DumpFoldout("Path data", ref _isExpandedPath, () => stampMeshProvider.LastPathie.Build(MeshWeaverSettings.Current.currentLodMaskLayer));
         }
     }
 }

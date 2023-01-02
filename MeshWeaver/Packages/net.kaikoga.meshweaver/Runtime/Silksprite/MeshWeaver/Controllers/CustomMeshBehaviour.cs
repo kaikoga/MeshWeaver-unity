@@ -11,7 +11,6 @@ namespace Silksprite.MeshWeaver.Controllers
     [ExecuteAlways]
     public abstract class CustomMeshBehaviour : MonoBehaviour
     {
-        public LodMaskLayer lodMaskLayer = LodMaskLayer.LOD0;
         public bool updatesEveryFrame;
 
         [SerializeField] MeshBehaviourProfile profile;
@@ -22,11 +21,17 @@ namespace Silksprite.MeshWeaver.Controllers
         public MeshFilter[] meshFilters;
         public MeshCollider[] meshColliders;
 
+        LodMaskLayer _currentLodMaskLayer;
         Mesh _runtimeMesh;
         Mesh _runtimeColliderMesh;
 
         void Update()
         {
+            if (_currentLodMaskLayer != MeshWeaverSettings.Current.currentLodMaskLayer)
+            {
+                _currentLodMaskLayer = MeshWeaverSettings.Current.currentLodMaskLayer;
+                _runtimeMesh = null;
+            }
             if (_runtimeMesh == null || updatesEveryFrame)
             {
                 Compile();
@@ -42,6 +47,8 @@ namespace Silksprite.MeshWeaver.Controllers
 
         public void Compile()
         {
+            var lodMaskLayer = MeshWeaverSettings.Current.currentLodMaskLayer;
+
             if (_runtimeMesh == null) _runtimeMesh = new Mesh();
             OnPopulateMesh(lodMaskLayer, _runtimeMesh, true);
 

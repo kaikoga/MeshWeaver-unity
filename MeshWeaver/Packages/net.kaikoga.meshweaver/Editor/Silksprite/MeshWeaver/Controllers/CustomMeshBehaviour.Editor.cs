@@ -1,4 +1,5 @@
 using Silksprite.MeshWeaver.Controllers.Utils;
+using Silksprite.MeshWeaver.Models;
 using UnityEditor;
 using UnityEngine;
 
@@ -10,6 +11,14 @@ namespace Silksprite.MeshWeaver.Controllers
     {
         public override void OnInspectorGUI()
         {
+            using (var changedScope = new EditorGUI.ChangeCheckScope())
+            {
+                MeshWeaverSettings.Current.currentLodMaskLayer = (LodMaskLayer)EditorGUILayout.EnumPopup("Current LOD (Global)", MeshWeaverSettings.Current.currentLodMaskLayer);
+                if (changedScope.changed)
+                {
+                    EditorUtility.SetDirty(target);
+                }
+            }
             base.OnInspectorGUI();
             var meshBehaviour = (CustomMeshBehaviour)target;
             if (meshBehaviour is MeshBehaviour)

@@ -51,7 +51,7 @@ namespace Silksprite.MeshWeaver.Controllers.Base
             }
             var containerMatrix = transform.localToWorldMatrix * transform.ToLocalTranslation();
 
-            var pathie = ToFactory().Build(LodMaskLayer.LOD0); // FIXME: I think this should use global editingLodMaskLayer
+            var pathie = ToFactory().Build(MeshWeaverSettings.Current.currentLodMaskLayer);
             var points = pathie.Vertices.Select(v => containerMatrix.MultiplyPoint3x4(v.Vertex)).ToArray();
 
             Gizmos.matrix = Matrix4x4.identity;
