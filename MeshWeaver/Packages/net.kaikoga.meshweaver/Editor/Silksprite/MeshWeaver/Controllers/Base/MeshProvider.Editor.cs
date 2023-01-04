@@ -8,12 +8,13 @@ using Silksprite.MeshWeaver.Models.DataObjects;
 using Silksprite.MeshWeaver.Utils;
 using UnityEditor;
 using UnityEngine;
+using static Silksprite.MeshWeaver.Utils.Localization;
 
 namespace Silksprite.MeshWeaver.Controllers.Base
 {
     [CustomEditor(typeof(MeshProvider), true, isFallback = true)]
     [CanEditMultipleObjects]
-    public class MeshProviderEditor : GeometryProviderEditor
+    public class MeshProviderEditor : ProviderBaseEditor
     {
         bool _isExpanded;
         bool _isColliderExpanded;
@@ -34,7 +35,7 @@ namespace Silksprite.MeshWeaver.Controllers.Base
                 }
             }
 
-            if (GUILayout.Button("Bake"))
+            if (GUILayout.Button(Tr("Bake")))
             {
                 var meshProvider = (MeshProvider)target;
                 var transform = meshProvider.transform;
@@ -72,8 +73,8 @@ namespace Silksprite.MeshWeaver.Controllers.Base
                 if (_colliderMeshie == null) _colliderMeshie = factory.Build(LodMaskLayer.Collider);
             }
 
-            MeshWeaverGUI.DumpFoldout("Mesh Dump", ref _isExpanded, () => _meshie);
-            MeshWeaverGUI.DumpFoldout("Collider Mesh Dump", ref _isColliderExpanded, () => _colliderMeshie);
+            MeshWeaverGUI.DumpFoldout(Tr("Mesh Dump"), ref _isExpanded, () => _meshie);
+            MeshWeaverGUI.DumpFoldout(Tr("Collider Mesh Dump"), ref _isColliderExpanded, () => _colliderMeshie);
         }
 
         protected bool HasFrameBounds() => true;

@@ -1,6 +1,9 @@
 using Silksprite.MeshWeaver.Controllers.Utils;
+using Silksprite.MeshWeaver.Scopes;
+using Silksprite.MeshWeaver.Utils;
 using UnityEditor;
 using UnityEngine;
+using static Silksprite.MeshWeaver.Utils.Localization;
 
 namespace Silksprite.MeshWeaver.Controllers
 {
@@ -12,31 +15,36 @@ namespace Silksprite.MeshWeaver.Controllers
         {
             MeshWeaverControllerGUI.LodSelectorGUI(target);
 
-            base.OnInspectorGUI();
+            using (new BackgroundColorScope(Color.magenta))
+            {
+                MeshWeaverGUI.Header(Tr("Fallback Inspector"));
+                base.OnInspectorGUI();
+            }
+
             var meshBehaviour = (CustomMeshBehaviour)target;
             if (meshBehaviour is MeshBehaviour)
             {
                 MeshProviderMenus.Menu.ChildPopup(meshBehaviour, "Mesh Providers");
             }
 
-            if (GUILayout.Button("Collect Materials"))
+            if (GUILayout.Button(Tr("Collect Materials")))
             {
                 meshBehaviour.CollectMaterials();
             }
-            if (GUILayout.Button("Compile"))
+            if (GUILayout.Button(Tr("Compile")))
             {
                 meshBehaviour.Compile();
             }
-            if (GUILayout.Button("Compile All Active"))
+            if (GUILayout.Button(Tr("Compile All Active")))
             {
                 foreach (var m in FindObjectsOfType<CustomMeshBehaviour>()) m.Compile();
             }
-            if (HasSetupAsMeshRendererButton(meshBehaviour) && GUILayout.Button("I am Mesh Renderer"))
+            if (HasSetupAsMeshRendererButton(meshBehaviour) && GUILayout.Button(Tr("I am Mesh Renderer")))
             {
                 SetupAsMeshRenderer(meshBehaviour);
             }
 
-            if (HasCreateExporterButton(meshBehaviour) && GUILayout.Button("Create Exporter"))
+            if (HasCreateExporterButton(meshBehaviour) && GUILayout.Button(Tr("Create Exporter")))
             {
                 CreateExporter(meshBehaviour);
             }

@@ -7,6 +7,11 @@ namespace Silksprite.MeshWeaver.Utils
 {
     public static class MeshWeaverGUI
     {
+        public static void Header(string text)
+        {
+            GUILayout.Label(text, MeshWeaverSkin.Header);
+        }
+
         public static void DumpFoldout(string titlePrefix, ref bool isExpanded, Func<IDump> dump)
         {
             var dumped = dump();

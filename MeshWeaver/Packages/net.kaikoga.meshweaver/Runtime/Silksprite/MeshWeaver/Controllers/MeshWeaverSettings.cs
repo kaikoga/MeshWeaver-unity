@@ -15,6 +15,7 @@ namespace Silksprite.MeshWeaver.Controllers
         public class MeshWeaverSettingsData
         {
             public LodMaskLayer currentLodMaskLayer = LodMaskLayer.LOD0;
+            public string lang = "en";
         }
     }
 }

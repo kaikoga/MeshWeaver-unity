@@ -5,6 +5,7 @@ using Silksprite.MeshWeaver.Controllers.Base;
 using Silksprite.MeshWeaver.Controllers.Extensions;
 using UnityEditor;
 using UnityEngine;
+using static Silksprite.MeshWeaver.Utils.Localization;
 
 namespace Silksprite.MeshWeaver.Utils
 {
@@ -17,7 +18,7 @@ namespace Silksprite.MeshWeaver.Utils
         public ChildComponentPopupMenu(params Type[] types)
         {
             _types = new [] { (Type)null, null }.Concat(types).ToArray();
-            _menuOptions = new [] { "Create Child...", "" }.Concat(types.Select(type => type == typeof(void) ? "" : type.Name)).ToArray();
+            _menuOptions = new [] { Tr("Create Child..."), "" }.Concat(types.Select(type => type == typeof(void) ? "" : type.Name)).ToArray();
         }
 
         public T ChildPopup(Component self, string label)

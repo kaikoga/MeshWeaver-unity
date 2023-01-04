@@ -7,12 +7,13 @@ using Silksprite.MeshWeaver.Models.DataObjects;
 using Silksprite.MeshWeaver.Utils;
 using UnityEditor;
 using UnityEngine;
+using static Silksprite.MeshWeaver.Utils.Localization;
 
 namespace Silksprite.MeshWeaver.Controllers.Base
 {
     [CustomEditor(typeof(PathProvider), true, isFallback = true)]
     [CanEditMultipleObjects]
-    public class PathProviderEditor : GeometryProviderEditor
+    public class PathProviderEditor : ProviderBaseEditor
     {
         bool _isExpanded;
         bool _isColliderExpanded;
@@ -33,7 +34,7 @@ namespace Silksprite.MeshWeaver.Controllers.Base
                 }
             }
 
-            if (GUILayout.Button("Bake"))
+            if (GUILayout.Button(Tr("Bake")))
             {
                 var pathProvider = (PathProvider)target;
                 var transform = pathProvider.transform;
@@ -67,8 +68,8 @@ namespace Silksprite.MeshWeaver.Controllers.Base
                 if (_colliderPathie == null) _colliderPathie = factory.Build(LodMaskLayer.Collider);
             }
 
-            MeshWeaverGUI.DumpFoldout("Path Dump", ref _isExpanded, () => _pathie);
-            MeshWeaverGUI.DumpFoldout("Collider Path Dump", ref _isColliderExpanded, () => _colliderPathie);
+            MeshWeaverGUI.DumpFoldout(Tr("Path Dump"), ref _isExpanded, () => _pathie);
+            MeshWeaverGUI.DumpFoldout(Tr("Collider Path Dump"), ref _isColliderExpanded, () => _colliderPathie);
 
         }
 

@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Silksprite.MeshWeaver.Models;
+using Silksprite.MeshWeaver.Scopes;
+using Silksprite.MeshWeaver.Utils;
 using UnityEditor;
 using UnityEngine;
+using static Silksprite.MeshWeaver.Utils.Localization;
 
 namespace Silksprite.MeshWeaver.Controllers
 {
@@ -13,27 +16,32 @@ namespace Silksprite.MeshWeaver.Controllers
     {
         public override void OnInspectorGUI()
         {
-            base.OnInspectorGUI();
+            using (new BackgroundColorScope(Color.magenta))
+            {
+                MeshWeaverGUI.Header(Tr("Fallback Inspector"));
+                base.OnInspectorGUI();
+                MeshWeaverGUI.Header(Tr("End Fallback Inspector"));
+            }
             var meshBehaviourExporter = (MeshBehaviourExporter)target;
             var meshBehaviour = meshBehaviourExporter.GetComponent<CustomMeshBehaviour>();
-            if (GUILayout.Button("Copy Materials from MeshBehaviour"))
+            if (GUILayout.Button(Tr("Copy Materials from MeshBehaviour")))
             {
                 meshBehaviourExporter.materials = meshBehaviour.materials.ToArray();
             }
 
-            if (GUILayout.Button("Create Mesh Asset"))
+            if (GUILayout.Button(Tr("Create Mesh Asset")))
             {
-                var projectFilePath = EditorUtility.SaveFilePanelInProject("Export Mesh Asset",  meshBehaviourExporter.gameObject.name, "mesh", "");
+                var projectFilePath = EditorUtility.SaveFilePanelInProject(Tr("Export Mesh Asset"),  meshBehaviourExporter.gameObject.name, "mesh", "");
                 ExportMeshAsset(projectFilePath, meshBehaviourExporter, meshBehaviour);
             }
 
-            if (GUILayout.Button("Create Mesh Prefab"))
+            if (GUILayout.Button(Tr("Create Mesh Prefab")))
             {
-                var projectFilePath = EditorUtility.SaveFilePanelInProject("Export Mesh Prefab",  meshBehaviourExporter.gameObject.name, "prefab", "");
+                var projectFilePath = EditorUtility.SaveFilePanelInProject(Tr("Export Mesh Prefab"),  meshBehaviourExporter.gameObject.name, "prefab", "");
                 ExportMeshPrefab(projectFilePath, meshBehaviourExporter, meshBehaviour);
             }
 
-            if (GUILayout.Button("Update Exported Assets"))
+            if (GUILayout.Button(Tr("Update Exported Assets")))
             {
                 OnValidate();
                 if (AssetDatabase.IsMainAsset(meshBehaviourExporter.outputMesh))
