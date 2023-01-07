@@ -1,5 +1,4 @@
 using Silksprite.MeshWeaver.Controllers.Utils;
-using Silksprite.MeshWeaver.Scopes;
 using Silksprite.MeshWeaver.Utils;
 using UnityEditor;
 using UnityEngine;
@@ -11,42 +10,61 @@ namespace Silksprite.MeshWeaver.Controllers
     [CanEditMultipleObjects]
     public class CustomMeshBehaviourEditor : Editor
     {
+        CustomMeshBehaviour _meshBehaviour;
+
+        SerializedProperty _serializedUpdatesEveryFrame;
+        SerializedProperty _serializedProfile;
+        SerializedProperty _serializedMaterials;
+        SerializedProperty _serializedMeshFilters;
+        SerializedProperty _serializedMeshColliders;
+
+        void OnEnable()
+        {
+            _meshBehaviour = (CustomMeshBehaviour)target;
+
+            _serializedUpdatesEveryFrame = serializedObject.FindProperty(nameof(CustomMeshBehaviour.updatesEveryFrame));
+            _serializedProfile = serializedObject.FindProperty("profile"); // nameof(CustomMeshBehaviour.profile)
+            _serializedMaterials = serializedObject.FindProperty(nameof(CustomMeshBehaviour.materials));
+            _serializedMeshFilters = serializedObject.FindProperty(nameof(CustomMeshBehaviour.meshFilters));
+            _serializedMeshColliders = serializedObject.FindProperty(nameof(CustomMeshBehaviour.meshColliders));
+        }
+
         public override void OnInspectorGUI()
         {
             MeshWeaverControllerGUI.LodSelectorGUI(target);
 
-            using (new BackgroundColorScope(Color.magenta))
+            MeshWeaverGUILayout.PropertyField(_serializedUpdatesEveryFrame, Loc("CustomMeshBehaviour.updatesEveryFrame"));
+            MeshWeaverGUILayout.PropertyField(_serializedProfile, Loc("CustomMeshBehaviour.profile"));
+            MeshWeaverGUILayout.PropertyField(_serializedMaterials, Loc("CustomMeshBehaviour.materials"));
+            MeshWeaverGUILayout.PropertyField(_serializedMeshFilters, Loc("CustomMeshBehaviour.meshFilters"));
+            MeshWeaverGUILayout.PropertyField(_serializedMeshColliders, Loc("CustomMeshBehaviour.meshColliders"));
+            serializedObject.ApplyModifiedProperties();
+            
+            if (_meshBehaviour is MeshBehaviour)
             {
-                MeshWeaverGUI.Header(Tr("Fallback Inspector"));
-                base.OnInspectorGUI();
-            }
-
-            var meshBehaviour = (CustomMeshBehaviour)target;
-            if (meshBehaviour is MeshBehaviour)
-            {
-                MeshProviderMenus.Menu.ChildPopup(meshBehaviour, "Mesh Providers");
+                MeshProviderMenus.Menu.ChildPopup(_meshBehaviour, Tr("Mesh Providers"));
             }
 
             if (GUILayout.Button(Tr("Collect Materials")))
             {
-                meshBehaviour.CollectMaterials();
+                _meshBehaviour.CollectMaterials();
             }
             if (GUILayout.Button(Tr("Compile")))
             {
-                meshBehaviour.Compile();
+                _meshBehaviour.Compile();
             }
             if (GUILayout.Button(Tr("Compile All Active")))
             {
                 foreach (var m in FindObjectsOfType<CustomMeshBehaviour>()) m.Compile();
             }
-            if (HasSetupAsMeshRendererButton(meshBehaviour) && GUILayout.Button(Tr("I am Mesh Renderer")))
+            if (HasSetupAsMeshRendererButton(_meshBehaviour) && GUILayout.Button(Tr("I am Mesh Renderer")))
             {
-                SetupAsMeshRenderer(meshBehaviour);
+                SetupAsMeshRenderer(_meshBehaviour);
             }
 
-            if (HasCreateExporterButton(meshBehaviour) && GUILayout.Button(Tr("Create Exporter")))
+            if (HasCreateExporterButton(_meshBehaviour) && GUILayout.Button(Tr("Create Exporter")))
             {
-                CreateExporter(meshBehaviour);
+                CreateExporter(_meshBehaviour);
             }
         }
 

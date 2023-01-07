@@ -18,9 +18,9 @@ namespace Silksprite.MeshWeaver.Controllers
         {
             using (new BackgroundColorScope(Color.magenta))
             {
-                MeshWeaverGUI.Header(Tr("Fallback Inspector"));
+                MeshWeaverGUILayout.Header(Loc("Fallback Inspector"));
                 base.OnInspectorGUI();
-                MeshWeaverGUI.Header(Tr("End Fallback Inspector"));
+                MeshWeaverGUILayout.Header(Loc("End Fallback Inspector"));
             }
             var meshBehaviourExporter = (MeshBehaviourExporter)target;
             var meshBehaviour = meshBehaviourExporter.GetComponent<CustomMeshBehaviour>();

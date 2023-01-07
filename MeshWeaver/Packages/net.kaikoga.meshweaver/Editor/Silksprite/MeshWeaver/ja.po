@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-01-05 00:27+0900\n"
+"POT-Creation-Date: 2023-01-07 19:48+0900\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -12,7 +12,7 @@ msgstr ""
 "X-Generator: Poedit 3.2.2\n"
 "X-Poedit-Basepath: ../../..\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-KeywordsList: Tr\n"
+"X-Poedit-KeywordsList: Tr;Loc\n"
 "X-Poedit-SearchPath-0: .\n"
 
 #: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshProvider.Editor.cs:38
@@ -37,57 +37,87 @@ msgid "Collider Path Dump"
 msgstr "コライダーパスのダンプ"
 
 #: Editor/Silksprite/MeshWeaver/Controllers/Base/ProviderBase.Editor.cs:15
-#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:20
+#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourExporter.Editor.cs:21
 msgid "Fallback Inspector"
 msgstr "仮UI"
 
 #: Editor/Silksprite/MeshWeaver/Controllers/Base/ProviderBase.Editor.cs:17
+#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourExporter.Editor.cs:23
 msgid "End Fallback Inspector"
 msgstr "仮UIここまで"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:30
+#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:36
+msgid "CustomMeshBehaviour.updatesEveryFrame"
+msgstr "毎フレーム更新する"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:37
+msgid "CustomMeshBehaviour.profile"
+msgstr "基本設定"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:38
+msgid "CustomMeshBehaviour.materials"
+msgstr "マテリアル"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:39
+msgid "CustomMeshBehaviour.meshFilters"
+msgstr "出力先MeshFilter"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:40
+msgid "CustomMeshBehaviour.meshColliders"
+msgstr "出力先MeshCollider"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:44
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/CompositeMeshProvider.Editor.cs:16
+msgid "Mesh Providers"
+msgstr "子メッシュ"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:47
 msgid "Collect Materials"
 msgstr "マテリアルを再収集"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:34
+#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:51
 msgid "Compile"
 msgstr "コンパイル"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:38
+#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:55
 msgid "Compile All Active"
 msgstr "アクティブを全てコンパイル"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:42
+#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:59
 msgid "I am Mesh Renderer"
 msgstr "自分自身がMesh Rendererになる事だ"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:47
+#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:64
 msgid "Create Exporter"
 msgstr "Exporterを生成する"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourExporter.Editor.cs:20
+#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourExporter.Editor.cs:27
 msgid "Copy Materials from MeshBehaviour"
 msgstr "マテリアルをMeshBehaviourからコピー"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourExporter.Editor.cs:25
+#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourExporter.Editor.cs:32
 msgid "Create Mesh Asset"
 msgstr "メッシュアセットを作成"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourExporter.Editor.cs:27
+#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourExporter.Editor.cs:34
 msgid "Export Mesh Asset"
 msgstr "メッシュアセットを書き出し"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourExporter.Editor.cs:31
+#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourExporter.Editor.cs:38
 msgid "Create Mesh Prefab"
 msgstr "プレハブを作成"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourExporter.Editor.cs:33
+#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourExporter.Editor.cs:40
 msgid "Export Mesh Prefab"
 msgstr "プレハブを書き出し"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourExporter.Editor.cs:37
+#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourExporter.Editor.cs:44
 msgid "Update Exported Assets"
 msgstr "書き出されたアセットを更新"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Paths/CompositePathProvider.Editor.cs:16
+msgid "Path Providers"
+msgstr "子パス"
 
 # notranslation
 #: Editor/Silksprite/MeshWeaver/Controllers/Utils/MeshWeaverControllerGUI.cs:17
