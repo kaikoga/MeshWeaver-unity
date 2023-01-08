@@ -30,7 +30,13 @@ namespace Silksprite.MeshWeaver.Utils
             string _lang;
             Dictionary<string, T> _cache = new Dictionary<string, T>();
 
-            public delegate T Generator(string lang, string key); 
+            public delegate T Generator(string lang, string key);
+
+            public void Clear()
+            {
+                _lang = null;
+                _cache.Clear();
+            }
 
             public T FindOrCreate(string key, Generator generator)
             {
@@ -43,6 +49,16 @@ namespace Silksprite.MeshWeaver.Utils
                 value = generator(_lang, key);
                 _cache.Add(key, value);
                 return value;
+            }
+        }
+
+        class LocalizationPostProcessor : AssetPostprocessor
+        {
+            static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths)
+            {
+                PoCache.Clear();
+                TrCache.Clear();
+                GUIContentCache.Clear();
             }
         }
     }
