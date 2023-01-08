@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-01-08 15:37+0900\n"
+"POT-Creation-Date: 2023-01-08 22:10+0900\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -70,7 +70,7 @@ msgid "CustomMeshBehaviour.meshColliders"
 msgstr "同期するMeshCollider"
 
 #: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:46
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/CompositeMeshProvider.Editor.cs:17
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/CompositeMeshProvider.Editor.cs:16
 msgid "Mesh Providers"
 msgstr "子メッシュ"
 
@@ -155,12 +155,64 @@ msgstr "コライダー メッシュ"
 msgid "Update Exported Assets"
 msgstr "書き出されたアセットを更新"
 
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/ImportMeshProvider.Editor.cs:24
+msgid "ImportMeshProvider.mesh"
+msgstr "メッシュアセット"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/ImportMeshProvider.Editor.cs:25
+msgid "ImportMeshProvider.materials"
+msgstr "マテリアル"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/MatrixMeshProvider.Editor.cs:40
+msgid "MatrixMeshProvider.pathProviderX"
+msgstr "パス X軸"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/MatrixMeshProvider.Editor.cs:42
+msgid "MatrixMeshProvider.pathProviderY"
+msgstr "パス Y軸"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/MatrixMeshProvider.Editor.cs:45
+msgid "MatrixMeshProvider.operatorKind"
+msgstr "パス演算子"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/MatrixMeshProvider.Editor.cs:46
+msgid "MatrixMeshProvider.defaultCellPatternKind"
+msgstr "セル形状"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/MatrixMeshProvider.Editor.cs:47
+msgid "MatrixMeshProvider.cellPatternOverrides"
+msgstr "セルのオーバーライド"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/MatrixMeshProvider.Editor.cs:48
+msgid "MatrixMeshProvider.material"
+msgstr "マテリアル"
+
 #: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PolygonMeshProvider.Editor.cs:29
 msgid "PolygonMeshProvider.pathProvider"
 msgstr "パス"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PolygonMeshProvider.Editor.cs:30
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PolygonMeshProvider.Editor.cs:31
 msgid "PolygonMeshProvider.material"
+msgstr "マテリアル"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/StampMeshProvider.Editor.cs:32
+msgid "StampMeshProvider.meshProvider"
+msgstr "メッシュ"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/StampMeshProvider.Editor.cs:34
+msgid "StampMeshProvider.pathProvider"
+msgstr "パス"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/StitchMeshProvider.Editor.cs:34
+msgid "StitchMeshProvider.pathProviderA"
+msgstr "パス A"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/StitchMeshProvider.Editor.cs:36
+msgid "StitchMeshProvider.pathProviderB"
+msgstr "パス B"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/StitchMeshProvider.Editor.cs:39
+msgid "StitchMeshProvider.material"
 msgstr "マテリアル"
 
 #: Editor/Silksprite/MeshWeaver/Controllers/Paths/CompositePathProvider.Editor.cs:17
