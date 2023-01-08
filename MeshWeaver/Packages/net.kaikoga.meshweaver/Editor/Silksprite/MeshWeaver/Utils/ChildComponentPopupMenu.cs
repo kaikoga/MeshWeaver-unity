@@ -13,17 +13,17 @@ namespace Silksprite.MeshWeaver.Utils
     where T : Component
     {
         readonly Type[] _types;
-        readonly string[] _menuOptions;
+        readonly LocalizedContent[] _menuOptions;
 
         public ChildComponentPopupMenu(params Type[] types)
         {
             _types = new [] { (Type)null, null }.Concat(types).ToArray();
-            _menuOptions = new [] { Tr("Create Child..."), "" }.Concat(types.Select(type => type == typeof(void) ? "" : type.Name)).ToArray();
+            _menuOptions = new [] { Loc("Create Child..."), _Loc("") }.Concat(types.Select(type => type == typeof(void) ? _Loc("") : _Loc(type.Name))).ToArray();
         }
 
         public T ChildPopup(Component self, string label)
         {
-            var index = EditorGUILayout.Popup(label, 0, _menuOptions);
+            var index = EditorGUILayout.Popup(label, 0, _menuOptions.Select(loc => loc.Tr).ToArray());
             return index <= 0 ? null : self.AddChildComponent<T>(_types[index]);
         }
 

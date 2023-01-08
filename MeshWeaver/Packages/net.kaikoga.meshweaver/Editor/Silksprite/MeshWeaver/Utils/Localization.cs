@@ -23,6 +23,7 @@ namespace Silksprite.MeshWeaver.Utils
         public static GUIContent GUIContent(string key) => GUIContentCache.FindOrCreate(key, (l, k) => new GUIContent(Po.GetLocalizedString(k), null, k));
 
         public static LocalizedContent Loc(string key) => new LocalizedContent(key);
+        public static LocalizedContent _Loc(string key) => new LocalizedContent(key);
 
         class LocalizationCache<T>
         {
