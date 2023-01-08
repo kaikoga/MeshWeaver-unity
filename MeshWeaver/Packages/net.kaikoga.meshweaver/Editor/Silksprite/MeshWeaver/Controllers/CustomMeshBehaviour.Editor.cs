@@ -31,7 +31,8 @@ namespace Silksprite.MeshWeaver.Controllers
 
         public override void OnInspectorGUI()
         {
-            MeshWeaverControllerGUI.LodSelectorGUI(target);
+            MeshWeaverControllerGUILayout.LangSelectorGUI();
+            MeshWeaverControllerGUILayout.LodSelectorGUI(target);
 
             MeshWeaverGUILayout.PropertyField(_serializedUpdatesEveryFrame, Loc("CustomMeshBehaviour.updatesEveryFrame"));
             MeshWeaverGUILayout.PropertyField(_serializedProfile, Loc("CustomMeshBehaviour.profile"));

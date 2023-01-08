@@ -24,9 +24,10 @@ namespace Silksprite.MeshWeaver.Controllers.Base
 
         public sealed override void OnInspectorGUI()
         {
+            MeshWeaverControllerGUILayout.LangSelectorGUI();
             using (var changedScope = new EditorGUI.ChangeCheckScope())
             {
-                MeshWeaverControllerGUI.LodSelectorGUI(target);
+                MeshWeaverControllerGUILayout.LodSelectorGUI(target);
                 OnPropertiesGUI();
                 if (changedScope.changed)
                 {
