@@ -1,3 +1,4 @@
+using Silksprite.MeshWeaver.Controllers.Fallback;
 using Silksprite.MeshWeaver.Controllers.Utils;
 using UnityEditor;
 using UnityEngine;
@@ -6,7 +7,7 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes.Modifiers
 {
     [CustomEditor(typeof(MeshCutoutColliderProvider))]
     [CanEditMultipleObjects]
-    public class MeshCutoutColliderProviderEditor : Editor
+    public class MeshCutoutColliderProviderEditor : SubProviderBaseEditor
     {
         public override void OnInspectorGUI()
         {

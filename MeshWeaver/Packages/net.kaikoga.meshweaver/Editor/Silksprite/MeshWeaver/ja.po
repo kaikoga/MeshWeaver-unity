@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-01-08 13:46+0900\n"
+"POT-Creation-Date: 2023-01-08 15:37+0900\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -15,32 +15,37 @@ msgstr ""
 "X-Poedit-KeywordsList: Tr;Loc\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshProvider.Editor.cs:39
-#: Editor/Silksprite/MeshWeaver/Controllers/Base/PathProvider.Editor.cs:38
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshProviderEditorBase.cs:37
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/PathProviderEditorBase.cs:36
 msgid "Bake"
 msgstr "ベイクする"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshProvider.Editor.cs:77
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshProviderEditorBase.cs:59
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/PathProviderEditorBase.cs:54
+msgid "GeometryProvider.lodMask"
+msgstr "LOD マスク"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshProviderEditorBase.cs:73
 msgid "Mesh Dump"
 msgstr "メッシュのダンプ"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshProvider.Editor.cs:78
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshProviderEditorBase.cs:74
 msgid "Collider Mesh Dump"
 msgstr "コライダーのダンプ"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Base/PathProvider.Editor.cs:72
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/PathProviderEditorBase.cs:68
 msgid "Path Dump"
 msgstr "パスのダンプ"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Base/PathProvider.Editor.cs:73
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/PathProviderEditorBase.cs:69
 msgid "Collider Path Dump"
 msgstr "コライダーパスのダンプ"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Base/ProviderBase.Editor.cs:15
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/ProviderEditorBase.cs:15
 msgid "Fallback Inspector"
 msgstr "仮UI"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Base/ProviderBase.Editor.cs:17
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/ProviderEditorBase.cs:17
 msgid "End Fallback Inspector"
 msgstr "仮UIここまで"
 
@@ -65,7 +70,7 @@ msgid "CustomMeshBehaviour.meshColliders"
 msgstr "同期するMeshCollider"
 
 #: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:46
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/CompositeMeshProvider.Editor.cs:16
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/CompositeMeshProvider.Editor.cs:17
 msgid "Mesh Providers"
 msgstr "子メッシュ"
 
@@ -150,7 +155,15 @@ msgstr "コライダー メッシュ"
 msgid "Update Exported Assets"
 msgstr "書き出されたアセットを更新"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Paths/CompositePathProvider.Editor.cs:16
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PolygonMeshProvider.Editor.cs:29
+msgid "PolygonMeshProvider.pathProvider"
+msgstr "パス"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PolygonMeshProvider.Editor.cs:30
+msgid "PolygonMeshProvider.material"
+msgstr "マテリアル"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Paths/CompositePathProvider.Editor.cs:17
 msgid "Path Providers"
 msgstr "子パス"
 
@@ -161,7 +174,7 @@ msgstr "Language (Global)"
 
 #: Editor/Silksprite/MeshWeaver/Controllers/Utils/MeshWeaverControllerGUILayout.cs:23
 msgid "Current LOD (Global)"
-msgstr "表示するLOD"
+msgstr "表示するLOD (Global)"
 
 #: Editor/Silksprite/MeshWeaver/Utils/ChildComponentPopupMenu.cs:21
 msgid "Create Child..."

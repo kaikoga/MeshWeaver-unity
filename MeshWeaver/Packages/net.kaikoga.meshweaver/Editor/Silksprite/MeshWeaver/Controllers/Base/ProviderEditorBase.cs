@@ -6,7 +6,7 @@ using static Silksprite.MeshWeaver.Utils.Localization;
 
 namespace Silksprite.MeshWeaver.Controllers.Base
 {
-    public abstract class ProviderBaseEditor : Editor
+    public abstract class ProviderEditorBase : Editor
     {
         public override void OnInspectorGUI()
         {

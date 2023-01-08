@@ -12,9 +12,7 @@ using static Silksprite.MeshWeaver.Utils.Localization;
 
 namespace Silksprite.MeshWeaver.Controllers.Base
 {
-    [CustomEditor(typeof(MeshProvider), true, isFallback = true)]
-    [CanEditMultipleObjects]
-    public class MeshProviderEditor : ProviderBaseEditor
+    public abstract class MeshProviderEditorBase : ProviderEditorBase
     {
         bool _isExpanded;
         bool _isColliderExpanded;
@@ -58,10 +56,8 @@ namespace Silksprite.MeshWeaver.Controllers.Base
 
         protected virtual void OnPropertiesGUI()
         {
-            base.OnInspectorGUI();
-
-            var meshProvider = (MeshProvider)target;
-            MeshModifierProviderMenus.Menu.ModifierPopup(meshProvider);
+            MeshWeaverGUILayout.PropertyField(serializedObject.FindProperty("lodMask"), Loc("GeometryProvider.lodMask"));
+            serializedObject.ApplyModifiedProperties();
         }
 
         protected virtual void OnDumpGUI()
@@ -77,6 +73,8 @@ namespace Silksprite.MeshWeaver.Controllers.Base
             MeshWeaverGUI.DumpFoldout(Tr("Mesh Dump"), ref _isExpanded, () => _meshie);
             MeshWeaverGUI.DumpFoldout(Tr("Collider Mesh Dump"), ref _isColliderExpanded, () => _colliderMeshie);
         }
+
+        protected void OnBaseInspectorGUI() => base.OnInspectorGUI();
 
         protected bool HasFrameBounds() => true;
 
