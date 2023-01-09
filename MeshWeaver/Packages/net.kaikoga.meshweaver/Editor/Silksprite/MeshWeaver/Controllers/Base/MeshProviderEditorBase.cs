@@ -18,29 +18,15 @@ namespace Silksprite.MeshWeaver.Controllers.Base
         bool _isExpanded;
         bool _isColliderExpanded;
 
-        Meshie _meshie;
-        Meshie _colliderMeshie;
-        
         public sealed override VisualElement CreateInspectorGUI()
         {
             var container = CreateRootContainerElement();
             container.Add(new IMGUIContainer(() =>
             {
                 MeshWeaverControllerGUILayout.LangSelectorGUI();
+                MeshWeaverControllerGUILayout.LodSelectorGUI(target);
             }));
-            container.Add(new IMGUIContainer(() =>
-            {
-                using (var changedScope = new EditorGUI.ChangeCheckScope())
-                {
-                    MeshWeaverControllerGUILayout.LodSelectorGUI(target);
-                    PropertiesGUI();
-                    if (changedScope.changed)
-                    {
-                        _meshie = null;
-                        _colliderMeshie = null;
-                    }
-                }
-            }));
+            container.Add(new IMGUIContainer(PropertiesGUI));
             container.Add(new IMGUIContainer(() =>
             {
                 if (GUILayout.Button(Tr("Bake")))
@@ -60,10 +46,7 @@ namespace Silksprite.MeshWeaver.Controllers.Base
                     bakedTransform.localScale = transform.localScale;
                 }
             }));
-            container.Add(new IMGUIContainer(() =>
-            {
-                DumpGUI();
-            }));
+            container.Add(new IMGUIContainer(DumpGUI));
             return container;
         }
 
@@ -78,16 +61,9 @@ namespace Silksprite.MeshWeaver.Controllers.Base
 
         void DumpGUI()
         {
-            var meshProvider = (MeshProvider)target;
-            var factory = meshProvider.LastFactory;
-            if (factory != null)
-            {
-                if (_meshie == null) _meshie = factory.Build(MeshWeaverSettings.Current.currentLodMaskLayer);
-                if (_colliderMeshie == null) _colliderMeshie = factory.Build(LodMaskLayer.Collider);
-            }
-
-            MeshWeaverGUI.DumpFoldout(Tr("Mesh Dump"), ref _isExpanded, () => _meshie);
-            MeshWeaverGUI.DumpFoldout(Tr("Collider Mesh Dump"), ref _isColliderExpanded, () => _colliderMeshie);
+            var factory = ((MeshProvider)target).LastFactory;
+            MeshWeaverGUI.DumpFoldout(Tr("Mesh Dump"), ref _isExpanded, () => factory?.Build(MeshWeaverSettings.Current.currentLodMaskLayer));
+            MeshWeaverGUI.DumpFoldout(Tr("Collider Mesh Dump"), ref _isColliderExpanded, () => factory?.Build(LodMaskLayer.Collider));
             OnDumpGUI();
         }
 

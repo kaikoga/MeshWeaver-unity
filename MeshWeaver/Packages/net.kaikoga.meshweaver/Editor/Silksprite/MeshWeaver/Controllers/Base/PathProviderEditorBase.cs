@@ -16,9 +16,6 @@ namespace Silksprite.MeshWeaver.Controllers.Base
     {
         bool _isExpanded;
         bool _isColliderExpanded;
-        
-        Pathie _pathie;
-        Pathie _colliderPathie;
 
         public sealed override VisualElement CreateInspectorGUI()
         {
@@ -26,20 +23,9 @@ namespace Silksprite.MeshWeaver.Controllers.Base
             container.Add(new IMGUIContainer(() =>
             {
                 MeshWeaverControllerGUILayout.LangSelectorGUI();
+                MeshWeaverControllerGUILayout.LodSelectorGUI(target);
             }));
-            container.Add(new IMGUIContainer(() =>
-            {
-                using (var changedScope = new EditorGUI.ChangeCheckScope())
-                {
-                    MeshWeaverControllerGUILayout.LodSelectorGUI(target);
-                    PropertiesGUI();
-                    if (changedScope.changed)
-                    {
-                        _pathie = null;
-                        _colliderPathie = null;
-                    }
-                }
-            }));
+            container.Add(new IMGUIContainer(PropertiesGUI));
             container.Add(new IMGUIContainer(() =>
             {
                 if (GUILayout.Button(Tr("Bake")))
@@ -55,10 +41,7 @@ namespace Silksprite.MeshWeaver.Controllers.Base
                     bakedTransform.localScale = transform.localScale;
                 }
             }));
-            container.Add(new IMGUIContainer(() =>
-            {
-                DumpGUI();
-            }));
+            container.Add(new IMGUIContainer(DumpGUI));
             return container;
         }
 
@@ -73,16 +56,10 @@ namespace Silksprite.MeshWeaver.Controllers.Base
 
         void DumpGUI()
         {
-            var pathProvider = (PathProvider)target;
-            var factory = pathProvider.LastFactory;
-            if (factory != null)
-            {
-                if (_pathie == null) _pathie = factory.Build(MeshWeaverSettings.Current.currentLodMaskLayer);
-                if (_colliderPathie == null) _colliderPathie = factory.Build(LodMaskLayer.Collider);
-            }
+            var factory = ((PathProvider)target).LastFactory;
 
-            MeshWeaverGUI.DumpFoldout(Tr("Path Dump"), ref _isExpanded, () => _pathie);
-            MeshWeaverGUI.DumpFoldout(Tr("Collider Path Dump"), ref _isColliderExpanded, () => _colliderPathie);
+            MeshWeaverGUI.DumpFoldout(Tr("Path Dump"), ref _isExpanded, () => factory?.Build(MeshWeaverSettings.Current.currentLodMaskLayer));
+            MeshWeaverGUI.DumpFoldout(Tr("Collider Path Dump"), ref _isColliderExpanded, () => factory?.Build(LodMaskLayer.Collider));
         }
 
         protected virtual void OnDumpGUI() { }

@@ -23,6 +23,7 @@ namespace Silksprite.MeshWeaver.Controllers.Utils
                 MeshWeaverSettings.Current.currentLodMaskLayer = (LodMaskLayer)EditorGUILayout.EnumPopup(Tr("Current LOD (Global)"), MeshWeaverSettings.Current.currentLodMaskLayer);
                 if (changedScope.changed)
                 {
+                    // Try to force redraw
                     EditorUtility.SetDirty(target);
                 }
             }
