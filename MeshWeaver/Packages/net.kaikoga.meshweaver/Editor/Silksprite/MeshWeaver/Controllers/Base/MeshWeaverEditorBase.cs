@@ -1,5 +1,7 @@
+using System;
 using Silksprite.MeshWeaver.Controllers.Utils;
 using Silksprite.MeshWeaver.Scopes;
+using Silksprite.MeshWeaver.UIElements;
 using Silksprite.MeshWeaver.Utils;
 using UnityEditor;
 using UnityEngine;
@@ -44,6 +46,18 @@ namespace Silksprite.MeshWeaver.Controllers.Base
                 base.OnInspectorGUI();
                 MeshWeaverGUILayout.Header(Loc("End Fallback Inspector"));
             }
+        }
+
+        protected static VisualElement Div(string containerName, Action<VisualElement> initializer)
+        {
+             var container = new VisualElement { name = containerName };
+             initializer(container);
+             return container;
+        }
+
+        protected VisualElement Prop(string absolutePath, LocalizedContent loc)
+        {
+            return new LocPropertyField(serializedObject.FindProperty(absolutePath), loc);
         }
     }
 }

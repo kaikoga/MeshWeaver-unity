@@ -20,7 +20,7 @@ namespace Silksprite.MeshWeaver.Utils
 
         public static string Tr(string key) => TrCache.FindOrCreate(key, (l, k) => Po != null ? Po.GetLocalizedString(k) : k);
 
-        public static GUIContent GUIContent(string key) => GUIContentCache.FindOrCreate(key, (l, k) => new GUIContent(Po.GetLocalizedString(k), null, k));
+        public static GUIContent GUIContent(string key) => GUIContentCache.FindOrCreate(key, (l, k) => new GUIContent(Tr(k), null, k));
 
         public static LocalizedContent Loc(string key) => new LocalizedContent(key);
         public static LocalizedContent _Loc(string key) => new LocalizedContent(key);

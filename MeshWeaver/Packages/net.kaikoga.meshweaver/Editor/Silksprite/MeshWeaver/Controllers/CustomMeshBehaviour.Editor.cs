@@ -1,5 +1,6 @@
 using Silksprite.MeshWeaver.Controllers.Base;
 using Silksprite.MeshWeaver.Controllers.Utils;
+using Silksprite.MeshWeaver.UIElements;
 using Silksprite.MeshWeaver.Utils;
 using UnityEditor;
 using UnityEngine;
@@ -23,20 +24,13 @@ namespace Silksprite.MeshWeaver.Controllers
 
         protected sealed override void PopulateInspectorGUI(VisualElement container)
         {
-            var serializedUpdatesEveryFrame = serializedObject.FindProperty(nameof(CustomMeshBehaviour.updatesEveryFrame));
-            var serializedProfile = serializedObject.FindProperty("profile"); // nameof(CustomMeshBehaviour.profile)
-            var serializedMaterials = serializedObject.FindProperty(nameof(CustomMeshBehaviour.materials));
-            var serializedMeshFilters = serializedObject.FindProperty(nameof(CustomMeshBehaviour.meshFilters));
-            var serializedMeshColliders = serializedObject.FindProperty(nameof(CustomMeshBehaviour.meshColliders));
-
-            container.Add(new IMGUIContainer(() =>
+            container.Add(Div("properties", c =>
             {
-                MeshWeaverGUILayout.PropertyField(serializedUpdatesEveryFrame, Loc("CustomMeshBehaviour.updatesEveryFrame"));
-                MeshWeaverGUILayout.PropertyField(serializedProfile, Loc("CustomMeshBehaviour.profile"));
-                MeshWeaverGUILayout.PropertyField(serializedMaterials, Loc("CustomMeshBehaviour.materials"));
-                MeshWeaverGUILayout.PropertyField(serializedMeshFilters, Loc("CustomMeshBehaviour.meshFilters"));
-                MeshWeaverGUILayout.PropertyField(serializedMeshColliders, Loc("CustomMeshBehaviour.meshColliders"));
-                serializedObject.ApplyModifiedProperties();
+                c.Add(Prop(nameof(CustomMeshBehaviour.updatesEveryFrame), Loc("CustomMeshBehaviour.updatesEveryFrame")));
+                c.Add(Prop("profile", Loc("CustomMeshBehaviour.profile")));
+                c.Add(Prop(nameof(CustomMeshBehaviour.materials), Loc("CustomMeshBehaviour.materials")));
+                c.Add(Prop(nameof(CustomMeshBehaviour.meshFilters), Loc("CustomMeshBehaviour.meshFilters")));
+                c.Add(Prop(nameof(CustomMeshBehaviour.meshColliders), Loc("CustomMeshBehaviour.meshColliders")));
             }));
             container.Add(new IMGUIContainer(() =>
             {
