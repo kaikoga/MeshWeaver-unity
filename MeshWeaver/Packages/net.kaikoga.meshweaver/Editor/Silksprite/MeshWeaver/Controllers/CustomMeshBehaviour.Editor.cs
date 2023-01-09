@@ -12,6 +12,8 @@ namespace Silksprite.MeshWeaver.Controllers
     [CanEditMultipleObjects]
     public class CustomMeshBehaviourEditor : MeshWeaverEditorBase
     {
+        protected override bool IsMainComponentEditor => true;
+
         CustomMeshBehaviour _meshBehaviour;
 
         void OnEnable()
@@ -19,7 +21,7 @@ namespace Silksprite.MeshWeaver.Controllers
             _meshBehaviour = (CustomMeshBehaviour)target;
         }
 
-        public sealed override VisualElement CreateInspectorGUI()
+        protected sealed override void PopulateInspectorGUI(VisualElement container)
         {
             var serializedUpdatesEveryFrame = serializedObject.FindProperty(nameof(CustomMeshBehaviour.updatesEveryFrame));
             var serializedProfile = serializedObject.FindProperty("profile"); // nameof(CustomMeshBehaviour.profile)
@@ -27,12 +29,6 @@ namespace Silksprite.MeshWeaver.Controllers
             var serializedMeshFilters = serializedObject.FindProperty(nameof(CustomMeshBehaviour.meshFilters));
             var serializedMeshColliders = serializedObject.FindProperty(nameof(CustomMeshBehaviour.meshColliders));
 
-            var container = CreateRootContainerElement();
-            container.Add(new IMGUIContainer(() =>
-            {
-                MeshWeaverControllerGUILayout.LangSelectorGUI();
-                MeshWeaverControllerGUILayout.LodSelectorGUI(target);
-            }));
             container.Add(new IMGUIContainer(() =>
             {
                 MeshWeaverGUILayout.PropertyField(serializedUpdatesEveryFrame, Loc("CustomMeshBehaviour.updatesEveryFrame"));
@@ -71,7 +67,6 @@ namespace Silksprite.MeshWeaver.Controllers
                     CreateExporter(_meshBehaviour);
                 }
             }));
-            return container;
         }
 
         static bool HasSetupAsMeshRendererButton(CustomMeshBehaviour meshBehaviour)

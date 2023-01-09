@@ -8,15 +8,15 @@ namespace Silksprite.MeshWeaver.Controllers.Fallback
     [CanEditMultipleObjects]
     public class SubProviderBaseEditor : ProviderEditorBase
     {
-        public sealed override VisualElement CreateInspectorGUI()
+        protected override bool IsMainComponentEditor => false;
+
+        protected sealed override void PopulateInspectorGUI(VisualElement container)
         {
-            var container = CreateRootContainerElement();
             container.Add(new IMGUIContainer(() =>
             {
                 OnBaseInspectorGUI();
                 OnPropertiesGUI();
             }));
-            return container;
         }
 
         protected virtual void OnPropertiesGUI() { }

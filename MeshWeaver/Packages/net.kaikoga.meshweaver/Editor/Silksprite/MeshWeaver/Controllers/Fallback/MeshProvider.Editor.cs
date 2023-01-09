@@ -8,6 +8,8 @@ namespace Silksprite.MeshWeaver.Controllers.Fallback
     [CanEditMultipleObjects]
     public class MeshProviderEditor : MeshProviderEditorBase
     {
+        protected override bool IsMainComponentEditor => true;
+
         protected override void OnPropertiesGUI()
         {
             OnBaseInspectorGUI();

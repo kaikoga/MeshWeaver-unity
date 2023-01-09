@@ -14,17 +14,13 @@ namespace Silksprite.MeshWeaver.Controllers.Base
 {
     public abstract class PathProviderEditorBase : ProviderEditorBase
     {
+        protected override bool IsMainComponentEditor => true;
+
         bool _isExpanded;
         bool _isColliderExpanded;
 
-        public sealed override VisualElement CreateInspectorGUI()
+        protected sealed override void PopulateInspectorGUI(VisualElement container)
         {
-            var container = CreateRootContainerElement();
-            container.Add(new IMGUIContainer(() =>
-            {
-                MeshWeaverControllerGUILayout.LangSelectorGUI();
-                MeshWeaverControllerGUILayout.LodSelectorGUI(target);
-            }));
             container.Add(new IMGUIContainer(PropertiesGUI));
             container.Add(new IMGUIContainer(() =>
             {
@@ -42,7 +38,6 @@ namespace Silksprite.MeshWeaver.Controllers.Base
                 }
             }));
             container.Add(new IMGUIContainer(DumpGUI));
-            return container;
         }
 
         void PropertiesGUI()

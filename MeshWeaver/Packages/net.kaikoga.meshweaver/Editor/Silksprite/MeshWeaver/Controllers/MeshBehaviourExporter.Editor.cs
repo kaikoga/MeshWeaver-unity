@@ -16,6 +16,8 @@ namespace Silksprite.MeshWeaver.Controllers
     [CustomEditor(typeof(MeshBehaviourExporter))]
     public class MeshBehaviourExporterEditor : MeshWeaverEditorBase
     {
+        protected override bool IsMainComponentEditor => false;
+
         MeshBehaviourExporter _meshBehaviourExporter;
         CustomMeshBehaviour _meshBehaviour;
 
@@ -27,7 +29,7 @@ namespace Silksprite.MeshWeaver.Controllers
             _meshBehaviour = _meshBehaviourExporter.GetComponent<CustomMeshBehaviour>();
         }
 
-        public sealed override VisualElement CreateInspectorGUI()
+        protected sealed override void PopulateInspectorGUI(VisualElement container)
         {
             var serializedOverrideMaterials = serializedObject.FindProperty(nameof(MeshBehaviourExporter.overrideMaterials));
             var serializedMaterials = serializedObject.FindProperty(nameof(MeshBehaviourExporter.materials));
@@ -37,7 +39,6 @@ namespace Silksprite.MeshWeaver.Controllers
             var serializedOutputMeshLod2 = serializedObject.FindProperty(nameof(MeshBehaviourExporter.outputMeshLod2));
             var serializedOutputMeshForCollider = serializedObject.FindProperty(nameof(MeshBehaviourExporter.outputMeshForCollider));
 
-            var container = CreateRootContainerElement();
             container.Add(new IMGUIContainer(() =>
             {
                 MeshWeaverGUILayout.PropertyField(serializedOverrideMaterials, Loc("MeshBehaviourExporter.overrideMaterials"));
@@ -134,7 +135,6 @@ namespace Silksprite.MeshWeaver.Controllers
                     }
                 }
             }));
-            return container;
         }
 
         static void RefreshMeshReferences(string projectFilePath, MeshBehaviourExporter meshBehaviourExporter, bool reconnect)

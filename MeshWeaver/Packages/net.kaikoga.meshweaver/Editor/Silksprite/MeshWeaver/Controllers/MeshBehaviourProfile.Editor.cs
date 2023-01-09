@@ -8,9 +8,10 @@ namespace Silksprite.MeshWeaver.Controllers
     [CustomEditor(typeof(MeshBehaviourProfile))]
     public class MeshBehaviourProfileEditor : MeshWeaverEditorBase
     {
-        public sealed override VisualElement CreateInspectorGUI()
+        protected override bool IsMainComponentEditor => false;
+
+        protected sealed override void PopulateInspectorGUI(VisualElement container)
         {
-            var container = CreateRootContainerElement();
             container.Add(new IMGUIContainer(() =>
             {
                 var serializedObj = serializedObject;
@@ -22,7 +23,6 @@ namespace Silksprite.MeshWeaver.Controllers
                 } while (property.NextVisible(false));
                 serializedObj.ApplyModifiedProperties();
             }));
-            return container;
         }
     }
 }
