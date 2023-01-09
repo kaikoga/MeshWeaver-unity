@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Silksprite.MeshWeaver.Controllers.Utils;
 using Silksprite.MeshWeaver.Models;
 using Silksprite.MeshWeaver.Scopes;
 using Silksprite.MeshWeaver.UIElements;
@@ -10,7 +9,6 @@ using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 using static Silksprite.MeshWeaver.Utils.Localization;
-using Random = UnityEngine.Random;
 
 namespace Silksprite.MeshWeaver.Controllers.Base
 {
@@ -20,8 +18,6 @@ namespace Silksprite.MeshWeaver.Controllers.Base
 
         VisualElement _root;
         VisualElement _container;
-
-        static EventCallback<ChangeEvent<string>> _onGlobalLangChange;
 
         public sealed override VisualElement CreateInspectorGUI()
         {
@@ -35,8 +31,8 @@ namespace Silksprite.MeshWeaver.Controllers.Base
                 PopulateRootElement();
                 _root.Bind(serializedObject);
             });
-            _root.RegisterCallback(new EventCallback<AttachToPanelEvent>(attach => _onGlobalLangChange += onGlobalLangChange));
-            _root.RegisterCallback(new EventCallback<DetachFromPanelEvent>(detach => _onGlobalLangChange -= onGlobalLangChange));
+            _root.RegisterCallback(new EventCallback<AttachToPanelEvent>(attach => MeshWeaverSettings._onGlobalLangChange += onGlobalLangChange));
+            _root.RegisterCallback(new EventCallback<DetachFromPanelEvent>(detach => MeshWeaverSettings._onGlobalLangChange -= onGlobalLangChange));
 
             return _root;
 
@@ -48,21 +44,19 @@ namespace Silksprite.MeshWeaver.Controllers.Base
                     {
                         var langSelector = new PopupField<string>(Tr("Language (Global)"),
                             new List<string> { "en", "ja" },
-                            MeshWeaverSettings.Current.lang) { name = "mw-langSelector" };
+                            MeshWeaverSettings.Current.Lang) { name = "mw-langSelector" };
 
                         langSelector.RegisterValueChangedCallback(change =>
                         {
-                            MeshWeaverSettings.Current.lang = change.newValue;
-                            _onGlobalLangChange(change);
+                            MeshWeaverSettings.Current.Lang = change.newValue;
                         });
                         header.Add(langSelector);
 
                         var lodSelector = new EnumField(Tr("Current LOD (Global)"),
-                            MeshWeaverSettings.Current.currentLodMaskLayer) { name = "mw-lodSelector" };
+                            MeshWeaverSettings.Current.CurrentLodMaskLayer) { name = "mw-lodSelector" };
                         lodSelector.RegisterValueChangedCallback(change =>
                         {
-                            MeshWeaverSettings.Current.currentLodMaskLayer = (LodMaskLayer)change.newValue;
-                            EditorApplication.QueuePlayerLoopUpdate();
+                            MeshWeaverSettings.Current.CurrentLodMaskLayer = (LodMaskLayer)change.newValue;
                         });
                         header.Add(lodSelector);
                     }));

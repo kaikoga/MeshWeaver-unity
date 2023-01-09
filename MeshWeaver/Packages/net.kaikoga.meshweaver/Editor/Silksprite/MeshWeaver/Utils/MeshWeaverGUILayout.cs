@@ -13,7 +13,7 @@ namespace Silksprite.MeshWeaver.Utils
 
         public static void PropertyField(SerializedProperty serializedProperty, LocalizedContent label)
         {
-            if (MeshWeaverSettings.Current.lang == "en")
+            if (MeshWeaverSettings.Current.Lang == "en")
             {
                 EditorGUILayout.PropertyField(serializedProperty);
             }

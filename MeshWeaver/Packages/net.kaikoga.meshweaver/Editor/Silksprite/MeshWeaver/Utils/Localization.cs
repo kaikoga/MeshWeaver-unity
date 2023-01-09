@@ -40,9 +40,9 @@ namespace Silksprite.MeshWeaver.Utils
 
             public T FindOrCreate(string key, Generator generator)
             {
-                if (_lang != MeshWeaverSettings.Current.lang)
+                if (_lang != MeshWeaverSettings.Current.Lang)
                 {
-                    _lang = MeshWeaverSettings.Current.lang;
+                    _lang = MeshWeaverSettings.Current.Lang;
                     _cache = new Dictionary<string, T>();
                 }
                 if (_cache.TryGetValue(key, out var value)) return value;

@@ -53,7 +53,7 @@ namespace Silksprite.MeshWeaver.Controllers.Base
         {
             var factory = ((PathProvider)target).LastFactory;
 
-            MeshWeaverGUI.DumpFoldout(Tr("Path Dump"), ref _isExpanded, () => factory?.Build(MeshWeaverSettings.Current.currentLodMaskLayer));
+            MeshWeaverGUI.DumpFoldout(Tr("Path Dump"), ref _isExpanded, () => factory?.Build(MeshWeaverSettings.Current.CurrentLodMaskLayer));
             MeshWeaverGUI.DumpFoldout(Tr("Collider Path Dump"), ref _isColliderExpanded, () => factory?.Build(LodMaskLayer.Collider));
         }
 

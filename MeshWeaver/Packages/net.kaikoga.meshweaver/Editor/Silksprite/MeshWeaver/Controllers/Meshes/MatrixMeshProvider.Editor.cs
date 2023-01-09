@@ -51,8 +51,8 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
 
         protected override void OnDumpGUI()
         {
-            MeshWeaverGUI.DumpFoldout("Path data X", ref _isExpandedX, () => _meshProvider.LastPathieX?.Build(MeshWeaverSettings.Current.currentLodMaskLayer));
-            MeshWeaverGUI.DumpFoldout("Path data Y", ref _isExpandedY, () => _meshProvider.LastPathieY?.Build(MeshWeaverSettings.Current.currentLodMaskLayer));
+            MeshWeaverGUI.DumpFoldout("Path data X", ref _isExpandedX, () => _meshProvider.LastPathieX?.Build(MeshWeaverSettings.Current.CurrentLodMaskLayer));
+            MeshWeaverGUI.DumpFoldout("Path data Y", ref _isExpandedY, () => _meshProvider.LastPathieY?.Build(MeshWeaverSettings.Current.CurrentLodMaskLayer));
         }
     }
 }

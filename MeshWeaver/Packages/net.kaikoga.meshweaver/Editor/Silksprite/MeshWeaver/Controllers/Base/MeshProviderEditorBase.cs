@@ -57,7 +57,7 @@ namespace Silksprite.MeshWeaver.Controllers.Base
         void DumpGUI()
         {
             var factory = ((MeshProvider)target).LastFactory;
-            MeshWeaverGUI.DumpFoldout(Tr("Mesh Dump"), ref _isExpanded, () => factory?.Build(MeshWeaverSettings.Current.currentLodMaskLayer));
+            MeshWeaverGUI.DumpFoldout(Tr("Mesh Dump"), ref _isExpanded, () => factory?.Build(MeshWeaverSettings.Current.CurrentLodMaskLayer));
             MeshWeaverGUI.DumpFoldout(Tr("Collider Mesh Dump"), ref _isColliderExpanded, () => factory?.Build(LodMaskLayer.Collider));
             OnDumpGUI();
         }

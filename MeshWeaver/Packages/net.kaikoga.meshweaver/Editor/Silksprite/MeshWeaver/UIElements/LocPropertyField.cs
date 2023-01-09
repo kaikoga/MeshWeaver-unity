@@ -7,7 +7,7 @@ namespace Silksprite.MeshWeaver.UIElements
 {
     public class LocPropertyField : PropertyField  
     {
-        public LocPropertyField(SerializedProperty property, LocalizedContent locLabel) : base(property, MeshWeaverSettings.Current.lang == "en" ? property.displayName : locLabel.Tr)
+        public LocPropertyField(SerializedProperty property, LocalizedContent locLabel) : base(property, MeshWeaverSettings.Current.Lang == "en" ? property.displayName : locLabel.Tr)
         {
         }
     }
