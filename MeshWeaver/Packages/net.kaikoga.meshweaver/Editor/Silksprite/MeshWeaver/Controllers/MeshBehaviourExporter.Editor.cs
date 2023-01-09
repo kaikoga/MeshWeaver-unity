@@ -40,10 +40,6 @@ namespace Silksprite.MeshWeaver.Controllers
             var container = CreateRootContainerElement();
             container.Add(new IMGUIContainer(() =>
             {
-                MeshWeaverControllerGUILayout.LangSelectorGUI();
-            }));
-            container.Add(new IMGUIContainer(() =>
-            {
                 MeshWeaverGUILayout.PropertyField(serializedOverrideMaterials, Loc("MeshBehaviourExporter.overrideMaterials"));
                 if (serializedOverrideMaterials.boolValue)
                 {
