@@ -1,11 +1,12 @@
 using Silksprite.MeshWeaver.Controllers.Base;
+using Silksprite.MeshWeaver.Controllers.Fallback;
 using UnityEditor;
 using UnityEngine;
 
 namespace Silksprite.MeshWeaver.Controllers
 {
     [CustomEditor(typeof(TranslationProvider))]
-    public class TranslationProviderEditor : ProviderEditorBase
+    public class TranslationProviderEditor : SubProviderBaseEditor
     {
         Axis _focusAxis;
         int _controlIdX;

@@ -7,7 +7,7 @@ namespace Silksprite.MeshWeaver.Controllers
     [CustomEditor(typeof(MeshBehaviourProfile))]
     public class MeshBehaviourProfileEditor : MeshWeaverEditorBase
     {
-        public override void OnInspectorGUI()
+        protected sealed override void OnInspectorIMGUI()
         {
             var serializedObj = serializedObject;
             var property = serializedObject.FindProperty("data");

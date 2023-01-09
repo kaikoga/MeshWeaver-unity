@@ -42,7 +42,7 @@ namespace Silksprite.MeshWeaver.Controllers
             _serializedOutputMeshForCollider = serializedObject.FindProperty(nameof(MeshBehaviourExporter.outputMeshForCollider));
         }
 
-        public override void OnInspectorGUI()
+        protected sealed override void OnInspectorIMGUI()
         {
             MeshWeaverControllerGUILayout.LangSelectorGUI();
             MeshWeaverGUILayout.PropertyField(_serializedOverrideMaterials, Loc("MeshBehaviourExporter.overrideMaterials"));

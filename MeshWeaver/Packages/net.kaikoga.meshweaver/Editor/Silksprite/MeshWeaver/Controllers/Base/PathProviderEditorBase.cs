@@ -19,7 +19,7 @@ namespace Silksprite.MeshWeaver.Controllers.Base
         Pathie _pathie;
         Pathie _colliderPathie;
 
-        public sealed override void OnInspectorGUI()
+        protected sealed override void OnInspectorIMGUI()
         {
             MeshWeaverControllerGUILayout.LangSelectorGUI();
             using (var changedScope = new EditorGUI.ChangeCheckScope())

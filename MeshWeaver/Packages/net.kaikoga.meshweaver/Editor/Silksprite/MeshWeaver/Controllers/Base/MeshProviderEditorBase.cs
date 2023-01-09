@@ -20,7 +20,7 @@ namespace Silksprite.MeshWeaver.Controllers.Base
         Meshie _meshie;
         Meshie _colliderMeshie;
 
-        public sealed override void OnInspectorGUI()
+        protected sealed override void OnInspectorIMGUI()
         {
             MeshWeaverControllerGUILayout.LangSelectorGUI();
             using (var changedScope = new EditorGUI.ChangeCheckScope())

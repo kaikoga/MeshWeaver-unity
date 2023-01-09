@@ -30,7 +30,7 @@ namespace Silksprite.MeshWeaver.Controllers
             _serializedMeshColliders = serializedObject.FindProperty(nameof(CustomMeshBehaviour.meshColliders));
         }
 
-        public override void OnInspectorGUI()
+        protected sealed override void OnInspectorIMGUI()
         {
             MeshWeaverControllerGUILayout.LangSelectorGUI();
             MeshWeaverControllerGUILayout.LodSelectorGUI(target);
