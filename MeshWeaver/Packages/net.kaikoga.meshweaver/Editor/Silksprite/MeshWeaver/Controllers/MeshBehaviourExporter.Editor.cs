@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Silksprite.MeshWeaver.Controllers.Base;
-using Silksprite.MeshWeaver.Controllers.Utils;
 using Silksprite.MeshWeaver.Models;
 using Silksprite.MeshWeaver.Utils;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
-using static Silksprite.MeshWeaver.Utils.Localization;
+using static Silksprite.MeshWeaver.Tools.LocalizationTool;
 
 namespace Silksprite.MeshWeaver.Controllers
 {
@@ -39,9 +38,12 @@ namespace Silksprite.MeshWeaver.Controllers
             var serializedOutputMeshLod2 = serializedObject.FindProperty(nameof(MeshBehaviourExporter.outputMeshLod2));
             var serializedOutputMeshForCollider = serializedObject.FindProperty(nameof(MeshBehaviourExporter.outputMeshForCollider));
 
+            container.Add(Div("test", c =>
+            {
+                c.Add(Prop(nameof(MeshBehaviourExporter.overrideMaterials), Loc("MeshBehaviourExporter.overrideMaterials")));
+            }));
             container.Add(new IMGUIContainer(() =>
             {
-                MeshWeaverGUILayout.PropertyField(serializedOverrideMaterials, Loc("MeshBehaviourExporter.overrideMaterials"));
                 if (serializedOverrideMaterials.boolValue)
                 {
                     MeshWeaverGUILayout.PropertyField(serializedMaterials, Loc("MeshBehaviourExporter.materials"));

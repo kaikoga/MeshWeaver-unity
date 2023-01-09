@@ -12,7 +12,7 @@ namespace Silksprite.MeshWeaver.Controllers
 
         public static MeshWeaverSettingsData Current => _current ?? (_current = new MeshWeaverSettingsData());
 
-        public static EventCallback<ChangeEvent<string>> _onGlobalLangChange;
+        public static EventCallback<ChangeEvent<string>> onGlobalLangChange;
  
         [Serializable]
         public class MeshWeaverSettingsData
@@ -40,7 +40,7 @@ namespace Silksprite.MeshWeaver.Controllers
                     using (var change = ChangeEvent<string>.GetPooled(lang, value))
                     {
                         lang = value;
-                        _onGlobalLangChange(change);
+                        onGlobalLangChange(change);
                     }
                 }
             }

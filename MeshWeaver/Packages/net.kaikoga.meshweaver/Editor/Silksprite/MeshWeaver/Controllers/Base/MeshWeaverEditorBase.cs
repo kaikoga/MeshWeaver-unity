@@ -8,6 +8,7 @@ using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
+using static Silksprite.MeshWeaver.Tools.LocalizationTool;
 using static Silksprite.MeshWeaver.Utils.Localization;
 
 namespace Silksprite.MeshWeaver.Controllers.Base
@@ -31,8 +32,8 @@ namespace Silksprite.MeshWeaver.Controllers.Base
                 PopulateRootElement();
                 _root.Bind(serializedObject);
             });
-            _root.RegisterCallback(new EventCallback<AttachToPanelEvent>(attach => MeshWeaverSettings._onGlobalLangChange += onGlobalLangChange));
-            _root.RegisterCallback(new EventCallback<DetachFromPanelEvent>(detach => MeshWeaverSettings._onGlobalLangChange -= onGlobalLangChange));
+            _root.RegisterCallback(new EventCallback<AttachToPanelEvent>(attach => MeshWeaverSettings.onGlobalLangChange += onGlobalLangChange));
+            _root.RegisterCallback(new EventCallback<DetachFromPanelEvent>(detach => MeshWeaverSettings.onGlobalLangChange -= onGlobalLangChange));
 
             return _root;
 
@@ -44,11 +45,11 @@ namespace Silksprite.MeshWeaver.Controllers.Base
                     {
                         var langSelector = new PopupField<string>(Tr("Language (Global)"),
                             new List<string> { "en", "ja" },
-                            MeshWeaverSettings.Current.Lang) { name = "mw-langSelector" };
+                            Lang) { name = "mw-langSelector" };
 
                         langSelector.RegisterValueChangedCallback(change =>
                         {
-                            MeshWeaverSettings.Current.Lang = change.newValue;
+                            Lang = change.newValue;
                         });
                         header.Add(langSelector);
 

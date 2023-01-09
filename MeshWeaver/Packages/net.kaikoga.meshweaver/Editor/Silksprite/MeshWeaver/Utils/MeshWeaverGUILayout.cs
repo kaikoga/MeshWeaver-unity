@@ -1,4 +1,3 @@
-using Silksprite.MeshWeaver.Controllers;
 using UnityEditor;
 using UnityEngine;
 
@@ -13,7 +12,7 @@ namespace Silksprite.MeshWeaver.Utils
 
         public static void PropertyField(SerializedProperty serializedProperty, LocalizedContent label)
         {
-            if (MeshWeaverSettings.Current.Lang == "en")
+            if (Localization.Lang == "en")
             {
                 EditorGUILayout.PropertyField(serializedProperty);
             }

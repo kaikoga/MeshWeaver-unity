@@ -8,6 +8,7 @@ using Silksprite.MeshWeaver.Utils;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
+using static Silksprite.MeshWeaver.Tools.LocalizationTool;
 using static Silksprite.MeshWeaver.Utils.Localization;
 
 namespace Silksprite.MeshWeaver.Controllers.Base

@@ -1,4 +1,5 @@
 using UnityEngine;
+using static Silksprite.MeshWeaver.Tools.LocalizationTool;
 
 namespace Silksprite.MeshWeaver.Utils
 {
@@ -7,7 +8,7 @@ namespace Silksprite.MeshWeaver.Utils
         readonly string _key;
         public LocalizedContent(string key) => _key = key;
         
-        public string Tr => Localization.Tr(_key);
-        public GUIContent GUIContent => Localization.GUIContent(_key);
+        public string Tr => Tr(_key);
+        public GUIContent GUIContent => GUIContent(_key);
     }
 }
