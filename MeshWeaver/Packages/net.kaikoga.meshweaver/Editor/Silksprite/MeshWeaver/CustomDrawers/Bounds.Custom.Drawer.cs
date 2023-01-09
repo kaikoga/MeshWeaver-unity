@@ -1,3 +1,4 @@
+using Silksprite.MeshWeaver.Scopes;
 using Silksprite.MeshWeaver.Utils;
 using UnityEditor;
 using UnityEngine;
@@ -11,6 +12,7 @@ namespace Silksprite.MeshWeaver.CustomDrawers
         {
             var preferMinMax = ((BoundsCustomAttribute)attribute).preferMinMax;
 
+            using (new WideModeScope(true))
             using (new EditorGUI.PropertyScope(position, label, property))
             {
                 position = EditorGUI.PrefixLabel(position, label);

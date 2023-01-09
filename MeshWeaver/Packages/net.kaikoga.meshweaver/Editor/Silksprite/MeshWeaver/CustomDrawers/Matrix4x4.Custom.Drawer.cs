@@ -1,4 +1,5 @@
 using Silksprite.MeshWeaver.Extensions;
+using Silksprite.MeshWeaver.Scopes;
 using UnityEditor;
 using UnityEngine;
 
@@ -11,6 +12,7 @@ namespace Silksprite.MeshWeaver.CustomDrawers
         {
             var preferTRS = ((Matrix4x4CustomAttribute)attribute).preferTRS;
 
+            using (new WideModeScope(true))
             using (new EditorGUI.PropertyScope(position, label, property))
             {
                 var matrix4x4 = property.GetMatrix4x4Value();
