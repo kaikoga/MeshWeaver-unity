@@ -37,7 +37,7 @@ namespace Silksprite.MeshWeaver.Controllers
             var serializedOutputMeshLod2 = serializedObject.FindProperty(nameof(MeshBehaviourExporter.outputMeshLod2));
             var serializedOutputMeshForCollider = serializedObject.FindProperty(nameof(MeshBehaviourExporter.outputMeshForCollider));
 
-            var container = new VisualElement { name = "container" };
+            var container = CreateRootContainerElement();
             container.Add(new IMGUIContainer(() =>
             {
                 MeshWeaverControllerGUILayout.LangSelectorGUI();

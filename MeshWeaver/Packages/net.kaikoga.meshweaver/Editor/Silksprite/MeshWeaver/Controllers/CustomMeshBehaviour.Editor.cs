@@ -27,7 +27,7 @@ namespace Silksprite.MeshWeaver.Controllers
             var serializedMeshFilters = serializedObject.FindProperty(nameof(CustomMeshBehaviour.meshFilters));
             var serializedMeshColliders = serializedObject.FindProperty(nameof(CustomMeshBehaviour.meshColliders));
 
-            var container = new VisualElement { name = "container" };
+            var container = CreateRootContainerElement();
             container.Add(new IMGUIContainer(() =>
             {
                 MeshWeaverControllerGUILayout.LangSelectorGUI();

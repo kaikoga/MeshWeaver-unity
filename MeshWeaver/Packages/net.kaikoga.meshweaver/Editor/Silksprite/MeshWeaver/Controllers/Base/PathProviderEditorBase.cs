@@ -7,6 +7,7 @@ using Silksprite.MeshWeaver.Models.DataObjects;
 using Silksprite.MeshWeaver.Utils;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UIElements;
 using static Silksprite.MeshWeaver.Utils.Localization;
 
 namespace Silksprite.MeshWeaver.Controllers.Base
@@ -19,34 +20,39 @@ namespace Silksprite.MeshWeaver.Controllers.Base
         Pathie _pathie;
         Pathie _colliderPathie;
 
-        protected sealed override void OnInspectorIMGUI()
+        public sealed override VisualElement CreateInspectorGUI()
         {
-            MeshWeaverControllerGUILayout.LangSelectorGUI();
-            using (var changedScope = new EditorGUI.ChangeCheckScope())
+            var container = CreateRootContainerElement();
+            container.Add(new IMGUIContainer(() =>
             {
-                MeshWeaverControllerGUILayout.LodSelectorGUI(target);
-                PropertiesGUI();
-                if (changedScope.changed)
+                MeshWeaverControllerGUILayout.LangSelectorGUI();
+                using (var changedScope = new EditorGUI.ChangeCheckScope())
                 {
-                    _pathie = null;
-                    _colliderPathie = null;
+                    MeshWeaverControllerGUILayout.LodSelectorGUI(target);
+                    PropertiesGUI();
+                    if (changedScope.changed)
+                    {
+                        _pathie = null;
+                        _colliderPathie = null;
+                    }
                 }
-            }
 
-            if (GUILayout.Button(Tr("Bake")))
-            {
-                var pathProvider = (PathProvider)target;
-                var transform = pathProvider.transform;
-                var baked = transform.parent.AddChildComponent<BakedPathProvider>();
-                baked.lodMaskLayers = LodMaskLayers.Values;
-                baked.pathData = LodMaskLayers.Values.Select(lod => PathieData.FromPathie(pathProvider.ToFactory().Build(lod))).ToArray();
-                var bakedTransform = baked.transform;
-                bakedTransform.localPosition = transform.localPosition;
-                bakedTransform.localRotation = transform.localRotation;
-                bakedTransform.localScale = transform.localScale;
-            }
+                if (GUILayout.Button(Tr("Bake")))
+                {
+                    var pathProvider = (PathProvider)target;
+                    var transform = pathProvider.transform;
+                    var baked = transform.parent.AddChildComponent<BakedPathProvider>();
+                    baked.lodMaskLayers = LodMaskLayers.Values;
+                    baked.pathData = LodMaskLayers.Values.Select(lod => PathieData.FromPathie(pathProvider.ToFactory().Build(lod))).ToArray();
+                    var bakedTransform = baked.transform;
+                    bakedTransform.localPosition = transform.localPosition;
+                    bakedTransform.localRotation = transform.localRotation;
+                    bakedTransform.localScale = transform.localScale;
+                }
 
-            DumpGUI();
+                DumpGUI();
+            }));
+            return container;
         }
 
         void PropertiesGUI()

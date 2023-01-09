@@ -20,5 +20,10 @@ namespace Silksprite.MeshWeaver.Controllers.Base
                 MeshWeaverGUILayout.Header(Loc("End Fallback Inspector"));
             }
         }
+
+        protected static VisualElement CreateRootContainerElement()
+        {
+            return new VisualElement { name = "container" };
+        }
     }
 }

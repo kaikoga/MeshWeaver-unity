@@ -8,6 +8,7 @@ using Silksprite.MeshWeaver.Models.DataObjects;
 using Silksprite.MeshWeaver.Utils;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UIElements;
 using static Silksprite.MeshWeaver.Utils.Localization;
 
 namespace Silksprite.MeshWeaver.Controllers.Base
@@ -19,39 +20,44 @@ namespace Silksprite.MeshWeaver.Controllers.Base
 
         Meshie _meshie;
         Meshie _colliderMeshie;
-
-        protected sealed override void OnInspectorIMGUI()
+        
+        public sealed override VisualElement CreateInspectorGUI()
         {
-            MeshWeaverControllerGUILayout.LangSelectorGUI();
-            using (var changedScope = new EditorGUI.ChangeCheckScope())
+            var container = CreateRootContainerElement();
+            container.Add(new IMGUIContainer(() =>
             {
-                MeshWeaverControllerGUILayout.LodSelectorGUI(target);
-                PropertiesGUI();
-                if (changedScope.changed)
+                MeshWeaverControllerGUILayout.LangSelectorGUI();
+                using (var changedScope = new EditorGUI.ChangeCheckScope())
                 {
-                    _meshie = null;
-                    _colliderMeshie = null;
+                    MeshWeaverControllerGUILayout.LodSelectorGUI(target);
+                    PropertiesGUI();
+                    if (changedScope.changed)
+                    {
+                        _meshie = null;
+                        _colliderMeshie = null;
+                    }
                 }
-            }
 
-            if (GUILayout.Button(Tr("Bake")))
-            {
-                var meshProvider = (MeshProvider)target;
-                var transform = meshProvider.transform;
-                var baked = transform.parent.AddChildComponent<BakedMeshProvider>();
-                using (var context = new DynamicMeshContext())
+                if (GUILayout.Button(Tr("Bake")))
                 {
-                    baked.lodMaskLayers = LodMaskLayers.Values;
-                    baked.meshData = LodMaskLayers.Values.Select(lod => MeshieData.FromMeshie(meshProvider.ToFactory(context).Build(lod), i => i)).ToArray();
-                    baked.materials = context.ToMaterials();
+                    var meshProvider = (MeshProvider)target;
+                    var transform = meshProvider.transform;
+                    var baked = transform.parent.AddChildComponent<BakedMeshProvider>();
+                    using (var context = new DynamicMeshContext())
+                    {
+                        baked.lodMaskLayers = LodMaskLayers.Values;
+                        baked.meshData = LodMaskLayers.Values.Select(lod => MeshieData.FromMeshie(meshProvider.ToFactory(context).Build(lod), i => i)).ToArray();
+                        baked.materials = context.ToMaterials();
+                    }
+                    var bakedTransform = baked.transform;
+                    bakedTransform.localPosition = transform.localPosition;
+                    bakedTransform.localRotation = transform.localRotation;
+                    bakedTransform.localScale = transform.localScale;
                 }
-                var bakedTransform = baked.transform;
-                bakedTransform.localPosition = transform.localPosition;
-                bakedTransform.localRotation = transform.localRotation;
-                bakedTransform.localScale = transform.localScale;
-            }
 
-            DumpGUI();
+                DumpGUI();
+            }));
+            return container;
         }
 
         void PropertiesGUI()

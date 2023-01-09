@@ -10,19 +10,19 @@ namespace Silksprite.MeshWeaver.Controllers
     {
         public sealed override VisualElement CreateInspectorGUI()
         {
-            return new IMGUIContainer(OnInspectorIMGUI);
-        }
-
-        void OnInspectorIMGUI()
-        {
-            var serializedObj = serializedObject;
-            var property = serializedObject.FindProperty("data");
-            property.NextVisible(true);
-            do
+            var container = CreateRootContainerElement();
+            container.Add(new IMGUIContainer(() =>
             {
-                EditorGUILayout.PropertyField(property);
-            } while (property.NextVisible(false));
-            serializedObj.ApplyModifiedProperties();
+                var serializedObj = serializedObject;
+                var property = serializedObject.FindProperty("data");
+                property.NextVisible(true);
+                do
+                {
+                    EditorGUILayout.PropertyField(property);
+                } while (property.NextVisible(false));
+                serializedObj.ApplyModifiedProperties();
+            }));
+            return container;
         }
     }
 }

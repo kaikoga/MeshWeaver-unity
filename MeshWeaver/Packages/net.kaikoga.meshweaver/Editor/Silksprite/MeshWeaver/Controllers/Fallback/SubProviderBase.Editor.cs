@@ -1,5 +1,6 @@
 using Silksprite.MeshWeaver.Controllers.Base;
 using UnityEditor;
+using UnityEngine.UIElements;
 
 namespace Silksprite.MeshWeaver.Controllers.Fallback
 {
@@ -7,10 +8,15 @@ namespace Silksprite.MeshWeaver.Controllers.Fallback
     [CanEditMultipleObjects]
     public class SubProviderBaseEditor : ProviderEditorBase
     {
-        protected sealed override void OnInspectorIMGUI()
+        public sealed override VisualElement CreateInspectorGUI()
         {
-            OnBaseInspectorGUI();
-            OnPropertiesGUI();
+            var container = CreateRootContainerElement();
+            container.Add(new IMGUIContainer(() =>
+            {
+                OnBaseInspectorGUI();
+                OnPropertiesGUI();
+            }));
+            return container;
         }
 
         protected virtual void OnPropertiesGUI() { }
