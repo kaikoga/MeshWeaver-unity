@@ -19,126 +19,122 @@ namespace Silksprite.MeshWeaver.Controllers
         MeshBehaviourExporter _meshBehaviourExporter;
         CustomMeshBehaviour _meshBehaviour;
 
-        SerializedProperty _serializedOverrideMaterials;
-        SerializedProperty _serializedMaterials;
-        SerializedProperty _serializedOutputMesh;
-        SerializedProperty _serializedOutputPrefab;
-        SerializedProperty _serializedOutputMeshLod1;
-        SerializedProperty _serializedOutputMeshLod2;
-        SerializedProperty _serializedOutputMeshForCollider;
-
         bool _editLinkedAssets;
 
         void OnEnable()
         {
             _meshBehaviourExporter = (MeshBehaviourExporter)target;
             _meshBehaviour = _meshBehaviourExporter.GetComponent<CustomMeshBehaviour>();
-
-            _serializedOverrideMaterials = serializedObject.FindProperty(nameof(MeshBehaviourExporter.overrideMaterials));
-            _serializedMaterials = serializedObject.FindProperty(nameof(MeshBehaviourExporter.materials));
-            _serializedOutputMesh = serializedObject.FindProperty(nameof(MeshBehaviourExporter.outputMesh));
-            _serializedOutputPrefab = serializedObject.FindProperty(nameof(MeshBehaviourExporter.outputPrefab));
-            _serializedOutputMeshLod1 = serializedObject.FindProperty(nameof(MeshBehaviourExporter.outputMeshLod1));
-            _serializedOutputMeshLod2 = serializedObject.FindProperty(nameof(MeshBehaviourExporter.outputMeshLod2));
-            _serializedOutputMeshForCollider = serializedObject.FindProperty(nameof(MeshBehaviourExporter.outputMeshForCollider));
         }
 
         public sealed override VisualElement CreateInspectorGUI()
         {
-            return new IMGUIContainer(OnInspectorIMGUI);
-        }
+            var serializedOverrideMaterials = serializedObject.FindProperty(nameof(MeshBehaviourExporter.overrideMaterials));
+            var serializedMaterials = serializedObject.FindProperty(nameof(MeshBehaviourExporter.materials));
+            var serializedOutputMesh = serializedObject.FindProperty(nameof(MeshBehaviourExporter.outputMesh));
+            var serializedOutputPrefab = serializedObject.FindProperty(nameof(MeshBehaviourExporter.outputPrefab));
+            var serializedOutputMeshLod1 = serializedObject.FindProperty(nameof(MeshBehaviourExporter.outputMeshLod1));
+            var serializedOutputMeshLod2 = serializedObject.FindProperty(nameof(MeshBehaviourExporter.outputMeshLod2));
+            var serializedOutputMeshForCollider = serializedObject.FindProperty(nameof(MeshBehaviourExporter.outputMeshForCollider));
 
-        void OnInspectorIMGUI()
-        {
-            MeshWeaverControllerGUILayout.LangSelectorGUI();
-            MeshWeaverGUILayout.PropertyField(_serializedOverrideMaterials, Loc("MeshBehaviourExporter.overrideMaterials"));
-            if (_serializedOverrideMaterials.boolValue)
+            var container = new VisualElement { name = "container" };
+            container.Add(new IMGUIContainer(() =>
             {
-                MeshWeaverGUILayout.PropertyField(_serializedMaterials, Loc("MeshBehaviourExporter.materials"));
-                if (GUILayout.Button(Tr("Copy Materials from MeshBehaviour")))
+                MeshWeaverControllerGUILayout.LangSelectorGUI();
+                MeshWeaverGUILayout.PropertyField(serializedOverrideMaterials, Loc("MeshBehaviourExporter.overrideMaterials"));
+                if (serializedOverrideMaterials.boolValue)
                 {
-                    _meshBehaviourExporter.materials = _meshBehaviour.materials.ToArray();
-                }
-            }
-
-            _editLinkedAssets = EditorGUILayout.Toggle(Loc("Edit Linked Assets").Tr, _editLinkedAssets);
-
-            if (_editLinkedAssets || _serializedOutputMesh.objectReferenceValue)
-            {
-                using (new EditorGUILayout.HorizontalScope())
-                {
-                    using (new EditorGUI.DisabledScope(!_editLinkedAssets))
+                    MeshWeaverGUILayout.PropertyField(serializedMaterials, Loc("MeshBehaviourExporter.materials"));
+                    if (GUILayout.Button(Tr("Copy Materials from MeshBehaviour")))
                     {
-                        MeshWeaverGUILayout.PropertyField(_serializedOutputMesh, Loc("MeshBehaviourExporter.outputMesh"));
-                    }
-                    if (GUILayout.Button(Tr("Detach")))
-                    {
-                        _serializedOutputMesh.objectReferenceValue = null;
+                        _meshBehaviourExporter.materials = _meshBehaviour.materials.ToArray();
                     }
                 }
-            }
-            else
-            {
-                if (GUILayout.Button(Tr("Create Mesh Asset...")))
-                {
-                    var projectFilePath = EditorUtility.SaveFilePanelInProject(Tr("Export Mesh Asset"),  _meshBehaviourExporter.gameObject.name, "mesh", "");
-                    ExportMeshAsset(projectFilePath, _meshBehaviourExporter, _meshBehaviour);
-                }
-            }
 
-            if (_editLinkedAssets || _serializedOutputPrefab.objectReferenceValue)
-            {
-                using (new EditorGUILayout.HorizontalScope())
+                _editLinkedAssets = EditorGUILayout.Toggle(Loc("Edit Linked Assets").Tr, _editLinkedAssets);
+
+                if (_editLinkedAssets || serializedOutputMesh.objectReferenceValue)
                 {
-                    using (new EditorGUI.DisabledScope(!_editLinkedAssets))
+                    using (new EditorGUILayout.HorizontalScope())
                     {
-                        MeshWeaverGUILayout.PropertyField(_serializedOutputPrefab, Loc("MeshBehaviourExporter.outputPrefab"));
+                        using (new EditorGUI.DisabledScope(!_editLinkedAssets))
+                        {
+                            MeshWeaverGUILayout.PropertyField(serializedOutputMesh, Loc("MeshBehaviourExporter.outputMesh"));
+                        }
+
+                        if (GUILayout.Button(Tr("Detach")))
+                        {
+                            serializedOutputMesh.objectReferenceValue = null;
+                        }
                     }
-                    if (GUILayout.Button(Tr("Detach")))
-                    {
-                        _serializedOutputPrefab.objectReferenceValue = null;
-                    }
-                }
-            }
-            else
-            {
-                if (GUILayout.Button(Tr("Create Mesh Prefab...")))
-                {
-                    var projectFilePath = EditorUtility.SaveFilePanelInProject(Tr("Export Mesh Prefab"), _meshBehaviourExporter.gameObject.name, "prefab", "");
-                    ExportMeshPrefab(projectFilePath, _meshBehaviourExporter, _meshBehaviour);
-                }
-            }
-
-            using (new EditorGUI.DisabledGroupScope(true))
-            {
-                MeshWeaverGUILayout.PropertyField(_serializedOutputMeshLod1, Loc("MeshBehaviourExporter.outputMeshLod1"));
-                MeshWeaverGUILayout.PropertyField(_serializedOutputMeshLod2, Loc("MeshBehaviourExporter.outputMeshLod2"));
-                MeshWeaverGUILayout.PropertyField(_serializedOutputMeshForCollider, Loc("MeshBehaviourExporter.outputMeshForCollider"));
-            }
-            serializedObject.ApplyModifiedProperties();
-
-
-            if (GUILayout.Button(Tr("Update Exported Assets")))
-            {
-                if (AssetDatabase.IsMainAsset(_meshBehaviourExporter.outputMesh))
-                {
-                    var projectFilePath = AssetDatabase.GetAssetPath(_meshBehaviourExporter.outputMesh);
-                    ExportMeshAsset(projectFilePath, _meshBehaviourExporter, _meshBehaviour);
                 }
                 else
                 {
-                    _meshBehaviourExporter.outputMesh = null;
+                    if (GUILayout.Button(Tr("Create Mesh Asset...")))
+                    {
+                        var projectFilePath = EditorUtility.SaveFilePanelInProject(Tr("Export Mesh Asset"), _meshBehaviourExporter.gameObject.name, "mesh", "");
+                        ExportMeshAsset(projectFilePath, _meshBehaviourExporter, _meshBehaviour);
+                    }
                 }
-                if (AssetDatabase.IsMainAsset(_meshBehaviourExporter.outputPrefab))
+
+                if (_editLinkedAssets || serializedOutputPrefab.objectReferenceValue)
                 {
-                    var projectFilePath = AssetDatabase.GetAssetPath(_meshBehaviourExporter.outputPrefab);
-                    ExportMeshPrefab(projectFilePath, _meshBehaviourExporter, _meshBehaviour);
+                    using (new EditorGUILayout.HorizontalScope())
+                    {
+                        using (new EditorGUI.DisabledScope(!_editLinkedAssets))
+                        {
+                            MeshWeaverGUILayout.PropertyField(serializedOutputPrefab, Loc("MeshBehaviourExporter.outputPrefab"));
+                        }
+
+                        if (GUILayout.Button(Tr("Detach")))
+                        {
+                            serializedOutputPrefab.objectReferenceValue = null;
+                        }
+                    }
                 }
                 else
                 {
-                    _meshBehaviourExporter.outputPrefab = null;
+                    if (GUILayout.Button(Tr("Create Mesh Prefab...")))
+                    {
+                        var projectFilePath = EditorUtility.SaveFilePanelInProject(Tr("Export Mesh Prefab"), _meshBehaviourExporter.gameObject.name, "prefab", "");
+                        ExportMeshPrefab(projectFilePath, _meshBehaviourExporter, _meshBehaviour);
+                    }
                 }
-            }
+
+                using (new EditorGUI.DisabledGroupScope(true))
+                {
+                    MeshWeaverGUILayout.PropertyField(serializedOutputMeshLod1, Loc("MeshBehaviourExporter.outputMeshLod1"));
+                    MeshWeaverGUILayout.PropertyField(serializedOutputMeshLod2, Loc("MeshBehaviourExporter.outputMeshLod2"));
+                    MeshWeaverGUILayout.PropertyField(serializedOutputMeshForCollider, Loc("MeshBehaviourExporter.outputMeshForCollider"));
+                }
+
+                serializedObject.ApplyModifiedProperties();
+
+
+                if (GUILayout.Button(Tr("Update Exported Assets")))
+                {
+                    if (AssetDatabase.IsMainAsset(_meshBehaviourExporter.outputMesh))
+                    {
+                        var projectFilePath = AssetDatabase.GetAssetPath(_meshBehaviourExporter.outputMesh);
+                        ExportMeshAsset(projectFilePath, _meshBehaviourExporter, _meshBehaviour);
+                    }
+                    else
+                    {
+                        _meshBehaviourExporter.outputMesh = null;
+                    }
+
+                    if (AssetDatabase.IsMainAsset(_meshBehaviourExporter.outputPrefab))
+                    {
+                        var projectFilePath = AssetDatabase.GetAssetPath(_meshBehaviourExporter.outputPrefab);
+                        ExportMeshPrefab(projectFilePath, _meshBehaviourExporter, _meshBehaviour);
+                    }
+                    else
+                    {
+                        _meshBehaviourExporter.outputPrefab = null;
+                    }
+                }
+            }));
+            return container;
         }
 
         static void RefreshMeshReferences(string projectFilePath, MeshBehaviourExporter meshBehaviourExporter, bool reconnect)

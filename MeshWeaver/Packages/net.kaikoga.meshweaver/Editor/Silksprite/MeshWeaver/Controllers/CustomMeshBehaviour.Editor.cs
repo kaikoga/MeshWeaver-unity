@@ -14,66 +14,60 @@ namespace Silksprite.MeshWeaver.Controllers
     {
         CustomMeshBehaviour _meshBehaviour;
 
-        SerializedProperty _serializedUpdatesEveryFrame;
-        SerializedProperty _serializedProfile;
-        SerializedProperty _serializedMaterials;
-        SerializedProperty _serializedMeshFilters;
-        SerializedProperty _serializedMeshColliders;
-
         void OnEnable()
         {
             _meshBehaviour = (CustomMeshBehaviour)target;
-
-            _serializedUpdatesEveryFrame = serializedObject.FindProperty(nameof(CustomMeshBehaviour.updatesEveryFrame));
-            _serializedProfile = serializedObject.FindProperty("profile"); // nameof(CustomMeshBehaviour.profile)
-            _serializedMaterials = serializedObject.FindProperty(nameof(CustomMeshBehaviour.materials));
-            _serializedMeshFilters = serializedObject.FindProperty(nameof(CustomMeshBehaviour.meshFilters));
-            _serializedMeshColliders = serializedObject.FindProperty(nameof(CustomMeshBehaviour.meshColliders));
         }
 
         public sealed override VisualElement CreateInspectorGUI()
         {
-            return new IMGUIContainer(OnInspectorIMGUI);
-        }
+            var serializedUpdatesEveryFrame = serializedObject.FindProperty(nameof(CustomMeshBehaviour.updatesEveryFrame));
+            var serializedProfile = serializedObject.FindProperty("profile"); // nameof(CustomMeshBehaviour.profile)
+            var serializedMaterials = serializedObject.FindProperty(nameof(CustomMeshBehaviour.materials));
+            var serializedMeshFilters = serializedObject.FindProperty(nameof(CustomMeshBehaviour.meshFilters));
+            var serializedMeshColliders = serializedObject.FindProperty(nameof(CustomMeshBehaviour.meshColliders));
 
-        void OnInspectorIMGUI()
-        {
-            MeshWeaverControllerGUILayout.LangSelectorGUI();
-            MeshWeaverControllerGUILayout.LodSelectorGUI(target);
+            var container = new VisualElement { name = "container" };
+            container.Add(new IMGUIContainer(() =>
+            {
+                MeshWeaverControllerGUILayout.LangSelectorGUI();
+                MeshWeaverControllerGUILayout.LodSelectorGUI(target);
 
-            MeshWeaverGUILayout.PropertyField(_serializedUpdatesEveryFrame, Loc("CustomMeshBehaviour.updatesEveryFrame"));
-            MeshWeaverGUILayout.PropertyField(_serializedProfile, Loc("CustomMeshBehaviour.profile"));
-            MeshWeaverGUILayout.PropertyField(_serializedMaterials, Loc("CustomMeshBehaviour.materials"));
-            MeshWeaverGUILayout.PropertyField(_serializedMeshFilters, Loc("CustomMeshBehaviour.meshFilters"));
-            MeshWeaverGUILayout.PropertyField(_serializedMeshColliders, Loc("CustomMeshBehaviour.meshColliders"));
-            serializedObject.ApplyModifiedProperties();
+                MeshWeaverGUILayout.PropertyField(serializedUpdatesEveryFrame, Loc("CustomMeshBehaviour.updatesEveryFrame"));
+                MeshWeaverGUILayout.PropertyField(serializedProfile, Loc("CustomMeshBehaviour.profile"));
+                MeshWeaverGUILayout.PropertyField(serializedMaterials, Loc("CustomMeshBehaviour.materials"));
+                MeshWeaverGUILayout.PropertyField(serializedMeshFilters, Loc("CustomMeshBehaviour.meshFilters"));
+                MeshWeaverGUILayout.PropertyField(serializedMeshColliders, Loc("CustomMeshBehaviour.meshColliders"));
+                serializedObject.ApplyModifiedProperties();
             
-            if (_meshBehaviour is MeshBehaviour)
-            {
-                MeshProviderMenus.Menu.ChildPopup(_meshBehaviour, Tr("Mesh Providers"));
-            }
+                if (_meshBehaviour is MeshBehaviour)
+                {
+                    MeshProviderMenus.Menu.ChildPopup(_meshBehaviour, Tr("Mesh Providers"));
+                }
 
-            if (GUILayout.Button(Tr("Collect Materials")))
-            {
-                _meshBehaviour.CollectMaterials();
-            }
-            if (GUILayout.Button(Tr("Compile")))
-            {
-                _meshBehaviour.Compile();
-            }
-            if (GUILayout.Button(Tr("Compile All Active")))
-            {
-                foreach (var m in FindObjectsOfType<CustomMeshBehaviour>()) m.Compile();
-            }
-            if (HasSetupAsMeshRendererButton(_meshBehaviour) && GUILayout.Button(Tr("I am Mesh Renderer")))
-            {
-                SetupAsMeshRenderer(_meshBehaviour);
-            }
+                if (GUILayout.Button(Tr("Collect Materials")))
+                {
+                    _meshBehaviour.CollectMaterials();
+                }
+                if (GUILayout.Button(Tr("Compile")))
+                {
+                    _meshBehaviour.Compile();
+                }
+                if (GUILayout.Button(Tr("Compile All Active")))
+                {
+                    foreach (var m in FindObjectsOfType<CustomMeshBehaviour>()) m.Compile();
+                }
+                if (HasSetupAsMeshRendererButton(_meshBehaviour) && GUILayout.Button(Tr("I am Mesh Renderer")))
+                {
+                    SetupAsMeshRenderer(_meshBehaviour);
+                }
 
-            if (HasCreateExporterButton(_meshBehaviour) && GUILayout.Button(Tr("Create Exporter")))
-            {
-                CreateExporter(_meshBehaviour);
-            }
+                if (HasCreateExporterButton(_meshBehaviour) && GUILayout.Button(Tr("Create Exporter")))
+                {
+                    CreateExporter(_meshBehaviour);
+                }
+            }));
+            return container;
         }
 
         static bool HasSetupAsMeshRendererButton(CustomMeshBehaviour meshBehaviour)
