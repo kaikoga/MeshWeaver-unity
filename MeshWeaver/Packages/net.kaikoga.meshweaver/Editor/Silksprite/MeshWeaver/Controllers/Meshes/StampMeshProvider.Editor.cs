@@ -29,7 +29,6 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
 
         protected override void OnPropertiesGUI()
         {
-            base.OnPropertiesGUI();
             MeshWeaverGUILayout.PropertyField(_serializedMeshProvider, Loc("StampMeshProvider.meshProvider"));
             MeshProviderMenus.Menu.PropertyField(_meshProvider, " ", "Mesh", ref _meshProvider.meshProvider);
             MeshWeaverGUILayout.PropertyField(_serializedPathProvider, Loc("StampMeshProvider.pathProvider"));
@@ -39,7 +38,6 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
 
         protected override void OnDumpGUI()
         {
-            base.OnDumpGUI();
             MeshWeaverGUI.DumpFoldout("Mesh data", ref _isExpandedMesh, () => _meshProvider.LastMeshie?.Build(MeshWeaverSettings.Current.currentLodMaskLayer));
             MeshWeaverGUI.DumpFoldout("Path data", ref _isExpandedPath, () => _meshProvider.LastPathie?.Build(MeshWeaverSettings.Current.currentLodMaskLayer));
         }

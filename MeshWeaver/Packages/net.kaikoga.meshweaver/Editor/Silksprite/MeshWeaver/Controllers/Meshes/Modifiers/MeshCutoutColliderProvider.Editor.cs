@@ -9,9 +9,8 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes.Modifiers
     [CanEditMultipleObjects]
     public class MeshCutoutColliderProviderEditor : SubProviderBaseEditor
     {
-        public override void OnInspectorGUI()
+        protected override void OnPropertiesGUI()
         {
-            base.OnInspectorGUI();
             var meshCutoutColliderProvider = (MeshCutoutColliderProvider)target;
             Collider predicate = null;
             ColliderMenus.Menu.PropertyField(meshCutoutColliderProvider, "Predicate", "Predicate", ref predicate);

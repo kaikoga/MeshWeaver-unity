@@ -1,3 +1,4 @@
+using Silksprite.MeshWeaver.Controllers.Base;
 using Silksprite.MeshWeaver.Controllers.Utils;
 using Silksprite.MeshWeaver.Utils;
 using UnityEditor;
@@ -8,7 +9,7 @@ namespace Silksprite.MeshWeaver.Controllers
 {
     [CustomEditor(typeof(CustomMeshBehaviour), true, isFallback = true)]
     [CanEditMultipleObjects]
-    public class CustomMeshBehaviourEditor : Editor
+    public class CustomMeshBehaviourEditor : MeshWeaverEditorBase
     {
         CustomMeshBehaviour _meshBehaviour;
 

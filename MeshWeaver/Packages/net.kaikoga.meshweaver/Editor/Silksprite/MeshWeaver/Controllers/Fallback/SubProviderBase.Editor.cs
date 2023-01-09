@@ -7,5 +7,11 @@ namespace Silksprite.MeshWeaver.Controllers.Fallback
     [CanEditMultipleObjects]
     public class SubProviderBaseEditor : ProviderEditorBase
     {
+        public sealed override void OnInspectorGUI()
+        {
+            OnBaseInspectorGUI();
+            OnPropertiesGUI();
+        }
+        protected virtual void OnPropertiesGUI() { }
     }
 }

@@ -11,7 +11,6 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
     {
         protected override void OnPropertiesGUI()
         {
-            base.OnPropertiesGUI();
             var compositeMeshProvider = (CompositeMeshProvider)target;
             MeshProviderMenus.Menu.ChildPopup(compositeMeshProvider, Tr("Mesh Providers"));
         }

@@ -25,7 +25,6 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
 
         protected override void OnPropertiesGUI()
         {
-            base.OnPropertiesGUI();
             MeshWeaverGUILayout.PropertyField(_serializedPathProvider, Loc("PolygonMeshProvider.pathProvider"));
             PathProviderMenus.CollectionsMenu.PropertyField(_meshProvider, " ", "Path", ref _meshProvider.pathProvider);
             MeshWeaverGUILayout.PropertyField(_serializedMaterial, Loc("PolygonMeshProvider.material"));

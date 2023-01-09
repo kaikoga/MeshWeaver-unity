@@ -20,7 +20,6 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
 
         protected override void OnPropertiesGUI()
         {
-            base.OnPropertiesGUI();
             MeshWeaverGUILayout.PropertyField(_serializedMesh, Loc("ImportMeshProvider.mesh"));
             MeshWeaverGUILayout.PropertyField(_serializedMaterials, Loc("ImportMeshProvider.materials"));
             serializedObject.ApplyModifiedProperties();

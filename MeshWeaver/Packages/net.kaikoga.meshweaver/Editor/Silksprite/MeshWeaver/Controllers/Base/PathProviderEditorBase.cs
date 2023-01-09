@@ -25,7 +25,7 @@ namespace Silksprite.MeshWeaver.Controllers.Base
             using (var changedScope = new EditorGUI.ChangeCheckScope())
             {
                 MeshWeaverControllerGUILayout.LodSelectorGUI(target);
-                OnPropertiesGUI();
+                PropertiesGUI();
                 if (changedScope.changed)
                 {
                     _pathie = null;
@@ -46,16 +46,19 @@ namespace Silksprite.MeshWeaver.Controllers.Base
                 bakedTransform.localScale = transform.localScale;
             }
 
-            OnDumpGUI();
+            DumpGUI();
         }
 
-        protected virtual void OnPropertiesGUI()
+        void PropertiesGUI()
         {
             MeshWeaverGUILayout.PropertyField(serializedObject.FindProperty("lodMask"), Loc("GeometryProvider.lodMask"));
             serializedObject.ApplyModifiedProperties();
+            OnPropertiesGUI();
         }
 
-        protected virtual void OnDumpGUI()
+        protected abstract void OnPropertiesGUI();
+
+        void DumpGUI()
         {
             var pathProvider = (PathProvider)target;
             var factory = pathProvider.LastFactory;
@@ -67,10 +70,9 @@ namespace Silksprite.MeshWeaver.Controllers.Base
 
             MeshWeaverGUI.DumpFoldout(Tr("Path Dump"), ref _isExpanded, () => _pathie);
             MeshWeaverGUI.DumpFoldout(Tr("Collider Path Dump"), ref _isColliderExpanded, () => _colliderPathie);
-
         }
 
-        protected void OnBaseInspectorGUI() => base.OnInspectorGUI();
+        protected virtual void OnDumpGUI() { }
 
         protected bool HasFrameBounds() => true;
 

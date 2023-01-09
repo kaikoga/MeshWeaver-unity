@@ -1,4 +1,3 @@
-using Silksprite.MeshWeaver.Controllers.Base;
 using Silksprite.MeshWeaver.Controllers.Fallback;
 using Silksprite.MeshWeaver.Controllers.Utils;
 using UnityEditor;
@@ -12,7 +11,6 @@ namespace Silksprite.MeshWeaver.Controllers.Paths
     {
         protected override void OnPropertiesGUI()
         {
-            base.OnPropertiesGUI();
             var compositePathProvider = (CompositePathProvider)target;
             PathProviderMenus.ElementsMenu.ChildPopup(compositePathProvider, Tr("Path Providers"));
         }

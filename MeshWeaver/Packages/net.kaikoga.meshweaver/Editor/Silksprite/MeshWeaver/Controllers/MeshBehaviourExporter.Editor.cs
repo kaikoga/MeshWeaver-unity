@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Silksprite.MeshWeaver.Controllers.Base;
 using Silksprite.MeshWeaver.Controllers.Utils;
 using Silksprite.MeshWeaver.Models;
 using Silksprite.MeshWeaver.Utils;
@@ -12,7 +13,7 @@ using static Silksprite.MeshWeaver.Utils.Localization;
 namespace Silksprite.MeshWeaver.Controllers
 {
     [CustomEditor(typeof(MeshBehaviourExporter))]
-    public class MeshBehaviourExporterEditor : Editor
+    public class MeshBehaviourExporterEditor : MeshWeaverEditorBase
     {
         MeshBehaviourExporter _meshBehaviourExporter;
         CustomMeshBehaviour _meshBehaviour;

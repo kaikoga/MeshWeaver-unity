@@ -8,9 +8,8 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes.Modifiers
     [CanEditMultipleObjects]
     public class MeshRepeatProviderEditor : SubProviderBaseEditor
     {
-        public override void OnInspectorGUI()
+        protected override void OnPropertiesGUI()
         {
-            base.OnInspectorGUI();
             var meshRepeatProvider = (MeshRepeatProvider)target;
             TransformMenus.Menu.PropertyField(meshRepeatProvider, "Offset By Reference", "Offset By Reference", ref meshRepeatProvider.offsetByReference);
         }

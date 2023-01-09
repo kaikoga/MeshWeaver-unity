@@ -23,7 +23,6 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
 
         protected override void OnDumpGUI()
         {
-            base.OnDumpGUI();
             var pillarMeshProvider = (PillarMeshProvider)target;
             MeshWeaverGUI.DumpFoldout("Path data X", ref _isExpandedX, () => pillarMeshProvider.LastPathieX?.Build(MeshWeaverSettings.Current.currentLodMaskLayer));
             MeshWeaverGUI.DumpFoldout("Path data Y", ref _isExpandedY, () => pillarMeshProvider.LastPathieY?.Build(MeshWeaverSettings.Current.currentLodMaskLayer));

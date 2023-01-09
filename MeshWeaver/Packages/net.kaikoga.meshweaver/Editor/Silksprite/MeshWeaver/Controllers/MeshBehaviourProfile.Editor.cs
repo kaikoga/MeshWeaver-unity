@@ -1,10 +1,11 @@
+using Silksprite.MeshWeaver.Controllers.Base;
 using UnityEditor;
 
 namespace Silksprite.MeshWeaver.Controllers
 {
     [CanEditMultipleObjects]
     [CustomEditor(typeof(MeshBehaviourProfile))]
-    public class MeshBehaviourProfileEditor : Editor
+    public class MeshBehaviourProfileEditor : MeshWeaverEditorBase
     {
         public override void OnInspectorGUI()
         {
