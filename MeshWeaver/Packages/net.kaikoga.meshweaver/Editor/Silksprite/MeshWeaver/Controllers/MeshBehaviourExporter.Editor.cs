@@ -41,6 +41,9 @@ namespace Silksprite.MeshWeaver.Controllers
             container.Add(new IMGUIContainer(() =>
             {
                 MeshWeaverControllerGUILayout.LangSelectorGUI();
+            }));
+            container.Add(new IMGUIContainer(() =>
+            {
                 MeshWeaverGUILayout.PropertyField(serializedOverrideMaterials, Loc("MeshBehaviourExporter.overrideMaterials"));
                 if (serializedOverrideMaterials.boolValue)
                 {
@@ -109,8 +112,9 @@ namespace Silksprite.MeshWeaver.Controllers
                 }
 
                 serializedObject.ApplyModifiedProperties();
-
-
+            }));
+            container.Add(new IMGUIContainer(() =>
+            {
                 if (GUILayout.Button(Tr("Update Exported Assets")))
                 {
                     if (AssetDatabase.IsMainAsset(_meshBehaviourExporter.outputMesh))

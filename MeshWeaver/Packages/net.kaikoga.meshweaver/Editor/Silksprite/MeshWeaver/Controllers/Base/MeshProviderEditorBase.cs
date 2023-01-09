@@ -27,6 +27,9 @@ namespace Silksprite.MeshWeaver.Controllers.Base
             container.Add(new IMGUIContainer(() =>
             {
                 MeshWeaverControllerGUILayout.LangSelectorGUI();
+            }));
+            container.Add(new IMGUIContainer(() =>
+            {
                 using (var changedScope = new EditorGUI.ChangeCheckScope())
                 {
                     MeshWeaverControllerGUILayout.LodSelectorGUI(target);
@@ -37,7 +40,9 @@ namespace Silksprite.MeshWeaver.Controllers.Base
                         _colliderMeshie = null;
                     }
                 }
-
+            }));
+            container.Add(new IMGUIContainer(() =>
+            {
                 if (GUILayout.Button(Tr("Bake")))
                 {
                     var meshProvider = (MeshProvider)target;
@@ -54,7 +59,9 @@ namespace Silksprite.MeshWeaver.Controllers.Base
                     bakedTransform.localRotation = transform.localRotation;
                     bakedTransform.localScale = transform.localScale;
                 }
-
+            }));
+            container.Add(new IMGUIContainer(() =>
+            {
                 DumpGUI();
             }));
             return container;

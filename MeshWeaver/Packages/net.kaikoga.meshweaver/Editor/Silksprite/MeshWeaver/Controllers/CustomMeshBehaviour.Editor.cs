@@ -32,14 +32,18 @@ namespace Silksprite.MeshWeaver.Controllers
             {
                 MeshWeaverControllerGUILayout.LangSelectorGUI();
                 MeshWeaverControllerGUILayout.LodSelectorGUI(target);
-
+            }));
+            container.Add(new IMGUIContainer(() =>
+            {
                 MeshWeaverGUILayout.PropertyField(serializedUpdatesEveryFrame, Loc("CustomMeshBehaviour.updatesEveryFrame"));
                 MeshWeaverGUILayout.PropertyField(serializedProfile, Loc("CustomMeshBehaviour.profile"));
                 MeshWeaverGUILayout.PropertyField(serializedMaterials, Loc("CustomMeshBehaviour.materials"));
                 MeshWeaverGUILayout.PropertyField(serializedMeshFilters, Loc("CustomMeshBehaviour.meshFilters"));
                 MeshWeaverGUILayout.PropertyField(serializedMeshColliders, Loc("CustomMeshBehaviour.meshColliders"));
                 serializedObject.ApplyModifiedProperties();
-            
+            }));
+            container.Add(new IMGUIContainer(() =>
+            {
                 if (_meshBehaviour is MeshBehaviour)
                 {
                     MeshProviderMenus.Menu.ChildPopup(_meshBehaviour, Tr("Mesh Providers"));
