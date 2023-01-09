@@ -23,7 +23,7 @@ namespace Silksprite.MeshWeaver.Controllers.Base
                 _root.Add(new IMGUIContainer(() =>
                 {
                     MeshWeaverControllerGUILayout.LangSelectorGUI();
-                    MeshWeaverControllerGUILayout.LodSelectorGUI(target);
+                    MeshWeaverControllerGUILayout.LodSelectorGUI();
                 }) { name = "mw-header" } );
             }
             _container = new VisualElement { name = "mw-container" };
