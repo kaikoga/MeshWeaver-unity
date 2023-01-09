@@ -1,5 +1,6 @@
 using Silksprite.MeshWeaver.Controllers.Base;
 using Silksprite.MeshWeaver.Controllers.Utils;
+using Silksprite.MeshWeaver.UIElements;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -36,29 +37,36 @@ namespace Silksprite.MeshWeaver.Controllers
                 {
                     MeshProviderMenus.Menu.ChildPopup(_meshBehaviour, Tr("Mesh Providers"));
                 }
+            }));
 
-                if (GUILayout.Button(Tr("Collect Materials")))
-                {
-                    _meshBehaviour.CollectMaterials();
-                }
-                if (GUILayout.Button(Tr("Compile")))
-                {
-                    _meshBehaviour.Compile();
-                }
-                if (GUILayout.Button(Tr("Compile All Active")))
-                {
-                    foreach (var m in FindObjectsOfType<CustomMeshBehaviour>()) m.Compile();
-                }
-                if (HasSetupAsMeshRendererButton(_meshBehaviour) && GUILayout.Button(Tr("I am Mesh Renderer")))
+            container.Add(new LocButton(Loc("Collect Materials"), () =>
+            {
+                _meshBehaviour.CollectMaterials();
+            }));
+            container.Add(new LocButton(Loc("Compile"), () =>
+            {
+                _meshBehaviour.Compile();
+            }));
+            container.Add(new LocButton(Loc("Compile All Active"), () =>
+            {
+                foreach (var m in FindObjectsOfType<CustomMeshBehaviour>()) m.Compile();
+            }));
+
+            if (HasSetupAsMeshRendererButton(_meshBehaviour))
+            {
+                container.Add(new LocButton(Loc("I am Mesh Renderer"), () =>
                 {
                     SetupAsMeshRenderer(_meshBehaviour);
-                }
+                }));
+            }
 
-                if (HasCreateExporterButton(_meshBehaviour) && GUILayout.Button(Tr("Create Exporter")))
+            if (HasCreateExporterButton(_meshBehaviour))
+            {
+                container.Add(new LocButton(Loc("Create Exporter"), () =>
                 {
                     CreateExporter(_meshBehaviour);
-                }
-            }));
+                }));
+            }
         }
 
         static bool HasSetupAsMeshRendererButton(CustomMeshBehaviour meshBehaviour)

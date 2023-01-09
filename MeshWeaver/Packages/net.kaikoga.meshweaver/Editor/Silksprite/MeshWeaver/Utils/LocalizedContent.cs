@@ -8,6 +8,7 @@ namespace Silksprite.MeshWeaver.Utils
         readonly string _key;
         public LocalizedContent(string key) => _key = key;
         
+        public string Id => $"mw-{_key.Replace(" ", "")}";
         public string Tr => Tr(_key);
         public GUIContent GUIContent => GUIContent(_key);
     }
