@@ -82,11 +82,22 @@ namespace Silksprite.MeshWeaver.Controllers.Base
             }
         }
 
+        protected static VisualElement Div(Action<VisualElement> initializer) => Div(null, initializer);
+
         protected static VisualElement Div(string containerName, Action<VisualElement> initializer)
         {
-             var container = new VisualElement { name = containerName };
-             initializer(container);
-             return container;
+            var container = new VisualElement { name = containerName };
+            initializer(container);
+            return container;
+        }
+
+        protected static VisualElement HDiv(Action<VisualElement> initializer) => HDiv(null, initializer);
+
+        protected static VisualElement HDiv(string containerName, Action<VisualElement> initializer)
+        {
+            var container = new VisualElement { name = containerName, style = { flexDirection = new StyleEnum<FlexDirection>(FlexDirection.Row)}};
+            initializer(container);
+            return container;
         }
 
         protected VisualElement Prop(string absolutePath, LocalizedContent loc)
