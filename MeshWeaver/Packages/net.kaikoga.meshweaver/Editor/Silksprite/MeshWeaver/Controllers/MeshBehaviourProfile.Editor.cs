@@ -1,5 +1,6 @@
 using Silksprite.MeshWeaver.Controllers.Base;
 using UnityEditor;
+using UnityEngine.UIElements;
 
 namespace Silksprite.MeshWeaver.Controllers
 {
@@ -7,7 +8,12 @@ namespace Silksprite.MeshWeaver.Controllers
     [CustomEditor(typeof(MeshBehaviourProfile))]
     public class MeshBehaviourProfileEditor : MeshWeaverEditorBase
     {
-        protected sealed override void OnInspectorIMGUI()
+        public sealed override VisualElement CreateInspectorGUI()
+        {
+            return new IMGUIContainer(OnInspectorIMGUI);
+        }
+
+        void OnInspectorIMGUI()
         {
             var serializedObj = serializedObject;
             var property = serializedObject.FindProperty("data");

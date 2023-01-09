@@ -9,14 +9,7 @@ namespace Silksprite.MeshWeaver.Controllers.Base
 {
     public abstract class MeshWeaverEditorBase : Editor
     {
-        public sealed override VisualElement CreateInspectorGUI()
-        {
-            return new IMGUIContainer(OnInspectorIMGUI);
-        }
-
         public sealed override void OnInspectorGUI() { }
-
-        protected abstract void OnInspectorIMGUI();
 
         protected void OnBaseInspectorGUI()
         {

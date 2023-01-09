@@ -8,6 +8,7 @@ using Silksprite.MeshWeaver.Models;
 using Silksprite.MeshWeaver.Utils;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UIElements;
 using static Silksprite.MeshWeaver.Utils.Localization;
 
 namespace Silksprite.MeshWeaver.Controllers
@@ -42,7 +43,12 @@ namespace Silksprite.MeshWeaver.Controllers
             _serializedOutputMeshForCollider = serializedObject.FindProperty(nameof(MeshBehaviourExporter.outputMeshForCollider));
         }
 
-        protected sealed override void OnInspectorIMGUI()
+        public sealed override VisualElement CreateInspectorGUI()
+        {
+            return new IMGUIContainer(OnInspectorIMGUI);
+        }
+
+        void OnInspectorIMGUI()
         {
             MeshWeaverControllerGUILayout.LangSelectorGUI();
             MeshWeaverGUILayout.PropertyField(_serializedOverrideMaterials, Loc("MeshBehaviourExporter.overrideMaterials"));
