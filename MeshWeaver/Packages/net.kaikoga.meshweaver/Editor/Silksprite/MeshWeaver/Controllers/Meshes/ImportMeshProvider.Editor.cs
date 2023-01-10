@@ -1,6 +1,7 @@
 using Silksprite.MeshWeaver.Controllers.Base;
 using Silksprite.MeshWeaver.Utils;
 using UnityEditor;
+using UnityEngine.UIElements;
 using static Silksprite.MeshWeaver.Tools.LocalizationTool;
 
 namespace Silksprite.MeshWeaver.Controllers.Meshes
@@ -18,11 +19,14 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
             _serializedMaterials = serializedObject.FindProperty(nameof(ImportMeshProvider.materials));
         }
 
-        protected override void OnPropertiesGUI()
+        protected override void PopulatePropertiesGUI(VisualElement container)
         {
-            MeshWeaverGUILayout.PropertyField(_serializedMesh, Loc("ImportMeshProvider.mesh"));
-            MeshWeaverGUILayout.PropertyField(_serializedMaterials, Loc("ImportMeshProvider.materials"));
-            serializedObject.ApplyModifiedProperties();
+            container.Add(new IMGUIContainer(() =>
+            {
+                MeshWeaverGUILayout.PropertyField(_serializedMesh, Loc("ImportMeshProvider.mesh"));
+                MeshWeaverGUILayout.PropertyField(_serializedMaterials, Loc("ImportMeshProvider.materials"));
+                serializedObject.ApplyModifiedProperties();
+            }));
         }
     }
 }

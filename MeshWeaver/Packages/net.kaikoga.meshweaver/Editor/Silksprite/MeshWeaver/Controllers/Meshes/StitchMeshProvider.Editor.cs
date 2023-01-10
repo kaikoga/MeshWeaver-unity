@@ -2,6 +2,7 @@ using Silksprite.MeshWeaver.Controllers.Base;
 using Silksprite.MeshWeaver.Controllers.Utils;
 using Silksprite.MeshWeaver.Utils;
 using UnityEditor;
+using UnityEngine.UIElements;
 using static Silksprite.MeshWeaver.Tools.LocalizationTool;
 
 namespace Silksprite.MeshWeaver.Controllers.Meshes
@@ -28,21 +29,27 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
             _serializedMaterial = serializedObject.FindProperty(nameof(StitchMeshProvider.material));
         }
 
-        protected override void OnPropertiesGUI()
+        protected override void PopulatePropertiesGUI(VisualElement container)
         {
-            MeshWeaverGUILayout.PropertyField(_serializedPathProviderA, Loc("StitchMeshProvider.pathProviderA"));
-            PathProviderMenus.CollectionsMenu.PropertyField(_meshProvider, " ", "Path A", ref _meshProvider.pathProviderA);
-            MeshWeaverGUILayout.PropertyField(_serializedPathProviderB, Loc("StitchMeshProvider.pathProviderB"));
-            PathProviderMenus.CollectionsMenu.PropertyField(_meshProvider, " ", "Path B", ref _meshProvider.pathProviderB);
+            container.Add(new IMGUIContainer(() =>
+            {
+                MeshWeaverGUILayout.PropertyField(_serializedPathProviderA, Loc("StitchMeshProvider.pathProviderA"));
+                PathProviderMenus.CollectionsMenu.PropertyField(_meshProvider, " ", "Path A", ref _meshProvider.pathProviderA);
+                MeshWeaverGUILayout.PropertyField(_serializedPathProviderB, Loc("StitchMeshProvider.pathProviderB"));
+                PathProviderMenus.CollectionsMenu.PropertyField(_meshProvider, " ", "Path B", ref _meshProvider.pathProviderB);
 
-            MeshWeaverGUILayout.PropertyField(_serializedMaterial, Loc("StitchMeshProvider.material"));
-            serializedObject.ApplyModifiedProperties();
+                MeshWeaverGUILayout.PropertyField(_serializedMaterial, Loc("StitchMeshProvider.material"));
+                serializedObject.ApplyModifiedProperties();
+            }));
         }
 
-        protected override void OnDumpGUI()
+        protected override void PopulateDumpGUI(VisualElement container)
         {
-            MeshWeaverGUI.DumpFoldout("Path data A", ref _isExpandedA, () => _meshProvider.LastPathieA?.Build(MeshWeaverSettings.Current.CurrentLodMaskLayer));
-            MeshWeaverGUI.DumpFoldout("Path data B", ref _isExpandedB, () => _meshProvider.LastPathieB?.Build(MeshWeaverSettings.Current.CurrentLodMaskLayer));
+            container.Add(new IMGUIContainer(() =>
+            {
+                MeshWeaverGUI.DumpFoldout("Path data A", ref _isExpandedA, () => _meshProvider.LastPathieA?.Build(MeshWeaverSettings.Current.CurrentLodMaskLayer));
+                MeshWeaverGUI.DumpFoldout("Path data B", ref _isExpandedB, () => _meshProvider.LastPathieB?.Build(MeshWeaverSettings.Current.CurrentLodMaskLayer));
+            }));
         }
     }
 }

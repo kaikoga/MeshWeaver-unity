@@ -3,6 +3,7 @@ using Silksprite.MeshWeaver.Controllers.Fallback;
 using Silksprite.MeshWeaver.Controllers.Utils;
 using Silksprite.MeshWeaver.Utils;
 using UnityEditor;
+using UnityEngine.UIElements;
 
 namespace Silksprite.MeshWeaver.Controllers.Meshes
 {
@@ -13,19 +14,24 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
         bool _isExpandedX;
         bool _isExpandedY;
 
-        protected override void OnPropertiesGUI()
+        protected override void PopulatePropertiesGUI(VisualElement container)
         {
-            base.OnPropertiesGUI();
-            var pillarMeshProvider = (PillarMeshProvider)target;
-            PathProviderMenus.CollectionsMenu.PropertyField(pillarMeshProvider, "Path X", "Path X", ref pillarMeshProvider.pathProviderX);
-            PathProviderMenus.CollectionsMenu.PropertyField(pillarMeshProvider, "Path Y", "Path Y", ref pillarMeshProvider.pathProviderY);
+            container.Add(new IMGUIContainer(() =>
+            {
+                var pillarMeshProvider = (PillarMeshProvider)target;
+                PathProviderMenus.CollectionsMenu.PropertyField(pillarMeshProvider, "Path X", "Path X", ref pillarMeshProvider.pathProviderX);
+                PathProviderMenus.CollectionsMenu.PropertyField(pillarMeshProvider, "Path Y", "Path Y", ref pillarMeshProvider.pathProviderY);
+            }));
         }
 
-        protected override void OnDumpGUI()
+        protected override void PopulateDumpGUI(VisualElement container)
         {
-            var pillarMeshProvider = (PillarMeshProvider)target;
-            MeshWeaverGUI.DumpFoldout("Path data X", ref _isExpandedX, () => pillarMeshProvider.LastPathieX?.Build(MeshWeaverSettings.Current.CurrentLodMaskLayer));
-            MeshWeaverGUI.DumpFoldout("Path data Y", ref _isExpandedY, () => pillarMeshProvider.LastPathieY?.Build(MeshWeaverSettings.Current.CurrentLodMaskLayer));
+            container.Add(new IMGUIContainer(() =>
+            {
+                var pillarMeshProvider = (PillarMeshProvider)target;
+                MeshWeaverGUI.DumpFoldout("Path data X", ref _isExpandedX, () => pillarMeshProvider.LastPathieX?.Build(MeshWeaverSettings.Current.CurrentLodMaskLayer));
+                MeshWeaverGUI.DumpFoldout("Path data Y", ref _isExpandedY, () => pillarMeshProvider.LastPathieY?.Build(MeshWeaverSettings.Current.CurrentLodMaskLayer));
+            }));
         }
     }
 }

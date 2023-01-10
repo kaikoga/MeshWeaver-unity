@@ -1,5 +1,6 @@
 using Silksprite.MeshWeaver.Controllers.Base;
 using UnityEditor;
+using UnityEngine.UIElements;
 
 namespace Silksprite.MeshWeaver.Controllers.Meshes
 {
@@ -7,7 +8,7 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
     [CanEditMultipleObjects]
     public class MeshReferenceEditor : MeshProviderEditorBase
     {
-        protected override void OnPropertiesGUI()
+        protected override void PopulatePropertiesGUI(VisualElement container)
         {
         }
     }

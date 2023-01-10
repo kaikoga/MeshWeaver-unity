@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Silksprite.MeshWeaver.Models;
 using Silksprite.MeshWeaver.Scopes;
@@ -15,7 +14,7 @@ namespace Silksprite.MeshWeaver.Controllers.Base
 {
     public abstract class MeshWeaverEditorBase : Editor
     {
-        protected abstract bool IsMainComponentEditor { get; } 
+        protected abstract bool IsMainComponentEditor { get; }
 
         VisualElement _root;
         VisualElement _container;
@@ -41,27 +40,22 @@ namespace Silksprite.MeshWeaver.Controllers.Base
             {
                 if (IsMainComponentEditor)
                 {
-                    _root.Add(Div("mw-header", header =>
+                    _root.Add(new Div("mw-header", header =>
                     {
                         var langSelector = new PopupField<string>(Tr("Language (Global)"),
                             new List<string> { "en", "ja" },
                             Lang) { name = "mw-langSelector" };
 
-                        langSelector.RegisterValueChangedCallback(change =>
-                        {
-                            Lang = change.newValue;
-                        });
+                        langSelector.RegisterValueChangedCallback(change => { Lang = change.newValue; });
                         header.Add(langSelector);
 
                         var lodSelector = new EnumField(Tr("Current LOD (Global)"),
                             MeshWeaverSettings.Current.CurrentLodMaskLayer) { name = "mw-lodSelector" };
-                        lodSelector.RegisterValueChangedCallback(change =>
-                        {
-                            MeshWeaverSettings.Current.CurrentLodMaskLayer = (LodMaskLayer)change.newValue;
-                        });
+                        lodSelector.RegisterValueChangedCallback(change => { MeshWeaverSettings.Current.CurrentLodMaskLayer = (LodMaskLayer)change.newValue; });
                         header.Add(lodSelector);
                     }));
                 }
+
                 _container = new VisualElement { name = "mw-container" };
                 PopulateInspectorGUI(_container);
                 _root.Add(_container);
@@ -70,7 +64,9 @@ namespace Silksprite.MeshWeaver.Controllers.Base
 
         protected abstract void PopulateInspectorGUI(VisualElement root);
 
-        public sealed override void OnInspectorGUI() { }
+        public sealed override void OnInspectorGUI()
+        {
+        }
 
         protected void OnBaseInspectorGUI()
         {
@@ -80,24 +76,6 @@ namespace Silksprite.MeshWeaver.Controllers.Base
                 base.OnInspectorGUI();
                 MeshWeaverGUILayout.Header(Loc("End Fallback Inspector"));
             }
-        }
-
-        protected static VisualElement Div(Action<VisualElement> initializer) => Div(null, initializer);
-
-        protected static VisualElement Div(string containerName, Action<VisualElement> initializer)
-        {
-            var container = new VisualElement { name = containerName };
-            initializer(container);
-            return container;
-        }
-
-        protected static VisualElement HDiv(Action<VisualElement> initializer) => HDiv(null, initializer);
-
-        protected static VisualElement HDiv(string containerName, Action<VisualElement> initializer)
-        {
-            var container = new VisualElement { name = containerName, style = { flexDirection = new StyleEnum<FlexDirection>(FlexDirection.Row)}};
-            initializer(container);
-            return container;
         }
 
         protected VisualElement Prop(string absolutePath, LocalizedContent loc)

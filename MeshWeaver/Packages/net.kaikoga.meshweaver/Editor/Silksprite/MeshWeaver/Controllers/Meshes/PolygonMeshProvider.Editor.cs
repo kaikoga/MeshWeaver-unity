@@ -2,6 +2,7 @@ using Silksprite.MeshWeaver.Controllers.Base;
 using Silksprite.MeshWeaver.Controllers.Utils;
 using Silksprite.MeshWeaver.Utils;
 using UnityEditor;
+using UnityEngine.UIElements;
 using static Silksprite.MeshWeaver.Tools.LocalizationTool;
 
 namespace Silksprite.MeshWeaver.Controllers.Meshes
@@ -23,12 +24,15 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
             _serializedMaterial = serializedObject.FindProperty(nameof(PolygonMeshProvider.material));
         }
 
-        protected override void OnPropertiesGUI()
+        protected override void PopulatePropertiesGUI(VisualElement container)
         {
-            MeshWeaverGUILayout.PropertyField(_serializedPathProvider, Loc("PolygonMeshProvider.pathProvider"));
-            PathProviderMenus.CollectionsMenu.PropertyField(_meshProvider, " ", "Path", ref _meshProvider.pathProvider);
-            MeshWeaverGUILayout.PropertyField(_serializedMaterial, Loc("PolygonMeshProvider.material"));
-            serializedObject.ApplyModifiedProperties();
+            container.Add(new IMGUIContainer(() =>
+            {
+                MeshWeaverGUILayout.PropertyField(_serializedPathProvider, Loc("PolygonMeshProvider.pathProvider"));
+                PathProviderMenus.CollectionsMenu.PropertyField(_meshProvider, " ", "Path", ref _meshProvider.pathProvider);
+                MeshWeaverGUILayout.PropertyField(_serializedMaterial, Loc("PolygonMeshProvider.material"));
+                serializedObject.ApplyModifiedProperties();
+            }));
         }
     }
 }

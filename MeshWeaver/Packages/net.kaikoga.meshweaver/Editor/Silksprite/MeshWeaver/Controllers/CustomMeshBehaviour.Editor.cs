@@ -1,3 +1,4 @@
+using System;
 using Silksprite.MeshWeaver.Controllers.Base;
 using Silksprite.MeshWeaver.Controllers.Utils;
 using Silksprite.MeshWeaver.UIElements;
@@ -23,7 +24,7 @@ namespace Silksprite.MeshWeaver.Controllers
 
         protected sealed override void PopulateInspectorGUI(VisualElement container)
         {
-            container.Add(Div("properties", c =>
+            container.Add(new Div("properties", c =>
             {
                 c.Add(Prop(nameof(CustomMeshBehaviour.updatesEveryFrame), Loc("CustomMeshBehaviour.updatesEveryFrame")));
                 c.Add(Prop("profile", Loc("CustomMeshBehaviour.profile")));
@@ -39,14 +40,8 @@ namespace Silksprite.MeshWeaver.Controllers
                 }
             }));
 
-            container.Add(new LocButton(Loc("Collect Materials"), () =>
-            {
-                _meshBehaviour.CollectMaterials();
-            }));
-            container.Add(new LocButton(Loc("Compile"), () =>
-            {
-                _meshBehaviour.Compile();
-            }));
+            container.Add(new LocButton(Loc("Collect Materials"), () => { _meshBehaviour.CollectMaterials(); }));
+            container.Add(new LocButton(Loc("Compile"), () => { _meshBehaviour.Compile(); }));
             container.Add(new LocButton(Loc("Compile All Active"), () =>
             {
                 foreach (var m in FindObjectsOfType<CustomMeshBehaviour>()) m.Compile();
@@ -54,18 +49,12 @@ namespace Silksprite.MeshWeaver.Controllers
 
             if (HasSetupAsMeshRendererButton(_meshBehaviour))
             {
-                container.Add(new LocButton(Loc("I am Mesh Renderer"), () =>
-                {
-                    SetupAsMeshRenderer(_meshBehaviour);
-                }));
+                container.Add(new LocButton(Loc("I am Mesh Renderer"), () => { SetupAsMeshRenderer(_meshBehaviour); }));
             }
 
             if (HasCreateExporterButton(_meshBehaviour))
             {
-                container.Add(new LocButton(Loc("Create Exporter"), () =>
-                {
-                    CreateExporter(_meshBehaviour);
-                }));
+                container.Add(new LocButton(Loc("Create Exporter"), () => { CreateExporter(_meshBehaviour); }));
             }
         }
 

@@ -4,6 +4,7 @@ using Silksprite.MeshWeaver.Controllers.Paths;
 using Silksprite.MeshWeaver.Controllers.Utils;
 using Silksprite.MeshWeaver.Models;
 using Silksprite.MeshWeaver.Models.DataObjects;
+using Silksprite.MeshWeaver.UIElements;
 using Silksprite.MeshWeaver.Utils;
 using UnityEditor;
 using UnityEngine;
@@ -22,7 +23,7 @@ namespace Silksprite.MeshWeaver.Controllers.Base
 
         protected sealed override void PopulateInspectorGUI(VisualElement container)
         {
-            container.Add(new IMGUIContainer(PropertiesGUI));
+            container.Add(CreatePropertiesGUI());
             container.Add(new IMGUIContainer(() =>
             {
                 if (GUILayout.Button(Tr("Bake")))
@@ -38,27 +39,42 @@ namespace Silksprite.MeshWeaver.Controllers.Base
                     bakedTransform.localScale = transform.localScale;
                 }
             }));
-            container.Add(new IMGUIContainer(DumpGUI));
+            container.Add(CreateDumpGUI());
         }
 
-        void PropertiesGUI()
+        VisualElement CreatePropertiesGUI()
         {
-            MeshWeaverGUILayout.PropertyField(serializedObject.FindProperty("lodMask"), Loc("GeometryProvider.lodMask"));
-            serializedObject.ApplyModifiedProperties();
-            OnPropertiesGUI();
+            return new Div("mw-properties", c =>
+            {
+                c.Add(new IMGUIContainer(() =>
+                {
+                    MeshWeaverGUILayout.PropertyField(serializedObject.FindProperty("lodMask"), Loc("GeometryProvider.lodMask"));
+                    serializedObject.ApplyModifiedProperties();
+                }));
+                PopulatePropertiesGUI(c);
+            });
         }
 
-        protected abstract void OnPropertiesGUI();
-
-        void DumpGUI()
+        VisualElement CreateDumpGUI()
         {
-            var factory = ((PathProvider)target).LastFactory;
+            return new Div("mw-dump", c =>
+            {
+                c.Add(new IMGUIContainer(() =>
+                {
+                    var factory = ((PathProvider)target).LastFactory;
 
-            MeshWeaverGUI.DumpFoldout(Tr("Path Dump"), ref _isExpanded, () => factory?.Build(MeshWeaverSettings.Current.CurrentLodMaskLayer));
-            MeshWeaverGUI.DumpFoldout(Tr("Collider Path Dump"), ref _isColliderExpanded, () => factory?.Build(LodMaskLayer.Collider));
+                    MeshWeaverGUI.DumpFoldout(Tr("Path Dump"), ref _isExpanded, () => factory?.Build(MeshWeaverSettings.Current.CurrentLodMaskLayer));
+                    MeshWeaverGUI.DumpFoldout(Tr("Collider Path Dump"), ref _isColliderExpanded, () => factory?.Build(LodMaskLayer.Collider));
+                }));
+                PopulateDumpGUI(c);
+            });
         }
 
-        protected virtual void OnDumpGUI() { }
+        protected abstract void PopulatePropertiesGUI(VisualElement container);
+
+        protected virtual void PopulateDumpGUI(VisualElement container)
+        {
+        }
 
         protected bool HasFrameBounds() => true;
 

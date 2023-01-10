@@ -2,6 +2,7 @@ using Silksprite.MeshWeaver.Controllers.Base;
 using Silksprite.MeshWeaver.Controllers.Utils;
 using Silksprite.MeshWeaver.Utils;
 using UnityEditor;
+using UnityEngine.UIElements;
 using static Silksprite.MeshWeaver.Tools.LocalizationTool;
 
 namespace Silksprite.MeshWeaver.Controllers.Meshes
@@ -26,19 +27,25 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
             _serializedPathProvider = serializedObject.FindProperty(nameof(StampMeshProvider.pathProvider));
         }
 
-        protected override void OnPropertiesGUI()
+        protected override void PopulatePropertiesGUI(VisualElement container)
         {
-            MeshWeaverGUILayout.PropertyField(_serializedMeshProvider, Loc("StampMeshProvider.meshProvider"));
-            MeshProviderMenus.Menu.PropertyField(_meshProvider, " ", "Mesh", ref _meshProvider.meshProvider);
-            MeshWeaverGUILayout.PropertyField(_serializedPathProvider, Loc("StampMeshProvider.pathProvider"));
-            PathProviderMenus.ElementsMenu.PropertyField(_meshProvider, " ", "Path", ref _meshProvider.pathProvider);
-            serializedObject.ApplyModifiedProperties();
+            container.Add(new IMGUIContainer(() =>
+            {
+                MeshWeaverGUILayout.PropertyField(_serializedMeshProvider, Loc("StampMeshProvider.meshProvider"));
+                MeshProviderMenus.Menu.PropertyField(_meshProvider, " ", "Mesh", ref _meshProvider.meshProvider);
+                MeshWeaverGUILayout.PropertyField(_serializedPathProvider, Loc("StampMeshProvider.pathProvider"));
+                PathProviderMenus.ElementsMenu.PropertyField(_meshProvider, " ", "Path", ref _meshProvider.pathProvider);
+                serializedObject.ApplyModifiedProperties();
+            }));
         }
 
-        protected override void OnDumpGUI()
+        protected override void PopulateDumpGUI(VisualElement container)
         {
-            MeshWeaverGUI.DumpFoldout("Mesh data", ref _isExpandedMesh, () => _meshProvider.LastMeshie?.Build(MeshWeaverSettings.Current.CurrentLodMaskLayer));
-            MeshWeaverGUI.DumpFoldout("Path data", ref _isExpandedPath, () => _meshProvider.LastPathie?.Build(MeshWeaverSettings.Current.CurrentLodMaskLayer));
+            container.Add(new IMGUIContainer(() =>
+            {
+                MeshWeaverGUI.DumpFoldout("Mesh data", ref _isExpandedMesh, () => _meshProvider.LastMeshie?.Build(MeshWeaverSettings.Current.CurrentLodMaskLayer));
+                MeshWeaverGUI.DumpFoldout("Path data", ref _isExpandedPath, () => _meshProvider.LastPathie?.Build(MeshWeaverSettings.Current.CurrentLodMaskLayer));
+            }));
         }
     }
 }

@@ -21,6 +21,7 @@ namespace Silksprite.MeshWeaver.Controllers
                 {
                     EditorGUILayout.PropertyField(property);
                 } while (property.NextVisible(false));
+
                 serializedObj.ApplyModifiedProperties();
             }));
         }

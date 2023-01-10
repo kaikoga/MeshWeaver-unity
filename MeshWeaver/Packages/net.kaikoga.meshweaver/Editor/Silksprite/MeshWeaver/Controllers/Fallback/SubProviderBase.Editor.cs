@@ -19,6 +19,8 @@ namespace Silksprite.MeshWeaver.Controllers.Fallback
             }));
         }
 
-        protected virtual void OnPropertiesGUI() { }
+        protected virtual void OnPropertiesGUI()
+        {
+        }
     }
 }

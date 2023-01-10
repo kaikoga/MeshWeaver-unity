@@ -4,6 +4,7 @@ using Silksprite.MeshWeaver.Controllers.Extensions;
 using Silksprite.MeshWeaver.Controllers.Meshes;
 using Silksprite.MeshWeaver.Models;
 using Silksprite.MeshWeaver.Models.DataObjects;
+using Silksprite.MeshWeaver.UIElements;
 using Silksprite.MeshWeaver.Utils;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -20,7 +21,7 @@ namespace Silksprite.MeshWeaver.Controllers.Base
 
         protected sealed override void PopulateInspectorGUI(VisualElement container)
         {
-            container.Add(new IMGUIContainer(PropertiesGUI));
+            container.Add(CreatePropertiesGUI());
             container.Add(new IMGUIContainer(() =>
             {
                 if (GUILayout.Button(Tr("Bake")))
@@ -34,33 +35,48 @@ namespace Silksprite.MeshWeaver.Controllers.Base
                         baked.meshData = LodMaskLayers.Values.Select(lod => MeshieData.FromMeshie(meshProvider.ToFactory(context).Build(lod), i => i)).ToArray();
                         baked.materials = context.ToMaterials();
                     }
+
                     var bakedTransform = baked.transform;
                     bakedTransform.localPosition = transform.localPosition;
                     bakedTransform.localRotation = transform.localRotation;
                     bakedTransform.localScale = transform.localScale;
                 }
             }));
-            container.Add(new IMGUIContainer(DumpGUI));
+            container.Add(CreateDumpGUI());
         }
 
-        void PropertiesGUI()
+        VisualElement CreatePropertiesGUI()
         {
-            MeshWeaverGUILayout.PropertyField(serializedObject.FindProperty("lodMask"), Loc("GeometryProvider.lodMask"));
-            serializedObject.ApplyModifiedProperties();
-            OnPropertiesGUI();
+            return new Div("mw-properties", c =>
+            {
+                c.Add(new IMGUIContainer(() =>
+                {
+                    MeshWeaverGUILayout.PropertyField(serializedObject.FindProperty("lodMask"), Loc("GeometryProvider.lodMask"));
+                    serializedObject.ApplyModifiedProperties();
+                }));
+                PopulatePropertiesGUI(c);
+            });
         }
 
-        protected abstract void OnPropertiesGUI();
-
-        void DumpGUI()
+        VisualElement CreateDumpGUI()
         {
-            var factory = ((MeshProvider)target).LastFactory;
-            MeshWeaverGUI.DumpFoldout(Tr("Mesh Dump"), ref _isExpanded, () => factory?.Build(MeshWeaverSettings.Current.CurrentLodMaskLayer));
-            MeshWeaverGUI.DumpFoldout(Tr("Collider Mesh Dump"), ref _isColliderExpanded, () => factory?.Build(LodMaskLayer.Collider));
-            OnDumpGUI();
+            return new Div("mw-dump", c =>
+            {
+                c.Add(new IMGUIContainer(() =>
+                {
+                    var factory = ((MeshProvider)target).LastFactory;
+                    MeshWeaverGUI.DumpFoldout(Tr("Mesh Dump"), ref _isExpanded, () => factory?.Build(MeshWeaverSettings.Current.CurrentLodMaskLayer));
+                    MeshWeaverGUI.DumpFoldout(Tr("Collider Mesh Dump"), ref _isColliderExpanded, () => factory?.Build(LodMaskLayer.Collider));
+                }));
+                PopulateDumpGUI(c);
+            });
         }
 
-        protected virtual void OnDumpGUI() { }
+        protected abstract void PopulatePropertiesGUI(VisualElement container);
+
+        protected virtual void PopulateDumpGUI(VisualElement container)
+        {
+        }
 
         protected bool HasFrameBounds() => true;
 

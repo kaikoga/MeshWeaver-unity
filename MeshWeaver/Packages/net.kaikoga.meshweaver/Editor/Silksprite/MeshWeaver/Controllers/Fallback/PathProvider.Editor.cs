@@ -1,6 +1,7 @@
 using Silksprite.MeshWeaver.Controllers.Base;
 using Silksprite.MeshWeaver.Controllers.Utils;
 using UnityEditor;
+using UnityEngine.UIElements;
 
 namespace Silksprite.MeshWeaver.Controllers.Fallback
 {
@@ -10,12 +11,15 @@ namespace Silksprite.MeshWeaver.Controllers.Fallback
     {
         protected override bool IsMainComponentEditor => true;
 
-        protected override void OnPropertiesGUI()
+        protected override void PopulatePropertiesGUI(VisualElement container)
         {
-            OnBaseInspectorGUI();
+            container.Add(new IMGUIContainer(() =>
+            {
+                OnBaseInspectorGUI();
 
-            var pathProvider = (PathProvider)target;
-            PathModifierProviderMenus.Menu.ModifierPopup(pathProvider);
+                var pathProvider = (PathProvider)target;
+                PathModifierProviderMenus.Menu.ModifierPopup(pathProvider);
+            }));
         }
     }
 }

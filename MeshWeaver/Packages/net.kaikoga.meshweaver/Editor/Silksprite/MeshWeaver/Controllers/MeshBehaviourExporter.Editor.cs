@@ -38,23 +38,24 @@ namespace Silksprite.MeshWeaver.Controllers
             overrideMaterials.RegisterCallback(new EventCallback<ChangeEvent<bool>>(_ => Refresh()));
             container.Add(overrideMaterials);
 
-            var materialsContainer = Div("mw-materialsContainer", c =>
+            var materialsContainer = new Div("mw-materialsContainer", c =>
             {
                 c.Add(Prop(nameof(MeshBehaviourExporter.materials), Loc("MeshBehaviourExporter.materials")));
-                c.Add(new LocButton(Loc("Copy Materials from MeshBehaviour"), () =>
-                {
-                    _meshBehaviourExporter.materials = _meshBehaviour.materials.ToArray();
-                }));
+                c.Add(new LocButton(Loc("Copy Materials from MeshBehaviour"), () => { _meshBehaviourExporter.materials = _meshBehaviour.materials.ToArray(); }));
             });
             AddRefreshCallback(() => materialsContainer.style.display = new StyleEnum<DisplayStyle>(_meshBehaviourExporter.overrideMaterials ? DisplayStyle.Flex : DisplayStyle.None));
             container.Add(materialsContainer);
 
             var editLinkedAssets = new LocToggle(Loc("Edit Linked Assets")) { value = _editLinkedAssets };
-            editLinkedAssets.RegisterValueChangedCallback(changed => { _editLinkedAssets = changed.newValue; Refresh(); });
+            editLinkedAssets.RegisterValueChangedCallback(changed =>
+            {
+                _editLinkedAssets = changed.newValue;
+                Refresh();
+            });
             container.Add(editLinkedAssets);
 
             var outputMeshContainer = new DivIfElse(
-                HDiv(c =>
+                new HDiv(c =>
                 {
                     var outputMesh = Prop(nameof(MeshBehaviourExporter.outputMesh), Loc("MeshBehaviourExporter.outputMesh"));
                     AddRefreshCallback(() => outputMesh.SetEnabled(_editLinkedAssets));
@@ -75,7 +76,7 @@ namespace Silksprite.MeshWeaver.Controllers
             container.Add(outputMeshContainer);
 
             var outputPrefabContainer = new DivIfElse(
-                HDiv(c =>
+                new HDiv(c =>
                 {
                     var outputPrefab = Prop(nameof(MeshBehaviourExporter.outputPrefab), Loc("MeshBehaviourExporter.outputPrefab"));
                     AddRefreshCallback(() => outputPrefab.SetEnabled(_editLinkedAssets));
@@ -95,7 +96,7 @@ namespace Silksprite.MeshWeaver.Controllers
             AddRefreshCallback(() => outputPrefabContainer.value = _editLinkedAssets || _meshBehaviourExporter.outputPrefab);
             container.Add(outputPrefabContainer);
 
-            container.Add(Div(c =>
+            container.Add(new Div(c =>
             {
                 var outputMeshLod1 = Prop(nameof(MeshBehaviourExporter.outputMeshLod1), Loc("MeshBehaviourExporter.outputMeshLod1"));
                 outputMeshLod1.SetEnabled(false);
@@ -138,7 +139,7 @@ namespace Silksprite.MeshWeaver.Controllers
         {
             var meshes = AssetDatabase.LoadAllAssetsAtPath(projectFilePath).OfType<Mesh>().ToArray();
             meshBehaviourExporter.outputMesh = meshes.FirstOrDefault(AssetDatabase.IsMainAsset);
-            
+
             var subAssets = meshes.Where(AssetDatabase.IsSubAsset).ToArray();
             meshBehaviourExporter.outputMeshLod1 = subAssets.FirstOrDefault(mesh => mesh.name.EndsWith("_LOD1"));
             meshBehaviourExporter.outputMeshLod2 = subAssets.FirstOrDefault(mesh => mesh.name.EndsWith("_LOD2"));
@@ -161,10 +162,12 @@ namespace Silksprite.MeshWeaver.Controllers
             {
                 meshBehaviourExporter.outputMeshLod1 = new Mesh();
             }
+
             if (!meshBehaviourExporter.outputMeshLod2)
             {
                 meshBehaviourExporter.outputMeshLod2 = new Mesh();
             }
+
             if (!meshBehaviourExporter.outputMeshForCollider)
             {
                 meshBehaviourExporter.outputMeshForCollider = new Mesh();
@@ -235,7 +238,7 @@ namespace Silksprite.MeshWeaver.Controllers
                     gameObject.transform.SetParent(prefab.transform, false);
                     return SetupRenderer(gameObject, mesh);
                 }
-                
+
                 LOD CreateLOD(Renderer meshRenderer, float screenRelativeTransitionHeight)
                 {
                     return new LOD

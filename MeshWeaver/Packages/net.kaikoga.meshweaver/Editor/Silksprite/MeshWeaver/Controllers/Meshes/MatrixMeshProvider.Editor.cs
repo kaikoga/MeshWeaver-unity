@@ -2,6 +2,7 @@ using Silksprite.MeshWeaver.Controllers.Base;
 using Silksprite.MeshWeaver.Controllers.Utils;
 using Silksprite.MeshWeaver.Utils;
 using UnityEditor;
+using UnityEngine.UIElements;
 using static Silksprite.MeshWeaver.Tools.LocalizationTool;
 
 namespace Silksprite.MeshWeaver.Controllers.Meshes
@@ -22,7 +23,7 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
         SerializedProperty _serializedCellPatternOverrides;
         SerializedProperty _serializedMaterial;
 
-        
+
         void OnEnable()
         {
             _meshProvider = (MatrixMeshProvider)target;
@@ -35,24 +36,30 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
             _serializedMaterial = serializedObject.FindProperty(nameof(MatrixMeshProvider.material));
         }
 
-        protected override void OnPropertiesGUI()
+        protected override void PopulatePropertiesGUI(VisualElement container)
         {
-            MeshWeaverGUILayout.PropertyField(_serializedPathProviderX, Loc("MatrixMeshProvider.pathProviderX"));
-            PathProviderMenus.CollectionsMenu.PropertyField(_meshProvider, " ", "Path X", ref _meshProvider.pathProviderX);
-            MeshWeaverGUILayout.PropertyField(_serializedPathProviderY, Loc("MatrixMeshProvider.pathProviderY"));
-            PathProviderMenus.CollectionsMenu.PropertyField(_meshProvider, " ", "Path Y", ref _meshProvider.pathProviderY);
-            
-            MeshWeaverGUILayout.PropertyField(_serializedOperatorKind, Loc("MatrixMeshProvider.operatorKind"));
-            MeshWeaverGUILayout.PropertyField(_serializedDefaultCellPatternKind, Loc("MatrixMeshProvider.defaultCellPatternKind"));
-            MeshWeaverGUILayout.PropertyField(_serializedCellPatternOverrides, Loc("MatrixMeshProvider.cellPatternOverrides"));
-            MeshWeaverGUILayout.PropertyField(_serializedMaterial, Loc("MatrixMeshProvider.material"));
-            serializedObject.ApplyModifiedProperties();
+            container.Add(new IMGUIContainer(() =>
+            {
+                MeshWeaverGUILayout.PropertyField(_serializedPathProviderX, Loc("MatrixMeshProvider.pathProviderX"));
+                PathProviderMenus.CollectionsMenu.PropertyField(_meshProvider, " ", "Path X", ref _meshProvider.pathProviderX);
+                MeshWeaverGUILayout.PropertyField(_serializedPathProviderY, Loc("MatrixMeshProvider.pathProviderY"));
+                PathProviderMenus.CollectionsMenu.PropertyField(_meshProvider, " ", "Path Y", ref _meshProvider.pathProviderY);
+
+                MeshWeaverGUILayout.PropertyField(_serializedOperatorKind, Loc("MatrixMeshProvider.operatorKind"));
+                MeshWeaverGUILayout.PropertyField(_serializedDefaultCellPatternKind, Loc("MatrixMeshProvider.defaultCellPatternKind"));
+                MeshWeaverGUILayout.PropertyField(_serializedCellPatternOverrides, Loc("MatrixMeshProvider.cellPatternOverrides"));
+                MeshWeaverGUILayout.PropertyField(_serializedMaterial, Loc("MatrixMeshProvider.material"));
+                serializedObject.ApplyModifiedProperties();
+            }));
         }
 
-        protected override void OnDumpGUI()
+        protected override void PopulateDumpGUI(VisualElement container)
         {
-            MeshWeaverGUI.DumpFoldout("Path data X", ref _isExpandedX, () => _meshProvider.LastPathieX?.Build(MeshWeaverSettings.Current.CurrentLodMaskLayer));
-            MeshWeaverGUI.DumpFoldout("Path data Y", ref _isExpandedY, () => _meshProvider.LastPathieY?.Build(MeshWeaverSettings.Current.CurrentLodMaskLayer));
+            container.Add(new IMGUIContainer(() =>
+            {
+                MeshWeaverGUI.DumpFoldout("Path data X", ref _isExpandedX, () => _meshProvider.LastPathieX?.Build(MeshWeaverSettings.Current.CurrentLodMaskLayer));
+                MeshWeaverGUI.DumpFoldout("Path data Y", ref _isExpandedY, () => _meshProvider.LastPathieY?.Build(MeshWeaverSettings.Current.CurrentLodMaskLayer));
+            }));
         }
     }
 }
