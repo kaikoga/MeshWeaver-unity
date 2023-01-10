@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UIElements;
 using static Silksprite.MeshWeaver.Tools.LocalizationTool;
 
 namespace Silksprite.MeshWeaver.Utils
@@ -23,6 +24,11 @@ namespace Silksprite.MeshWeaver.Utils
             if (index <= 0) return default;
 
             return (T)(object)self.gameObject.AddComponent(_types[index]);
+        }
+        
+        public VisualElement VisualElement(Component self, LocalizedContent? label = null)
+        {
+            return new IMGUIContainer(() => ModifierPopup(self, label));
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Linq;
 using Silksprite.MeshWeaver.Controllers.Extensions;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UIElements;
 using static Silksprite.MeshWeaver.Tools.LocalizationTool;
 
 namespace Silksprite.MeshWeaver.Utils
@@ -33,6 +34,20 @@ namespace Silksprite.MeshWeaver.Utils
                 property = child;
                 property.name = $"{property.name}_{name}";
             }
+        }
+
+        public VisualElement VisualElement(Component self, string label, string name, SerializedProperty serializedProperty)
+        {
+            return new IMGUIContainer(() =>
+            {
+                var child = ChildPopup(self, label);
+                if (serializedProperty != null && child != null)
+                {
+                    child.name = $"{child.name}_{name}";
+                    serializedProperty.objectReferenceValue = child;
+                    serializedProperty.serializedObject.ApplyModifiedProperties();
+                }
+            });
         }
     }
 }

@@ -20,10 +20,7 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
         protected override void PopulatePropertiesGUI(VisualElement container)
         {
             container.Add(Prop(nameof(PolygonMeshProvider.pathProvider), Loc("PolygonMeshProvider.pathProvider")));
-            container.Add(new IMGUIContainer(() =>
-            {
-                PathProviderMenus.CollectionsMenu.PropertyField(_meshProvider, " ", "Path", ref _meshProvider.pathProvider);
-            }));
+            container.Add(PathProviderMenus.CollectionsMenu.VisualElement(_meshProvider, " ", "Path", serializedObject.FindProperty(nameof(PolygonMeshProvider.pathProvider))));
             container.Add(Prop(nameof(PolygonMeshProvider.material), Loc("PolygonMeshProvider.material")));
         }
     }
