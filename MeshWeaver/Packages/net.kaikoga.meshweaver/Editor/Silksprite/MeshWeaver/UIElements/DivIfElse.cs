@@ -1,3 +1,4 @@
+using Silksprite.MeshWeaver.UIElements.Extensions;
 using UnityEngine.UIElements;
 
 namespace Silksprite.MeshWeaver.UIElements
@@ -8,15 +9,11 @@ namespace Silksprite.MeshWeaver.UIElements
         readonly VisualElement _elseContent;
         bool _value;
 
-        public bool value
+        public DivIfElse WithDisplay(bool displayIfTrue)
         {
-            get => _value;
-            set
-            {
-                _value = value;
-                _ifContent.style.display = new StyleEnum<DisplayStyle>(value ? DisplayStyle.Flex : DisplayStyle.None);
-                _elseContent.style.display = new StyleEnum<DisplayStyle>(value ? DisplayStyle.None : DisplayStyle.Flex);
-            }
+            _ifContent.WithDisplay(displayIfTrue);
+            _elseContent.WithDisplay(!displayIfTrue);
+            return this;
         }
 
         public DivIfElse(VisualElement ifContent) : this(ifContent, new VisualElement()) { }
@@ -27,7 +24,7 @@ namespace Silksprite.MeshWeaver.UIElements
             _elseContent = elseContent;
             Add(_ifContent);
             Add(_elseContent);
-            value = false;
+            WithDisplay(false);
         }
     }
 }

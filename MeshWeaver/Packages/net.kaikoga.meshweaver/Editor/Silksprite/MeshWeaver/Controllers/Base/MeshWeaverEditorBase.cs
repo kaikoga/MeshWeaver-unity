@@ -78,7 +78,7 @@ namespace Silksprite.MeshWeaver.Controllers.Base
             }
         }
 
-        protected VisualElement Prop(string absolutePath, LocalizedContent loc)
+        protected LocPropertyField Prop(string absolutePath, LocalizedContent loc)
         {
             return new LocPropertyField(serializedObject.FindProperty(absolutePath), loc);
         }
