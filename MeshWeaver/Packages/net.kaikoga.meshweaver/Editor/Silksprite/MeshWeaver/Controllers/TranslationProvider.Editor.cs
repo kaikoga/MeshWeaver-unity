@@ -1,13 +1,21 @@
 using Silksprite.MeshWeaver.Controllers.Base;
-using Silksprite.MeshWeaver.Controllers.Fallback;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace Silksprite.MeshWeaver.Controllers
 {
     [CustomEditor(typeof(TranslationProvider))]
-    public class TranslationProviderEditor : SubProviderBaseEditor
+    public class TranslationProviderEditor : SubProviderEditorBase
     {
+        protected override void PopulatePropertiesGUI(VisualElement container)
+        {
+            // FIXME:
+            container.Add(PopulateDefaultInspectorGUI());
+        }
+
+        #region scene GUI
+
         Axis _focusAxis;
         int _controlIdX;
         int _controlIdY;
@@ -110,5 +118,7 @@ namespace Silksprite.MeshWeaver.Controllers
             Y,
             Z
         }
+
+        #endregion
     }
 }

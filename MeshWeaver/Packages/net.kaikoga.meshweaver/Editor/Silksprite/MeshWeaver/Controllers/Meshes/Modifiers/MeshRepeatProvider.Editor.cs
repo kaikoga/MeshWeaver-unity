@@ -1,4 +1,4 @@
-using Silksprite.MeshWeaver.Controllers.Fallback;
+using Silksprite.MeshWeaver.Controllers.Base;
 using Silksprite.MeshWeaver.Controllers.Utils;
 using UnityEditor;
 using UnityEngine.UIElements;
@@ -7,7 +7,7 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes.Modifiers
 {
     [CustomEditor(typeof(MeshRepeatProvider))]
     [CanEditMultipleObjects]
-    public class MeshRepeatProviderEditor : SubProviderBaseEditor
+    public class MeshRepeatProviderEditor : SubProviderEditorBase
     {
         protected override void PopulatePropertiesGUI(VisualElement container)
         {
