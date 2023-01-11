@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-01-12 02:50+0900\n"
+"POT-Creation-Date: 2023-01-12 03:10+0900\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -319,62 +319,106 @@ msgid "Path Providers"
 msgstr "子パス"
 
 #: Editor/Silksprite/MeshWeaver/Controllers/Paths/CompositePathProvider.Editor.cs:16
-#: Editor/Silksprite/MeshWeaver/Controllers/Paths/PathReference.Editor.cs:16
+#: Editor/Silksprite/MeshWeaver/Controllers/Paths/PathReference.Editor.cs:15
 msgid "PathReference.isLoop"
 msgstr "ループ化"
 
 #: Editor/Silksprite/MeshWeaver/Controllers/Paths/CompositePathProvider.Editor.cs:17
-#: Editor/Silksprite/MeshWeaver/Controllers/Paths/PathReference.Editor.cs:17
+#: Editor/Silksprite/MeshWeaver/Controllers/Paths/PathReference.Editor.cs:16
 msgid "PathReference.smoothJoin"
 msgstr "連続化"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Paths/ExtractPathProvider.Editor.cs:15
+#: Editor/Silksprite/MeshWeaver/Controllers/Paths/ExtractPathProvider.Editor.cs:14
 msgid "ExtractPathProvider.meshProvider"
 msgstr "抽出元メッシュ"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Paths/ExtractPathProvider.Editor.cs:16
+#: Editor/Silksprite/MeshWeaver/Controllers/Paths/ExtractPathProvider.Editor.cs:15
 msgid "ExtractPathProvider.pathName"
 msgstr "パス名"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Paths/PathReference.Editor.cs:15
+#: Editor/Silksprite/MeshWeaver/Controllers/Paths/PathReference.Editor.cs:14
 msgid "PathReference.pathProviders"
 msgstr "パス参照"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Paths/RevolutionPathProvider.Editor.cs:15
+#: Editor/Silksprite/MeshWeaver/Controllers/Paths/RevolutionPathProvider.Editor.cs:14
 msgid "RevolutionPathProvider.min"
 msgstr "最小角度"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Paths/RevolutionPathProvider.Editor.cs:16
+#: Editor/Silksprite/MeshWeaver/Controllers/Paths/RevolutionPathProvider.Editor.cs:15
 msgid "RevolutionPathProvider.max"
 msgstr "最大角度"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Paths/RevolutionPathProvider.Editor.cs:17
+#: Editor/Silksprite/MeshWeaver/Controllers/Paths/RevolutionPathProvider.Editor.cs:16
 msgid "RevolutionPathProvider.subdivision"
 msgstr "分割数"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Paths/RevolutionPathProvider.Editor.cs:18
+#: Editor/Silksprite/MeshWeaver/Controllers/Paths/RevolutionPathProvider.Editor.cs:17
 msgid "RevolutionPathProvider.axis"
 msgstr "回転軸"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Paths/RevolutionPathProvider.Editor.cs:19
+#: Editor/Silksprite/MeshWeaver/Controllers/Paths/RevolutionPathProvider.Editor.cs:18
 msgid "RevolutionPathProvider.isLoop"
 msgstr "ループ化"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Paths/RevolutionPathProvider.Editor.cs:20
+#: Editor/Silksprite/MeshWeaver/Controllers/Paths/RevolutionPathProvider.Editor.cs:19
 msgid "RevolutionPathProvider.vector"
 msgstr "基準ベクトル"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Paths/ShapePathProvider.Editor.cs:15
+#: Editor/Silksprite/MeshWeaver/Controllers/Paths/ShapePathProvider.Editor.cs:14
 msgid "ShapePathProvider.kind"
 msgstr "シェイプの種類"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Paths/VertexProvider.Editor.cs:15
+#: Editor/Silksprite/MeshWeaver/Controllers/Paths/VertexProvider.Editor.cs:14
 msgid "VertexProvider.crease"
 msgstr "折り目にする"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Paths/VertexProvider.Editor.cs:16
+#: Editor/Silksprite/MeshWeaver/Controllers/Paths/VertexProvider.Editor.cs:15
 msgid "VertexProvider.uvs"
 msgstr "UV"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/TranslationProvider.Editor.cs:14
+msgid "TranslationProvider.translation"
+msgstr "座標変換"
+
+# optional
+#: Editor/Silksprite/MeshWeaver/CustomDrawers/Matrix4x4.Custom.Drawer.cs:31
+msgid "TRS"
+msgstr "TRS"
+
+# optional
+#: Editor/Silksprite/MeshWeaver/CustomDrawers/Matrix4x4.Custom.Drawer.cs:35
+msgid "Reset"
+msgstr "リセット"
+
+# optional
+#: Editor/Silksprite/MeshWeaver/CustomDrawers/Matrix4x4.Custom.Drawer.cs:50
+msgid "Position"
+msgstr "Position"
+
+# optional
+#: Editor/Silksprite/MeshWeaver/CustomDrawers/Matrix4x4.Custom.Drawer.cs:54
+msgid "Rotation"
+msgstr "Rotation"
+
+# optional
+#: Editor/Silksprite/MeshWeaver/CustomDrawers/Matrix4x4.Custom.Drawer.cs:58
+msgid "Scale"
+msgstr "Scale"
+
+# optional
+#: Editor/Silksprite/MeshWeaver/CustomDrawers/Matrix4x4.Custom.Drawer.cs:76
+msgid "One X"
+msgstr "One X"
+
+# optional
+#: Editor/Silksprite/MeshWeaver/CustomDrawers/Matrix4x4.Custom.Drawer.cs:80
+msgid "One Y"
+msgstr "One Y"
+
+# optional
+#: Editor/Silksprite/MeshWeaver/CustomDrawers/Matrix4x4.Custom.Drawer.cs:84
+msgid "One Z"
+msgstr "One Z"
 
 #: Editor/Silksprite/MeshWeaver/Utils/ChildComponentPopupMenu.cs:20
 msgid "Create Child..."
@@ -387,6 +431,38 @@ msgstr "追加..."
 #: Editor/Silksprite/MeshWeaver/Utils/ModifierComponentPopupMenu.cs:25
 msgid "Modifiers"
 msgstr "Modifier"
+
+# optional
+#~ msgid "Matrix4x4CustomAttribute.TRS"
+#~ msgstr "TRS"
+
+# optional
+#~ msgid "Matrix4x4CustomAttribute.Reset"
+#~ msgstr "リセット"
+
+# optional
+#~ msgid "Matrix4x4CustomAttribute.Position"
+#~ msgstr "Position"
+
+# optional
+#~ msgid "Matrix4x4CustomAttribute.Rotation"
+#~ msgstr "Rotation"
+
+# optional
+#~ msgid "Matrix4x4CustomAttribute.Scale"
+#~ msgstr "Scale"
+
+# optional
+#~ msgid "Matrix4x4CustomAttribute.One X"
+#~ msgstr "One X"
+
+# optional
+#~ msgid "Matrix4x4CustomAttribute.One Y"
+#~ msgstr "One Y"
+
+# optional
+#~ msgid "Matrix4x4CustomAttribute.One Z"
+#~ msgstr "One Z"
 
 #, fuzzy
 #~| msgid "StampMeshProvider.meshProvider"

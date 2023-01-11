@@ -2,6 +2,7 @@ using Silksprite.MeshWeaver.Controllers.Base;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
+using static Silksprite.MeshWeaver.Tools.LocalizationTool;
 
 namespace Silksprite.MeshWeaver.Controllers
 {
@@ -10,8 +11,7 @@ namespace Silksprite.MeshWeaver.Controllers
     {
         protected override void PopulatePropertiesGUI(VisualElement container)
         {
-            // FIXME:
-            container.Add(PopulateDefaultInspectorGUI());
+            container.Add(Prop(nameof(TranslationProvider.translation), Loc("TranslationProvider.translation")));
         }
 
         #region scene GUI
