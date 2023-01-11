@@ -13,12 +13,10 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
     {
         protected override void PopulatePropertiesGUI(VisualElement container)
         {
-            container.Add(new IMGUIContainer(() =>
-            {
-                var pillarMeshProvider = (PillarMeshProvider)target;
-                PathProviderMenus.CollectionsMenu.PropertyField(pillarMeshProvider, "Path X", "Path X", ref pillarMeshProvider.pathProviderX);
-                PathProviderMenus.CollectionsMenu.PropertyField(pillarMeshProvider, "Path Y", "Path Y", ref pillarMeshProvider.pathProviderY);
-            }));
+            container.Add(PathProviderMenus.CollectionsMenu.VisualElement((PillarMeshProvider)target, "Path X", "Path X", 
+                serializedObject.FindProperty(nameof(PillarMeshProvider.pathProviderX))));
+            container.Add(PathProviderMenus.CollectionsMenu.VisualElement((PillarMeshProvider)target, "Path Y", "Path Y",
+                serializedObject.FindProperty(nameof(PillarMeshProvider.pathProviderX))));
         }
 
         protected override void PopulateDumpGUI(VisualElement container)

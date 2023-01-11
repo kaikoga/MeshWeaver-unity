@@ -12,11 +12,7 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
     {
         protected override void PopulatePropertiesGUI(VisualElement container)
         {
-            container.Add(new IMGUIContainer(() =>
-            {
-                var compositeMeshProvider = (CompositeMeshProvider)target;
-                MeshProviderMenus.Menu.ChildPopup(compositeMeshProvider, Tr("Mesh Providers"));
-            }));
+            container.Add(MeshProviderMenus.Menu.VisualElement((CompositeMeshProvider)target, Tr("Mesh Providers")));
         }
     }
 }

@@ -1,5 +1,6 @@
 using Silksprite.MeshWeaver.Controllers.Base;
 using UnityEditor;
+using UnityEditor.UIElements;
 using UnityEngine.UIElements;
 
 namespace Silksprite.MeshWeaver.Controllers
@@ -14,7 +15,6 @@ namespace Silksprite.MeshWeaver.Controllers
         {
             container.Add(new IMGUIContainer(() =>
             {
-                var serializedObj = serializedObject;
                 var property = serializedObject.FindProperty("data");
                 property.NextVisible(true);
                 do
@@ -22,7 +22,7 @@ namespace Silksprite.MeshWeaver.Controllers
                     EditorGUILayout.PropertyField(property);
                 } while (property.NextVisible(false));
 
-                serializedObj.ApplyModifiedProperties();
+                serializedObject.ApplyModifiedProperties();
             }));
         }
     }

@@ -12,11 +12,7 @@ namespace Silksprite.MeshWeaver.Controllers.Paths
     {
         protected override void PopulatePropertiesGUI(VisualElement container)
         {
-            container.Add(new IMGUIContainer(() =>
-            {
-                var compositePathProvider = (CompositePathProvider)target;
-                PathProviderMenus.ElementsMenu.ChildPopup(compositePathProvider, Tr("Path Providers"));
-            }));
+            container.Add(PathProviderMenus.ElementsMenu.VisualElement((CompositePathProvider)target, Tr("Path Providers")));
         }
     }
 }

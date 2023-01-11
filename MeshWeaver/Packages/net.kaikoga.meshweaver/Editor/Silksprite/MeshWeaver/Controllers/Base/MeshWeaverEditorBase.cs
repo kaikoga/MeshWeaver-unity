@@ -68,14 +68,17 @@ namespace Silksprite.MeshWeaver.Controllers.Base
         {
         }
 
-        protected void OnBaseInspectorGUI()
+        protected VisualElement PopulateDefaultInspectorGUI()
         {
-            using (new BackgroundColorScope(Color.magenta))
+            return new IMGUIContainer(() =>
             {
-                MeshWeaverGUILayout.Header(Loc("Fallback Inspector"));
-                base.OnInspectorGUI();
-                MeshWeaverGUILayout.Header(Loc("End Fallback Inspector"));
-            }
+                using (new BackgroundColorScope(Color.magenta))
+                {
+                    MeshWeaverGUILayout.Header(Loc("Fallback Inspector"));
+                    DrawDefaultInspector();
+                    MeshWeaverGUILayout.Header(Loc("End Fallback Inspector"));
+                }
+            });
         }
 
         protected LocPropertyField Prop(string absolutePath, LocalizedContent loc)
