@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-01-12 02:44+0900\n"
+"POT-Creation-Date: 2023-01-12 02:50+0900\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -197,14 +197,78 @@ msgid "MatrixMeshProvider.material"
 msgstr "マテリアル"
 
 #: Editor/Silksprite/MeshWeaver/Controllers/Meshes/MatrixMeshProvider.Editor.cs:30
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:25
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:50
 msgid "Input Path dump X"
 msgstr "入力パスXのダンプ"
 
 #: Editor/Silksprite/MeshWeaver/Controllers/Meshes/MatrixMeshProvider.Editor.cs:31
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:26
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:51
 msgid "Input Path dump Y"
 msgstr "入力パスYのダンプ"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:20
+msgid "PillarMeshProvider.fillBody"
+msgstr "本体を生成する"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:21
+msgid "PillarMeshProvider.fillBottom"
+msgstr "底面を生成する"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:22
+msgid "PillarMeshProvider.fillTop"
+msgstr "上面を生成する"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:24
+msgid "PillarMeshProvider.uvChannelBody"
+msgstr "本体のUVチャンネル"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:25
+msgid "PillarMeshProvider.uvChannelBottom"
+msgstr "底面のUVチャンネル"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:26
+msgid "PillarMeshProvider.uvChannelTop"
+msgstr "上面のUVチャンネル"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:28
+msgid "PillarMeshProvider.materialBody"
+msgstr "本体のマテリアル"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:29
+msgid "PillarMeshProvider.materialBottom"
+msgstr "底面のマテリアル"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:30
+msgid "PillarMeshProvider.materialTop"
+msgstr "上面のマテリアル"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:32
+msgid "PillarMeshProvider.pathProviderX"
+msgstr "パス X軸"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:35
+msgid "PillarMeshProvider.pathProviderY"
+msgstr "パス Y軸"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:39
+msgid "PillarMeshProvider.operatorKind"
+msgstr "パス演算子"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:40
+msgid "PillarMeshProvider.defaultCellPatternKind"
+msgstr "セル形状"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:41
+msgid "PillarMeshProvider.cellPatternOverrides"
+msgstr "セルのオーバーライド"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:43
+msgid "PillarMeshProvider.longitudeAxisKind"
+msgstr "高さとして扱う軸"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:44
+msgid "PillarMeshProvider.reverseLids"
+msgstr "底面と上面を反転する"
 
 #: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PolygonMeshProvider.Editor.cs:15
 msgid "PolygonMeshProvider.pathProvider"
