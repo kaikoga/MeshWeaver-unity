@@ -1,5 +1,4 @@
-using Silksprite.MeshWeaver.Controllers.Fallback;
-using Silksprite.MeshWeaver.Controllers.Utils;
+using Silksprite.MeshWeaver.Controllers.Base;
 using UnityEditor;
 using UnityEngine.UIElements;
 using static Silksprite.MeshWeaver.Tools.LocalizationTool;
@@ -8,7 +7,7 @@ namespace Silksprite.MeshWeaver.Controllers.Paths
 {
     [CustomEditor(typeof(ShapePathProvider))]
     [CanEditMultipleObjects]
-    public class ShapePathProviderEditor : PathProviderEditor
+    public class ShapePathProviderEditor : PathProviderEditorBase
     {
         protected override void PopulatePropertiesGUI(VisualElement container)
         {

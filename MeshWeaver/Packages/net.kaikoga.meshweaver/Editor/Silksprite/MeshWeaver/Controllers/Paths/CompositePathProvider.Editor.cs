@@ -1,4 +1,4 @@
-using Silksprite.MeshWeaver.Controllers.Fallback;
+using Silksprite.MeshWeaver.Controllers.Base;
 using Silksprite.MeshWeaver.Controllers.Utils;
 using UnityEditor;
 using UnityEngine.UIElements;
@@ -8,7 +8,7 @@ namespace Silksprite.MeshWeaver.Controllers.Paths
 {
     [CustomEditor(typeof(CompositePathProvider))]
     [CanEditMultipleObjects]
-    public class CompositePathProviderEditor : PathProviderEditor
+    public class CompositePathProviderEditor : PathProviderEditorBase
     {
         protected override void PopulatePropertiesGUI(VisualElement container)
         {

@@ -4,12 +4,10 @@ using UnityEngine.UIElements;
 
 namespace Silksprite.MeshWeaver.Controllers.Fallback
 {
-    [CustomEditor(typeof(PathProvider), true, isFallback = true)]
+    [CustomEditor(typeof(MeshProvider), true, isFallback = true)]
     [CanEditMultipleObjects]
-    public class PathProviderEditor : PathProviderEditorBase
+    public sealed class MeshProviderFallbackEditor : MeshProviderEditorBase
     {
-        protected override bool IsMainComponentEditor => true;
-
         protected override void PopulatePropertiesGUI(VisualElement container)
         {
             container.Add(PopulateDefaultInspectorGUI());
