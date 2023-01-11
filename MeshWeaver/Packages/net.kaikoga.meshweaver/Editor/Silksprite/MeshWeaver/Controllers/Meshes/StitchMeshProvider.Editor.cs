@@ -14,10 +14,10 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
         protected override void PopulatePropertiesGUI(VisualElement container)
         {
             container.Add(Prop(nameof(StitchMeshProvider.pathProviderA), Loc("StitchMeshProvider.pathProviderA")));
-            container.Add(PathProviderMenus.CollectionsMenu.VisualElement((StitchMeshProvider)target, " ", "Path A",
+            container.Add(PathProviderMenus.CollectionsMenu.VisualElement((StitchMeshProvider)target, "Path A",
                 serializedObject.FindProperty(nameof(StitchMeshProvider.pathProviderA))));
             container.Add(Prop(nameof(StitchMeshProvider.pathProviderB), Loc("StitchMeshProvider.pathProviderB")));
-            container.Add(PathProviderMenus.CollectionsMenu.VisualElement((StitchMeshProvider)target, " ", "Path B",
+            container.Add(PathProviderMenus.CollectionsMenu.VisualElement((StitchMeshProvider)target, "Path B",
                 serializedObject.FindProperty(nameof(StitchMeshProvider.pathProviderB))));
 
             container.Add(Prop(nameof(StitchMeshProvider.material), Loc("StitchMeshProvider.material")));

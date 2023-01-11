@@ -13,9 +13,9 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
     {
         protected override void PopulatePropertiesGUI(VisualElement container)
         {
-            container.Add(PathProviderMenus.CollectionsMenu.VisualElement((PillarMeshProvider)target, "Path X", "Path X", 
+            container.Add(PathProviderMenus.CollectionsMenu.VisualElement((PillarMeshProvider)target, "Path X", 
                 serializedObject.FindProperty(nameof(PillarMeshProvider.pathProviderX))));
-            container.Add(PathProviderMenus.CollectionsMenu.VisualElement((PillarMeshProvider)target, "Path Y", "Path Y",
+            container.Add(PathProviderMenus.CollectionsMenu.VisualElement((PillarMeshProvider)target, "Path Y",
                 serializedObject.FindProperty(nameof(PillarMeshProvider.pathProviderX))));
         }
 

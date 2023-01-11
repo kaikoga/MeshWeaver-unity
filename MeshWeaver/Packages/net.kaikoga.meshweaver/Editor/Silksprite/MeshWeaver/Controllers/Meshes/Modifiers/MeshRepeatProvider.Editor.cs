@@ -11,7 +11,7 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes.Modifiers
     {
         protected override void PopulatePropertiesGUI(VisualElement container)
         {
-            container.Add(TransformMenus.Menu.VisualElement((MeshRepeatProvider)target, "Offset By Reference", "Offset By Reference",
+            container.Add(TransformMenus.Menu.VisualElement((MeshRepeatProvider)target, "Offset By Reference",
                 serializedObject.FindProperty(nameof(MeshRepeatProvider.offsetByReference))));
         }
     }

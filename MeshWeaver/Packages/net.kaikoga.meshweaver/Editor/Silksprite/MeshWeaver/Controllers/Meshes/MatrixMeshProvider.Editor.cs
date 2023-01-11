@@ -14,10 +14,10 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
         protected override void PopulatePropertiesGUI(VisualElement container)
         {
             container.Add(Prop(nameof(MatrixMeshProvider.pathProviderX), Loc("MatrixMeshProvider.pathProviderX")));
-            container.Add(PathProviderMenus.CollectionsMenu.VisualElement((MatrixMeshProvider)target, " ", "Path X",
+            container.Add(PathProviderMenus.CollectionsMenu.VisualElement((MatrixMeshProvider)target, "Path X",
                 serializedObject.FindProperty(nameof(MatrixMeshProvider.pathProviderX))));
             container.Add(Prop(nameof(MatrixMeshProvider.pathProviderY), Loc("MatrixMeshProvider.pathProviderY")));
-            container.Add(PathProviderMenus.CollectionsMenu.VisualElement((MatrixMeshProvider)target, " ", "Path Y",
+            container.Add(PathProviderMenus.CollectionsMenu.VisualElement((MatrixMeshProvider)target, "Path Y",
                 serializedObject.FindProperty(nameof(MatrixMeshProvider.pathProviderY))));
             container.Add(Prop(nameof(MatrixMeshProvider.operatorKind), Loc("MatrixMeshProvider.operatorKind")));
             container.Add(Prop(nameof(MatrixMeshProvider.defaultCellPatternKind), Loc("MatrixMeshProvider.defaultCellPatternKind")));

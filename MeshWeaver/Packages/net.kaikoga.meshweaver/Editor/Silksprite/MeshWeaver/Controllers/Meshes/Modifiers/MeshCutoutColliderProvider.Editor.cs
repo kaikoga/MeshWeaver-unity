@@ -11,7 +11,7 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes.Modifiers
     {
         protected override void PopulatePropertiesGUI(VisualElement container)
         {
-            container.Add(ColliderMenus.Menu.VisualElement((MeshCutoutColliderProvider)target, "Predicate", "Predicate",
+            container.Add(ColliderMenus.Menu.VisualElement((MeshCutoutColliderProvider)target, "Predicate",
                 serializedObject.FindProperty(nameof(MeshCutoutColliderProvider.predicates))));
         }
     }

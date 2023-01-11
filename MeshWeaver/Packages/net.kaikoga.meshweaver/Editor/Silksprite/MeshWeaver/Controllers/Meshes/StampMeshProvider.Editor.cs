@@ -14,10 +14,10 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
         protected override void PopulatePropertiesGUI(VisualElement container)
         {
             container.Add(Prop(nameof(StampMeshProvider.meshProvider), Loc("StampMeshProvider.meshProvider")));
-            container.Add(MeshProviderMenus.Menu.VisualElement((StampMeshProvider)target, " ", "Mesh",
+            container.Add(MeshProviderMenus.Menu.VisualElement((StampMeshProvider)target, "Mesh",
                 serializedObject.FindProperty(nameof(StampMeshProvider.meshProvider))));
             container.Add(Prop(nameof(StampMeshProvider.pathProvider), Loc("StampMeshProvider.pathProvider")));
-            container.Add(PathProviderMenus.ElementsMenu.VisualElement((StampMeshProvider)target, " ", "Path",
+            container.Add(PathProviderMenus.ElementsMenu.VisualElement((StampMeshProvider)target, "Path",
                 serializedObject.FindProperty(nameof(StampMeshProvider.pathProvider))));
         }
 
