@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-01-12 03:10+0900\n"
+"POT-Creation-Date: 2023-01-12 08:12+0900\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -206,6 +206,74 @@ msgstr "入力パスXのダンプ"
 msgid "Input Path dump Y"
 msgstr "入力パスYのダンプ"
 
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/Modifiers/MeshCutoutBoundsProvider.Editor.cs:14
+msgid "MeshCutoutBoundsProvider.boundsData"
+msgstr "Bounds"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/Modifiers/MeshCutoutBoundsProvider.Editor.cs:15
+msgid "MeshCutoutBoundsProvider.inside"
+msgstr "内側"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/Modifiers/MeshCutoutBoundsProvider.Editor.cs:16
+msgid "MeshCutoutBoundsProvider.numVertex"
+msgstr "頂点数"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/Modifiers/MeshCutoutColliderProvider.Editor.cs:15
+msgid "MeshCutoutColliderProvider.predicates"
+msgstr "コライダー"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/Modifiers/MeshCutoutColliderProvider.Editor.cs:18
+msgid "MeshCutoutColliderProvider.inside"
+msgstr "内側"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/Modifiers/MeshCutoutColliderProvider.Editor.cs:19
+msgid "MeshCutoutColliderProvider.numVertex"
+msgstr "頂点数"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/Modifiers/MeshCutoutUvBoundsProvider.Editor.cs:14
+msgid "MeshCutoutUvBoundsProvider.uvAreas"
+msgstr "UV"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/Modifiers/MeshCutoutUvBoundsProvider.Editor.cs:15
+msgid "MeshCutoutUvBoundsProvider.uvChannel"
+msgstr "UVチャンネル"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/Modifiers/MeshCutoutUvBoundsProvider.Editor.cs:16
+msgid "MeshCutoutUvBoundsProvider.inside"
+msgstr "内側"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/Modifiers/MeshCutoutUvBoundsProvider.Editor.cs:17
+msgid "MeshCutoutUvBoundsProvider.numVertex"
+msgstr "頂点数"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/Modifiers/MeshRepeatProvider.Editor.cs:15
+msgid "MeshRepeatProvider.count"
+msgstr "回数"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/Modifiers/MeshRepeatProvider.Editor.cs:16
+msgid "MeshRepeatProvider.offset"
+msgstr "オフセット"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/Modifiers/MeshRepeatProvider.Editor.cs:17
+msgid "MeshRepeatProvider.offsetByReference"
+msgstr "オフセットの設定"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/Modifiers/MeshReverseProvider.Editor.cs:14
+msgid "MeshReverseProvider.front"
+msgstr "前面を表示する"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/Modifiers/MeshReverseProvider.Editor.cs:15
+msgid "MeshReverseProvider.back"
+msgstr "背面を表示する"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/Modifiers/MeshSetMaterialIndexProvider.Editor.cs:14
+msgid "MeshSetMaterialIndexProvider.materialIndex"
+msgstr "マテリアル番号"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/Modifiers/MeshSubdivisionProvider.Editor.cs:14
+msgid "MeshSubdivisionProvider.count"
+msgstr "分割数"
+
 #: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:20
 msgid "PillarMeshProvider.fillBody"
 msgstr "本体を生成する"
@@ -314,6 +382,110 @@ msgstr "入力パスAのダンプ"
 msgid "Input Path dump B"
 msgstr "入力パスBのダンプ"
 
+#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/UvChannelRandomizerProvider.Editor.cs:15
+msgid "UvChannelRandomizerProvider.@base"
+msgstr "基準点"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/UvChannelRandomizerProvider.Editor.cs:16
+msgid "UvChannelRandomizerProvider.range"
+msgstr "範囲"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/UvChannelRandomizerProvider.Editor.cs:17
+msgid "UvChannelRandomizerProvider.seed"
+msgstr "シード値"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/UvChannelRandomizerProvider.Editor.cs:18
+msgid "UvChannelRandomizerProvider.uvChannel"
+msgstr "UVチャンネル"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/UvChannelRemapperProvider.Editor.cs:15
+msgid "UvChannelRemapperProvider.uvArea"
+msgstr "UV範囲"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/UvChannelRemapperProvider.Editor.cs:16
+msgid "UvChannelRemapperProvider.uvChannel"
+msgstr "UVチャンネル"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/UvProjectorProvider.Editor.cs:17
+msgid "UvProjectorProvider.projection"
+msgstr "射影モード"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/UvProjectorProvider.Editor.cs:18
+msgid "UvProjectorProvider.referenceTranslation"
+msgstr "射影方向の設定"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/UvProjectorProvider.Editor.cs:21
+msgid "UvProjectorProvider.axisX"
+msgstr "X軸"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/UvProjectorProvider.Editor.cs:22
+msgid "UvProjectorProvider.axisY"
+msgstr "Y軸"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/UvProjectorProvider.Editor.cs:23
+msgid "UvProjectorProvider.uvArea"
+msgstr "UV範囲"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/UvProjectorProvider.Editor.cs:24
+msgid "UvProjectorProvider.uvChannel"
+msgstr "UVチャンネル"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/UvRandomizerProvider.Editor.cs:15
+msgid "UvRandomizerProvider.@base"
+msgstr "基準点"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/UvRandomizerProvider.Editor.cs:16
+msgid "UvRandomizerProvider.range"
+msgstr "範囲"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/UvRandomizerProvider.Editor.cs:17
+msgid "UvRandomizerProvider.seed"
+msgstr "シード値"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/UvRemapperProvider.Editor.cs:15
+msgid "UvRemapperProvider.uvArea"
+msgstr "UV範囲"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/VertwiseAlignProvider.Editor.cs:15
+msgid "VertwiseAlignProvider.alignPosition"
+msgstr "Positionを整列"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/VertwiseAlignProvider.Editor.cs:16
+msgid "VertwiseAlignProvider.alignRotation"
+msgstr "Rotationを整列"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/VertwiseAlignProvider.Editor.cs:17
+msgid "VertwiseAlignProvider.alignScale"
+msgstr "Scaleを整列"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/VertwiseNormalizeProvider.Editor.cs:15
+msgid "VertwiseNormalizeProvider.bounds"
+msgstr "Bounds"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/VertwiseQuantizeProvider.Editor.cs:15
+msgid "VertwiseQuantizeProvider.denominator"
+msgstr "分母"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/VertwiseResetProvider.Editor.cs:15
+msgid "VertwiseResetProvider.resetPosition"
+msgstr "Positionをリセット"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/VertwiseResetProvider.Editor.cs:16
+msgid "VertwiseResetProvider.resetRotation"
+msgstr "Rotationをリセット"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/VertwiseResetProvider.Editor.cs:17
+msgid "VertwiseResetProvider.resetScale"
+msgstr "Scaleをリセット"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/VertwiseTranslateProvider.Editor.cs:16
+msgid "VertwiseTranslateProvider.size"
+msgstr "Scale"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/VertwiseTranslateProvider.Editor.cs:17
+msgid "VertwiseTranslateProvider.referenceTranslation"
+msgstr "座標変換量の設定"
+
 #: Editor/Silksprite/MeshWeaver/Controllers/Paths/CompositePathProvider.Editor.cs:15
 msgid "Path Providers"
 msgstr "子パス"
@@ -335,6 +507,66 @@ msgstr "抽出元メッシュ"
 #: Editor/Silksprite/MeshWeaver/Controllers/Paths/ExtractPathProvider.Editor.cs:15
 msgid "ExtractPathProvider.pathName"
 msgstr "パス名"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Paths/Modifiers/PathBevelProvider.Editor.cs:14
+msgid "PathBevelProvider.subdivision"
+msgstr "分割数"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Paths/Modifiers/PathBevelProvider.Editor.cs:15
+msgid "PathBevelProvider.size"
+msgstr "サイズ"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Paths/Modifiers/PathBevelProvider.Editor.cs:16
+msgid "PathBevelProvider.strength"
+msgstr "強さ"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Paths/Modifiers/PathChainProvider.Editor.cs:14
+msgid "PathChainProvider.rolling"
+msgstr "きりもみ回転"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Paths/Modifiers/PathRepeatProvider.Editor.cs:15
+msgid "PathRepeatProvider.count"
+msgstr "回数"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Paths/Modifiers/PathRepeatProvider.Editor.cs:16
+msgid "PathRepeatProvider.offset"
+msgstr "オフセット"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Paths/Modifiers/PathRepeatProvider.Editor.cs:17
+msgid "PathRepeatProvider.offsetByReference"
+msgstr "オフセットの設定"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Paths/Modifiers/PathRepeatProvider.Editor.cs:20
+msgid "PathRepeatProvider.offsetByPath"
+msgstr "パスのオフセットを適用"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Paths/Modifiers/PathRepeatProvider.Editor.cs:21
+msgid "PathRepeatProvider.smoothJoin"
+msgstr "連続化"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Paths/Modifiers/PathSubdivisionProvider.Editor.cs:14
+msgid "PathSubdivisionProvider.maxCount"
+msgstr "最大分割数"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Paths/Modifiers/PathSubdivisionProvider.Editor.cs:15
+msgid "PathSubdivisionProvider.maxLength"
+msgstr "最大分割長"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Paths/Modifiers/UvGeneratorProvider.Editor.cs:14
+msgid "UvGeneratorProvider.uvArea"
+msgstr "UV範囲"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Paths/Modifiers/UvGeneratorProvider.Editor.cs:15
+msgid "UvGeneratorProvider.absoluteScale"
+msgstr "絶対値で生成する"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Paths/Modifiers/UvGeneratorProvider.Editor.cs:16
+msgid "UvGeneratorProvider.topologicalWeight"
+msgstr "トポロジーを重視する"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Paths/Modifiers/UvGeneratorProvider.Editor.cs:17
+msgid "UvGeneratorProvider.uvChannel"
+msgstr "UVチャンネル"
 
 #: Editor/Silksprite/MeshWeaver/Controllers/Paths/PathReference.Editor.cs:14
 msgid "PathReference.pathProviders"
