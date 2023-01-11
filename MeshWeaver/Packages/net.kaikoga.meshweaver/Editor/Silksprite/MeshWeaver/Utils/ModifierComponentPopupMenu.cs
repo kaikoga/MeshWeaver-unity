@@ -18,17 +18,16 @@ namespace Silksprite.MeshWeaver.Utils
             _menuOptions = new [] { Loc("Add Modifier..."), _Loc("") }.Concat(types.Select(type => type == typeof(void) ? _Loc("") : _Loc(type.Name))).ToArray();
         }
 
-        T ModifierPopup(Component self, LocalizedContent? label = null)
-        {
-            var index = EditorGUILayout.Popup((label ?? Loc("Modifiers")).Tr, 0, _menuOptions.Select(x => x.Tr).ToArray());
-            if (index <= 0) return default;
-
-            return (T)(object)self.gameObject.AddComponent(_types[index]);
-        }
-        
         public VisualElement VisualElement(Component self, LocalizedContent? label = null)
         {
-            return new IMGUIContainer(() => ModifierPopup(self, label));
+            return new IMGUIContainer(() =>
+            {
+                var index = EditorGUILayout.Popup((label ?? Loc("Modifiers")).Tr, 0, _menuOptions.Select(x => x.Tr).ToArray());
+                if (index > 0)
+                {
+                    self.gameObject.AddComponent(_types[index]);
+                }
+            });
         }
     }
 }
