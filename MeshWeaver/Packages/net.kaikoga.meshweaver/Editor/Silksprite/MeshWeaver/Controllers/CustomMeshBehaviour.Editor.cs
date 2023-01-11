@@ -1,7 +1,7 @@
-using System;
 using Silksprite.MeshWeaver.Controllers.Base;
 using Silksprite.MeshWeaver.Controllers.Utils;
 using Silksprite.MeshWeaver.UIElements;
+using Silksprite.MeshWeaver.UIElements.Extensions;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -32,13 +32,10 @@ namespace Silksprite.MeshWeaver.Controllers
                 c.Add(Prop(nameof(CustomMeshBehaviour.meshFilters), Loc("CustomMeshBehaviour.meshFilters")));
                 c.Add(Prop(nameof(CustomMeshBehaviour.meshColliders), Loc("CustomMeshBehaviour.meshColliders")));
             }));
-            container.Add(new IMGUIContainer(() =>
+            if (_meshBehaviour is MeshBehaviour)
             {
-                if (_meshBehaviour is MeshBehaviour)
-                {
-                    MeshProviderMenus.Menu.ChildPopup(_meshBehaviour, Tr("Mesh Providers"));
-                }
-            }));
+                container.Add(MeshProviderMenus.Menu.VisualElement(_meshBehaviour, Tr("Mesh Providers")));
+            }
 
             container.Add(new LocButton(Loc("Collect Materials"), () => { _meshBehaviour.CollectMaterials(); }));
             container.Add(new LocButton(Loc("Compile"), () => { _meshBehaviour.Compile(); }));

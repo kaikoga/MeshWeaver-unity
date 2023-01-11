@@ -1,3 +1,4 @@
+using System;
 using UnityEngine.UIElements;
 
 namespace Silksprite.MeshWeaver.UIElements.Extensions
@@ -18,5 +19,24 @@ namespace Silksprite.MeshWeaver.UIElements.Extensions
             return visualElement;
         }
 
+        public static T WithDisplayOnRefresh<T>(this T visualElement, Dispatcher<RefreshEvent> onRefresh, Func<bool> displayIfTrue)
+            where T : VisualElement
+        {
+            onRefresh.Add(_ => visualElement.WithDisplay(displayIfTrue()));
+            return visualElement;
+        }
+
+        public static DivIfElse WithDisplayOnRefresh(this DivIfElse visualElement, Dispatcher<RefreshEvent> onRefresh, Func<bool> displayIfTrue)
+        {
+            onRefresh.Add(_ => visualElement.WithDisplay(displayIfTrue()));
+            return visualElement;
+        }
+
+        public static T WithEnableOnRefresh<T>(this T visualElement, Dispatcher<RefreshEvent> onRefresh, Func<bool> enableIfTrue)
+            where T : VisualElement
+        {
+            onRefresh.Add(_ => visualElement.WithEnabled(enableIfTrue()));
+            return visualElement;
+        }
     }
 }

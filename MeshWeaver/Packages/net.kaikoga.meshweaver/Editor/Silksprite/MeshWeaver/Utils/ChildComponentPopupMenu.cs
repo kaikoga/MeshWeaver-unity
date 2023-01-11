@@ -36,6 +36,8 @@ namespace Silksprite.MeshWeaver.Utils
             }
         }
 
+        public VisualElement VisualElement(Component self, string label) => VisualElement(self, label, null, null);
+
         public VisualElement VisualElement(Component self, string label, string name, SerializedProperty serializedProperty)
         {
             return new IMGUIContainer(() =>

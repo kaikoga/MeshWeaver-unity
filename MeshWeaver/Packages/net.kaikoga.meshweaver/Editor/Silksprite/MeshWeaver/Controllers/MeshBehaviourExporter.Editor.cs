@@ -41,8 +41,7 @@ namespace Silksprite.MeshWeaver.Controllers
             {
                 c.Add(Prop(nameof(MeshBehaviourExporter.materials), Loc("MeshBehaviourExporter.materials")));
                 c.Add(new LocButton(Loc("Copy Materials from MeshBehaviour"), () => { _meshBehaviourExporter.materials = _meshBehaviour.materials.ToArray(); }));
-            });
-            onRefresh.Add(_ => materialsContainer.WithDisplay(_meshBehaviourExporter.overrideMaterials));
+            }).WithDisplayOnRefresh(onRefresh, () => _meshBehaviourExporter.overrideMaterials);
             container.Add(materialsContainer);
 
             var editLinkedAssets = new LocToggle(Loc("Edit Linked Assets")) { value = _editLinkedAssets };
@@ -56,8 +55,8 @@ namespace Silksprite.MeshWeaver.Controllers
             var outputMeshContainer = new DivIfElse(
                 new HDiv(c =>
                 {
-                    var outputMesh = Prop(nameof(MeshBehaviourExporter.outputMesh), Loc("MeshBehaviourExporter.outputMesh"));
-                    onRefresh.Add(_ => outputMesh.SetEnabled(_editLinkedAssets));
+                    var outputMesh = Prop(nameof(MeshBehaviourExporter.outputMesh), Loc("MeshBehaviourExporter.outputMesh"))
+                        .WithEnableOnRefresh(onRefresh, () => _editLinkedAssets);
                     c.Add(outputMesh);
                     c.Add(new LocButton(Loc("Detach"), () =>
                     {
@@ -70,15 +69,14 @@ namespace Silksprite.MeshWeaver.Controllers
                     var projectFilePath = EditorUtility.SaveFilePanelInProject(Tr("Export Mesh Asset"), _meshBehaviourExporter.gameObject.name, "mesh", "");
                     ExportMeshAsset(projectFilePath, _meshBehaviourExporter, _meshBehaviour);
                     onRefresh.Invoke();
-                }));
-            onRefresh.Add(_ => outputMeshContainer.WithDisplay(_editLinkedAssets || _meshBehaviourExporter.outputMesh));
+                })).WithDisplayOnRefresh(onRefresh, () => _editLinkedAssets || _meshBehaviourExporter.outputMesh);
             container.Add(outputMeshContainer);
 
             var outputPrefabContainer = new DivIfElse(
                 new HDiv(c =>
                 {
-                    var outputPrefab = Prop(nameof(MeshBehaviourExporter.outputPrefab), Loc("MeshBehaviourExporter.outputPrefab"));
-                    onRefresh.Add(_ => outputPrefab.SetEnabled(_editLinkedAssets));
+                    var outputPrefab = Prop(nameof(MeshBehaviourExporter.outputPrefab), Loc("MeshBehaviourExporter.outputPrefab"))
+                        .WithEnableOnRefresh(onRefresh, () => _editLinkedAssets);
                     c.Add(outputPrefab);
                     c.Add(new LocButton(Loc("Detach"), () =>
                     {
@@ -91,8 +89,7 @@ namespace Silksprite.MeshWeaver.Controllers
                     var projectFilePath = EditorUtility.SaveFilePanelInProject(Tr("Export Mesh Prefab"), _meshBehaviourExporter.gameObject.name, "prefab", "");
                     ExportMeshPrefab(projectFilePath, _meshBehaviourExporter, _meshBehaviour);
                     onRefresh.Invoke();
-                }));
-            onRefresh.Add(_ => outputPrefabContainer.WithDisplay(_editLinkedAssets || _meshBehaviourExporter.outputPrefab));
+                })).WithDisplayOnRefresh(onRefresh, () => _editLinkedAssets || _meshBehaviourExporter.outputPrefab);
             container.Add(outputPrefabContainer);
 
             container.Add(new Div(c =>
