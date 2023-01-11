@@ -17,9 +17,6 @@ namespace Silksprite.MeshWeaver.Controllers.Base
     {
         protected override bool IsMainComponentEditor => true;
 
-        bool _isExpanded;
-        bool _isColliderExpanded;
-
         protected sealed override void PopulateInspectorGUI(VisualElement container)
         {
             container.Add(CreatePropertiesGUI());
@@ -57,12 +54,8 @@ namespace Silksprite.MeshWeaver.Controllers.Base
         {
             return new Div("mw-dump", c =>
             {
-                c.Add(new IMGUIContainer(() =>
-                {
-                    var factory = ((MeshProvider)target).LastFactory;
-                    MeshWeaverGUI.DumpFoldout(Tr("Mesh Dump"), ref _isExpanded, () => factory?.Build(MeshWeaverSettings.Current.CurrentLodMaskLayer));
-                    MeshWeaverGUI.DumpFoldout(Tr("Collider Mesh Dump"), ref _isColliderExpanded, () => factory?.Build(LodMaskLayer.Collider));
-                }));
+                c.Add(new DumpFoldout(Loc("Mesh Dump"), () => ((MeshProvider)target).LastFactory?.Build(MeshWeaverSettings.Current.CurrentLodMaskLayer)));
+                c.Add(new DumpFoldout(Loc("Collider Mesh Dump"), () => ((MeshProvider)target).LastFactory?.Build(LodMaskLayer.Collider)));
                 PopulateDumpGUI(c);
             });
         }

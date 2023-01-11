@@ -1,9 +1,9 @@
-using Silksprite.MeshWeaver.Controllers.Base;
 using Silksprite.MeshWeaver.Controllers.Fallback;
 using Silksprite.MeshWeaver.Controllers.Utils;
-using Silksprite.MeshWeaver.Utils;
+using Silksprite.MeshWeaver.UIElements;
 using UnityEditor;
 using UnityEngine.UIElements;
+using static Silksprite.MeshWeaver.Tools.LocalizationTool;
 
 namespace Silksprite.MeshWeaver.Controllers.Meshes
 {
@@ -11,9 +11,6 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
     [CanEditMultipleObjects]
     public class PillarMeshProviderEditor : MeshProviderEditor
     {
-        bool _isExpandedX;
-        bool _isExpandedY;
-
         protected override void PopulatePropertiesGUI(VisualElement container)
         {
             container.Add(new IMGUIContainer(() =>
@@ -26,12 +23,9 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
 
         protected override void PopulateDumpGUI(VisualElement container)
         {
-            container.Add(new IMGUIContainer(() =>
-            {
-                var pillarMeshProvider = (PillarMeshProvider)target;
-                MeshWeaverGUI.DumpFoldout("Path data X", ref _isExpandedX, () => pillarMeshProvider.LastPathieX?.Build(MeshWeaverSettings.Current.CurrentLodMaskLayer));
-                MeshWeaverGUI.DumpFoldout("Path data Y", ref _isExpandedY, () => pillarMeshProvider.LastPathieY?.Build(MeshWeaverSettings.Current.CurrentLodMaskLayer));
-            }));
+            var pillarMeshProvider = (PillarMeshProvider)target;
+            container.Add(new DumpFoldout(Loc("Path data X"), () => pillarMeshProvider.LastPathieX?.Build(MeshWeaverSettings.Current.CurrentLodMaskLayer)));
+            container.Add(new DumpFoldout(Loc("Path data Y"), () => pillarMeshProvider.LastPathieY?.Build(MeshWeaverSettings.Current.CurrentLodMaskLayer)));
         }
     }
 }

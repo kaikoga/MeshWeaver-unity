@@ -6,20 +6,15 @@ using Silksprite.MeshWeaver.Models;
 using Silksprite.MeshWeaver.Models.DataObjects;
 using Silksprite.MeshWeaver.UIElements;
 using Silksprite.MeshWeaver.Utils;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 using static Silksprite.MeshWeaver.Tools.LocalizationTool;
-using static Silksprite.MeshWeaver.Utils.Localization;
 
 namespace Silksprite.MeshWeaver.Controllers.Base
 {
     public abstract class PathProviderEditorBase : ProviderEditorBase
     {
         protected override bool IsMainComponentEditor => true;
-
-        bool _isExpanded;
-        bool _isColliderExpanded;
 
         protected sealed override void PopulateInspectorGUI(VisualElement container)
         {
@@ -53,13 +48,8 @@ namespace Silksprite.MeshWeaver.Controllers.Base
         {
             return new Div("mw-dump", c =>
             {
-                c.Add(new IMGUIContainer(() =>
-                {
-                    var factory = ((PathProvider)target).LastFactory;
-
-                    MeshWeaverGUI.DumpFoldout(Tr("Path Dump"), ref _isExpanded, () => factory?.Build(MeshWeaverSettings.Current.CurrentLodMaskLayer));
-                    MeshWeaverGUI.DumpFoldout(Tr("Collider Path Dump"), ref _isColliderExpanded, () => factory?.Build(LodMaskLayer.Collider));
-                }));
+                c.Add(new DumpFoldout(Loc("Path Dump"), () => ((PathProvider)target).LastFactory?.Build(MeshWeaverSettings.Current.CurrentLodMaskLayer)));
+                c.Add(new DumpFoldout(Loc("Collider Path Dump"), () => ((PathProvider)target).LastFactory?.Build(LodMaskLayer.Collider)));
                 PopulateDumpGUI(c);
             });
         }

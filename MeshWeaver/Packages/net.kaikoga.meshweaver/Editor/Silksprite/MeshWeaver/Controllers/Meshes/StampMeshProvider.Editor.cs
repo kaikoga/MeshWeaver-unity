@@ -1,5 +1,6 @@
 using Silksprite.MeshWeaver.Controllers.Base;
 using Silksprite.MeshWeaver.Controllers.Utils;
+using Silksprite.MeshWeaver.UIElements;
 using Silksprite.MeshWeaver.Utils;
 using UnityEditor;
 using UnityEngine.UIElements;
@@ -15,9 +16,6 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
 
         SerializedProperty _serializedMeshProvider;
         SerializedProperty _serializedPathProvider;
-
-        bool _isExpandedMesh;
-        bool _isExpandedPath;
 
         void OnEnable()
         {
@@ -41,11 +39,8 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
 
         protected override void PopulateDumpGUI(VisualElement container)
         {
-            container.Add(new IMGUIContainer(() =>
-            {
-                MeshWeaverGUI.DumpFoldout("Mesh data", ref _isExpandedMesh, () => _meshProvider.LastMeshie?.Build(MeshWeaverSettings.Current.CurrentLodMaskLayer));
-                MeshWeaverGUI.DumpFoldout("Path data", ref _isExpandedPath, () => _meshProvider.LastPathie?.Build(MeshWeaverSettings.Current.CurrentLodMaskLayer));
-            }));
+            container.Add(new DumpFoldout(Loc("Mesh data"), () => _meshProvider.LastMeshie?.Build(MeshWeaverSettings.Current.CurrentLodMaskLayer)));
+            container.Add(new DumpFoldout(Loc("Path data"), () => _meshProvider.LastPathie?.Build(MeshWeaverSettings.Current.CurrentLodMaskLayer)));
         }
     }
 }

@@ -1,5 +1,6 @@
 using Silksprite.MeshWeaver.Controllers.Base;
 using Silksprite.MeshWeaver.Controllers.Utils;
+using Silksprite.MeshWeaver.UIElements;
 using Silksprite.MeshWeaver.Utils;
 using UnityEditor;
 using UnityEngine.UIElements;
@@ -11,9 +12,6 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
     [CanEditMultipleObjects]
     public class MatrixMeshProviderEditor : MeshProviderEditorBase
     {
-        bool _isExpandedX;
-        bool _isExpandedY;
-
         MatrixMeshProvider _meshProvider;
 
         SerializedProperty _serializedPathProviderX;
@@ -55,11 +53,8 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
 
         protected override void PopulateDumpGUI(VisualElement container)
         {
-            container.Add(new IMGUIContainer(() =>
-            {
-                MeshWeaverGUI.DumpFoldout("Path data X", ref _isExpandedX, () => _meshProvider.LastPathieX?.Build(MeshWeaverSettings.Current.CurrentLodMaskLayer));
-                MeshWeaverGUI.DumpFoldout("Path data Y", ref _isExpandedY, () => _meshProvider.LastPathieY?.Build(MeshWeaverSettings.Current.CurrentLodMaskLayer));
-            }));
+            container.Add(new DumpFoldout(Loc("Path data X"), () => _meshProvider.LastPathieX?.Build(MeshWeaverSettings.Current.CurrentLodMaskLayer)));
+            container.Add(new DumpFoldout(Loc("Path data Y"), () => _meshProvider.LastPathieY?.Build(MeshWeaverSettings.Current.CurrentLodMaskLayer)));
         }
     }
 }
