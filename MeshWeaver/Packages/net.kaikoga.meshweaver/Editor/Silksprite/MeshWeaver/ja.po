@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-01-10 17:27+0900\n"
+"POT-Creation-Date: 2023-01-12 02:44+0900\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -15,21 +15,21 @@ msgstr ""
 "X-Poedit-KeywordsList: Tr;Loc\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshProviderEditorBase.cs:27
-#: Editor/Silksprite/MeshWeaver/Controllers/Base/PathProviderEditorBase.cs:29
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshProviderEditorBase.cs:24
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/PathProviderEditorBase.cs:23
 msgid "Bake"
 msgstr "ベイクする"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshProviderEditorBase.cs:54
-#: Editor/Silksprite/MeshWeaver/Controllers/Base/PathProviderEditorBase.cs:51
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshProviderEditorBase.cs:48
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/PathProviderEditorBase.cs:42
 msgid "GeometryProvider.lodMask"
 msgstr "LOD マスク"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshProviderEditorBase.cs:68
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshProviderEditorBase.cs:57
 msgid "Mesh Dump"
 msgstr "メッシュのダンプ"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshProviderEditorBase.cs:69
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshProviderEditorBase.cs:58
 msgid "Collider Mesh Dump"
 msgstr "コライダーのダンプ"
 
@@ -42,19 +42,19 @@ msgstr "Language (Global)"
 msgid "Current LOD (Global)"
 msgstr "表示するLOD (Global)"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshWeaverEditorBase.cs:75
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshWeaverEditorBase.cs:77
 msgid "Fallback Inspector"
 msgstr "仮UI"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshWeaverEditorBase.cs:77
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshWeaverEditorBase.cs:79
 msgid "End Fallback Inspector"
 msgstr "仮UIここまで"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Base/PathProviderEditorBase.cs:66
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/PathProviderEditorBase.cs:51
 msgid "Path Dump"
 msgstr "パスのダンプ"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Base/PathProviderEditorBase.cs:67
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/PathProviderEditorBase.cs:52
 msgid "Collider Path Dump"
 msgstr "コライダーパスのダンプ"
 
@@ -78,164 +78,253 @@ msgstr "同期するMeshFilter"
 msgid "CustomMeshBehaviour.meshColliders"
 msgstr "同期するMeshCollider"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:39
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/CompositeMeshProvider.Editor.cs:18
+#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:37
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/CompositeMeshProvider.Editor.cs:15
 msgid "Mesh Providers"
 msgstr "子メッシュ"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:43
+#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:40
 msgid "Collect Materials"
 msgstr "マテリアルを再収集"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:44
+#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:41
 msgid "Compile"
 msgstr "コンパイル"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:45
+#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:42
 msgid "Compile All Active"
 msgstr "アクティブを全てコンパイル"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:52
+#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:49
 msgid "I am Mesh Renderer"
 msgstr "自分自身がMesh Rendererになる事だ"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:57
+#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:54
 msgid "Create Exporter"
 msgstr "Exporterを生成する"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourExporter.Editor.cs:37
+#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourExporter.Editor.cs:36
 msgid "MeshBehaviourExporter.overrideMaterials"
 msgstr "マテリアルを上書きする"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourExporter.Editor.cs:43
+#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourExporter.Editor.cs:42
 msgid "MeshBehaviourExporter.materials"
 msgstr "マテリアル"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourExporter.Editor.cs:44
+#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourExporter.Editor.cs:43
 msgid "Copy Materials from MeshBehaviour"
 msgstr "マテリアルをMeshBehaviourからコピー"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourExporter.Editor.cs:49
+#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourExporter.Editor.cs:47
 msgid "Edit Linked Assets"
 msgstr "出力先を変更する"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourExporter.Editor.cs:60
+#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourExporter.Editor.cs:58
 msgid "MeshBehaviourExporter.outputMesh"
 msgstr "出力先メッシュ"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourExporter.Editor.cs:63
-#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourExporter.Editor.cs:84
+#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourExporter.Editor.cs:61
+#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourExporter.Editor.cs:81
 msgid "Detach"
 msgstr "切り離す"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourExporter.Editor.cs:69
+#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourExporter.Editor.cs:67
 msgid "Create Mesh Asset..."
 msgstr "出力先メッシュアセットを作成..."
 
-#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourExporter.Editor.cs:71
+#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourExporter.Editor.cs:69
 msgid "Export Mesh Asset"
 msgstr "メッシュアセットを書き出し"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourExporter.Editor.cs:81
+#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourExporter.Editor.cs:78
 msgid "MeshBehaviourExporter.outputPrefab"
 msgstr "出力先プレハブ"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourExporter.Editor.cs:90
+#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourExporter.Editor.cs:87
 msgid "Create Mesh Prefab..."
 msgstr "出力先プレハブを作成..."
 
-#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourExporter.Editor.cs:92
+#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourExporter.Editor.cs:89
 msgid "Export Mesh Prefab"
 msgstr "プレハブを書き出し"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourExporter.Editor.cs:101
+#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourExporter.Editor.cs:97
 msgid "MeshBehaviourExporter.outputMeshLod1"
 msgstr "LOD1 メッシュ"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourExporter.Editor.cs:104
+#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourExporter.Editor.cs:98
 msgid "MeshBehaviourExporter.outputMeshLod2"
 msgstr "LOD2 メッシュ"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourExporter.Editor.cs:107
+#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourExporter.Editor.cs:99
 msgid "MeshBehaviourExporter.outputMeshForCollider"
 msgstr "コライダー メッシュ"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourExporter.Editor.cs:112
+#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourExporter.Editor.cs:102
 msgid "Update Exported Assets"
 msgstr "書き出されたアセットを更新"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/ImportMeshProvider.Editor.cs:26
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/ImportMeshProvider.Editor.cs:14
 msgid "ImportMeshProvider.mesh"
 msgstr "メッシュアセット"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/ImportMeshProvider.Editor.cs:27
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/ImportMeshProvider.Editor.cs:15
 msgid "ImportMeshProvider.materials"
 msgstr "マテリアル"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/MatrixMeshProvider.Editor.cs:43
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/MatrixMeshProvider.Editor.cs:16
 msgid "MatrixMeshProvider.pathProviderX"
 msgstr "パス X軸"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/MatrixMeshProvider.Editor.cs:45
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/MatrixMeshProvider.Editor.cs:19
 msgid "MatrixMeshProvider.pathProviderY"
 msgstr "パス Y軸"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/MatrixMeshProvider.Editor.cs:48
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/MatrixMeshProvider.Editor.cs:22
 msgid "MatrixMeshProvider.operatorKind"
 msgstr "パス演算子"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/MatrixMeshProvider.Editor.cs:49
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/MatrixMeshProvider.Editor.cs:23
 msgid "MatrixMeshProvider.defaultCellPatternKind"
 msgstr "セル形状"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/MatrixMeshProvider.Editor.cs:50
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/MatrixMeshProvider.Editor.cs:24
 msgid "MatrixMeshProvider.cellPatternOverrides"
 msgstr "セルのオーバーライド"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/MatrixMeshProvider.Editor.cs:51
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/MatrixMeshProvider.Editor.cs:25
 msgid "MatrixMeshProvider.material"
 msgstr "マテリアル"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PolygonMeshProvider.Editor.cs:22
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/MatrixMeshProvider.Editor.cs:30
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:25
+msgid "Input Path dump X"
+msgstr "入力パスXのダンプ"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/MatrixMeshProvider.Editor.cs:31
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:26
+msgid "Input Path dump Y"
+msgstr "入力パスYのダンプ"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PolygonMeshProvider.Editor.cs:15
 msgid "PolygonMeshProvider.pathProvider"
 msgstr "パス"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PolygonMeshProvider.Editor.cs:27
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PolygonMeshProvider.Editor.cs:18
 msgid "PolygonMeshProvider.material"
 msgstr "マテリアル"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/StampMeshProvider.Editor.cs:34
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/StampMeshProvider.Editor.cs:16
 msgid "StampMeshProvider.meshProvider"
 msgstr "メッシュ"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/StampMeshProvider.Editor.cs:36
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/StampMeshProvider.Editor.cs:19
 msgid "StampMeshProvider.pathProvider"
 msgstr "パス"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/StitchMeshProvider.Editor.cs:36
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/StampMeshProvider.Editor.cs:26
+msgid "Input Mesh dump"
+msgstr "入力メッシュのダンプ"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/StampMeshProvider.Editor.cs:27
+msgid "Input Path dump"
+msgstr "入力パスのダンプ"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/StitchMeshProvider.Editor.cs:16
 msgid "StitchMeshProvider.pathProviderA"
 msgstr "パス A"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/StitchMeshProvider.Editor.cs:38
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/StitchMeshProvider.Editor.cs:19
 msgid "StitchMeshProvider.pathProviderB"
 msgstr "パス B"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/StitchMeshProvider.Editor.cs:41
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/StitchMeshProvider.Editor.cs:23
 msgid "StitchMeshProvider.material"
 msgstr "マテリアル"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Paths/CompositePathProvider.Editor.cs:18
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/StitchMeshProvider.Editor.cs:28
+msgid "Input Path dump A"
+msgstr "入力パスAのダンプ"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/StitchMeshProvider.Editor.cs:29
+msgid "Input Path dump B"
+msgstr "入力パスBのダンプ"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Paths/CompositePathProvider.Editor.cs:15
 msgid "Path Providers"
 msgstr "子パス"
 
-#: Editor/Silksprite/MeshWeaver/Utils/ChildComponentPopupMenu.cs:19
+#: Editor/Silksprite/MeshWeaver/Controllers/Paths/CompositePathProvider.Editor.cs:16
+#: Editor/Silksprite/MeshWeaver/Controllers/Paths/PathReference.Editor.cs:16
+msgid "PathReference.isLoop"
+msgstr "ループ化"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Paths/CompositePathProvider.Editor.cs:17
+#: Editor/Silksprite/MeshWeaver/Controllers/Paths/PathReference.Editor.cs:17
+msgid "PathReference.smoothJoin"
+msgstr "連続化"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Paths/ExtractPathProvider.Editor.cs:15
+msgid "ExtractPathProvider.meshProvider"
+msgstr "抽出元メッシュ"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Paths/ExtractPathProvider.Editor.cs:16
+msgid "ExtractPathProvider.pathName"
+msgstr "パス名"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Paths/PathReference.Editor.cs:15
+msgid "PathReference.pathProviders"
+msgstr "パス参照"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Paths/RevolutionPathProvider.Editor.cs:15
+msgid "RevolutionPathProvider.min"
+msgstr "最小角度"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Paths/RevolutionPathProvider.Editor.cs:16
+msgid "RevolutionPathProvider.max"
+msgstr "最大角度"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Paths/RevolutionPathProvider.Editor.cs:17
+msgid "RevolutionPathProvider.subdivision"
+msgstr "分割数"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Paths/RevolutionPathProvider.Editor.cs:18
+msgid "RevolutionPathProvider.axis"
+msgstr "回転軸"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Paths/RevolutionPathProvider.Editor.cs:19
+msgid "RevolutionPathProvider.isLoop"
+msgstr "ループ化"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Paths/RevolutionPathProvider.Editor.cs:20
+msgid "RevolutionPathProvider.vector"
+msgstr "基準ベクトル"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Paths/ShapePathProvider.Editor.cs:15
+msgid "ShapePathProvider.kind"
+msgstr "シェイプの種類"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Paths/VertexProvider.Editor.cs:15
+msgid "VertexProvider.crease"
+msgstr "折り目にする"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Paths/VertexProvider.Editor.cs:16
+msgid "VertexProvider.uvs"
+msgstr "UV"
+
+#: Editor/Silksprite/MeshWeaver/Utils/ChildComponentPopupMenu.cs:20
 msgid "Create Child..."
 msgstr "追加..."
 
-#: Editor/Silksprite/MeshWeaver/Utils/ModifierComponentPopupMenu.cs:17
+#: Editor/Silksprite/MeshWeaver/Utils/ModifierComponentPopupMenu.cs:18
 msgid "Add Modifier..."
 msgstr "追加..."
 
-#: Editor/Silksprite/MeshWeaver/Utils/ModifierComponentPopupMenu.cs:22
+#: Editor/Silksprite/MeshWeaver/Utils/ModifierComponentPopupMenu.cs:25
 msgid "Modifiers"
 msgstr "Modifier"
+
+#, fuzzy
+#~| msgid "StampMeshProvider.meshProvider"
+#~ msgid "ImportMeshProvider.meshProvider"
+#~ msgstr "メッシュ"
