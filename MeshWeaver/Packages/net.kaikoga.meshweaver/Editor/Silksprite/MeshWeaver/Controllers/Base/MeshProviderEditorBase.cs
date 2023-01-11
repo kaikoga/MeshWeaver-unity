@@ -2,6 +2,7 @@ using System.Linq;
 using Silksprite.MeshWeaver.Controllers.Context;
 using Silksprite.MeshWeaver.Controllers.Extensions;
 using Silksprite.MeshWeaver.Controllers.Meshes;
+using Silksprite.MeshWeaver.Controllers.Utils;
 using Silksprite.MeshWeaver.Models;
 using Silksprite.MeshWeaver.Models.DataObjects;
 using Silksprite.MeshWeaver.UIElements;
@@ -22,6 +23,7 @@ namespace Silksprite.MeshWeaver.Controllers.Base
         protected sealed override void PopulateInspectorGUI(VisualElement container)
         {
             container.Add(CreatePropertiesGUI());
+            container.Add(MeshModifierProviderMenus.Menu.VisualElement((MeshProvider)target));
             container.Add(new LocButton(Loc("Bake"), () =>
             {
                 var meshProvider = (MeshProvider)target;

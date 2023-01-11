@@ -24,6 +24,7 @@ namespace Silksprite.MeshWeaver.Controllers.Base
         protected sealed override void PopulateInspectorGUI(VisualElement container)
         {
             container.Add(CreatePropertiesGUI());
+            container.Add(PathModifierProviderMenus.Menu.VisualElement((PathProvider)target));
             container.Add(new LocButton(Loc("Bake"), () =>
             {
                 var pathProvider = (PathProvider)target;

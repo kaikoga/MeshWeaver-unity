@@ -1,5 +1,4 @@
 using Silksprite.MeshWeaver.Controllers.Base;
-using Silksprite.MeshWeaver.Controllers.Utils;
 using UnityEditor;
 using UnityEngine.UIElements;
 
@@ -14,7 +13,6 @@ namespace Silksprite.MeshWeaver.Controllers.Fallback
         protected override void PopulatePropertiesGUI(VisualElement container)
         {
             container.Add(new IMGUIContainer(OnBaseInspectorGUI));
-            container.Add(MeshModifierProviderMenus.Menu.VisualElement((MeshProvider)target));
         }
     }
 }
