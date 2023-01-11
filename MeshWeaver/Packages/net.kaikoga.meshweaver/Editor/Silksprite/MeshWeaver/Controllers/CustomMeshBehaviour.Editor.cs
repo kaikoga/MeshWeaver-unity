@@ -34,7 +34,7 @@ namespace Silksprite.MeshWeaver.Controllers
             }));
             if (_meshBehaviour is MeshBehaviour)
             {
-                container.Add(MeshProviderMenus.Menu.VisualElement(_meshBehaviour, Tr("Mesh Providers")));
+                container.Add(MeshProviderMenus.Menu.VisualElement(_meshBehaviour, Loc("Mesh Providers")));
             }
 
             container.Add(new LocButton(Loc("Collect Materials"), () => { _meshBehaviour.CollectMaterials(); }));

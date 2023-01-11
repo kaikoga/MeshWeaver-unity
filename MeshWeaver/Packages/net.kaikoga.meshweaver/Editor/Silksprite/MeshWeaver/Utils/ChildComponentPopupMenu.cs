@@ -20,14 +20,14 @@ namespace Silksprite.MeshWeaver.Utils
             _menuOptions = new [] { Loc("Create Child..."), _Loc("") }.Concat(types.Select(type => type == typeof(void) ? _Loc("") : _Loc(type.Name))).ToArray();
         }
 
-        public VisualElement VisualElement(Component self, string label) => VisualElement(self, label, null, null);
-        public VisualElement VisualElement(Component self, string name, SerializedProperty serializedProperty) => VisualElement(self, " ", name, serializedProperty);
+        public VisualElement VisualElement(Component self, LocalizedContent? label) => VisualElement(self, label, null, null);
+        public VisualElement VisualElement(Component self, string name, SerializedProperty serializedProperty) => VisualElement(self, null, name, serializedProperty);
 
-        VisualElement VisualElement(Component self, string label, string name, SerializedProperty serializedProperty)
+        VisualElement VisualElement(Component self, LocalizedContent? label, string name, SerializedProperty serializedProperty)
         {
             return new IMGUIContainer(() =>
             {
-                var index = EditorGUILayout.Popup(label, 0, _menuOptions.Select(loc => loc.Tr).ToArray());
+                var index = EditorGUILayout.Popup(label?.Tr ?? " ", 0, _menuOptions.Select(loc => loc.Tr).ToArray());
                 if (index <= 0) return;
 
                 var child = self.AddChildComponent<T>(_types[index]);
