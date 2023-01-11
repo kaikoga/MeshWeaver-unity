@@ -43,12 +43,19 @@ namespace Silksprite.MeshWeaver.Utils
             return new IMGUIContainer(() =>
             {
                 var child = ChildPopup(self, label);
-                if (serializedProperty != null && child != null)
+                if (serializedProperty == null || child == null) return;
+                child.name = $"{child.name}_{name}";
+                if (serializedProperty.isArray)
                 {
-                    child.name = $"{child.name}_{name}";
-                    serializedProperty.objectReferenceValue = child;
-                    serializedProperty.serializedObject.ApplyModifiedProperties();
+                    var size = serializedProperty.arraySize;
+                    serializedProperty.InsertArrayElementAtIndex(size);
+                    serializedProperty.GetArrayElementAtIndex(size).objectReferenceValue = child;
                 }
+                else
+                {
+                    serializedProperty.objectReferenceValue = child;
+                }
+                serializedProperty.serializedObject.ApplyModifiedProperties();
             });
         }
     }

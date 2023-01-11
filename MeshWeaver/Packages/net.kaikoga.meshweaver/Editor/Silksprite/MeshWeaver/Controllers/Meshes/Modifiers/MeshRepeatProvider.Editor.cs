@@ -1,6 +1,7 @@
 using Silksprite.MeshWeaver.Controllers.Fallback;
 using Silksprite.MeshWeaver.Controllers.Utils;
 using UnityEditor;
+using UnityEngine.UIElements;
 
 namespace Silksprite.MeshWeaver.Controllers.Meshes.Modifiers
 {
@@ -8,10 +9,10 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes.Modifiers
     [CanEditMultipleObjects]
     public class MeshRepeatProviderEditor : SubProviderBaseEditor
     {
-        protected override void OnPropertiesGUI()
+        protected override void PopulatePropertiesGUI(VisualElement container)
         {
-            var meshRepeatProvider = (MeshRepeatProvider)target;
-            TransformMenus.Menu.PropertyField(meshRepeatProvider, "Offset By Reference", "Offset By Reference", ref meshRepeatProvider.offsetByReference);
+            container.Add(TransformMenus.Menu.VisualElement((MeshRepeatProvider)target, "Offset By Reference", "Offset By Reference",
+                serializedObject.FindProperty(nameof(MeshRepeatProvider.offsetByReference))));
         }
     }
 }

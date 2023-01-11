@@ -12,14 +12,11 @@ namespace Silksprite.MeshWeaver.Controllers.Fallback
 
         protected sealed override void PopulateInspectorGUI(VisualElement container)
         {
-            container.Add(new IMGUIContainer(() =>
-            {
-                OnBaseInspectorGUI();
-                OnPropertiesGUI();
-            }));
+            container.Add(new IMGUIContainer(OnBaseInspectorGUI));
+            PopulatePropertiesGUI(container);
         }
 
-        protected virtual void OnPropertiesGUI()
+        protected virtual void PopulatePropertiesGUI(VisualElement container)
         {
         }
     }

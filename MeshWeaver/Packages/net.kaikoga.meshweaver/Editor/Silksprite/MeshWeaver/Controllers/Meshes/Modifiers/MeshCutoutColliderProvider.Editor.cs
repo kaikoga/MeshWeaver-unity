@@ -1,7 +1,7 @@
 using Silksprite.MeshWeaver.Controllers.Fallback;
 using Silksprite.MeshWeaver.Controllers.Utils;
 using UnityEditor;
-using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace Silksprite.MeshWeaver.Controllers.Meshes.Modifiers
 {
@@ -9,15 +9,10 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes.Modifiers
     [CanEditMultipleObjects]
     public class MeshCutoutColliderProviderEditor : SubProviderBaseEditor
     {
-        protected override void OnPropertiesGUI()
+        protected override void PopulatePropertiesGUI(VisualElement container)
         {
-            var meshCutoutColliderProvider = (MeshCutoutColliderProvider)target;
-            Collider predicate = null;
-            ColliderMenus.Menu.PropertyField(meshCutoutColliderProvider, "Predicate", "Predicate", ref predicate);
-            if (predicate)
-            {
-                meshCutoutColliderProvider.predicates.Add(predicate);
-            }
+            container.Add(ColliderMenus.Menu.VisualElement((MeshCutoutColliderProvider)target, "Predicate", "Predicate",
+                serializedObject.FindProperty(nameof(MeshCutoutColliderProvider.predicates))));
         }
     }
 }
