@@ -24,20 +24,17 @@ namespace Silksprite.MeshWeaver.Controllers.Base
         protected sealed override void PopulateInspectorGUI(VisualElement container)
         {
             container.Add(CreatePropertiesGUI());
-            container.Add(new IMGUIContainer(() =>
+            container.Add(new LocButton(Loc("Bake"), () =>
             {
-                if (GUILayout.Button(Tr("Bake")))
-                {
-                    var pathProvider = (PathProvider)target;
-                    var transform = pathProvider.transform;
-                    var baked = transform.parent.AddChildComponent<BakedPathProvider>();
-                    baked.lodMaskLayers = LodMaskLayers.Values;
-                    baked.pathData = LodMaskLayers.Values.Select(lod => PathieData.FromPathie(pathProvider.ToFactory().Build(lod))).ToArray();
-                    var bakedTransform = baked.transform;
-                    bakedTransform.localPosition = transform.localPosition;
-                    bakedTransform.localRotation = transform.localRotation;
-                    bakedTransform.localScale = transform.localScale;
-                }
+                var pathProvider = (PathProvider)target;
+                var transform = pathProvider.transform;
+                var baked = transform.parent.AddChildComponent<BakedPathProvider>();
+                baked.lodMaskLayers = LodMaskLayers.Values;
+                baked.pathData = LodMaskLayers.Values.Select(lod => PathieData.FromPathie(pathProvider.ToFactory().Build(lod))).ToArray();
+                var bakedTransform = baked.transform;
+                bakedTransform.localPosition = transform.localPosition;
+                bakedTransform.localRotation = transform.localRotation;
+                bakedTransform.localScale = transform.localScale;
             }));
             container.Add(CreateDumpGUI());
         }
@@ -46,11 +43,7 @@ namespace Silksprite.MeshWeaver.Controllers.Base
         {
             return new Div("mw-properties", c =>
             {
-                c.Add(new IMGUIContainer(() =>
-                {
-                    MeshWeaverGUILayout.PropertyField(serializedObject.FindProperty("lodMask"), Loc("GeometryProvider.lodMask"));
-                    serializedObject.ApplyModifiedProperties();
-                }));
+                c.Add(Prop(nameof(PathProvider.lodMask), Loc("GeometryProvider.lodMask")));
                 PopulatePropertiesGUI(c);
             });
         }

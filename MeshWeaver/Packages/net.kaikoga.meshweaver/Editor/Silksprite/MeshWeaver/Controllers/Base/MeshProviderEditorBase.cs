@@ -22,25 +22,22 @@ namespace Silksprite.MeshWeaver.Controllers.Base
         protected sealed override void PopulateInspectorGUI(VisualElement container)
         {
             container.Add(CreatePropertiesGUI());
-            container.Add(new IMGUIContainer(() =>
+            container.Add(new LocButton(Loc("Bake"), () =>
             {
-                if (GUILayout.Button(Tr("Bake")))
+                var meshProvider = (MeshProvider)target;
+                var transform = meshProvider.transform;
+                var baked = transform.parent.AddChildComponent<BakedMeshProvider>();
+                using (var context = new DynamicMeshContext())
                 {
-                    var meshProvider = (MeshProvider)target;
-                    var transform = meshProvider.transform;
-                    var baked = transform.parent.AddChildComponent<BakedMeshProvider>();
-                    using (var context = new DynamicMeshContext())
-                    {
-                        baked.lodMaskLayers = LodMaskLayers.Values;
-                        baked.meshData = LodMaskLayers.Values.Select(lod => MeshieData.FromMeshie(meshProvider.ToFactory(context).Build(lod), i => i)).ToArray();
-                        baked.materials = context.ToMaterials();
-                    }
-
-                    var bakedTransform = baked.transform;
-                    bakedTransform.localPosition = transform.localPosition;
-                    bakedTransform.localRotation = transform.localRotation;
-                    bakedTransform.localScale = transform.localScale;
+                    baked.lodMaskLayers = LodMaskLayers.Values;
+                    baked.meshData = LodMaskLayers.Values.Select(lod => MeshieData.FromMeshie(meshProvider.ToFactory(context).Build(lod), i => i)).ToArray();
+                    baked.materials = context.ToMaterials();
                 }
+
+                var bakedTransform = baked.transform;
+                bakedTransform.localPosition = transform.localPosition;
+                bakedTransform.localRotation = transform.localRotation;
+                bakedTransform.localScale = transform.localScale;
             }));
             container.Add(CreateDumpGUI());
         }
@@ -49,11 +46,7 @@ namespace Silksprite.MeshWeaver.Controllers.Base
         {
             return new Div("mw-properties", c =>
             {
-                c.Add(new IMGUIContainer(() =>
-                {
-                    MeshWeaverGUILayout.PropertyField(serializedObject.FindProperty("lodMask"), Loc("GeometryProvider.lodMask"));
-                    serializedObject.ApplyModifiedProperties();
-                }));
+                c.Add(Prop(nameof(MeshProvider.lodMask), Loc("GeometryProvider.lodMask")));
                 PopulatePropertiesGUI(c);
             });
         }

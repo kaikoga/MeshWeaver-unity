@@ -13,13 +13,8 @@ namespace Silksprite.MeshWeaver.Controllers.Fallback
 
         protected override void PopulatePropertiesGUI(VisualElement container)
         {
-            container.Add(new IMGUIContainer(() =>
-            {
-                OnBaseInspectorGUI();
-
-                var pathProvider = (PathProvider)target;
-                PathModifierProviderMenus.Menu.ModifierPopup(pathProvider);
-            }));
+            container.Add(new IMGUIContainer(OnBaseInspectorGUI));
+            container.Add(PathModifierProviderMenus.Menu.VisualElement((PathProvider)target));
         }
     }
 }

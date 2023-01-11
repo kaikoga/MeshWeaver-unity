@@ -18,7 +18,7 @@ namespace Silksprite.MeshWeaver.Utils
             _menuOptions = new [] { Loc("Add Modifier..."), _Loc("") }.Concat(types.Select(type => type == typeof(void) ? _Loc("") : _Loc(type.Name))).ToArray();
         }
 
-        public T ModifierPopup(Component self, LocalizedContent? label = null)
+        T ModifierPopup(Component self, LocalizedContent? label = null)
         {
             var index = EditorGUILayout.Popup((label ?? Loc("Modifiers")).Tr, 0, _menuOptions.Select(x => x.Tr).ToArray());
             if (index <= 0) return default;
