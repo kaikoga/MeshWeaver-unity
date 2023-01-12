@@ -8,6 +8,7 @@ namespace Silksprite.MeshWeaver.Controllers.Modifiers
 {
     public class VertwiseTranslateProvider : VertwiseModifierProviderBase
     {
+        // FIXME: Scale?
         public Vector3 size = Vector3.one;
         public Transform referenceTranslation;
 

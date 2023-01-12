@@ -1,17 +1,22 @@
+using Silksprite.MeshWeaver.Controllers.Base;
 using Silksprite.MeshWeaver.Controllers.Utils;
 using UnityEditor;
+using UnityEngine.UIElements;
+using static Silksprite.MeshWeaver.Tools.LocalizationTool;
 
 namespace Silksprite.MeshWeaver.Controllers.Meshes.Modifiers
 {
     [CustomEditor(typeof(MeshRepeatProvider))]
     [CanEditMultipleObjects]
-    public class MeshRepeatProviderEditor : Editor
+    public class MeshRepeatProviderEditor : SubProviderEditorBase
     {
-        public override void OnInspectorGUI()
+        protected override void PopulatePropertiesGUI(VisualElement container)
         {
-            base.OnInspectorGUI();
-            var meshRepeatProvider = (MeshRepeatProvider)target;
-            TransformMenus.Menu.PropertyField(meshRepeatProvider, "Offset By Reference", ref meshRepeatProvider.offsetByReference);
+            container.Add(Prop(nameof(MeshRepeatProvider.count), Loc("MeshRepeatProvider.count")));
+            container.Add(Prop(nameof(MeshRepeatProvider.offset), Loc("MeshRepeatProvider.offset")));
+            container.Add(Prop(nameof(MeshRepeatProvider.offsetByReference), Loc("MeshRepeatProvider.offsetByReference")));
+            container.Add(TransformMenus.Menu.VisualElement((MeshRepeatProvider)target, "Offset By Reference",
+                serializedObject.FindProperty(nameof(MeshRepeatProvider.offsetByReference))));
         }
     }
 }

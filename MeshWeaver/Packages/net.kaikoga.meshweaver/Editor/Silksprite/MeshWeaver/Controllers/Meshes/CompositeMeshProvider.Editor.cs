@@ -1,18 +1,18 @@
 using Silksprite.MeshWeaver.Controllers.Base;
 using Silksprite.MeshWeaver.Controllers.Utils;
 using UnityEditor;
+using UnityEngine.UIElements;
+using static Silksprite.MeshWeaver.Tools.LocalizationTool;
 
 namespace Silksprite.MeshWeaver.Controllers.Meshes
 {
     [CustomEditor(typeof(CompositeMeshProvider))]
     [CanEditMultipleObjects]
-    public class CompositeMeshProviderEditor : MeshProviderEditor
+    public class CompositeMeshProviderEditor : MeshProviderEditorBase
     {
-        public override void OnInspectorGUI()
+        protected override void PopulatePropertiesGUI(VisualElement container)
         {
-            base.OnInspectorGUI();
-            var compositeMeshProvider = (CompositeMeshProvider)target;
-            MeshProviderMenus.Menu.ChildPopup(compositeMeshProvider);
+            container.Add(MeshProviderMenus.Menu.VisualElement((CompositeMeshProvider)target, Loc("Mesh Providers")));
         }
     }
 }

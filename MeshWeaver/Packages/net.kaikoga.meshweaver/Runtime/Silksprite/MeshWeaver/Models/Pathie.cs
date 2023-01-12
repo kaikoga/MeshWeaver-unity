@@ -5,7 +5,7 @@ using Silksprite.MeshWeaver.Models.Paths.Modifiers;
 
 namespace Silksprite.MeshWeaver.Models
 {
-    public class Pathie
+    public class Pathie : IDump
     {
         public IReadOnlyList<Vertie> Vertices => _vertices;
         public readonly bool isLoop;

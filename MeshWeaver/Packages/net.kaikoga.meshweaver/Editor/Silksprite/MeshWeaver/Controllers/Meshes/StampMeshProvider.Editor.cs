@@ -1,26 +1,30 @@
 using Silksprite.MeshWeaver.Controllers.Base;
 using Silksprite.MeshWeaver.Controllers.Utils;
-using Silksprite.MeshWeaver.Utils;
+using Silksprite.MeshWeaver.UIElements;
 using UnityEditor;
+using UnityEngine.UIElements;
+using static Silksprite.MeshWeaver.Tools.LocalizationTool;
 
 namespace Silksprite.MeshWeaver.Controllers.Meshes
 {
     [CustomEditor(typeof(StampMeshProvider))]
     [CanEditMultipleObjects]
-    public class StampMeshProviderEditor : MeshProviderEditor
+    public class StampMeshProviderEditor : MeshProviderEditorBase
     {
-        bool _isExpandedMesh;
-        bool _isExpandedPath;
-
-        public override void OnInspectorGUI()
+        protected override void PopulatePropertiesGUI(VisualElement container)
         {
-            base.OnInspectorGUI();
-            var stampMeshProvider = (StampMeshProvider)target;
-            MeshProviderMenus.Menu.PropertyField(stampMeshProvider, "Mesh", ref stampMeshProvider.meshProvider);
-            PathProviderMenus.ElementsMenu.PropertyField(stampMeshProvider, "Path", ref stampMeshProvider.pathProvider);
+            container.Add(Prop(nameof(StampMeshProvider.meshProvider), Loc("StampMeshProvider.meshProvider")));
+            container.Add(MeshProviderMenus.Menu.VisualElement((StampMeshProvider)target, "Mesh",
+                serializedObject.FindProperty(nameof(StampMeshProvider.meshProvider))));
+            container.Add(Prop(nameof(StampMeshProvider.pathProvider), Loc("StampMeshProvider.pathProvider")));
+            container.Add(PathProviderMenus.ElementsMenu.VisualElement((StampMeshProvider)target, "Path",
+                serializedObject.FindProperty(nameof(StampMeshProvider.pathProvider))));
+        }
 
-            MeshWeaverGUI.DumpFoldout("Mesh data", ref _isExpandedMesh, () => stampMeshProvider.LastMeshie.Build(GuessCurrentLodMaskLayer()));
-            MeshWeaverGUI.DumpFoldout("Path data", ref _isExpandedPath, () => stampMeshProvider.LastPathie.Build(GuessCurrentLodMaskLayer()));
+        protected override void PopulateDumpGUI(VisualElement container)
+        {
+            container.Add(new DumpFoldout(Loc("Input Mesh dump"), () => ((StampMeshProvider)target).LastMeshie?.Build(MeshWeaverSettings.Current.CurrentLodMaskLayer)));
+            container.Add(new DumpFoldout(Loc("Input Path dump"), () => ((StampMeshProvider)target).LastPathie?.Build(MeshWeaverSettings.Current.CurrentLodMaskLayer)));
         }
     }
 }

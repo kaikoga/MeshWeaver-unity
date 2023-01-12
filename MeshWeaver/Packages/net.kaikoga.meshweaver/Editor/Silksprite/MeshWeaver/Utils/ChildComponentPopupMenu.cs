@@ -1,10 +1,10 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using Silksprite.MeshWeaver.Controllers.Base;
 using Silksprite.MeshWeaver.Controllers.Extensions;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UIElements;
+using static Silksprite.MeshWeaver.Tools.LocalizationTool;
 
 namespace Silksprite.MeshWeaver.Utils
 {
@@ -12,28 +12,40 @@ namespace Silksprite.MeshWeaver.Utils
     where T : Component
     {
         readonly Type[] _types;
-        readonly string[] _menuOptions;
+        readonly LocalizedContent[] _menuOptions;
 
         public ChildComponentPopupMenu(params Type[] types)
         {
             _types = new [] { (Type)null, null }.Concat(types).ToArray();
-            _menuOptions = new [] { "Create Child...", "" }.Concat(types.Select(type => type == typeof(void) ? "" : type.Name)).ToArray();
+            _menuOptions = new [] { Loc("Create Child..."), _Loc("") }.Concat(types.Select(type => type == typeof(void) ? _Loc("") : _Loc(type.Name))).ToArray();
         }
 
-        public T ChildPopup(Component self)
-        {
-            var index = EditorGUILayout.Popup(0, _menuOptions);
-            return index <= 0 ? null : self.AddChildComponent<T>(_types[index]);
-        }
+        public VisualElement VisualElement(Component self, LocalizedContent? label) => VisualElement(self, label, null, null);
+        public VisualElement VisualElement(Component self, string name, SerializedProperty serializedProperty) => VisualElement(self, null, name, serializedProperty);
 
-        public void PropertyField(Component self, string name, ref T property)
+        VisualElement VisualElement(Component self, LocalizedContent? label, string name, SerializedProperty serializedProperty)
         {
-            var child = ChildPopup(self);
-            if (child != null)
+            return new IMGUIContainer(() =>
             {
-                property = child;
-                property.name = $"{property.name}_{name}";
-            }
+                var index = EditorGUILayout.Popup(label?.Tr ?? " ", 0, _menuOptions.Select(loc => loc.Tr).ToArray());
+                if (index <= 0) return;
+
+                var child = self.AddChildComponent<T>(_types[index]);
+                if (serializedProperty == null) return;
+
+                child.name = $"{child.name}_{name}";
+                if (serializedProperty.isArray)
+                {
+                    var size = serializedProperty.arraySize;
+                    serializedProperty.InsertArrayElementAtIndex(size);
+                    serializedProperty.GetArrayElementAtIndex(size).objectReferenceValue = child;
+                }
+                else
+                {
+                    serializedProperty.objectReferenceValue = child;
+                }
+                serializedProperty.serializedObject.ApplyModifiedProperties();
+            });
         }
     }
 }

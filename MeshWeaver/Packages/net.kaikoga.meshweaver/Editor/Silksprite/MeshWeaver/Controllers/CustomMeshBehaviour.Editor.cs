@@ -1,42 +1,57 @@
+using Silksprite.MeshWeaver.Controllers.Base;
 using Silksprite.MeshWeaver.Controllers.Utils;
+using Silksprite.MeshWeaver.UIElements;
+using Silksprite.MeshWeaver.UIElements.Extensions;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UIElements;
+using static Silksprite.MeshWeaver.Tools.LocalizationTool;
 
 namespace Silksprite.MeshWeaver.Controllers
 {
     [CustomEditor(typeof(CustomMeshBehaviour), true, isFallback = true)]
     [CanEditMultipleObjects]
-    public class CustomMeshBehaviourEditor : Editor
+    public class CustomMeshBehaviourEditor : MeshWeaverEditorBase
     {
-        public override void OnInspectorGUI()
+        protected override bool IsMainComponentEditor => true;
+
+        CustomMeshBehaviour _meshBehaviour;
+
+        void OnEnable()
         {
-            base.OnInspectorGUI();
-            var meshBehaviour = (CustomMeshBehaviour)target;
-            if (meshBehaviour is MeshBehaviour)
+            _meshBehaviour = (CustomMeshBehaviour)target;
+        }
+
+        protected sealed override void PopulateInspectorGUI(VisualElement container)
+        {
+            container.Add(new Div("properties", c =>
             {
-                MeshProviderMenus.Menu.ChildPopup(meshBehaviour);
+                c.Add(Prop(nameof(CustomMeshBehaviour.updatesEveryFrame), Loc("CustomMeshBehaviour.updatesEveryFrame")));
+                c.Add(Prop("profile", Loc("CustomMeshBehaviour.profile")));
+                c.Add(Prop(nameof(CustomMeshBehaviour.materials), Loc("CustomMeshBehaviour.materials")));
+                c.Add(Prop(nameof(CustomMeshBehaviour.meshFilters), Loc("CustomMeshBehaviour.meshFilters")));
+                c.Add(Prop(nameof(CustomMeshBehaviour.meshColliders), Loc("CustomMeshBehaviour.meshColliders")));
+            }));
+            if (_meshBehaviour is MeshBehaviour)
+            {
+                container.Add(MeshProviderMenus.Menu.VisualElement(_meshBehaviour, Loc("Mesh Providers")));
             }
 
-            if (GUILayout.Button("Collect Materials"))
-            {
-                meshBehaviour.CollectMaterials();
-            }
-            if (GUILayout.Button("Compile"))
-            {
-                meshBehaviour.Compile();
-            }
-            if (GUILayout.Button("Compile All Active"))
+            container.Add(new LocButton(Loc("Collect Materials"), () => { _meshBehaviour.CollectMaterials(); }));
+            container.Add(new LocButton(Loc("Compile"), () => { _meshBehaviour.Compile(); }));
+            container.Add(new LocButton(Loc("Compile All Active"), () =>
             {
                 foreach (var m in FindObjectsOfType<CustomMeshBehaviour>()) m.Compile();
-            }
-            if (HasSetupAsMeshRendererButton(meshBehaviour) && GUILayout.Button("I am Mesh Renderer"))
+            }));
+
+            if (HasSetupAsMeshRendererButton(_meshBehaviour))
             {
-                SetupAsMeshRenderer(meshBehaviour);
+                container.Add(new LocButton(Loc("I am Mesh Renderer"), () => { SetupAsMeshRenderer(_meshBehaviour); }));
             }
 
-            if (HasCreateExporterButton(meshBehaviour) && GUILayout.Button("Create Exporter"))
+            if (HasCreateExporterButton(_meshBehaviour))
             {
-                CreateExporter(meshBehaviour);
+                container.Add(new LocButton(Loc("Create Exporter"), () => { CreateExporter(_meshBehaviour); }));
             }
         }
 

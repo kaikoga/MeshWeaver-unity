@@ -5,51 +5,25 @@ using Silksprite.MeshWeaver.Controllers.Meshes;
 using Silksprite.MeshWeaver.Controllers.Utils;
 using Silksprite.MeshWeaver.Models;
 using Silksprite.MeshWeaver.Models.DataObjects;
+using Silksprite.MeshWeaver.UIElements;
 using Silksprite.MeshWeaver.Utils;
-using UnityEditor;
 using UnityEngine;
+using UnityEngine.UIElements;
+using static Silksprite.MeshWeaver.Tools.LocalizationTool;
 
 namespace Silksprite.MeshWeaver.Controllers.Base
 {
-    [CustomEditor(typeof(MeshProvider), true, isFallback = true)]
-    [CanEditMultipleObjects]
-    public class MeshProviderEditor : GeometryProviderEditor
+    public abstract class MeshProviderEditorBase : ProviderEditorBase
     {
-        bool _isExpanded;
-        bool _isColliderExpanded;
+        protected override bool IsMainComponentEditor => true;
 
-        Meshie _meshie;
-        Meshie _colliderMeshie;
-
-        void OnValidate()
+        protected sealed override void PopulateInspectorGUI(VisualElement container)
         {
-            _meshie = null;
-            _colliderMeshie = null;
-        }
-
-        public override void OnInspectorGUI()
-        {
-            var meshProvider = (MeshProvider)target;
-            base.OnInspectorGUI();
-            
-            var factory = meshProvider.LastFactory;
-            if (factory != null)
+            container.Add(CreatePropertiesGUI());
+            container.Add(MeshModifierProviderMenus.Menu.VisualElement((MeshProvider)target));
+            container.Add(new LocButton(Loc("Bake"), () =>
             {
-                if (_meshie == null) _meshie = factory.Build(GuessCurrentLodMaskLayer());
-                if (_colliderMeshie == null) _colliderMeshie = factory.Build(LodMaskLayer.Collider);
-            }
-
-            MeshWeaverGUI.DumpFoldout($"Mesh Dump: {_meshie}",
-                ref _isExpanded,
-                () => _meshie?.Dump());
-            MeshWeaverGUI.DumpFoldout($"Collider Mesh Dump: {_colliderMeshie}",
-                ref _isColliderExpanded,
-                () => _colliderMeshie?.Dump());
-
-            MeshModifierProviderMenus.Menu.ModifierPopup(meshProvider);
-
-            if (GUILayout.Button("Bake"))
-            {
+                var meshProvider = (MeshProvider)target;
                 var transform = meshProvider.transform;
                 var baked = transform.parent.AddChildComponent<BakedMeshProvider>();
                 using (var context = new DynamicMeshContext())
@@ -58,13 +32,40 @@ namespace Silksprite.MeshWeaver.Controllers.Base
                     baked.meshData = LodMaskLayers.Values.Select(lod => MeshieData.FromMeshie(meshProvider.ToFactory(context).Build(lod), i => i)).ToArray();
                     baked.materials = context.ToMaterials();
                 }
+
                 var bakedTransform = baked.transform;
                 bakedTransform.localPosition = transform.localPosition;
                 bakedTransform.localRotation = transform.localRotation;
                 bakedTransform.localScale = transform.localScale;
-            }
+            }));
+            container.Add(CreateDumpGUI());
         }
-        
+
+        VisualElement CreatePropertiesGUI()
+        {
+            return new Div("mw-properties", c =>
+            {
+                c.Add(Prop(nameof(MeshProvider.lodMask), Loc("GeometryProvider.lodMask")));
+                PopulatePropertiesGUI(c);
+            });
+        }
+
+        VisualElement CreateDumpGUI()
+        {
+            return new Div("mw-dump", c =>
+            {
+                c.Add(new DumpFoldout(Loc("Mesh Dump"), () => ((MeshProvider)target).LastFactory?.Build(MeshWeaverSettings.Current.CurrentLodMaskLayer)));
+                c.Add(new DumpFoldout(Loc("Collider Mesh Dump"), () => ((MeshProvider)target).LastFactory?.Build(LodMaskLayer.Collider)));
+                PopulateDumpGUI(c);
+            });
+        }
+
+        protected abstract void PopulatePropertiesGUI(VisualElement container);
+
+        protected virtual void PopulateDumpGUI(VisualElement container)
+        {
+        }
+
         protected bool HasFrameBounds() => true;
 
         protected Bounds OnGetFrameBounds()

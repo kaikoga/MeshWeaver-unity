@@ -1,26 +1,34 @@
 using Silksprite.MeshWeaver.Controllers.Base;
 using Silksprite.MeshWeaver.Controllers.Utils;
-using Silksprite.MeshWeaver.Utils;
+using Silksprite.MeshWeaver.UIElements;
 using UnityEditor;
+using UnityEngine.UIElements;
+using static Silksprite.MeshWeaver.Tools.LocalizationTool;
 
 namespace Silksprite.MeshWeaver.Controllers.Meshes
 {
     [CustomEditor(typeof(MatrixMeshProvider))]
     [CanEditMultipleObjects]
-    public class MatrixMeshProviderEditor : MeshProviderEditor
+    public class MatrixMeshProviderEditor : MeshProviderEditorBase
     {
-        bool _isExpandedX;
-        bool _isExpandedY;
-
-        public override void OnInspectorGUI()
+        protected override void PopulatePropertiesGUI(VisualElement container)
         {
-            base.OnInspectorGUI();
-            var matrixMeshProvider = (MatrixMeshProvider)target;
-            PathProviderMenus.CollectionsMenu.PropertyField(matrixMeshProvider, "Path X", ref matrixMeshProvider.pathProviderX);
-            PathProviderMenus.CollectionsMenu.PropertyField(matrixMeshProvider, "Path Y", ref matrixMeshProvider.pathProviderY);
+            container.Add(Prop(nameof(MatrixMeshProvider.pathProviderX), Loc("MatrixMeshProvider.pathProviderX")));
+            container.Add(PathProviderMenus.CollectionsMenu.VisualElement((MatrixMeshProvider)target, "Path X",
+                serializedObject.FindProperty(nameof(MatrixMeshProvider.pathProviderX))));
+            container.Add(Prop(nameof(MatrixMeshProvider.pathProviderY), Loc("MatrixMeshProvider.pathProviderY")));
+            container.Add(PathProviderMenus.CollectionsMenu.VisualElement((MatrixMeshProvider)target, "Path Y",
+                serializedObject.FindProperty(nameof(MatrixMeshProvider.pathProviderY))));
+            container.Add(Prop(nameof(MatrixMeshProvider.operatorKind), Loc("MatrixMeshProvider.operatorKind")));
+            container.Add(Prop(nameof(MatrixMeshProvider.defaultCellPatternKind), Loc("MatrixMeshProvider.defaultCellPatternKind")));
+            container.Add(Prop(nameof(MatrixMeshProvider.cellPatternOverrides), Loc("MatrixMeshProvider.cellPatternOverrides")));
+            container.Add(Prop(nameof(MatrixMeshProvider.material), Loc("MatrixMeshProvider.material")));
+        }
 
-            MeshWeaverGUI.DumpFoldout("Path data X", ref _isExpandedX, () => matrixMeshProvider.LastPathieX.Build(GuessCurrentLodMaskLayer()));
-            MeshWeaverGUI.DumpFoldout("Path data Y", ref _isExpandedY, () => matrixMeshProvider.LastPathieY.Build(GuessCurrentLodMaskLayer()));
+        protected override void PopulateDumpGUI(VisualElement container)
+        {
+            container.Add(new DumpFoldout(Loc("Input Path dump X"), () => ((MatrixMeshProvider)target).LastPathieX?.Build(MeshWeaverSettings.Current.CurrentLodMaskLayer)));
+            container.Add(new DumpFoldout(Loc("Input Path dump Y"), () => ((MatrixMeshProvider)target).LastPathieY?.Build(MeshWeaverSettings.Current.CurrentLodMaskLayer)));
         }
     }
 }

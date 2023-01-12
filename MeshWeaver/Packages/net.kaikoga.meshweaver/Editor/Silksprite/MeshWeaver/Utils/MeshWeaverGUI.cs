@@ -1,4 +1,5 @@
 using System;
+using Silksprite.MeshWeaver.Models;
 using UnityEditor;
 using UnityEngine;
 
@@ -6,15 +7,6 @@ namespace Silksprite.MeshWeaver.Utils
 {
     public static class MeshWeaverGUI
     {
-        public static void DumpFoldout(string title, ref bool isExpanded, Func<object> dump)
-        {
-            isExpanded = EditorGUILayout.Foldout(isExpanded, title);
-            if (isExpanded)
-            {
-                EditorGUILayout.TextArea(dump()?.ToString() ?? "null");
-            }
-        }
-
         public static void MultiPropertyField(Rect position, GUIContent[] subLabels, SerializedProperty valuesIterator, float labelWidth)
         {
             void DrawNext(Rect pos, GUIContent label, int i)

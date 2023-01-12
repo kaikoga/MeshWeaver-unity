@@ -1,12 +1,12 @@
-using Silksprite.MeshWeaver.Controllers;
+using Silksprite.MeshWeaver.Controllers.Base;
 using Silksprite.MeshWeaver.Controllers.Meshes;
 using Silksprite.MeshWeaver.Controllers.Paths;
 using UnityEditor;
 using UnityEngine;
 
-namespace Silksprite.MeshWeaver.Utils
+namespace Silksprite.MeshWeaver.Primitives
 {
-    public static class MeshBuilderMenus
+    public static class MeshWeaverMenuItems
     {
         [MenuItem("GameObject/MeshWeaver/Mesh Behaviour", false, 10)]
         public static void CreateMeshBehaviour(MenuCommand menuCommand)
@@ -53,58 +53,88 @@ namespace Silksprite.MeshWeaver.Utils
         [MenuItem("GameObject/MeshWeaver/Primitives/Quad XY", false, 10)]
         public static void CreateQuadXY(MenuCommand menuCommand)
         {
-            var parent = menuCommand.context as GameObject;
-            var cubeProvider = MeshWeaverPrimitives.CreateQuadXYPrimitive();
-            DoUnityThings(MeshWeaverPrimitives.WrapPrimitiveIfNeeded(cubeProvider, parent), parent);
+            var primitiveProvider = MeshWeaverPrimitives.CreateQuadXYPrimitive();
+            DoUnityThings(primitiveProvider, menuCommand.context as GameObject);
         }
 
         [MenuItem("GameObject/MeshWeaver/Primitives/Quad XZ", false, 10)]
         public static void CreateQuadXZ(MenuCommand menuCommand)
         {
-            var parent = menuCommand.context as GameObject;
-            var cubeProvider = MeshWeaverPrimitives.CreateQuadXZPrimitive();
-            DoUnityThings(MeshWeaverPrimitives.WrapPrimitiveIfNeeded(cubeProvider, parent), parent);
+            var primitiveProvider = MeshWeaverPrimitives.CreateQuadXZPrimitive();
+            DoUnityThings(primitiveProvider, menuCommand.context as GameObject);
         }
 
         [MenuItem("GameObject/MeshWeaver/Primitives/Plane", false, 10)]
         public static void CreatePlane(MenuCommand menuCommand)
         {
-            var parent = menuCommand.context as GameObject;
-            var cubeProvider = MeshWeaverPrimitives.CreatePlanePrimitive();
-            DoUnityThings(MeshWeaverPrimitives.WrapPrimitiveIfNeeded(cubeProvider, parent), parent);
+            var primitiveProvider = MeshWeaverPrimitives.CreatePlanePrimitive(true);
+            DoUnityThings(primitiveProvider, menuCommand.context as GameObject);
         }
 
         [MenuItem("GameObject/MeshWeaver/Primitives/Cube", false, 10)]
         public static void CreateCube(MenuCommand menuCommand)
         {
-            var parent = menuCommand.context as GameObject;
-            var cubeProvider = MeshWeaverPrimitives.CreateCubePrimitive();
-            DoUnityThings(MeshWeaverPrimitives.WrapPrimitiveIfNeeded(cubeProvider, parent), parent);
+            var primitiveProvider = MeshWeaverPrimitives.CreateCubePrimitive(true);
+            DoUnityThings(primitiveProvider, menuCommand.context as GameObject);
         }
 
         [MenuItem("GameObject/MeshWeaver/Primitives/Sphere", false, 10)]
         public static void CreateSphere(MenuCommand menuCommand)
         {
-            var parent = menuCommand.context as GameObject;
-            var cubeProvider = MeshWeaverPrimitives.CreateSpherePrimitive();
-            DoUnityThings(MeshWeaverPrimitives.WrapPrimitiveIfNeeded(cubeProvider, parent), parent);
+            var primitiveProvider = MeshWeaverPrimitives.CreateSpherePrimitive(true);
+            DoUnityThings(primitiveProvider, menuCommand.context as GameObject);
         }
 
         [MenuItem("GameObject/MeshWeaver/Primitives/Cylinder", false, 10)]
         public static void CreateCylinder(MenuCommand menuCommand)
         {
-            var parent = menuCommand.context as GameObject;
-            var cubeProvider = MeshWeaverPrimitives.CreateCylinderPrimitive();
-            DoUnityThings(MeshWeaverPrimitives.WrapPrimitiveIfNeeded(cubeProvider, parent), parent);
+            var primitiveProvider = MeshWeaverPrimitives.CreateCylinderPrimitive(true);
+            DoUnityThings(primitiveProvider, menuCommand.context as GameObject);
         }
 
         [MenuItem("GameObject/MeshWeaver/Primitives/Stairs", false, 10)]
         public static void CreateStairs(MenuCommand menuCommand)
         {
-            var parent = menuCommand.context as GameObject;
-            var cubeProvider = MeshWeaverPrimitives.CreateStairsPrimitive();
-            DoUnityThings(MeshWeaverPrimitives.WrapPrimitiveIfNeeded(cubeProvider, parent), parent);
+            var primitiveProvider = MeshWeaverPrimitives.CreateStairsPrimitive(true);
+            DoUnityThings(primitiveProvider, menuCommand.context as GameObject);
         }
+
+        [MenuItem("GameObject/MeshWeaver/Primitives/NoUV/Plane", false, 10)]
+        public static void CreatePlaneNoUv(MenuCommand menuCommand)
+        {
+            var primitiveProvider = MeshWeaverPrimitives.CreatePlanePrimitive(false);
+            DoUnityThings(primitiveProvider, menuCommand.context as GameObject);
+        }
+
+        [MenuItem("GameObject/MeshWeaver/Primitives/NoUV/Cube", false, 10)]
+        public static void CreateCubeNoUv(MenuCommand menuCommand)
+        {
+            var primitiveProvider = MeshWeaverPrimitives.CreateCubePrimitive(false);
+            DoUnityThings(primitiveProvider, menuCommand.context as GameObject);
+        }
+
+        [MenuItem("GameObject/MeshWeaver/Primitives/NoUV/Sphere", false, 10)]
+        public static void CreateSphereNoUv(MenuCommand menuCommand)
+        {
+            var primitiveProvider = MeshWeaverPrimitives.CreateSpherePrimitive(false);
+            DoUnityThings(primitiveProvider, menuCommand.context as GameObject);
+        }
+
+        [MenuItem("GameObject/MeshWeaver/Primitives/NoUV/Cylinder", false, 10)]
+        public static void CreateCylinderNoUv(MenuCommand menuCommand)
+        {
+            var primitiveProvider = MeshWeaverPrimitives.CreateCylinderPrimitive(false);
+            DoUnityThings(primitiveProvider, menuCommand.context as GameObject);
+        }
+
+        [MenuItem("GameObject/MeshWeaver/Primitives/NoUV/Stairs", false, 10)]
+        public static void CreateStairsNoUv(MenuCommand menuCommand)
+        {
+            var primitiveProvider = MeshWeaverPrimitives.CreateStairsPrimitive(false);
+            DoUnityThings(primitiveProvider, menuCommand.context as GameObject);
+        }
+
+        static void DoUnityThings(MeshProvider meshProvider, GameObject parent) => DoUnityThings(MeshWeaverPrimitives.WrapPrimitiveIfNeeded(meshProvider, parent), parent);
 
         static void DoUnityThings(GameObject gameObject, GameObject parent)
         {

@@ -1,11 +1,21 @@
+using Silksprite.MeshWeaver.Controllers.Base;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UIElements;
+using static Silksprite.MeshWeaver.Tools.LocalizationTool;
 
 namespace Silksprite.MeshWeaver.Controllers
 {
     [CustomEditor(typeof(TranslationProvider))]
-    public class TranslationProviderEditor : Editor
+    public class TranslationProviderEditor : SubProviderEditorBase
     {
+        protected override void PopulatePropertiesGUI(VisualElement container)
+        {
+            container.Add(Prop(nameof(TranslationProvider.translation), Loc("TranslationProvider.translation")));
+        }
+
+        #region scene GUI
+
         Axis _focusAxis;
         int _controlIdX;
         int _controlIdY;
@@ -108,5 +118,7 @@ namespace Silksprite.MeshWeaver.Controllers
             Y,
             Z
         }
+
+        #endregion
     }
 }

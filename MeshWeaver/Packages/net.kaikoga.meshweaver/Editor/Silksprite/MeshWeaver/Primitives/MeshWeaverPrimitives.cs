@@ -8,9 +8,10 @@ using Silksprite.MeshWeaver.Controllers.Paths.Modifiers;
 using Silksprite.MeshWeaver.Models.Meshes;
 using Silksprite.MeshWeaver.Models.Modifiers;
 using Silksprite.MeshWeaver.Models.Paths;
+using Silksprite.MeshWeaver.Utils;
 using UnityEngine;
 
-namespace Silksprite.MeshWeaver.Utils
+namespace Silksprite.MeshWeaver.Primitives
 {
     public static class MeshWeaverPrimitives
     {
@@ -91,7 +92,7 @@ namespace Silksprite.MeshWeaver.Utils
             return polygon;
         }
 
-        public static MeshProvider CreatePlanePrimitive()
+        public static MeshProvider CreatePlanePrimitive(bool hasUv)
         {
             var gameObject = new GameObject("Plane Provider");
             var matrix = gameObject.AddComponent<MatrixMeshProvider>();
@@ -101,7 +102,11 @@ namespace Silksprite.MeshWeaver.Utils
 
             pathX.CreateVertex(new Vector3(0f, 0f, 0f), false);
             pathX.CreateVertex(new Vector3(1f, 0f, 0f), false);
-            AddUvGeneratorProvider(pathX, new Rect(0f, 0f, 1f, 0f), 0);
+            if (hasUv)
+            {
+                AddUvGeneratorProvider(pathX, new Rect(0f, 0f, 1f, 0f), 0);
+            }
+
             var subdivisionX = pathX.gameObject.AddComponent<PathSubdivisionProvider>();
             subdivisionX.maxCount = 4;
             subdivisionX.maxLength = 0.25f;
@@ -110,21 +115,28 @@ namespace Silksprite.MeshWeaver.Utils
             matrix.pathProviderY = pathY;
             pathY.CreateVertex(new Vector3(0f, 0f, 0f), false);
             pathY.CreateVertex(new Vector3(0f, 0f, 1f), false);
-            AddUvGeneratorProvider(pathY, new Rect(0f, 0f, 0f, 1f), 0);
+            if (hasUv)
+            {
+                AddUvGeneratorProvider(pathY, new Rect(0f, 0f, 0f, 1f), 0);
+            }
+
             var subdivisionY = pathY.gameObject.AddComponent<PathSubdivisionProvider>();
             subdivisionY.maxCount = 4;
             subdivisionY.maxLength = 0.25f;
             return matrix;
         }
 
-        public static MeshProvider CreateCubePrimitive()
+        public static MeshProvider CreateCubePrimitive(bool hasUv)
         {
             var gameObject = new GameObject("Cube Provider");
             var pillar = gameObject.AddComponent<PillarMeshProvider>();
             pillar.fillBottom = true;
             pillar.fillTop = true;
-            pillar.uvChannelBottom = 1;
-            pillar.uvChannelTop = 1;
+            if (hasUv)
+            {
+                pillar.uvChannelBottom = 1;
+                pillar.uvChannelTop = 1;
+            }
 
             var pathX = pillar.AddChildComponent<CompositePathProvider>("CompositePathProvider_Path X");
             pillar.pathProviderX = pathX;
@@ -133,20 +145,27 @@ namespace Silksprite.MeshWeaver.Utils
             pathX.CreateVertex(new Vector3(1f, 0f, 1f), true);
             pathX.CreateVertex(new Vector3(0f, 0f, 1f), true);
             pathX.isLoop = true;
-            AddUvGeneratorProvider(pathX, new Rect(0f, 0f, 4f, 0f), 0);
-            var uvX2 = AddUvProjectorProvider(pathX, 1);
-            uvX2.axisX = UvProjector.ProjectionAxisKind.XPlus;
-            uvX2.axisY = UvProjector.ProjectionAxisKind.ZPlus;
+            if (hasUv)
+            {
+                AddUvGeneratorProvider(pathX, new Rect(0f, 0f, 4f, 0f), 0);
+                var uvX2 = AddUvProjectorProvider(pathX, 1);
+                uvX2.axisX = UvProjector.ProjectionAxisKind.XPlus;
+                uvX2.axisY = UvProjector.ProjectionAxisKind.ZPlus;
+            }
 
             var pathY = pillar.AddChildComponent<CompositePathProvider>("CompositePathProvider_Path Y");
             pillar.pathProviderY = pathY;
             pathY.CreateVertex(new Vector3(0f, 0f, 0f), false);
             pathY.CreateVertex(new Vector3(0f, 1f, 0f), false);
-            AddUvGeneratorProvider(pathY, new Rect(0f, 0f, 0f, 1f), 0);
+            if (hasUv)
+            {
+                AddUvGeneratorProvider(pathY, new Rect(0f, 0f, 0f, 1f), 0);
+            }
+
             return pillar;
         }
 
-        public static MeshProvider CreateSpherePrimitive()
+        public static MeshProvider CreateSpherePrimitive(bool hasUv)
         {
             var gameObject = new GameObject("Sphere Provider");
             var matrix = gameObject.AddComponent<MatrixMeshProvider>();
@@ -159,7 +178,10 @@ namespace Silksprite.MeshWeaver.Utils
             pathX.subdivision = 16;
             pathX.hasLegacyRadius = false;
             matrix.pathProviderX = pathX;
-            AddUvGeneratorProvider(pathX, new Rect(0f, 0f, 2f, 0f), 0, 0f);
+            if (hasUv)
+            {
+                AddUvGeneratorProvider(pathX, new Rect(0f, 0f, 2f, 0f), 0, 0f);
+            }
 
             var pathY = matrix.AddChildComponent<RevolutionPathProvider>("RevolutionPathProvider_Path Y");
             pathY.axis = RevolutionPathieFactory.Axis.X;
@@ -170,19 +192,26 @@ namespace Silksprite.MeshWeaver.Utils
             pathY.isLoop = false;
             pathY.hasLegacyRadius = false;
             matrix.pathProviderY = pathY;
-            AddUvGeneratorProvider(pathY, new Rect(0f, 1f, 0f, 0f), 0);
+            if (hasUv)
+            {
+                AddUvGeneratorProvider(pathY, new Rect(0f, 1f, 0f, 0f), 0);
+            }
 
             return matrix;
         }
 
-        public static MeshProvider CreateCylinderPrimitive()
+        public static MeshProvider CreateCylinderPrimitive(bool hasUv)
         {
             var gameObject = new GameObject("Cylinder Provider");
             var pillar = gameObject.AddComponent<PillarMeshProvider>();
             pillar.fillBottom = true;
             pillar.fillTop = true;
-            pillar.uvChannelBottom = 1;
-            pillar.uvChannelTop = 1;
+            if (hasUv)
+            {
+                pillar.uvChannelBottom = 1;
+                pillar.uvChannelTop = 1;
+            }
+
             pillar.operatorKind = MatrixMeshieFactory.OperatorKind.ApplyY;
 
             var pathX = pillar.AddChildComponent<RevolutionPathProvider>("RevolutionPathProvider_Path X");
@@ -193,28 +222,37 @@ namespace Silksprite.MeshWeaver.Utils
             pathX.subdivision = 16;
             pathX.hasLegacyRadius = false;
             pillar.pathProviderX = pathX;
-            AddUvGeneratorProvider(pathX, new Rect(0f, 0f, 2f, 0f), 0);
-            var uvX2 = AddUvProjectorProvider(pathX, 1);
-            uvX2.axisX = UvProjector.ProjectionAxisKind.XPlus;
-            uvX2.axisY = UvProjector.ProjectionAxisKind.ZPlus;
+            if (hasUv)
+            {
+                AddUvGeneratorProvider(pathX, new Rect(0f, 0f, 2f, 0f), 0);
+                var uvX2 = AddUvProjectorProvider(pathX, 1);
+                uvX2.axisX = UvProjector.ProjectionAxisKind.XPlus;
+                uvX2.axisY = UvProjector.ProjectionAxisKind.ZPlus;
+            }
 
             var pathY = pillar.AddChildComponent<CompositePathProvider>("CompositePathProvider_Path Y");
             pathY.CreateVertex(new Vector3(0f, 0f, 0f), false);
             pathY.CreateVertex(new Vector3(0f, 1f, 0f), false);
             pillar.pathProviderY = pathY;
-            AddUvGeneratorProvider(pathY, new Rect(0f, 0f, 0f, 1f), 0);
+            if (hasUv)
+            {
+                AddUvGeneratorProvider(pathY, new Rect(0f, 0f, 0f, 1f), 0);
+            }
 
             return pillar;
         }
 
-        public static MeshProvider CreateStairsPrimitive()
+        public static MeshProvider CreateStairsPrimitive(bool hasUv)
         {
             var gameObject = new GameObject("Stairs Provider");
             var pillar = gameObject.AddComponent<PillarMeshProvider>();
             pillar.fillBottom = true;
             pillar.fillTop = true;
-            pillar.uvChannelBottom = 1;
-            pillar.uvChannelTop = 1;
+            if (hasUv)
+            {
+                pillar.uvChannelBottom = 1;
+                pillar.uvChannelTop = 1;
+            }
 
             var pathX = pillar.AddChildComponent<CompositePathProvider>("CompositePathProvider_Path X");
             pillar.pathProviderX = pathX;
@@ -233,14 +271,20 @@ namespace Silksprite.MeshWeaver.Utils
             pathX.CreateVertex(new Vector3(1f, 1f, 0f), true);
             pathX.CreateVertex(new Vector3(1f, 0f, 0f), true);
             pathX.CreateVertex(new Vector3(0f, 0f, 0f), false);
-            AddUvGeneratorProvider(pathX, new Rect(0f, 0f, 2f, 0f), 0);
-            AddUvProjectorProvider(pathX, 1);
+            if (hasUv)
+            {
+                AddUvGeneratorProvider(pathX, new Rect(0f, 0f, 2f, 0f), 0);
+                AddUvProjectorProvider(pathX, 1);
+            }
 
             var pathY = pillar.AddChildComponent<CompositePathProvider>("CompositePathProvider_Path Y");
             pillar.pathProviderY = pathY;
             pathY.CreateVertex(new Vector3(0f, 0f, 0f), false);
             pathY.CreateVertex(new Vector3(0f, 0f, 1f), false);
-            AddUvGeneratorProvider(pathY, new Rect(0f, 0f, 0f, 1f), 0);
+            if (hasUv)
+            {
+                AddUvGeneratorProvider(pathY, new Rect(0f, 0f, 0f, 1f), 0);
+            }
 
             return pillar;
         }

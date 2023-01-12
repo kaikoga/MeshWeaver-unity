@@ -4,15 +4,20 @@ using UnityEngine;
 
 namespace Silksprite.MeshWeaver.Controllers.Base
 {
-    public abstract class ProviderBase<T> : MonoBehaviour
+    public abstract class ProviderBase : MonoBehaviour
     {
-        const int CurrentSerializedFormat = 1;
+        protected const int CurrentSerializedFormat = 1;
 
         [HideInInspector]
-        [SerializeField] int serializedFormat = CurrentSerializedFormat;
+        [SerializeField] protected int serializedFormat = CurrentSerializedFormat;
 
         protected virtual bool RefreshAlways => false;
 
+        protected virtual void Upgrade(int oldVersion, int newVersion) { }
+    }
+
+    public abstract class ProviderBase<T> : ProviderBase
+    {
         IMeshContext _lastContext;
 
         bool _hasCachedObject;
@@ -74,8 +79,5 @@ namespace Silksprite.MeshWeaver.Controllers.Base
         protected abstract T CreateObject(IMeshContext context);
 
         protected virtual void RefreshUnityReferences() { }
-        
-        protected virtual void Upgrade(int oldVersion, int newVersion) { }
-
     }
 }

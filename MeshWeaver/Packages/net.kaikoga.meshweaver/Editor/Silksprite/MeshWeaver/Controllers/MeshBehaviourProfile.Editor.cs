@@ -1,21 +1,29 @@
+using Silksprite.MeshWeaver.Controllers.Base;
 using UnityEditor;
+using UnityEditor.UIElements;
+using UnityEngine.UIElements;
 
 namespace Silksprite.MeshWeaver.Controllers
 {
     [CanEditMultipleObjects]
     [CustomEditor(typeof(MeshBehaviourProfile))]
-    public class MeshBehaviourProfileEditor : Editor
+    public class MeshBehaviourProfileEditor : MeshWeaverEditorBase
     {
-        public override void OnInspectorGUI()
+        protected override bool IsMainComponentEditor => false;
+
+        protected sealed override void PopulateInspectorGUI(VisualElement container)
         {
-            var serializedObj = serializedObject;
-            var property = serializedObject.FindProperty("data");
-            property.NextVisible(true);
-            do
+            container.Add(new IMGUIContainer(() =>
             {
-                EditorGUILayout.PropertyField(property);
-            } while (property.NextVisible(false));
-            serializedObj.ApplyModifiedProperties();
+                var property = serializedObject.FindProperty("data");
+                property.NextVisible(true);
+                do
+                {
+                    EditorGUILayout.PropertyField(property);
+                } while (property.NextVisible(false));
+
+                serializedObject.ApplyModifiedProperties();
+            }));
         }
     }
 }
