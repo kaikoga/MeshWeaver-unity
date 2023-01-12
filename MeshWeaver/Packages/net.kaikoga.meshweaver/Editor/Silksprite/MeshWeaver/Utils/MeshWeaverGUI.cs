@@ -7,16 +7,6 @@ namespace Silksprite.MeshWeaver.Utils
 {
     public static class MeshWeaverGUI
     {
-        public static void DumpFoldout(string titlePrefix, ref bool isExpanded, Func<IDump> dump)
-        {
-            var dumped = dump();
-            isExpanded = EditorGUILayout.Foldout(isExpanded, $"{titlePrefix}: {dumped}");
-            if (isExpanded)
-            {
-                EditorGUILayout.TextArea(dumped?.Dump() ?? "null");
-            }
-        }
-
         public static void MultiPropertyField(Rect position, GUIContent[] subLabels, SerializedProperty valuesIterator, float labelWidth)
         {
             void DrawNext(Rect pos, GUIContent label, int i)

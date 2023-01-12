@@ -1,7 +1,7 @@
 using Silksprite.MeshWeaver.Controllers.Base;
-using Silksprite.MeshWeaver.Utils;
 using UnityEditor;
-using static Silksprite.MeshWeaver.Utils.Localization;
+using UnityEngine.UIElements;
+using static Silksprite.MeshWeaver.Tools.LocalizationTool;
 
 namespace Silksprite.MeshWeaver.Controllers.Meshes
 {
@@ -9,21 +9,10 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
     [CanEditMultipleObjects]
     public class ImportMeshProviderEditor : MeshProviderEditorBase
     {
-        SerializedProperty _serializedMesh;
-        SerializedProperty _serializedMaterials;
-
-        void OnEnable()
+        protected override void PopulatePropertiesGUI(VisualElement container)
         {
-            _serializedMesh = serializedObject.FindProperty(nameof(ImportMeshProvider.mesh));
-            _serializedMaterials = serializedObject.FindProperty(nameof(ImportMeshProvider.materials));
-        }
-
-        protected override void OnPropertiesGUI()
-        {
-            base.OnPropertiesGUI();
-            MeshWeaverGUILayout.PropertyField(_serializedMesh, Loc("ImportMeshProvider.mesh"));
-            MeshWeaverGUILayout.PropertyField(_serializedMaterials, Loc("ImportMeshProvider.materials"));
-            serializedObject.ApplyModifiedProperties();
+            container.Add(Prop(nameof(ImportMeshProvider.mesh), Loc("ImportMeshProvider.mesh")));
+            container.Add(Prop(nameof(ImportMeshProvider.materials), Loc("ImportMeshProvider.materials")));
         }
     }
 }

@@ -1,8 +1,9 @@
 using Silksprite.MeshWeaver.Controllers.Base;
 using Silksprite.MeshWeaver.Controllers.Utils;
-using Silksprite.MeshWeaver.Utils;
+using Silksprite.MeshWeaver.UIElements;
 using UnityEditor;
-using static Silksprite.MeshWeaver.Utils.Localization;
+using UnityEngine.UIElements;
+using static Silksprite.MeshWeaver.Tools.LocalizationTool;
 
 namespace Silksprite.MeshWeaver.Controllers.Meshes
 {
@@ -10,41 +11,22 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
     [CanEditMultipleObjects]
     public class StitchMeshProviderEditor : MeshProviderEditorBase
     {
-        StitchMeshProvider _meshProvider;
-
-        SerializedProperty _serializedPathProviderA;
-        SerializedProperty _serializedPathProviderB;
-        SerializedProperty _serializedMaterial;
-
-        bool _isExpandedA;
-        bool _isExpandedB;
-
-        void OnEnable()
+        protected override void PopulatePropertiesGUI(VisualElement container)
         {
-            _meshProvider = (StitchMeshProvider)target;
+            container.Add(Prop(nameof(StitchMeshProvider.pathProviderA), Loc("StitchMeshProvider.pathProviderA")));
+            container.Add(PathProviderMenus.CollectionsMenu.VisualElement((StitchMeshProvider)target, "Path A",
+                serializedObject.FindProperty(nameof(StitchMeshProvider.pathProviderA))));
+            container.Add(Prop(nameof(StitchMeshProvider.pathProviderB), Loc("StitchMeshProvider.pathProviderB")));
+            container.Add(PathProviderMenus.CollectionsMenu.VisualElement((StitchMeshProvider)target, "Path B",
+                serializedObject.FindProperty(nameof(StitchMeshProvider.pathProviderB))));
 
-            _serializedPathProviderA = serializedObject.FindProperty(nameof(StitchMeshProvider.pathProviderA));
-            _serializedPathProviderB = serializedObject.FindProperty(nameof(StitchMeshProvider.pathProviderB));
-            _serializedMaterial = serializedObject.FindProperty(nameof(StitchMeshProvider.material));
+            container.Add(Prop(nameof(StitchMeshProvider.material), Loc("StitchMeshProvider.material")));
         }
 
-        protected override void OnPropertiesGUI()
+        protected override void PopulateDumpGUI(VisualElement container)
         {
-            base.OnPropertiesGUI();
-            MeshWeaverGUILayout.PropertyField(_serializedPathProviderA, Loc("StitchMeshProvider.pathProviderA"));
-            PathProviderMenus.CollectionsMenu.PropertyField(_meshProvider, " ", "Path A", ref _meshProvider.pathProviderA);
-            MeshWeaverGUILayout.PropertyField(_serializedPathProviderB, Loc("StitchMeshProvider.pathProviderB"));
-            PathProviderMenus.CollectionsMenu.PropertyField(_meshProvider, " ", "Path B", ref _meshProvider.pathProviderB);
-
-            MeshWeaverGUILayout.PropertyField(_serializedMaterial, Loc("StitchMeshProvider.material"));
-            serializedObject.ApplyModifiedProperties();
-        }
-
-        protected override void OnDumpGUI()
-        {
-            base.OnDumpGUI();
-            MeshWeaverGUI.DumpFoldout("Path data A", ref _isExpandedA, () => _meshProvider.LastPathieA?.Build(MeshWeaverSettings.Current.currentLodMaskLayer));
-            MeshWeaverGUI.DumpFoldout("Path data B", ref _isExpandedB, () => _meshProvider.LastPathieB?.Build(MeshWeaverSettings.Current.currentLodMaskLayer));
+            container.Add(new DumpFoldout(Loc("Input Path dump A"), () => ((StitchMeshProvider)target).LastPathieA?.Build(MeshWeaverSettings.Current.CurrentLodMaskLayer)));
+            container.Add(new DumpFoldout(Loc("Input Path dump B"), () => ((StitchMeshProvider)target).LastPathieB?.Build(MeshWeaverSettings.Current.CurrentLodMaskLayer)));
         }
     }
 }

@@ -4,36 +4,23 @@ using Silksprite.MeshWeaver.Controllers.Paths;
 using Silksprite.MeshWeaver.Controllers.Utils;
 using Silksprite.MeshWeaver.Models;
 using Silksprite.MeshWeaver.Models.DataObjects;
+using Silksprite.MeshWeaver.UIElements;
 using Silksprite.MeshWeaver.Utils;
-using UnityEditor;
 using UnityEngine;
-using static Silksprite.MeshWeaver.Utils.Localization;
+using UnityEngine.UIElements;
+using static Silksprite.MeshWeaver.Tools.LocalizationTool;
 
 namespace Silksprite.MeshWeaver.Controllers.Base
 {
     public abstract class PathProviderEditorBase : ProviderEditorBase
     {
-        bool _isExpanded;
-        bool _isColliderExpanded;
-        
-        Pathie _pathie;
-        Pathie _colliderPathie;
+        protected override bool IsMainComponentEditor => true;
 
-        public sealed override void OnInspectorGUI()
+        protected sealed override void PopulateInspectorGUI(VisualElement container)
         {
-            MeshWeaverControllerGUILayout.LangSelectorGUI();
-            using (var changedScope = new EditorGUI.ChangeCheckScope())
-            {
-                MeshWeaverControllerGUILayout.LodSelectorGUI(target);
-                OnPropertiesGUI();
-                if (changedScope.changed)
-                {
-                    _pathie = null;
-                    _colliderPathie = null;
-                }
-            }
-
-            if (GUILayout.Button(Tr("Bake")))
+            container.Add(CreatePropertiesGUI());
+            container.Add(PathModifierProviderMenus.Menu.VisualElement((PathProvider)target));
+            container.Add(new LocButton(Loc("Bake"), () =>
             {
                 var pathProvider = (PathProvider)target;
                 var transform = pathProvider.transform;
@@ -44,33 +31,34 @@ namespace Silksprite.MeshWeaver.Controllers.Base
                 bakedTransform.localPosition = transform.localPosition;
                 bakedTransform.localRotation = transform.localRotation;
                 bakedTransform.localScale = transform.localScale;
-            }
-
-            OnDumpGUI();
+            }));
+            container.Add(CreateDumpGUI());
         }
 
-        protected virtual void OnPropertiesGUI()
+        VisualElement CreatePropertiesGUI()
         {
-            MeshWeaverGUILayout.PropertyField(serializedObject.FindProperty("lodMask"), Loc("GeometryProvider.lodMask"));
-            serializedObject.ApplyModifiedProperties();
-        }
-
-        protected virtual void OnDumpGUI()
-        {
-            var pathProvider = (PathProvider)target;
-            var factory = pathProvider.LastFactory;
-            if (factory != null)
+            return new Div("mw-properties", c =>
             {
-                if (_pathie == null) _pathie = factory.Build(MeshWeaverSettings.Current.currentLodMaskLayer);
-                if (_colliderPathie == null) _colliderPathie = factory.Build(LodMaskLayer.Collider);
-            }
-
-            MeshWeaverGUI.DumpFoldout(Tr("Path Dump"), ref _isExpanded, () => _pathie);
-            MeshWeaverGUI.DumpFoldout(Tr("Collider Path Dump"), ref _isColliderExpanded, () => _colliderPathie);
-
+                c.Add(Prop(nameof(PathProvider.lodMask), Loc("GeometryProvider.lodMask")));
+                PopulatePropertiesGUI(c);
+            });
         }
 
-        protected void OnBaseInspectorGUI() => base.OnInspectorGUI();
+        VisualElement CreateDumpGUI()
+        {
+            return new Div("mw-dump", c =>
+            {
+                c.Add(new DumpFoldout(Loc("Path Dump"), () => ((PathProvider)target).LastFactory?.Build(MeshWeaverSettings.Current.CurrentLodMaskLayer)));
+                c.Add(new DumpFoldout(Loc("Collider Path Dump"), () => ((PathProvider)target).LastFactory?.Build(LodMaskLayer.Collider)));
+                PopulateDumpGUI(c);
+            });
+        }
+
+        protected abstract void PopulatePropertiesGUI(VisualElement container);
+
+        protected virtual void PopulateDumpGUI(VisualElement container)
+        {
+        }
 
         protected bool HasFrameBounds() => true;
 

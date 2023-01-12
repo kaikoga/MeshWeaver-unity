@@ -1,20 +1,20 @@
 using Silksprite.MeshWeaver.Controllers.Base;
-using Silksprite.MeshWeaver.Controllers.Fallback;
 using Silksprite.MeshWeaver.Controllers.Utils;
 using UnityEditor;
-using static Silksprite.MeshWeaver.Utils.Localization;
+using UnityEngine.UIElements;
+using static Silksprite.MeshWeaver.Tools.LocalizationTool;
 
 namespace Silksprite.MeshWeaver.Controllers.Paths
 {
     [CustomEditor(typeof(CompositePathProvider))]
     [CanEditMultipleObjects]
-    public class CompositePathProviderEditor : PathProviderEditor
+    public class CompositePathProviderEditor : PathProviderEditorBase
     {
-        protected override void OnPropertiesGUI()
+        protected override void PopulatePropertiesGUI(VisualElement container)
         {
-            base.OnPropertiesGUI();
-            var compositePathProvider = (CompositePathProvider)target;
-            PathProviderMenus.ElementsMenu.ChildPopup(compositePathProvider, Tr("Path Providers"));
+            container.Add(PathProviderMenus.ElementsMenu.VisualElement((CompositePathProvider)target, Loc("Path Providers")));
+            container.Add(Prop(nameof(PathReference.isLoop), Loc("PathReference.isLoop")));
+            container.Add(Prop(nameof(PathReference.smoothJoin), Loc("PathReference.smoothJoin")));
         }
     }
 }

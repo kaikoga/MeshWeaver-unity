@@ -1,8 +1,8 @@
 using Silksprite.MeshWeaver.Controllers.Base;
 using Silksprite.MeshWeaver.Controllers.Utils;
-using Silksprite.MeshWeaver.Utils;
 using UnityEditor;
-using static Silksprite.MeshWeaver.Utils.Localization;
+using UnityEngine.UIElements;
+using static Silksprite.MeshWeaver.Tools.LocalizationTool;
 
 namespace Silksprite.MeshWeaver.Controllers.Meshes
 {
@@ -10,26 +10,12 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
     [CanEditMultipleObjects]
     public class PolygonMeshProviderEditor : MeshProviderEditorBase
     {
-        PolygonMeshProvider _meshProvider;
-
-        SerializedProperty _serializedPathProvider;
-        SerializedProperty _serializedMaterial;
-
-        void OnEnable()
+        protected override void PopulatePropertiesGUI(VisualElement container)
         {
-            _meshProvider = (PolygonMeshProvider)target;
-
-            _serializedPathProvider = serializedObject.FindProperty(nameof(PolygonMeshProvider.pathProvider));
-            _serializedMaterial = serializedObject.FindProperty(nameof(PolygonMeshProvider.material));
-        }
-
-        protected override void OnPropertiesGUI()
-        {
-            base.OnPropertiesGUI();
-            MeshWeaverGUILayout.PropertyField(_serializedPathProvider, Loc("PolygonMeshProvider.pathProvider"));
-            PathProviderMenus.CollectionsMenu.PropertyField(_meshProvider, " ", "Path", ref _meshProvider.pathProvider);
-            MeshWeaverGUILayout.PropertyField(_serializedMaterial, Loc("PolygonMeshProvider.material"));
-            serializedObject.ApplyModifiedProperties();
+            container.Add(Prop(nameof(PolygonMeshProvider.pathProvider), Loc("PolygonMeshProvider.pathProvider")));
+            container.Add(PathProviderMenus.CollectionsMenu.VisualElement((PolygonMeshProvider)target, "Path",
+                serializedObject.FindProperty(nameof(PolygonMeshProvider.pathProvider))));
+            container.Add(Prop(nameof(PolygonMeshProvider.material), Loc("PolygonMeshProvider.material")));
         }
     }
 }

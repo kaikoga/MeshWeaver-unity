@@ -5,36 +5,23 @@ using Silksprite.MeshWeaver.Controllers.Meshes;
 using Silksprite.MeshWeaver.Controllers.Utils;
 using Silksprite.MeshWeaver.Models;
 using Silksprite.MeshWeaver.Models.DataObjects;
+using Silksprite.MeshWeaver.UIElements;
 using Silksprite.MeshWeaver.Utils;
-using UnityEditor;
 using UnityEngine;
-using static Silksprite.MeshWeaver.Utils.Localization;
+using UnityEngine.UIElements;
+using static Silksprite.MeshWeaver.Tools.LocalizationTool;
 
 namespace Silksprite.MeshWeaver.Controllers.Base
 {
     public abstract class MeshProviderEditorBase : ProviderEditorBase
     {
-        bool _isExpanded;
-        bool _isColliderExpanded;
+        protected override bool IsMainComponentEditor => true;
 
-        Meshie _meshie;
-        Meshie _colliderMeshie;
-
-        public sealed override void OnInspectorGUI()
+        protected sealed override void PopulateInspectorGUI(VisualElement container)
         {
-            MeshWeaverControllerGUILayout.LangSelectorGUI();
-            using (var changedScope = new EditorGUI.ChangeCheckScope())
-            {
-                MeshWeaverControllerGUILayout.LodSelectorGUI(target);
-                OnPropertiesGUI();
-                if (changedScope.changed)
-                {
-                    _meshie = null;
-                    _colliderMeshie = null;
-                }
-            }
-
-            if (GUILayout.Button(Tr("Bake")))
+            container.Add(CreatePropertiesGUI());
+            container.Add(MeshModifierProviderMenus.Menu.VisualElement((MeshProvider)target));
+            container.Add(new LocButton(Loc("Bake"), () =>
             {
                 var meshProvider = (MeshProvider)target;
                 var transform = meshProvider.transform;
@@ -45,36 +32,39 @@ namespace Silksprite.MeshWeaver.Controllers.Base
                     baked.meshData = LodMaskLayers.Values.Select(lod => MeshieData.FromMeshie(meshProvider.ToFactory(context).Build(lod), i => i)).ToArray();
                     baked.materials = context.ToMaterials();
                 }
+
                 var bakedTransform = baked.transform;
                 bakedTransform.localPosition = transform.localPosition;
                 bakedTransform.localRotation = transform.localRotation;
                 bakedTransform.localScale = transform.localScale;
-            }
-
-            OnDumpGUI();
+            }));
+            container.Add(CreateDumpGUI());
         }
 
-        protected virtual void OnPropertiesGUI()
+        VisualElement CreatePropertiesGUI()
         {
-            MeshWeaverGUILayout.PropertyField(serializedObject.FindProperty("lodMask"), Loc("GeometryProvider.lodMask"));
-            serializedObject.ApplyModifiedProperties();
-        }
-
-        protected virtual void OnDumpGUI()
-        {
-            var meshProvider = (MeshProvider)target;
-            var factory = meshProvider.LastFactory;
-            if (factory != null)
+            return new Div("mw-properties", c =>
             {
-                if (_meshie == null) _meshie = factory.Build(MeshWeaverSettings.Current.currentLodMaskLayer);
-                if (_colliderMeshie == null) _colliderMeshie = factory.Build(LodMaskLayer.Collider);
-            }
-
-            MeshWeaverGUI.DumpFoldout(Tr("Mesh Dump"), ref _isExpanded, () => _meshie);
-            MeshWeaverGUI.DumpFoldout(Tr("Collider Mesh Dump"), ref _isColliderExpanded, () => _colliderMeshie);
+                c.Add(Prop(nameof(MeshProvider.lodMask), Loc("GeometryProvider.lodMask")));
+                PopulatePropertiesGUI(c);
+            });
         }
 
-        protected void OnBaseInspectorGUI() => base.OnInspectorGUI();
+        VisualElement CreateDumpGUI()
+        {
+            return new Div("mw-dump", c =>
+            {
+                c.Add(new DumpFoldout(Loc("Mesh Dump"), () => ((MeshProvider)target).LastFactory?.Build(MeshWeaverSettings.Current.CurrentLodMaskLayer)));
+                c.Add(new DumpFoldout(Loc("Collider Mesh Dump"), () => ((MeshProvider)target).LastFactory?.Build(LodMaskLayer.Collider)));
+                PopulateDumpGUI(c);
+            });
+        }
+
+        protected abstract void PopulatePropertiesGUI(VisualElement container);
+
+        protected virtual void PopulateDumpGUI(VisualElement container)
+        {
+        }
 
         protected bool HasFrameBounds() => true;
 
