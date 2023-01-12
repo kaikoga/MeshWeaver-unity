@@ -23,7 +23,13 @@ namespace Silksprite.MeshWeaver.UIElements
                     property.serializedObject.ApplyModifiedProperties();
                     using (var evt = PropertyChangeEvent.GetPooled()) SendEvent(evt);
                 }
-            }) { name = "mw-imgui" });
+            }) { name = "mw-imgui", style =
+            {
+                paddingTop = new StyleLength(1f),
+                paddingBottom = new StyleLength(1f),
+                paddingLeft = new StyleLength(1f),
+                paddingRight = new StyleLength(1f)
+            } });
         }
     }
 
