@@ -18,5 +18,20 @@ namespace Silksprite.MeshWeaver.UIElements.Extensions
             callbackEventHandler.UnregisterCallback(callback);
             return true;
         }
+        
+        public static bool RegisterPropertyChangedCallback<T>(this LocPropertyField propertyField, EventCallback<PropertyChangeEvent> callback)
+        {
+            if (!(propertyField is CallbackEventHandler callbackEventHandler)) return false;
+            callbackEventHandler.RegisterCallback(callback);
+            return true;
+        }
+
+        public static bool UnregisterPropertyChangedCallback<T>(this LocPropertyField propertyField, EventCallback<PropertyChangeEvent> callback)
+        {
+            if (!(propertyField is CallbackEventHandler callbackEventHandler)) return false;
+            callbackEventHandler.UnregisterCallback(callback);
+            return true;
+        }
+
     }
 }

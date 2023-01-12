@@ -5,9 +5,31 @@ using UnityEngine.UIElements;
 
 namespace Silksprite.MeshWeaver.UIElements
 {
-    public class LocPropertyField : PropertyField  
+    public class LocPropertyField : VisualElement
     {
-        public LocPropertyField(SerializedProperty property, LocalizedContent locLabel) : base(property, Localization.Lang == "en" ? property.displayName : locLabel.Tr)
+        // Very ugly implementation using EditorGUILayout.PropertyField(), because
+        // - it is currently the only simple way to dynamically update label content,
+        // - only IMGUI supports custom property attributes, and
+        // - only IMGUI is supported by prefab override editor
+        public LocPropertyField(SerializedProperty property, LocalizedContent locLabel)
+        {
+            name = "mw-genericProperty";
+            Add(new IMGUIContainer(() =>
+            {
+                EditorGUI.BeginChangeCheck();
+                MeshWeaverGUILayout.PropertyField(property, locLabel);
+                if (EditorGUI.EndChangeCheck())
+                {
+                    property.serializedObject.ApplyModifiedProperties();
+                    using (var evt = PropertyChangeEvent.GetPooled()) SendEvent(evt);
+                }
+            }) { name = "mw-imgui" });
+        }
+    }
+
+    public class LocPropertyField2 : PropertyField  
+    {
+        public LocPropertyField2(SerializedProperty property, LocalizedContent locLabel) : base(property, Localization.Lang == "en" ? property.displayName : locLabel.Tr)
         {
             style.flexGrow = new StyleFloat(1f);
         }
