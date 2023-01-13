@@ -6,6 +6,7 @@ namespace Silksprite.MeshWeaver.GUIActions.Extensions
 {
     public static class GUIElementExtension
     {
+        // FIXME: implement scopes as proper GUIAction attributes instead of wrapped objects
         public static GUIAction WithDisplay(this GUIAction guiAction, bool displayIfTrue) => WithDisplayImpl(guiAction, () => displayIfTrue);
 
         public static GUIAction WithEnabled(this GUIAction guiAction, bool enableIfTrue) => WithEnabledImpl(guiAction, () => enableIfTrue);
