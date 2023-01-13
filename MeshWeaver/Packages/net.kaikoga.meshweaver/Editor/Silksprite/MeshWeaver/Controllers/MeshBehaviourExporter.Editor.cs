@@ -47,7 +47,7 @@ namespace Silksprite.MeshWeaver.Controllers
             var editLinkedAssets = new LocToggle(Loc("Edit Linked Assets")) { value = _editLinkedAssets };
             editLinkedAssets.RegisterValueChangedCallback(changed =>
             {
-                _editLinkedAssets = changed.newValue;
+                _editLinkedAssets = editLinkedAssets.value;
                 onRefresh.Invoke();
             });
             container.Add(editLinkedAssets);

@@ -1,6 +1,6 @@
 namespace Silksprite.MeshWeaver.GUIActions.Events
 {
-    public class RefreshEvent : EventBase<RefreshEvent>
+    public class ChangeEvent<T> : EventBase<ChangeEvent<T>>
     {
     }
 }

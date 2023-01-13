@@ -2,7 +2,6 @@ using Silksprite.MeshWeaver.GUIActions.Events;
 using Silksprite.MeshWeaver.Utils;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace Silksprite.MeshWeaver.GUIActions
 {

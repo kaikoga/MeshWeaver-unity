@@ -1,6 +1,5 @@
 using Silksprite.MeshWeaver.GUIActions.Events;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace Silksprite.MeshWeaver.GUIActions.Extensions
 {

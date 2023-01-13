@@ -17,7 +17,8 @@ namespace Silksprite.MeshWeaver.GUIActions.Extensions
 
         public static GUIAction WithDisplayOnRefresh(this DivIfElse guiElement, Dispatcher<RefreshEvent> onRefresh, Func<bool> displayIfTrue)
         {
-            return WithDisplayImpl(guiElement, displayIfTrue);
+            onRefresh.Add(_ => guiElement.value = displayIfTrue());
+            return guiElement;
         }
 
         public static GUIAction WithEnableOnRefresh(this GUIAction guiAction, Dispatcher<RefreshEvent> onRefresh, Func<bool> enableIfTrue)

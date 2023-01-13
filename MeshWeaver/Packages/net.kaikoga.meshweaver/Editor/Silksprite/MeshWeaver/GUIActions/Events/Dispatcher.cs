@@ -1,5 +1,3 @@
-using UnityEngine.UIElements;
-
 namespace Silksprite.MeshWeaver.GUIActions.Events
 {
     public class Dispatcher<T> where T : EventBase<T>, new()
@@ -12,8 +10,5 @@ namespace Silksprite.MeshWeaver.GUIActions.Events
         {
             using (var evt = EventBase<T>.GetPooled()) _onDispatch?.Invoke(evt);
         }
-    }
-    
-    namespace Extensions {
     }
 }
