@@ -5,9 +5,7 @@ namespace Silksprite.MeshWeaver.GUIActions
 {
     public class HDiv : GUIContainer
     {
-        public HDiv(Action<GUIContainer> initializer) : this(null, initializer) { }
-
-        public HDiv(string containerName, Action<GUIContainer> initializer)
+        public HDiv(Action<GUIContainer> initializer)
         {
             initializer(this);
         }

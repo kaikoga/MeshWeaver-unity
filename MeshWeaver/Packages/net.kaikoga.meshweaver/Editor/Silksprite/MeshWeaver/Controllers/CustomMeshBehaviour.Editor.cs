@@ -22,7 +22,7 @@ namespace Silksprite.MeshWeaver.Controllers
 
         protected sealed override void PopulateInspectorGUI(GUIContainer container)
         {
-            container.Add(new Div("properties", c =>
+            container.Add(new Div(c =>
             {
                 c.Add(Prop(nameof(CustomMeshBehaviour.updatesEveryFrame), Loc("CustomMeshBehaviour.updatesEveryFrame")));
                 c.Add(Prop("profile", Loc("CustomMeshBehaviour.profile")));

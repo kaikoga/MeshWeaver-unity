@@ -37,7 +37,7 @@ namespace Silksprite.MeshWeaver.Controllers
             overrideMaterials.RegisterPropertyChangedCallback<bool>(_ => onRefresh.Invoke());
             container.Add(overrideMaterials);
 
-            var materialsContainer = new Div("mw-materialsContainer", c =>
+            var materialsContainer = new Div(c =>
             {
                 c.Add(Prop(nameof(MeshBehaviourExporter.materials), Loc("MeshBehaviourExporter.materials")));
                 c.Add(new LocButton(Loc("Copy Materials from MeshBehaviour"), () => { _meshBehaviourExporter.materials = _meshBehaviour.materials.ToArray(); }));

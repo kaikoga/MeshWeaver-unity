@@ -42,7 +42,7 @@ namespace Silksprite.MeshWeaver.Controllers.Base
 
         GUIAction CreatePropertiesGUI()
         {
-            return new Div("mw-properties", c =>
+            return new Div(c =>
             {
                 c.Add(Prop(nameof(MeshProvider.lodMask), Loc("GeometryProvider.lodMask")));
                 PopulatePropertiesGUI(c);
@@ -51,7 +51,7 @@ namespace Silksprite.MeshWeaver.Controllers.Base
 
         GUIAction CreateDumpGUI()
         {
-            return new Div("mw-dump", c =>
+            return new Div(c =>
             {
                 c.Add(new DumpFoldout(Loc("Mesh Dump"), () => ((MeshProvider)target).LastFactory?.Build(MeshWeaverSettings.Current.CurrentLodMaskLayer)));
                 c.Add(new DumpFoldout(Loc("Collider Mesh Dump"), () => ((MeshProvider)target).LastFactory?.Build(LodMaskLayer.Collider)));

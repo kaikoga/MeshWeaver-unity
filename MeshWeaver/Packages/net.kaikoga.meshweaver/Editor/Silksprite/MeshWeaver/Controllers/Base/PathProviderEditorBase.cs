@@ -36,7 +36,7 @@ namespace Silksprite.MeshWeaver.Controllers.Base
 
         GUIContainer CreatePropertiesGUI()
         {
-            return new Div("mw-properties", c =>
+            return new Div(c =>
             {
                 c.Add(Prop(nameof(PathProvider.lodMask), Loc("GeometryProvider.lodMask")));
                 PopulatePropertiesGUI(c);
@@ -45,7 +45,7 @@ namespace Silksprite.MeshWeaver.Controllers.Base
 
         GUIContainer CreateDumpGUI()
         {
-            return new Div("mw-dump", c =>
+            return new Div(c =>
             {
                 c.Add(new DumpFoldout(Loc("Path Dump"), () => ((PathProvider)target).LastFactory?.Build(MeshWeaverSettings.Current.CurrentLodMaskLayer)));
                 c.Add(new DumpFoldout(Loc("Collider Path Dump"), () => ((PathProvider)target).LastFactory?.Build(LodMaskLayer.Collider)));
