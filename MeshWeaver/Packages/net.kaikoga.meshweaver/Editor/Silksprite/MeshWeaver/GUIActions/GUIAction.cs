@@ -1,13 +1,10 @@
 using System;
-using UnityEngine.UIElements;
 
 namespace Silksprite.MeshWeaver.GUIActions
 {
     public abstract class GUIAction
     {
         public abstract void OnGUI();
-
-        public VisualElement VisualElement() => new IMGUIContainer(OnGUI);
 
         public static GUIAction Build(Action onGUI) => new GUIActionImpl(onGUI);
 

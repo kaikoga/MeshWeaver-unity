@@ -4,7 +4,6 @@ using Silksprite.MeshWeaver.Controllers.Extensions;
 using Silksprite.MeshWeaver.GUIActions;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.UIElements;
 using static Silksprite.MeshWeaver.Tools.LocalizationTool;
 
 namespace Silksprite.MeshWeaver.Utils
@@ -21,17 +20,8 @@ namespace Silksprite.MeshWeaver.Utils
             _menuOptions = new [] { Loc("Create Child..."), _Loc("") }.Concat(types.Select(type => type == typeof(void) ? _Loc("") : _Loc(type.Name))).ToArray();
         }
 
-        public VisualElement VisualElement(Component self, LocalizedContent? label) => VisualElement(self, label, null, null);
-        public VisualElement VisualElement(Component self, string name, SerializedProperty serializedProperty) => VisualElement(self, null, name, serializedProperty);
-
         public GUIAction ToGUIAction(Component self, LocalizedContent? label) => ToGUIAction(self, label, null, null);
         public GUIAction ToGUIAction(Component self, string name, SerializedProperty serializedProperty) => ToGUIAction(self, null, name, serializedProperty);
-
-        VisualElement VisualElement(Component self, LocalizedContent? label, string name, SerializedProperty serializedProperty)
-        {
-            var guiAction = ToGUIAction(self, label, name, serializedProperty);
-            return new IMGUIContainer(() => guiAction.OnGUI());
-        }
 
         GUIAction ToGUIAction(Component self, LocalizedContent? label, string name, SerializedProperty serializedProperty)
         {

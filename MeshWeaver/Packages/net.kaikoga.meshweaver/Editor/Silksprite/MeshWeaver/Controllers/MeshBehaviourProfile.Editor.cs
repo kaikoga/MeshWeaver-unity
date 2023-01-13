@@ -1,8 +1,6 @@
 using Silksprite.MeshWeaver.Controllers.Base;
 using Silksprite.MeshWeaver.GUIActions;
 using UnityEditor;
-using UnityEditor.UIElements;
-using UnityEngine.UIElements;
 
 namespace Silksprite.MeshWeaver.Controllers
 {
