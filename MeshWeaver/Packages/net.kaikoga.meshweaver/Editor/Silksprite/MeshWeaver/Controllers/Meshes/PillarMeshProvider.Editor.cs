@@ -1,12 +1,7 @@
-using System.Collections.Generic;
 using Silksprite.MeshWeaver.Controllers.Base;
-using Silksprite.MeshWeaver.Controllers.Fallback;
 using Silksprite.MeshWeaver.Controllers.Utils;
-using Silksprite.MeshWeaver.Models.Meshes;
-using Silksprite.MeshWeaver.UIElements;
+using Silksprite.MeshWeaver.GUIActions;
 using UnityEditor;
-using UnityEngine;
-using UnityEngine.UIElements;
 using static Silksprite.MeshWeaver.Tools.LocalizationTool;
 
 namespace Silksprite.MeshWeaver.Controllers.Meshes
@@ -15,7 +10,7 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
     [CanEditMultipleObjects]
     public class PillarMeshProviderEditor : MeshProviderEditorBase
     {
-        protected override void PopulatePropertiesGUI(VisualElement container)
+        protected override void PopulatePropertiesGUI(GUIContainer container)
         {
             container.Add(Prop(nameof(PillarMeshProvider.fillBody), Loc("PillarMeshProvider.fillBody")));
             container.Add(Prop(nameof(PillarMeshProvider.fillBottom), Loc("PillarMeshProvider.fillBottom")));
@@ -30,10 +25,10 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
             container.Add(Prop(nameof(PillarMeshProvider.materialTop), Loc("PillarMeshProvider.materialTop")));
 
             container.Add(Prop(nameof(PillarMeshProvider.pathProviderX), Loc("PillarMeshProvider.pathProviderX")));
-            container.Add(PathProviderMenus.CollectionsMenu.VisualElement((PillarMeshProvider)target, "Path X",
+            container.Add(PathProviderMenus.CollectionsMenu.ToGUIAction((PillarMeshProvider)target, "Path X",
                 serializedObject.FindProperty(nameof(PillarMeshProvider.pathProviderX))));
             container.Add(Prop(nameof(PillarMeshProvider.pathProviderY), Loc("PillarMeshProvider.pathProviderY")));
-            container.Add(PathProviderMenus.CollectionsMenu.VisualElement((PillarMeshProvider)target, "Path Y",
+            container.Add(PathProviderMenus.CollectionsMenu.ToGUIAction((PillarMeshProvider)target, "Path Y",
                 serializedObject.FindProperty(nameof(PillarMeshProvider.pathProviderY))));
 
             container.Add(Prop(nameof(PillarMeshProvider.operatorKind), Loc("PillarMeshProvider.operatorKind")));
@@ -44,7 +39,7 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
             container.Add(Prop(nameof(PillarMeshProvider.reverseLids), Loc("PillarMeshProvider.reverseLids")));
         }
 
-        protected override void PopulateDumpGUI(VisualElement container)
+        protected override void PopulateDumpGUI(GUIContainer container)
         {
             var pillarMeshProvider = (PillarMeshProvider)target;
             container.Add(new DumpFoldout(Loc("Input Path dump X"), () => pillarMeshProvider.LastPathieX?.Build(MeshWeaverSettings.Current.CurrentLodMaskLayer)));

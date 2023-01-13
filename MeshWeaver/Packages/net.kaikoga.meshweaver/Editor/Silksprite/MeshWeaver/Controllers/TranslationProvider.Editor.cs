@@ -1,4 +1,5 @@
 using Silksprite.MeshWeaver.Controllers.Base;
+using Silksprite.MeshWeaver.GUIActions;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -9,7 +10,7 @@ namespace Silksprite.MeshWeaver.Controllers
     [CustomEditor(typeof(TranslationProvider))]
     public class TranslationProviderEditor : SubProviderEditorBase
     {
-        protected override void PopulatePropertiesGUI(VisualElement container)
+        protected override void PopulatePropertiesGUI(GUIContainer container)
         {
             container.Add(Prop(nameof(TranslationProvider.translation), Loc("TranslationProvider.translation")));
         }

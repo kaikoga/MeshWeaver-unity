@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Silksprite.MeshWeaver.GUIActions;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -21,6 +22,18 @@ namespace Silksprite.MeshWeaver.Utils
         public VisualElement VisualElement(Component self, LocalizedContent? label = null)
         {
             return new IMGUIContainer(() =>
+            {
+                var index = EditorGUILayout.Popup((label ?? Loc("Modifiers")).Tr, 0, _menuOptions.Select(x => x.Tr).ToArray());
+                if (index > 0)
+                {
+                    self.gameObject.AddComponent(_types[index]);
+                }
+            });
+        }
+
+        public GUIAction ToGUIAction(Component self, LocalizedContent? label = null)
+        {
+            return GUIAction.Build(() =>
             {
                 var index = EditorGUILayout.Popup((label ?? Loc("Modifiers")).Tr, 0, _menuOptions.Select(x => x.Tr).ToArray());
                 if (index > 0)

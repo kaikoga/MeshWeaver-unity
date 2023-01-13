@@ -1,10 +1,8 @@
 using Silksprite.MeshWeaver.Controllers.Base;
 using Silksprite.MeshWeaver.Controllers.Utils;
-using Silksprite.MeshWeaver.UIElements;
-using Silksprite.MeshWeaver.UIElements.Extensions;
+using Silksprite.MeshWeaver.GUIActions;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.UIElements;
 using static Silksprite.MeshWeaver.Tools.LocalizationTool;
 
 namespace Silksprite.MeshWeaver.Controllers
@@ -22,7 +20,7 @@ namespace Silksprite.MeshWeaver.Controllers
             _meshBehaviour = (CustomMeshBehaviour)target;
         }
 
-        protected sealed override void PopulateInspectorGUI(VisualElement container)
+        protected sealed override void PopulateInspectorGUI(GUIContainer container)
         {
             container.Add(new Div("properties", c =>
             {
@@ -34,7 +32,7 @@ namespace Silksprite.MeshWeaver.Controllers
             }));
             if (_meshBehaviour is MeshBehaviour)
             {
-                container.Add(MeshProviderMenus.Menu.VisualElement(_meshBehaviour, Loc("Mesh Providers")));
+                container.Add(MeshProviderMenus.Menu.ToGUIAction(_meshBehaviour, Loc("Mesh Providers")));
             }
 
             container.Add(new LocButton(Loc("Collect Materials"), () => { _meshBehaviour.CollectMaterials(); }));

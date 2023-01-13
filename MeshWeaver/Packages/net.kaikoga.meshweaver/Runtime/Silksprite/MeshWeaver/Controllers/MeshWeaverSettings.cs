@@ -40,7 +40,7 @@ namespace Silksprite.MeshWeaver.Controllers
                     using (var change = ChangeEvent<string>.GetPooled(lang, value))
                     {
                         lang = value;
-                        onGlobalLangChange(change);
+                        onGlobalLangChange?.Invoke(change);
                     }
                 }
             }

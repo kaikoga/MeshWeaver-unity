@@ -3,12 +3,11 @@ using Silksprite.MeshWeaver.Controllers.Context;
 using Silksprite.MeshWeaver.Controllers.Extensions;
 using Silksprite.MeshWeaver.Controllers.Meshes;
 using Silksprite.MeshWeaver.Controllers.Utils;
+using Silksprite.MeshWeaver.GUIActions;
 using Silksprite.MeshWeaver.Models;
 using Silksprite.MeshWeaver.Models.DataObjects;
-using Silksprite.MeshWeaver.UIElements;
 using Silksprite.MeshWeaver.Utils;
 using UnityEngine;
-using UnityEngine.UIElements;
 using static Silksprite.MeshWeaver.Tools.LocalizationTool;
 
 namespace Silksprite.MeshWeaver.Controllers.Base
@@ -17,10 +16,10 @@ namespace Silksprite.MeshWeaver.Controllers.Base
     {
         protected override bool IsMainComponentEditor => true;
 
-        protected sealed override void PopulateInspectorGUI(VisualElement container)
+        protected sealed override void PopulateInspectorGUI(GUIContainer container)
         {
             container.Add(CreatePropertiesGUI());
-            container.Add(MeshModifierProviderMenus.Menu.VisualElement((MeshProvider)target));
+            container.Add(MeshModifierProviderMenus.Menu.ToGUIAction((MeshProvider)target));
             container.Add(new LocButton(Loc("Bake"), () =>
             {
                 var meshProvider = (MeshProvider)target;
@@ -41,7 +40,7 @@ namespace Silksprite.MeshWeaver.Controllers.Base
             container.Add(CreateDumpGUI());
         }
 
-        VisualElement CreatePropertiesGUI()
+        GUIAction CreatePropertiesGUI()
         {
             return new Div("mw-properties", c =>
             {
@@ -50,7 +49,7 @@ namespace Silksprite.MeshWeaver.Controllers.Base
             });
         }
 
-        VisualElement CreateDumpGUI()
+        GUIAction CreateDumpGUI()
         {
             return new Div("mw-dump", c =>
             {
@@ -60,9 +59,9 @@ namespace Silksprite.MeshWeaver.Controllers.Base
             });
         }
 
-        protected abstract void PopulatePropertiesGUI(VisualElement container);
+        protected abstract void PopulatePropertiesGUI(GUIContainer container);
 
-        protected virtual void PopulateDumpGUI(VisualElement container)
+        protected virtual void PopulateDumpGUI(GUIContainer container)
         {
         }
 

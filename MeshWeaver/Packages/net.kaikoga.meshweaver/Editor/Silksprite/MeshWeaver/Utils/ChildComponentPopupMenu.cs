@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using Silksprite.MeshWeaver.Controllers.Extensions;
+using Silksprite.MeshWeaver.GUIActions;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -23,9 +24,18 @@ namespace Silksprite.MeshWeaver.Utils
         public VisualElement VisualElement(Component self, LocalizedContent? label) => VisualElement(self, label, null, null);
         public VisualElement VisualElement(Component self, string name, SerializedProperty serializedProperty) => VisualElement(self, null, name, serializedProperty);
 
+        public GUIAction ToGUIAction(Component self, LocalizedContent? label) => ToGUIAction(self, label, null, null);
+        public GUIAction ToGUIAction(Component self, string name, SerializedProperty serializedProperty) => ToGUIAction(self, null, name, serializedProperty);
+
         VisualElement VisualElement(Component self, LocalizedContent? label, string name, SerializedProperty serializedProperty)
         {
-            return new IMGUIContainer(() =>
+            var guiAction = ToGUIAction(self, label, name, serializedProperty);
+            return new IMGUIContainer(() => guiAction.OnGUI());
+        }
+
+        GUIAction ToGUIAction(Component self, LocalizedContent? label, string name, SerializedProperty serializedProperty)
+        {
+            return GUIAction.Build(() =>
             {
                 var index = EditorGUILayout.Popup(label?.Tr ?? " ", 0, _menuOptions.Select(loc => loc.Tr).ToArray());
                 if (index <= 0) return;
