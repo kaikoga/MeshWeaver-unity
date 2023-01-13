@@ -20,7 +20,14 @@ namespace Silksprite.MeshWeaver.GUIActions
         public override void OnGUI()
         {
             EditorGUI.BeginChangeCheck();
-            MeshWeaverGUILayout.PropertyField(_property, _locLabel);
+            if (Localization.Lang == "en")
+            {
+                EditorGUILayout.PropertyField(_property);
+            }
+            else
+            {
+                EditorGUILayout.PropertyField(_property, _locLabel.GUIContent);
+            }
             if (EditorGUI.EndChangeCheck())
             {
                 _property.serializedObject.ApplyModifiedProperties();

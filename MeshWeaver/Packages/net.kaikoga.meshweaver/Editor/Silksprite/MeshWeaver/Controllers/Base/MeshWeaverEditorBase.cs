@@ -75,9 +75,9 @@ namespace Silksprite.MeshWeaver.Controllers.Base
             {
                 using (new BackgroundColorScope(Color.magenta))
                 {
-                    MeshWeaverGUILayout.Header(Loc("Fallback Inspector"));
+                    new Header(Loc("Fallback Inspector")).OnGUI();
                     DrawDefaultInspector();
-                    MeshWeaverGUILayout.Header(Loc("End Fallback Inspector"));
+                    new Header(Loc("End Fallback Inspector")).OnGUI();
                 }
             });
         }
