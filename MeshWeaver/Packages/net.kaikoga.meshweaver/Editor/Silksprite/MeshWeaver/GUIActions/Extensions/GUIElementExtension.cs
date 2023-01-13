@@ -1,7 +1,6 @@
 using System;
-using Silksprite.MeshWeaver.UIElements;
+using Silksprite.MeshWeaver.GUIActions.Events;
 using UnityEditor;
-using RefreshEvent = Silksprite.MeshWeaver.GUIActions.Events.RefreshEvent;
 
 namespace Silksprite.MeshWeaver.GUIActions.Extensions
 {
@@ -11,17 +10,17 @@ namespace Silksprite.MeshWeaver.GUIActions.Extensions
 
         public static GUIAction WithEnabled(this GUIAction guiAction, bool enableIfTrue) => WithEnabledImpl(guiAction, () => enableIfTrue);
 
-        public static GUIAction WithDisplayOnRefresh(this GUIAction guiAction, Events.Dispatcher<RefreshEvent> onRefresh, Func<bool> displayIfTrue)
+        public static GUIAction WithDisplayOnRefresh(this GUIAction guiAction, Dispatcher<RefreshEvent> onRefresh, Func<bool> displayIfTrue)
         {
             return WithDisplayImpl(guiAction, displayIfTrue);
         }
 
-        public static GUIAction WithDisplayOnRefresh(this DivIfElse guiElement, Events.Dispatcher<RefreshEvent> onRefresh, Func<bool> displayIfTrue)
+        public static GUIAction WithDisplayOnRefresh(this DivIfElse guiElement, Dispatcher<RefreshEvent> onRefresh, Func<bool> displayIfTrue)
         {
             return WithDisplayImpl(guiElement, displayIfTrue);
         }
 
-        public static GUIAction WithEnableOnRefresh(this GUIAction guiAction, Events.Dispatcher<RefreshEvent> onRefresh, Func<bool> enableIfTrue)
+        public static GUIAction WithEnableOnRefresh(this GUIAction guiAction, Dispatcher<RefreshEvent> onRefresh, Func<bool> enableIfTrue)
         {
             return WithEnabledImpl(guiAction, enableIfTrue);
         }
