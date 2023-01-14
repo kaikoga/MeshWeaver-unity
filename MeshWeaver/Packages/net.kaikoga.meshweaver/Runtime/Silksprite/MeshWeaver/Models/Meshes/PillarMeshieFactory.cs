@@ -1,7 +1,5 @@
-using System.Collections.Generic;
-using Silksprite.MeshWeaver.Models.Extensions;
+using System;
 using Silksprite.MeshWeaver.Models.Meshes.Modifiers;
-using Silksprite.MeshWeaver.Models.Modifiers;
 using Silksprite.MeshWeaver.Models.Paths;
 using UnityEngine;
 
@@ -63,21 +61,44 @@ namespace Silksprite.MeshWeaver.Models.Meshes
                 builder.Concat(new MatrixMeshieFactory(_pathieX, _pathieY, _operatorKind, _defaultCellPatternKind, _cellPatternOverrides, _materialIndexBody).Build(lod), Matrix4x4.identity, _uvChannelBody);
             }
 
-            var (longitudePathie, latitudePathie) = _longitudeAxisKind == LongitudeAxisKind.Y ? (_pathieY, _pathieX) : (_pathieX, _pathieY);
-            var ends = longitudePathie.Build(lod);
-
             if (_fillBottom)
             {
-                var bottomMeshie = new PolygonMeshieFactory2(latitudePathie, _materialIndexBottom).Build(lod);
+                string BottomPathName()
+                {
+                    switch (_longitudeAxisKind)
+                    {
+                        case LongitudeAxisKind.X:
+                            return MatrixMeshieFactory.PathNames.XFirst;
+                        case LongitudeAxisKind.Y:
+                            return MatrixMeshieFactory.PathNames.YFirst;
+                        default:
+                            throw new ArgumentOutOfRangeException();
+                    }
+                }
+                var bottomMeshie = new PolygonMeshieFactory2(new ExtractPathieFactory(this, BottomPathName()), _materialIndexBottom).Build(lod);
                 if (_reverseLids) bottomMeshie = bottomMeshie.Apply(MeshReverse.BackOnly);
-                builder.Concat(bottomMeshie, ends.First.Translation, _uvChannelBottom);
+                builder.Concat(bottomMeshie, Matrix4x4.identity, _uvChannelBottom);
             }
+
             if (_fillTop)
             {
-                var topMeshie = new PolygonMeshieFactory2(latitudePathie, _materialIndexTop).Build(lod);
+                string TopPathName()
+                {
+                    switch (_longitudeAxisKind)
+                    {
+                        case LongitudeAxisKind.X:
+                            return MatrixMeshieFactory.PathNames.XLast;
+                        case LongitudeAxisKind.Y:
+                            return MatrixMeshieFactory.PathNames.YLast;
+                        default:
+                            throw new ArgumentOutOfRangeException();
+                    }
+                }
+                var topMeshie = new PolygonMeshieFactory2(new ExtractPathieFactory(this, TopPathName()), _materialIndexTop).Build(lod);
                 if (!_reverseLids) topMeshie = topMeshie.Apply(MeshReverse.BackOnly);
-                builder.Concat(topMeshie, ends.Last.Translation, _uvChannelTop);
+                builder.Concat(topMeshie, Matrix4x4.identity, _uvChannelTop);
             }
+
             return builder.ToMeshie();
         }
 

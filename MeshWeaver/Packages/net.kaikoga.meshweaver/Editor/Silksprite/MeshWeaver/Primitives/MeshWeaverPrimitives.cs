@@ -246,7 +246,7 @@ namespace Silksprite.MeshWeaver.Primitives
                 pillar.uvChannelTop = 1;
             }
 
-            pillar.operatorKind = MatrixMeshieFactory.OperatorKind.ApplyY;
+            pillar.operatorKind = MatrixMeshieFactory.OperatorKind.ApplyX;
 
             var pathX = pillar.AddChildComponent<RevolutionPathProvider>("RevolutionPathProvider_Path X");
             pathX.axis = RevolutionPathieFactory.Axis.Y;
@@ -265,10 +265,10 @@ namespace Silksprite.MeshWeaver.Primitives
             }
 
             var pathY = pillar.AddChildComponent<CompositePathProvider>("CompositePathProvider_Path Y");
-            pathY.CreateVertex(new Vector3(0f, 0f, 0f), false);
+            pathY.CreateVertex(new Vector3(0f, 0f, 0f), false).gameObject.SetActive(false);
             pathY.CreateVertex(new Vector3(0.5f, 0f, 0f), false);
             pathY.CreateVertex(new Vector3(0.5f, 1f, 0f), false);
-            pathY.CreateVertex(new Vector3(0f, 1f, 0f), false);
+            pathY.CreateVertex(new Vector3(0f, 1f, 0f), false).gameObject.SetActive(false);
             pillar.pathProviderY = pathY;
             if (hasUv)
             {

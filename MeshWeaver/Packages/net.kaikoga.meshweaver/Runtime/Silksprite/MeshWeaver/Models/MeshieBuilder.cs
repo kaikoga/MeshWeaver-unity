@@ -24,6 +24,7 @@ namespace Silksprite.MeshWeaver.Models
         {
             var offset = Vertices.Count;
             IEnumerable<Vertie> vertices;
+            // TODO: optimize
             if (matrix4x4 != Matrix4x4.identity)
             {
                 var selector = uvIndex != 0 ? (Func<Vertie, Vertie>)(v => v.MultiplyPoint(matrix4x4).ShiftUvChannel(uvIndex)) : v => v.MultiplyPoint(matrix4x4);
