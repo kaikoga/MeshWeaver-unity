@@ -1,12 +1,9 @@
-using System.Collections.Generic;
 using Silksprite.MeshWeaver.GUIActions;
-using Silksprite.MeshWeaver.Models;
 using Silksprite.MeshWeaver.Scopes;
 using Silksprite.MeshWeaver.Utils;
 using UnityEditor;
 using UnityEngine;
 using static Silksprite.MeshWeaver.Tools.LocalizationTool;
-using static Silksprite.MeshWeaver.Utils.Localization;
 
 namespace Silksprite.MeshWeaver.Controllers.Base
 {
@@ -35,26 +32,7 @@ namespace Silksprite.MeshWeaver.Controllers.Base
 
             void PopulateRootElement()
             {
-                if (IsMainComponentEditor)
-                {
-                    _root.Add(GUIAction.Build(() =>
-                    {
-                        using (var changed = new EditorGUI.ChangeCheckScope())
-                        {
-                            var list = new List<string> { "en", "ja" };
-                            var lang = EditorGUILayout.Popup(Loc("Language (Global)").GUIContent,
-                                list.IndexOf(Lang), list.ToArray());
-                            if (changed.changed && lang >= 0) Lang = list[lang];
-                        }
-
-                        using (var changed = new EditorGUI.ChangeCheckScope())
-                        {
-                            var lod = EditorGUILayout.EnumPopup(Loc("Current LOD (Global)").GUIContent, MeshWeaverSettings.Current.CurrentLodMaskLayer);
-                            if (changed.changed) MeshWeaverSettings.Current.CurrentLodMaskLayer = (LodMaskLayer)lod;
-                        }
-                    }));
-                }
-
+                if (IsMainComponentEditor) _root.Add(new MainProviderHeader());
                 _container = new GUIContainer();
                 PopulateInspectorGUI(_container);
                 _root.Add(_container);
