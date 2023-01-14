@@ -1,6 +1,6 @@
 using Silksprite.MeshWeaver.Controllers.Base;
+using Silksprite.MeshWeaver.GUIActions;
 using UnityEditor;
-using UnityEngine.UIElements;
 
 namespace Silksprite.MeshWeaver.Controllers.Fallback
 {
@@ -10,7 +10,7 @@ namespace Silksprite.MeshWeaver.Controllers.Fallback
     {
         protected override bool IsMainComponentEditor => false;
 
-        protected sealed override void PopulateInspectorGUI(VisualElement container)
+        protected sealed override void PopulateInspectorGUI(GUIContainer container)
         {
             container.Add(PopulateDefaultInspectorGUI());
         }

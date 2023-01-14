@@ -1,6 +1,6 @@
 using Silksprite.MeshWeaver.Controllers.Base;
+using Silksprite.MeshWeaver.GUIActions;
 using UnityEditor;
-using UnityEngine.UIElements;
 
 namespace Silksprite.MeshWeaver.Controllers.Paths.Modifiers
 {
@@ -8,7 +8,7 @@ namespace Silksprite.MeshWeaver.Controllers.Paths.Modifiers
     [CanEditMultipleObjects]
     public class PathOptimizeProviderEditor : SubProviderEditorBase
     {
-        protected override void PopulatePropertiesGUI(VisualElement container)
+        protected override void PopulatePropertiesGUI(GUIContainer container)
         {
         }
     }

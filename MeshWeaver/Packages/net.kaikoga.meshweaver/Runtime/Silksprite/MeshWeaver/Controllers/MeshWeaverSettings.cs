@@ -1,7 +1,6 @@
 using System;
 using Silksprite.MeshWeaver.Models;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace Silksprite.MeshWeaver.Controllers
 {
@@ -12,8 +11,6 @@ namespace Silksprite.MeshWeaver.Controllers
 
         public static MeshWeaverSettingsData Current => _current ?? (_current = new MeshWeaverSettingsData());
 
-        public static EventCallback<ChangeEvent<string>> onGlobalLangChange;
- 
         [Serializable]
         public class MeshWeaverSettingsData
         {
@@ -35,14 +32,7 @@ namespace Silksprite.MeshWeaver.Controllers
             public string Lang
             {
                 get => lang;
-                set
-                {
-                    using (var change = ChangeEvent<string>.GetPooled(lang, value))
-                    {
-                        lang = value;
-                        onGlobalLangChange(change);
-                    }
-                }
+                set => lang = value;
             }
         }
 

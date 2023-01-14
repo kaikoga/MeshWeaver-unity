@@ -2,8 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Silksprite.MeshWeaver.CustomDrawers;
-using Silksprite.MeshWeaver.Models.Extensions;
-using Silksprite.MeshWeaver.Models.Modifiers;
 using Silksprite.MeshWeaver.Models.Paths;
 using UnityEngine;
 
@@ -135,23 +133,44 @@ namespace Silksprite.MeshWeaver.Models.Meshes
 
         public Pathie Extract(string pathName, LodMaskLayer lod)
         {
-            Pathie DoExtract(IPathieFactory longitude, IPathieFactory latitude, bool isEnd)
+            Pathie DoExtractX(Pathie pathieX, Vertie vertexY)
             {
-                var ends = longitude.Build(lod);
-                var translation = isEnd ? ends.Last : ends.First;
-                return latitude.WithModifiers(new VertwiseTranslate(translation.Translation)).Build(lod);
+                return DoExtract2(pathieX.Vertices, Enumerable.Repeat(vertexY, pathieX.Vertices.Count), pathieX.isLoop);
+            }
+
+            Pathie DoExtractY(Vertie vertexX, Pathie pathieY)
+            {
+                return DoExtract2(Enumerable.Repeat(vertexX, pathieY.Vertices.Count), pathieY.Vertices, pathieY.isLoop);
+            }
+
+            Pathie DoExtract2(IEnumerable<Vertie> verticesX, IEnumerable<Vertie> verticesY, bool isLoop)
+            {
+                return new Pathie(verticesX.Zip(verticesY, (pX, pY) =>
+                {
+                    switch (_operatorKind)
+                    {
+                        case OperatorKind.TranslateOnly:
+                            return pX + pY.Vertex;
+                        case OperatorKind.ApplyX:
+                            return pX * pY;
+                        case OperatorKind.ApplyY:
+                            return pY * pX;
+                        default:
+                            throw new ArgumentOutOfRangeException();
+                    }
+                }), isLoop);
             }
 
             switch (pathName)
             {
                 case PathNames.XFirst:
-                    return DoExtract(_pathieY, _pathieX, false);
+                    return DoExtractY(_pathieX.Build(lod).Vertices.First(), _pathieY.Build(lod));
                 case PathNames.XLast:
-                    return DoExtract(_pathieY, _pathieX, true);
+                    return DoExtractY(_pathieX.Build(lod).Vertices.Last(), _pathieY.Build(lod));
                 case PathNames.YFirst:
-                    return DoExtract(_pathieX, _pathieY, false);
+                    return DoExtractX(_pathieX.Build(lod), _pathieY.Build(lod).Vertices.First());
                 case PathNames.YLast:
-                    return DoExtract(_pathieX, _pathieY, true);
+                    return DoExtractX(_pathieX.Build(lod), _pathieY.Build(lod).Vertices.Last());
                 case PathNames.X:
                     return _pathieX.Build(lod);
                 case PathNames.Y:

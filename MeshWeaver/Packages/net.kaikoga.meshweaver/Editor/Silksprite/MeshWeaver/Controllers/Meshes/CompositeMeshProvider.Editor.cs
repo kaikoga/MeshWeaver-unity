@@ -1,7 +1,7 @@
 using Silksprite.MeshWeaver.Controllers.Base;
 using Silksprite.MeshWeaver.Controllers.Utils;
+using Silksprite.MeshWeaver.GUIActions;
 using UnityEditor;
-using UnityEngine.UIElements;
 using static Silksprite.MeshWeaver.Tools.LocalizationTool;
 
 namespace Silksprite.MeshWeaver.Controllers.Meshes
@@ -10,9 +10,9 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
     [CanEditMultipleObjects]
     public class CompositeMeshProviderEditor : MeshProviderEditorBase
     {
-        protected override void PopulatePropertiesGUI(VisualElement container)
+        protected override void PopulatePropertiesGUI(GUIContainer container)
         {
-            container.Add(MeshProviderMenus.Menu.VisualElement((CompositeMeshProvider)target, Loc("Mesh Providers")));
+            container.Add(MeshProviderMenus.Menu.ToGUIAction((CompositeMeshProvider)target, Loc("Mesh Providers")));
         }
     }
 }

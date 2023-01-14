@@ -1,4 +1,4 @@
-using UnityEngine.UIElements;
+using Silksprite.MeshWeaver.GUIActions;
 
 namespace Silksprite.MeshWeaver.Controllers.Base
 {
@@ -6,11 +6,11 @@ namespace Silksprite.MeshWeaver.Controllers.Base
     {
         protected override bool IsMainComponentEditor => false;
 
-        protected sealed override void PopulateInspectorGUI(VisualElement container)
+        protected sealed override void PopulateInspectorGUI(GUIContainer container)
         {
             PopulatePropertiesGUI(container);
         }
 
-        protected abstract void PopulatePropertiesGUI(VisualElement container);
+        protected abstract void PopulatePropertiesGUI(GUIContainer container);
     }
 }

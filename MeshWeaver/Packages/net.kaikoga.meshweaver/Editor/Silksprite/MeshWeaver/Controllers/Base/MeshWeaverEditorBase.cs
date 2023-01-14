@@ -1,14 +1,9 @@
-using System.Collections.Generic;
-using Silksprite.MeshWeaver.Models;
+using Silksprite.MeshWeaver.GUIActions;
 using Silksprite.MeshWeaver.Scopes;
-using Silksprite.MeshWeaver.UIElements;
 using Silksprite.MeshWeaver.Utils;
 using UnityEditor;
-using UnityEditor.UIElements;
 using UnityEngine;
-using UnityEngine.UIElements;
 using static Silksprite.MeshWeaver.Tools.LocalizationTool;
-using static Silksprite.MeshWeaver.Utils.Localization;
 
 namespace Silksprite.MeshWeaver.Controllers.Base
 {
@@ -16,67 +11,51 @@ namespace Silksprite.MeshWeaver.Controllers.Base
     {
         protected abstract bool IsMainComponentEditor { get; }
 
-        VisualElement _root;
-        VisualElement _container;
+        GUIContainer _root;
+        GUIContainer _container;
 
-        public sealed override VisualElement CreateInspectorGUI()
+        GUIContainer PopulateGUIRoot()
         {
-            _root = new VisualElement { name = "mw-root" };
+            _root = new GUIContainer();
             PopulateRootElement();
 
-            var onGlobalLangChange = new EventCallback<ChangeEvent<string>>(change =>
-            {
-                _root.Unbind();
-                _root.Clear();
-                PopulateRootElement();
-                _root.Bind(serializedObject);
-            });
-            _root.RegisterCallback(new EventCallback<AttachToPanelEvent>(attach => MeshWeaverSettings.onGlobalLangChange += onGlobalLangChange));
-            _root.RegisterCallback(new EventCallback<DetachFromPanelEvent>(detach => MeshWeaverSettings.onGlobalLangChange -= onGlobalLangChange));
+            // NOTE: Not needed because everything is made in IMGUI
+            // var onGlobalLangChange = new EventCallback<ChangeEvent<string>>(change =>
+            // {
+            //     _root = new GUIContainer();
+            //     PopulateRootElement();
+            // });
+            // _root.RegisterCallback(new EventCallback<AttachToPanelEvent>(attach => MeshWeaverSettings.onGlobalLangChange += onGlobalLangChange));
+            // _root.RegisterCallback(new EventCallback<DetachFromPanelEvent>(detach => MeshWeaverSettings.onGlobalLangChange -= onGlobalLangChange));
 
             return _root;
 
             void PopulateRootElement()
             {
-                if (IsMainComponentEditor)
-                {
-                    _root.Add(new Div("mw-header", header =>
-                    {
-                        var langSelector = new PopupField<string>(Tr("Language (Global)"),
-                            new List<string> { "en", "ja" },
-                            Lang) { name = "mw-langSelector" };
-
-                        langSelector.RegisterValueChangedCallback(change => { Lang = change.newValue; });
-                        header.Add(langSelector);
-
-                        var lodSelector = new EnumField(Tr("Current LOD (Global)"),
-                            MeshWeaverSettings.Current.CurrentLodMaskLayer) { name = "mw-lodSelector" };
-                        lodSelector.RegisterValueChangedCallback(change => { MeshWeaverSettings.Current.CurrentLodMaskLayer = (LodMaskLayer)change.newValue; });
-                        header.Add(lodSelector);
-                    }));
-                }
-
-                _container = new VisualElement { name = "mw-container" };
+                if (IsMainComponentEditor) _root.Add(new MainProviderHeader());
+                _container = new GUIContainer();
                 PopulateInspectorGUI(_container);
                 _root.Add(_container);
             }
         }
 
-        protected abstract void PopulateInspectorGUI(VisualElement root);
+        protected abstract void PopulateInspectorGUI(GUIContainer root);
 
         public sealed override void OnInspectorGUI()
         {
+            _root = _root ?? PopulateGUIRoot();
+            _root.OnGUI();
         }
 
-        protected VisualElement PopulateDefaultInspectorGUI()
+        protected GUIAction PopulateDefaultInspectorGUI()
         {
-            return new IMGUIContainer(() =>
+            return GUIAction.Build(() =>
             {
                 using (new BackgroundColorScope(Color.magenta))
                 {
-                    MeshWeaverGUILayout.Header(Loc("Fallback Inspector"));
+                    new Header(Loc("Fallback Inspector")).OnGUI();
                     DrawDefaultInspector();
-                    MeshWeaverGUILayout.Header(Loc("End Fallback Inspector"));
+                    new Header(Loc("End Fallback Inspector")).OnGUI();
                 }
             });
         }

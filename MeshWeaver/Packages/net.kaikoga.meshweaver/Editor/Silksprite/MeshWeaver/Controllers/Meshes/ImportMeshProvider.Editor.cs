@@ -1,6 +1,6 @@
 using Silksprite.MeshWeaver.Controllers.Base;
+using Silksprite.MeshWeaver.GUIActions;
 using UnityEditor;
-using UnityEngine.UIElements;
 using static Silksprite.MeshWeaver.Tools.LocalizationTool;
 
 namespace Silksprite.MeshWeaver.Controllers.Meshes
@@ -9,7 +9,7 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
     [CanEditMultipleObjects]
     public class ImportMeshProviderEditor : MeshProviderEditorBase
     {
-        protected override void PopulatePropertiesGUI(VisualElement container)
+        protected override void PopulatePropertiesGUI(GUIContainer container)
         {
             container.Add(Prop(nameof(ImportMeshProvider.mesh), Loc("ImportMeshProvider.mesh")));
             container.Add(Prop(nameof(ImportMeshProvider.materials), Loc("ImportMeshProvider.materials")));

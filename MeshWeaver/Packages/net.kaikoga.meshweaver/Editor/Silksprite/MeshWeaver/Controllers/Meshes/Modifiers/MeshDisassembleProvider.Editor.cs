@@ -1,6 +1,6 @@
 using Silksprite.MeshWeaver.Controllers.Base;
+using Silksprite.MeshWeaver.GUIActions;
 using UnityEditor;
-using UnityEngine.UIElements;
 
 namespace Silksprite.MeshWeaver.Controllers.Meshes.Modifiers
 {
@@ -8,7 +8,7 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes.Modifiers
     [CanEditMultipleObjects]
     public class MeshDisassembleProviderEditor : SubProviderEditorBase
     {
-        protected override void PopulatePropertiesGUI(VisualElement container)
+        protected override void PopulatePropertiesGUI(GUIContainer container)
         {
         }
     }

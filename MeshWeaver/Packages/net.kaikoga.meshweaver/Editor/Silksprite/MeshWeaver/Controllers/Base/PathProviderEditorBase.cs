@@ -2,12 +2,11 @@ using System.Linq;
 using Silksprite.MeshWeaver.Controllers.Extensions;
 using Silksprite.MeshWeaver.Controllers.Paths;
 using Silksprite.MeshWeaver.Controllers.Utils;
+using Silksprite.MeshWeaver.GUIActions;
 using Silksprite.MeshWeaver.Models;
 using Silksprite.MeshWeaver.Models.DataObjects;
-using Silksprite.MeshWeaver.UIElements;
 using Silksprite.MeshWeaver.Utils;
 using UnityEngine;
-using UnityEngine.UIElements;
 using static Silksprite.MeshWeaver.Tools.LocalizationTool;
 
 namespace Silksprite.MeshWeaver.Controllers.Base
@@ -16,10 +15,10 @@ namespace Silksprite.MeshWeaver.Controllers.Base
     {
         protected override bool IsMainComponentEditor => true;
 
-        protected sealed override void PopulateInspectorGUI(VisualElement container)
+        protected sealed override void PopulateInspectorGUI(GUIContainer container)
         {
             container.Add(CreatePropertiesGUI());
-            container.Add(PathModifierProviderMenus.Menu.VisualElement((PathProvider)target));
+            container.Add(PathModifierProviderMenus.Menu.ToGUIAction((PathProvider)target));
             container.Add(new LocButton(Loc("Bake"), () =>
             {
                 var pathProvider = (PathProvider)target;
@@ -35,18 +34,18 @@ namespace Silksprite.MeshWeaver.Controllers.Base
             container.Add(CreateDumpGUI());
         }
 
-        VisualElement CreatePropertiesGUI()
+        GUIContainer CreatePropertiesGUI()
         {
-            return new Div("mw-properties", c =>
+            return new Div(c =>
             {
                 c.Add(Prop(nameof(PathProvider.lodMask), Loc("GeometryProvider.lodMask")));
                 PopulatePropertiesGUI(c);
             });
         }
 
-        VisualElement CreateDumpGUI()
+        GUIContainer CreateDumpGUI()
         {
-            return new Div("mw-dump", c =>
+            return new Div(c =>
             {
                 c.Add(new DumpFoldout(Loc("Path Dump"), () => ((PathProvider)target).LastFactory?.Build(MeshWeaverSettings.Current.CurrentLodMaskLayer)));
                 c.Add(new DumpFoldout(Loc("Collider Path Dump"), () => ((PathProvider)target).LastFactory?.Build(LodMaskLayer.Collider)));
@@ -54,9 +53,9 @@ namespace Silksprite.MeshWeaver.Controllers.Base
             });
         }
 
-        protected abstract void PopulatePropertiesGUI(VisualElement container);
+        protected abstract void PopulatePropertiesGUI(GUIContainer container);
 
-        protected virtual void PopulateDumpGUI(VisualElement container)
+        protected virtual void PopulateDumpGUI(GUIContainer container)
         {
         }
 

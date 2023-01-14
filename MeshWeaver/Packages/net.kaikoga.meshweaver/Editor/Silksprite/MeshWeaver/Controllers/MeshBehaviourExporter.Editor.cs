@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Silksprite.MeshWeaver.Controllers.Base;
+using Silksprite.MeshWeaver.GUIActions;
+using Silksprite.MeshWeaver.GUIActions.Events;
+using Silksprite.MeshWeaver.GUIActions.Extensions;
 using Silksprite.MeshWeaver.Models;
-using Silksprite.MeshWeaver.UIElements;
-using Silksprite.MeshWeaver.UIElements.Extensions;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.UIElements;
 using static Silksprite.MeshWeaver.Tools.LocalizationTool;
 
 namespace Silksprite.MeshWeaver.Controllers
@@ -29,7 +29,7 @@ namespace Silksprite.MeshWeaver.Controllers
             _meshBehaviour = _meshBehaviourExporter.GetComponent<CustomMeshBehaviour>();
         }
 
-        protected sealed override void PopulateInspectorGUI(VisualElement container)
+        protected sealed override void PopulateInspectorGUI(GUIContainer container)
         {
             var onRefresh = new Dispatcher<RefreshEvent>();
 
@@ -37,7 +37,7 @@ namespace Silksprite.MeshWeaver.Controllers
             overrideMaterials.RegisterPropertyChangedCallback<bool>(_ => onRefresh.Invoke());
             container.Add(overrideMaterials);
 
-            var materialsContainer = new Div("mw-materialsContainer", c =>
+            var materialsContainer = new Div(c =>
             {
                 c.Add(Prop(nameof(MeshBehaviourExporter.materials), Loc("MeshBehaviourExporter.materials")));
                 c.Add(new LocButton(Loc("Copy Materials from MeshBehaviour"), () => { _meshBehaviourExporter.materials = _meshBehaviour.materials.ToArray(); }));
@@ -47,7 +47,7 @@ namespace Silksprite.MeshWeaver.Controllers
             var editLinkedAssets = new LocToggle(Loc("Edit Linked Assets")) { value = _editLinkedAssets };
             editLinkedAssets.RegisterValueChangedCallback(changed =>
             {
-                _editLinkedAssets = changed.newValue;
+                _editLinkedAssets = editLinkedAssets.value;
                 onRefresh.Invoke();
             });
             container.Add(editLinkedAssets);
