@@ -85,10 +85,17 @@ namespace Silksprite.MeshWeaver.Primitives
             DoUnityThings(primitiveProvider, menuCommand.context as GameObject);
         }
 
-        [MenuItem("GameObject/MeshWeaver/Primitives/Cylinder", false, 10)]
-        public static void CreateCylinder(MenuCommand menuCommand)
+        [MenuItem("GameObject/MeshWeaver/Primitives/Cylinder Extruded", false, 10)]
+        public static void CreateExtrudedCylinder(MenuCommand menuCommand)
         {
-            var primitiveProvider = MeshWeaverPrimitives.CreateCylinderPrimitive(true);
+            var primitiveProvider = MeshWeaverPrimitives.CreateExtrudedCylinderPrimitive(true);
+            DoUnityThings(primitiveProvider, menuCommand.context as GameObject);
+        }
+
+        [MenuItem("GameObject/MeshWeaver/Primitives/Cylinder Rotated", false, 10)]
+        public static void CreateRotatedCylinder(MenuCommand menuCommand)
+        {
+            var primitiveProvider = MeshWeaverPrimitives.CreateRotatedCylinderPrimitive(true);
             DoUnityThings(primitiveProvider, menuCommand.context as GameObject);
         }
 
@@ -120,10 +127,17 @@ namespace Silksprite.MeshWeaver.Primitives
             DoUnityThings(primitiveProvider, menuCommand.context as GameObject);
         }
 
-        [MenuItem("GameObject/MeshWeaver/Primitives/NoUV/Cylinder", false, 10)]
-        public static void CreateCylinderNoUv(MenuCommand menuCommand)
+        [MenuItem("GameObject/MeshWeaver/Primitives/NoUV/Cylinder Extruded", false, 10)]
+        public static void CreateExtrudedCylinderNoUv(MenuCommand menuCommand)
         {
-            var primitiveProvider = MeshWeaverPrimitives.CreateCylinderPrimitive(false);
+            var primitiveProvider = MeshWeaverPrimitives.CreateExtrudedCylinderPrimitive(false);
+            DoUnityThings(primitiveProvider, menuCommand.context as GameObject);
+        }
+
+        [MenuItem("GameObject/MeshWeaver/Primitives/NoUV/Cylinder Rotated", false, 10)]
+        public static void CreateRotatedCylinderNoUv(MenuCommand menuCommand)
+        {
+            var primitiveProvider = MeshWeaverPrimitives.CreateRotatedCylinderPrimitive(false);
             DoUnityThings(primitiveProvider, menuCommand.context as GameObject);
         }
 

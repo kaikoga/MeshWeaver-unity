@@ -24,14 +24,6 @@ namespace Silksprite.MeshWeaver.Primitives
             return meshBehaviour;
         }
 
-        static VertexProvider AddVertexProvider(Transform parent)
-        {
-            var gameObject = new GameObject("VertexProvider");
-            gameObject.transform.SetParent(parent, false);
-            var vertexProvider = gameObject.AddComponent<VertexProvider>();
-            return vertexProvider;
-        }
-
         static UvGeneratorProvider AddUvGeneratorProvider(PathProvider pathProvider, Rect uvArea, int uvChannel, float topologicalWeight = 1f)
         {
             var uvGenerator = pathProvider.gameObject.AddComponent<UvGeneratorProvider>();
@@ -200,7 +192,7 @@ namespace Silksprite.MeshWeaver.Primitives
             return matrix;
         }
 
-        public static MeshProvider CreateCylinderPrimitive(bool hasUv)
+        public static MeshProvider CreateExtrudedCylinderPrimitive(bool hasUv)
         {
             var gameObject = new GameObject("Cylinder Provider");
             var pillar = gameObject.AddComponent<PillarMeshProvider>();
@@ -232,6 +224,50 @@ namespace Silksprite.MeshWeaver.Primitives
 
             var pathY = pillar.AddChildComponent<CompositePathProvider>("CompositePathProvider_Path Y");
             pathY.CreateVertex(new Vector3(0f, 0f, 0f), false);
+            pathY.CreateVertex(new Vector3(0f, 1f, 0f), false);
+            pillar.pathProviderY = pathY;
+            if (hasUv)
+            {
+                AddUvGeneratorProvider(pathY, new Rect(0f, 0f, 0f, 1f), 0);
+            }
+
+            return pillar;
+        }
+
+        public static MeshProvider CreateRotatedCylinderPrimitive(bool hasUv)
+        {
+            var gameObject = new GameObject("Cylinder Provider");
+            var pillar = gameObject.AddComponent<PillarMeshProvider>();
+            pillar.fillBottom = true;
+            pillar.fillTop = true;
+            if (hasUv)
+            {
+                pillar.uvChannelBottom = 1;
+                pillar.uvChannelTop = 1;
+            }
+
+            pillar.operatorKind = MatrixMeshieFactory.OperatorKind.ApplyY;
+
+            var pathX = pillar.AddChildComponent<RevolutionPathProvider>("RevolutionPathProvider_Path X");
+            pathX.axis = RevolutionPathieFactory.Axis.Y;
+            pathX.min = 360f;
+            pathX.max = 0f;
+            pathX.vector = Vector3.zero;
+            pathX.subdivision = 16;
+            pathX.hasLegacyRadius = false;
+            pillar.pathProviderX = pathX;
+            if (hasUv)
+            {
+                AddUvGeneratorProvider(pathX, new Rect(0f, 0f, 2f, 0f), 0);
+                var uvX2 = AddUvProjectorProvider(pathX, 1);
+                uvX2.axisX = UvProjector.ProjectionAxisKind.XPlus;
+                uvX2.axisY = UvProjector.ProjectionAxisKind.ZPlus;
+            }
+
+            var pathY = pillar.AddChildComponent<CompositePathProvider>("CompositePathProvider_Path Y");
+            pathY.CreateVertex(new Vector3(0f, 0f, 0f), false);
+            pathY.CreateVertex(new Vector3(0.5f, 0f, 0f), false);
+            pathY.CreateVertex(new Vector3(0.5f, 1f, 0f), false);
             pathY.CreateVertex(new Vector3(0f, 1f, 0f), false);
             pillar.pathProviderY = pathY;
             if (hasUv)
