@@ -1,6 +1,7 @@
 using Silksprite.MeshWeaver.Controllers.Base;
 using Silksprite.MeshWeaver.Controllers.Utils;
 using Silksprite.MeshWeaver.GUIActions;
+using Silksprite.MeshWeaver.GUIActions.Extensions;
 using UnityEditor;
 using static Silksprite.MeshWeaver.Tools.LocalizationTool;
 
@@ -12,18 +13,7 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
     {
         protected override void PopulatePropertiesGUI(GUIContainer container)
         {
-            container.Add(Prop(nameof(PillarMeshProvider.fillBody), Loc("PillarMeshProvider.fillBody")));
-            container.Add(Prop(nameof(PillarMeshProvider.fillBottom), Loc("PillarMeshProvider.fillBottom")));
-            container.Add(Prop(nameof(PillarMeshProvider.fillTop), Loc("PillarMeshProvider.fillTop")));
-
-            container.Add(Prop(nameof(PillarMeshProvider.uvChannelBody), Loc("PillarMeshProvider.uvChannelBody")));
-            container.Add(Prop(nameof(PillarMeshProvider.uvChannelBottom), Loc("PillarMeshProvider.uvChannelBottom")));
-            container.Add(Prop(nameof(PillarMeshProvider.uvChannelTop), Loc("PillarMeshProvider.uvChannelTop")));
-
-            container.Add(Prop(nameof(PillarMeshProvider.materialBody), Loc("PillarMeshProvider.materialBody")));
-            container.Add(Prop(nameof(PillarMeshProvider.materialBottom), Loc("PillarMeshProvider.materialBottom")));
-            container.Add(Prop(nameof(PillarMeshProvider.materialTop), Loc("PillarMeshProvider.materialTop")));
-
+            container.Add(new Header(Loc("Sources")));
             container.Add(Prop(nameof(PillarMeshProvider.pathProviderX), Loc("PillarMeshProvider.pathProviderX")));
             container.Add(PathProviderMenus.CollectionsMenu.ToGUIAction((PillarMeshProvider)target, "Path X",
                 serializedObject.FindProperty(nameof(PillarMeshProvider.pathProviderX))));
@@ -32,11 +22,36 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
                 serializedObject.FindProperty(nameof(PillarMeshProvider.pathProviderY))));
 
             container.Add(Prop(nameof(PillarMeshProvider.operatorKind), Loc("PillarMeshProvider.operatorKind")));
-            container.Add(Prop(nameof(PillarMeshProvider.defaultCellPatternKind), Loc("PillarMeshProvider.defaultCellPatternKind")));
-            container.Add(Prop(nameof(PillarMeshProvider.cellPatternOverrides), Loc("PillarMeshProvider.cellPatternOverrides")));
 
+            container.Add(new Header(Loc("Body")));
+            container.Add(Prop(nameof(PillarMeshProvider.fillBody), Loc("PillarMeshProvider.fillBody")));
+            container.Add(new Div(c =>
+            {
+                c.Add(Prop(nameof(PillarMeshProvider.materialBody), Loc("PillarMeshProvider.materialBody")));
+                c.Add(Prop(nameof(PillarMeshProvider.uvChannelBody), Loc("PillarMeshProvider.uvChannelBody")));
+                c.Add(Prop(nameof(PillarMeshProvider.defaultCellPatternKind), Loc("PillarMeshProvider.defaultCellPatternKind")));
+                c.Add(Prop(nameof(PillarMeshProvider.cellPatternOverrides), Loc("PillarMeshProvider.cellPatternOverrides")));
+            }).WithDisplayOnRefresh(null, () => ((PillarMeshProvider)target).fillBody).WithIndent());
+
+            container.Add(new Header(Loc("Lids")));
             container.Add(Prop(nameof(PillarMeshProvider.longitudeAxisKind), Loc("PillarMeshProvider.longitudeAxisKind")));
+            container.Add(Prop(nameof(PillarMeshProvider.fillBottom), Loc("PillarMeshProvider.fillBottom")));
+            container.Add(new Div(c =>
+            {
+                c.Add(Prop(nameof(PillarMeshProvider.materialBottom), Loc("PillarMeshProvider.materialBottom")));
+                c.Add(Prop(nameof(PillarMeshProvider.uvChannelBottom), Loc("PillarMeshProvider.uvChannelBottom")));
+            }).WithDisplayOnRefresh(null, () => ((PillarMeshProvider)target).fillBottom).WithIndent());
+
+            container.Add(Prop(nameof(PillarMeshProvider.fillTop), Loc("PillarMeshProvider.fillTop")));
+            container.Add(new Div(c =>
+            {
+                c.Add(Prop(nameof(PillarMeshProvider.materialTop), Loc("PillarMeshProvider.materialTop")));
+                c.Add(Prop(nameof(PillarMeshProvider.uvChannelTop), Loc("PillarMeshProvider.uvChannelTop")));
+            }).WithDisplayOnRefresh(null, () => ((PillarMeshProvider)target).fillTop).WithIndent());
+
             container.Add(Prop(nameof(PillarMeshProvider.reverseLids), Loc("PillarMeshProvider.reverseLids")));
+
+
         }
 
         protected override void PopulateDumpGUI(GUIContainer container)

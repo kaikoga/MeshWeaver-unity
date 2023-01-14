@@ -12,6 +12,7 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
     {
         protected override void PopulatePropertiesGUI(GUIContainer container)
         {
+            container.Add(new Header(Loc("Sources")));
             container.Add(Prop(nameof(MatrixMeshProvider.pathProviderX), Loc("MatrixMeshProvider.pathProviderX")));
             container.Add(PathProviderMenus.CollectionsMenu.ToGUIAction((MatrixMeshProvider)target, "Path X",
                 serializedObject.FindProperty(nameof(MatrixMeshProvider.pathProviderX))));
@@ -19,9 +20,11 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
             container.Add(PathProviderMenus.CollectionsMenu.ToGUIAction((MatrixMeshProvider)target, "Path Y",
                 serializedObject.FindProperty(nameof(MatrixMeshProvider.pathProviderY))));
             container.Add(Prop(nameof(MatrixMeshProvider.operatorKind), Loc("MatrixMeshProvider.operatorKind")));
+
+            container.Add(new Header(Loc("Output")));
+            container.Add(Prop(nameof(MatrixMeshProvider.material), Loc("MatrixMeshProvider.material")));
             container.Add(Prop(nameof(MatrixMeshProvider.defaultCellPatternKind), Loc("MatrixMeshProvider.defaultCellPatternKind")));
             container.Add(Prop(nameof(MatrixMeshProvider.cellPatternOverrides), Loc("MatrixMeshProvider.cellPatternOverrides")));
-            container.Add(Prop(nameof(MatrixMeshProvider.material), Loc("MatrixMeshProvider.material")));
         }
 
         protected override void PopulateDumpGUI(GUIContainer container)

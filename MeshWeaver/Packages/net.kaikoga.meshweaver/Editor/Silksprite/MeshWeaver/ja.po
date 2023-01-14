@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-01-12 08:12+0900\n"
+"POT-Creation-Date: 2023-01-14 10:35+0900\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -15,91 +15,86 @@ msgstr ""
 "X-Poedit-KeywordsList: Tr;Loc\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshProviderEditorBase.cs:24
-#: Editor/Silksprite/MeshWeaver/Controllers/Base/PathProviderEditorBase.cs:23
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshProviderEditorBase.cs:25
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/PathProviderEditorBase.cs:22
 msgid "Bake"
 msgstr "ベイクする"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshProviderEditorBase.cs:48
-#: Editor/Silksprite/MeshWeaver/Controllers/Base/PathProviderEditorBase.cs:42
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshProviderEditorBase.cs:49
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/PathProviderEditorBase.cs:41
 msgid "GeometryProvider.lodMask"
 msgstr "LOD マスク"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshProviderEditorBase.cs:57
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshProviderEditorBase.cs:58
+msgid "Dumps"
+msgstr "ダンプ"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshProviderEditorBase.cs:59
 msgid "Mesh Dump"
 msgstr "メッシュのダンプ"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshProviderEditorBase.cs:58
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshProviderEditorBase.cs:60
 msgid "Collider Mesh Dump"
 msgstr "コライダーのダンプ"
 
-# notranslation
-#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshWeaverEditorBase.cs:45
-msgid "Language (Global)"
-msgstr "Language (Global)"
-
-#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshWeaverEditorBase.cs:52
-msgid "Current LOD (Global)"
-msgstr "表示するLOD (Global)"
-
-#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshWeaverEditorBase.cs:77
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshWeaverEditorBase.cs:56
 msgid "Fallback Inspector"
 msgstr "仮UI"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshWeaverEditorBase.cs:79
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshWeaverEditorBase.cs:58
 msgid "End Fallback Inspector"
 msgstr "仮UIここまで"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Base/PathProviderEditorBase.cs:51
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/PathProviderEditorBase.cs:50
 msgid "Path Dump"
 msgstr "パスのダンプ"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Base/PathProviderEditorBase.cs:52
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/PathProviderEditorBase.cs:51
 msgid "Collider Path Dump"
 msgstr "コライダーパスのダンプ"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:29
+#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:27
 msgid "CustomMeshBehaviour.updatesEveryFrame"
 msgstr "毎フレーム更新する"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:30
+#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:28
 msgid "CustomMeshBehaviour.profile"
 msgstr "基本設定"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:31
+#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:29
 msgid "CustomMeshBehaviour.materials"
 msgstr "マテリアル"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:32
+#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:30
 msgid "CustomMeshBehaviour.meshFilters"
 msgstr "同期するMeshFilter"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:33
+#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:31
 msgid "CustomMeshBehaviour.meshColliders"
 msgstr "同期するMeshCollider"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:37
+#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:35
 #: Editor/Silksprite/MeshWeaver/Controllers/Meshes/CompositeMeshProvider.Editor.cs:15
 msgid "Mesh Providers"
 msgstr "子メッシュ"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:40
+#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:38
 msgid "Collect Materials"
 msgstr "マテリアルを再収集"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:41
+#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:39
 msgid "Compile"
 msgstr "コンパイル"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:42
+#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:40
 msgid "Compile All Active"
 msgstr "アクティブを全てコンパイル"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:49
+#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:47
 msgid "I am Mesh Renderer"
 msgstr "自分自身がMesh Rendererになる事だ"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:54
+#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:52
 msgid "Create Exporter"
 msgstr "Exporterを生成する"
 
@@ -172,6 +167,11 @@ msgstr "メッシュアセット"
 msgid "ImportMeshProvider.materials"
 msgstr "マテリアル"
 
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/MatrixMeshProvider.Editor.cs:15
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:16
+msgid "Sources"
+msgstr "入力"
+
 #: Editor/Silksprite/MeshWeaver/Controllers/Meshes/MatrixMeshProvider.Editor.cs:16
 msgid "MatrixMeshProvider.pathProviderX"
 msgstr "パス X軸"
@@ -184,25 +184,29 @@ msgstr "パス Y軸"
 msgid "MatrixMeshProvider.operatorKind"
 msgstr "パス演算子"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/MatrixMeshProvider.Editor.cs:23
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/MatrixMeshProvider.Editor.cs:24
+msgid "Output"
+msgstr "出力"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/MatrixMeshProvider.Editor.cs:25
 msgid "MatrixMeshProvider.defaultCellPatternKind"
 msgstr "セル形状"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/MatrixMeshProvider.Editor.cs:24
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/MatrixMeshProvider.Editor.cs:26
 msgid "MatrixMeshProvider.cellPatternOverrides"
 msgstr "セルのオーバーライド"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/MatrixMeshProvider.Editor.cs:25
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/MatrixMeshProvider.Editor.cs:27
 msgid "MatrixMeshProvider.material"
 msgstr "マテリアル"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/MatrixMeshProvider.Editor.cs:30
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:50
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/MatrixMeshProvider.Editor.cs:32
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:60
 msgid "Input Path dump X"
 msgstr "入力パスXのダンプ"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/MatrixMeshProvider.Editor.cs:31
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:51
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/MatrixMeshProvider.Editor.cs:33
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:61
 msgid "Input Path dump Y"
 msgstr "入力パスYのダンプ"
 
@@ -274,67 +278,75 @@ msgstr "マテリアル番号"
 msgid "MeshSubdivisionProvider.count"
 msgstr "分割数"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:20
-msgid "PillarMeshProvider.fillBody"
-msgstr "本体を生成する"
-
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:21
-msgid "PillarMeshProvider.fillBottom"
-msgstr "底面を生成する"
-
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:22
-msgid "PillarMeshProvider.fillTop"
-msgstr "上面を生成する"
-
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:24
-msgid "PillarMeshProvider.uvChannelBody"
-msgstr "本体のUVチャンネル"
-
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:25
-msgid "PillarMeshProvider.uvChannelBottom"
-msgstr "底面のUVチャンネル"
-
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:26
-msgid "PillarMeshProvider.uvChannelTop"
-msgstr "上面のUVチャンネル"
-
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:28
-msgid "PillarMeshProvider.materialBody"
-msgstr "本体のマテリアル"
-
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:29
-msgid "PillarMeshProvider.materialBottom"
-msgstr "底面のマテリアル"
-
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:30
-msgid "PillarMeshProvider.materialTop"
-msgstr "上面のマテリアル"
-
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:32
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:17
 msgid "PillarMeshProvider.pathProviderX"
 msgstr "パス X軸"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:35
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:20
 msgid "PillarMeshProvider.pathProviderY"
 msgstr "パス Y軸"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:39
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:24
 msgid "PillarMeshProvider.operatorKind"
 msgstr "パス演算子"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:40
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:26
+msgid "Body"
+msgstr "本体の出力"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:27
 msgid "PillarMeshProvider.defaultCellPatternKind"
 msgstr "セル形状"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:41
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:28
 msgid "PillarMeshProvider.cellPatternOverrides"
 msgstr "セルのオーバーライド"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:43
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:29
+msgid "PillarMeshProvider.fillBody"
+msgstr "本体を生成する"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:32
+msgid "PillarMeshProvider.materialBody"
+msgstr "本体のマテリアル"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:33
+msgid "PillarMeshProvider.uvChannelBody"
+msgstr "本体のUVチャンネル"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:36
+msgid "Lids"
+msgstr "底面と上面の出力"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:37
 msgid "PillarMeshProvider.longitudeAxisKind"
 msgstr "高さとして扱う軸"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:44
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:38
+msgid "PillarMeshProvider.fillBottom"
+msgstr "底面を生成する"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:41
+msgid "PillarMeshProvider.materialBottom"
+msgstr "底面のマテリアル"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:42
+msgid "PillarMeshProvider.uvChannelBottom"
+msgstr "底面のUVチャンネル"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:45
+msgid "PillarMeshProvider.fillTop"
+msgstr "上面を生成する"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:48
+msgid "PillarMeshProvider.materialTop"
+msgstr "上面のマテリアル"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:49
+msgid "PillarMeshProvider.uvChannelTop"
+msgstr "上面のUVチャンネル"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:52
 msgid "PillarMeshProvider.reverseLids"
 msgstr "底面と上面を反転する"
 
@@ -346,143 +358,143 @@ msgstr "パス"
 msgid "PolygonMeshProvider.material"
 msgstr "マテリアル"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/StampMeshProvider.Editor.cs:16
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/StampMeshProvider.Editor.cs:15
 msgid "StampMeshProvider.meshProvider"
 msgstr "メッシュ"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/StampMeshProvider.Editor.cs:19
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/StampMeshProvider.Editor.cs:18
 msgid "StampMeshProvider.pathProvider"
 msgstr "パス"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/StampMeshProvider.Editor.cs:26
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/StampMeshProvider.Editor.cs:25
 msgid "Input Mesh dump"
 msgstr "入力メッシュのダンプ"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/StampMeshProvider.Editor.cs:27
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/StampMeshProvider.Editor.cs:26
 msgid "Input Path dump"
 msgstr "入力パスのダンプ"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/StitchMeshProvider.Editor.cs:16
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/StitchMeshProvider.Editor.cs:15
 msgid "StitchMeshProvider.pathProviderA"
 msgstr "パス A"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/StitchMeshProvider.Editor.cs:19
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/StitchMeshProvider.Editor.cs:18
 msgid "StitchMeshProvider.pathProviderB"
 msgstr "パス B"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/StitchMeshProvider.Editor.cs:23
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/StitchMeshProvider.Editor.cs:22
 msgid "StitchMeshProvider.material"
 msgstr "マテリアル"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/StitchMeshProvider.Editor.cs:28
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/StitchMeshProvider.Editor.cs:27
 msgid "Input Path dump A"
 msgstr "入力パスAのダンプ"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/StitchMeshProvider.Editor.cs:29
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/StitchMeshProvider.Editor.cs:28
 msgid "Input Path dump B"
 msgstr "入力パスBのダンプ"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/UvChannelRandomizerProvider.Editor.cs:15
+#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/UvChannelRandomizerProvider.Editor.cs:14
 msgid "UvChannelRandomizerProvider.@base"
 msgstr "基準点"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/UvChannelRandomizerProvider.Editor.cs:16
+#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/UvChannelRandomizerProvider.Editor.cs:15
 msgid "UvChannelRandomizerProvider.range"
 msgstr "範囲"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/UvChannelRandomizerProvider.Editor.cs:17
+#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/UvChannelRandomizerProvider.Editor.cs:16
 msgid "UvChannelRandomizerProvider.seed"
 msgstr "シード値"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/UvChannelRandomizerProvider.Editor.cs:18
+#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/UvChannelRandomizerProvider.Editor.cs:17
 msgid "UvChannelRandomizerProvider.uvChannel"
 msgstr "UVチャンネル"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/UvChannelRemapperProvider.Editor.cs:15
+#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/UvChannelRemapperProvider.Editor.cs:14
 msgid "UvChannelRemapperProvider.uvArea"
 msgstr "UV範囲"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/UvChannelRemapperProvider.Editor.cs:16
+#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/UvChannelRemapperProvider.Editor.cs:15
 msgid "UvChannelRemapperProvider.uvChannel"
 msgstr "UVチャンネル"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/UvProjectorProvider.Editor.cs:17
+#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/UvProjectorProvider.Editor.cs:15
 msgid "UvProjectorProvider.projection"
 msgstr "射影モード"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/UvProjectorProvider.Editor.cs:18
+#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/UvProjectorProvider.Editor.cs:16
 msgid "UvProjectorProvider.referenceTranslation"
 msgstr "射影方向の設定"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/UvProjectorProvider.Editor.cs:21
+#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/UvProjectorProvider.Editor.cs:19
 msgid "UvProjectorProvider.axisX"
 msgstr "X軸"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/UvProjectorProvider.Editor.cs:22
+#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/UvProjectorProvider.Editor.cs:20
 msgid "UvProjectorProvider.axisY"
 msgstr "Y軸"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/UvProjectorProvider.Editor.cs:23
+#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/UvProjectorProvider.Editor.cs:21
 msgid "UvProjectorProvider.uvArea"
 msgstr "UV範囲"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/UvProjectorProvider.Editor.cs:24
+#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/UvProjectorProvider.Editor.cs:22
 msgid "UvProjectorProvider.uvChannel"
 msgstr "UVチャンネル"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/UvRandomizerProvider.Editor.cs:15
+#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/UvRandomizerProvider.Editor.cs:14
 msgid "UvRandomizerProvider.@base"
 msgstr "基準点"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/UvRandomizerProvider.Editor.cs:16
+#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/UvRandomizerProvider.Editor.cs:15
 msgid "UvRandomizerProvider.range"
 msgstr "範囲"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/UvRandomizerProvider.Editor.cs:17
+#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/UvRandomizerProvider.Editor.cs:16
 msgid "UvRandomizerProvider.seed"
 msgstr "シード値"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/UvRemapperProvider.Editor.cs:15
+#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/UvRemapperProvider.Editor.cs:14
 msgid "UvRemapperProvider.uvArea"
 msgstr "UV範囲"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/VertwiseAlignProvider.Editor.cs:15
+#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/VertwiseAlignProvider.Editor.cs:14
 msgid "VertwiseAlignProvider.alignPosition"
 msgstr "Positionを整列"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/VertwiseAlignProvider.Editor.cs:16
+#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/VertwiseAlignProvider.Editor.cs:15
 msgid "VertwiseAlignProvider.alignRotation"
 msgstr "Rotationを整列"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/VertwiseAlignProvider.Editor.cs:17
+#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/VertwiseAlignProvider.Editor.cs:16
 msgid "VertwiseAlignProvider.alignScale"
 msgstr "Scaleを整列"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/VertwiseNormalizeProvider.Editor.cs:15
+#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/VertwiseNormalizeProvider.Editor.cs:14
 msgid "VertwiseNormalizeProvider.bounds"
 msgstr "Bounds"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/VertwiseQuantizeProvider.Editor.cs:15
+#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/VertwiseQuantizeProvider.Editor.cs:14
 msgid "VertwiseQuantizeProvider.denominator"
 msgstr "分母"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/VertwiseResetProvider.Editor.cs:15
+#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/VertwiseResetProvider.Editor.cs:14
 msgid "VertwiseResetProvider.resetPosition"
 msgstr "Positionをリセット"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/VertwiseResetProvider.Editor.cs:16
+#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/VertwiseResetProvider.Editor.cs:15
 msgid "VertwiseResetProvider.resetRotation"
 msgstr "Rotationをリセット"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/VertwiseResetProvider.Editor.cs:17
+#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/VertwiseResetProvider.Editor.cs:16
 msgid "VertwiseResetProvider.resetScale"
 msgstr "Scaleをリセット"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/VertwiseTranslateProvider.Editor.cs:16
+#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/VertwiseTranslateProvider.Editor.cs:15
 msgid "VertwiseTranslateProvider.size"
 msgstr "Scale"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/VertwiseTranslateProvider.Editor.cs:17
+#: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/VertwiseTranslateProvider.Editor.cs:16
 msgid "VertwiseTranslateProvider.referenceTranslation"
 msgstr "座標変換量の設定"
 
@@ -652,6 +664,15 @@ msgstr "One Y"
 msgid "One Z"
 msgstr "One Z"
 
+# notranslation
+#: Editor/Silksprite/MeshWeaver/GUIActions/MainProviderHeader.cs:34
+msgid "Language"
+msgstr "Language"
+
+#: Editor/Silksprite/MeshWeaver/GUIActions/MainProviderHeader.cs:41
+msgid "Current LOD"
+msgstr "表示するLOD"
+
 #: Editor/Silksprite/MeshWeaver/Utils/ChildComponentPopupMenu.cs:20
 msgid "Create Child..."
 msgstr "追加..."
@@ -663,3 +684,18 @@ msgstr "追加..."
 #: Editor/Silksprite/MeshWeaver/Utils/ModifierComponentPopupMenu.cs:25
 msgid "Modifiers"
 msgstr "Modifier"
+
+#~ msgid "MatrixMeshProvider.Sources"
+#~ msgstr "入力"
+
+#~ msgid "MatrixMeshProvider.Output"
+#~ msgstr "出力"
+
+#~ msgid "PillarMeshProvider.Sources"
+#~ msgstr "入力"
+
+#~ msgid "PillarMeshProvider.Body"
+#~ msgstr "本体の出力"
+
+#~ msgid "PillarMeshProvider.Lids"
+#~ msgstr "底面と上面の出力"

@@ -6,7 +6,9 @@ using Silksprite.MeshWeaver.Controllers.Utils;
 using Silksprite.MeshWeaver.GUIActions;
 using Silksprite.MeshWeaver.Models;
 using Silksprite.MeshWeaver.Models.DataObjects;
+using Silksprite.MeshWeaver.Scopes;
 using Silksprite.MeshWeaver.Utils;
+using UnityEditor;
 using UnityEngine;
 using static Silksprite.MeshWeaver.Tools.LocalizationTool;
 
@@ -51,11 +53,20 @@ namespace Silksprite.MeshWeaver.Controllers.Base
 
         GUIAction CreateDumpGUI()
         {
-            return new Div(c =>
+            var div = new Div(c =>
             {
+                c.Add(new Header(Loc("Dumps")));
                 c.Add(new DumpFoldout(Loc("Mesh Dump"), () => ((MeshProvider)target).LastFactory?.Build(MeshWeaverSettings.Current.CurrentLodMaskLayer)));
                 c.Add(new DumpFoldout(Loc("Collider Mesh Dump"), () => ((MeshProvider)target).LastFactory?.Build(LodMaskLayer.Collider)));
                 PopulateDumpGUI(c);
+            }); 
+            return GUIAction.Build(() =>
+            {
+                using (new EditorGUI.IndentLevelScope())
+                using (new BoxLayoutScope(MeshWeaverSkin.Dump))
+                {
+                    div.OnGUI();
+                }
             });
         }
 

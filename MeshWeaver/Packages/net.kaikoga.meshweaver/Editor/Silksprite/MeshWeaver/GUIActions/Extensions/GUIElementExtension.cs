@@ -11,6 +11,8 @@ namespace Silksprite.MeshWeaver.GUIActions.Extensions
 
         public static GUIAction WithEnabled(this GUIAction guiAction, bool enableIfTrue) => WithEnabledImpl(guiAction, () => enableIfTrue);
 
+        public static GUIAction WithIndent(this GUIAction guiAction, int indentLevel = 1) => WithIndentImpl(guiAction, () => indentLevel);
+
         public static GUIAction WithDisplayOnRefresh(this GUIAction guiAction, Dispatcher<RefreshEvent> onRefresh, Func<bool> displayIfTrue)
         {
             return WithDisplayImpl(guiAction, displayIfTrue);
@@ -46,5 +48,15 @@ namespace Silksprite.MeshWeaver.GUIActions.Extensions
             });
         }
 
+        static GUIAction WithIndentImpl(this GUIAction guiAction, Func<int> indentLevel)
+        {
+            return GUIAction.Build(() =>
+            {
+                using (new EditorGUI.IndentLevelScope(indentLevel()))
+                {
+                    guiAction.OnGUI();
+                }
+            });
+        }
     }
 }

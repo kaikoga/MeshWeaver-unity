@@ -12,9 +12,12 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
     {
         protected override void PopulatePropertiesGUI(GUIContainer container)
         {
+            container.Add(new Header(Loc("Sources")));
             container.Add(Prop(nameof(PolygonMeshProvider.pathProvider), Loc("PolygonMeshProvider.pathProvider")));
             container.Add(PathProviderMenus.CollectionsMenu.ToGUIAction((PolygonMeshProvider)target, "Path",
                 serializedObject.FindProperty(nameof(PolygonMeshProvider.pathProvider))));
+
+            container.Add(new Header(Loc("Output")));
             container.Add(Prop(nameof(PolygonMeshProvider.material), Loc("PolygonMeshProvider.material")));
         }
     }
