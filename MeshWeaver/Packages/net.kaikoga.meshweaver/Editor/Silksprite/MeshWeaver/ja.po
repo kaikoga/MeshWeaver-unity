@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-01-14 10:35+0900\n"
+"POT-Creation-Date: 2023-01-14 10:47+0900\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -169,6 +169,7 @@ msgstr "マテリアル"
 
 #: Editor/Silksprite/MeshWeaver/Controllers/Meshes/MatrixMeshProvider.Editor.cs:15
 #: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:16
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PolygonMeshProvider.Editor.cs:15
 msgid "Sources"
 msgstr "入力"
 
@@ -185,20 +186,21 @@ msgid "MatrixMeshProvider.operatorKind"
 msgstr "パス演算子"
 
 #: Editor/Silksprite/MeshWeaver/Controllers/Meshes/MatrixMeshProvider.Editor.cs:24
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PolygonMeshProvider.Editor.cs:20
 msgid "Output"
 msgstr "出力"
 
 #: Editor/Silksprite/MeshWeaver/Controllers/Meshes/MatrixMeshProvider.Editor.cs:25
+msgid "MatrixMeshProvider.material"
+msgstr "マテリアル"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/MatrixMeshProvider.Editor.cs:26
 msgid "MatrixMeshProvider.defaultCellPatternKind"
 msgstr "セル形状"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/MatrixMeshProvider.Editor.cs:26
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/MatrixMeshProvider.Editor.cs:27
 msgid "MatrixMeshProvider.cellPatternOverrides"
 msgstr "セルのオーバーライド"
-
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/MatrixMeshProvider.Editor.cs:27
-msgid "MatrixMeshProvider.material"
-msgstr "マテリアル"
 
 #: Editor/Silksprite/MeshWeaver/Controllers/Meshes/MatrixMeshProvider.Editor.cs:32
 #: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:60
@@ -209,6 +211,10 @@ msgstr "入力パスXのダンプ"
 #: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:61
 msgid "Input Path dump Y"
 msgstr "入力パスYのダンプ"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/MeshReference.Editor.cs:14
+msgid "MeshReference.meshProviders"
+msgstr "メッシュ参照"
 
 #: Editor/Silksprite/MeshWeaver/Controllers/Meshes/Modifiers/MeshCutoutBoundsProvider.Editor.cs:14
 msgid "MeshCutoutBoundsProvider.boundsData"
@@ -295,24 +301,24 @@ msgid "Body"
 msgstr "本体の出力"
 
 #: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:27
-msgid "PillarMeshProvider.defaultCellPatternKind"
-msgstr "セル形状"
-
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:28
-msgid "PillarMeshProvider.cellPatternOverrides"
-msgstr "セルのオーバーライド"
-
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:29
 msgid "PillarMeshProvider.fillBody"
 msgstr "本体を生成する"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:32
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:30
 msgid "PillarMeshProvider.materialBody"
 msgstr "本体のマテリアル"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:33
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:31
 msgid "PillarMeshProvider.uvChannelBody"
 msgstr "本体のUVチャンネル"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:32
+msgid "PillarMeshProvider.defaultCellPatternKind"
+msgstr "セル形状"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:33
+msgid "PillarMeshProvider.cellPatternOverrides"
+msgstr "セルのオーバーライド"
 
 #: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:36
 msgid "Lids"
@@ -350,11 +356,11 @@ msgstr "上面のUVチャンネル"
 msgid "PillarMeshProvider.reverseLids"
 msgstr "底面と上面を反転する"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PolygonMeshProvider.Editor.cs:15
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PolygonMeshProvider.Editor.cs:16
 msgid "PolygonMeshProvider.pathProvider"
 msgstr "パス"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PolygonMeshProvider.Editor.cs:18
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PolygonMeshProvider.Editor.cs:21
 msgid "PolygonMeshProvider.material"
 msgstr "マテリアル"
 
