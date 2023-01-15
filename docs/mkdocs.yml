@@ -1,6 +1,6 @@
 site_name: MeshWeaver Documentation
 
-site_url: https://kaikoga.github.io/MeshWeaver-unity/docs/
+# site_url: https://kaikoga.github.io/MeshWeaver-unity/docs/ja/
 repo_url: https://github.com/kaikoga/MeshWeaver-Unity/
 
 docs_dir: docs
@@ -66,5 +66,5 @@ theme:
 extra:
   alternate:
     - name: Japanese
-      link: /docs/ja/
+      link: /MeshWeaver-unity/docs/ja/
       lang: ja
