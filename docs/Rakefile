@@ -1,13 +1,14 @@
 desc 'build'
 task :build do
-  sh 'docker run --rm -it -v ${PWD}:/docs -v ${PWD}/src/ja:/docs/src -v ${PWD}/site:/site squidfunk/mkdocs-material build -d /site'
-  rm_rf '../Website/docs'
-  mv 'site', '../Website/docs'
+  sh 'docker run --rm -it -v ${PWD}:/docs -v ${PWD}/src/ja:/docs/docs -v ${PWD}/site:/site squidfunk/mkdocs-material build -d /site'
+  rm_rf '../Website/docs/ja'
+  mkdir_p '../Website/docs'
+  mv 'site', '../Website/docs/ja'
 end
 
 desc 'serve'
 task :serve do
-  sh 'docker run --rm -it -p 8000:8000 -v ${PWD}:/docs -v ${PWD}/src/ja:/docs/src squidfunk/mkdocs-material'
+  sh 'docker run --rm -it -p 8000:8000 -v ${PWD}:/docs -v ${PWD}/src/ja:/docs/docs squidfunk/mkdocs-material'
 end
 
 task :default => :build
