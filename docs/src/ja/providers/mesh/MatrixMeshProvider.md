@@ -1,0 +1,3 @@
+# MatrixMeshProvider
+
+MatrixMeshProviderはパスを二つ受け取り、パスを別のパスに沿って動かした軌跡に格子状にポリゴンを生成します。

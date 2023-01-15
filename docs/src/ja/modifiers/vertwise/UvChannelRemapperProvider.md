@@ -1,0 +1,3 @@
+# UvChannelRemapperProvider
+
+UvChannelRandomizerProviderはメッシュまたはパスに含まれる頂点ごとに、指定したUVチャンネルに設定されているUV座標を指定した範囲内に再マッピングします。

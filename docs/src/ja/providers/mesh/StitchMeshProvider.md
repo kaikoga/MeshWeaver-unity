@@ -1,0 +1,3 @@
+# StitchMeshProvider
+
+StitchMeshProviderはパスを二つ受け取り、二つのパスの間を縫い合わせるようにポリゴンを生成します。

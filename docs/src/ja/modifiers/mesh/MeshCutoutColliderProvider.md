@@ -1,0 +1,3 @@
+# MeshCutoutColliderProvider
+
+MeshCutoutBoundsProviderはColliderで指定した範囲内に頂点が存在するポリゴンをメッシュから取り除いて出力します。

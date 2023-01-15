@@ -1,0 +1,3 @@
+# ShapePathProvider
+
+ShapePathProviderは定義済みのパスを出力します。

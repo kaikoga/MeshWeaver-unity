@@ -1,0 +1,3 @@
+# CompositeMeshProvider
+
+CompositeMeshProviderはヒエラルキーで直接の子になっているメッシュを受け取り、全て結合したメッシュを生成します。

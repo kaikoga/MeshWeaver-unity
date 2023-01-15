@@ -1,0 +1,3 @@
+# StampMeshProvider
+
+StampMeshProviderはメッシュとパスを受け取り、受け取ったパスの頂点位置にメッシュをコピーして生成します。

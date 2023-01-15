@@ -1,0 +1,3 @@
+# MeshCutoutUvBoundsProvider
+
+MeshCutoutBoundsProviderはUv Areaで指定した範囲内にUV座標が存在するポリゴンをメッシュから取り除いて出力します。

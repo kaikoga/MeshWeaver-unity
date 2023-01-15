@@ -1,0 +1,3 @@
+# VertwiseNormalizeProvider
+
+VertwiseNormalizeProviderはメッシュまたはパスに含まれる頂点ごとに、座標を指定した範囲内に再マッピングします。
