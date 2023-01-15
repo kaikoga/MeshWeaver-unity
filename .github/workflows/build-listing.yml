@@ -64,7 +64,9 @@ jobs:
 
       - name: Build and merge MkDocs into Pages
         working-directory: ./docs
-        run: mkdocs build -d ../Website/docs
+        run: |
+          mv src/ja docs
+          mkdocs build -d ../Website/docs/ja/
 
       - name: Setup Pages
         uses: actions/configure-pages@v2
