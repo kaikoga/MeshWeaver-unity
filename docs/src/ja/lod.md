@@ -21,6 +21,18 @@ MeshWeaverには固定で４つのLODが存在します。
 
 初期設定では、MeshWeaverの出力するプレハブには、Collider設定で出力されたメッシュがメッシュコライダーとして設定されています。
 
-### まとめると
+## LOD の例
+
+### 階段
+
+![StairsProvider_LOD0](images/lod/StairsProvider_LOD0.jpg)
+
+これはMeshWeaverでモデリングした階段です。
+
+![StairsProvider_Collider](images/lod/StairsProvider_Collider.jpg)
+
+上の階段のLODを適切に設定することにより、コライダー用のメッシュをこのような形状にすることができます。
+
+## まとめると
 
 レンダラー用のメッシュとコライダー用のメッシュをいっぺんにモデリングするための機能です！
