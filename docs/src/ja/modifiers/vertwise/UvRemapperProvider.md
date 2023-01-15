@@ -1,0 +1,3 @@
+# UvRemapperProvider
+
+UvRemapperProviderはメッシュまたはパスに含まれる頂点ごとに、全てのUV座標を指定した範囲内に再マッピングします。

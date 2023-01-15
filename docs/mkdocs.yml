@@ -1,0 +1,70 @@
+site_name: MeshWeaver Documentation
+
+site_url: https://kaikoga.github.io/MeshWeaver-unity/docs/
+repo_url: https://github.com/kaikoga/MeshWeaver-Unity/
+
+docs_dir: src
+
+nav:
+  - index.md
+  - first_steps.md
+  - lod.md
+  - mesh_profile.md
+  - hint_worlds.md
+  - Providers:
+    - Mesh:
+      - providers/mesh/CompositeMeshProvider.md
+      - providers/mesh/MeshReference.md
+      - providers/mesh/PolygonMeshProvider.md
+      - providers/mesh/MatrixMeshProvider.md
+      - providers/mesh/PillarMeshProvider.md
+      - providers/mesh/StitchMeshProvider.md
+      - providers/mesh/StampMeshProvider.md
+      - providers/mesh/ImportMeshProvider.md
+    - Path:
+      - providers/path/CompositePathProvider.md
+      - providers/path/PathReference.md
+      - providers/path/ExtractPathProvider.md
+      - providers/path/VertexProvider.md
+      - providers/path/ShapePathProvider.md
+      - providers/path/RevolutionPathProvider.md
+  - Modifier Providers:
+    - Vertwise:
+      - modifiers/vertwise/VertwiseNormalizeProvider.md
+      - modifiers/vertwise/VertwiseTranslateProvider.md
+      - modifiers/vertwise/VertwiseAlignProvider.md
+      - modifiers/vertwise/VertwiseResetProvider.md
+      - modifiers/vertwise/VertwiseQuantizeProvider.md
+      - modifiers/vertwise/UvProjectorProvider.md
+      - modifiers/vertwise/UvRemapperProvider.md
+      - modifiers/vertwise/UvChannelRemapperProvider.md
+      - modifiers/vertwise/UvRandomizerProvider.md
+      - modifiers/vertwise/UvChannelRandomizerProvider.md
+    - Mesh:
+      - modifiers/mesh/MeshReverseProvider.md
+      - modifiers/mesh/MeshRepeatProvider.md
+      - modifiers/mesh/MeshSubdivisionProvider.md
+      - modifiers/mesh/MeshDisassembleProvider.md
+      - modifiers/mesh/MeshCutoutBoundsProvider.md
+      - modifiers/mesh/MeshCutoutUvBoundsProvider.md
+      - modifiers/mesh/MeshCutoutColliderProvider.md
+    - Path:
+      - modifiers/path/PathReverseProvider.md
+      - modifiers/path/PathRepeatProvider.md
+      - modifiers/path/PathSubdivisionProvider.md
+      - modifiers/path/PathOptimizeProvider.md
+      - modifiers/path/PathBevelProvider.md
+      - modifiers/path/PathChainProvider.md
+      - modifiers/path/UvGeneratorProvider.md
+  - GitHub: https://github.com/kaikoga/MeshWeaver-Unity/
+  - twitter/@kaikoga: https://twitter.com/kaikoga
+
+theme:
+  name: material
+  language: ja
+
+extra:
+  alternate:
+    - name: Japanese
+      link: /docs/ja/
+      lang: ja

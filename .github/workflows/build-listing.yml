@@ -54,6 +54,18 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
  
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.x
+
+      - name: Install Material for MkDocs
+        run: pip install mkdocs-material 
+
+      - name: Build and merge MkDocs into Pages
+        working-directory: ./docs
+        run: mkdocs build -d ../Website/docs
+
       - name: Setup Pages
         uses: actions/configure-pages@v2
         

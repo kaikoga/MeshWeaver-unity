@@ -1,0 +1,5 @@
+# MeshReference
+
+MeshReferenceはインスペクタで参照しているメッシュをコピーして出力します。
+
+出力結果はMeshReference自身のTransformによって移動されます。

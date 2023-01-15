@@ -1,0 +1,3 @@
+# UvProjectorProvider
+
+UvProjectorProviderはメッシュまたはパスに含まれる頂点ごとに、頂点座標に応じたUV値を設定します。

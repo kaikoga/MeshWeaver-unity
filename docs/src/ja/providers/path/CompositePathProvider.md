@@ -1,0 +1,3 @@
+# CompositePathProvider
+
+CompositePathProviderはヒエラルキーで直接の子になっているパスを受け取り、全て結合したパスを生成します。

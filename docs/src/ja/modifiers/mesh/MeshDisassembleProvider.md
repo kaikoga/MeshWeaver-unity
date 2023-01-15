@@ -1,0 +1,3 @@
+# MeshDisassembleProvider
+
+MeshDisassembleProviderはメッシュに含まれる複数のポリゴンで共有される頂点を分解します。

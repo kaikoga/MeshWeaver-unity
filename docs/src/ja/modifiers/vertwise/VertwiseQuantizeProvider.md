@@ -1,0 +1,3 @@
+# VertwiseQuantizeProvider
+
+VertwiseQuantizeProviderはメッシュまたはパスに含まれる頂点ごとに、座標をキリのよい数値に丸めます。

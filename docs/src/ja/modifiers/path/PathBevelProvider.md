@@ -1,0 +1,3 @@
+# PathBevelProvider
+
+PathBevelProviderはパスに対して丸みを持った細分化を行います。

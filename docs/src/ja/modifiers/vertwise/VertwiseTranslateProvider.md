@@ -1,0 +1,3 @@
+# VertwiseTranslateProvider
+
+VertwiseTranslateProviderはメッシュまたはパスに含まれる頂点ごとに、座標変換を加えます。

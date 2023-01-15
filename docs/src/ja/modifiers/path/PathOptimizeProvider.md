@@ -1,0 +1,3 @@
+# PathOptimizeProvider
+
+PathOptimizeProviderはパスから不要な頂点を取り除こうとします。

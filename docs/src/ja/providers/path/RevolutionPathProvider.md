@@ -1,0 +1,3 @@
+# RevolutionPathProvider
+
+RevolutionPathProviderは基準となる頂点を設定した上で、それを指定した角度と軸に従って回転したパスを生成します。

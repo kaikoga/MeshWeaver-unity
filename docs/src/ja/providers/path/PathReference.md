@@ -1,0 +1,5 @@
+# PathReference
+
+PathReferenceはインスペクタで参照しているパスをコピーして出力します。
+
+出力結果はPathReference自身のTransformによって移動されます。
