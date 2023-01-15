@@ -21,12 +21,16 @@
 
 指定された場所に頂点を生成します。
 
+![VertexProvider](images/first_steps/VertexProvider.jpg)
+
 #### CompositePathProvider
 
 ヒエラルキーで子になっている頂点やパスを受け取り、全て結合したパスを生成します。
 CompositePathProviderだけがヒエラルキーで子になっている頂点やパスを受け取ることができます。
 
 つまり、グループ化みたいなことができます。
+
+![CompositePathProvider](images/first_steps/CompositePathProvider.jpg)
 
 逆に言うなら、CompositePathProvider以外のPathProviderコンポーネントの親子関係は自由に設定できます。
 （もっとも、コンポーネントが利用するパスを子にしておくことでヒエラルキーを整理するのが良いと思います。プリミティブはそのような構造になっています。）
@@ -44,6 +48,8 @@ CompositePathProviderだけがヒエラルキーで子になっている頂点�
 
 これを用いて作った四角形が「MeshWeaver」→「Primitives」→「Quad XZ」で出てくる四角ポリゴンです。
 
+![QuadProvider](images/first_steps/QuadProvider.jpg)
+
 オブジェクトを選択すると、一周ぐるっと回るパスが存在することがわかります。
 このパスはVertexProviderが入ったCompositePathProviderが生成しているものです。
 
@@ -54,8 +60,13 @@ CompositePathProviderだけがヒエラルキーで子になっている頂点�
 
 これを用いて作った四角形が「MeshWeaver」→「Primitives」→「Plane」で出てくる地面です。
 
+![PlaneProvider_X](images/first_steps/PlaneProvider_X.jpg)
+![PlaneProvider_Y](images/first_steps/PlaneProvider_Y.jpg)
+
 オブジェクトを選択すると、X軸方向に延びるパスとZ軸方向に延びるパスが存在することがわかります。
-「Quad XZ」と「Plane」は出力結果の見た目は似ていますが、構造は違うことがわかります。
+
+「Quad XZ」と「Plane」は出力結果の見た目は似ていますが、構造は異なります。
+「Quad XZ」が多角形であるのに対して、「Plane」はX軸方向に延ばしたパスをZ軸方向に動かした軌跡です。
 
 #### PillarMeshProvider
 
@@ -65,6 +76,9 @@ CompositePathProviderだけがヒエラルキーで子になっている頂点�
 
 これを用いて作った箱が「MeshWeaver」→「Primitives」→「Cube」で出てくるキューブです。
 
+![CubeProvider_X](images/first_steps/CubeProvider_X.jpg)
+![CubeProvider_Y](images/first_steps/CubeProvider_Y.jpg)
+
 オブジェクトを選択すると、一周ぐるっと回るパスとY軸方向に延びるパスが存在することがわかります。
 
 #### CompositeMeshProvider
@@ -73,6 +87,8 @@ CompositePathProviderだけがヒエラルキーで子になっている頂点�
 CompositeMeshProviderだけがヒエラルキーで子になっているメッシュを受け取ることができます。
 
 つまり、グループ化みたいなことができます。
+
+![CompositeMeshProvider](images/first_steps/CompositeMeshProvider.jpg)
 
 逆に言うなら、CompositeMeshProvider以外のMeshProviderコンポーネントの親子関係は自由に設定できます。
 （もっとも、コンポーネントが利用するメッシュを子にしておくことでヒエラルキーを整理するのが良いと思います。）
