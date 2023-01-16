@@ -12,12 +12,10 @@ namespace Silksprite.MeshWeaver.Utils
     where T : Component
     {
         readonly Type[] _types;
-        readonly LocalizedContent[] _menuOptions;
 
         public ChildComponentPopupMenu(params Type[] types)
         {
-            _types = new [] { (Type)null, null }.Concat(types).ToArray();
-            _menuOptions = new [] { Loc("Create Child..."), _Loc("") }.Concat(types.Select(type => type == typeof(void) ? _Loc("") : _Loc(type.Name))).ToArray();
+            _types = types;
         }
 
         public GUIAction ToGUIAction(Component self, LocalizedContent? label) => ToGUIAction(self, label, null, null);
@@ -25,27 +23,28 @@ namespace Silksprite.MeshWeaver.Utils
 
         GUIAction ToGUIAction(Component self, LocalizedContent? label, string name, SerializedProperty serializedProperty)
         {
-            return GUIAction.Build(() =>
+            return new LocPopupButtons(label ?? _Loc(" "), Loc("Create Child..."), _types.Select(type =>
             {
-                var index = EditorGUILayout.Popup(label?.Tr ?? " ", 0, _menuOptions.Select(loc => loc.Tr).ToArray());
-                if (index <= 0) return;
-
-                var child = self.AddChildComponent<T>(_types[index]);
-                if (serializedProperty == null) return;
-
-                child.name = $"{child.name}_{name}";
-                if (serializedProperty.isArray)
+                if (type == typeof(void) || type == null) return new LocMenuItem(_Loc(""), null);
+                return new LocMenuItem(_Loc(type.Name), () =>
                 {
-                    var size = serializedProperty.arraySize;
-                    serializedProperty.InsertArrayElementAtIndex(size);
-                    serializedProperty.GetArrayElementAtIndex(size).objectReferenceValue = child;
-                }
-                else
-                {
-                    serializedProperty.objectReferenceValue = child;
-                }
-                serializedProperty.serializedObject.ApplyModifiedProperties();
-            });
+                    var child = self.AddChildComponent<T>(type);
+                    if (serializedProperty == null) return;
+
+                    child.name = $"{child.name}_{name}";
+                    if (serializedProperty.isArray)
+                    {
+                        var size = serializedProperty.arraySize;
+                        serializedProperty.InsertArrayElementAtIndex(size);
+                        serializedProperty.GetArrayElementAtIndex(size).objectReferenceValue = child;
+                    }
+                    else
+                    {
+                        serializedProperty.objectReferenceValue = child;
+                    }
+                    serializedProperty.serializedObject.ApplyModifiedProperties();
+                });
+            }).ToArray());
         }
     }
 }
