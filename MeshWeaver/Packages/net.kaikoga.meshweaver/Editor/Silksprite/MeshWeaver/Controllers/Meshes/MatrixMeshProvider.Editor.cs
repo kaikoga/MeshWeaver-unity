@@ -1,6 +1,9 @@
+using System.Collections.Generic;
 using Silksprite.MeshWeaver.Controllers.Base;
+using Silksprite.MeshWeaver.Controllers.Commands;
 using Silksprite.MeshWeaver.Controllers.Utils;
 using Silksprite.MeshWeaver.GUIActions;
+using Silksprite.MeshWeaver.GUIActions.Extensions;
 using UnityEditor;
 using static Silksprite.MeshWeaver.Tools.LocalizationTool;
 
@@ -25,6 +28,12 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
             container.Add(Prop(nameof(MatrixMeshProvider.material), Loc("MatrixMeshProvider.material")));
             container.Add(Prop(nameof(MatrixMeshProvider.defaultCellPatternKind), Loc("MatrixMeshProvider.defaultCellPatternKind")));
             container.Add(Prop(nameof(MatrixMeshProvider.cellPatternOverrides), Loc("MatrixMeshProvider.cellPatternOverrides")));
+        }
+
+        protected override void PopulateAdvancedActions(List<LocMenuItem> menuItems)
+        {
+            menuItems.Add(new UpgradeBySwapScript<MatrixMeshProvider, PillarMeshProvider>().ToLocMenuItem(target as MatrixMeshProvider));
+            menuItems.Add(new UpgradeByWrapWithCompositeEntirely<MatrixMeshProvider, CompositeMeshProvider>().ToLocMenuItem(target as MatrixMeshProvider));
         }
 
         protected override void PopulateDumpGUI(GUIContainer container)
