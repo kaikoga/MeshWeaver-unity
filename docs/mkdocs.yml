@@ -8,6 +8,7 @@ docs_dir: docs
 nav:
   - index.md
   - first_steps.md
+  - mesh_behaviour.md
   - lod.md
   - mesh_profile.md
   - hint_worlds.md
