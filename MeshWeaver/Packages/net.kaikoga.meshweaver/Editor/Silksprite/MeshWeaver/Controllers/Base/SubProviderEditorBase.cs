@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using Silksprite.MeshWeaver.GUIActions;
+using static Silksprite.MeshWeaver.Tools.LocalizationTool;
 
 namespace Silksprite.MeshWeaver.Controllers.Base
 {
@@ -8,9 +10,27 @@ namespace Silksprite.MeshWeaver.Controllers.Base
 
         protected sealed override void PopulateInspectorGUI(GUIContainer container)
         {
-            PopulatePropertiesGUI(container);
+            container.Add(CreatePropertiesGUI());
+            container.Add(CreateAdvancedActionsGUI());
         }
 
+        GUIAction CreatePropertiesGUI()
+        {
+            return new Div(PopulatePropertiesGUI);
+        }
+        
+        GUIAction CreateAdvancedActionsGUI()
+        {
+            var menuItems = new List<LocMenuItem>();
+            PopulateAdvancedActions(menuItems);
+            if (menuItems.Count == 0) return new GUIContainer();
+            return new LocPopupButtons(Loc("Advanced Actions"), Loc("Command..."), menuItems.ToArray());
+        }
+        
         protected abstract void PopulatePropertiesGUI(GUIContainer container);
+
+        protected virtual void PopulateAdvancedActions(List<LocMenuItem> menuItems)
+        {
+        }
     }
 }
