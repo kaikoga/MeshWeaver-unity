@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Silksprite.MeshWeaver.Controllers.Commands;
+using Silksprite.MeshWeaver.Controllers.Paths;
 using Silksprite.MeshWeaver.Controllers.Utils;
 using Silksprite.MeshWeaver.GUIActions;
 using Silksprite.MeshWeaver.GUIActions.Extensions;
@@ -72,6 +73,7 @@ namespace Silksprite.MeshWeaver.Controllers.Base
 
         void PopulateCommonAdvancedActions(List<LocMenuItem> menuItems)
         {
+            menuItems.Add(new UpgradeByWrapWithCompositeEntirely<PathProvider, CompositePathProvider>().ToLocMenuItem(target as PathProvider));
             menuItems.Add(new BakePath().ToLocMenuItem((PathProvider)target));
         }
 

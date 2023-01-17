@@ -33,7 +33,6 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
         protected override void PopulateAdvancedActions(List<LocMenuItem> menuItems)
         {
             menuItems.Add(new UpgradeBySwapScript<MatrixMeshProvider, PillarMeshProvider>().ToLocMenuItem(target as MatrixMeshProvider));
-            menuItems.Add(new UpgradeByWrapWithCompositeEntirely<MatrixMeshProvider, CompositeMeshProvider>().ToLocMenuItem(target as MatrixMeshProvider));
         }
 
         protected override void PopulateDumpGUI(GUIContainer container)
