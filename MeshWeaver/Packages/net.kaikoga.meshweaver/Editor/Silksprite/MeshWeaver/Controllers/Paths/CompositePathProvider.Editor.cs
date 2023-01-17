@@ -13,8 +13,8 @@ namespace Silksprite.MeshWeaver.Controllers.Paths
         protected override void PopulatePropertiesGUI(GUIContainer container)
         {
             container.Add(PathProviderMenus.ElementsMenu.ToGUIAction((CompositePathProvider)target, Loc("Path Providers")));
-            container.Add(Prop(nameof(PathReference.isLoop), Loc("PathReference.isLoop")));
-            container.Add(Prop(nameof(PathReference.smoothJoin), Loc("PathReference.smoothJoin")));
+            container.Add(Prop(nameof(CompositePathProvider.isLoop), Loc("CompositePathProvider.isLoop")));
+            container.Add(Prop(nameof(CompositePathProvider.smoothJoin), Loc("CompositePathProvider.smoothJoin")));
         }
     }
 }
