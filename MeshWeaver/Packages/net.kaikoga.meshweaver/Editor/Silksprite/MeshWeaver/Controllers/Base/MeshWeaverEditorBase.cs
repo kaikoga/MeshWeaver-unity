@@ -10,6 +10,7 @@ namespace Silksprite.MeshWeaver.Controllers.Base
     public abstract class MeshWeaverEditorBase : Editor
     {
         protected abstract bool IsMainComponentEditor { get; }
+        protected virtual bool IsExperimental => false;
 
         GUIContainer _root;
         GUIContainer _container;
@@ -33,10 +34,20 @@ namespace Silksprite.MeshWeaver.Controllers.Base
             void PopulateRootElement()
             {
                 if (IsMainComponentEditor) _root.Add(new MainProviderHeader());
+                if (IsExperimental) _root.Add(PopulateExperimentalBanner());
                 _container = new GUIContainer();
                 PopulateInspectorGUI(_container);
                 _root.Add(_container);
             }
+        }
+
+        GUIAction PopulateExperimentalBanner()
+        {
+            return new Div(c =>
+            {
+                c.Add(new Header(Loc("Experimental")));
+                c.Add(new LocHelpBox(Loc("This component may break in future release."), MessageType.Warning));
+            });
         }
 
         protected abstract void PopulateInspectorGUI(GUIContainer root);

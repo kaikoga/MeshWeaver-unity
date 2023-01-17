@@ -10,6 +10,8 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
     [CanEditMultipleObjects]
     public class BakedMeshProviderEditor : MeshProviderEditorBase
     {
+        protected override bool IsExperimental => true;
+
         protected override void PopulatePropertiesGUI(GUIContainer container)
         {
             container.Add(Prop(nameof(BakedMeshProvider.lodMaskLayers), Loc("BakedMeshProvider.lodMaskLayers")));

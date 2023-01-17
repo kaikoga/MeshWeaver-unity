@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-01-17 10:02+0900\n"
+"POT-Creation-Date: 2023-01-17 10:12+0900\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -184,14 +184,24 @@ msgid "Update Exported Assets"
 msgstr "書き出されたアセットを更新"
 
 #: Editor/Silksprite/MeshWeaver/Controllers/Meshes/BakedMeshProvider.Editor.cs:15
+#: Editor/Silksprite/MeshWeaver/Controllers/Paths/BakedPathProvider.Editor.cs:15
+msgid "Experimental"
+msgstr "実験的機能"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/BakedMeshProvider.Editor.cs:16
+#: Editor/Silksprite/MeshWeaver/Controllers/Paths/BakedPathProvider.Editor.cs:16
+msgid "This component may break in future release."
+msgstr "このコンポーネントは将来のリリースで機能が変更される可能性があります。"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/BakedMeshProvider.Editor.cs:17
 msgid "BakedMeshProvider.lodMaskLayers"
 msgstr "LOD マスクデータ"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/BakedMeshProvider.Editor.cs:16
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/BakedMeshProvider.Editor.cs:18
 msgid "BakedMeshProvider.meshData"
 msgstr "メッシュデータ"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/BakedMeshProvider.Editor.cs:17
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/BakedMeshProvider.Editor.cs:19
 msgid "BakedMeshProvider.materials"
 msgstr "マテリアル"
 
@@ -540,11 +550,11 @@ msgstr "Scale"
 msgid "VertwiseTranslateProvider.referenceTranslation"
 msgstr "座標変換量の設定"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Paths/BakedPathProvider.Editor.cs:15
+#: Editor/Silksprite/MeshWeaver/Controllers/Paths/BakedPathProvider.Editor.cs:17
 msgid "BakedPathProvider.lodMaskLayers"
 msgstr "LOD マスクデータ"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Paths/BakedPathProvider.Editor.cs:16
+#: Editor/Silksprite/MeshWeaver/Controllers/Paths/BakedPathProvider.Editor.cs:18
 msgid "BakedPathProvider.pathData"
 msgstr "パスデータ"
 
