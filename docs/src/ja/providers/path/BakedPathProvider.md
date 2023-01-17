@@ -1,0 +1,3 @@
+# BakedPathProvider
+
+BakedPathProviderには生成済みのパスデータが格納されます。

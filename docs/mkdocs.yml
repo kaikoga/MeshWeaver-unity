@@ -21,6 +21,7 @@ nav:
       - providers/mesh/StitchMeshProvider.md
       - providers/mesh/StampMeshProvider.md
       - providers/mesh/ImportMeshProvider.md
+      - providers/mesh/BakedMeshProvider.md
     - Path:
       - providers/path/CompositePathProvider.md
       - providers/path/PathReference.md
@@ -28,6 +29,7 @@ nav:
       - providers/path/VertexProvider.md
       - providers/path/ShapePathProvider.md
       - providers/path/RevolutionPathProvider.md
+      - providers/path/BakedPathProvider.md
   - Modifier Providers:
     - Vertwise:
       - modifiers/vertwise/VertwiseNormalizeProvider.md
