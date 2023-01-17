@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-01-17 09:43+0900\n"
+"POT-Creation-Date: 2023-01-17 10:02+0900\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -15,32 +15,33 @@ msgstr ""
 "X-Poedit-KeywordsList: Tr;Loc\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshProviderEditorBase.cs:33
-#: Editor/Silksprite/MeshWeaver/Controllers/Base/PathProviderEditorBase.cs:32
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshProviderEditorBase.cs:34
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/PathProviderEditorBase.cs:33
 msgid "GeometryProvider.lodMask"
 msgstr "LOD マスク"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshProviderEditorBase.cs:42
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshProviderEditorBase.cs:43
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/PathProviderEditorBase.cs:42
 msgid "Dumps"
 msgstr "ダンプ"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshProviderEditorBase.cs:43
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshProviderEditorBase.cs:44
 msgid "Mesh Dump"
 msgstr "メッシュのダンプ"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshProviderEditorBase.cs:44
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshProviderEditorBase.cs:45
 msgid "Collider Mesh Dump"
 msgstr "コライダーのダンプ"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshProviderEditorBase.cs:62
-#: Editor/Silksprite/MeshWeaver/Controllers/Base/PathProviderEditorBase.cs:60
-#: Editor/Silksprite/MeshWeaver/Controllers/Base/SubProviderEditorBase.cs:27
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshProviderEditorBase.cs:63
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/PathProviderEditorBase.cs:62
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/SubProviderEditorBase.cs:31
 msgid "Advanced Actions"
 msgstr "高度な操作"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshProviderEditorBase.cs:62
-#: Editor/Silksprite/MeshWeaver/Controllers/Base/PathProviderEditorBase.cs:60
-#: Editor/Silksprite/MeshWeaver/Controllers/Base/SubProviderEditorBase.cs:27
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshProviderEditorBase.cs:63
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/PathProviderEditorBase.cs:62
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/SubProviderEditorBase.cs:31
 msgid "Command..."
 msgstr "コマンドを実行..."
 
@@ -52,13 +53,17 @@ msgstr "仮UI"
 msgid "End Fallback Inspector"
 msgstr "仮UIここまで"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Base/PathProviderEditorBase.cs:41
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/PathProviderEditorBase.cs:43
 msgid "Path Dump"
 msgstr "パスのダンプ"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Base/PathProviderEditorBase.cs:42
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/PathProviderEditorBase.cs:44
 msgid "Collider Path Dump"
 msgstr "コライダーパスのダンプ"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/SubProviderEditorBase.cs:21
+msgid "ModifierProviderBase.lodMask"
+msgstr "LOD マスク"
 
 #: Editor/Silksprite/MeshWeaver/Controllers/Commands/BakeMesh.cs:17
 msgid "Bake Mesh"
@@ -233,12 +238,12 @@ msgstr "セル形状"
 msgid "MatrixMeshProvider.cellPatternOverrides"
 msgstr "セルのオーバーライド"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/MatrixMeshProvider.Editor.cs:41
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/MatrixMeshProvider.Editor.cs:40
 #: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:60
 msgid "Input Path dump X"
 msgstr "入力パスXのダンプ"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/MatrixMeshProvider.Editor.cs:42
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/MatrixMeshProvider.Editor.cs:41
 #: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:61
 msgid "Input Path dump Y"
 msgstr "入力パスYのダンプ"
@@ -671,7 +676,7 @@ msgstr "折り目にする"
 msgid "VertexProvider.uvs"
 msgstr "UV"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/TranslationProvider.Editor.cs:14
+#: Editor/Silksprite/MeshWeaver/Controllers/TranslationProvider.Editor.cs:16
 msgid "TranslationProvider.translation"
 msgstr "座標変換"
 

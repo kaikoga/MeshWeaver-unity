@@ -16,7 +16,11 @@ namespace Silksprite.MeshWeaver.Controllers.Base
 
         GUIAction CreatePropertiesGUI()
         {
-            return new Div(PopulatePropertiesGUI);
+            return new Div(c =>
+            {
+                c.Add(Prop(nameof(MeshProvider.lodMask), Loc("ModifierProviderBase.lodMask")));
+                PopulatePropertiesGUI(c);
+            });
         }
         
         GUIAction CreateAdvancedActionsGUI()

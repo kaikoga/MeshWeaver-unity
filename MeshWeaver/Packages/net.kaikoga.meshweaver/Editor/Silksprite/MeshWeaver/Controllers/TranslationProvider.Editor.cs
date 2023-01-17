@@ -7,9 +7,11 @@ using static Silksprite.MeshWeaver.Tools.LocalizationTool;
 namespace Silksprite.MeshWeaver.Controllers
 {
     [CustomEditor(typeof(TranslationProvider))]
-    public class TranslationProviderEditor : SubProviderEditorBase
+    public class TranslationProviderEditor : ProviderEditorBase
     {
-        protected override void PopulatePropertiesGUI(GUIContainer container)
+        protected override bool IsMainComponentEditor => false;
+
+        protected override void PopulateInspectorGUI(GUIContainer container)
         {
             container.Add(Prop(nameof(TranslationProvider.translation), Loc("TranslationProvider.translation")));
         }
