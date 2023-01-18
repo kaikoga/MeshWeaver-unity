@@ -16,6 +16,8 @@ namespace Silksprite.MeshWeaver.GUIActions
         const float HeaderPopupWidth = 160f;
         const float HeaderLabelWidth = 100f;
 
+        static Texture2D Banner => AssetDatabase.LoadAssetAtPath<Texture2D>("Packages/net.kaikoga.meshweaver/Editor/Images/banner.png");
+
         public MainProviderHeader()
         {
             if (_acknowledgeSettingsAssetCreated)
@@ -33,8 +35,8 @@ namespace Silksprite.MeshWeaver.GUIActions
                 var height = EditorGUIUtility.singleLineHeight * 2 + EditorGUIUtility.standardVerticalSpacing;
                 var rect = GUILayoutUtility.GetRect(0f, float.MaxValue, height, height);
                 var labelRect = rect;
-                labelRect.width -= HeaderPopupWidth;
-                GUI.Label(labelRect, $"MeshWeaver\n{MeshWeaverConstants.Version}", MeshWeaverSkin.Header);
+                labelRect.width -= HeaderPopupWidth + 16f;
+                GUI.DrawTexture(labelRect, Banner, ScaleMode.ScaleToFit);
 
                 rect.xMin = rect.xMax - HeaderPopupWidth;
                 var popupRect = rect;
