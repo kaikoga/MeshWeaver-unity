@@ -1,11 +1,14 @@
+using System.Collections.Generic;
 using System.Linq;
-using Silksprite.MeshWeaver.Controllers.Extensions;
+using Silksprite.MeshWeaver.Controllers.Commands;
 using Silksprite.MeshWeaver.Controllers.Paths;
 using Silksprite.MeshWeaver.Controllers.Utils;
 using Silksprite.MeshWeaver.GUIActions;
+using Silksprite.MeshWeaver.GUIActions.Extensions;
 using Silksprite.MeshWeaver.Models;
-using Silksprite.MeshWeaver.Models.DataObjects;
+using Silksprite.MeshWeaver.Scopes;
 using Silksprite.MeshWeaver.Utils;
+using UnityEditor;
 using UnityEngine;
 using static Silksprite.MeshWeaver.Tools.LocalizationTool;
 
@@ -19,22 +22,11 @@ namespace Silksprite.MeshWeaver.Controllers.Base
         {
             container.Add(CreatePropertiesGUI());
             container.Add(PathModifierProviderMenus.Menu.ToGUIAction((PathProvider)target));
-            container.Add(new LocButton(Loc("Bake"), () =>
-            {
-                var pathProvider = (PathProvider)target;
-                var transform = pathProvider.transform;
-                var baked = transform.parent.AddChildComponent<BakedPathProvider>();
-                baked.lodMaskLayers = LodMaskLayers.Values;
-                baked.pathData = LodMaskLayers.Values.Select(lod => PathieData.FromPathie(pathProvider.ToFactory().Build(lod))).ToArray();
-                var bakedTransform = baked.transform;
-                bakedTransform.localPosition = transform.localPosition;
-                bakedTransform.localRotation = transform.localRotation;
-                bakedTransform.localScale = transform.localScale;
-            }));
             container.Add(CreateDumpGUI());
+            container.Add(CreateAdvancedActionsGUI());
         }
 
-        GUIContainer CreatePropertiesGUI()
+        GUIAction CreatePropertiesGUI()
         {
             return new Div(c =>
             {
@@ -43,20 +35,47 @@ namespace Silksprite.MeshWeaver.Controllers.Base
             });
         }
 
-        GUIContainer CreateDumpGUI()
+        GUIAction CreateDumpGUI()
         {
-            return new Div(c =>
+            var div = new Div(c =>
             {
+                c.Add(new Header(Loc("Dumps")));
                 c.Add(new DumpFoldout(Loc("Path Dump"), () => ((PathProvider)target).LastFactory?.Build(MeshWeaverSettings.Current.CurrentLodMaskLayer)));
                 c.Add(new DumpFoldout(Loc("Collider Path Dump"), () => ((PathProvider)target).LastFactory?.Build(LodMaskLayer.Collider)));
                 PopulateDumpGUI(c);
             });
+            return GUIAction.Build(() =>
+            {
+                using (new EditorGUI.IndentLevelScope())
+                using (new BoxLayoutScope(MeshWeaverSkin.Dump))
+                {
+                    div.OnGUI();
+                }
+            });
+        }
+
+        GUIAction CreateAdvancedActionsGUI()
+        {
+            var menuItems = new List<LocMenuItem>();
+            PopulateAdvancedActions(menuItems);
+            PopulateCommonAdvancedActions(menuItems);
+            return new LocPopupButtons(Loc("Advanced Actions"), Loc("Command..."), menuItems.ToArray());
         }
 
         protected abstract void PopulatePropertiesGUI(GUIContainer container);
 
         protected virtual void PopulateDumpGUI(GUIContainer container)
         {
+        }
+
+        protected virtual void PopulateAdvancedActions(List<LocMenuItem> menuItems)
+        {
+        }
+
+        void PopulateCommonAdvancedActions(List<LocMenuItem> menuItems)
+        {
+            menuItems.Add(new UpgradeByWrapWithCompositeEntirely<PathProvider, CompositePathProvider>().ToLocMenuItem(target as PathProvider));
+            menuItems.Add(new BakePath().ToLocMenuItem((PathProvider)target));
         }
 
         protected bool HasFrameBounds() => true;

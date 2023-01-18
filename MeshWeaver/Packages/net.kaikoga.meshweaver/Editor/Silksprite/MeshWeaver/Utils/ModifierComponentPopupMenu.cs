@@ -10,24 +10,22 @@ namespace Silksprite.MeshWeaver.Utils
     public class ModifierComponentPopupMenu<T>
     {
         readonly Type[] _types;
-        readonly LocalizedContent[] _menuOptions;
 
         public ModifierComponentPopupMenu(params Type[] types)
         {
-            _types = new [] { (Type)null, null }.Concat(types).ToArray();
-            _menuOptions = new [] { Loc("Add Modifier..."), _Loc("") }.Concat(types.Select(type => type == typeof(void) ? _Loc("") : _Loc(type.Name))).ToArray();
+            _types = types;
         }
 
         public GUIAction ToGUIAction(Component self, LocalizedContent? label = null)
         {
-            return GUIAction.Build(() =>
+            return new LocPopupButtons(label ?? Loc("Modifiers"), Loc("Add Modifier..."), _types.Select(type =>
             {
-                var index = EditorGUILayout.Popup((label ?? Loc("Modifiers")).Tr, 0, _menuOptions.Select(x => x.Tr).ToArray());
-                if (index > 0)
+                if (type == typeof(void) || type == null) return new LocMenuItem(_Loc(""), null);
+                return new LocMenuItem(_Loc(type.Name), () =>
                 {
-                    self.gameObject.AddComponent(_types[index]);
-                }
-            });
+                    self.gameObject.AddComponent(type);
+                });
+            }).ToArray());
         }
     }
 }

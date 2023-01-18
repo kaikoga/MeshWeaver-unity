@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-01-14 10:47+0900\n"
+"POT-Creation-Date: 2023-01-19 06:06+0900\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -15,43 +15,76 @@ msgstr ""
 "X-Poedit-KeywordsList: Tr;Loc\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshProviderEditorBase.cs:25
-#: Editor/Silksprite/MeshWeaver/Controllers/Base/PathProviderEditorBase.cs:22
-msgid "Bake"
-msgstr "ベイクする"
-
-#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshProviderEditorBase.cs:49
-#: Editor/Silksprite/MeshWeaver/Controllers/Base/PathProviderEditorBase.cs:41
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshProviderEditorBase.cs:34
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/PathProviderEditorBase.cs:33
 msgid "GeometryProvider.lodMask"
 msgstr "LOD マスク"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshProviderEditorBase.cs:58
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshProviderEditorBase.cs:43
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/PathProviderEditorBase.cs:42
 msgid "Dumps"
 msgstr "ダンプ"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshProviderEditorBase.cs:59
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshProviderEditorBase.cs:44
 msgid "Mesh Dump"
 msgstr "メッシュのダンプ"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshProviderEditorBase.cs:60
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshProviderEditorBase.cs:45
 msgid "Collider Mesh Dump"
 msgstr "コライダーのダンプ"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshWeaverEditorBase.cs:56
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshProviderEditorBase.cs:63
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/PathProviderEditorBase.cs:62
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/SubProviderEditorBase.cs:31
+msgid "Advanced Actions"
+msgstr "高度な操作"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshProviderEditorBase.cs:63
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/PathProviderEditorBase.cs:62
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/SubProviderEditorBase.cs:31
+msgid "Command..."
+msgstr "コマンドを実行..."
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshWeaverEditorBase.cs:48
+msgid "Experimental"
+msgstr "実験的機能"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshWeaverEditorBase.cs:49
+msgid "This component may break in future release."
+msgstr ""
+"このコンポーネントは将来のリリースで機能が変更される可能性があります。"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshWeaverEditorBase.cs:67
 msgid "Fallback Inspector"
 msgstr "仮UI"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshWeaverEditorBase.cs:58
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshWeaverEditorBase.cs:69
 msgid "End Fallback Inspector"
 msgstr "仮UIここまで"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Base/PathProviderEditorBase.cs:50
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/PathProviderEditorBase.cs:43
 msgid "Path Dump"
 msgstr "パスのダンプ"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Base/PathProviderEditorBase.cs:51
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/PathProviderEditorBase.cs:44
 msgid "Collider Path Dump"
 msgstr "コライダーパスのダンプ"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/SubProviderEditorBase.cs:21
+msgid "ModifierProviderBase.lodMask"
+msgstr "LOD マスク"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Commands/BakeMesh.cs:17
+msgid "Bake Mesh"
+msgstr "メッシュをベイクする"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Commands/BakePath.cs:16
+msgid "Bake Path"
+msgstr "パスをベイクする"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Commands/UpgradeByWrapWithCompositeEntirely.cs:13
+msgid "Wrap with Composite/With Modifiers"
+msgstr "Compositeで包む/モディファイアごと"
 
 #: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:27
 msgid "CustomMeshBehaviour.updatesEveryFrame"
@@ -159,6 +192,26 @@ msgstr "コライダー メッシュ"
 msgid "Update Exported Assets"
 msgstr "書き出されたアセットを更新"
 
+#: Editor/Silksprite/MeshWeaver/Controllers/MeshWeaverSettings.Editor.cs:16
+msgid ""
+"This asset contains global settings of MeshWeaver. This file can be moved "
+"anywhere inside Assets directory."
+msgstr ""
+"このアセットはMeshWeaverの設定ファイルです。Assetsディレクトリ以下の好きな"
+"場所に置いてください。"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/BakedMeshProvider.Editor.cs:17
+msgid "BakedMeshProvider.lodMaskLayers"
+msgstr "LOD マスクデータ"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/BakedMeshProvider.Editor.cs:18
+msgid "BakedMeshProvider.meshData"
+msgstr "メッシュデータ"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/BakedMeshProvider.Editor.cs:19
+msgid "BakedMeshProvider.materials"
+msgstr "マテリアル"
+
 #: Editor/Silksprite/MeshWeaver/Controllers/Meshes/ImportMeshProvider.Editor.cs:14
 msgid "ImportMeshProvider.mesh"
 msgstr "メッシュアセット"
@@ -167,47 +220,47 @@ msgstr "メッシュアセット"
 msgid "ImportMeshProvider.materials"
 msgstr "マテリアル"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/MatrixMeshProvider.Editor.cs:15
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/MatrixMeshProvider.Editor.cs:18
 #: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:16
 #: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PolygonMeshProvider.Editor.cs:15
 msgid "Sources"
 msgstr "入力"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/MatrixMeshProvider.Editor.cs:16
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/MatrixMeshProvider.Editor.cs:19
 msgid "MatrixMeshProvider.pathProviderX"
 msgstr "パス X軸"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/MatrixMeshProvider.Editor.cs:19
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/MatrixMeshProvider.Editor.cs:22
 msgid "MatrixMeshProvider.pathProviderY"
 msgstr "パス Y軸"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/MatrixMeshProvider.Editor.cs:22
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/MatrixMeshProvider.Editor.cs:25
 msgid "MatrixMeshProvider.operatorKind"
 msgstr "パス演算子"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/MatrixMeshProvider.Editor.cs:24
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/MatrixMeshProvider.Editor.cs:27
 #: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PolygonMeshProvider.Editor.cs:20
 msgid "Output"
 msgstr "出力"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/MatrixMeshProvider.Editor.cs:25
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/MatrixMeshProvider.Editor.cs:28
 msgid "MatrixMeshProvider.material"
 msgstr "マテリアル"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/MatrixMeshProvider.Editor.cs:26
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/MatrixMeshProvider.Editor.cs:29
 msgid "MatrixMeshProvider.defaultCellPatternKind"
 msgstr "セル形状"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/MatrixMeshProvider.Editor.cs:27
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/MatrixMeshProvider.Editor.cs:30
 msgid "MatrixMeshProvider.cellPatternOverrides"
 msgstr "セルのオーバーライド"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/MatrixMeshProvider.Editor.cs:32
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/MatrixMeshProvider.Editor.cs:40
 #: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:60
 msgid "Input Path dump X"
 msgstr "入力パスXのダンプ"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/MatrixMeshProvider.Editor.cs:33
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/MatrixMeshProvider.Editor.cs:41
 #: Editor/Silksprite/MeshWeaver/Controllers/Meshes/PillarMeshProvider.Editor.cs:61
 msgid "Input Path dump Y"
 msgstr "入力パスYのダンプ"
@@ -504,18 +557,24 @@ msgstr "Scale"
 msgid "VertwiseTranslateProvider.referenceTranslation"
 msgstr "座標変換量の設定"
 
+#: Editor/Silksprite/MeshWeaver/Controllers/Paths/BakedPathProvider.Editor.cs:17
+msgid "BakedPathProvider.lodMaskLayers"
+msgstr "LOD マスクデータ"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Paths/BakedPathProvider.Editor.cs:18
+msgid "BakedPathProvider.pathData"
+msgstr "パスデータ"
+
 #: Editor/Silksprite/MeshWeaver/Controllers/Paths/CompositePathProvider.Editor.cs:15
 msgid "Path Providers"
 msgstr "子パス"
 
 #: Editor/Silksprite/MeshWeaver/Controllers/Paths/CompositePathProvider.Editor.cs:16
-#: Editor/Silksprite/MeshWeaver/Controllers/Paths/PathReference.Editor.cs:15
-msgid "PathReference.isLoop"
+msgid "CompositePathProvider.isLoop"
 msgstr "ループ化"
 
 #: Editor/Silksprite/MeshWeaver/Controllers/Paths/CompositePathProvider.Editor.cs:17
-#: Editor/Silksprite/MeshWeaver/Controllers/Paths/PathReference.Editor.cs:16
-msgid "PathReference.smoothJoin"
+msgid "CompositePathProvider.smoothJoin"
 msgstr "連続化"
 
 #: Editor/Silksprite/MeshWeaver/Controllers/Paths/ExtractPathProvider.Editor.cs:14
@@ -590,6 +649,14 @@ msgstr "UVチャンネル"
 msgid "PathReference.pathProviders"
 msgstr "パス参照"
 
+#: Editor/Silksprite/MeshWeaver/Controllers/Paths/PathReference.Editor.cs:15
+msgid "PathReference.isLoop"
+msgstr "ループ化"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Paths/PathReference.Editor.cs:16
+msgid "PathReference.smoothJoin"
+msgstr "連続化"
+
 #: Editor/Silksprite/MeshWeaver/Controllers/Paths/RevolutionPathProvider.Editor.cs:14
 msgid "RevolutionPathProvider.min"
 msgstr "最小角度"
@@ -626,7 +693,7 @@ msgstr "折り目にする"
 msgid "VertexProvider.uvs"
 msgstr "UV"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/TranslationProvider.Editor.cs:14
+#: Editor/Silksprite/MeshWeaver/Controllers/TranslationProvider.Editor.cs:16
 msgid "TranslationProvider.translation"
 msgstr "座標変換"
 
@@ -671,25 +738,36 @@ msgid "One Z"
 msgstr "One Z"
 
 # notranslation
-#: Editor/Silksprite/MeshWeaver/GUIActions/MainProviderHeader.cs:34
+#: Editor/Silksprite/MeshWeaver/GUIActions/MainProviderHeader.cs:45
 msgid "Language"
 msgstr "Language"
 
-#: Editor/Silksprite/MeshWeaver/GUIActions/MainProviderHeader.cs:41
+#: Editor/Silksprite/MeshWeaver/GUIActions/MainProviderHeader.cs:52
 msgid "Current LOD"
 msgstr "表示するLOD"
 
-#: Editor/Silksprite/MeshWeaver/Utils/ChildComponentPopupMenu.cs:20
+#: Editor/Silksprite/MeshWeaver/GUIActions/MainProviderHeader.cs:61
+msgid ""
+"Multiple MeshWeaver Settings asset found. Settings may or may not be saved."
+msgstr ""
+"MeshWeaverの設定ファイルが複数存在するようです。設定の変更が保存されないか"
+"もしれません。"
+
+#: Editor/Silksprite/MeshWeaver/GUIActions/MainProviderHeader.cs:65
+msgid "MeshWeaver Settings saved to Assets/MeshWeaverSettings.asset."
+msgstr "MeshWeaverの設定が Assets/MeshWeaverSettings.asset に保存されます。"
+
+#: Editor/Silksprite/MeshWeaver/Utils/ChildComponentPopupMenu.cs:26
 msgid "Create Child..."
 msgstr "追加..."
 
-#: Editor/Silksprite/MeshWeaver/Utils/ModifierComponentPopupMenu.cs:18
+#: Editor/Silksprite/MeshWeaver/Utils/ModifierComponentPopupMenu.cs:21
+msgid "Modifiers"
+msgstr "モディファイア"
+
+#: Editor/Silksprite/MeshWeaver/Utils/ModifierComponentPopupMenu.cs:21
 msgid "Add Modifier..."
 msgstr "追加..."
-
-#: Editor/Silksprite/MeshWeaver/Utils/ModifierComponentPopupMenu.cs:25
-msgid "Modifiers"
-msgstr "Modifier"
 
 #~ msgid "MatrixMeshProvider.Sources"
 #~ msgstr "入力"

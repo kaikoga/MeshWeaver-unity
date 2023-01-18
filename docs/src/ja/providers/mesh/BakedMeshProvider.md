@@ -1,0 +1,3 @@
+# BakedMeshProvider
+
+BakedMeshProviderには生成済みのメッシュデータが格納されます。

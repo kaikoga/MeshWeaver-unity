@@ -1,11 +1,12 @@
+using System.Collections.Generic;
 using System.Linq;
+using Silksprite.MeshWeaver.Controllers.Commands;
 using Silksprite.MeshWeaver.Controllers.Context;
-using Silksprite.MeshWeaver.Controllers.Extensions;
 using Silksprite.MeshWeaver.Controllers.Meshes;
 using Silksprite.MeshWeaver.Controllers.Utils;
 using Silksprite.MeshWeaver.GUIActions;
+using Silksprite.MeshWeaver.GUIActions.Extensions;
 using Silksprite.MeshWeaver.Models;
-using Silksprite.MeshWeaver.Models.DataObjects;
 using Silksprite.MeshWeaver.Scopes;
 using Silksprite.MeshWeaver.Utils;
 using UnityEditor;
@@ -22,24 +23,8 @@ namespace Silksprite.MeshWeaver.Controllers.Base
         {
             container.Add(CreatePropertiesGUI());
             container.Add(MeshModifierProviderMenus.Menu.ToGUIAction((MeshProvider)target));
-            container.Add(new LocButton(Loc("Bake"), () =>
-            {
-                var meshProvider = (MeshProvider)target;
-                var transform = meshProvider.transform;
-                var baked = transform.parent.AddChildComponent<BakedMeshProvider>();
-                using (var context = new DynamicMeshContext())
-                {
-                    baked.lodMaskLayers = LodMaskLayers.Values;
-                    baked.meshData = LodMaskLayers.Values.Select(lod => MeshieData.FromMeshie(meshProvider.ToFactory(context).Build(lod), i => i)).ToArray();
-                    baked.materials = context.ToMaterials();
-                }
-
-                var bakedTransform = baked.transform;
-                bakedTransform.localPosition = transform.localPosition;
-                bakedTransform.localRotation = transform.localRotation;
-                bakedTransform.localScale = transform.localScale;
-            }));
             container.Add(CreateDumpGUI());
+            container.Add(CreateAdvancedActionsGUI());
         }
 
         GUIAction CreatePropertiesGUI()
@@ -70,10 +55,28 @@ namespace Silksprite.MeshWeaver.Controllers.Base
             });
         }
 
+        GUIAction CreateAdvancedActionsGUI()
+        {
+            var menuItems = new List<LocMenuItem>();
+            PopulateAdvancedActions(menuItems);
+            PopulateCommonAdvancedActions(menuItems);
+            return new LocPopupButtons(Loc("Advanced Actions"), Loc("Command..."), menuItems.ToArray());
+        }
+
         protected abstract void PopulatePropertiesGUI(GUIContainer container);
 
         protected virtual void PopulateDumpGUI(GUIContainer container)
         {
+        }
+
+        protected virtual void PopulateAdvancedActions(List<LocMenuItem> menuItems)
+        {
+        }
+
+        void PopulateCommonAdvancedActions(List<LocMenuItem> menuItems)
+        {
+            menuItems.Add(new UpgradeByWrapWithCompositeEntirely<MeshProvider, CompositeMeshProvider>().ToLocMenuItem(target as MeshProvider));
+            menuItems.Add(new BakeMesh().ToLocMenuItem((MeshProvider)target));
         }
 
         protected bool HasFrameBounds() => true;

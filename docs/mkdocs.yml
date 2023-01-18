@@ -8,6 +8,7 @@ docs_dir: docs
 nav:
   - index.md
   - first_steps.md
+  - mesh_behaviour.md
   - lod.md
   - mesh_profile.md
   - hint_worlds.md
@@ -21,6 +22,7 @@ nav:
       - providers/mesh/StitchMeshProvider.md
       - providers/mesh/StampMeshProvider.md
       - providers/mesh/ImportMeshProvider.md
+      - providers/mesh/BakedMeshProvider.md
     - Path:
       - providers/path/CompositePathProvider.md
       - providers/path/PathReference.md
@@ -28,6 +30,7 @@ nav:
       - providers/path/VertexProvider.md
       - providers/path/ShapePathProvider.md
       - providers/path/RevolutionPathProvider.md
+      - providers/path/BakedPathProvider.md
   - Modifier Providers:
     - Vertwise:
       - modifiers/vertwise/VertwiseNormalizeProvider.md
@@ -62,6 +65,8 @@ nav:
 theme:
   name: material
   language: ja
+  logo: images/logo.png
+  favicon: images/favicon.ico
 
 extra:
   alternate:
