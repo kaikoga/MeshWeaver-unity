@@ -1,5 +1,7 @@
 # Welcome to MeshWeaver
 
+![MeshWeaver](images/index/banner_144.png)
+
 ## これは何？
 
 MeshWeaver（メッシュウィーバー）は、Unity上でメッシュを生成するエディタ拡張です。

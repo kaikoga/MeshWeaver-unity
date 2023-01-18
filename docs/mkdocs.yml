@@ -65,6 +65,8 @@ nav:
 theme:
   name: material
   language: ja
+  logo: images/logo.png
+  favicon: images/favicon.ico
 
 extra:
   alternate:
