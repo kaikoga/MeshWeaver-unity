@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-01-17 10:12+0900\n"
+"POT-Creation-Date: 2023-01-19 06:06+0900\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -45,11 +45,20 @@ msgstr "高度な操作"
 msgid "Command..."
 msgstr "コマンドを実行..."
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshWeaverEditorBase.cs:56
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshWeaverEditorBase.cs:48
+msgid "Experimental"
+msgstr "実験的機能"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshWeaverEditorBase.cs:49
+msgid "This component may break in future release."
+msgstr ""
+"このコンポーネントは将来のリリースで機能が変更される可能性があります。"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshWeaverEditorBase.cs:67
 msgid "Fallback Inspector"
 msgstr "仮UI"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshWeaverEditorBase.cs:58
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshWeaverEditorBase.cs:69
 msgid "End Fallback Inspector"
 msgstr "仮UIここまで"
 
@@ -183,15 +192,13 @@ msgstr "コライダー メッシュ"
 msgid "Update Exported Assets"
 msgstr "書き出されたアセットを更新"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/BakedMeshProvider.Editor.cs:15
-#: Editor/Silksprite/MeshWeaver/Controllers/Paths/BakedPathProvider.Editor.cs:15
-msgid "Experimental"
-msgstr "実験的機能"
-
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/BakedMeshProvider.Editor.cs:16
-#: Editor/Silksprite/MeshWeaver/Controllers/Paths/BakedPathProvider.Editor.cs:16
-msgid "This component may break in future release."
-msgstr "このコンポーネントは将来のリリースで機能が変更される可能性があります。"
+#: Editor/Silksprite/MeshWeaver/Controllers/MeshWeaverSettings.Editor.cs:16
+msgid ""
+"This asset contains global settings of MeshWeaver. This file can be moved "
+"anywhere inside Assets directory."
+msgstr ""
+"このアセットはMeshWeaverの設定ファイルです。Assetsディレクトリ以下の好きな"
+"場所に置いてください。"
 
 #: Editor/Silksprite/MeshWeaver/Controllers/Meshes/BakedMeshProvider.Editor.cs:17
 msgid "BakedMeshProvider.lodMaskLayers"
@@ -731,13 +738,24 @@ msgid "One Z"
 msgstr "One Z"
 
 # notranslation
-#: Editor/Silksprite/MeshWeaver/GUIActions/MainProviderHeader.cs:34
+#: Editor/Silksprite/MeshWeaver/GUIActions/MainProviderHeader.cs:45
 msgid "Language"
 msgstr "Language"
 
-#: Editor/Silksprite/MeshWeaver/GUIActions/MainProviderHeader.cs:41
+#: Editor/Silksprite/MeshWeaver/GUIActions/MainProviderHeader.cs:52
 msgid "Current LOD"
 msgstr "表示するLOD"
+
+#: Editor/Silksprite/MeshWeaver/GUIActions/MainProviderHeader.cs:61
+msgid ""
+"Multiple MeshWeaver Settings asset found. Settings may or may not be saved."
+msgstr ""
+"MeshWeaverの設定ファイルが複数存在するようです。設定の変更が保存されないか"
+"もしれません。"
+
+#: Editor/Silksprite/MeshWeaver/GUIActions/MainProviderHeader.cs:65
+msgid "MeshWeaver Settings saved to Assets/MeshWeaverSettings.asset."
+msgstr "MeshWeaverの設定が Assets/MeshWeaverSettings.asset に保存されます。"
 
 #: Editor/Silksprite/MeshWeaver/Utils/ChildComponentPopupMenu.cs:26
 msgid "Create Child..."
