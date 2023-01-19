@@ -10,12 +10,9 @@ namespace Silksprite.MeshWeaver.Controllers.Paths
     [CanEditMultipleObjects]
     public class BakedPathProviderEditor : PathProviderEditorBase
     {
-        protected override bool IsExperimental => true;
-
         protected override void PopulatePropertiesGUI(GUIContainer container)
         {
-            container.Add(Prop(nameof(BakedPathProvider.lodMaskLayers), Loc("BakedPathProvider.lodMaskLayers")));
-            container.Add(Prop(nameof(BakedPathProvider.pathData), Loc("BakedPathProvider.pathData")));
+            container.Add(Prop(nameof(BakedPathProvider.bakedData), Loc("BakedPathProvider.bakedData")));
         }
     }
 }

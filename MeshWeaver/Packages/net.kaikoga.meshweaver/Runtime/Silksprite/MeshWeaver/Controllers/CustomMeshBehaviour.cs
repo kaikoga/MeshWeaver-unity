@@ -16,10 +16,8 @@ namespace Silksprite.MeshWeaver.Controllers
         [SerializeField] MeshBehaviourProfile profile;
         public MeshBehaviourProfileData ProfileData => profile ? profile.data : MeshBehaviourProfileData.Default;
         
+        public bool overrideMaterials;
         public Material[] materials;
-
-        public MeshFilter[] meshFilters;
-        public MeshCollider[] meshColliders;
 
         LodMaskLayer _currentLodMaskLayer;
         Mesh _runtimeMesh;
@@ -52,14 +50,17 @@ namespace Silksprite.MeshWeaver.Controllers
             if (_runtimeMesh == null) _runtimeMesh = new Mesh();
             OnPopulateMesh(lodMaskLayer, _runtimeMesh, true);
 
-            var sharedMaterials = (materials?.Length ?? 0) > 0 ? materials : null;
 
-            foreach (var meshFilter in meshFilters?.Where(m => m != null) ?? Enumerable.Empty<MeshFilter>())
+            if (TryGetComponent<MeshFilter>(out var meshFilter))
             {
-                if (meshFilter) meshFilter.sharedMesh = _runtimeMesh;
-                if (sharedMaterials != null)
+                meshFilter.sharedMesh = _runtimeMesh;
+                if (materials != null && meshFilter.TryGetComponent<MeshRenderer>(out var meshRenderer))
                 {
-                    if (meshFilter.TryGetComponent<MeshRenderer>(out var meshRenderer)) meshRenderer.sharedMaterials = sharedMaterials;
+                    // NOTE: trim subMeshCount here because when the last submeshes have zero polys:
+                    // - Excess Material is registered to materials array prior to mesh population, and 
+                    // - _runtimeMesh does not have the submesh index because there is no Gon with the specific material index, so
+                    // - materials.Length > _runtimeMesh.subMeshCount is possible and we can only know it here
+                    meshRenderer.sharedMaterials = materials.Take(_runtimeMesh.subMeshCount).ToArray();
                 }
             }
 
@@ -74,9 +75,9 @@ namespace Silksprite.MeshWeaver.Controllers
                 OnPopulateMesh(LodMaskLayer.Collider, _runtimeColliderMesh, true);
                 runtimeColliderMesh = _runtimeColliderMesh;
             }
-            foreach (var meshCollider in meshColliders ?? Enumerable.Empty<MeshCollider>())
+            if (TryGetComponent<MeshCollider>(out var meshCollider))
             {
-                if (meshCollider) meshCollider.sharedMesh = runtimeColliderMesh;
+                meshCollider.sharedMesh = runtimeColliderMesh;
             }
         }
 
@@ -111,13 +112,5 @@ namespace Silksprite.MeshWeaver.Controllers
         {
             return Meshie.Empty();
         }
-
-        public void CollectMaterials()
-        {
-            OnCollectMaterials();
-            Compile();
-        }
-
-        protected virtual void OnCollectMaterials() { }
     }
 }

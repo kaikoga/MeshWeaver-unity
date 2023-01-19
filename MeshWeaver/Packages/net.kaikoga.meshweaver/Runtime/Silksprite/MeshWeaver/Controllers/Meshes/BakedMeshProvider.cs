@@ -1,7 +1,6 @@
 using System.Linq;
 using Silksprite.MeshWeaver.Controllers.Base;
 using Silksprite.MeshWeaver.Controllers.Context;
-using Silksprite.MeshWeaver.Models;
 using Silksprite.MeshWeaver.Models.DataObjects;
 using Silksprite.MeshWeaver.Models.Meshes;
 using UnityEngine;
@@ -10,18 +9,18 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
 {
     public class BakedMeshProvider : MeshProvider
     {
-        public LodMaskLayer[] lodMaskLayers;
-        public MeshieData[] meshData;
+        public BakedMeshieData[] bakedData;
 
         public Material[] materials;
 
         protected override IMeshieFactory CreateFactory(IMeshContext context)
         {
-            if (lodMaskLayers == null || meshData == null) return MeshieFactory.Empty;
+            if (bakedData == null) return MeshieFactory.Empty;
 
-            var dict = lodMaskLayers
-                .Zip(meshData, (lod, meshie) => (lod, meshie))
-                .ToDictionary(kv => kv.lod, kv => kv.meshie);
+            var dict = bakedData
+                .SelectMany(data => data.lodMaskLayers.Select(lod => (lod, data.meshData)))
+                .GroupBy(kv => kv.lod)
+                .ToDictionary(kv => kv.Key, kv => kv.First().meshData);
             return new BakedMeshieFactory(dict, i => context.GetMaterialIndex(materials[i]));
         }
     }

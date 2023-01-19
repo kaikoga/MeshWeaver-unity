@@ -1,4 +1,3 @@
-using System.Linq;
 using Silksprite.MeshWeaver.Controllers.Extensions;
 using Silksprite.MeshWeaver.Controllers.Base;
 using Silksprite.MeshWeaver.Controllers.Context;
@@ -14,21 +13,22 @@ namespace Silksprite.MeshWeaver.Controllers
 
         protected override Meshie OnPopulateMesh(LodMaskLayer lod)
         {
-            if (materials == null || !_staticContext.SequenceEqual(materials))
+            if (overrideMaterials)
             {
-                _staticContext?.Dispose();
-                _staticContext = new StaticMeshContext(materials);
+                if (materials == null || !_staticContext.SequenceEqual(materials))
+                {
+                    _staticContext?.Dispose();
+                    _staticContext = new StaticMeshContext(materials);
+                }
+
+                return this.GetComponentsInDirectChildren<MeshProvider>().CollectMeshies(_staticContext).Build(lod);
             }
 
-            return this.GetComponentsInDirectChildren<MeshProvider>().CollectMeshies(_staticContext).Build(lod);
-        }
-
-        protected override void OnCollectMaterials()
-        {
             using (var context = new DynamicMeshContext())
             {
-                this.GetComponentsInDirectChildren<MeshProvider>().CollectMeshies(context);
+                var result = this.GetComponentsInDirectChildren<MeshProvider>().CollectMeshies(context).Build(lod);
                 materials = context.ToMaterials();
+                return result;
             }
         }
     }

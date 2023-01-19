@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -24,12 +23,12 @@ namespace Silksprite.MeshWeaver.Models
         public void Export()
         {
             var subMeshes = _gons.GroupBy(gon => gon.MaterialIndex).OrderBy(group => group.Key).ToArray();
-            _mesh.subMeshCount = Math.Max(subMeshes.Length, 1);
+            _mesh.subMeshCount = subMeshes.Select(subMesh => subMesh.Key).Concat(Enumerable.Repeat(0, 1)).Max() + 1;
             _mesh.SetVertices(_vertices.Select(v => v.Vertex).ToArray());
             _mesh.SetUVs(0, _vertices.Select(v => v.Uv).ToArray());
-            for (var i = 0; i < subMeshes.Length; i++)
+            foreach (var subMesh in subMeshes)
             {
-                _mesh.SetTriangles(subMeshes[i].SelectMany(gon => gon.Indices).ToArray(), i);
+                _mesh.SetTriangles(subMesh.SelectMany(gon => gon.Indices).ToArray(), subMesh.Key);
             }
             _mesh.RecalculateBounds();
             switch (_settings.NormalGenerator)
