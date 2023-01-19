@@ -33,7 +33,7 @@ namespace Silksprite.MeshWeaver.Controllers.Base
 
             void PopulateRootElement()
             {
-                if (IsMainComponentEditor) _root.Add(new MainProviderHeader());
+                if (IsMainComponentEditor) _root.Add(new MainProviderHeader(false, false));
                 if (IsExperimental) _root.Add(PopulateExperimentalBanner());
                 _container = new GUIContainer();
                 PopulateInspectorGUI(_container);

@@ -19,7 +19,7 @@ namespace Silksprite.MeshWeaver.Controllers
         [SettingsProvider]
         public static SettingsProvider SettingsProvider()
         {
-            var guiAction = new MainProviderHeader();
+            var guiAction = new MainProviderHeader(true, false);
 
             // First parameter is the path in the Settings window.
             // Second parameter is the scope of this setting: it only appears in the Project Settings window.

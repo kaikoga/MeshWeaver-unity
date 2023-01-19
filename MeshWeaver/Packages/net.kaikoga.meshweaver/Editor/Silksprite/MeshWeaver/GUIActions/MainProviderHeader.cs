@@ -18,8 +18,13 @@ namespace Silksprite.MeshWeaver.GUIActions
 
         static Texture2D Banner => AssetDatabase.LoadAssetAtPath<Texture2D>("Packages/net.kaikoga.meshweaver/Editor/Images/banner.png");
 
-        public MainProviderHeader()
+        bool _isExpanded;
+        readonly bool _showFoldout;
+
+        public MainProviderHeader(bool isExpanded, bool showFoldout)
         {
+            _isExpanded = isExpanded;
+            _showFoldout = showFoldout;
             if (_acknowledgeSettingsAssetCreated)
             {
                 MeshWeaverSettings.InfoSettingsAssetCreated = false;
@@ -32,14 +37,26 @@ namespace Silksprite.MeshWeaver.GUIActions
             using (new BoxLayoutScope(MeshWeaverSkin.Primary))
             using (new LabelWidthScope(HeaderLabelWidth))
             {
-                var height = EditorGUIUtility.singleLineHeight * 2 + EditorGUIUtility.standardVerticalSpacing;
+                var height = _isExpanded ? EditorGUIUtility.singleLineHeight * 3 + EditorGUIUtility.standardVerticalSpacing * 2 : EditorGUIUtility.singleLineHeight * 2 + EditorGUIUtility.standardVerticalSpacing;
                 var rect = GUILayoutUtility.GetRect(0f, float.MaxValue, height, height);
-                var labelRect = rect;
-                labelRect.width -= HeaderPopupWidth + 16f;
+                var leftPane = rect;
+                leftPane.xMin += 10f;
+                leftPane.width -= HeaderPopupWidth + 10f;
+                var rightPane = rect;
+                rightPane.xMin = rect.xMax - HeaderPopupWidth;
+
+                var labelRect = leftPane;
+                labelRect.height = EditorGUIUtility.singleLineHeight * 2 + EditorGUIUtility.standardVerticalSpacing;
                 GUI.DrawTexture(labelRect, Banner, ScaleMode.ScaleToFit);
 
-                rect.xMin = rect.xMax - HeaderPopupWidth;
-                var popupRect = rect;
+                if (_showFoldout)
+                {
+                    var foldoutRect = labelRect;
+                    foldoutRect.width = 0f;
+                    _isExpanded = EditorGUI.Foldout(foldoutRect, _isExpanded, "");
+                }
+
+                var popupRect = rightPane;
                 popupRect.height = EditorGUIUtility.singleLineHeight;
                 using (var changed = new EditorGUI.ChangeCheckScope())
                 {
@@ -58,6 +75,12 @@ namespace Silksprite.MeshWeaver.GUIActions
                     }
                 }
 
+                if (_isExpanded)
+                {
+                    var versionRect = new Rect(leftPane.x, EditorGUIUtility.singleLineHeight * 2 + EditorGUIUtility.standardVerticalSpacing * 2, leftPane.width, EditorGUIUtility.singleLineHeight);
+                    GUI.Label(versionRect, $"MeshWeaver {MeshWeaverConstants.Version}");
+                }
+                
                 if (MeshWeaverSettings.WarnMultipleSettingsAsset)
                 {
                     new LocHelpBox(Loc("Multiple MeshWeaver Settings asset found. Settings may or may not be saved."), MessageType.Warning).OnGUI();
