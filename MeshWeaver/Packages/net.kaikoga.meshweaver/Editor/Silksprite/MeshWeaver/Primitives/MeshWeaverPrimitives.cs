@@ -8,19 +8,17 @@ using Silksprite.MeshWeaver.Controllers.Paths.Modifiers;
 using Silksprite.MeshWeaver.Models.Meshes;
 using Silksprite.MeshWeaver.Models.Modifiers;
 using Silksprite.MeshWeaver.Models.Paths;
-using Silksprite.MeshWeaver.Utils;
 using UnityEngine;
 
 namespace Silksprite.MeshWeaver.Primitives
 {
     public static class MeshWeaverPrimitives
     {
-        public static MeshBehaviour CreateMeshBehaviour(bool renderer)
+        public static MeshBehaviour CreateMeshBehaviour(bool hasRenderer)
         {
             var gameObject = new GameObject("Mesh Behaviour");
             var meshBehaviour = gameObject.AddComponent<MeshBehaviour>();
-            meshBehaviour.materials = new[] { UnityAssetLocator.DefaultMaterial() };
-            if (renderer) CustomMeshBehaviourEditor.SetupAsMeshRenderer(meshBehaviour);
+            if (hasRenderer) CustomMeshBehaviourEditor.SetupAsMeshRenderer(meshBehaviour);
             return meshBehaviour;
         }
 
@@ -41,19 +39,11 @@ namespace Silksprite.MeshWeaver.Primitives
             return uvProjector;
         }
 
-        public static GameObject WrapPrimitiveIfNeeded(MeshProvider meshProvider, GameObject parent)
-        {
-            if (parent && parent.GetComponentInParent<CustomMeshBehaviour>()) return meshProvider.gameObject;
-
-            var meshBehaviour = CreateMeshBehaviour(true);
-            meshProvider.transform.SetParent(meshBehaviour.transform, false);
-            return meshBehaviour.gameObject;
-        }
-
-        public static MeshProvider CreateQuadXYPrimitive()
+        public static MeshProvider CreateQuadXYPrimitive(Material material)
         {
             var gameObject = new GameObject("Quad Provider");
             var polygon = gameObject.AddComponent<PolygonMeshProvider>();
+            polygon.material = material;
 
             var path = polygon.AddChildComponent<CompositePathProvider>("CompositePathProvider_Path");
             polygon.pathProvider = path;
@@ -67,10 +57,11 @@ namespace Silksprite.MeshWeaver.Primitives
             return polygon;
         }
 
-        public static MeshProvider CreateQuadXZPrimitive()
+        public static MeshProvider CreateQuadXZPrimitive(Material material)
         {
             var gameObject = new GameObject("Quad Provider");
             var polygon = gameObject.AddComponent<PolygonMeshProvider>();
+            polygon.material = material;
 
             var path = polygon.AddChildComponent<CompositePathProvider>("CompositePathProvider_Path");
             polygon.pathProvider = path;
@@ -84,10 +75,11 @@ namespace Silksprite.MeshWeaver.Primitives
             return polygon;
         }
 
-        public static MeshProvider CreatePlanePrimitive(bool hasUv)
+        public static MeshProvider CreatePlanePrimitive(Material material, bool hasUv)
         {
             var gameObject = new GameObject("Plane Provider");
             var matrix = gameObject.AddComponent<MatrixMeshProvider>();
+            matrix.material = material;
 
             var pathX = matrix.AddChildComponent<CompositePathProvider>("CompositePathProvider_Path X");
             matrix.pathProviderX = pathX;
@@ -118,12 +110,15 @@ namespace Silksprite.MeshWeaver.Primitives
             return matrix;
         }
 
-        public static MeshProvider CreateCubePrimitive(bool hasUv)
+        public static MeshProvider CreateCubePrimitive(Material material, bool hasUv)
         {
             var gameObject = new GameObject("Cube Provider");
             var pillar = gameObject.AddComponent<PillarMeshProvider>();
             pillar.fillBottom = true;
             pillar.fillTop = true;
+            pillar.materialBody = material;
+            pillar.materialBottom = material;
+            pillar.materialTop = material;
             if (hasUv)
             {
                 pillar.uvChannelBottom = 1;
@@ -157,10 +152,11 @@ namespace Silksprite.MeshWeaver.Primitives
             return pillar;
         }
 
-        public static MeshProvider CreateSpherePrimitive(bool hasUv)
+        public static MeshProvider CreateSpherePrimitive(Material material, bool hasUv)
         {
             var gameObject = new GameObject("Sphere Provider");
             var matrix = gameObject.AddComponent<MatrixMeshProvider>();
+            matrix.material = material;
 
             var pathX = matrix.AddChildComponent<RevolutionPathProvider>("RevolutionPathProvider_Path X");
             pathX.axis = RevolutionPathieFactory.Axis.Y;
@@ -192,12 +188,15 @@ namespace Silksprite.MeshWeaver.Primitives
             return matrix;
         }
 
-        public static MeshProvider CreateExtrudedCylinderPrimitive(bool hasUv)
+        public static MeshProvider CreateExtrudedCylinderPrimitive(Material material, bool hasUv)
         {
             var gameObject = new GameObject("Cylinder Provider");
             var pillar = gameObject.AddComponent<PillarMeshProvider>();
             pillar.fillBottom = true;
             pillar.fillTop = true;
+            pillar.materialBody = material;
+            pillar.materialBottom = material;
+            pillar.materialTop = material;
             if (hasUv)
             {
                 pillar.uvChannelBottom = 1;
@@ -234,12 +233,15 @@ namespace Silksprite.MeshWeaver.Primitives
             return pillar;
         }
 
-        public static MeshProvider CreateRotatedCylinderPrimitive(bool hasUv)
+        public static MeshProvider CreateRotatedCylinderPrimitive(Material material, bool hasUv)
         {
             var gameObject = new GameObject("Cylinder Provider");
             var pillar = gameObject.AddComponent<PillarMeshProvider>();
             pillar.fillBottom = true;
             pillar.fillTop = true;
+            pillar.materialBody = material;
+            pillar.materialBottom = material;
+            pillar.materialTop = material;
             if (hasUv)
             {
                 pillar.uvChannelBottom = 1;
@@ -278,12 +280,15 @@ namespace Silksprite.MeshWeaver.Primitives
             return pillar;
         }
 
-        public static MeshProvider CreateStairsPrimitive(bool hasUv)
+        public static MeshProvider CreateStairsPrimitive(Material material, bool hasUv)
         {
             var gameObject = new GameObject("Stairs Provider");
             var pillar = gameObject.AddComponent<PillarMeshProvider>();
             pillar.fillBottom = true;
             pillar.fillTop = true;
+            pillar.materialBody = material;
+            pillar.materialBottom = material;
+            pillar.materialTop = material;
             if (hasUv)
             {
                 pillar.uvChannelBottom = 1;
