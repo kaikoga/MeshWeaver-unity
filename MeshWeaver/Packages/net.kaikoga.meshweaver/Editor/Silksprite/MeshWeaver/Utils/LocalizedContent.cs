@@ -10,6 +10,6 @@ namespace Silksprite.MeshWeaver.Utils
         
         public string Id => $"mw-{_key.Replace(" ", "")}";
         public string Tr => Tr(_key);
-        public GUIContent GUIContent => GUIContent(_key);
+        public GUIContent GUIContent => GUIContent(Tr);
     }
 }

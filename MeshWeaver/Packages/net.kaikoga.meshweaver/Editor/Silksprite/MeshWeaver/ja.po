@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-01-20 05:48+0900\n"
+"POT-Creation-Date: 2023-01-20 06:06+0900\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -86,40 +86,36 @@ msgstr "パスをベイクする"
 msgid "Wrap with Composite/With Modifiers"
 msgstr "Compositeで包む/モディファイアごと"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:31
-msgid "CustomMeshBehaviour.updatesEveryFrame"
-msgstr "毎フレーム更新する"
-
-#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:32
+#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:33
 msgid "CustomMeshBehaviour.profile"
 msgstr "基本設定"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:33
+#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:34
 msgid "CustomMeshBehaviour.overrideMaterials"
 msgstr "マテリアルを上書きする"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:36
+#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:37
 msgid "CustomMeshBehaviour.materials"
 msgstr "マテリアル"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:41
+#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:42
 #: Editor/Silksprite/MeshWeaver/Controllers/Meshes/CompositeMeshProvider.Editor.cs:15
 msgid "Mesh Providers"
 msgstr "子メッシュ"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:44
+#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:47
 msgid "Compile"
 msgstr "コンパイル"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:45
+#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:48
 msgid "Compile All Active"
 msgstr "アクティブを全てコンパイル"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:52
+#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:58
 msgid "I am Mesh Renderer"
 msgstr "自分自身がMesh Rendererになる事だ"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:57
+#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:62
 msgid "Create Exporter"
 msgstr "Exporterを生成する"
 
@@ -183,6 +179,66 @@ msgstr "コライダー メッシュ"
 #: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourExporter.Editor.cs:102
 msgid "Update Exported Assets"
 msgstr "書き出されたアセットを更新"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourProfile.Editor.cs:18
+msgid "Realtime Mesh Generator Settings"
+msgstr "リアルタイムプレビュー用メッシュ設定"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourProfile.Editor.cs:19
+msgid "MeshBehaviourProfileData.realtimeNormalGeneratorKind"
+msgstr "ノーマル（プレビュー）"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourProfile.Editor.cs:20
+msgid "MeshBehaviourProfileData.realtimeNormalGeneratorAngle"
+msgstr "ノーマル角度（プレビュー）"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourProfile.Editor.cs:21
+msgid "MeshBehaviourProfileData.realtimeLightmapGeneratorKind"
+msgstr "ライトマップ（プレビュー）"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourProfile.Editor.cs:23
+msgid "Exported Mesh Generator Settings"
+msgstr "アセットエクスポート用メッシュ設定"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourProfile.Editor.cs:24
+msgid "MeshBehaviourProfileData.exportedNormalGeneratorKind"
+msgstr "ノーマル（エクスポート）"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourProfile.Editor.cs:25
+msgid "MeshBehaviourProfileData.exportedNormalGeneratorAngle"
+msgstr "ノーマル角度（エクスポート）"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourProfile.Editor.cs:26
+msgid "MeshBehaviourProfileData.exportedLightmapGeneratorKind"
+msgstr "ライトマップ（エクスポート）"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourProfile.Editor.cs:28
+msgid "Exported Prefab Settings"
+msgstr "プレハブ書き出し設定"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourProfile.Editor.cs:29
+msgid "MeshBehaviourProfileData.useLod"
+msgstr "LODを組み込む"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourProfile.Editor.cs:30
+msgid "MeshBehaviourProfileData.useLod1"
+msgstr "LOD1を組み込む"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourProfile.Editor.cs:31
+msgid "MeshBehaviourProfileData.useLod2"
+msgstr "LOD2を組み込む"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourProfile.Editor.cs:32
+msgid "MeshBehaviourProfileData.useCollider"
+msgstr "コライダーを組み込む"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourProfile.Editor.cs:33
+msgid "MeshBehaviourProfileData.useLightmap"
+msgstr "ライトマップを有効"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourProfile.Editor.cs:34
+msgid "MeshBehaviourProfileData.staticEditorFlags"
+msgstr "Staticフラグを設定"
 
 #: Editor/Silksprite/MeshWeaver/Controllers/MeshWeaverSettings.Editor.cs:16
 msgid ""
@@ -752,6 +808,9 @@ msgstr "モディファイア"
 #: Editor/Silksprite/MeshWeaver/Utils/ModifierComponentPopupMenu.cs:21
 msgid "Add Modifier..."
 msgstr "追加..."
+
+#~ msgid "CustomMeshBehaviour.updatesEveryFrame"
+#~ msgstr "毎フレーム更新する"
 
 #~ msgid "Collect Materials"
 #~ msgstr "マテリアルを再収集"
