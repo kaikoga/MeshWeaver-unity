@@ -19,8 +19,11 @@ namespace Silksprite.MeshWeaver.Controllers.Commands
         {
             var transform = target.transform;
             var baked = transform.parent.AddChildComponent<BakedPathProvider>();
-            baked.lodMaskLayers = LodMaskLayers.Values;
-            baked.pathData = LodMaskLayers.Values.Select(lod => PathieData.FromPathie(target.ToFactory().Build(lod))).ToArray();
+            baked.bakedData = LodMaskLayers.Values.Select(lod => new BakedPathieData
+            {
+                lodMaskLayers = new [] { lod },
+                pathData = PathieData.FromPathie(target.ToFactory().Build(lod))
+            }).ToArray();
             var bakedTransform = baked.transform;
             bakedTransform.localPosition = transform.localPosition;
             bakedTransform.localRotation = transform.localRotation;

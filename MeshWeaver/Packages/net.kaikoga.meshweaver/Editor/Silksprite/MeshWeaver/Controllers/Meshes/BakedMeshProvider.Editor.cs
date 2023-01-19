@@ -10,12 +10,9 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
     [CanEditMultipleObjects]
     public class BakedMeshProviderEditor : MeshProviderEditorBase
     {
-        protected override bool IsExperimental => true;
-
         protected override void PopulatePropertiesGUI(GUIContainer container)
         {
-            container.Add(Prop(nameof(BakedMeshProvider.lodMaskLayers), Loc("BakedMeshProvider.lodMaskLayers")));
-            container.Add(Prop(nameof(BakedMeshProvider.meshData), Loc("BakedMeshProvider.meshData")));
+            container.Add(Prop(nameof(BakedMeshProvider.bakedData), Loc("BakedMeshProvider.bakedData")));
             container.Add(Prop(nameof(BakedMeshProvider.materials), Loc("BakedMeshProvider.materials")));
         }
     }

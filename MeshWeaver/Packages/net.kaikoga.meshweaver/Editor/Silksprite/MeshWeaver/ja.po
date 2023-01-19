@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-01-19 06:06+0900\n"
+"POT-Creation-Date: 2023-01-19 20:17+0900\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -200,15 +200,11 @@ msgstr ""
 "このアセットはMeshWeaverの設定ファイルです。Assetsディレクトリ以下の好きな"
 "場所に置いてください。"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/BakedMeshProvider.Editor.cs:17
-msgid "BakedMeshProvider.lodMaskLayers"
-msgstr "LOD マスクデータ"
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/BakedMeshProvider.Editor.cs:15
+msgid "BakedMeshProvider.bakedData"
+msgstr "ベイクされたデータ"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/BakedMeshProvider.Editor.cs:18
-msgid "BakedMeshProvider.meshData"
-msgstr "メッシュデータ"
-
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/BakedMeshProvider.Editor.cs:19
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/BakedMeshProvider.Editor.cs:16
 msgid "BakedMeshProvider.materials"
 msgstr "マテリアル"
 
@@ -557,13 +553,9 @@ msgstr "Scale"
 msgid "VertwiseTranslateProvider.referenceTranslation"
 msgstr "座標変換量の設定"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Paths/BakedPathProvider.Editor.cs:17
-msgid "BakedPathProvider.lodMaskLayers"
-msgstr "LOD マスクデータ"
-
-#: Editor/Silksprite/MeshWeaver/Controllers/Paths/BakedPathProvider.Editor.cs:18
-msgid "BakedPathProvider.pathData"
-msgstr "パスデータ"
+#: Editor/Silksprite/MeshWeaver/Controllers/Paths/BakedPathProvider.Editor.cs:15
+msgid "BakedPathProvider.bakedData"
+msgstr "ベイクされたデータ"
 
 #: Editor/Silksprite/MeshWeaver/Controllers/Paths/CompositePathProvider.Editor.cs:15
 msgid "Path Providers"
@@ -738,22 +730,22 @@ msgid "One Z"
 msgstr "One Z"
 
 # notranslation
-#: Editor/Silksprite/MeshWeaver/GUIActions/MainProviderHeader.cs:45
+#: Editor/Silksprite/MeshWeaver/GUIActions/MainProviderHeader.cs:64
 msgid "Language"
 msgstr "Language"
 
-#: Editor/Silksprite/MeshWeaver/GUIActions/MainProviderHeader.cs:52
+#: Editor/Silksprite/MeshWeaver/GUIActions/MainProviderHeader.cs:71
 msgid "Current LOD"
 msgstr "表示するLOD"
 
-#: Editor/Silksprite/MeshWeaver/GUIActions/MainProviderHeader.cs:61
+#: Editor/Silksprite/MeshWeaver/GUIActions/MainProviderHeader.cs:86
 msgid ""
 "Multiple MeshWeaver Settings asset found. Settings may or may not be saved."
 msgstr ""
 "MeshWeaverの設定ファイルが複数存在するようです。設定の変更が保存されないか"
 "もしれません。"
 
-#: Editor/Silksprite/MeshWeaver/GUIActions/MainProviderHeader.cs:65
+#: Editor/Silksprite/MeshWeaver/GUIActions/MainProviderHeader.cs:90
 msgid "MeshWeaver Settings saved to Assets/MeshWeaverSettings.asset."
 msgstr "MeshWeaverの設定が Assets/MeshWeaverSettings.asset に保存されます。"
 
@@ -768,6 +760,12 @@ msgstr "モディファイア"
 #: Editor/Silksprite/MeshWeaver/Utils/ModifierComponentPopupMenu.cs:21
 msgid "Add Modifier..."
 msgstr "追加..."
+
+#~ msgid "BakedMeshProvider.lodMaskLayers"
+#~ msgstr "LOD マスクデータ"
+
+#~ msgid "BakedPathProvider.lodMaskLayers"
+#~ msgstr "LOD マスクデータ"
 
 #~ msgid "MatrixMeshProvider.Sources"
 #~ msgstr "入力"
