@@ -15,6 +15,7 @@ namespace Silksprite.MeshWeaver.Controllers
         [SerializeField] MeshBehaviourProfile profile;
         public MeshBehaviourProfileData ProfileData => profile ? profile.data : MeshBehaviourProfileData.Default;
         
+        public bool overrideMaterials;
         public Material[] materials;
 
         LodMaskLayer _currentLodMaskLayer;
@@ -107,13 +108,5 @@ namespace Silksprite.MeshWeaver.Controllers
         {
             return Meshie.Empty();
         }
-
-        public void CollectMaterials()
-        {
-            OnCollectMaterials();
-            Compile();
-        }
-
-        protected virtual void OnCollectMaterials() { }
     }
 }

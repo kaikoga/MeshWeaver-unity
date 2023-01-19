@@ -156,7 +156,6 @@ namespace Silksprite.MeshWeaver.Primitives
 
             var meshBehaviour = MeshWeaverPrimitives.CreateMeshBehaviour(true);
             meshProvider.transform.SetParent(meshBehaviour.transform, false);
-            meshBehaviour.CollectMaterials();
             return meshBehaviour.gameObject;
         }
 

@@ -1,6 +1,8 @@
 using Silksprite.MeshWeaver.Controllers.Base;
 using Silksprite.MeshWeaver.Controllers.Utils;
 using Silksprite.MeshWeaver.GUIActions;
+using Silksprite.MeshWeaver.GUIActions.Events;
+using Silksprite.MeshWeaver.GUIActions.Extensions;
 using UnityEditor;
 using UnityEngine;
 using static Silksprite.MeshWeaver.Tools.LocalizationTool;
@@ -22,33 +24,44 @@ namespace Silksprite.MeshWeaver.Controllers
 
         protected sealed override void PopulateInspectorGUI(GUIContainer container)
         {
+            var onRefresh = new Dispatcher<RefreshEvent>();
+
             container.Add(new Div(c =>
             {
-                c.Add(Prop(nameof(CustomMeshBehaviour.updatesEveryFrame), Loc("CustomMeshBehaviour.updatesEveryFrame")));
+                // TODO: how to expose CustomMeshBehaviour.updatesEveryFrame
+                // c.Add(Prop(nameof(CustomMeshBehaviour.updatesEveryFrame), Loc("CustomMeshBehaviour.updatesEveryFrame")));
                 c.Add(Prop("profile", Loc("CustomMeshBehaviour.profile")));
-                c.Add(Prop(nameof(CustomMeshBehaviour.materials), Loc("CustomMeshBehaviour.materials")));
+                var lockMaterials = Prop(nameof(CustomMeshBehaviour.overrideMaterials), Loc("CustomMeshBehaviour.overrideMaterials"));
+                lockMaterials.RegisterPropertyChangedCallback<bool>(changed => onRefresh.Invoke());
+                c.Add(lockMaterials);
+                c.Add(Prop(nameof(CustomMeshBehaviour.materials), Loc("CustomMeshBehaviour.materials"))
+                    .WithEnableOnRefresh(onRefresh, () => _meshBehaviour.overrideMaterials));
             }));
             if (_meshBehaviour is MeshBehaviour)
             {
                 container.Add(MeshProviderMenus.Menu.ToGUIAction(_meshBehaviour, Loc("Mesh Providers")));
             }
 
-            container.Add(new LocButton(Loc("Collect Materials"), () => { _meshBehaviour.CollectMaterials(); }));
-            container.Add(new LocButton(Loc("Compile"), () => { _meshBehaviour.Compile(); }));
-            container.Add(new LocButton(Loc("Compile All Active"), () =>
+            container.Add(new HDiv(c =>
             {
-                foreach (var m in FindObjectsOfType<CustomMeshBehaviour>()) m.Compile();
+                c.Add(new LocButton(Loc("Compile"), () => { _meshBehaviour.Compile(); }));
+                c.Add(new LocButton(Loc("Compile All Active"), () =>
+                {
+                    foreach (var m in FindObjectsOfType<CustomMeshBehaviour>()) m.Compile();
+                }));
             }));
 
-            if (HasSetupAsMeshRendererButton(_meshBehaviour))
+            container.Add(new HDiv(c =>
             {
-                container.Add(new LocButton(Loc("I am Mesh Renderer"), () => { SetupAsMeshRenderer(_meshBehaviour); }));
-            }
-
-            if (HasCreateExporterButton(_meshBehaviour))
-            {
-                container.Add(new LocButton(Loc("Create Exporter"), () => { CreateExporter(_meshBehaviour); }));
-            }
+                if (HasSetupAsMeshRendererButton(_meshBehaviour))
+                {
+                    c.Add(new LocButton(Loc("I am Mesh Renderer"), () => { SetupAsMeshRenderer(_meshBehaviour); }));
+                }
+                if (HasCreateExporterButton(_meshBehaviour))
+                {
+                    c.Add(new LocButton(Loc("Create Exporter"), () => { CreateExporter(_meshBehaviour); }));
+                }
+            }));
         }
 
         static bool HasSetupAsMeshRendererButton(CustomMeshBehaviour meshBehaviour)
