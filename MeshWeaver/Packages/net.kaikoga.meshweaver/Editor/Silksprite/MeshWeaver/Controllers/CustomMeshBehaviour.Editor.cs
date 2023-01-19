@@ -67,17 +67,17 @@ namespace Silksprite.MeshWeaver.Controllers
         {
             if (!meshBehaviour.GetComponent<MeshFilter>())
             {
-                meshBehaviour.gameObject.AddComponent<MeshFilter>();
+                Undo.AddComponent<MeshFilter>(meshBehaviour.gameObject);
             }
 
             if (!meshBehaviour.GetComponent<MeshRenderer>())
             {
-                meshBehaviour.gameObject.AddComponent<MeshRenderer>();
+                Undo.AddComponent<MeshRenderer>(meshBehaviour.gameObject);
             }
 
             if (!meshBehaviour.GetComponent<MeshCollider>())
             {
-                meshBehaviour.gameObject.AddComponent<MeshCollider>();
+                Undo.AddComponent<MeshCollider>(meshBehaviour.gameObject);
             }
         }
 
