@@ -1,4 +1,3 @@
-using System.Linq;
 using Silksprite.MeshWeaver.Models;
 using UnityEngine;
 
@@ -17,9 +16,6 @@ namespace Silksprite.MeshWeaver.Controllers
         public MeshBehaviourProfileData ProfileData => profile ? profile.data : MeshBehaviourProfileData.Default;
         
         public Material[] materials;
-
-        public MeshFilter[] meshFilters;
-        public MeshCollider[] meshColliders;
 
         LodMaskLayer _currentLodMaskLayer;
         Mesh _runtimeMesh;
@@ -54,9 +50,9 @@ namespace Silksprite.MeshWeaver.Controllers
 
             var sharedMaterials = (materials?.Length ?? 0) > 0 ? materials : null;
 
-            foreach (var meshFilter in meshFilters?.Where(m => m != null) ?? Enumerable.Empty<MeshFilter>())
+            if (TryGetComponent<MeshFilter>(out var meshFilter))
             {
-                if (meshFilter) meshFilter.sharedMesh = _runtimeMesh;
+                meshFilter.sharedMesh = _runtimeMesh;
                 if (sharedMaterials != null)
                 {
                     if (meshFilter.TryGetComponent<MeshRenderer>(out var meshRenderer)) meshRenderer.sharedMaterials = sharedMaterials;
@@ -74,9 +70,9 @@ namespace Silksprite.MeshWeaver.Controllers
                 OnPopulateMesh(LodMaskLayer.Collider, _runtimeColliderMesh, true);
                 runtimeColliderMesh = _runtimeColliderMesh;
             }
-            foreach (var meshCollider in meshColliders ?? Enumerable.Empty<MeshCollider>())
+            if (TryGetComponent<MeshCollider>(out var meshCollider))
             {
-                if (meshCollider) meshCollider.sharedMesh = runtimeColliderMesh;
+                meshCollider.sharedMesh = runtimeColliderMesh;
             }
         }
 

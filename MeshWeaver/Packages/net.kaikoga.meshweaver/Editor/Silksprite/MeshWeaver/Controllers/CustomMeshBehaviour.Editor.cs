@@ -27,8 +27,6 @@ namespace Silksprite.MeshWeaver.Controllers
                 c.Add(Prop(nameof(CustomMeshBehaviour.updatesEveryFrame), Loc("CustomMeshBehaviour.updatesEveryFrame")));
                 c.Add(Prop("profile", Loc("CustomMeshBehaviour.profile")));
                 c.Add(Prop(nameof(CustomMeshBehaviour.materials), Loc("CustomMeshBehaviour.materials")));
-                c.Add(Prop(nameof(CustomMeshBehaviour.meshFilters), Loc("CustomMeshBehaviour.meshFilters")));
-                c.Add(Prop(nameof(CustomMeshBehaviour.meshColliders), Loc("CustomMeshBehaviour.meshColliders")));
             }));
             if (_meshBehaviour is MeshBehaviour)
             {
@@ -69,9 +67,7 @@ namespace Silksprite.MeshWeaver.Controllers
         {
             if (!meshBehaviour.GetComponent<MeshFilter>())
             {
-                var meshFilter = meshBehaviour.gameObject.AddComponent<MeshFilter>();
-                meshBehaviour.meshFilters = meshBehaviour.meshFilters ?? new MeshFilter[] { };
-                ArrayUtility.Add(ref meshBehaviour.meshFilters, meshFilter);
+                meshBehaviour.gameObject.AddComponent<MeshFilter>();
             }
 
             if (!meshBehaviour.GetComponent<MeshRenderer>())
@@ -81,9 +77,7 @@ namespace Silksprite.MeshWeaver.Controllers
 
             if (!meshBehaviour.GetComponent<MeshCollider>())
             {
-                var meshCollider = meshBehaviour.gameObject.AddComponent<MeshCollider>();
-                meshBehaviour.meshColliders = meshBehaviour.meshColliders ?? new MeshCollider[] { };
-                ArrayUtility.Add(ref meshBehaviour.meshColliders, meshCollider);
+                meshBehaviour.gameObject.AddComponent<MeshCollider>();
             }
         }
 

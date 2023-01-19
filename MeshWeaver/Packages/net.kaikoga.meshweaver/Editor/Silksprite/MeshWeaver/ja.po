@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-01-19 20:17+0900\n"
+"POT-Creation-Date: 2023-01-20 03:27+0900\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -98,36 +98,28 @@ msgstr "基本設定"
 msgid "CustomMeshBehaviour.materials"
 msgstr "マテリアル"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:30
-msgid "CustomMeshBehaviour.meshFilters"
-msgstr "同期するMeshFilter"
-
-#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:31
-msgid "CustomMeshBehaviour.meshColliders"
-msgstr "同期するMeshCollider"
-
-#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:35
+#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:33
 #: Editor/Silksprite/MeshWeaver/Controllers/Meshes/CompositeMeshProvider.Editor.cs:15
 msgid "Mesh Providers"
 msgstr "子メッシュ"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:38
+#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:36
 msgid "Collect Materials"
 msgstr "マテリアルを再収集"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:39
+#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:37
 msgid "Compile"
 msgstr "コンパイル"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:40
+#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:38
 msgid "Compile All Active"
 msgstr "アクティブを全てコンパイル"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:47
+#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:45
 msgid "I am Mesh Renderer"
 msgstr "自分自身がMesh Rendererになる事だ"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:52
+#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:50
 msgid "Create Exporter"
 msgstr "Exporterを生成する"
 
@@ -760,24 +752,3 @@ msgstr "モディファイア"
 #: Editor/Silksprite/MeshWeaver/Utils/ModifierComponentPopupMenu.cs:21
 msgid "Add Modifier..."
 msgstr "追加..."
-
-#~ msgid "BakedMeshProvider.lodMaskLayers"
-#~ msgstr "LOD マスクデータ"
-
-#~ msgid "BakedPathProvider.lodMaskLayers"
-#~ msgstr "LOD マスクデータ"
-
-#~ msgid "MatrixMeshProvider.Sources"
-#~ msgstr "入力"
-
-#~ msgid "MatrixMeshProvider.Output"
-#~ msgstr "出力"
-
-#~ msgid "PillarMeshProvider.Sources"
-#~ msgstr "入力"
-
-#~ msgid "PillarMeshProvider.Body"
-#~ msgstr "本体の出力"
-
-#~ msgid "PillarMeshProvider.Lids"
-#~ msgstr "底面と上面の出力"
