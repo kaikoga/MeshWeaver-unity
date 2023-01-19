@@ -1,3 +1,4 @@
+using System.Linq;
 using Silksprite.MeshWeaver.Models;
 using UnityEngine;
 
@@ -49,14 +50,17 @@ namespace Silksprite.MeshWeaver.Controllers
             if (_runtimeMesh == null) _runtimeMesh = new Mesh();
             OnPopulateMesh(lodMaskLayer, _runtimeMesh, true);
 
-            var sharedMaterials = (materials?.Length ?? 0) > 0 ? materials : null;
 
             if (TryGetComponent<MeshFilter>(out var meshFilter))
             {
                 meshFilter.sharedMesh = _runtimeMesh;
-                if (sharedMaterials != null)
+                if (materials != null && meshFilter.TryGetComponent<MeshRenderer>(out var meshRenderer))
                 {
-                    if (meshFilter.TryGetComponent<MeshRenderer>(out var meshRenderer)) meshRenderer.sharedMaterials = sharedMaterials;
+                    // NOTE: trim subMeshCount here because when the last submeshes have zero polys:
+                    // - Excess Material is registered to materials array prior to mesh population, and 
+                    // - _runtimeMesh does not have the submesh index because there is no Gon with the specific material index, so
+                    // - materials.Length > _runtimeMesh.subMeshCount is possible and we can only know it here
+                    meshRenderer.sharedMaterials = materials.Take(_runtimeMesh.subMeshCount).ToArray();
                 }
             }
 
