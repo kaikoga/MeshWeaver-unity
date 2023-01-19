@@ -4,7 +4,7 @@ namespace Silksprite.MeshWeaver.Utils
 {
     public static class MeshWeaverSkin
     {
-        public static Color Primary => new Color(0.4f, 0.8f, 0.7f, 1.0f);
+        public static Color Primary => new Color(0.6f, 0.9f, 0.8f, 1.0f);
         public static Color Dump => new Color(0.6f, 0.6f, 0.6f, 1.0f);
 
         public static readonly GUIStyle Header = new GUIStyle
