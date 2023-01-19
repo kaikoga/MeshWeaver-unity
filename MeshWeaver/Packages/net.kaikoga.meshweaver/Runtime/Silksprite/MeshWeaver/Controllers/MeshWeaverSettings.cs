@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Silksprite.MeshWeaver.Models;
 using UnityEngine;
 
@@ -18,7 +19,13 @@ namespace Silksprite.MeshWeaver.Controllers
 
         static MeshWeaverSettings FindSettingsAsset()
         {
+#if UNITY_EDITOR
+            var assets = UnityEditor.AssetDatabase.FindAssets($"t:{nameof(MeshWeaverSettings)}")
+                .Select(guid => UnityEditor.AssetDatabase.LoadAssetAtPath<MeshWeaverSettings>(UnityEditor.AssetDatabase.GUIDToAssetPath(guid)))
+                .ToArray();
+#else
             var assets = Resources.FindObjectsOfTypeAll<MeshWeaverSettings>();
+#endif
             WarnMultipleSettingsAsset = assets.Length > 1; 
             return assets.Length == 0 ? CreateInstance<MeshWeaverSettings>() : assets[0];
         }
