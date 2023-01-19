@@ -1,6 +1,6 @@
 # MeshWeaver
 
-Quick and non-destuctive 3D Modeling in Unity Editor
+Quick and non-destructive 3D Modeling in Unity Editor
 
 ## License
 
