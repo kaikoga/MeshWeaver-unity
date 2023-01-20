@@ -4,7 +4,7 @@ Quick and non-destructive 3D Modeling in Unity Editor
 
 ## License
 
-TBD.
+[MIT License](LICENSE.md) Copyright (c) 2023 kaikoga
 
 ## Download
 
@@ -25,9 +25,9 @@ TBD.
 
 Unityで3Dモデリングするやつです
 
-## License
+## ライセンス
 
-TBD.
+[MIT License](LICENSE.md) Copyright (c) 2023 kaikoga
 
 ## ダウンロードページ
 
