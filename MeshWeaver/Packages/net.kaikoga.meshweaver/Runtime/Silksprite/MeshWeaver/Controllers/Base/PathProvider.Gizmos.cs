@@ -49,7 +49,7 @@ namespace Silksprite.MeshWeaver.Controllers.Base
                 Handles.DrawAAPolyLine(Texture2D.whiteTexture, width, vertices);
                 Handles.color = oldColor;
             }
-            var containerMatrix = transform.localToWorldMatrix * transform.ToLocalTranslation();
+            var containerMatrix = transform.localToWorldMatrix * transform.ToLocalTranslationModification();
 
             var pathie = ToFactory().Build(MeshWeaverSettings.Current.CurrentLodMaskLayer);
             var points = pathie.Vertices.Select(v => containerMatrix.MultiplyPoint3x4(v.Vertex)).ToArray();

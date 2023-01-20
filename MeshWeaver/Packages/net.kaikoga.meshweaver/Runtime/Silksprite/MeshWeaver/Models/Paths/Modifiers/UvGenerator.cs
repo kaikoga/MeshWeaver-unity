@@ -29,6 +29,7 @@ namespace Silksprite.MeshWeaver.Models.Paths.Modifiers
             }
 
             var iMax = pathie.Vertices.Count - 1;
+            if (iMax <= 0) iMax = 1;
             if (_topologicalWeight == 0 && !_absoluteScale)
             {
                 return pathie.Modify((vertie, i) => vertie.AddUv(_uvArea.min + _uvArea.size * ((float)i / iMax), _uvChannel));

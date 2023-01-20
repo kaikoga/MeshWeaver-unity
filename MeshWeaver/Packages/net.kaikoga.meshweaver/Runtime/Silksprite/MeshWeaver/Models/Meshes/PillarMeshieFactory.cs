@@ -75,7 +75,7 @@ namespace Silksprite.MeshWeaver.Models.Meshes
                             throw new ArgumentOutOfRangeException();
                     }
                 }
-                var bottomMeshie = new PolygonMeshieFactory2(new ExtractPathieFactory(this, BottomPathName()), _materialIndexBottom).Build(lod);
+                var bottomMeshie = new PolygonMeshieFactory(new ExtractPathieFactory(this, BottomPathName()), _materialIndexBottom).Build(lod);
                 if (_reverseLids) bottomMeshie = bottomMeshie.Apply(MeshReverse.BackOnly);
                 builder.Concat(bottomMeshie, Matrix4x4.identity, _uvChannelBottom);
             }
@@ -94,7 +94,7 @@ namespace Silksprite.MeshWeaver.Models.Meshes
                             throw new ArgumentOutOfRangeException();
                     }
                 }
-                var topMeshie = new PolygonMeshieFactory2(new ExtractPathieFactory(this, TopPathName()), _materialIndexTop).Build(lod);
+                var topMeshie = new PolygonMeshieFactory(new ExtractPathieFactory(this, TopPathName()), _materialIndexTop).Build(lod);
                 if (!_reverseLids) topMeshie = topMeshie.Apply(MeshReverse.BackOnly);
                 builder.Concat(topMeshie, Matrix4x4.identity, _uvChannelTop);
             }
