@@ -16,7 +16,17 @@ namespace Silksprite.MeshWeaver.Controllers.Extensions
             {
                 return localTranslation;
             }
-            return translation.LocalTranslation(transform.ToLocalMatrix());
+            return translation.LocalTranslation(localTranslation);
+        }
+
+        public static Matrix4x4 ToLocalTranslationModification(this Transform transform)
+        {
+            var localTranslation = Matrix4x4.identity;
+            if (!(transform.TryGetComponent<TranslationProvider>(out var translation) && translation.enabled))
+            {
+                return localTranslation;
+            }
+            return translation.LocalTranslation(localTranslation);
         }
     }
 }
