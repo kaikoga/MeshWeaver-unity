@@ -41,7 +41,7 @@ namespace Silksprite.MeshWeaver.Controllers.Base
             var div = new Div(c =>
             {
                 c.Add(new Header(Loc("Dumps")));
-                c.Add(new DumpFoldout(Loc("Mesh Dump"), () => ((MeshProvider)target).LastFactory?.Build(MeshWeaverSettings.Current.CurrentLodMaskLayer)));
+                c.Add(new DumpFoldout(Loc("Mesh Dump"), () => ((MeshProvider)target).LastFactory?.Build(MeshWeaverSettings.Current.activeLodMaskLayer)));
                 c.Add(new DumpFoldout(Loc("Collider Mesh Dump"), () => ((MeshProvider)target).LastFactory?.Build(LodMaskLayer.Collider)));
                 PopulateDumpGUI(c);
             }); 

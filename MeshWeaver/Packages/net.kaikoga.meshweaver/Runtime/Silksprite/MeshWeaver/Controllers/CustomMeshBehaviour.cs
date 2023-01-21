@@ -25,9 +25,9 @@ namespace Silksprite.MeshWeaver.Controllers
 
         void Update()
         {
-            if (_currentLodMaskLayer != MeshWeaverSettings.Current.CurrentLodMaskLayer)
+            if (_currentLodMaskLayer != MeshWeaverSettings.Current.activeLodMaskLayer)
             {
-                _currentLodMaskLayer = MeshWeaverSettings.Current.CurrentLodMaskLayer;
+                _currentLodMaskLayer = MeshWeaverSettings.Current.activeLodMaskLayer;
                 _runtimeMesh = null;
             }
             if (_runtimeMesh == null || updatesEveryFrame)
@@ -45,7 +45,7 @@ namespace Silksprite.MeshWeaver.Controllers
 
         public void Compile()
         {
-            var lodMaskLayer = MeshWeaverSettings.Current.CurrentLodMaskLayer;
+            var lodMaskLayer = MeshWeaverSettings.Current.activeLodMaskLayer;
 
             if (_runtimeMesh == null) _runtimeMesh = new Mesh();
             OnPopulateMesh(lodMaskLayer, _runtimeMesh, true);

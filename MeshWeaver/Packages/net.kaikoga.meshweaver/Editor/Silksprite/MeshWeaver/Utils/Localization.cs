@@ -6,12 +6,11 @@ namespace Silksprite.MeshWeaver.Utils
     {
         public static string Lang
         {
-            get => MeshWeaverSettings.Current.Lang;
+            get => MeshWeaverSettings.Current.lang;
             set
             {
-                MeshWeaverSettings.Current.Lang = value;
+                MeshWeaverSettings.Current.lang = value;
                 MeshWeaverSettings.ApplySettings();
-
             }
         }
 

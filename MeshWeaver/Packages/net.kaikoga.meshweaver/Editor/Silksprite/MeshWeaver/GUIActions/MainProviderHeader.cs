@@ -68,10 +68,10 @@ namespace Silksprite.MeshWeaver.GUIActions
                 popupRect.y += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
                 using (var changed = new EditorGUI.ChangeCheckScope())
                 {
-                    var lod = EditorGUI.EnumPopup(popupRect, Loc("Current LOD").Tr, MeshWeaverSettings.Current.CurrentLodMaskLayer);
+                    var lod = EditorGUI.EnumPopup(popupRect, Loc("Current LOD").Tr, MeshWeaverSettings.Current.activeLodMaskLayer);
                     if (changed.changed)
                     {
-                        MeshWeaverSettings.Current.CurrentLodMaskLayer = (LodMaskLayer)lod;
+                        MeshWeaverSettings.Current.activeLodMaskLayer = (LodMaskLayer)lod;
                         MeshWeaverSettings.ApplySettings();
                     }
                 }

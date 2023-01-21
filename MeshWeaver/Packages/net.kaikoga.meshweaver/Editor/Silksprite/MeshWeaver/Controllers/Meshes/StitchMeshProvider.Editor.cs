@@ -24,8 +24,8 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
 
         protected override void PopulateDumpGUI(GUIContainer container)
         {
-            container.Add(new DumpFoldout(Loc("Input Path dump A"), () => ((StitchMeshProvider)target).LastPathieA?.Build(MeshWeaverSettings.Current.CurrentLodMaskLayer)));
-            container.Add(new DumpFoldout(Loc("Input Path dump B"), () => ((StitchMeshProvider)target).LastPathieB?.Build(MeshWeaverSettings.Current.CurrentLodMaskLayer)));
+            container.Add(new DumpFoldout(Loc("Input Path dump A"), () => ((StitchMeshProvider)target).LastPathieA?.Build(MeshWeaverSettings.Current.activeLodMaskLayer)));
+            container.Add(new DumpFoldout(Loc("Input Path dump B"), () => ((StitchMeshProvider)target).LastPathieB?.Build(MeshWeaverSettings.Current.activeLodMaskLayer)));
         }
     }
 }
