@@ -55,14 +55,14 @@ namespace Silksprite.MeshWeaver.Primitives
         [MenuItem("GameObject/MeshWeaver/Primitives/Quad XY", false, 10)]
         public static void CreateQuadXY(MenuCommand menuCommand)
         {
-            var primitiveProvider = MeshWeaverPrimitives.CreateQuadXYPrimitive(UnityAssetLocator.DefaultMaterial());
+            var primitiveProvider = MeshWeaverPrimitives.CreateQuadXYPrimitive(UnityAssetLocator.DefaultMaterial(), true);
             DoUnityThings(primitiveProvider, menuCommand.context as GameObject);
         }
 
         [MenuItem("GameObject/MeshWeaver/Primitives/Quad XZ", false, 10)]
         public static void CreateQuadXZ(MenuCommand menuCommand)
         {
-            var primitiveProvider = MeshWeaverPrimitives.CreateQuadXZPrimitive(UnityAssetLocator.DefaultMaterial());
+            var primitiveProvider = MeshWeaverPrimitives.CreateQuadXZPrimitive(UnityAssetLocator.DefaultMaterial(), true);
             DoUnityThings(primitiveProvider, menuCommand.context as GameObject);
         }
 
@@ -107,6 +107,21 @@ namespace Silksprite.MeshWeaver.Primitives
             var primitiveProvider = MeshWeaverPrimitives.CreateStairsPrimitive(UnityAssetLocator.DefaultMaterial(), true);
             DoUnityThings(primitiveProvider, menuCommand.context as GameObject);
         }
+
+        [MenuItem("GameObject/MeshWeaver/Primitives/NoUV/Quad XY", false, 10)]
+        public static void CreateQuadXYNoUv(MenuCommand menuCommand)
+        {
+            var primitiveProvider = MeshWeaverPrimitives.CreateQuadXYPrimitive(UnityAssetLocator.DefaultMaterial(), false);
+            DoUnityThings(primitiveProvider, menuCommand.context as GameObject);
+        }
+
+        [MenuItem("GameObject/MeshWeaver/Primitives/NoUV/Quad XZ", false, 10)]
+        public static void CreateQuadXZNoUv(MenuCommand menuCommand)
+        {
+            var primitiveProvider = MeshWeaverPrimitives.CreateQuadXZPrimitive(UnityAssetLocator.DefaultMaterial(), false);
+            DoUnityThings(primitiveProvider, menuCommand.context as GameObject);
+        }
+
 
         [MenuItem("GameObject/MeshWeaver/Primitives/NoUV/Plane", false, 10)]
         public static void CreatePlaneNoUv(MenuCommand menuCommand)

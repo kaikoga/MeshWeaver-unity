@@ -39,7 +39,7 @@ namespace Silksprite.MeshWeaver.Primitives
             return uvProjector;
         }
 
-        public static MeshProvider CreateQuadXYPrimitive(Material material)
+        public static MeshProvider CreateQuadXYPrimitive(Material material, bool hasUv)
         {
             var gameObject = new GameObject("Quad Provider");
             var polygon = gameObject.AddComponent<PolygonMeshProvider>();
@@ -48,16 +48,26 @@ namespace Silksprite.MeshWeaver.Primitives
             var path = polygon.AddChildComponent<CompositePathProvider>("CompositePathProvider_Path");
             polygon.pathProvider = path;
 
-            path.CreateVertex(new Vector3(0f, 0f, 0f), false, new Vector2(0f, 0f));
-            path.CreateVertex(new Vector3(0f, 1f, 0f), false, new Vector2(0f, 1f));
-            path.CreateVertex(new Vector3(1f, 1f, 0f), false, new Vector2(1f, 1f));
-            path.CreateVertex(new Vector3(1f, 0f, 0f), false, new Vector2(1f, 0f));
+            if (hasUv)
+            {
+                path.CreateVertex(new Vector3(0f, 0f, 0f), false, new Vector2(0f, 0f));
+                path.CreateVertex(new Vector3(0f, 1f, 0f), false, new Vector2(0f, 1f));
+                path.CreateVertex(new Vector3(1f, 1f, 0f), false, new Vector2(1f, 1f));
+                path.CreateVertex(new Vector3(1f, 0f, 0f), false, new Vector2(1f, 0f));
+            }
+            else
+            {
+                path.CreateVertex(new Vector3(0f, 0f, 0f), false);
+                path.CreateVertex(new Vector3(0f, 1f, 0f), false);
+                path.CreateVertex(new Vector3(1f, 1f, 0f), false);
+                path.CreateVertex(new Vector3(1f, 0f, 0f), false);
+            }
             path.isLoop = true;
 
             return polygon;
         }
 
-        public static MeshProvider CreateQuadXZPrimitive(Material material)
+        public static MeshProvider CreateQuadXZPrimitive(Material material, bool hasUv)
         {
             var gameObject = new GameObject("Quad Provider");
             var polygon = gameObject.AddComponent<PolygonMeshProvider>();
@@ -66,10 +76,20 @@ namespace Silksprite.MeshWeaver.Primitives
             var path = polygon.AddChildComponent<CompositePathProvider>("CompositePathProvider_Path");
             polygon.pathProvider = path;
 
-            path.CreateVertex(new Vector3(0f, 0f, 0f), false, new Vector2(0f, 0f));
-            path.CreateVertex(new Vector3(0f, 0f, 1f), false, new Vector2(0f, 1f));
-            path.CreateVertex(new Vector3(1f, 0f, 1f), false, new Vector2(1f, 1f));
-            path.CreateVertex(new Vector3(1f, 0f, 0f), false, new Vector2(1f, 0f));
+            if (hasUv)
+            {
+                path.CreateVertex(new Vector3(0f, 0f, 0f), false, new Vector2(0f, 0f));
+                path.CreateVertex(new Vector3(0f, 0f, 1f), false, new Vector2(0f, 1f));
+                path.CreateVertex(new Vector3(1f, 0f, 1f), false, new Vector2(1f, 1f));
+                path.CreateVertex(new Vector3(1f, 0f, 0f), false, new Vector2(1f, 0f));
+            }
+            else
+            {
+                path.CreateVertex(new Vector3(0f, 0f, 0f), false);
+                path.CreateVertex(new Vector3(0f, 0f, 1f), false);
+                path.CreateVertex(new Vector3(1f, 0f, 1f), false);
+                path.CreateVertex(new Vector3(1f, 0f, 0f), false);
+            }
             path.isLoop = true;
 
             return polygon;
