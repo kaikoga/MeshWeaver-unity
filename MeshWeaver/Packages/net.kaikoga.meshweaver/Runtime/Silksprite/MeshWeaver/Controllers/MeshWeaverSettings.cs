@@ -30,7 +30,7 @@ namespace Silksprite.MeshWeaver.Controllers
             return assets.Length == 0 ? CreateInstance<MeshWeaverSettings>() : assets[0];
         }
 
-        static void WriteSettings()
+        public static void ApplySettings()
         {
 #if UNITY_EDITOR
             var settingsAsset = SettingsAsset;
@@ -44,6 +44,7 @@ namespace Silksprite.MeshWeaver.Controllers
                 }
                 UnityEditor.EditorUtility.SetDirty(settingsAsset);
             }
+            if (!Application.isPlaying) UnityEditor.EditorApplication.QueuePlayerLoopUpdate();
 #endif
             _settingsAsset = null;
         }
@@ -59,32 +60,19 @@ namespace Silksprite.MeshWeaver.Controllers
             public LodMaskLayer CurrentLodMaskLayer
             {
                 get => currentLodMaskLayer;
-                set
-                {
-                    currentLodMaskLayer = value;
-                    WriteSettings();
-                    if (!Application.isPlaying) UnityEditor.EditorApplication.QueuePlayerLoopUpdate();
-                }
+                set => currentLodMaskLayer = value;
             }
 
             public string Lang
             {
                 get => lang;
-                set
-                {
-                    lang = value;
-                    WriteSettings();
-                }
+                set => lang = value;
             }
 
             public Material DefaultMaterial
             {
                 get => defaultMaterial;
-                set
-                {
-                    defaultMaterial = value;
-                    WriteSettings();
-                }
+                set => defaultMaterial = value;
             }
         }
     }

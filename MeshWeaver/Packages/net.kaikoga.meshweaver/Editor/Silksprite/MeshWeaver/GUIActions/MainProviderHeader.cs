@@ -72,6 +72,7 @@ namespace Silksprite.MeshWeaver.GUIActions
                     if (changed.changed)
                     {
                         MeshWeaverSettings.Current.CurrentLodMaskLayer = (LodMaskLayer)lod;
+                        MeshWeaverSettings.ApplySettings();
                     }
                 }
 

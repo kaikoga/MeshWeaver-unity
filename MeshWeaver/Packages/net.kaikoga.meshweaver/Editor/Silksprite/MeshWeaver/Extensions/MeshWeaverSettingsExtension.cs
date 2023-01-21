@@ -8,8 +8,15 @@ namespace Silksprite.MeshWeaver.Extensions
     {
         public static Material DefaultMaterialOrDefault(this MeshWeaverSettings.MeshWeaverSettingsData current)
         {
-            var material = current.DefaultMaterial; 
-            return material ? material : current.DefaultMaterial = UnityAssetLocator.DefaultMaterial();
+            var material = current.DefaultMaterial;
+            if (!material)
+            {
+                material = UnityAssetLocator.DefaultMaterial();
+                current.DefaultMaterial = material;
+                MeshWeaverSettings.ApplySettings();
+            }
+            return material;
+
         }
     }
 }
