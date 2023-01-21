@@ -54,6 +54,8 @@ namespace Silksprite.MeshWeaver.Controllers
             [SerializeField] LodMaskLayer currentLodMaskLayer = LodMaskLayer.LOD0;
             [SerializeField] string lang = "en";
 
+            [SerializeField] Material defaultMaterial;
+
             public LodMaskLayer CurrentLodMaskLayer
             {
                 get => currentLodMaskLayer;
@@ -74,7 +76,16 @@ namespace Silksprite.MeshWeaver.Controllers
                     WriteSettings();
                 }
             }
-        }
 
+            public Material DefaultMaterial
+            {
+                get => defaultMaterial;
+                set
+                {
+                    defaultMaterial = value;
+                    WriteSettings();
+                }
+            }
+        }
     }
 }
