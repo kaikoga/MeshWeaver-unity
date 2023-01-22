@@ -1,5 +1,8 @@
+using System;
+using System.Linq;
 using Silksprite.MeshWeaver.Controllers.Base;
 using Silksprite.MeshWeaver.Controllers.Utils;
+using Silksprite.MeshWeaver.Extensions;
 using Silksprite.MeshWeaver.GUIActions;
 using Silksprite.MeshWeaver.GUIActions.Events;
 using Silksprite.MeshWeaver.GUIActions.Extensions;
@@ -30,7 +33,29 @@ namespace Silksprite.MeshWeaver.Controllers
             {
                 // TODO: how to expose CustomMeshBehaviour.updatesEveryFrame
                 // c.Add(Prop(nameof(CustomMeshBehaviour.updatesEveryFrame), Loc("CustomMeshBehaviour.updatesEveryFrame")));
-                c.Add(Prop("profile", Loc("CustomMeshBehaviour.profile")));
+
+                if (MeshWeaverSettings.Current.profiles.Length == 0) MeshWeaverSettings.Current.ResetDefaultProfiles();
+                var options = MeshWeaverSettings.Current.profiles.Select(prof => _Loc(prof.name))
+                    .Concat(new []{ Loc("CustomMeshBehaviour.customProfile") }).ToArray();
+                var customProfileIndex = MeshWeaverSettings.Current.profiles.Length;
+                var profileIndex = Array.IndexOf(MeshWeaverSettings.Current.profiles, serializedObject.FindProperty("profile").objectReferenceValue);
+                if (profileIndex < 0) profileIndex = customProfileIndex; 
+                var profilesPopup = new LocPopup(Loc("MeshWeaverSettings.profiles"),
+                    profileIndex,
+                    options);
+                profilesPopup.onChanged.Add(_ =>
+                {
+                    if (profilesPopup.value < customProfileIndex)
+                    {
+                        serializedObject.FindProperty("profile").objectReferenceValue = MeshWeaverSettings.Current.profiles[profilesPopup.value];
+                    }
+                    serializedObject.ApplyModifiedProperties();
+                    onRefresh.Invoke();
+                });
+                c.Add(profilesPopup);
+                c.Add(Prop("profile", Loc("CustomMeshBehaviour.customProfile"))
+                    .WithDisplayOnRefresh(onRefresh, () => profilesPopup.value == customProfileIndex));
+
                 var lockMaterials = Prop(nameof(CustomMeshBehaviour.overrideMaterials), Loc("CustomMeshBehaviour.overrideMaterials"));
                 lockMaterials.RegisterPropertyChangedCallback<bool>(changed => onRefresh.Invoke());
                 c.Add(lockMaterials);

@@ -22,8 +22,8 @@ namespace Silksprite.MeshWeaver.Controllers.Base
         {
             container.Add(CreatePropertiesGUI());
             container.Add(PathModifierProviderMenus.Menu.ToGUIAction((PathProvider)target));
-            container.Add(CreateDumpGUI());
-            container.Add(CreateAdvancedActionsGUI());
+            if (MeshWeaverSettings.Current.enableDumpGUI) container.Add(CreateDumpGUI());
+            if (MeshWeaverSettings.Current.enableAdvancedActions) container.Add(CreateAdvancedActionsGUI());
         }
 
         GUIAction CreatePropertiesGUI()
@@ -40,7 +40,7 @@ namespace Silksprite.MeshWeaver.Controllers.Base
             var div = new Div(c =>
             {
                 c.Add(new Header(Loc("Dumps")));
-                c.Add(new DumpFoldout(Loc("Path Dump"), () => ((PathProvider)target).LastFactory?.Build(MeshWeaverSettings.Current.CurrentLodMaskLayer)));
+                c.Add(new DumpFoldout(Loc("Path Dump"), () => ((PathProvider)target).LastFactory?.Build(MeshWeaverSettings.Current.activeLodMaskLayer)));
                 c.Add(new DumpFoldout(Loc("Collider Path Dump"), () => ((PathProvider)target).LastFactory?.Build(LodMaskLayer.Collider)));
                 PopulateDumpGUI(c);
             });

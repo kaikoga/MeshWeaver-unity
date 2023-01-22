@@ -11,7 +11,7 @@ namespace Silksprite.MeshWeaver.Controllers.Base
         protected sealed override void PopulateInspectorGUI(GUIContainer container)
         {
             container.Add(CreatePropertiesGUI());
-            container.Add(CreateAdvancedActionsGUI());
+            if (MeshWeaverSettings.Current.enableAdvancedActions) container.Add(CreateAdvancedActionsGUI());
         }
 
         GUIAction CreatePropertiesGUI()

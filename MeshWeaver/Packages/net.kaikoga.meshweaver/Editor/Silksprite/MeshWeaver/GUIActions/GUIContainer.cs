@@ -7,6 +7,7 @@ namespace Silksprite.MeshWeaver.GUIActions
         Action _onGUI;
 
         public void Add(GUIAction element) => _onGUI += element.OnGUI;
+        public void AddAction(Action callback) => _onGUI += callback;
 
         public override void OnGUI()
         {

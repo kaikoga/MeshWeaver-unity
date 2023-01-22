@@ -9,7 +9,8 @@ namespace Silksprite.MeshWeaver.Controllers
     [CustomEditor(typeof(MeshWeaverSettings))]
     public class MeshWeaverSettingsEditor : MeshWeaverEditorBase
     {
-        protected override bool IsMainComponentEditor => true;
+        protected override bool IsMainComponentEditor => false;
+        protected override bool IsSettingsEditor => true;
 
         protected sealed override void PopulateInspectorGUI(GUIContainer container)
         {
@@ -19,7 +20,7 @@ namespace Silksprite.MeshWeaver.Controllers
         [SettingsProvider]
         public static SettingsProvider SettingsProvider()
         {
-            var guiAction = new MainProviderHeader(true, false);
+            var guiAction = new MainProviderHeader(true, false, true);
 
             // First parameter is the path in the Settings window.
             // Second parameter is the scope of this setting: it only appears in the Project Settings window.

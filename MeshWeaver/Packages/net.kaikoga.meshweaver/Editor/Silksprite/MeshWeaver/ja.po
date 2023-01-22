@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-01-20 06:06+0900\n"
+"POT-Creation-Date: 2023-01-22 11:15+0900\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -45,20 +45,20 @@ msgstr "高度な操作"
 msgid "Command..."
 msgstr "コマンドを実行..."
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshWeaverEditorBase.cs:48
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshWeaverEditorBase.cs:50
 msgid "Experimental"
 msgstr "実験的機能"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshWeaverEditorBase.cs:49
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshWeaverEditorBase.cs:51
 msgid "This component may break in future release."
 msgstr ""
 "このコンポーネントは将来のリリースで機能が変更される可能性があります。"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshWeaverEditorBase.cs:67
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshWeaverEditorBase.cs:69
 msgid "Fallback Inspector"
 msgstr "仮UI"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshWeaverEditorBase.cs:69
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshWeaverEditorBase.cs:71
 msgid "End Fallback Inspector"
 msgstr "仮UIここまで"
 
@@ -86,36 +86,41 @@ msgstr "パスをベイクする"
 msgid "Wrap with Composite/With Modifiers"
 msgstr "Compositeで包む/モディファイアごと"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:33
-msgid "CustomMeshBehaviour.profile"
+#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:43
+#: Editor/Silksprite/MeshWeaver/GUIActions/MainProviderHeader.cs:88
+msgid "MeshWeaverSettings.profiles"
 msgstr "基本設定"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:34
+#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:55
+msgid "CustomMeshBehaviour.customProfile"
+msgstr "カスタム基本設定"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:58
 msgid "CustomMeshBehaviour.overrideMaterials"
 msgstr "マテリアルを上書きする"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:37
+#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:61
 msgid "CustomMeshBehaviour.materials"
 msgstr "マテリアル"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:42
+#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:66
 #: Editor/Silksprite/MeshWeaver/Controllers/Meshes/CompositeMeshProvider.Editor.cs:15
 msgid "Mesh Providers"
 msgstr "子メッシュ"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:47
+#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:71
 msgid "Compile"
 msgstr "コンパイル"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:48
+#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:72
 msgid "Compile All Active"
 msgstr "アクティブを全てコンパイル"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:58
+#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:82
 msgid "I am Mesh Renderer"
 msgstr "自分自身がMesh Rendererになる事だ"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:62
+#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:86
 msgid "Create Exporter"
 msgstr "Exporterを生成する"
 
@@ -240,7 +245,7 @@ msgstr "ライトマップを有効"
 msgid "MeshBehaviourProfileData.staticEditorFlags"
 msgstr "Staticフラグを設定"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/MeshWeaverSettings.Editor.cs:16
+#: Editor/Silksprite/MeshWeaver/Controllers/MeshWeaverSettings.Editor.cs:17
 msgid ""
 "This asset contains global settings of MeshWeaver. This file can be moved "
 "anywhere inside Assets directory."
@@ -778,22 +783,38 @@ msgid "One Z"
 msgstr "One Z"
 
 # notranslation
-#: Editor/Silksprite/MeshWeaver/GUIActions/MainProviderHeader.cs:64
+#: Editor/Silksprite/MeshWeaver/GUIActions/MainProviderHeader.cs:55
 msgid "Language"
 msgstr "Language"
 
-#: Editor/Silksprite/MeshWeaver/GUIActions/MainProviderHeader.cs:71
+#: Editor/Silksprite/MeshWeaver/GUIActions/MainProviderHeader.cs:62
 msgid "Current LOD"
 msgstr "表示するLOD"
 
+#: Editor/Silksprite/MeshWeaver/GUIActions/MainProviderHeader.cs:85
+msgid "MeshWeaverSettings.enableDumpGUI"
+msgstr "ダンプUIを表示する"
+
 #: Editor/Silksprite/MeshWeaver/GUIActions/MainProviderHeader.cs:86
+msgid "MeshWeaverSettings.enableAdvancedActions"
+msgstr "高度な操作を表示する"
+
+#: Editor/Silksprite/MeshWeaver/GUIActions/MainProviderHeader.cs:87
+msgid "MeshWeaverSettings.defaultMaterial"
+msgstr "デフォルトマテリアル"
+
+#: Editor/Silksprite/MeshWeaver/GUIActions/MainProviderHeader.cs:89
+msgid "Reset to Default Profiles"
+msgstr "基本設定を初期化する"
+
+#: Editor/Silksprite/MeshWeaver/GUIActions/MainProviderHeader.cs:96
 msgid ""
 "Multiple MeshWeaver Settings asset found. Settings may or may not be saved."
 msgstr ""
 "MeshWeaverの設定ファイルが複数存在するようです。設定の変更が保存されないか"
 "もしれません。"
 
-#: Editor/Silksprite/MeshWeaver/GUIActions/MainProviderHeader.cs:90
+#: Editor/Silksprite/MeshWeaver/GUIActions/MainProviderHeader.cs:98
 msgid "MeshWeaver Settings saved to Assets/MeshWeaverSettings.asset."
 msgstr "MeshWeaverの設定が Assets/MeshWeaverSettings.asset に保存されます。"
 

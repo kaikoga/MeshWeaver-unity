@@ -2,7 +2,7 @@ using Silksprite.MeshWeaver.Controllers;
 using Silksprite.MeshWeaver.Controllers.Base;
 using Silksprite.MeshWeaver.Controllers.Meshes;
 using Silksprite.MeshWeaver.Controllers.Paths;
-using Silksprite.MeshWeaver.Utils;
+using Silksprite.MeshWeaver.Extensions;
 using UnityEditor;
 using UnityEngine;
 
@@ -10,6 +10,8 @@ namespace Silksprite.MeshWeaver.Primitives
 {
     public static class MeshWeaverMenuItems
     {
+        static Material Material() => MeshWeaverSettings.Current.DefaultMaterialOrDefault();
+
         [MenuItem("GameObject/MeshWeaver/Mesh Behaviour", false, 10)]
         public static void CreateMeshBehaviour(MenuCommand menuCommand)
         {
@@ -55,98 +57,113 @@ namespace Silksprite.MeshWeaver.Primitives
         [MenuItem("GameObject/MeshWeaver/Primitives/Quad XY", false, 10)]
         public static void CreateQuadXY(MenuCommand menuCommand)
         {
-            var primitiveProvider = MeshWeaverPrimitives.CreateQuadXYPrimitive(UnityAssetLocator.DefaultMaterial());
+            var primitiveProvider = MeshWeaverPrimitives.CreateQuadXYPrimitive(Material(), true);
             DoUnityThings(primitiveProvider, menuCommand.context as GameObject);
         }
 
         [MenuItem("GameObject/MeshWeaver/Primitives/Quad XZ", false, 10)]
         public static void CreateQuadXZ(MenuCommand menuCommand)
         {
-            var primitiveProvider = MeshWeaverPrimitives.CreateQuadXZPrimitive(UnityAssetLocator.DefaultMaterial());
+            var primitiveProvider = MeshWeaverPrimitives.CreateQuadXZPrimitive(Material(), true);
             DoUnityThings(primitiveProvider, menuCommand.context as GameObject);
         }
 
         [MenuItem("GameObject/MeshWeaver/Primitives/Plane", false, 10)]
         public static void CreatePlane(MenuCommand menuCommand)
         {
-            var primitiveProvider = MeshWeaverPrimitives.CreatePlanePrimitive(UnityAssetLocator.DefaultMaterial(), true);
+            var primitiveProvider = MeshWeaverPrimitives.CreatePlanePrimitive(Material(), true);
             DoUnityThings(primitiveProvider, menuCommand.context as GameObject);
         }
 
         [MenuItem("GameObject/MeshWeaver/Primitives/Cube", false, 10)]
         public static void CreateCube(MenuCommand menuCommand)
         {
-            var primitiveProvider = MeshWeaverPrimitives.CreateCubePrimitive(UnityAssetLocator.DefaultMaterial(), true);
+            var primitiveProvider = MeshWeaverPrimitives.CreateCubePrimitive(Material(), true);
             DoUnityThings(primitiveProvider, menuCommand.context as GameObject);
         }
 
         [MenuItem("GameObject/MeshWeaver/Primitives/Sphere", false, 10)]
         public static void CreateSphere(MenuCommand menuCommand)
         {
-            var primitiveProvider = MeshWeaverPrimitives.CreateSpherePrimitive(UnityAssetLocator.DefaultMaterial(), true);
+            var primitiveProvider = MeshWeaverPrimitives.CreateSpherePrimitive(Material(), true);
             DoUnityThings(primitiveProvider, menuCommand.context as GameObject);
         }
 
         [MenuItem("GameObject/MeshWeaver/Primitives/Cylinder Extruded", false, 10)]
         public static void CreateExtrudedCylinder(MenuCommand menuCommand)
         {
-            var primitiveProvider = MeshWeaverPrimitives.CreateExtrudedCylinderPrimitive(UnityAssetLocator.DefaultMaterial(), true);
+            var primitiveProvider = MeshWeaverPrimitives.CreateExtrudedCylinderPrimitive(Material(), true);
             DoUnityThings(primitiveProvider, menuCommand.context as GameObject);
         }
 
         [MenuItem("GameObject/MeshWeaver/Primitives/Cylinder Rotated", false, 10)]
         public static void CreateRotatedCylinder(MenuCommand menuCommand)
         {
-            var primitiveProvider = MeshWeaverPrimitives.CreateRotatedCylinderPrimitive(UnityAssetLocator.DefaultMaterial(), true);
+            var primitiveProvider = MeshWeaverPrimitives.CreateRotatedCylinderPrimitive(Material(), true);
             DoUnityThings(primitiveProvider, menuCommand.context as GameObject);
         }
 
         [MenuItem("GameObject/MeshWeaver/Primitives/Stairs", false, 10)]
         public static void CreateStairs(MenuCommand menuCommand)
         {
-            var primitiveProvider = MeshWeaverPrimitives.CreateStairsPrimitive(UnityAssetLocator.DefaultMaterial(), true);
+            var primitiveProvider = MeshWeaverPrimitives.CreateStairsPrimitive(Material(), true);
             DoUnityThings(primitiveProvider, menuCommand.context as GameObject);
         }
+
+        [MenuItem("GameObject/MeshWeaver/Primitives/NoUV/Quad XY", false, 10)]
+        public static void CreateQuadXYNoUv(MenuCommand menuCommand)
+        {
+            var primitiveProvider = MeshWeaverPrimitives.CreateQuadXYPrimitive(Material(), false);
+            DoUnityThings(primitiveProvider, menuCommand.context as GameObject);
+        }
+
+        [MenuItem("GameObject/MeshWeaver/Primitives/NoUV/Quad XZ", false, 10)]
+        public static void CreateQuadXZNoUv(MenuCommand menuCommand)
+        {
+            var primitiveProvider = MeshWeaverPrimitives.CreateQuadXZPrimitive(Material(), false);
+            DoUnityThings(primitiveProvider, menuCommand.context as GameObject);
+        }
+
 
         [MenuItem("GameObject/MeshWeaver/Primitives/NoUV/Plane", false, 10)]
         public static void CreatePlaneNoUv(MenuCommand menuCommand)
         {
-            var primitiveProvider = MeshWeaverPrimitives.CreatePlanePrimitive(UnityAssetLocator.DefaultMaterial(), false);
+            var primitiveProvider = MeshWeaverPrimitives.CreatePlanePrimitive(Material(), false);
             DoUnityThings(primitiveProvider, menuCommand.context as GameObject);
         }
 
         [MenuItem("GameObject/MeshWeaver/Primitives/NoUV/Cube", false, 10)]
         public static void CreateCubeNoUv(MenuCommand menuCommand)
         {
-            var primitiveProvider = MeshWeaverPrimitives.CreateCubePrimitive(UnityAssetLocator.DefaultMaterial(), false);
+            var primitiveProvider = MeshWeaverPrimitives.CreateCubePrimitive(Material(), false);
             DoUnityThings(primitiveProvider, menuCommand.context as GameObject);
         }
 
         [MenuItem("GameObject/MeshWeaver/Primitives/NoUV/Sphere", false, 10)]
         public static void CreateSphereNoUv(MenuCommand menuCommand)
         {
-            var primitiveProvider = MeshWeaverPrimitives.CreateSpherePrimitive(UnityAssetLocator.DefaultMaterial(), false);
+            var primitiveProvider = MeshWeaverPrimitives.CreateSpherePrimitive(Material(), false);
             DoUnityThings(primitiveProvider, menuCommand.context as GameObject);
         }
 
         [MenuItem("GameObject/MeshWeaver/Primitives/NoUV/Cylinder Extruded", false, 10)]
         public static void CreateExtrudedCylinderNoUv(MenuCommand menuCommand)
         {
-            var primitiveProvider = MeshWeaverPrimitives.CreateExtrudedCylinderPrimitive(UnityAssetLocator.DefaultMaterial(), false);
+            var primitiveProvider = MeshWeaverPrimitives.CreateExtrudedCylinderPrimitive(Material(), false);
             DoUnityThings(primitiveProvider, menuCommand.context as GameObject);
         }
 
         [MenuItem("GameObject/MeshWeaver/Primitives/NoUV/Cylinder Rotated", false, 10)]
         public static void CreateRotatedCylinderNoUv(MenuCommand menuCommand)
         {
-            var primitiveProvider = MeshWeaverPrimitives.CreateRotatedCylinderPrimitive(UnityAssetLocator.DefaultMaterial(), false);
+            var primitiveProvider = MeshWeaverPrimitives.CreateRotatedCylinderPrimitive(Material(), false);
             DoUnityThings(primitiveProvider, menuCommand.context as GameObject);
         }
 
         [MenuItem("GameObject/MeshWeaver/Primitives/NoUV/Stairs", false, 10)]
         public static void CreateStairsNoUv(MenuCommand menuCommand)
         {
-            var primitiveProvider = MeshWeaverPrimitives.CreateStairsPrimitive(UnityAssetLocator.DefaultMaterial(), false);
+            var primitiveProvider = MeshWeaverPrimitives.CreateStairsPrimitive(Material(), false);
             DoUnityThings(primitiveProvider, menuCommand.context as GameObject);
         }
 

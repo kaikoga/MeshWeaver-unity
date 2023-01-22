@@ -6,8 +6,12 @@ namespace Silksprite.MeshWeaver.Utils
     {
         public static string Lang
         {
-            get => MeshWeaverSettings.Current.Lang;
-            set => MeshWeaverSettings.Current.Lang = value;
+            get => MeshWeaverSettings.Current.lang;
+            set
+            {
+                MeshWeaverSettings.Current.lang = value;
+                MeshWeaverSettings.ApplySettings();
+            }
         }
 
         internal static string PoPath(string lang)

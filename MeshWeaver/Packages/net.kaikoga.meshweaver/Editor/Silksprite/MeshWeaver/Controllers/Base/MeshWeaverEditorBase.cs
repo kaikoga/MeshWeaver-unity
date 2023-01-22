@@ -10,6 +10,7 @@ namespace Silksprite.MeshWeaver.Controllers.Base
     public abstract class MeshWeaverEditorBase : Editor
     {
         protected abstract bool IsMainComponentEditor { get; }
+        protected virtual bool IsSettingsEditor => false;
         protected virtual bool IsExperimental => false;
 
         GUIContainer _root;
@@ -33,7 +34,8 @@ namespace Silksprite.MeshWeaver.Controllers.Base
 
             void PopulateRootElement()
             {
-                if (IsMainComponentEditor) _root.Add(new MainProviderHeader(false, false));
+                if (IsMainComponentEditor) _root.Add(new MainProviderHeader(false, false, false));
+                if (IsSettingsEditor) _root.Add(new MainProviderHeader(true, false, true));
                 if (IsExperimental) _root.Add(PopulateExperimentalBanner());
                 _container = new GUIContainer();
                 PopulateInspectorGUI(_container);

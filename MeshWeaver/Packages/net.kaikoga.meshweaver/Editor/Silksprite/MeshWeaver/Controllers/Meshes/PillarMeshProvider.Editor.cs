@@ -57,8 +57,8 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
         protected override void PopulateDumpGUI(GUIContainer container)
         {
             var pillarMeshProvider = (PillarMeshProvider)target;
-            container.Add(new DumpFoldout(Loc("Input Path dump X"), () => pillarMeshProvider.LastPathieX?.Build(MeshWeaverSettings.Current.CurrentLodMaskLayer)));
-            container.Add(new DumpFoldout(Loc("Input Path dump Y"), () => pillarMeshProvider.LastPathieY?.Build(MeshWeaverSettings.Current.CurrentLodMaskLayer)));
+            container.Add(new DumpFoldout(Loc("Input Path dump X"), () => pillarMeshProvider.LastPathieX?.Build(MeshWeaverSettings.Current.activeLodMaskLayer)));
+            container.Add(new DumpFoldout(Loc("Input Path dump Y"), () => pillarMeshProvider.LastPathieY?.Build(MeshWeaverSettings.Current.activeLodMaskLayer)));
         }
     }
 }

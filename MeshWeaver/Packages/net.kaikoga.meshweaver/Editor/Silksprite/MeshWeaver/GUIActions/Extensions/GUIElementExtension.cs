@@ -11,6 +11,11 @@ namespace Silksprite.MeshWeaver.GUIActions.Extensions
 
         public static GUIAction WithEnabled(this GUIAction guiAction, bool enableIfTrue) => WithEnabledImpl(guiAction, () => enableIfTrue);
 
+        // XXX not this API
+        public static GUIAction WithDisplay(this GUIAction guiAction, Func<bool> displayIfTrue) => WithDisplayImpl(guiAction, displayIfTrue);
+        // XXX not this API
+        public static GUIAction WithEnabled(this GUIAction guiAction, Func<bool> enableIfTrue) => WithEnabledImpl(guiAction, enableIfTrue);
+
         public static GUIAction WithIndent(this GUIAction guiAction, int indentLevel = 1) => WithIndentImpl(guiAction, () => indentLevel);
 
         public static GUIAction WithDisplayOnRefresh(this GUIAction guiAction, Dispatcher<RefreshEvent> onRefresh, Func<bool> displayIfTrue)

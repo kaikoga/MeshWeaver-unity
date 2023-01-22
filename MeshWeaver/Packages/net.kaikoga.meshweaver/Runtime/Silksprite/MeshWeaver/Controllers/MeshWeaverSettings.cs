@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using Silksprite.MeshWeaver.Models;
 using UnityEngine;
@@ -8,14 +7,19 @@ namespace Silksprite.MeshWeaver.Controllers
     [ExcludeFromPreset]
     public class MeshWeaverSettings : ScriptableObject
     {
-        static MeshWeaverSettings _settingsAsset;
-        static MeshWeaverSettings SettingsAsset => _settingsAsset ? _settingsAsset : _settingsAsset = FindSettingsAsset();
+        public LodMaskLayer activeLodMaskLayer = LodMaskLayer.LOD0;
+        public string lang = "en";
+
+        public bool enableDumpGUI = true;
+        public bool enableAdvancedActions = true;
+        public Material defaultMaterial;
+        public MeshBehaviourProfile[] profiles = {};
+
         public static bool WarnMultipleSettingsAsset { get; private set; }
         public static bool InfoSettingsAssetCreated { get; set; }
 
-        public static MeshWeaverSettingsData Current => SettingsAsset.data;
-
-        [SerializeField] MeshWeaverSettingsData data = new MeshWeaverSettingsData();
+        static MeshWeaverSettings _current;
+        public static MeshWeaverSettings Current => _current ? _current : _current = FindSettingsAsset();
 
         static MeshWeaverSettings FindSettingsAsset()
         {
@@ -30,51 +34,22 @@ namespace Silksprite.MeshWeaver.Controllers
             return assets.Length == 0 ? CreateInstance<MeshWeaverSettings>() : assets[0];
         }
 
-        static void WriteSettings()
+        public static void ApplySettings()
         {
 #if UNITY_EDITOR
-            var settingsAsset = SettingsAsset;
-            if (settingsAsset)
+            if (_current)
             {
-                if (string.IsNullOrEmpty(UnityEditor.AssetDatabase.GetAssetPath(settingsAsset)))
+                if (string.IsNullOrEmpty(UnityEditor.AssetDatabase.GetAssetPath(_current)))
                 {
-                    UnityEditor.AssetDatabase.CreateAsset(settingsAsset, "Assets/MeshWeaverSettings.asset");
+                    UnityEditor.AssetDatabase.CreateAsset(_current, "Assets/MeshWeaverSettings.asset");
                     UnityEditor.AssetDatabase.SaveAssets();
                     InfoSettingsAssetCreated = true;
                 }
-                UnityEditor.EditorUtility.SetDirty(settingsAsset);
+                UnityEditor.EditorUtility.SetDirty(_current);
             }
+            if (!Application.isPlaying) UnityEditor.EditorApplication.QueuePlayerLoopUpdate();
 #endif
-            _settingsAsset = null;
+            _current = null;
         }
-
-        [Serializable]
-        public class MeshWeaverSettingsData
-        {
-            [SerializeField] LodMaskLayer currentLodMaskLayer = LodMaskLayer.LOD0;
-            [SerializeField] string lang = "en";
-
-            public LodMaskLayer CurrentLodMaskLayer
-            {
-                get => currentLodMaskLayer;
-                set
-                {
-                    currentLodMaskLayer = value;
-                    WriteSettings();
-                    if (!Application.isPlaying) UnityEditor.EditorApplication.QueuePlayerLoopUpdate();
-                }
-            }
-
-            public string Lang
-            {
-                get => lang;
-                set
-                {
-                    lang = value;
-                    WriteSettings();
-                }
-            }
-        }
-
     }
 }
