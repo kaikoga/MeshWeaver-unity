@@ -87,7 +87,10 @@ namespace Silksprite.MeshWeaver.Models.Meshes
                     var normalPrev = Vector3.Cross(localPrev, localI); //.normalized;
                     var normalNext = Vector3.Cross(localI, localNext); //.normalized;
                     var normalBeam = Vector3.Cross(localNext, localPrev); //.normalized;
-                    if (Vector3.Dot(normalPrev, normalNext) >= 0f &&
+                    if (normalPrev.sqrMagnitude > 0f &&
+                        normalNext.sqrMagnitude > 0f &&
+                        normalBeam.sqrMagnitude > 0f &&
+                        Vector3.Dot(normalPrev, normalNext) >= 0f &&
                         Vector3.Dot(normalNext, normalBeam) >= 0f &&
                         Vector3.Dot(normalBeam, normalPrev) >= 0f)
                     {
