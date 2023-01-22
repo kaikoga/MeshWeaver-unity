@@ -13,8 +13,6 @@ namespace Silksprite.MeshWeaver.GUIActions
 {
     public class MainProviderHeader : GUIContainer
     {
-        static bool _acknowledgeSettingsAssetCreated;
-
         const float HeaderPopupWidth = 160f;
         const float HeaderLabelWidth = 100f;
         const float ExtendedLabelWidth = 150f;
@@ -22,13 +20,8 @@ namespace Silksprite.MeshWeaver.GUIActions
         public MainProviderHeader(bool isExpanded, bool showFoldout, bool isExtended)
         {
             var banner = MeshWeaverAssetLocator.Banner();
+            var infoSettingsAssetCreated = false;
             
-            if (_acknowledgeSettingsAssetCreated)
-            {
-                MeshWeaverSettings.InfoSettingsAssetCreated = false;
-                _acknowledgeSettingsAssetCreated = false;
-            }
-
             Add(Scoped(() => new BoxLayoutScope(MeshWeaverSkin.Primary), c =>
             {
                 c.Add(Scoped(() => new LabelWidthScope(HeaderLabelWidth), () =>
@@ -96,7 +89,7 @@ namespace Silksprite.MeshWeaver.GUIActions
                             co.Add(new LocButton(Loc("Reset to Default Profiles"), () =>
                             {
                                 MeshWeaverSettings.Current.profiles = MeshWeaverAssetLocator.DefaultProfiles().ToArray();
-                            }).WithEnableOnRefresh(null, () => MeshWeaverSettings.Current.profiles.Length == 0));
+                            }).WithEnabled(MeshWeaverSettings.Current.profiles.Length == 0));
                         }));
                     }));
                 }
@@ -105,11 +98,13 @@ namespace Silksprite.MeshWeaver.GUIActions
                 {
                     c.Add(new LocHelpBox(Loc("Multiple MeshWeaver Settings asset found. Settings may or may not be saved."), MessageType.Warning));
                 }
-                if (MeshWeaverSettings.InfoSettingsAssetCreated)
-                {
-                    c.Add(new LocHelpBox(Loc("MeshWeaver Settings saved to Assets/MeshWeaverSettings.asset."), MessageType.Warning));
-                    _acknowledgeSettingsAssetCreated = true;
-                }
+                c.Add(new LocHelpBox(Loc("MeshWeaver Settings saved to Assets/MeshWeaverSettings.asset."), MessageType.Warning)
+                    .WithDisplay(() =>
+                    {
+                        infoSettingsAssetCreated |= MeshWeaverSettings.InfoSettingsAssetCreated;
+                        MeshWeaverSettings.InfoSettingsAssetCreated = false;
+                        return infoSettingsAssetCreated;
+                    }));
             }));
         }
     }
