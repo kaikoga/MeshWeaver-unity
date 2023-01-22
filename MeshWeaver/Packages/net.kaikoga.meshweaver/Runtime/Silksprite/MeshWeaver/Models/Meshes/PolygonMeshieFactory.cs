@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using Silksprite.MeshWeaver.Models.Extensions;
 using Silksprite.MeshWeaver.Models.Paths;
 using UnityEngine;
 
@@ -29,8 +31,8 @@ namespace Silksprite.MeshWeaver.Models.Meshes
         {
             var pathie = _pathie.Build(lod);
 
-            var vertices = pathie.Vertices;
-            var count = vertices.Count;
+            var vertices = pathie.DedupLoop((a, b) => a.VertexEquals(b)).ToArray();;
+            var count = vertices.Length;
             if (count < 3) return Meshie.Empty();
 
             var fail = Math.Min(InitialFail, count * count * count);
