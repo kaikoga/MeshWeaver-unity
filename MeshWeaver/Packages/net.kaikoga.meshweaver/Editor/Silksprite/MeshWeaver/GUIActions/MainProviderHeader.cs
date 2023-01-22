@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using System.Linq;
 using Silksprite.MeshWeaver.Controllers;
+using Silksprite.MeshWeaver.Extensions;
 using Silksprite.MeshWeaver.GUIActions.Extensions;
 using Silksprite.MeshWeaver.Models;
 using Silksprite.MeshWeaver.Scopes;
@@ -86,10 +86,7 @@ namespace Silksprite.MeshWeaver.GUIActions
                             co.Add(new LocPropertyField(serializedObject.FindProperty(nameof(MeshWeaverSettings.enableAdvancedActions)), Loc("MeshWeaverSettings.enableAdvancedActions")));
                             co.Add(new LocPropertyField(serializedObject.FindProperty(nameof(MeshWeaverSettings.defaultMaterial)), Loc("MeshWeaverSettings.defaultMaterial")));
                             co.Add(new LocPropertyField(serializedObject.FindProperty(nameof(MeshWeaverSettings.profiles)), Loc("MeshWeaverSettings.profiles")));
-                            co.Add(new LocButton(Loc("Reset to Default Profiles"), () =>
-                            {
-                                MeshWeaverSettings.Current.profiles = MeshWeaverAssetLocator.DefaultProfiles().ToArray();
-                            }).WithEnabled(MeshWeaverSettings.Current.profiles.Length == 0));
+                            co.Add(new LocButton(Loc("Reset to Default Profiles"), () => MeshWeaverSettings.Current.ResetDefaultProfiles()).WithEnabled(MeshWeaverSettings.Current.profiles.Length == 0));
                         }));
                     }));
                 }

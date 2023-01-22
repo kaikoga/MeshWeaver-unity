@@ -1,3 +1,4 @@
+using System.Linq;
 using Silksprite.MeshWeaver.Controllers;
 using Silksprite.MeshWeaver.Utils;
 using UnityEngine;
@@ -16,7 +17,11 @@ namespace Silksprite.MeshWeaver.Extensions
                 MeshWeaverSettings.ApplySettings();
             }
             return material;
+        }
 
+        public static void ResetDefaultProfiles(this MeshWeaverSettings current)
+        {
+            current.profiles = MeshWeaverAssetLocator.DefaultProfiles().ToArray();
         }
     }
 }
