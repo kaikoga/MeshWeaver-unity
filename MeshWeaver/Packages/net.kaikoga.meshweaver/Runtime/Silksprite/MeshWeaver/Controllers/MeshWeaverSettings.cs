@@ -13,6 +13,7 @@ namespace Silksprite.MeshWeaver.Controllers
         public bool enableDumpGUI = true;
         public bool enableAdvancedActions = true;
         public Material defaultMaterial;
+        public MeshBehaviourProfile[] profiles;
 
         public static bool WarnMultipleSettingsAsset { get; private set; }
         public static bool InfoSettingsAssetCreated { get; set; }

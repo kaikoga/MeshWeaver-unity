@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-01-22 08:28+0900\n"
+"POT-Creation-Date: 2023-01-22 09:32+0900\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -778,34 +778,42 @@ msgid "One Z"
 msgstr "One Z"
 
 # notranslation
-#: Editor/Silksprite/MeshWeaver/GUIActions/MainProviderHeader.cs:69
+#: Editor/Silksprite/MeshWeaver/GUIActions/MainProviderHeader.cs:62
 msgid "Language"
 msgstr "Language"
 
-#: Editor/Silksprite/MeshWeaver/GUIActions/MainProviderHeader.cs:76
+#: Editor/Silksprite/MeshWeaver/GUIActions/MainProviderHeader.cs:69
 msgid "Current LOD"
 msgstr "表示するLOD"
 
-#: Editor/Silksprite/MeshWeaver/GUIActions/MainProviderHeader.cs:96
+#: Editor/Silksprite/MeshWeaver/GUIActions/MainProviderHeader.cs:92
 msgid "MeshWeaverSettings.enableDumpGUI"
 msgstr "ダンプUIを表示する"
 
-#: Editor/Silksprite/MeshWeaver/GUIActions/MainProviderHeader.cs:97
+#: Editor/Silksprite/MeshWeaver/GUIActions/MainProviderHeader.cs:93
 msgid "MeshWeaverSettings.enableAdvancedActions"
 msgstr "高度な操作を表示する"
 
-#: Editor/Silksprite/MeshWeaver/GUIActions/MainProviderHeader.cs:98
+#: Editor/Silksprite/MeshWeaver/GUIActions/MainProviderHeader.cs:94
 msgid "MeshWeaverSettings.defaultMaterial"
 msgstr "デフォルトマテリアル"
 
-#: Editor/Silksprite/MeshWeaver/GUIActions/MainProviderHeader.cs:104
+#: Editor/Silksprite/MeshWeaver/GUIActions/MainProviderHeader.cs:95
+msgid "MeshWeaverSettings.profiles"
+msgstr "基本設定"
+
+#: Editor/Silksprite/MeshWeaver/GUIActions/MainProviderHeader.cs:96
+msgid "Reset to Default Profiles"
+msgstr "基本設定を初期化する"
+
+#: Editor/Silksprite/MeshWeaver/GUIActions/MainProviderHeader.cs:106
 msgid ""
 "Multiple MeshWeaver Settings asset found. Settings may or may not be saved."
 msgstr ""
 "MeshWeaverの設定ファイルが複数存在するようです。設定の変更が保存されないか"
 "もしれません。"
 
-#: Editor/Silksprite/MeshWeaver/GUIActions/MainProviderHeader.cs:108
+#: Editor/Silksprite/MeshWeaver/GUIActions/MainProviderHeader.cs:110
 msgid "MeshWeaver Settings saved to Assets/MeshWeaverSettings.asset."
 msgstr "MeshWeaverの設定が Assets/MeshWeaverSettings.asset に保存されます。"
 

@@ -3,7 +3,7 @@ using UnityEditor;
 
 namespace Silksprite.MeshWeaver.Scopes
 {
-    public readonly struct LabelWidthScope : IDisposable
+    public class LabelWidthScope : IDisposable
     {
         readonly float _oldLabelWidth;
 
