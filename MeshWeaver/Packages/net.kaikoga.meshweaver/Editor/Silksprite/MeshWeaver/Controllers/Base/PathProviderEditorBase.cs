@@ -22,8 +22,8 @@ namespace Silksprite.MeshWeaver.Controllers.Base
         {
             container.Add(CreatePropertiesGUI());
             container.Add(PathModifierProviderMenus.Menu.ToGUIAction((PathProvider)target));
-            container.Add(CreateDumpGUI());
-            container.Add(CreateAdvancedActionsGUI());
+            if (MeshWeaverSettings.Current.enableDumpGUI) container.Add(CreateDumpGUI());
+            if (MeshWeaverSettings.Current.enableAdvancedActions) container.Add(CreateAdvancedActionsGUI());
         }
 
         GUIAction CreatePropertiesGUI()

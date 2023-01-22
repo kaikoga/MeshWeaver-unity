@@ -1,17 +1,17 @@
-using System;
 using System.Linq;
 using Silksprite.MeshWeaver.Models;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Silksprite.MeshWeaver.Controllers
 {
     [ExcludeFromPreset]
     public class MeshWeaverSettings : ScriptableObject
     {
-        [FormerlySerializedAs("currentLodMaskLayer")] public LodMaskLayer activeLodMaskLayer = LodMaskLayer.LOD0;
+        public LodMaskLayer activeLodMaskLayer = LodMaskLayer.LOD0;
         public string lang = "en";
 
+        public bool enableDumpGUI = true;
+        public bool enableAdvancedActions = true;
         public Material defaultMaterial;
 
         public static bool WarnMultipleSettingsAsset { get; private set; }

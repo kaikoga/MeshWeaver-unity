@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-01-20 06:06+0900\n"
+"POT-Creation-Date: 2023-01-22 08:28+0900\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -45,20 +45,20 @@ msgstr "高度な操作"
 msgid "Command..."
 msgstr "コマンドを実行..."
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshWeaverEditorBase.cs:48
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshWeaverEditorBase.cs:50
 msgid "Experimental"
 msgstr "実験的機能"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshWeaverEditorBase.cs:49
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshWeaverEditorBase.cs:51
 msgid "This component may break in future release."
 msgstr ""
 "このコンポーネントは将来のリリースで機能が変更される可能性があります。"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshWeaverEditorBase.cs:67
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshWeaverEditorBase.cs:69
 msgid "Fallback Inspector"
 msgstr "仮UI"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshWeaverEditorBase.cs:69
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshWeaverEditorBase.cs:71
 msgid "End Fallback Inspector"
 msgstr "仮UIここまで"
 
@@ -240,7 +240,7 @@ msgstr "ライトマップを有効"
 msgid "MeshBehaviourProfileData.staticEditorFlags"
 msgstr "Staticフラグを設定"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/MeshWeaverSettings.Editor.cs:16
+#: Editor/Silksprite/MeshWeaver/Controllers/MeshWeaverSettings.Editor.cs:17
 msgid ""
 "This asset contains global settings of MeshWeaver. This file can be moved "
 "anywhere inside Assets directory."
@@ -778,22 +778,34 @@ msgid "One Z"
 msgstr "One Z"
 
 # notranslation
-#: Editor/Silksprite/MeshWeaver/GUIActions/MainProviderHeader.cs:64
+#: Editor/Silksprite/MeshWeaver/GUIActions/MainProviderHeader.cs:69
 msgid "Language"
 msgstr "Language"
 
-#: Editor/Silksprite/MeshWeaver/GUIActions/MainProviderHeader.cs:71
+#: Editor/Silksprite/MeshWeaver/GUIActions/MainProviderHeader.cs:76
 msgid "Current LOD"
 msgstr "表示するLOD"
 
-#: Editor/Silksprite/MeshWeaver/GUIActions/MainProviderHeader.cs:86
+#: Editor/Silksprite/MeshWeaver/GUIActions/MainProviderHeader.cs:96
+msgid "MeshWeaverSettings.enableDumpGUI"
+msgstr "ダンプUIを表示する"
+
+#: Editor/Silksprite/MeshWeaver/GUIActions/MainProviderHeader.cs:97
+msgid "MeshWeaverSettings.enableAdvancedActions"
+msgstr "高度な操作を表示する"
+
+#: Editor/Silksprite/MeshWeaver/GUIActions/MainProviderHeader.cs:98
+msgid "MeshWeaverSettings.defaultMaterial"
+msgstr "デフォルトマテリアル"
+
+#: Editor/Silksprite/MeshWeaver/GUIActions/MainProviderHeader.cs:104
 msgid ""
 "Multiple MeshWeaver Settings asset found. Settings may or may not be saved."
 msgstr ""
 "MeshWeaverの設定ファイルが複数存在するようです。設定の変更が保存されないか"
 "もしれません。"
 
-#: Editor/Silksprite/MeshWeaver/GUIActions/MainProviderHeader.cs:90
+#: Editor/Silksprite/MeshWeaver/GUIActions/MainProviderHeader.cs:108
 msgid "MeshWeaver Settings saved to Assets/MeshWeaverSettings.asset."
 msgstr "MeshWeaverの設定が Assets/MeshWeaverSettings.asset に保存されます。"
 
