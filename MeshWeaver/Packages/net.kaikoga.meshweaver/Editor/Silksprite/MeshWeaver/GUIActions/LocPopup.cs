@@ -6,19 +6,19 @@ namespace Silksprite.MeshWeaver.GUIActions
 {
     public class LocPopup : GUIAction
     {
-        public int Value { get; private set; }
+        public int value;
 
         readonly LocalizedContent _label;
         readonly LocalizedContent[] _options;
         readonly string[] _menuOptions;
         string _lang;
 
-        public readonly Dispatcher<ChangeEvent<int>> onChanged = new Dispatcher<ChangeEvent<int>>();
+        public readonly Dispatcher<ChangeEvent<int>, int> onChanged = new Dispatcher<ChangeEvent<int>, int>();
 
         public LocPopup(LocalizedContent label, int selectedIndex, LocalizedContent[] options)
         {
             _label = label;
-            Value = selectedIndex;
+            value = selectedIndex;
             _options = options;
             _menuOptions = new string[options.Length];
         }
@@ -34,10 +34,10 @@ namespace Silksprite.MeshWeaver.GUIActions
                 }
             }
                 
-            var index = EditorGUILayout.Popup(_label.Tr, Value, _menuOptions);
+            var index = EditorGUILayout.Popup(_label.Tr, value, _menuOptions);
             if (index < 0) return;
-            Value = index;
-            onChanged.Invoke();
+            value = index;
+            onChanged.Invoke(value);
         }
     }
 }

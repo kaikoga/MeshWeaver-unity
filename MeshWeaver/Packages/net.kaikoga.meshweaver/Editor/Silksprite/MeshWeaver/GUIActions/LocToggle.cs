@@ -10,7 +10,7 @@ namespace Silksprite.MeshWeaver.GUIActions
         readonly LocalizedContent _loc;
         public bool value;
 
-        public readonly Dispatcher<ChangeEvent<bool>> onValueChanged = new Dispatcher<ChangeEvent<bool>>();
+        public readonly Dispatcher<ChangeEvent<bool>, bool> onValueChanged = new Dispatcher<ChangeEvent<bool>, bool>();
 
         public LocToggle(LocalizedContent loc)
         {
@@ -25,7 +25,7 @@ namespace Silksprite.MeshWeaver.GUIActions
 
             if (EditorGUI.EndChangeCheck())
             {
-                onValueChanged.Invoke();
+                onValueChanged.Invoke(value);
             }
         }
     }

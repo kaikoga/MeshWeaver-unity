@@ -45,16 +45,16 @@ namespace Silksprite.MeshWeaver.Controllers
                     options);
                 profilesPopup.onChanged.Add(_ =>
                 {
-                    if (profilesPopup.Value < customProfileIndex)
+                    if (profilesPopup.value < customProfileIndex)
                     {
-                        serializedObject.FindProperty("profile").objectReferenceValue = MeshWeaverSettings.Current.profiles[profilesPopup.Value];
+                        serializedObject.FindProperty("profile").objectReferenceValue = MeshWeaverSettings.Current.profiles[profilesPopup.value];
                     }
                     serializedObject.ApplyModifiedProperties();
                     onRefresh.Invoke();
                 });
                 c.Add(profilesPopup);
                 c.Add(Prop("profile", Loc("CustomMeshBehaviour.customProfile"))
-                    .WithDisplayOnRefresh(onRefresh, () => profilesPopup.Value == customProfileIndex));
+                    .WithDisplayOnRefresh(onRefresh, () => profilesPopup.value == customProfileIndex));
 
                 var lockMaterials = Prop(nameof(CustomMeshBehaviour.overrideMaterials), Loc("CustomMeshBehaviour.overrideMaterials"));
                 lockMaterials.RegisterPropertyChangedCallback<bool>(changed => onRefresh.Invoke());
