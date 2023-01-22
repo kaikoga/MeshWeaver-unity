@@ -2,7 +2,7 @@
 
 ## MeshBehaviour コンポーネント
 
-MeshWeaverのメッシュを生成した上で、Unityのメッシュに変換するためのコンポーネントです。
+MeshWeaverのメッシュを生成した上で、Unityのメッシュに変換するコンポーネントです。
 
 ### 作り方
 
@@ -12,19 +12,14 @@ MeshWeaverのメッシュを生成した上で、Unityのメッシュに変換�
 
 ### インスペクタ
 
-TODO: ここにスクリーンショットを貼る
+![MeshBehaviour](images/mesh_behaviour/MeshBehaviour.jpg)
 
 #### 基本出力設定
 
 「基本設定」からMeshProfileを設定します。
 
-「マテリアル」には、リアルタイムプレビューを行う上で使用するマテリアルを設定します。
-
-「マテリアルを再収集」ボタンは、「マテリアル」にメッシュに使用されているマテリアルを適用します。
-
-#### リアルタイムプレビュー
-
-「同期するMeshFilter」と「同期するMeshCollider」には、リアルタイムプレビューの出力先が設定されます。
+「マテリアル」には、リアルタイムプレビューを行う上で使用するマテリアルが自動で設定されます。
+「マテリアルを上書きする」を有効にする事で手動設定も可能になります。
 
 #### メッシュの追加
 
@@ -32,25 +27,24 @@ TODO: ここにスクリーンショットを貼る
 
 #### そのほかの機能
 
-「毎フレーム更新する」はMeshBehaviourのリアルタイムプレビューをUpdateタイミングで強制的に再描画します。
-ほとんどの場合、有効にする必要はありません。
-
 「コンパイル」はMeshBehaviourのリアルタイムプレビューを強制的に再描画します。
 リアルタイムプレビューは自動で更新されるためほとんどの場合は押す必要はありませんが、不具合があったら押してください。
 
 「アクティブを全てコンパイル」はシーン上の全てのアクティブなMeshBehaviourに対して「コンパイル」を行います。
 
-「自分自身がMesh Rendererになる事だ」はMeshBehaviourに以下のコンポーネントを追加して、リアルタイムプレビューを設定します。
+「自分自身がMesh Rendererになる事だ」はMeshBehaviourに以下のコンポーネントを追加します。
+（「Mesh Behaviour With Renderer」でMeshBehaviourを作成した場合には既に追加済みです。）
 
 - MeshFilter
 - MeshRenderer
 - MeshCollider
 
+
 「Exporterを生成する」はMeshBehaviourにMeshBehaviourExporterを追加します。
 
 ## MeshBehaviourExporter コンポーネント
 
-MeshBehaviourが生成したメッシュをプレハブとアセットとして保存するための設定を行います。
+MeshBehaviourが生成したメッシュをプレハブとアセットとして保存する設定を行います。
 
 ### 作り方
 
@@ -58,7 +52,7 @@ MeshBehaviourのインスペクタから「Exporterを生成する」で、MeshB
 
 ### インスペクタ
 
-TODO: ここにスクリーンショットを貼る
+![MeshBehaviourExporter](images/mesh_behaviour/MeshBehaviourExporter.jpg)
 
 #### 出力されるアセットのマテリアル設定
 

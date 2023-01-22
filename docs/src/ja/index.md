@@ -37,7 +37,9 @@ MeshWeaver（メッシュウィーバー）は、Unity上でメッシュを生�
 
 ### 新規インストール
 
-[ダウンロードページ](https://kaikoga.github.io/MeshWeaver-unity/) または [GitHubのリリースページ](https://github.com/kaikoga/MeshWeaver-unity/releases) から最新版のUnityPackageをダウンロードしてください。
+[ダウンロードページ](https://kaikoga.github.io/MeshWeaver-unity/) または [GitHubのリリースページ](https://github.com/kaikoga/MeshWeaver-unity/releases) から最新版のunitypackageをダウンロードしてください。
+
+unitypackageをインポートすると、プロジェクトウィンドウのPackages以下にMeshWeaverがインストールされます。
 
 ### アップグレード方法
 
@@ -72,4 +74,6 @@ MeshWeaver（メッシュウィーバー）は、Unity上でメッシュを生�
 
 ## ドキュメント状況
 
-書きかけです！
+基本的な説明は揃っていますが、最新版の情報は反映しきれていないかもしれません。
+
+特にコンポーネントのリファレンスは激しく書きかけですが、フィーリングで掴んでいただければ幸いです。

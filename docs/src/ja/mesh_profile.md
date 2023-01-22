@@ -2,7 +2,7 @@
 
 ## MeshProfileとは？
 
-MeshWeaverが出力するメッシュアセットやプレハブアセットに対する共通設定を行うためには、MeshBehaviourに**MeshProfile（メッシュプロフィール）**を設定します。
+MeshWeaverが出力するメッシュアセットやプレハブアセットに対する共通設定を行うためには、MeshBehaviourに**MeshProfile（メッシュプロフィール／基本設定）**を設定します。
 MeshProfileを切り替えることで、コライダーやライトマップを利用するかどうかが切り替わります。
 
 ## 標準のMeshProfile
