@@ -9,10 +9,11 @@ nav:
   - index.md
   - first_steps.md
   - mesh_behaviour.md
+  - settings.md
   - lod.md
   - mesh_profile.md
   - hint_worlds.md
-  - Providers:
+  - Provider Reference:
     - Mesh:
       - providers/mesh/CompositeMeshProvider.md
       - providers/mesh/MeshReference.md
@@ -31,7 +32,7 @@ nav:
       - providers/path/ShapePathProvider.md
       - providers/path/RevolutionPathProvider.md
       - providers/path/BakedPathProvider.md
-  - Modifier Providers:
+  - Modifier Reference:
     - Vertwise:
       - modifiers/vertwise/VertwiseNormalizeProvider.md
       - modifiers/vertwise/VertwiseTranslateProvider.md
