@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using Silksprite.MeshWeaver.Models;
 using UnityEngine;
@@ -7,7 +8,8 @@ namespace Silksprite.MeshWeaver.Controllers
     [ExcludeFromPreset]
     public class MeshWeaverSettings : ScriptableObject
     {
-        public LodMaskLayer activeLodMaskLayer = LodMaskLayer.LOD0;
+        [NonSerialized] public LodMaskLayer activeLodMaskLayer = LodMaskLayer.LOD0;
+
         public string lang = "en";
 
         public bool enableDumpGUI = true;
@@ -47,9 +49,16 @@ namespace Silksprite.MeshWeaver.Controllers
                 }
                 UnityEditor.EditorUtility.SetDirty(_current);
             }
-            if (!Application.isPlaying) UnityEditor.EditorApplication.QueuePlayerLoopUpdate();
 #endif
             _current = null;
+        }
+        
+        
+        public static void ApplyLodMaskLayer()
+        {
+#if UNITY_EDITOR
+            if (!Application.isPlaying) UnityEditor.EditorApplication.QueuePlayerLoopUpdate();
+#endif
         }
     }
 }
