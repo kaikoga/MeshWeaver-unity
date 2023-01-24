@@ -17,11 +17,13 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
         {
             if (bakedData == null) return MeshieFactory.Empty;
 
+            foreach (var material in materials) context.GetMaterialIndex(material); 
+
             var dict = bakedData
                 .SelectMany(data => data.lodMaskLayers.Select(lod => (lod, data.meshData)))
                 .GroupBy(kv => kv.lod)
                 .ToDictionary(kv => kv.Key, kv => kv.First().meshData);
-            return new BakedMeshieFactory(dict, i => context.GetMaterialIndex(materials[i]));
+            return new BakedMeshieFactory(dict, i => materials[i]);
         }
     }
 }

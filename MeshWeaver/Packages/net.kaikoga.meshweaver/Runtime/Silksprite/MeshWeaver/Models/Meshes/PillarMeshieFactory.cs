@@ -24,16 +24,16 @@ namespace Silksprite.MeshWeaver.Models.Meshes
         readonly int _uvChannelBottom;
         readonly int _uvChannelTop;
         
-        readonly int _materialIndexBody;
-        readonly int _materialIndexBottom;
-        readonly int _materialIndexTop;
+        readonly Material _materialBody;
+        readonly Material _materialBottom;
+        readonly Material _materialTop;
 
         public PillarMeshieFactory(IPathieFactory pathieX, IPathieFactory pathieY,
             MatrixMeshieFactory.OperatorKind operatorKind, MatrixMeshieFactory.CellPatternKind defaultCellPatternKind, MatrixMeshieFactory.CellOverride[] cellPatternOverrides,
             LongitudeAxisKind longitudeAxisKind, bool reverseLids,
             bool fillBody, bool fillBottom, bool fillTop,
             int uvChannelBody, int uvChannelBottom, int uvChannelTop,
-            int materialIndexBody, int materialIndexBottom, int materialIndexTop)
+            Material materialBody, Material materialBottom, Material materialTop)
         {
             _pathieX = pathieX;
             _pathieY = pathieY;
@@ -48,9 +48,9 @@ namespace Silksprite.MeshWeaver.Models.Meshes
             _uvChannelBody = uvChannelBody;
             _uvChannelBottom = uvChannelBottom;
             _uvChannelTop = uvChannelTop;
-            _materialIndexBody = materialIndexBody;
-            _materialIndexBottom = materialIndexBottom;
-            _materialIndexTop = materialIndexTop;
+            _materialBody = materialBody;
+            _materialBottom = materialBottom;
+            _materialTop = materialTop;
         }
 
         public Meshie Build(LodMaskLayer lod)
@@ -58,7 +58,7 @@ namespace Silksprite.MeshWeaver.Models.Meshes
             var builder = Meshie.Builder();
             if (_fillBody)
             {
-                builder.Concat(new MatrixMeshieFactory(_pathieX, _pathieY, _operatorKind, _defaultCellPatternKind, _cellPatternOverrides, _materialIndexBody).Build(lod), Matrix4x4.identity, _uvChannelBody);
+                builder.Concat(new MatrixMeshieFactory(_pathieX, _pathieY, _operatorKind, _defaultCellPatternKind, _cellPatternOverrides, _materialBody).Build(lod), Matrix4x4.identity, _uvChannelBody);
             }
 
             if (_fillBottom)
@@ -75,7 +75,7 @@ namespace Silksprite.MeshWeaver.Models.Meshes
                             throw new ArgumentOutOfRangeException();
                     }
                 }
-                var bottomMeshie = new PolygonMeshieFactory(new ExtractPathieFactory(this, BottomPathName()), _materialIndexBottom).Build(lod);
+                var bottomMeshie = new PolygonMeshieFactory(new ExtractPathieFactory(this, BottomPathName()), _materialBottom).Build(lod);
                 if (_reverseLids) bottomMeshie = bottomMeshie.Apply(MeshReverse.BackOnly);
                 builder.Concat(bottomMeshie, Matrix4x4.identity, _uvChannelBottom);
             }
@@ -94,7 +94,7 @@ namespace Silksprite.MeshWeaver.Models.Meshes
                             throw new ArgumentOutOfRangeException();
                     }
                 }
-                var topMeshie = new PolygonMeshieFactory(new ExtractPathieFactory(this, TopPathName()), _materialIndexTop).Build(lod);
+                var topMeshie = new PolygonMeshieFactory(new ExtractPathieFactory(this, TopPathName()), _materialTop).Build(lod);
                 if (!_reverseLids) topMeshie = topMeshie.Apply(MeshReverse.BackOnly);
                 builder.Concat(topMeshie, Matrix4x4.identity, _uvChannelTop);
             }
@@ -104,7 +104,7 @@ namespace Silksprite.MeshWeaver.Models.Meshes
 
         public Pathie Extract(string pathName, LodMaskLayer lod)
         {
-            return new MatrixMeshieFactory(_pathieX, _pathieY, _operatorKind, _defaultCellPatternKind, _cellPatternOverrides, _materialIndexBody).Extract(pathName, lod);
+            return new MatrixMeshieFactory(_pathieX, _pathieY, _operatorKind, _defaultCellPatternKind, _cellPatternOverrides, _materialBody).Extract(pathName, lod);
         }
 
         public enum LongitudeAxisKind

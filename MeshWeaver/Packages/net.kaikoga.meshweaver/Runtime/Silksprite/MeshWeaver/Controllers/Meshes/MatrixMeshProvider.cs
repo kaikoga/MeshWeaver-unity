@@ -28,6 +28,9 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
 
         protected override IMeshieFactory CreateFactory(IMeshContext context)
         {
+            context.GetMaterialIndex(material);
+            foreach (var m in cellPatternOverrides) context.GetMaterialIndex(m.material);
+
             LastPathieX = pathProviderX.CollectPathie(context);
             LastPathieY = pathProviderY.CollectPathie(context);
             return new MatrixMeshieFactory(LastPathieX,
@@ -35,7 +38,7 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
                 operatorKind,
                 defaultCellPatternKind,
                 ResolveCellPatternOverrides(cellPatternOverrides, context),
-                context.GetMaterialIndex(material));
+                material);
         }
 
         public static MatrixMeshieFactory.CellOverride[] ResolveCellPatternOverrides(IReadOnlyCollection<CellOverrideData> data, IMeshContext context)
@@ -62,7 +65,7 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
                 {
                     cellPatternKind = cellPatternKind,
                     cellRange = cellRange,
-                    materialIndex = material ? context.GetMaterialIndex(material) : -1,
+                    material = material,
                 };
             }
         }

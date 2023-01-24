@@ -14,7 +14,8 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
 
         protected override IMeshieFactory CreateFactory(IMeshContext context)
         {
-            return new PolygonMeshieFactory(pathProvider.CollectPathie(context), context.GetMaterialIndex(material));
+            context.GetMaterialIndex(material);
+            return new PolygonMeshieFactory(pathProvider.CollectPathie(context), material);
         }
     }
 }

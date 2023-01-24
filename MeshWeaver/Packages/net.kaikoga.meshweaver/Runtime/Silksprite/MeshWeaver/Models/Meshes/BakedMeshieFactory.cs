@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Silksprite.MeshWeaver.Models.DataObjects;
+using UnityEngine;
 
 namespace Silksprite.MeshWeaver.Models.Meshes
 {
@@ -8,19 +9,19 @@ namespace Silksprite.MeshWeaver.Models.Meshes
     {
         readonly Dictionary<LodMaskLayer, MeshieData> _data;
         readonly MeshieData _defaultData;
-        readonly Func<int, int> _materialMapping;
+        readonly Func<int, Material> _materialMapping;
 
-        public BakedMeshieFactory(Dictionary<LodMaskLayer, MeshieData> data, Func<int, int> materialMapping)
+        public BakedMeshieFactory(Dictionary<LodMaskLayer, MeshieData> data, Func<int, Material> materialMapping)
         {
             _data = data;
-            _materialMapping = materialMapping ?? (i => i);
+            _materialMapping = materialMapping;
         }
 
-        public BakedMeshieFactory(MeshieData data, Func<int, int> materialMapping)
+        public BakedMeshieFactory(MeshieData data, Func<int, Material> materialMapping)
         {
             _data = new Dictionary<LodMaskLayer, MeshieData>();
             _defaultData = data;
-            _materialMapping = materialMapping ?? (i => i);
+            _materialMapping = materialMapping;
         }
 
         public Meshie Build(LodMaskLayer lod)

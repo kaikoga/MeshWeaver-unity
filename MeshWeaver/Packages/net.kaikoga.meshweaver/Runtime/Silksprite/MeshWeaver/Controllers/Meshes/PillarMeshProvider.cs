@@ -40,6 +40,11 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
 
         protected override IMeshieFactory CreateFactory(IMeshContext context)
         {
+            context.GetMaterialIndex(materialBody); 
+            context.GetMaterialIndex(materialBottom); 
+            context.GetMaterialIndex(materialTop);
+            foreach (var m in cellPatternOverrides) context.GetMaterialIndex(m.material);
+
             LastPathieX = pathProviderX.CollectPathie(context);
             LastPathieY = pathProviderY.CollectPathie(context);
             return new PillarMeshieFactory(LastPathieX,
@@ -55,9 +60,9 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
                 uvChannelBody,
                 uvChannelBottom,
                 uvChannelTop,
-                context.GetMaterialIndex(materialBody),
-                context.GetMaterialIndex(materialBottom),
-                context.GetMaterialIndex(materialTop));
+                materialBody,
+                materialBottom,
+                materialTop);
         }
     }
 }

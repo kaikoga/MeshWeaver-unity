@@ -40,7 +40,7 @@ namespace Silksprite.MeshWeaver.Models
             return this;
         }
 
-        public MeshieBuilder AddTriangles(IEnumerable<int> indices, int materialIndex)
+        public MeshieBuilder AddTriangles(IEnumerable<int> indices, Material material)
         {
             foreach (var trio in indices.EachTrio((a, b, c) => new [] { a, b, c }))
             {
@@ -56,7 +56,7 @@ namespace Silksprite.MeshWeaver.Models
                 {
                     continue;
                 }
-                Gons.Add(new Gon(trio, materialIndex));
+                Gons.Add(new Gon(trio, material));
             }
             return this;
         }
@@ -102,7 +102,7 @@ namespace Silksprite.MeshWeaver.Models
 
             return new Meshie(
                 Vertices.Where((v, i) => used[i]),
-                Gons.Select(gon => new Gon(gon.Indices.Select(i => indices[i]).ToArray(), gon.MaterialIndex)));
+                Gons.Select(gon => new Gon(gon.Indices.Select(i => indices[i]).ToArray(), gon.material)));
         }
     }
 }

@@ -12,6 +12,7 @@ namespace Silksprite.MeshWeaver.Models
         readonly Vertie[] _vertices;
         readonly Gon[] _gons;
 
+        // FIXME: also export materials array because submesh indexes are determined here
         public MeshExporter(Mesh mesh, MeshExportSettings settings, Vertie[] vertices, Gon[] gons)
         {
             _mesh = mesh;
@@ -22,13 +23,15 @@ namespace Silksprite.MeshWeaver.Models
 
         public void Export()
         {
-            var subMeshes = _gons.GroupBy(gon => gon.MaterialIndex).OrderBy(group => group.Key).ToArray();
-            _mesh.subMeshCount = subMeshes.Select(subMesh => subMesh.Key).Concat(Enumerable.Repeat(0, 1)).Max() + 1;
+            var defaultMaterial = _gons.Where(gon => gon.material).Select(gon => gon.material).FirstOrDefault();
+            
+            var subMeshes = _gons.GroupBy(gon => gon.material ? gon.material : defaultMaterial).ToArray();
+            _mesh.subMeshCount = subMeshes.Length > 0 ? subMeshes.Length : 1;
             _mesh.SetVertices(_vertices.Select(v => v.Vertex).ToArray());
             _mesh.SetUVs(0, _vertices.Select(v => v.Uv).ToArray());
-            foreach (var subMesh in subMeshes)
+            foreach (var subMesh in subMeshes.Select((data, i) => (data, i)))
             {
-                _mesh.SetTriangles(subMesh.SelectMany(gon => gon.Indices).ToArray(), subMesh.Key);
+                _mesh.SetTriangles(subMesh.data.SelectMany(gon => gon.Indices).ToArray(), subMesh.i);
             }
             _mesh.RecalculateBounds();
             switch (_settings.NormalGenerator)

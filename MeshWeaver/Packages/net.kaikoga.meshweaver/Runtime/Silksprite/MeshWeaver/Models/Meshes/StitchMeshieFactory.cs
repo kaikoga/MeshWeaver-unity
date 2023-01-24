@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Silksprite.MeshWeaver.Models.Extensions;
 using Silksprite.MeshWeaver.Models.Paths;
+using UnityEngine;
 
 namespace Silksprite.MeshWeaver.Models.Meshes
 {
@@ -10,14 +11,14 @@ namespace Silksprite.MeshWeaver.Models.Meshes
         readonly IPathieFactory _pathieA;
         readonly IPathieFactory _pathieB;
 
-        readonly int _materialIndex;
+        readonly Material _material;
 
         public StitchMeshieFactory(IPathieFactory pathieA, IPathieFactory pathieB,
-            int materialIndex)
+            Material material)
         {
             _pathieA = pathieA;
             _pathieB = pathieB;
-            _materialIndex = materialIndex;
+            _material = material;
         }
 
         public Meshie Build(LodMaskLayer lod)
@@ -41,13 +42,13 @@ namespace Silksprite.MeshWeaver.Models.Meshes
 
             void NextA()
             {
-                gons.Add(new Gon(new[] { a, countA + b % countB, (a + 1) % countA }, _materialIndex));
+                gons.Add(new Gon(new[] { a, countA + b % countB, (a + 1) % countA }, _material));
                 a++;
             }
 
             void NextB()
             {
-                gons.Add(new Gon(new[] { a % countA, countA + b, countA + (b + 1) % countB }, _materialIndex));
+                gons.Add(new Gon(new[] { a % countA, countA + b, countA + (b + 1) % countB }, _material));
                 b++;
             }
             

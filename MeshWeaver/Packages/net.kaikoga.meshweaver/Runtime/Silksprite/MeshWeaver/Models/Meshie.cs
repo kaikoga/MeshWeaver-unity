@@ -65,17 +65,17 @@ namespace Silksprite.MeshWeaver.Models
             return builder;
         }
 
-        public static MeshieBuilder Builder(IEnumerable<Vertie> vertices, IEnumerable<int> indices, int materialIndex, bool validateIndices = false)
+        public static MeshieBuilder Builder(IEnumerable<Vertie> vertices, IEnumerable<int> indices, Material material, bool validateIndices = false)
         {
             var builder = new MeshieBuilder();
             builder.Vertices.AddRange(vertices);
             if (validateIndices)
             {
-                builder.AddTriangles(indices, materialIndex);
+                builder.AddTriangles(indices, material);
             }
             else
             {
-                builder.Gons.AddRange(indices.EachTrio((a, b, c) => new Gon(new []{ a, b, c }, materialIndex)));
+                builder.Gons.AddRange(indices.EachTrio((a, b, c) => new Gon(new []{ a, b, c }, material)));
             }
             return builder;
         }

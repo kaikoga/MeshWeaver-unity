@@ -11,12 +11,12 @@ namespace Silksprite.MeshWeaver.Models.Meshes
     public class PolygonMeshieFactory : IMeshieFactory
     {
         readonly IPathieFactory _pathie;
-        readonly int _materialIndex;
+        readonly Material _material;
 
-        public PolygonMeshieFactory(IPathieFactory pathie, int materialIndex)
+        public PolygonMeshieFactory(IPathieFactory pathie, Material material)
         {
             _pathie = pathie;
-            _materialIndex = materialIndex;
+            _material = material;
         }
 
         const int InitialSize = 4;
@@ -116,7 +116,7 @@ namespace Silksprite.MeshWeaver.Models.Meshes
                 if (next[first] == prev[first]) break;
                 var i = FindFarthest();
                 while (ContainsOtherPoint(i)) i = next[i];
-                gons.Add(new Gon(new[] { prev[i], i, next[i] }, _materialIndex));
+                gons.Add(new Gon(new[] { prev[i], i, next[i] }, _material));
                 RemovePoint(i);
             }
 

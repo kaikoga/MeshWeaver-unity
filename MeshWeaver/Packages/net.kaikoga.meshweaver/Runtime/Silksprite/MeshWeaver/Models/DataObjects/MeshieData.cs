@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using UnityEngine;
 
 namespace Silksprite.MeshWeaver.Models.DataObjects
 {
@@ -9,7 +10,7 @@ namespace Silksprite.MeshWeaver.Models.DataObjects
         public VertieData[] vertices;
         public GonData[] gons;
 
-        public static MeshieData FromMeshie(Meshie meshie, Func<int, int> pin)
+        public static MeshieData FromMeshie(Meshie meshie, Func<Material, int> pin)
         {
             return new MeshieData
             {
@@ -18,7 +19,7 @@ namespace Silksprite.MeshWeaver.Models.DataObjects
             };
         }
 
-        public Meshie ToMeshie(Func<int, int> unpin)
+        public Meshie ToMeshie(Func<int, Material> unpin)
         {
             return new Meshie(vertices.Select(v => v.ToVertie()), gons.Select(g => g.ToGon(unpin)));
         }

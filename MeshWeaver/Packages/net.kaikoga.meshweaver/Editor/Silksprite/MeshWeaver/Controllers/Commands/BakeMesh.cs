@@ -25,7 +25,7 @@ namespace Silksprite.MeshWeaver.Controllers.Commands
                 baked.bakedData = LodMaskLayers.Values.Select(lod => new BakedMeshieData
                 {
                     lodMaskLayers = new [] { lod },
-                    meshData = MeshieData.FromMeshie(target.ToFactory(context).Build(lod), i => i)                    
+                    meshData = MeshieData.FromMeshie(target.ToFactory(context).Build(lod), material => context.GetMaterialIndex(material))
                 }).ToArray();
                 baked.materials = context.ToMaterials();
             }

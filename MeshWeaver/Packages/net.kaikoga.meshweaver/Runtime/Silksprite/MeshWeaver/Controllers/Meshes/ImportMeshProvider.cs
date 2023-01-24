@@ -13,7 +13,9 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
 
         protected override IMeshieFactory CreateFactory(IMeshContext context)
         {
-            return new ImportMeshieFactory(mesh, context.GetMaterialIndex(materials.First()));
+            foreach (var material in materials) context.GetMaterialIndex(material); 
+
+            return new ImportMeshieFactory(mesh, materials.ToArray());
         }
     }
 }

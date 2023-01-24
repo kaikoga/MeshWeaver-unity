@@ -6,12 +6,12 @@ namespace Silksprite.MeshWeaver.Models.Meshes
     public class ImportMeshieFactory : IMeshieFactory
     {
         readonly Mesh _mesh;
-        readonly int _materialIndex;
+        readonly Material[] _materials;
 
-        public ImportMeshieFactory(Mesh mesh, int materialIndex)
+        public ImportMeshieFactory(Mesh mesh, Material[] materials)
         {
             _mesh = mesh;
-            _materialIndex = materialIndex;
+            _materials = materials;
         }
 
         public Meshie Build(LodMaskLayer lod)
@@ -27,9 +27,9 @@ namespace Silksprite.MeshWeaver.Models.Meshes
             }
             for (var subMeshIndex = 0; subMeshIndex < _mesh.subMeshCount; subMeshIndex++)
             {
-                var materialIndex = _materialIndex + subMeshIndex;
+                var material = _materials[subMeshIndex];
                 var subMesh = _mesh.GetTriangles(subMeshIndex);
-                builder.Gons.AddRange(subMesh.EachTrio((a, b, c) => new Gon(new []{a, b, c}, materialIndex)));
+                builder.Gons.AddRange(subMesh.EachTrio((a, b, c) => new Gon(new []{a, b, c}, material)));
             }
             return builder.ToMeshie();
         }

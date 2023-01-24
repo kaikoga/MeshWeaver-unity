@@ -34,7 +34,7 @@ namespace Silksprite.MeshWeaver.Models.Meshes.Modifiers
                     builder.Vertices.Add((a + c) * 0.5f);
                     builder.Vertices.Add((b + c) * 0.5f);
                     builder.Vertices.Add(c);
-                    builder.AddTriangles(SubdividedIndices.Select(j => j + offset), gon.MaterialIndex);
+                    builder.AddTriangles(SubdividedIndices.Select(j => j + offset), gon.material);
                 }
                 result = builder;
             }

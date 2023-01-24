@@ -12,7 +12,7 @@ namespace Silksprite.MeshWeaver.Models.Meshes.Modifiers
             var index = 0;
             foreach (var gon in meshie.Gons)
             {
-                gons.Add(new Gon(Enumerable.Range(index, gon.Indices.Count).ToArray(), gon.MaterialIndex));
+                gons.Add(new Gon(Enumerable.Range(index, gon.Indices.Count).ToArray(), gon.material));
                 index += gon.Indices.Count;
             }
             var builder = Meshie.Builder();
