@@ -20,7 +20,7 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
         protected override IMeshieFactory CreateFactory(IMeshContext context)
         {
             LastMeshie = meshProvider.CollectMeshie(context);
-            LastPathie = pathProvider.CollectPathie();
+            LastPathie = pathProvider.CollectPathie(context);
             return new StampMeshieFactory(LastMeshie, LastPathie);
         }
     }

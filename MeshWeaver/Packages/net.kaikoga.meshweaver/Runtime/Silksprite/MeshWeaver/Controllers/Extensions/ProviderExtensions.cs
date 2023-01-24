@@ -39,23 +39,23 @@ namespace Silksprite.MeshWeaver.Controllers.Extensions
             return gameObject.AddComponent<CompositePathProvider>();
         }
 
-        public static IPathieFactory CollectPathie(this PathProvider pathProvider)
+        public static IPathieFactory CollectPathie(this PathProvider pathProvider, IMeshContext context)
         {
             if (pathProvider == null) return PathieFactory.Empty;
 
             var localTranslation = pathProvider.transform.ToLocalTranslation();
             // FIXME: maybe we want to cleanup Pathie.isLoop and fix this 
-            return ModifiedPathieFactory.Builder(pathProvider.ToFactory(), pathProvider.lodMask).Concat(new VertwiseTranslate(localTranslation)).ToFactory();
+            return ModifiedPathieFactory.Builder(pathProvider.ToFactory(context), pathProvider.lodMask).Concat(new VertwiseTranslate(localTranslation)).ToFactory();
         }
 
-        public static IPathieFactory CollectPathies(this IEnumerable<PathProvider> pathProviders, bool isLoop, bool smoothJoin)
+        public static IPathieFactory CollectPathies(this IEnumerable<PathProvider> pathProviders, IMeshContext context, bool isLoop, bool smoothJoin)
         {
             var builder = CompositePathieFactory.Builder(isLoop, smoothJoin);
             
             foreach (var pathProvider in pathProviders.Where(c => c != null && c.gameObject.activeSelf))
             {
                 var localTranslation = pathProvider.transform.ToLocalTranslation();
-                builder.Concat(pathProvider.ToFactory(), localTranslation);
+                builder.Concat(pathProvider.ToFactory(context), localTranslation);
             }
 
             return builder.ToFactory();

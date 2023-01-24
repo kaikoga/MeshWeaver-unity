@@ -28,8 +28,8 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
 
         protected override IMeshieFactory CreateFactory(IMeshContext context)
         {
-            LastPathieX = pathProviderX.CollectPathie();
-            LastPathieY = pathProviderY.CollectPathie();
+            LastPathieX = pathProviderX.CollectPathie(context);
+            LastPathieY = pathProviderY.CollectPathie(context);
             return new MatrixMeshieFactory(LastPathieX,
                 LastPathieY,
                 operatorKind,

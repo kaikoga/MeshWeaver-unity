@@ -1,5 +1,6 @@
 using System.Linq;
 using Silksprite.MeshWeaver.Controllers.Base;
+using Silksprite.MeshWeaver.Controllers.Context;
 using Silksprite.MeshWeaver.Controllers.Extensions;
 using Silksprite.MeshWeaver.Controllers.Paths;
 using Silksprite.MeshWeaver.Models;
@@ -19,11 +20,15 @@ namespace Silksprite.MeshWeaver.Controllers.Commands
         {
             var transform = target.transform;
             var baked = transform.parent.AddChildComponent<BakedPathProvider>();
-            baked.bakedData = LodMaskLayers.Values.Select(lod => new BakedPathieData
+            using (var context = new DynamicMeshContext())
             {
-                lodMaskLayers = new [] { lod },
-                pathData = PathieData.FromPathie(target.ToFactory().Build(lod))
-            }).ToArray();
+                baked.bakedData = LodMaskLayers.Values.Select(lod => new BakedPathieData
+                {
+                    lodMaskLayers = new[] { lod },
+                    pathData = PathieData.FromPathie(target.ToFactory(context).Build(lod))
+                }).ToArray();
+            }
+
             var bakedTransform = baked.transform;
             bakedTransform.localPosition = transform.localPosition;
             bakedTransform.localRotation = transform.localRotation;

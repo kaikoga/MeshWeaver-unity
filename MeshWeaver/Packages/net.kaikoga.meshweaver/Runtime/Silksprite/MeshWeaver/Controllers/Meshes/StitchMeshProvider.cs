@@ -21,8 +21,8 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
 
         protected override IMeshieFactory CreateFactory(IMeshContext context)
         {
-            LastPathieA = pathProviderA.CollectPathie();
-            LastPathieB = pathProviderB.CollectPathie();
+            LastPathieA = pathProviderA.CollectPathie(context);
+            LastPathieB = pathProviderB.CollectPathie(context);
             return new StitchMeshieFactory(LastPathieA, LastPathieB, context.GetMaterialIndex(material));
         }
     }

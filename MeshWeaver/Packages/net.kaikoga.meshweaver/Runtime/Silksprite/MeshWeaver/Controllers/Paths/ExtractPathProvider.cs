@@ -9,9 +9,9 @@ namespace Silksprite.MeshWeaver.Controllers.Paths
         public MeshProvider meshProvider;
         public string pathName;
 
-        protected override IPathieFactory CreateFactory()
+        protected override IPathieFactory CreateFactory(IMeshContext context)
         {
-            return new ExtractPathieFactory(meshProvider.ToFactory(NullMeshContext.Instance), pathName);
+            return new ExtractPathieFactory(meshProvider.ToFactory(context), pathName);
         }
     }
 }
