@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Silksprite.MeshWeaver.Controllers.Base;
-using Silksprite.MeshWeaver.Controllers.Context;
 using Silksprite.MeshWeaver.Controllers.Extensions;
 using Silksprite.MeshWeaver.CustomDrawers;
 using Silksprite.MeshWeaver.Models.Meshes;
@@ -26,29 +25,29 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
         public IPathieFactory LastPathieX { get; private set; }
         public IPathieFactory LastPathieY { get; private set; }
 
-        protected override IMeshieFactory CreateFactory(IMeshContext context)
+        protected override IMeshieFactory CreateFactory()
         {
             foreach (var m in cellPatternOverrides)
             {
             }
 
-            LastPathieX = pathProviderX.CollectPathie(context);
-            LastPathieY = pathProviderY.CollectPathie(context);
+            LastPathieX = pathProviderX.CollectPathie();
+            LastPathieY = pathProviderY.CollectPathie();
             return new MatrixMeshieFactory(LastPathieX,
                 LastPathieY,
                 operatorKind,
                 defaultCellPatternKind,
-                ResolveCellPatternOverrides(cellPatternOverrides, context),
+                ResolveCellPatternOverrides(cellPatternOverrides),
                 material);
         }
 
-        public static MatrixMeshieFactory.CellOverride[] ResolveCellPatternOverrides(IReadOnlyCollection<CellOverrideData> data, IMeshContext context)
+        public static MatrixMeshieFactory.CellOverride[] ResolveCellPatternOverrides(IReadOnlyCollection<CellOverrideData> data)
         {
             if (data == null || data.Count == 0)
             {
                 return Array.Empty<MatrixMeshieFactory.CellOverride>();
             }
-            return data.Select(cell => cell.ResolveMaterials(context)).ToArray();
+            return data.Select(cell => cell.ResolveMaterials()).ToArray();
         }
 
         [Serializable]
@@ -60,7 +59,7 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
 
             public Material material;
 
-            public MatrixMeshieFactory.CellOverride ResolveMaterials(IMeshContext context)
+            public MatrixMeshieFactory.CellOverride ResolveMaterials()
             {
                 return new MatrixMeshieFactory.CellOverride
                 {

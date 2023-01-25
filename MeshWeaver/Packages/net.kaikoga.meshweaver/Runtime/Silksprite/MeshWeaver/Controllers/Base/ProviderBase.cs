@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Silksprite.MeshWeaver.Controllers.Context;
 using UnityEngine;
 
 namespace Silksprite.MeshWeaver.Controllers.Base
@@ -18,24 +17,16 @@ namespace Silksprite.MeshWeaver.Controllers.Base
 
     public abstract class ProviderBase<T> : ProviderBase
     {
-        IMeshContext _lastContext;
-
         bool _hasCachedObject;
         protected T CachedObject { get; private set; }
 
-        protected T FindOrCreateObject(IMeshContext context)
+        protected T FindOrCreateObject()
         {
             if (RefreshAlways)
             {
-                return CachedObject = CreateObject(context);
+                return CachedObject = CreateObject();
             }
 
-            if (_lastContext != context)
-            {
-                CachedObject = default; 
-                _hasCachedObject = false;
-                _lastContext = context;
-            }
             if (_hasCachedObject)
             {
                 foreach (var obj in _unityReferences)
@@ -51,7 +42,7 @@ namespace Silksprite.MeshWeaver.Controllers.Base
             _unityReferences.Clear();
             RefreshUnityReferences();
             _hasCachedObject = true;
-            return CachedObject = CreateObject(context);
+            return CachedObject = CreateObject();
         }
 
         readonly List<Object> _unityReferences = new List<Object>();
@@ -76,7 +67,7 @@ namespace Silksprite.MeshWeaver.Controllers.Base
             if (obj) _unityReferences.Add(obj);
         }
 
-        protected abstract T CreateObject(IMeshContext context);
+        protected abstract T CreateObject();
 
         protected virtual void RefreshUnityReferences() { }
     }

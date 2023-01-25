@@ -1,6 +1,5 @@
 using System.Linq;
 using Silksprite.MeshWeaver.Controllers.Base;
-using Silksprite.MeshWeaver.Controllers.Context;
 using Silksprite.MeshWeaver.Models.DataObjects;
 using Silksprite.MeshWeaver.Models.Paths;
 
@@ -10,7 +9,7 @@ namespace Silksprite.MeshWeaver.Controllers.Paths
     {
         public BakedPathieData[] bakedData;
 
-        protected override IPathieFactory CreateFactory(IMeshContext context)
+        protected override IPathieFactory CreateFactory()
         {
             if (bakedData == null) return PathieFactory.Empty;
 

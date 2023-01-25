@@ -83,7 +83,7 @@ namespace Silksprite.MeshWeaver.Controllers.Base
         protected Bounds OnGetFrameBounds()
         {
             var pathProvider = (PathProvider)target;
-            var globalVertices = pathProvider.ToFactory(null).Build(LodMaskLayer.Collider)
+            var globalVertices = pathProvider.ToFactory().Build(LodMaskLayer.Collider)
                 .Vertices.Select(v => pathProvider.transform.TransformPoint(v.Vertex));
             return EditorBoundsUtil.CalculateFrameBounds(globalVertices);
         }

@@ -22,7 +22,7 @@ namespace Silksprite.MeshWeaver.Controllers.Commands
             var context = new MeshIndexMapping();
             baked.bakedData = LodMaskLayers.Values.Select(lod =>
             {
-                var meshie = target.ToFactory(null).Build(lod);
+                var meshie = target.ToFactory().Build(lod);
                 return new BakedMeshieData
                 {
                     lodMaskLayers = new[] { lod },

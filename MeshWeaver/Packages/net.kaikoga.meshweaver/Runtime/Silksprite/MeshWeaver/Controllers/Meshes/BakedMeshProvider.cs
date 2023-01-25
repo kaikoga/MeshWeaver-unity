@@ -1,6 +1,5 @@
 using System.Linq;
 using Silksprite.MeshWeaver.Controllers.Base;
-using Silksprite.MeshWeaver.Controllers.Context;
 using Silksprite.MeshWeaver.Models.DataObjects;
 using Silksprite.MeshWeaver.Models.Meshes;
 using UnityEngine;
@@ -13,7 +12,7 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
 
         public Material[] materials;
 
-        protected override IMeshieFactory CreateFactory(IMeshContext context)
+        protected override IMeshieFactory CreateFactory()
         {
             if (bakedData == null) return MeshieFactory.Empty;
 

@@ -20,7 +20,7 @@ namespace Silksprite.MeshWeaver.Controllers.Commands
             baked.bakedData = LodMaskLayers.Values.Select(lod => new BakedPathieData
             {
                 lodMaskLayers = new[] { lod },
-                pathData = PathieData.FromPathie(target.ToFactory(null).Build(lod))
+                pathData = PathieData.FromPathie(target.ToFactory().Build(lod))
             }).ToArray();
 
             var bakedTransform = baked.transform;

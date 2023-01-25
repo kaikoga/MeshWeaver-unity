@@ -1,5 +1,4 @@
 using Silksprite.MeshWeaver.Controllers.Base;
-using Silksprite.MeshWeaver.Controllers.Context;
 using Silksprite.MeshWeaver.Models.Paths;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -21,7 +20,7 @@ namespace Silksprite.MeshWeaver.Controllers.Paths
 
         public Vector3 vector = Vector3.right;
 
-        protected override IPathieFactory CreateFactory(IMeshContext context)
+        protected override IPathieFactory CreateFactory()
         {
             if (hasLegacyRadius)
             {

@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Silksprite.MeshWeaver.Controllers.Base;
-using Silksprite.MeshWeaver.Controllers.Context;
 using Silksprite.MeshWeaver.Controllers.Paths;
 using Silksprite.MeshWeaver.Models.DataObjects;
 using Silksprite.MeshWeaver.Models.Meshes;
@@ -39,44 +38,44 @@ namespace Silksprite.MeshWeaver.Controllers.Extensions
             return gameObject.AddComponent<CompositePathProvider>();
         }
 
-        public static IPathieFactory CollectPathie(this PathProvider pathProvider, IMeshContext context)
+        public static IPathieFactory CollectPathie(this PathProvider pathProvider)
         {
             if (pathProvider == null) return PathieFactory.Empty;
 
             var localTranslation = pathProvider.transform.ToLocalTranslation();
             // FIXME: maybe we want to cleanup Pathie.isLoop and fix this 
-            return ModifiedPathieFactory.Builder(pathProvider.ToFactory(context), pathProvider.lodMask).Concat(new VertwiseTranslate(localTranslation)).ToFactory();
+            return ModifiedPathieFactory.Builder(pathProvider.ToFactory(), pathProvider.lodMask).Concat(new VertwiseTranslate(localTranslation)).ToFactory();
         }
 
-        public static IPathieFactory CollectPathies(this IEnumerable<PathProvider> pathProviders, IMeshContext context, bool isLoop, bool smoothJoin)
+        public static IPathieFactory CollectPathies(this IEnumerable<PathProvider> pathProviders, bool isLoop, bool smoothJoin)
         {
             var builder = CompositePathieFactory.Builder(isLoop, smoothJoin);
             
             foreach (var pathProvider in pathProviders.Where(c => c != null && c.gameObject.activeSelf))
             {
                 var localTranslation = pathProvider.transform.ToLocalTranslation();
-                builder.Concat(pathProvider.ToFactory(context), localTranslation);
+                builder.Concat(pathProvider.ToFactory(), localTranslation);
             }
 
             return builder.ToFactory();
         }
 
-        public static IMeshieFactory CollectMeshie(this MeshProvider meshProvider, IMeshContext context)
+        public static IMeshieFactory CollectMeshie(this MeshProvider meshProvider)
         {
             if (meshProvider == null) return MeshieFactory.Empty;
 
             var localTranslation = meshProvider.transform.ToLocalTranslation();
-            return CompositeMeshieFactory.Builder().Concat(meshProvider.ToFactory(context), localTranslation).ToFactory();
+            return CompositeMeshieFactory.Builder().Concat(meshProvider.ToFactory(), localTranslation).ToFactory();
         }
 
-        public static IMeshieFactory CollectMeshies(this IEnumerable<MeshProvider> meshProviders, IMeshContext context)
+        public static IMeshieFactory CollectMeshies(this IEnumerable<MeshProvider> meshProviders)
         {
             var builder = CompositeMeshieFactory.Builder();
 
             foreach (var meshProvider in meshProviders.Where(c => c != null && c.gameObject.activeSelf))
             {
                 var localTranslation = meshProvider.transform.ToLocalTranslation();
-                builder.Concat(meshProvider.ToFactory(context), localTranslation);
+                builder.Concat(meshProvider.ToFactory(), localTranslation);
             }
 
             return builder.ToFactory();

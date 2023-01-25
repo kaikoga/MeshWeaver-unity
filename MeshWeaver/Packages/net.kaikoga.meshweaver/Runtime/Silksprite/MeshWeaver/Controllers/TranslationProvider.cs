@@ -1,5 +1,4 @@
 using Silksprite.MeshWeaver.Controllers.Base;
-using Silksprite.MeshWeaver.Controllers.Context;
 using Silksprite.MeshWeaver.Controllers.Extensions;
 using Silksprite.MeshWeaver.CustomDrawers;
 using UnityEngine;
@@ -67,7 +66,7 @@ namespace Silksprite.MeshWeaver.Controllers
             }
         }
 
-        protected override Matrix4x4 CreateObject(IMeshContext context) => LocalTranslation(transform.ToLocalMatrix());
+        protected override Matrix4x4 CreateObject() => LocalTranslation(transform.ToLocalMatrix());
 
         public Matrix4x4 LocalTranslation(Matrix4x4 localMatrix) => localMatrix * translation;
     }

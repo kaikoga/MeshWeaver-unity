@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Silksprite.MeshWeaver.Controllers.Base;
-using Silksprite.MeshWeaver.Controllers.Context;
 using Silksprite.MeshWeaver.Controllers.Extensions;
 using Silksprite.MeshWeaver.Models.Meshes;
 using Silksprite.MeshWeaver.Models.Paths;
@@ -38,19 +37,19 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
         public IPathieFactory LastPathieX { get; private set; }
         public IPathieFactory LastPathieY { get; private set; }
 
-        protected override IMeshieFactory CreateFactory(IMeshContext context)
+        protected override IMeshieFactory CreateFactory()
         {
             foreach (var m in cellPatternOverrides)
             {
             }
 
-            LastPathieX = pathProviderX.CollectPathie(context);
-            LastPathieY = pathProviderY.CollectPathie(context);
+            LastPathieX = pathProviderX.CollectPathie();
+            LastPathieY = pathProviderY.CollectPathie();
             return new PillarMeshieFactory(LastPathieX,
                 LastPathieY,
                 operatorKind,
                 defaultCellPatternKind,
-                MatrixMeshProvider.ResolveCellPatternOverrides(cellPatternOverrides, context),
+                MatrixMeshProvider.ResolveCellPatternOverrides(cellPatternOverrides),
                 longitudeAxisKind,
                 reverseLids,
                 fillBody,

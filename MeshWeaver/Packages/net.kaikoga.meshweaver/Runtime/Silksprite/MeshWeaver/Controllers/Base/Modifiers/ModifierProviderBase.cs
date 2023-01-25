@@ -1,4 +1,3 @@
-using Silksprite.MeshWeaver.Controllers.Context;
 using Silksprite.MeshWeaver.Models;
 
 namespace Silksprite.MeshWeaver.Controllers.Base.Modifiers
@@ -14,7 +13,7 @@ namespace Silksprite.MeshWeaver.Controllers.Base.Modifiers
             set => lodMask = value;
         }
 
-        protected sealed override T CreateObject(IMeshContext context) => CreateModifier();
+        protected sealed override T CreateObject() => CreateModifier();
 
         protected abstract T CreateModifier();
     }

@@ -1,5 +1,4 @@
 using Silksprite.MeshWeaver.Controllers.Base;
-using Silksprite.MeshWeaver.Controllers.Context;
 using Silksprite.MeshWeaver.Models.Paths;
 
 namespace Silksprite.MeshWeaver.Controllers.Paths
@@ -9,9 +8,9 @@ namespace Silksprite.MeshWeaver.Controllers.Paths
         public MeshProvider meshProvider;
         public string pathName;
 
-        protected override IPathieFactory CreateFactory(IMeshContext context)
+        protected override IPathieFactory CreateFactory()
         {
-            return new ExtractPathieFactory(meshProvider.ToFactory(context), pathName);
+            return new ExtractPathieFactory(meshProvider.ToFactory(), pathName);
         }
     }
 }

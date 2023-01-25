@@ -1,6 +1,5 @@
 using System.Linq;
 using Silksprite.MeshWeaver.Controllers.Base.Modifiers;
-using Silksprite.MeshWeaver.Controllers.Context;
 using Silksprite.MeshWeaver.Models;
 using Silksprite.MeshWeaver.Models.Paths;
 using Silksprite.MeshWeaver.Models.Paths.Core;
@@ -13,18 +12,18 @@ namespace Silksprite.MeshWeaver.Controllers.Base
 
         public IPathieFactory LastFactory => CachedObject;
 
-        public IPathieFactory ToFactory(IMeshContext context) => FindOrCreateObject(context);
+        public IPathieFactory ToFactory() => FindOrCreateObject();
 
-        protected sealed override IPathieFactory CreateObject(IMeshContext context)
+        protected sealed override IPathieFactory CreateObject()
         {
             var providers = GetComponents<IPathModifierProvider>()
                 .Where(provider => provider.enabled);
-            return providers.Aggregate(ModifiedPathieFactory.Builder(CreateFactory(context), lodMask),
+            return providers.Aggregate(ModifiedPathieFactory.Builder(CreateFactory(), lodMask),
                     (builder, provider) => builder.Concat(provider.PathieModifier, provider.LodMask))
                 .ToFactory();
         }
 
-        protected abstract IPathieFactory CreateFactory(IMeshContext context);
+        protected abstract IPathieFactory CreateFactory();
 
     }
 }
