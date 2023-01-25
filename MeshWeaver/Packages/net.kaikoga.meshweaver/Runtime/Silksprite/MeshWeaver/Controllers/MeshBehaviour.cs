@@ -11,7 +11,7 @@ namespace Silksprite.MeshWeaver.Controllers
     {
         protected override Meshie OnPopulateMesh(LodMaskLayer lod)
         {
-            using (var context = new DynamicMeshContext())
+            using (var context = NullMeshContext.Instance)
             {
                 return this.GetComponentsInDirectChildren<MeshProvider>().CollectMeshies(context).Build(lod);
             }
