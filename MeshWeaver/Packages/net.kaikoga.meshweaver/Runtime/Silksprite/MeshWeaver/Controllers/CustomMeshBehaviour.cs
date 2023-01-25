@@ -48,8 +48,7 @@ namespace Silksprite.MeshWeaver.Controllers
             var lodMaskLayer = MeshWeaverSettings.Current.activeLodMaskLayer;
 
             if (_runtimeMesh == null) _runtimeMesh = new Mesh();
-            OnPopulateMesh(lodMaskLayer, _runtimeMesh, true);
-
+            OnPopulateMesh(lodMaskLayer, true, _runtimeMesh, !overrideMaterials, out materials);
 
             if (TryGetComponent<MeshFilter>(out var meshFilter))
             {
@@ -72,7 +71,7 @@ namespace Silksprite.MeshWeaver.Controllers
             else
             {
                 if (_runtimeColliderMesh == null) _runtimeColliderMesh = new Mesh();
-                OnPopulateMesh(LodMaskLayer.Collider, _runtimeColliderMesh, true);
+                OnPopulateMesh(LodMaskLayer.Collider, true, _runtimeColliderMesh, false, out _);
                 runtimeColliderMesh = _runtimeColliderMesh;
             }
             if (TryGetComponent<MeshCollider>(out var meshCollider))
@@ -83,10 +82,10 @@ namespace Silksprite.MeshWeaver.Controllers
 
         public void ExportMesh(LodMaskLayer lodMask, Mesh mesh, bool realtime)
         {
-            OnPopulateMesh(lodMask, mesh, realtime);
+            OnPopulateMesh(lodMask, realtime, mesh, false, out _);
         }
 
-        protected virtual void OnPopulateMesh(LodMaskLayer lodMask, Mesh mesh, bool realtime)
+        protected virtual void OnPopulateMesh(LodMaskLayer lodMask, bool realtime, Mesh mesh, bool collectMaterials, out Material[] outMaterials)
         {
             mesh.Clear();
             var profileData = ProfileData;
@@ -106,6 +105,8 @@ namespace Silksprite.MeshWeaver.Controllers
                     profileData.exportedNormalGeneratorAngle,
                     forCollider ? MeshExportSettings.LightmapGeneratorKind.None : profileData.exportedLightmapGeneratorKind));
             }
+
+            outMaterials = collectMaterials ? meshie.Materials : null;
         }
 
         protected virtual Meshie OnPopulateMesh(LodMaskLayer lodMask)

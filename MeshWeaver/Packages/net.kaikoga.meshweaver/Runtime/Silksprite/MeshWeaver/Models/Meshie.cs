@@ -16,6 +16,11 @@ namespace Silksprite.MeshWeaver.Models
         public IReadOnlyList<Vertie> Vertices => _vertices;
         public IReadOnlyList<Gon> Gons => _gons;
 
+        MeshExporter _exported;
+        MeshExporter Exported => _exported ?? (_exported = new MeshExporter(_vertices, _gons));
+
+        public Material[] Materials => Exported.Materials;
+
         Meshie(Vertie[] vertices, Gon[] gons)
         {
             _vertices = vertices;
@@ -28,7 +33,7 @@ namespace Silksprite.MeshWeaver.Models
 
         public void ExportToMesh(Mesh mesh, MeshExportSettings settings)
         {
-            new MeshExporter(mesh, settings, _vertices, _gons).Export();
+            Exported.WriteToMesh(mesh, settings);
         }
 
         public Meshie Apply(IMeshieModifier modifier) => modifier.Modify(this);
