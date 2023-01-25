@@ -17,7 +17,9 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
         {
             if (bakedData == null) return MeshieFactory.Empty;
 
-            foreach (var material in materials) context.GetMaterialIndex(material); 
+            foreach (var material in materials)
+            {
+            }
 
             var dict = bakedData
                 .SelectMany(data => data.lodMaskLayers.Select(lod => (lod, data.meshData)))

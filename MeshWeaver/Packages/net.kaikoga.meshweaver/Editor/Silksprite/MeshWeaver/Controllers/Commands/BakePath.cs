@@ -1,13 +1,10 @@
 using System.Linq;
 using Silksprite.MeshWeaver.Controllers.Base;
-using Silksprite.MeshWeaver.Controllers.Context;
 using Silksprite.MeshWeaver.Controllers.Extensions;
 using Silksprite.MeshWeaver.Controllers.Paths;
 using Silksprite.MeshWeaver.Models;
 using Silksprite.MeshWeaver.Models.DataObjects;
 using Silksprite.MeshWeaver.Utils;
-using UnityEditor;
-using UnityEngine;
 using static Silksprite.MeshWeaver.Tools.LocalizationTool;
 
 namespace Silksprite.MeshWeaver.Controllers.Commands
@@ -23,7 +20,7 @@ namespace Silksprite.MeshWeaver.Controllers.Commands
             baked.bakedData = LodMaskLayers.Values.Select(lod => new BakedPathieData
             {
                 lodMaskLayers = new[] { lod },
-                pathData = PathieData.FromPathie(target.ToFactory(NullMeshContext.Instance).Build(lod))
+                pathData = PathieData.FromPathie(target.ToFactory(null).Build(lod))
             }).ToArray();
 
             var bakedTransform = baked.transform;

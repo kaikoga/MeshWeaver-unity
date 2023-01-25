@@ -52,7 +52,7 @@ namespace Silksprite.MeshWeaver.Controllers.Base
             }
             var containerMatrix = transform.localToWorldMatrix * transform.ToLocalTranslationModification();
 
-            var pathie = ToFactory(NullMeshContext.Instance).Build(MeshWeaverSettings.Current.activeLodMaskLayer);
+            var pathie = ToFactory(null).Build(MeshWeaverSettings.Current.activeLodMaskLayer);
             var points = pathie.Vertices.Select(v => containerMatrix.MultiplyPoint3x4(v.Vertex)).ToArray();
 
             Gizmos.matrix = Matrix4x4.identity;

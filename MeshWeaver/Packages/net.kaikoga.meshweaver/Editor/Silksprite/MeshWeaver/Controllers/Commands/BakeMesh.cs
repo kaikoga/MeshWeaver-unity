@@ -1,8 +1,6 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Silksprite.MeshWeaver.Controllers.Base;
-using Silksprite.MeshWeaver.Controllers.Context;
 using Silksprite.MeshWeaver.Controllers.Extensions;
 using Silksprite.MeshWeaver.Controllers.Meshes;
 using Silksprite.MeshWeaver.Models;
@@ -24,7 +22,7 @@ namespace Silksprite.MeshWeaver.Controllers.Commands
             var context = new MeshIndexMapping();
             baked.bakedData = LodMaskLayers.Values.Select(lod =>
             {
-                var meshie = target.ToFactory(NullMeshContext.Instance).Build(lod);
+                var meshie = target.ToFactory(null).Build(lod);
                 return new BakedMeshieData
                 {
                     lodMaskLayers = new[] { lod },
