@@ -7,20 +7,25 @@ namespace Silksprite.MeshWeaver.Controllers.Core
     {
         bool _hasTranslation;
         Matrix4x4 _translation = Matrix4x4.identity;
+        int _revision;
 
-        public bool Sync(Transform source)
+        public int Sync(Transform source)
         {
             if (source)
             {
                 _hasTranslation = true;
                 _translation = source.ToLocalTranslation();
-                return MeshWeaverApplication.IsSelected(source.gameObject);
+                if (MeshWeaverApplication.IsSelected(source.gameObject))
+                {
+                    _revision = MeshWeaverApplication.EmitRevision();
+                }
+                return _revision;
             }
             else
             {
                 var lastValue = _hasTranslation; 
                 _hasTranslation = false;
-                return lastValue;
+                return -1;
             }
         }
 

@@ -20,7 +20,7 @@ namespace Silksprite.MeshWeaver.Controllers.Modifiers
         public Rect uvArea = new Rect(0, 0, 1f, 1f);
         public int uvChannel;
 
-        protected override bool Sync() => _referenceTranslationCollector.Sync(referenceTranslation);
+        public override int Sync() => _referenceTranslationCollector.Sync(referenceTranslation);
 
         protected override VertwiseModifierBase CreateModifier()
         {

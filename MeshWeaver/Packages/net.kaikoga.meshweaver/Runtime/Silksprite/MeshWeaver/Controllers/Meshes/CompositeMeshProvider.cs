@@ -9,7 +9,7 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
     {
         readonly MeshieCollector _childrenCollector = new MeshieCollector();
 
-        protected override bool Sync() => _childrenCollector.Sync(this.GetComponentsInDirectChildren<MeshProvider>());
+        public override int Sync() => _childrenCollector.Sync(this.GetComponentsInDirectChildren<MeshProvider>());
 
         protected override IMeshieFactory CreateFactory() => _childrenCollector.Value;
     }

@@ -8,15 +8,20 @@ namespace Silksprite.MeshWeaver.Controllers.Core
     where T : Component
     {
         readonly List<T> _content = new List<T>();
+        int _revision;
 
         public T[] Value => _content.ToArray();
 
-        public bool Sync(IEnumerable<T> sources)
+        public int Sync(IEnumerable<T> sources)
         {
             var lastCount = _content.Count;
             _content.Clear();
             _content.AddRange(sources);
-            return lastCount != _content.Count || _content.Any(content => MeshWeaverApplication.IsSelected(content.gameObject));
+            if (lastCount != _content.Count || _content.Any(content => MeshWeaverApplication.IsSelected(content.gameObject)))
+            {
+                _revision = MeshWeaverApplication.EmitRevision();
+            }
+            return _revision;
         }
     }
 }

@@ -11,6 +11,7 @@ namespace Silksprite.MeshWeaver.Controllers.Core
     public class PathieCollector
     {
         readonly List<PathProvider> _content = new List<PathProvider>();
+        int _revision;
 
         public IPathieFactory SingleValue()
         {
@@ -36,20 +37,20 @@ namespace Silksprite.MeshWeaver.Controllers.Core
             return builder.ToFactory();
         }
 
-        public bool Sync(PathProvider pathProvider)
+        public int Sync(PathProvider pathProvider)
         {
-            var lastCount = _content.Count;
             _content.Clear();
             if (pathProvider) _content.Add(pathProvider);
-            return lastCount != _content.Count || MeshWeaverApplication.IsSelected(pathProvider.gameObject);
+            _revision = _content.Aggregate(0, (r, content) => r ^ content.Revision);
+            return _revision;
         }
 
-        public bool Sync(IEnumerable<PathProvider> pathProviders)
+        public int Sync(IEnumerable<PathProvider> pathProviders)
         {
-            var lastCount = _content.Count;
             _content.Clear();
             _content.AddRange(pathProviders.Where(c => c != null && c.gameObject.activeSelf));
-            return lastCount != _content.Count || _content.Any(content => MeshWeaverApplication.IsSelected(content.gameObject));
+            _revision = _content.Aggregate(0, (r, content) => r ^ content.Revision);
+            return _revision;
         }
     }
 }

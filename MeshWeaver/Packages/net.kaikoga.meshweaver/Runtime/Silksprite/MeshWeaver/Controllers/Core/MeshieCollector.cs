@@ -9,6 +9,7 @@ namespace Silksprite.MeshWeaver.Controllers.Core
     public class MeshieCollector
     {
         readonly List<MeshProvider> _content = new List<MeshProvider>();
+        int _revision;
 
         public IMeshieFactory Value
         {
@@ -27,20 +28,20 @@ namespace Silksprite.MeshWeaver.Controllers.Core
             }
         }
 
-        public bool Sync(MeshProvider meshProvider)
+        public int Sync(MeshProvider meshProvider)
         {
-            var lastCount = _content.Count;
             _content.Clear();
             if (meshProvider) _content.Add(meshProvider);
-            return lastCount != _content.Count || MeshWeaverApplication.IsSelected(meshProvider.gameObject);
+            _revision = _content.Aggregate(0, (r, content) => r ^ content.Revision);
+            return _revision;
         }
 
-        public bool Sync(IEnumerable<MeshProvider> meshProviders)
+        public int Sync(IEnumerable<MeshProvider> meshProviders)
         {
-            var lastCount = _content.Count;
             _content.Clear();
             _content.AddRange(meshProviders.Where(c => c != null && c.gameObject.activeSelf));
-            return lastCount != _content.Count || _content.Any(content => MeshWeaverApplication.IsSelected(content.gameObject));
+            _revision = _content.Aggregate(0, (r, content) => r ^ content.Revision);
+            return _revision;
         }
     }
 }

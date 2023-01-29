@@ -21,7 +21,7 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes.Modifiers
         [Range(0, 3)]
         public int numVertex = 1;
 
-        protected override bool Sync()
+        public override int Sync()
         {
             if (hasLegacyPredicate)
             {

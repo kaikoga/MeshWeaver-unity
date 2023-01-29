@@ -37,7 +37,7 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
         public IPathieFactory LastPathieX { get; private set; }
         public IPathieFactory LastPathieY { get; private set; }
 
-        protected override bool Sync()
+        public override int Sync()
         {
             return _pathProviderXCollector.Sync(pathProviderX) |
                    _pathProviderYCollector.Sync(pathProviderY);
