@@ -5,6 +5,7 @@ namespace Silksprite.MeshWeaver.Controllers.Paths
 {
     public class ExtractPathProvider : PathProvider
     {
+        // FIXME: collector
         public MeshProvider meshProvider;
         public string pathName;
 
