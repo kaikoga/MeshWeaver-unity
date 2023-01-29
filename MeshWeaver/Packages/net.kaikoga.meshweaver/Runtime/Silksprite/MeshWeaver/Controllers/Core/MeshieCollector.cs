@@ -8,25 +8,47 @@ namespace Silksprite.MeshWeaver.Controllers.Core
 {
     public class MeshieCollector
     {
+        readonly List<MeshProvider> _content = new List<MeshProvider>();
+
+        public IMeshieFactory Value
+        {
+            get
+            {
+                if (_content.Count == 0) return MeshieFactory.Empty;
+
+                var builder = CompositeMeshieFactory.Builder();
+                foreach (var meshProvider in _content)
+                {
+                    var localTranslation = meshProvider.transform.ToLocalTranslation();
+                    builder.Concat(meshProvider.ToFactory(), localTranslation);
+                }
+
+                return builder.ToFactory();
+            }
+        }
+
         public IMeshieFactory CollectMeshie(MeshProvider meshProvider)
         {
-            if (meshProvider == null) return MeshieFactory.Empty;
-
-            var localTranslation = meshProvider.transform.ToLocalTranslation();
-            return CompositeMeshieFactory.Builder().Concat(meshProvider.ToFactory(), localTranslation).ToFactory();
+            Sync(meshProvider);
+            return Value;
         }
 
         public IMeshieFactory CollectMeshies(IEnumerable<MeshProvider> meshProviders)
         {
-            var builder = CompositeMeshieFactory.Builder();
+            Sync(meshProviders);
+            return Value;
+        }
 
-            foreach (var meshProvider in meshProviders.Where(c => c != null && c.gameObject.activeSelf))
-            {
-                var localTranslation = meshProvider.transform.ToLocalTranslation();
-                builder.Concat(meshProvider.ToFactory(), localTranslation);
-            }
+        void Sync(MeshProvider meshProvider)
+        {
+            _content.Clear();
+            if (meshProvider) _content.Add(meshProvider);
+        }
 
-            return builder.ToFactory();
+        void Sync(IEnumerable<MeshProvider> meshProviders)
+        {
+            _content.Clear();
+            _content.AddRange(meshProviders.Where(c => c != null && c.gameObject.activeSelf));
         }
     }
 }
