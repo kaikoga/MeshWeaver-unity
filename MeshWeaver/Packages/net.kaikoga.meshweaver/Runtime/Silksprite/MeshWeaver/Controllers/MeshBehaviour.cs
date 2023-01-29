@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Silksprite.MeshWeaver.Controllers
 {
     [ExecuteAlways]
-    public class MeshBehaviour : CustomMeshBehaviour
+    public class MeshBehaviour : MeshBehaviourBase
     {
         protected override Meshie OnPopulateMesh(LodMaskLayer lod)
         {

@@ -18,7 +18,7 @@ namespace Silksprite.MeshWeaver.Primitives
         {
             var gameObject = new GameObject("Mesh Behaviour");
             var meshBehaviour = gameObject.AddComponent<MeshBehaviour>();
-            if (hasRenderer) CustomMeshBehaviourEditor.SetupAsMeshRenderer(meshBehaviour);
+            if (hasRenderer) MeshBehaviourBaseEditor.SetupAsMeshRenderer(meshBehaviour);
             return meshBehaviour;
         }
 
