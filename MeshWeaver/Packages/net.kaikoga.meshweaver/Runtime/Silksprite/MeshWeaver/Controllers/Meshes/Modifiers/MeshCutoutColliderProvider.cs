@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Silksprite.MeshWeaver.Controllers.Base.Modifiers;
+using Silksprite.MeshWeaver.Controllers.Core;
 using Silksprite.MeshWeaver.Models.Meshes.Modifiers;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -14,6 +15,7 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes.Modifiers
         [SerializeField] [HideInInspector] Collider legacyPredicate;
         
         public List<Collider> predicates = new List<Collider>();
+        readonly UnityCollector<Collider> _predicatesCollector = new UnityCollector<Collider>();
 
         public bool inside;
         [Range(0, 3)]
@@ -27,9 +29,7 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes.Modifiers
                 hasLegacyPredicate = false;
             }
 
-            // NOTE: We don't create a MeshCutoutCollider Model here,
-            // because Collider mono objects could easily get stale or missing and break things 
-            var predicatesArray = predicates.Where(p => p != null).ToArray();
+            var predicatesArray = _predicatesCollector.Collect(predicates);
 
             var localToWorldMatrix = transform.localToWorldMatrix;
             return new MeshCutout(v =>
