@@ -9,8 +9,6 @@ namespace Silksprite.MeshWeaver.Controllers
     [DisallowMultipleComponent]
     public class TranslationProvider : SubProviderBase<Matrix4x4>
     {
-        protected override bool RefreshAlways => true;
-
         [SerializeField] [HideInInspector] bool hasLegacyOneVectors = true;
         [FormerlySerializedAs("oneX")]
         [SerializeField] [HideInInspector] Vector3 legacyOneX = Vector3.right;

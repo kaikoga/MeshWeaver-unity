@@ -2,7 +2,6 @@ using Silksprite.MeshWeaver.Controllers.Base.Modifiers;
 using Silksprite.MeshWeaver.Controllers.Extensions;
 using Silksprite.MeshWeaver.Models.Paths.Modifiers;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Silksprite.MeshWeaver.Controllers.Paths.Modifiers
 {
@@ -25,7 +24,5 @@ namespace Silksprite.MeshWeaver.Controllers.Paths.Modifiers
         }
 
         protected override IPathieModifier CreateModifier() => new PathRepeat(count, Translation, offsetByPath, smoothJoin);
-        
-        protected override void RefreshUnityReferences() => AddUnityReference(offsetByReference);
     }
 }

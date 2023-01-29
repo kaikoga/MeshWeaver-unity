@@ -6,7 +6,5 @@ namespace Silksprite.MeshWeaver.Controllers.Base
     public abstract class GeometryProvider<T> : ProviderBase<T>
     where T : class
     {
-        // NOTE: We just can't cache GeometryProviders
-        protected override bool RefreshAlways => true;
     }
 }

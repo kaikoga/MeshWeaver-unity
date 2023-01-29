@@ -7,8 +7,6 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
 {
     public class StampMeshProvider : MeshProvider
     {
-        protected override bool RefreshAlways => true;
-
         public MeshProvider meshProvider;
         public PathProvider pathProvider;
 

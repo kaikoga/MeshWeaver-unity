@@ -23,7 +23,5 @@ namespace Silksprite.MeshWeaver.Controllers.Modifiers
         }
 
         protected override VertwiseModifierBase CreateModifier() => new VertwiseTranslate(Translation);
-        
-        protected override void RefreshUnityReferences() => AddUnityReference(referenceTranslation);
     }
 }

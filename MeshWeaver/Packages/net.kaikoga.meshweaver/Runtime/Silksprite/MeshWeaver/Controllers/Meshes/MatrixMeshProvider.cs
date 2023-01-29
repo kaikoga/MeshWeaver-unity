@@ -12,8 +12,6 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
 {
     public class MatrixMeshProvider : MeshProvider
     {
-        protected override bool RefreshAlways => true;
-
         public PathProvider pathProviderX;
         public PathProvider pathProviderY;
         public MatrixMeshieFactory.OperatorKind operatorKind = MatrixMeshieFactory.OperatorKind.ApplyX;

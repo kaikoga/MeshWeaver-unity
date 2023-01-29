@@ -38,11 +38,5 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes.Modifiers
                 return predicatesArray.Any(predicate => predicate && predicate.ClosestPoint(local) == local);
             }, inside, numVertex);
         }
-
-        // FIXME: the whole Modifier caching system should be reworked 
-        protected override void RefreshUnityReferences()
-        {
-            foreach (var predicate in predicates) AddUnityReference(predicate);
-        }
     }
 }

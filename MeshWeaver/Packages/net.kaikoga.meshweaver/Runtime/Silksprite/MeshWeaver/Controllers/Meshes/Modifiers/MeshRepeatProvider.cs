@@ -22,7 +22,5 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes.Modifiers
         }
 
         protected override IMeshieModifier CreateModifier() => new MeshRepeat(count, Translation);
-
-        protected override void RefreshUnityReferences() => AddUnityReference(offsetByReference);
     }
 }
