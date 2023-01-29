@@ -37,10 +37,16 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
         public IPathieFactory LastPathieX { get; private set; }
         public IPathieFactory LastPathieY { get; private set; }
 
+        protected override void Sync()
+        {
+            _pathProviderXCollector.Sync(pathProviderX);
+            _pathProviderYCollector.Sync(pathProviderY);
+        }
+
         protected override IMeshieFactory CreateFactory()
         {
-            LastPathieX = _pathProviderXCollector.CollectPathie(pathProviderX);
-            LastPathieY = _pathProviderYCollector.CollectPathie(pathProviderY);
+            LastPathieX = _pathProviderXCollector.SingleValue();
+            LastPathieY = _pathProviderYCollector.SingleValue();
             return new PillarMeshieFactory(LastPathieX,
                 LastPathieY,
                 operatorKind,

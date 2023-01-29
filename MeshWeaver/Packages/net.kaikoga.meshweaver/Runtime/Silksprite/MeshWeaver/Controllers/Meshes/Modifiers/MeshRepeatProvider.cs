@@ -13,8 +13,12 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes.Modifiers
         public Transform offsetByReference;
         readonly TranslationCollector _offsetByReferenceCollector = new TranslationCollector();
 
-        Matrix4x4 Translation => _offsetByReferenceCollector.Translate(Matrix4x4.Translate(offset), offsetByReference);
+        protected override void Sync() => _offsetByReferenceCollector.Sync(offsetByReference);
 
-        protected override IMeshieModifier CreateModifier() => new MeshRepeat(count, Translation);
+        protected override IMeshieModifier CreateModifier()
+        {
+            var translation = _offsetByReferenceCollector.Translate(Matrix4x4.Translate(offset));
+            return new MeshRepeat(count, translation);
+        }
     }
 }

@@ -10,12 +10,6 @@ namespace Silksprite.MeshWeaver.Controllers.Core
 
         public T[] Value => _content.ToArray();
 
-        public T[] Collect(IEnumerable<T> source)
-        {
-            Sync(source);
-            return Value;
-        }
-
         public void Sync(IEnumerable<T> source)
         {
             _content.Clear();

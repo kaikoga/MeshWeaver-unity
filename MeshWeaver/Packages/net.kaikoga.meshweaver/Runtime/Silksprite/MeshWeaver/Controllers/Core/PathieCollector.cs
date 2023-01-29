@@ -36,18 +36,6 @@ namespace Silksprite.MeshWeaver.Controllers.Core
             return builder.ToFactory();
         }
 
-        public IPathieFactory CollectPathie(PathProvider pathProvider)
-        {
-            Sync(pathProvider);
-            return SingleValue();
-        }
-
-        public IPathieFactory CollectPathies(IEnumerable<PathProvider> pathProviders, bool isLoop, bool smoothJoin)
-        {
-            Sync(pathProviders);
-            return CompositeValue(isLoop, smoothJoin);
-        }
-
         public void Sync(PathProvider pathProvider)
         {
             _content.Clear();

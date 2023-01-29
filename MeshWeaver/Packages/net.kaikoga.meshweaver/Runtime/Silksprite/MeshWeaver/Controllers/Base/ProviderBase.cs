@@ -18,6 +18,7 @@ namespace Silksprite.MeshWeaver.Controllers.Base
 
         protected T FindOrCreateObject()
         {
+            Sync();
             return CachedObject = CreateObject();
         }
 
@@ -34,6 +35,7 @@ namespace Silksprite.MeshWeaver.Controllers.Base
             }
         }
 
+        protected virtual void Sync() { }
         protected abstract T CreateObject();
     }
 }

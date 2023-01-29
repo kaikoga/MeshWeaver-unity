@@ -20,8 +20,12 @@ namespace Silksprite.MeshWeaver.Controllers.Modifiers
         public Rect uvArea = new Rect(0, 0, 1f, 1f);
         public int uvChannel;
 
-        Matrix4x4 Translation => _referenceTranslationCollector.Translate(Matrix4x4.identity, referenceTranslation);
+        protected override void Sync() => _referenceTranslationCollector.Sync(referenceTranslation);
 
-        protected override VertwiseModifierBase CreateModifier() => new UvProjector(projection, Translation, axisX, axisY, uvArea, uvChannel);
+        protected override VertwiseModifierBase CreateModifier()
+        {
+            var translation = _referenceTranslationCollector.Translate(Matrix4x4.identity);
+            return new UvProjector(projection, translation, axisX, axisY, uvArea, uvChannel);
+        }
     }
 }

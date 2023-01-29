@@ -27,25 +27,13 @@ namespace Silksprite.MeshWeaver.Controllers.Core
             }
         }
 
-        public IMeshieFactory CollectMeshie(MeshProvider meshProvider)
-        {
-            Sync(meshProvider);
-            return Value;
-        }
-
-        public IMeshieFactory CollectMeshies(IEnumerable<MeshProvider> meshProviders)
-        {
-            Sync(meshProviders);
-            return Value;
-        }
-
-        void Sync(MeshProvider meshProvider)
+        public void Sync(MeshProvider meshProvider)
         {
             _content.Clear();
             if (meshProvider) _content.Add(meshProvider);
         }
 
-        void Sync(IEnumerable<MeshProvider> meshProviders)
+        public void Sync(IEnumerable<MeshProvider> meshProviders)
         {
             _content.Clear();
             _content.AddRange(meshProviders.Where(c => c != null && c.gameObject.activeSelf));

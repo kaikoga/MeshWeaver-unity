@@ -12,9 +12,8 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
 
         public Material material;
 
-        protected override IMeshieFactory CreateFactory()
-        {
-            return new PolygonMeshieFactory(_pathProviderCollector.CollectPathie(pathProvider), material);
-        }
+        protected override void Sync() => _pathProviderCollector.Sync(pathProvider);
+
+        protected override IMeshieFactory CreateFactory() => new PolygonMeshieFactory(_pathProviderCollector.SingleValue(), material);
     }
 }

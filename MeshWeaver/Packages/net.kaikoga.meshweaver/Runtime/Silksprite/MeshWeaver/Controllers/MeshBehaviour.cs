@@ -13,7 +13,8 @@ namespace Silksprite.MeshWeaver.Controllers
 
         protected override Meshie OnPopulateMesh(LodMaskLayer lod)
         {
-            return _childrenCollector.CollectMeshies(this.GetComponentsInDirectChildren<MeshProvider>()).Build(lod);
+            _childrenCollector.Sync(this.GetComponentsInDirectChildren<MeshProvider>());
+            return _childrenCollector.Value.Build(lod);
         }
     }
 }

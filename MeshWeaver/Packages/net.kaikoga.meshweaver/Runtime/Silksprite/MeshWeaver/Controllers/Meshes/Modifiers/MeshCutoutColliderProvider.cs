@@ -21,7 +21,7 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes.Modifiers
         [Range(0, 3)]
         public int numVertex = 1;
 
-        protected override IMeshieModifier CreateModifier()
+        protected override void Sync()
         {
             if (hasLegacyPredicate)
             {
@@ -29,9 +29,14 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes.Modifiers
                 hasLegacyPredicate = false;
             }
 
-            var predicatesArray = _predicatesCollector.Collect(predicates);
+            _predicatesCollector.Sync(predicates);
+        }
 
+        protected override IMeshieModifier CreateModifier()
+        {
+            var predicatesArray = _predicatesCollector.Value;
             var localToWorldMatrix = transform.localToWorldMatrix;
+
             return new MeshCutout(v =>
             {
                 var local = localToWorldMatrix.MultiplyPoint(v);

@@ -16,8 +16,12 @@ namespace Silksprite.MeshWeaver.Controllers.Paths.Modifiers
         public bool offsetByPath = true;
         public bool smoothJoin = false;
 
-        Matrix4x4 Translation => _offsetByReferenceCollector.Translate(Matrix4x4.Translate(offset), offsetByReference);
+        protected override void Sync() => _offsetByReferenceCollector.Sync(offsetByReference);
 
-        protected override IPathieModifier CreateModifier() => new PathRepeat(count, Translation, offsetByPath, smoothJoin);
+        protected override IPathieModifier CreateModifier()
+        {
+            var translation = _offsetByReferenceCollector.Translate(Matrix4x4.Translate(offset));
+            return new PathRepeat(count, translation, offsetByPath, smoothJoin);
+        }
     }
 }
