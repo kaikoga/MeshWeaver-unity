@@ -14,17 +14,26 @@ namespace Silksprite.MeshWeaver.Controllers.Base
 
     public abstract class ProviderBase<T> : ProviderBase
     {
+        bool _hasCachedValue;
         protected T CachedObject { get; private set; }
 
         protected T FindOrCreateObject()
         {
-            Sync();
-            return CachedObject = CreateObject();
+            if (Sync())
+            {
+                _hasCachedValue = false;
+                CachedObject = default;
+            }
+
+            return _hasCachedValue ? CachedObject : CachedObject = CreateObject();
         }
 
         void OnValidate()
         {
-            // NOTE: This only work for ModiferProviders, because GeometryProviders refer Hierarchy structures
+            // catch Inspector changes
+            _hasCachedValue = false;
+            CachedObject = default;
+
             if (serializedFormat != CurrentSerializedFormat)
             {
                 Upgrade(serializedFormat, CurrentSerializedFormat);
@@ -35,7 +44,7 @@ namespace Silksprite.MeshWeaver.Controllers.Base
             }
         }
 
-        protected virtual void Sync() { }
+        protected virtual bool Sync() => false;
         protected abstract T CreateObject();
     }
 }

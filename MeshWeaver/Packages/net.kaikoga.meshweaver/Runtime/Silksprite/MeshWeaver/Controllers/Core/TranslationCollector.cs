@@ -8,16 +8,19 @@ namespace Silksprite.MeshWeaver.Controllers.Core
         bool _hasTranslation;
         Matrix4x4 _translation = Matrix4x4.identity;
 
-        public void Sync(Transform source)
+        public bool Sync(Transform source)
         {
             if (source)
             {
                 _hasTranslation = true;
                 _translation = source.ToLocalTranslation();
+                return MeshWeaverApplication.IsSelected(source.gameObject);
             }
             else
             {
+                var lastValue = _hasTranslation; 
                 _hasTranslation = false;
+                return lastValue;
             }
         }
 

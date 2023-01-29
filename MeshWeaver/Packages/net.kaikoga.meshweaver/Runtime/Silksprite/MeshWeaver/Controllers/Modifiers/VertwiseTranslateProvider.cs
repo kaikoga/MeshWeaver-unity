@@ -14,7 +14,7 @@ namespace Silksprite.MeshWeaver.Controllers.Modifiers
         public Transform referenceTranslation;
         readonly TranslationCollector _referenceTranslationCollector = new TranslationCollector();
 
-        protected override void Sync() => _referenceTranslationCollector.Sync(referenceTranslation);
+        protected override bool Sync() => _referenceTranslationCollector.Sync(referenceTranslation);
 
         protected override VertwiseModifierBase CreateModifier()
         {

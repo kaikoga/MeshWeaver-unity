@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Silksprite.MeshWeaver.Controllers.Core
@@ -10,10 +11,12 @@ namespace Silksprite.MeshWeaver.Controllers.Core
 
         public T[] Value => _content.ToArray();
 
-        public void Sync(IEnumerable<T> source)
+        public bool Sync(IEnumerable<T> sources)
         {
+            var lastCount = _content.Count;
             _content.Clear();
-            _content.AddRange(source);
+            _content.AddRange(sources);
+            return lastCount != _content.Count || _content.Any(content => MeshWeaverApplication.IsSelected(content.gameObject));
         }
     }
 }

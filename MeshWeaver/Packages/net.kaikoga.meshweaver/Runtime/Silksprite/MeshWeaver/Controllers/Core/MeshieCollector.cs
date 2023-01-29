@@ -27,16 +27,20 @@ namespace Silksprite.MeshWeaver.Controllers.Core
             }
         }
 
-        public void Sync(MeshProvider meshProvider)
+        public bool Sync(MeshProvider meshProvider)
         {
+            var lastCount = _content.Count;
             _content.Clear();
             if (meshProvider) _content.Add(meshProvider);
+            return lastCount != _content.Count || MeshWeaverApplication.IsSelected(meshProvider.gameObject);
         }
 
-        public void Sync(IEnumerable<MeshProvider> meshProviders)
+        public bool Sync(IEnumerable<MeshProvider> meshProviders)
         {
+            var lastCount = _content.Count;
             _content.Clear();
             _content.AddRange(meshProviders.Where(c => c != null && c.gameObject.activeSelf));
+            return lastCount != _content.Count || _content.Any(content => MeshWeaverApplication.IsSelected(content.gameObject));
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes.Modifiers
         public Transform offsetByReference;
         readonly TranslationCollector _offsetByReferenceCollector = new TranslationCollector();
 
-        protected override void Sync() => _offsetByReferenceCollector.Sync(offsetByReference);
+        protected override bool Sync() => _offsetByReferenceCollector.Sync(offsetByReference);
 
         protected override IMeshieModifier CreateModifier()
         {

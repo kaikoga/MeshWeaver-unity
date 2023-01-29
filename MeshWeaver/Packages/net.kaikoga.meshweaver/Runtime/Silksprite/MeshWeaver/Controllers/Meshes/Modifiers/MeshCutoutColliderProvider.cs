@@ -21,7 +21,7 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes.Modifiers
         [Range(0, 3)]
         public int numVertex = 1;
 
-        protected override void Sync()
+        protected override bool Sync()
         {
             if (hasLegacyPredicate)
             {
@@ -29,7 +29,7 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes.Modifiers
                 hasLegacyPredicate = false;
             }
 
-            _predicatesCollector.Sync(predicates);
+            return _predicatesCollector.Sync(predicates);
         }
 
         protected override IMeshieModifier CreateModifier()

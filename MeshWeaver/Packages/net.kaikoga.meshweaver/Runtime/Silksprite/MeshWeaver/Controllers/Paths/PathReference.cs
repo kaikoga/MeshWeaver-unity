@@ -13,7 +13,7 @@ namespace Silksprite.MeshWeaver.Controllers.Paths
         public bool isLoop;
         public bool smoothJoin;
 
-        protected override void Sync() => _pathProvidersCollector.Sync(pathProviders);
+        protected override bool Sync() => _pathProvidersCollector.Sync(pathProviders);
 
         protected override IPathieFactory CreateFactory() => _pathProvidersCollector.CompositeValue(isLoop, smoothJoin);
     }
