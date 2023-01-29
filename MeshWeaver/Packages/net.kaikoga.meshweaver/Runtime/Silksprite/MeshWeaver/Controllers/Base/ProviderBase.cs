@@ -15,10 +15,23 @@ namespace Silksprite.MeshWeaver.Controllers.Base
     public abstract class ProviderBase<T> : ProviderBase
     {
         int _myRevision = -1;
+        int _revision = -1;
         int _cachedRevision = -1;
+        int _globalFrame = -1;
+
         protected T CachedObject { get; private set; }
 
-        public int Revision => _myRevision ^ Sync();
+        public int Revision
+        {
+            get
+            {
+                if (_globalFrame == MeshWeaverApplication.globalFrame) return _revision;
+
+                _globalFrame = MeshWeaverApplication.globalFrame;
+                _revision = _myRevision ^ Sync();
+                return _revision;
+            }
+        }
 
         protected T FindOrCreateObject()
         {

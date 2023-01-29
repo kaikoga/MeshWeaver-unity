@@ -2,8 +2,18 @@ using UnityEngine;
 
 namespace Silksprite.MeshWeaver.Controllers
 {
+#if UNITY_EDITOR
+    [UnityEditor.InitializeOnLoad]
+#endif
     internal static class MeshWeaverApplication
     {
+        public static int globalFrame;
+
+        public static void GlobalUpdate()
+        {
+            globalFrame++;
+        }
+
         public static int EmitRevision()
         {
             return Random.Range(0, 0x7fffffff);
@@ -17,5 +27,12 @@ namespace Silksprite.MeshWeaver.Controllers
             return false;
 #endif
         }
+
+#if UNITY_EDITOR
+        static MeshWeaverApplication()
+        {
+            UnityEditor.EditorApplication.update += GlobalUpdate;
+        }
+#endif
     }
 }
