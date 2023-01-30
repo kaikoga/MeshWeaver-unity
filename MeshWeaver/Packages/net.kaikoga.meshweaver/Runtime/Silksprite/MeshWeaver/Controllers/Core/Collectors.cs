@@ -11,6 +11,7 @@ namespace Silksprite.MeshWeaver.Controllers.Core
         {
             if (Stack.Contains(collector))
             {
+                Stack.Clear();
                 throw new InvalidOperationException("Cyclic reference");
             }
             Stack.Push(collector);
@@ -20,7 +21,7 @@ namespace Silksprite.MeshWeaver.Controllers.Core
         {
             if (Stack.Pop() != collector)
             {
-                throw new InvalidOperationException("Cyclic reference");
+                throw new InvalidOperationException("Internal Error");
             }
         }
     }
