@@ -14,6 +14,7 @@ namespace Silksprite.MeshWeaver.Controllers.Core
 
         public int Sync(IEnumerable<T> sources)
         {
+            Collectors.Start(this);
             var lastCount = _content.Count;
             _content.Clear();
             _content.AddRange(sources);
@@ -21,6 +22,7 @@ namespace Silksprite.MeshWeaver.Controllers.Core
             {
                 _revision = MeshWeaverApplication.EmitRevision();
             }
+            Collectors.Finish(this);
             return _revision;
         }
     }

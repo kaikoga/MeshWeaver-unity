@@ -39,17 +39,21 @@ namespace Silksprite.MeshWeaver.Controllers.Core
 
         public int Sync(PathProvider pathProvider)
         {
+            Collectors.Start(this);
             _content.Clear();
             if (pathProvider) _content.Add(pathProvider);
             _revision = _content.Aggregate(0, (r, content) => r ^ content.Revision);
+            Collectors.Finish(this);
             return _revision;
         }
 
         public int Sync(IEnumerable<PathProvider> pathProviders)
         {
+            Collectors.Start(this);
             _content.Clear();
             _content.AddRange(pathProviders.Where(c => c != null && c.gameObject.activeSelf));
             _revision = _content.Aggregate(0, (r, content) => r ^ content.Revision);
+            Collectors.Finish(this);
             return _revision;
         }
     }

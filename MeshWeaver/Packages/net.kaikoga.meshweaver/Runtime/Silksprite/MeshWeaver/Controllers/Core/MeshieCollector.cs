@@ -30,17 +30,21 @@ namespace Silksprite.MeshWeaver.Controllers.Core
 
         public int Sync(MeshProvider meshProvider)
         {
+            Collectors.Start(this);
             _content.Clear();
             if (meshProvider) _content.Add(meshProvider);
             _revision = _content.Aggregate(0, (r, content) => r ^ content.Revision);
+            Collectors.Finish(this);
             return _revision;
         }
 
         public int Sync(IEnumerable<MeshProvider> meshProviders)
         {
+            Collectors.Start(this);
             _content.Clear();
             _content.AddRange(meshProviders.Where(c => c != null && c.gameObject.activeSelf));
             _revision = _content.Aggregate(0, (r, content) => r ^ content.Revision);
+            Collectors.Finish(this);
             return _revision;
         }
     }
