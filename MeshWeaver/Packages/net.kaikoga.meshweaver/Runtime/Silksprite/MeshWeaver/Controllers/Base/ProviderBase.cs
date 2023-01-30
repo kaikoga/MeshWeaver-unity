@@ -14,9 +14,6 @@ namespace Silksprite.MeshWeaver.Controllers.Base
 
     public abstract class ProviderBase<T> : ProviderBase
     {
-        int _myRevision = -1;
-        int _revision = -1;
-        int _cachedRevision = -1;
         int _globalFrame = -1;
 
         protected T CachedObject { get; private set; }
@@ -25,30 +22,26 @@ namespace Silksprite.MeshWeaver.Controllers.Base
         {
             get
             {
-                if (_globalFrame == MeshWeaverApplication.globalFrame) return _revision;
-
-                _globalFrame = MeshWeaverApplication.globalFrame;
-                _revision = _myRevision ^ Sync();
-                return _revision;
+                if (_globalFrame != MeshWeaverApplication.globalFrame)
+                {
+                    Sync();
+                    CachedObject = default;
+                    _globalFrame = MeshWeaverApplication.globalFrame;
+                }
+                return _globalFrame;
             }
         }
 
         protected T FindOrCreateObject()
         {
-            // catch Transform changes
-            if (MeshWeaverApplication.IsSelected(gameObject)) _myRevision = MeshWeaverApplication.EmitRevision();
-            
-            // catch Unity / ProviderBase reference changes
-            var newRevision = Revision;
-            if (newRevision == _cachedRevision) return CachedObject;
-            _cachedRevision = newRevision;
+            var _ = Revision;
             return CachedObject = CreateObject();
         }
 
         void OnValidate()
         {
             // catch Inspector changes
-            _myRevision = MeshWeaverApplication.EmitRevision();
+            _globalFrame = -1;
             CachedObject = default;
 
             if (serializedFormat != CurrentSerializedFormat)
