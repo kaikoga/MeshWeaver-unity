@@ -14,6 +14,8 @@ namespace Silksprite.MeshWeaver.Controllers.Base
 
         public IMeshieFactory ToFactory() => FindOrCreateObject();
 
+        protected sealed override int Sync() => SyncReferences() ^ GetComponents<IMeshModifierProvider>().Where(provider => provider.enabled).Aggregate(0, (r, content) => r ^ content.Revision);
+
         protected sealed override IMeshieFactory CreateObject()
         {
             var providers = GetComponents<IMeshModifierProvider>()
@@ -22,6 +24,8 @@ namespace Silksprite.MeshWeaver.Controllers.Base
                     (builder, provider) => builder.Concat(provider.MeshieModifier, provider.LodMask))
                 .ToFactory();
         }
+
+        protected virtual int SyncReferences() => 0;
 
         protected abstract IMeshieFactory CreateFactory();
     }

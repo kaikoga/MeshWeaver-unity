@@ -61,7 +61,7 @@ namespace Silksprite.MeshWeaver.Controllers.Base
             }
         }
 
-        public virtual int Sync() => 0;
+        protected virtual int Sync() => 0;
         protected abstract T CreateObject();
     }
 }

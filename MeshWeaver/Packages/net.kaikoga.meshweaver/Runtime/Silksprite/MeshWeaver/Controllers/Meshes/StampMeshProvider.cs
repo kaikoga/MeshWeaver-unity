@@ -16,7 +16,7 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
         public IMeshieFactory LastMeshie { get; private set; }
         public IPathieFactory LastPathie { get; private set; }
 
-        public override int Sync()
+        protected override int SyncReferences()
         {
             return _meshProviderCollector.Sync(meshProvider) ^
                    _pathProviderCollector.Sync(pathProvider);

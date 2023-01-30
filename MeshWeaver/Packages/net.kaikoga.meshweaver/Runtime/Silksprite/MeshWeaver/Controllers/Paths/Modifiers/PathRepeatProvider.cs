@@ -16,7 +16,7 @@ namespace Silksprite.MeshWeaver.Controllers.Paths.Modifiers
         public bool offsetByPath = true;
         public bool smoothJoin = false;
 
-        public override int Sync() => _offsetByReferenceCollector.Sync(offsetByReference);
+        protected override int Sync() => _offsetByReferenceCollector.Sync(offsetByReference);
 
         protected override IPathieModifier CreateModifier()
         {

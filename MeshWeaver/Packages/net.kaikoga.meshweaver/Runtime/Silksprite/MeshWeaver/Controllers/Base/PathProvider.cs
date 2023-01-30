@@ -14,6 +14,8 @@ namespace Silksprite.MeshWeaver.Controllers.Base
 
         public IPathieFactory ToFactory() => FindOrCreateObject();
 
+        protected sealed override int Sync() => SyncReferences() ^ GetComponents<IPathModifierProvider>().Where(provider => provider.enabled).Aggregate(0, (r, content) => r ^ content.Revision);
+
         protected sealed override IPathieFactory CreateObject()
         {
             var providers = GetComponents<IPathModifierProvider>()
@@ -23,7 +25,8 @@ namespace Silksprite.MeshWeaver.Controllers.Base
                 .ToFactory();
         }
 
-        protected abstract IPathieFactory CreateFactory();
+        protected virtual int SyncReferences() => 0;
 
+        protected abstract IPathieFactory CreateFactory();
     }
 }

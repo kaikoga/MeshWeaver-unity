@@ -10,7 +10,7 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
         public List<MeshProvider> meshProviders = new List<MeshProvider>();
         readonly MeshieCollector _meshProvidersCollector = new MeshieCollector();
 
-        public override int Sync() => _meshProvidersCollector.Sync(meshProviders);
+        protected override int SyncReferences() => _meshProvidersCollector.Sync(meshProviders);
 
         protected override IMeshieFactory CreateFactory() => _meshProvidersCollector.Value;
     }

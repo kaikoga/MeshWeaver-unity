@@ -12,7 +12,7 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
 
         public Material material;
 
-        public override int Sync() => _pathProviderCollector.Sync(pathProvider);
+        protected override int SyncReferences() => _pathProviderCollector.Sync(pathProvider);
 
         protected override IMeshieFactory CreateFactory() => new PolygonMeshieFactory(_pathProviderCollector.SingleValue(), material);
     }
