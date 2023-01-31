@@ -17,12 +17,10 @@ namespace Silksprite.MeshWeaver.Models
     public sealed class Mux<T> : IEnumerable<MuxLayer<T>>, IEquatable<Mux<T>>
     {
         readonly MuxLayer<T>[] _layers;
-        readonly int _offset; // TODO: possibly remove offset "optimization"
 
         public T Value => ValueAt(0);
         public T ValueAt(int channel)
         {
-            channel += _offset;
             var value = default(T);
             for (var i = 0; i < _layers.Length; i++)
             {
@@ -33,13 +31,9 @@ namespace Silksprite.MeshWeaver.Models
 
         public int Count => _layers.Length;
         public int ChannelAtIndex(int index) => _layers[index].Channel;
-        public MuxLayer<T> MuxLayerAtIndex(int index) => new MuxLayer<T>(_layers[index].Value, _layers[index].Channel - _offset);
+        public MuxLayer<T> MuxLayerAtIndex(int index) => new MuxLayer<T>(_layers[index].Value, _layers[index].Channel);
 
-        Mux(MuxLayer<T>[] layers, int offset)
-        {
-            _layers = layers;
-            _offset = offset;
-        }
+        Mux(MuxLayer<T>[] layers) => _layers = layers;
 
         static readonly SortedList<int, T> WorkSortedList = new SortedList<int, T>();
         public static Mux<T> Build(IEnumerable<MuxLayer<T>> unsortedLayers)
@@ -48,30 +42,27 @@ namespace Silksprite.MeshWeaver.Models
             foreach (var layer in unsortedLayers) sortedList[layer.Channel] = layer.Value;
             var compactedLayers = sortedList.Select(kv => new MuxLayer<T>(kv.Value, kv.Key)).ToArray();
             sortedList.Clear();
-            return new Mux<T>(compactedLayers, 0);
+            return new Mux<T>(compactedLayers);
         }
 
-        public static Mux<T> FastBuild() => new Mux<T>(Array.Empty<MuxLayer<T>>(), 0);
-        public static Mux<T> FastBuild(MuxLayer<T> singleLayer) => new Mux<T>(new[] { singleLayer }, 0 );
+        public static Mux<T> FastBuild() => new Mux<T>(Array.Empty<MuxLayer<T>>());
+        public static Mux<T> FastBuild(MuxLayer<T> singleLayer) => new Mux<T>(new[] { singleLayer } );
 
-        public static Mux<T> FastBuild(IEnumerable<MuxLayer<T>> sortedLayers)
-        {
-            return new Mux<T>(sortedLayers.ToArray(), 0);
-        }
+        public static Mux<T> FastBuild(IEnumerable<MuxLayer<T>> sortedLayers) => new Mux<T>(sortedLayers.ToArray());
 
         public Mux<T> Shift(int deltaChannel)
         {
-            return new Mux<T>(_layers, _offset + deltaChannel);
+            return FastBuild(_layers.Select(layer => new MuxLayer<T>(layer.Value, layer.Channel - deltaChannel)));
         }
 
         public IEnumerator<MuxLayer<T>> GetEnumerator()
         {
-            return _layers.Select(layer => new MuxLayer<T>(layer.Value, layer.Channel - _offset)).GetEnumerator();
+            return _layers.Select(layer => new MuxLayer<T>(layer.Value, layer.Channel)).GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return _layers.Select(layer => new MuxLayer<T>(layer.Value, layer.Channel - _offset)).GetEnumerator();
+            return _layers.Select(layer => new MuxLayer<T>(layer.Value, layer.Channel)).GetEnumerator();
         }
 
         #region IEquatable<Mux<T>>
@@ -92,7 +83,7 @@ namespace Silksprite.MeshWeaver.Models
         {
             unchecked
             {
-                return (_layers.GetHashCode() * 397) ^ _offset;
+                return (_layers.GetHashCode() * 397);
             }
         }
 
