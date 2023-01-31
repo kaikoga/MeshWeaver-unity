@@ -169,7 +169,7 @@ namespace Silksprite.MeshWeaver.Primitives
 
         static GameObject WrapPrimitiveIfNeeded(MeshProvider meshProvider, GameObject parent)
         {
-            if (parent && parent.GetComponentInParent<CustomMeshBehaviour>()) return meshProvider.gameObject;
+            if (parent && parent.GetComponentInParent<MeshBehaviourBase>()) return meshProvider.gameObject;
 
             var meshBehaviour = MeshWeaverPrimitives.CreateMeshBehaviour(true);
             meshProvider.transform.SetParent(meshBehaviour.transform, false);

@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using Silksprite.MeshWeaver.Controllers.Context;
 using UnityEngine;
 
 namespace Silksprite.MeshWeaver.Controllers.Base
@@ -11,56 +9,41 @@ namespace Silksprite.MeshWeaver.Controllers.Base
         [HideInInspector]
         [SerializeField] protected int serializedFormat = CurrentSerializedFormat;
 
-        protected virtual bool RefreshAlways => false;
-
         protected virtual void Upgrade(int oldVersion, int newVersion) { }
     }
 
     public abstract class ProviderBase<T> : ProviderBase
     {
-        IMeshContext _lastContext;
+        int _globalFrame = -1;
 
-        bool _hasCachedObject;
         protected T CachedObject { get; private set; }
 
-        protected T FindOrCreateObject(IMeshContext context)
+        public int Revision
         {
-            if (RefreshAlways)
+            get
             {
-                return CachedObject = CreateObject(context);
-            }
-
-            if (_lastContext != context)
-            {
-                CachedObject = default; 
-                _hasCachedObject = false;
-                _lastContext = context;
-            }
-            if (_hasCachedObject)
-            {
-                foreach (var obj in _unityReferences)
+                if (_globalFrame != MeshWeaverApplication.globalFrame)
                 {
-                    if (obj) continue;
+                    Sync();
                     CachedObject = default;
-                    _hasCachedObject = false;
-                    break;
+                    _globalFrame = MeshWeaverApplication.globalFrame;
                 }
+                return _globalFrame;
             }
-
-            if (_hasCachedObject) return CachedObject;
-            _unityReferences.Clear();
-            RefreshUnityReferences();
-            _hasCachedObject = true;
-            return CachedObject = CreateObject(context);
         }
 
-        readonly List<Object> _unityReferences = new List<Object>();
+        protected T FindOrCreateObject()
+        {
+            var _ = Revision;
+            return CachedObject = CreateObject();
+        }
 
         void OnValidate()
         {
-            // NOTE: This only work for ModiferProviders, because GeometryProviders refer Hierarchy structures
+            // catch Inspector changes
+            _globalFrame = -1;
             CachedObject = default;
-            _hasCachedObject = false;
+
             if (serializedFormat != CurrentSerializedFormat)
             {
                 Upgrade(serializedFormat, CurrentSerializedFormat);
@@ -71,13 +54,7 @@ namespace Silksprite.MeshWeaver.Controllers.Base
             }
         }
 
-        protected void AddUnityReference(Object obj)
-        {
-            if (obj) _unityReferences.Add(obj);
-        }
-
-        protected abstract T CreateObject(IMeshContext context);
-
-        protected virtual void RefreshUnityReferences() { }
+        protected virtual int Sync() => 0;
+        protected abstract T CreateObject();
     }
 }

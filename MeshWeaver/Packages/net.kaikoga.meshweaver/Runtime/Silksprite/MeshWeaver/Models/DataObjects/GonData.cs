@@ -10,16 +10,16 @@ namespace Silksprite.MeshWeaver.Models.DataObjects
         public int[] indices;
         public int materialIndex;
 
-        public static GonData FromGon(Gon gon, Func<int, int> pin)
+        public static GonData FromGon(Gon gon, Func<Material, int> pin)
         {
             return new GonData
             {
                 indices = gon.Indices.ToArray(),
-                materialIndex = pin(gon.MaterialIndex)
+                materialIndex = pin(gon.material)
             };
         }
 
-        public Gon ToGon(Func<int, int> unpin)
+        public Gon ToGon(Func<int, Material> unpin)
         {
             return new Gon(indices, unpin(materialIndex));
         }

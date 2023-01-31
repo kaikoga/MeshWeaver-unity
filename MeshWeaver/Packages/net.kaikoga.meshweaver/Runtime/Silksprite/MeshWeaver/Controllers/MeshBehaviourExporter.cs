@@ -1,8 +1,9 @@
+using Silksprite.MeshWeaver.Controllers.Base;
 using UnityEngine;
 
 namespace Silksprite.MeshWeaver.Controllers
 {
-    [RequireComponent(typeof(CustomMeshBehaviour))]
+    [RequireComponent(typeof(MeshBehaviourBase))]
     public class MeshBehaviourExporter : MonoBehaviour
     {
         public bool overrideMaterials;

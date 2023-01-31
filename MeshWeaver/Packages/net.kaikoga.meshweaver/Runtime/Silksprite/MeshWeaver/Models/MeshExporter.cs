@@ -6,70 +6,75 @@ namespace Silksprite.MeshWeaver.Models
 {
     public class MeshExporter
     {
-        readonly Mesh _mesh;
-        readonly MeshExportSettings _settings;
-
         readonly Vertie[] _vertices;
-        readonly Gon[] _gons;
 
-        public MeshExporter(Mesh mesh, MeshExportSettings settings, Vertie[] vertices, Gon[] gons)
+        readonly int[][] _subMeshes;
+        readonly Material[] _materials;
+
+        public Material[] Materials => _materials.ToArray();
+
+        public MeshExporter(Vertie[] vertices, Gon[] gons)
         {
-            _mesh = mesh;
-            _settings = settings;
             _vertices = vertices;
-            _gons = gons;
+
+            var subMeshes = gons.GroupBy(gon => gon.material).ToArray(); 
+            _subMeshes = subMeshes.Select(subMesh => subMesh.SelectMany(gon => gon.Indices).ToArray()).ToArray();
+            _materials = subMeshes.Select(subMesh => subMesh.Key).ToArray();
+            for (var i = 0; i < _materials.Length; i++)
+            {
+                if (_materials[i] == null) _materials[i] = _materials.FirstOrDefault(m => m);
+            }
         }
 
-        public void Export()
+        public void WriteToMesh(Mesh mesh, MeshExportSettings settings)
         {
-            var subMeshes = _gons.GroupBy(gon => gon.MaterialIndex).OrderBy(group => group.Key).ToArray();
-            _mesh.subMeshCount = subMeshes.Select(subMesh => subMesh.Key).Concat(Enumerable.Repeat(0, 1)).Max() + 1;
-            _mesh.SetVertices(_vertices.Select(v => v.Vertex).ToArray());
-            _mesh.SetUVs(0, _vertices.Select(v => v.Uv).ToArray());
-            foreach (var subMesh in subMeshes)
+            mesh.subMeshCount = _subMeshes.Length > 0 ? _subMeshes.Length : 1;
+            mesh.SetVertices(_vertices.Select(v => v.Vertex).ToArray());
+            mesh.SetUVs(0, _vertices.Select(v => v.Uv).ToArray());
+            for (var subMeshIndex = 0; subMeshIndex < _subMeshes.Length; subMeshIndex++)
             {
-                _mesh.SetTriangles(subMesh.SelectMany(gon => gon.Indices).ToArray(), subMesh.Key);
+                mesh.SetTriangles(_subMeshes[subMeshIndex], subMeshIndex);
             }
-            _mesh.RecalculateBounds();
-            switch (_settings.NormalGenerator)
+            mesh.RecalculateBounds();
+            switch (settings.NormalGenerator)
             {
                 case MeshExportSettings.NormalGeneratorKind.Default:
-                    _mesh.RecalculateNormals();
+                    mesh.RecalculateNormals();
                     break;
                 case MeshExportSettings.NormalGeneratorKind.Up:
-                    _mesh.SetNormals(Enumerable.Repeat(Vector3.up, _mesh.vertexCount).ToArray());
+                    mesh.SetNormals(Enumerable.Repeat(Vector3.up, mesh.vertexCount).ToArray());
                     break;
                 case MeshExportSettings.NormalGeneratorKind.Down:
-                    _mesh.SetNormals(Enumerable.Repeat(Vector3.down, _mesh.vertexCount).ToArray());
+                    mesh.SetNormals(Enumerable.Repeat(Vector3.down, mesh.vertexCount).ToArray());
                     break;
                 case MeshExportSettings.NormalGeneratorKind.Sphere:
-                    ProjectSphereNormals();
+                    ProjectSphereNormals(mesh);
                     break;
                 case MeshExportSettings.NormalGeneratorKind.Cylinder:
-                    ProjectCylinderNormals();
+                    ProjectCylinderNormals(mesh);
                     break;
                 case MeshExportSettings.NormalGeneratorKind.Smooth:
-                    RecalculateNormals();
+                    RecalculateNormals(mesh);
                     break;
                 case MeshExportSettings.NormalGeneratorKind.SmoothHigh:
-                    RecalculateNormals(true);
+                    RecalculateNormals(mesh, true);
                     break;
                 case MeshExportSettings.NormalGeneratorKind.None:
                     break;
                 default:
-                    _mesh.RecalculateNormals();
+                    mesh.RecalculateNormals();
                     break;
             }
-            _mesh.RecalculateTangents();
-            switch (_settings.LightmapGenerator)
+            mesh.RecalculateTangents();
+            switch (settings.LightmapGenerator)
             {
                 case MeshExportSettings.LightmapGeneratorKind.None:
                     break;
                 default:
 #if UNITY_EDITOR
-                    if (_mesh.vertexCount > 0)
+                    if (mesh.vertexCount > 0)
                     {
-                        UnityEditor.Unwrapping.GenerateSecondaryUVSet(_mesh, new UnityEditor.UnwrapParam
+                        UnityEditor.Unwrapping.GenerateSecondaryUVSet(mesh, new UnityEditor.UnwrapParam
                         {
                             angleError = 0.08f,
                             areaError = 0.15f,
@@ -82,25 +87,25 @@ namespace Silksprite.MeshWeaver.Models
             }
         }
 
-        void ProjectSphereNormals()
+        static void ProjectSphereNormals(Mesh mesh)
         {
-            var vertices = _mesh.vertices;
+            var vertices = mesh.vertices;
             var center = vertices.Aggregate(Vector3.zero, (a, b) => a + b) / vertices.Length;
             
-            _mesh.SetNormals(_mesh.vertices.Select(v => (v - center).normalized).ToArray());
+            mesh.SetNormals(mesh.vertices.Select(v => (v - center).normalized).ToArray());
         }
 
-        void ProjectCylinderNormals()
+        static void ProjectCylinderNormals(Mesh mesh)
         {
-            var vertices = _mesh.vertices;
+            var vertices = mesh.vertices;
             var center = vertices.Aggregate(Vector3.zero, (a, b) => a + b) / vertices.Length;
             
-            _mesh.SetNormals(_mesh.vertices.Select(v => new Vector3(v.x - center.x, 0, v.z - center.z).normalized).ToArray());
+            mesh.SetNormals(mesh.vertices.Select(v => new Vector3(v.x - center.x, 0, v.z - center.z).normalized).ToArray());
         }
 
-        void RecalculateNormals(bool addAreaWeight = false)
+        static void RecalculateNormals(Mesh mesh, bool addAreaWeight = false)
         {
-            var vertices = _mesh.vertices;
+            var vertices = mesh.vertices;
 
             // normal index is the first identical normal
             Vector3 Quantize(Vector3 v)
@@ -110,9 +115,9 @@ namespace Silksprite.MeshWeaver.Models
             }
 
             var vertexValueToNormalIndex = new Dictionary<Vector3, int>();
-            for (var i = _mesh.vertices.Length - 1; i >= 0; i--)
+            for (var i = mesh.vertices.Length - 1; i >= 0; i--)
             {
-                vertexValueToNormalIndex[Quantize(_mesh.vertices[i])] = i;
+                vertexValueToNormalIndex[Quantize(mesh.vertices[i])] = i;
             }
 
             int VertexValueToNormalIndex(Vector3 v)
@@ -122,7 +127,7 @@ namespace Silksprite.MeshWeaver.Models
 
             // calculate the normals
             var vertNormals = new Vector3[vertices.Length];
-            var triangles = _mesh.triangles;
+            var triangles = mesh.triangles;
             for (var face = 0; face < triangles.Length; face += 3)
             {
                 var a = vertices[triangles[face]];
@@ -143,7 +148,7 @@ namespace Silksprite.MeshWeaver.Models
                 // vertNormals[triangles[face + 2]] += faceNormal;
             }
             
-            _mesh.SetNormals(vertices.Select(v => vertNormals[VertexValueToNormalIndex(v)].normalized).ToArray());
+            mesh.SetNormals(vertices.Select(v => vertNormals[VertexValueToNormalIndex(v)].normalized).ToArray());
             // _mesh.SetNormals(vertNormals.Select(v => v.normalized).ToArray());
         }
     }

@@ -1,5 +1,5 @@
 using Silksprite.MeshWeaver.Controllers.Base.Modifiers;
-using Silksprite.MeshWeaver.Controllers.Extensions;
+using Silksprite.MeshWeaver.Controllers.Core;
 using Silksprite.MeshWeaver.Models.Modifiers;
 using Silksprite.MeshWeaver.Models.Modifiers.Base;
 using UnityEngine;
@@ -10,20 +10,16 @@ namespace Silksprite.MeshWeaver.Controllers.Modifiers
     {
         // FIXME: Scale?
         public Vector3 size = Vector3.one;
+
         public Transform referenceTranslation;
+        readonly TranslationCollector _referenceTranslationCollector = new TranslationCollector();
 
-        Matrix4x4 Translation
+        protected override int Sync() => _referenceTranslationCollector.Sync(referenceTranslation);
+
+        protected override VertwiseModifierBase CreateModifier()
         {
-            get
-            {
-                var translation = Matrix4x4.Scale(size);
-                if (referenceTranslation) translation = referenceTranslation.ToLocalTranslation();
-                return translation;
-            }
+            var translation = _referenceTranslationCollector.Translate(Matrix4x4.Scale(size));
+            return new VertwiseTranslate(translation);
         }
-
-        protected override VertwiseModifierBase CreateModifier() => new VertwiseTranslate(Translation);
-        
-        protected override void RefreshUnityReferences() => AddUnityReference(referenceTranslation);
     }
 }

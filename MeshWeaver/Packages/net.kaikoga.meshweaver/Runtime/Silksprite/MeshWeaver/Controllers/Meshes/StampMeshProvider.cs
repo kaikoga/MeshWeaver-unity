@@ -1,26 +1,31 @@
 using Silksprite.MeshWeaver.Controllers.Base;
-using Silksprite.MeshWeaver.Controllers.Context;
-using Silksprite.MeshWeaver.Controllers.Extensions;
+using Silksprite.MeshWeaver.Controllers.Core;
 using Silksprite.MeshWeaver.Models.Meshes;
 using Silksprite.MeshWeaver.Models.Paths;
-using UnityEngine;
 
 namespace Silksprite.MeshWeaver.Controllers.Meshes
 {
     public class StampMeshProvider : MeshProvider
     {
-        protected override bool RefreshAlways => true;
-
         public MeshProvider meshProvider;
+        readonly MeshieCollector _meshProviderCollector = new MeshieCollector();
+
         public PathProvider pathProvider;
+        readonly PathieCollector _pathProviderCollector = new PathieCollector();
 
         public IMeshieFactory LastMeshie { get; private set; }
         public IPathieFactory LastPathie { get; private set; }
 
-        protected override IMeshieFactory CreateFactory(IMeshContext context)
+        protected override int SyncReferences()
         {
-            LastMeshie = meshProvider.CollectMeshie(context);
-            LastPathie = pathProvider.CollectPathie();
+            return _meshProviderCollector.Sync(meshProvider) ^
+                   _pathProviderCollector.Sync(pathProvider);
+        }
+
+        protected override IMeshieFactory CreateFactory()
+        {
+            LastMeshie = _meshProviderCollector.Value;
+            LastPathie = _pathProviderCollector.SingleValue();
             return new StampMeshieFactory(LastMeshie, LastPathie);
         }
     }

@@ -1,15 +1,16 @@
 using Silksprite.MeshWeaver.Controllers.Extensions;
 using Silksprite.MeshWeaver.Controllers.Base;
-using Silksprite.MeshWeaver.Controllers.Context;
+using Silksprite.MeshWeaver.Controllers.Core;
 using Silksprite.MeshWeaver.Models.Meshes;
 
 namespace Silksprite.MeshWeaver.Controllers.Meshes
 {
     public class CompositeMeshProvider : MeshProvider
     {
-        protected override IMeshieFactory CreateFactory(IMeshContext context)
-        {
-            return this.GetComponentsInDirectChildren<MeshProvider>().CollectMeshies(context);
-        }
+        readonly MeshieCollector _childrenCollector = new MeshieCollector();
+
+        protected override int SyncReferences() => _childrenCollector.Sync(this.GetComponentsInDirectChildren<MeshProvider>());
+
+        protected override IMeshieFactory CreateFactory() => _childrenCollector.Value;
     }
 }

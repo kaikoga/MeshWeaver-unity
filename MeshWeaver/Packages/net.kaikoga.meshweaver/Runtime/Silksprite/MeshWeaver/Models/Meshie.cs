@@ -16,6 +16,11 @@ namespace Silksprite.MeshWeaver.Models
         public IReadOnlyList<Vertie> Vertices => _vertices;
         public IReadOnlyList<Gon> Gons => _gons;
 
+        MeshExporter _exported;
+        MeshExporter Exported => _exported ?? (_exported = new MeshExporter(_vertices, _gons));
+
+        public Material[] Materials => Exported.Materials;
+
         Meshie(Vertie[] vertices, Gon[] gons)
         {
             _vertices = vertices;
@@ -28,7 +33,7 @@ namespace Silksprite.MeshWeaver.Models
 
         public void ExportToMesh(Mesh mesh, MeshExportSettings settings)
         {
-            new MeshExporter(mesh, settings, _vertices, _gons).Export();
+            Exported.WriteToMesh(mesh, settings);
         }
 
         public Meshie Apply(IMeshieModifier modifier) => modifier.Modify(this);
@@ -65,17 +70,17 @@ namespace Silksprite.MeshWeaver.Models
             return builder;
         }
 
-        public static MeshieBuilder Builder(IEnumerable<Vertie> vertices, IEnumerable<int> indices, int materialIndex, bool validateIndices = false)
+        public static MeshieBuilder Builder(IEnumerable<Vertie> vertices, IEnumerable<int> indices, Material material, bool validateIndices = false)
         {
             var builder = new MeshieBuilder();
             builder.Vertices.AddRange(vertices);
             if (validateIndices)
             {
-                builder.AddTriangles(indices, materialIndex);
+                builder.AddTriangles(indices, material);
             }
             else
             {
-                builder.Gons.AddRange(indices.EachTrio((a, b, c) => new Gon(new []{ a, b, c }, materialIndex)));
+                builder.Gons.AddRange(indices.EachTrio((a, b, c) => new Gon(new []{ a, b, c }, material)));
             }
             return builder;
         }

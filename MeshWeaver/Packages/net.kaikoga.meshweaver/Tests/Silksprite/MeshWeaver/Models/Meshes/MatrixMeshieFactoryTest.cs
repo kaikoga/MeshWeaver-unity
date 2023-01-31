@@ -44,7 +44,7 @@ namespace Silksprite.MeshWeaver.Models.Meshes
         {
             return new MatrixMeshieFactory(pathieX, pathieY,
                 MatrixMeshieFactory.OperatorKind.TranslateOnly, MatrixMeshieFactory.CellPatternKind.Default, Array.Empty<MatrixMeshieFactory.CellOverride>(),
-                0);
+                null); // XXX: define <TMaterial> to fix this
         }
     }
 }

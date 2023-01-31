@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Silksprite.MeshWeaver.Controllers.Commands;
-using Silksprite.MeshWeaver.Controllers.Context;
 using Silksprite.MeshWeaver.Controllers.Meshes;
 using Silksprite.MeshWeaver.Controllers.Utils;
 using Silksprite.MeshWeaver.GUIActions;
@@ -84,7 +83,7 @@ namespace Silksprite.MeshWeaver.Controllers.Base
         protected Bounds OnGetFrameBounds()
         {
             var meshProvider = (MeshProvider)target;
-            var globalVertices = meshProvider.ToFactory(NullMeshContext.Instance).Build(LodMaskLayer.Collider)
+            var globalVertices = meshProvider.ToFactory().Build(LodMaskLayer.Collider)
                 .Vertices.Select(v => meshProvider.transform.TransformPoint(v.Vertex));
             return EditorBoundsUtil.CalculateFrameBounds(globalVertices);
         }

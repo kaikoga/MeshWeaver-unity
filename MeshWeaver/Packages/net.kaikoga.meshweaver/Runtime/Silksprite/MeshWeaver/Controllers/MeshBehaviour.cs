@@ -1,35 +1,20 @@
 using Silksprite.MeshWeaver.Controllers.Extensions;
 using Silksprite.MeshWeaver.Controllers.Base;
-using Silksprite.MeshWeaver.Controllers.Context;
+using Silksprite.MeshWeaver.Controllers.Core;
 using Silksprite.MeshWeaver.Models;
 using UnityEngine;
 
 namespace Silksprite.MeshWeaver.Controllers
 {
     [ExecuteAlways]
-    public class MeshBehaviour : CustomMeshBehaviour
+    public class MeshBehaviour : MeshBehaviourBase
     {
-        StaticMeshContext _staticContext = new StaticMeshContext(new Material[]{});
+        readonly MeshieCollector _childrenCollector = new MeshieCollector();
 
         protected override Meshie OnPopulateMesh(LodMaskLayer lod)
         {
-            if (overrideMaterials)
-            {
-                if (materials == null || !_staticContext.SequenceEqual(materials))
-                {
-                    _staticContext?.Dispose();
-                    _staticContext = new StaticMeshContext(materials);
-                }
-
-                return this.GetComponentsInDirectChildren<MeshProvider>().CollectMeshies(_staticContext).Build(lod);
-            }
-
-            using (var context = new DynamicMeshContext())
-            {
-                var result = this.GetComponentsInDirectChildren<MeshProvider>().CollectMeshies(context).Build(lod);
-                materials = context.ToMaterials();
-                return result;
-            }
+            _childrenCollector.Sync(this.GetComponentsInDirectChildren<MeshProvider>());
+            return _childrenCollector.Value.Build(lod);
         }
     }
 }

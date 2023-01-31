@@ -15,7 +15,7 @@ namespace Silksprite.MeshWeaver.Models.Meshes
         readonly OperatorKind _operatorKind;
         readonly CellPatternKind _defaultCellPatternKind;
         readonly CellOverride[] _cellPatternOverrides;
-        readonly int _materialIndex;
+        readonly Material _material;
 
         static readonly Dictionary<CellFormKind, int[][]> CellIndices = new Dictionary<CellFormKind, int[][]>
         {
@@ -31,14 +31,14 @@ namespace Silksprite.MeshWeaver.Models.Meshes
 
         public MatrixMeshieFactory(IPathieFactory pathieX, IPathieFactory pathieY,
             OperatorKind operatorKind, CellPatternKind defaultCellPatternKind, CellOverride[] cellPatternOverrides,
-            int materialIndex)
+            Material material)
         {
             _pathieX = pathieX;
             _pathieY = pathieY;
             _operatorKind = operatorKind;
             _defaultCellPatternKind = defaultCellPatternKind;
             _cellPatternOverrides = cellPatternOverrides;
-            _materialIndex = materialIndex;
+            _material = material;
         }
 
         public Meshie Build(LodMaskLayer lod)
@@ -91,12 +91,12 @@ namespace Silksprite.MeshWeaver.Models.Meshes
                     a[3] = xb.i + yb.i * countX;
 
                     var cellPattern = _defaultCellPatternKind;
-                    var cellMaterialIndex = _materialIndex;
+                    var cellMaterial = _material;
                     foreach (var o in _cellPatternOverrides)
                     {
                         if (x < o.cellRange.xMin || x >= o.cellRange.xMax || y < o.cellRange.yMin || y >= o.cellRange.yMax) continue;
                         cellPattern = o.cellPatternKind;
-                        if (o.materialIndex > -1) cellMaterialIndex = o.materialIndex;
+                        if (o.material != null) cellMaterial = o.material;
                         break;
                     }
 
@@ -123,7 +123,7 @@ namespace Silksprite.MeshWeaver.Models.Meshes
                             throw new ArgumentOutOfRangeException();
                     }
 
-                    gons.AddRange(CellIndices[cellForm].Select(cellIndices => new Gon(cellIndices.Select(i => a[i]).ToArray(), cellMaterialIndex)));
+                    gons.AddRange(CellIndices[cellForm].Select(cellIndices => new Gon(cellIndices.Select(i => a[i]).ToArray(), cellMaterial)));
                 }
             }
 
@@ -218,7 +218,7 @@ namespace Silksprite.MeshWeaver.Models.Meshes
             [RectIntCustom]
             public RectInt cellRange = new RectInt(0, 0, 1, 1);
 
-            public int materialIndex;
+            public Material material;
         }
 
         enum CellFormKind

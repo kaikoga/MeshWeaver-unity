@@ -1,6 +1,6 @@
 using System.Linq;
 using Silksprite.MeshWeaver.Controllers.Base.Modifiers;
-using Silksprite.MeshWeaver.Controllers.Context;
+using Silksprite.MeshWeaver.Controllers.Core;
 using Silksprite.MeshWeaver.Models;
 using Silksprite.MeshWeaver.Models.Paths;
 using Silksprite.MeshWeaver.Models.Paths.Core;
@@ -11,20 +11,23 @@ namespace Silksprite.MeshWeaver.Controllers.Base
     {
         public LodMask lodMask = LodMask.All;
 
+        readonly ModifierCollector<IPathModifierProvider> _modifierCollector = new ModifierCollector<IPathModifierProvider>();
+
         public IPathieFactory LastFactory => CachedObject;
 
-        public IPathieFactory ToFactory() => FindOrCreateObject(null);
+        public IPathieFactory ToFactory() => FindOrCreateObject();
 
-        protected sealed override IPathieFactory CreateObject(IMeshContext context)
+        protected sealed override int Sync() => SyncReferences() ^ _modifierCollector.Sync(GetComponents<IPathModifierProvider>().Where(provider => provider.enabled));
+
+        protected sealed override IPathieFactory CreateObject()
         {
-            var providers = GetComponents<IPathModifierProvider>()
-                .Where(provider => provider.enabled);
-            return providers.Aggregate(ModifiedPathieFactory.Builder(CreateFactory(), lodMask),
+            return _modifierCollector.Value.Aggregate(ModifiedPathieFactory.Builder(CreateFactory(), lodMask),
                     (builder, provider) => builder.Concat(provider.PathieModifier, provider.LodMask))
                 .ToFactory();
         }
 
-        protected abstract IPathieFactory CreateFactory();
+        protected virtual int SyncReferences() => 0;
 
+        protected abstract IPathieFactory CreateFactory();
     }
 }

@@ -1,6 +1,5 @@
 using System;
 using System.Linq;
-using Silksprite.MeshWeaver.Controllers.Base;
 using Silksprite.MeshWeaver.Controllers.Utils;
 using Silksprite.MeshWeaver.Extensions;
 using Silksprite.MeshWeaver.GUIActions;
@@ -10,19 +9,19 @@ using UnityEditor;
 using UnityEngine;
 using static Silksprite.MeshWeaver.Tools.LocalizationTool;
 
-namespace Silksprite.MeshWeaver.Controllers
+namespace Silksprite.MeshWeaver.Controllers.Base
 {
-    [CustomEditor(typeof(CustomMeshBehaviour), true, isFallback = true)]
+    [CustomEditor(typeof(MeshBehaviourBase), true, isFallback = true)]
     [CanEditMultipleObjects]
-    public class CustomMeshBehaviourEditor : MeshWeaverEditorBase
+    public class MeshBehaviourBaseEditor : MeshWeaverEditorBase
     {
         protected override bool IsMainComponentEditor => true;
 
-        CustomMeshBehaviour _meshBehaviour;
+        MeshBehaviourBase _meshBehaviour;
 
         void OnEnable()
         {
-            _meshBehaviour = (CustomMeshBehaviour)target;
+            _meshBehaviour = (MeshBehaviourBase)target;
         }
 
         protected sealed override void PopulateInspectorGUI(GUIContainer container)
@@ -56,10 +55,10 @@ namespace Silksprite.MeshWeaver.Controllers
                 c.Add(Prop("profile", Loc("CustomMeshBehaviour.customProfile"))
                     .WithDisplayOnRefresh(onRefresh, () => profilesPopup.value == customProfileIndex));
 
-                var lockMaterials = Prop(nameof(CustomMeshBehaviour.overrideMaterials), Loc("CustomMeshBehaviour.overrideMaterials"));
+                var lockMaterials = Prop(nameof(MeshBehaviourBase.overrideMaterials), Loc("MeshBehaviourBase.overrideMaterials"));
                 lockMaterials.RegisterPropertyChangedCallback<bool>(changed => onRefresh.Invoke());
                 c.Add(lockMaterials);
-                c.Add(Prop(nameof(CustomMeshBehaviour.materials), Loc("CustomMeshBehaviour.materials"))
+                c.Add(Prop(nameof(MeshBehaviourBase.materials), Loc("MeshBehaviourBase.materials"))
                     .WithEnableOnRefresh(onRefresh, () => _meshBehaviour.overrideMaterials));
             }));
             if (_meshBehaviour is MeshBehaviour)
@@ -72,7 +71,7 @@ namespace Silksprite.MeshWeaver.Controllers
                 c.Add(new LocButton(Loc("Compile"), () => { _meshBehaviour.Compile(); }));
                 c.Add(new LocButton(Loc("Compile All Active"), () =>
                 {
-                    foreach (var m in FindObjectsOfType<CustomMeshBehaviour>()) m.Compile();
+                    foreach (var m in FindObjectsOfType<MeshBehaviourBase>()) m.Compile();
                 }));
             }));
 
@@ -89,19 +88,19 @@ namespace Silksprite.MeshWeaver.Controllers
             }));
         }
 
-        static bool HasSetupAsMeshRendererButton(CustomMeshBehaviour meshBehaviour)
+        static bool HasSetupAsMeshRendererButton(MeshBehaviourBase meshBehaviour)
         {
             return !meshBehaviour.GetComponent<MeshFilter>() ||
                    !meshBehaviour.GetComponent<MeshRenderer>() ||
                    !meshBehaviour.GetComponent<MeshCollider>();
         }
 
-        static bool HasCreateExporterButton(CustomMeshBehaviour meshBehaviour)
+        static bool HasCreateExporterButton(MeshBehaviourBase meshBehaviour)
         {
             return !meshBehaviour.GetComponent<MeshBehaviourExporter>();
         }
 
-        public static void SetupAsMeshRenderer(CustomMeshBehaviour meshBehaviour)
+        public static void SetupAsMeshRenderer(MeshBehaviourBase meshBehaviour)
         {
             if (!meshBehaviour.GetComponent<MeshFilter>())
             {
@@ -119,7 +118,7 @@ namespace Silksprite.MeshWeaver.Controllers
             }
         }
 
-        static void CreateExporter(CustomMeshBehaviour meshBehaviour)
+        static void CreateExporter(MeshBehaviourBase meshBehaviour)
         {
             if (!meshBehaviour.GetComponent<MeshBehaviourExporter>()) meshBehaviour.gameObject.AddComponent<MeshBehaviourExporter>();
         }

@@ -1,8 +1,6 @@
 using System.Collections.Generic;
-using System.Linq;
 using Silksprite.MeshWeaver.Controllers.Base;
-using Silksprite.MeshWeaver.Controllers.Context;
-using Silksprite.MeshWeaver.Controllers.Extensions;
+using Silksprite.MeshWeaver.Controllers.Core;
 using Silksprite.MeshWeaver.Models.Meshes;
 using Silksprite.MeshWeaver.Models.Paths;
 using UnityEngine;
@@ -11,8 +9,6 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
 {
     public class PillarMeshProvider : MeshProvider
     {
-        protected override bool RefreshAlways => true;
-
         public bool fillBody = true;
         public bool fillBottom;
         public bool fillTop;
@@ -26,7 +22,10 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
         public Material materialTop;
 
         public PathProvider pathProviderX;
+        readonly PathieCollector _pathProviderXCollector = new PathieCollector();
+
         public PathProvider pathProviderY;
+        readonly PathieCollector _pathProviderYCollector = new PathieCollector();
 
         public MatrixMeshieFactory.OperatorKind operatorKind = MatrixMeshieFactory.OperatorKind.ApplyX;
         public MatrixMeshieFactory.CellPatternKind defaultCellPatternKind = MatrixMeshieFactory.CellPatternKind.Default;
@@ -38,15 +37,21 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
         public IPathieFactory LastPathieX { get; private set; }
         public IPathieFactory LastPathieY { get; private set; }
 
-        protected override IMeshieFactory CreateFactory(IMeshContext context)
+        protected override int SyncReferences()
         {
-            LastPathieX = pathProviderX.CollectPathie();
-            LastPathieY = pathProviderY.CollectPathie();
+            return _pathProviderXCollector.Sync(pathProviderX) |
+                   _pathProviderYCollector.Sync(pathProviderY);
+        }
+
+        protected override IMeshieFactory CreateFactory()
+        {
+            LastPathieX = _pathProviderXCollector.SingleValue();
+            LastPathieY = _pathProviderYCollector.SingleValue();
             return new PillarMeshieFactory(LastPathieX,
                 LastPathieY,
                 operatorKind,
                 defaultCellPatternKind,
-                MatrixMeshProvider.ResolveCellPatternOverrides(cellPatternOverrides, context),
+                MatrixMeshProvider.ResolveCellPatternOverrides(cellPatternOverrides),
                 longitudeAxisKind,
                 reverseLids,
                 fillBody,
@@ -55,9 +60,9 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
                 uvChannelBody,
                 uvChannelBottom,
                 uvChannelTop,
-                context.GetMaterialIndex(materialBody),
-                context.GetMaterialIndex(materialBottom),
-                context.GetMaterialIndex(materialTop));
+                materialBody,
+                materialBottom,
+                materialTop);
         }
     }
 }

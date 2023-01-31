@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-01-22 11:15+0900\n"
+"POT-Creation-Date: 2023-01-29 13:27+0900\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -15,31 +15,70 @@ msgstr ""
 "X-Poedit-KeywordsList: Tr;Loc\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshProviderEditorBase.cs:34
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshBehaviourBase.Editor.cs:38
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshBehaviourBase.Editor.cs:55
+msgid "CustomMeshBehaviour.customProfile"
+msgstr "カスタム基本設定"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshBehaviourBase.Editor.cs:42
+#: Editor/Silksprite/MeshWeaver/GUIActions/MainProviderHeader.cs:88
+msgid "MeshWeaverSettings.profiles"
+msgstr "基本設定"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshBehaviourBase.Editor.cs:58
+msgid "MeshBehaviourBase.overrideMaterials"
+msgstr "マテリアルを上書きする"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshBehaviourBase.Editor.cs:61
+msgid "MeshBehaviourBase.materials"
+msgstr "マテリアル"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshBehaviourBase.Editor.cs:66
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/CompositeMeshProvider.Editor.cs:15
+msgid "Mesh Providers"
+msgstr "子メッシュ"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshBehaviourBase.Editor.cs:71
+msgid "Compile"
+msgstr "コンパイル"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshBehaviourBase.Editor.cs:72
+msgid "Compile All Active"
+msgstr "アクティブを全てコンパイル"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshBehaviourBase.Editor.cs:82
+msgid "I am Mesh Renderer"
+msgstr "自分自身がMesh Rendererになる事だ"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshBehaviourBase.Editor.cs:86
+msgid "Create Exporter"
+msgstr "Exporterを生成する"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshProviderEditorBase.cs:33
 #: Editor/Silksprite/MeshWeaver/Controllers/Base/PathProviderEditorBase.cs:33
 msgid "GeometryProvider.lodMask"
 msgstr "LOD マスク"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshProviderEditorBase.cs:43
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshProviderEditorBase.cs:42
 #: Editor/Silksprite/MeshWeaver/Controllers/Base/PathProviderEditorBase.cs:42
 msgid "Dumps"
 msgstr "ダンプ"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshProviderEditorBase.cs:44
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshProviderEditorBase.cs:43
 msgid "Mesh Dump"
 msgstr "メッシュのダンプ"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshProviderEditorBase.cs:45
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshProviderEditorBase.cs:44
 msgid "Collider Mesh Dump"
 msgstr "コライダーのダンプ"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshProviderEditorBase.cs:63
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshProviderEditorBase.cs:62
 #: Editor/Silksprite/MeshWeaver/Controllers/Base/PathProviderEditorBase.cs:62
 #: Editor/Silksprite/MeshWeaver/Controllers/Base/SubProviderEditorBase.cs:31
 msgid "Advanced Actions"
 msgstr "高度な操作"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshProviderEditorBase.cs:63
+#: Editor/Silksprite/MeshWeaver/Controllers/Base/MeshProviderEditorBase.cs:62
 #: Editor/Silksprite/MeshWeaver/Controllers/Base/PathProviderEditorBase.cs:62
 #: Editor/Silksprite/MeshWeaver/Controllers/Base/SubProviderEditorBase.cs:31
 msgid "Command..."
@@ -74,55 +113,17 @@ msgstr "コライダーパスのダンプ"
 msgid "ModifierProviderBase.lodMask"
 msgstr "LOD マスク"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Commands/BakeMesh.cs:17
+#: Editor/Silksprite/MeshWeaver/Controllers/Commands/BakeMesh.cs:16
 msgid "Bake Mesh"
 msgstr "メッシュをベイクする"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Commands/BakePath.cs:16
+#: Editor/Silksprite/MeshWeaver/Controllers/Commands/BakePath.cs:14
 msgid "Bake Path"
 msgstr "パスをベイクする"
 
 #: Editor/Silksprite/MeshWeaver/Controllers/Commands/UpgradeByWrapWithCompositeEntirely.cs:13
 msgid "Wrap with Composite/With Modifiers"
 msgstr "Compositeで包む/モディファイアごと"
-
-#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:43
-#: Editor/Silksprite/MeshWeaver/GUIActions/MainProviderHeader.cs:88
-msgid "MeshWeaverSettings.profiles"
-msgstr "基本設定"
-
-#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:55
-msgid "CustomMeshBehaviour.customProfile"
-msgstr "カスタム基本設定"
-
-#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:58
-msgid "CustomMeshBehaviour.overrideMaterials"
-msgstr "マテリアルを上書きする"
-
-#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:61
-msgid "CustomMeshBehaviour.materials"
-msgstr "マテリアル"
-
-#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:66
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/CompositeMeshProvider.Editor.cs:15
-msgid "Mesh Providers"
-msgstr "子メッシュ"
-
-#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:71
-msgid "Compile"
-msgstr "コンパイル"
-
-#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:72
-msgid "Compile All Active"
-msgstr "アクティブを全てコンパイル"
-
-#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:82
-msgid "I am Mesh Renderer"
-msgstr "自分自身がMesh Rendererになる事だ"
-
-#: Editor/Silksprite/MeshWeaver/Controllers/CustomMeshBehaviour.Editor.cs:86
-msgid "Create Exporter"
-msgstr "Exporterを生成する"
 
 #: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourExporter.Editor.cs:36
 msgid "MeshBehaviourExporter.overrideMaterials"
@@ -378,9 +379,9 @@ msgstr "前面を表示する"
 msgid "MeshReverseProvider.back"
 msgstr "背面を表示する"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/Modifiers/MeshSetMaterialIndexProvider.Editor.cs:14
-msgid "MeshSetMaterialIndexProvider.materialIndex"
-msgstr "マテリアル番号"
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/Modifiers/MeshSetMaterialProvider.Editor.cs:14
+msgid "MeshSetMaterialProvider.material"
+msgstr "マテリアル"
 
 #: Editor/Silksprite/MeshWeaver/Controllers/Meshes/Modifiers/MeshSubdivisionProvider.Editor.cs:14
 msgid "MeshSubdivisionProvider.count"
@@ -829,9 +830,3 @@ msgstr "モディファイア"
 #: Editor/Silksprite/MeshWeaver/Utils/ModifierComponentPopupMenu.cs:21
 msgid "Add Modifier..."
 msgstr "追加..."
-
-#~ msgid "CustomMeshBehaviour.updatesEveryFrame"
-#~ msgstr "毎フレーム更新する"
-
-#~ msgid "Collect Materials"
-#~ msgstr "マテリアルを再収集"

@@ -1,13 +1,6 @@
-using System.Collections.Generic;
 using System.Linq;
-using Silksprite.MeshWeaver.Controllers.Base;
-using Silksprite.MeshWeaver.Controllers.Context;
 using Silksprite.MeshWeaver.Controllers.Paths;
 using Silksprite.MeshWeaver.Models.DataObjects;
-using Silksprite.MeshWeaver.Models.Meshes;
-using Silksprite.MeshWeaver.Models.Modifiers;
-using Silksprite.MeshWeaver.Models.Paths;
-using Silksprite.MeshWeaver.Models.Paths.Core;
 using UnityEngine;
 
 namespace Silksprite.MeshWeaver.Controllers.Extensions
@@ -37,49 +30,6 @@ namespace Silksprite.MeshWeaver.Controllers.Extensions
             gameObject.transform.SetParent(parent.transform, false);
             gameObject.transform.localPosition = position;
             return gameObject.AddComponent<CompositePathProvider>();
-        }
-
-        public static IPathieFactory CollectPathie(this PathProvider pathProvider)
-        {
-            if (pathProvider == null) return PathieFactory.Empty;
-
-            var localTranslation = pathProvider.transform.ToLocalTranslation();
-            // FIXME: maybe we want to cleanup Pathie.isLoop and fix this 
-            return ModifiedPathieFactory.Builder(pathProvider.ToFactory(), pathProvider.lodMask).Concat(new VertwiseTranslate(localTranslation)).ToFactory();
-        }
-
-        public static IPathieFactory CollectPathies(this IEnumerable<PathProvider> pathProviders, bool isLoop, bool smoothJoin)
-        {
-            var builder = CompositePathieFactory.Builder(isLoop, smoothJoin);
-            
-            foreach (var pathProvider in pathProviders.Where(c => c != null && c.gameObject.activeSelf))
-            {
-                var localTranslation = pathProvider.transform.ToLocalTranslation();
-                builder.Concat(pathProvider.ToFactory(), localTranslation);
-            }
-
-            return builder.ToFactory();
-        }
-
-        public static IMeshieFactory CollectMeshie(this MeshProvider meshProvider, IMeshContext context)
-        {
-            if (meshProvider == null) return MeshieFactory.Empty;
-
-            var localTranslation = meshProvider.transform.ToLocalTranslation();
-            return CompositeMeshieFactory.Builder().Concat(meshProvider.ToFactory(context), localTranslation).ToFactory();
-        }
-
-        public static IMeshieFactory CollectMeshies(this IEnumerable<MeshProvider> meshProviders, IMeshContext context)
-        {
-            var builder = CompositeMeshieFactory.Builder();
-
-            foreach (var meshProvider in meshProviders.Where(c => c != null && c.gameObject.activeSelf))
-            {
-                var localTranslation = meshProvider.transform.ToLocalTranslation();
-                builder.Concat(meshProvider.ToFactory(context), localTranslation);
-            }
-
-            return builder.ToFactory();
         }
     }
 }

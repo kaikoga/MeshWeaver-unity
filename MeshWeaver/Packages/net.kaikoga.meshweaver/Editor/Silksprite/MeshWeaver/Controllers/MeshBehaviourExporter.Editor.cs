@@ -19,14 +19,14 @@ namespace Silksprite.MeshWeaver.Controllers
         protected override bool IsMainComponentEditor => false;
 
         MeshBehaviourExporter _meshBehaviourExporter;
-        CustomMeshBehaviour _meshBehaviour;
+        MeshBehaviourBase _meshBehaviour;
 
         bool _editLinkedAssets;
 
         void OnEnable()
         {
             _meshBehaviourExporter = (MeshBehaviourExporter)target;
-            _meshBehaviour = _meshBehaviourExporter.GetComponent<CustomMeshBehaviour>();
+            _meshBehaviour = _meshBehaviourExporter.GetComponent<MeshBehaviourBase>();
         }
 
         protected sealed override void PopulateInspectorGUI(GUIContainer container)
@@ -174,7 +174,7 @@ namespace Silksprite.MeshWeaver.Controllers
             meshBehaviourExporter.outputMeshForCollider.name = baseName + "_Collider";
         }
 
-        static void ExportMeshAsset(string projectFilePath, MeshBehaviourExporter meshBehaviourExporter, CustomMeshBehaviour meshBehaviour)
+        static void ExportMeshAsset(string projectFilePath, MeshBehaviourExporter meshBehaviourExporter, MeshBehaviourBase meshBehaviour)
         {
             if (string.IsNullOrEmpty(projectFilePath))
             {
@@ -191,7 +191,7 @@ namespace Silksprite.MeshWeaver.Controllers
             AssetDatabase.SaveAssets();
         }
 
-        static void ExportMeshPrefab(string projectFilePath, MeshBehaviourExporter meshBehaviourExporter, CustomMeshBehaviour meshBehaviour)
+        static void ExportMeshPrefab(string projectFilePath, MeshBehaviourExporter meshBehaviourExporter, MeshBehaviourBase meshBehaviour)
         {
             if (string.IsNullOrEmpty(projectFilePath))
             {

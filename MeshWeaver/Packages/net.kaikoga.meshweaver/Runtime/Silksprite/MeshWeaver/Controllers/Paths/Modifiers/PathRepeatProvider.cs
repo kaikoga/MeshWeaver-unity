@@ -1,8 +1,7 @@
 using Silksprite.MeshWeaver.Controllers.Base.Modifiers;
-using Silksprite.MeshWeaver.Controllers.Extensions;
+using Silksprite.MeshWeaver.Controllers.Core;
 using Silksprite.MeshWeaver.Models.Paths.Modifiers;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Silksprite.MeshWeaver.Controllers.Paths.Modifiers
 {
@@ -10,22 +9,19 @@ namespace Silksprite.MeshWeaver.Controllers.Paths.Modifiers
     {
         public int count = 2;
         public Vector3 offset;
+        
         public Transform offsetByReference;
+        readonly TranslationCollector _offsetByReferenceCollector = new TranslationCollector();
+
         public bool offsetByPath = true;
         public bool smoothJoin = false;
 
-        Matrix4x4 Translation
-        {
-            get
-            {
-                var translation = Matrix4x4.Translate(offset);
-                if (offsetByReference) translation = offsetByReference.ToLocalTranslation() * translation;
-                return translation;
-            }
-        }
+        protected override int Sync() => _offsetByReferenceCollector.Sync(offsetByReference);
 
-        protected override IPathieModifier CreateModifier() => new PathRepeat(count, Translation, offsetByPath, smoothJoin);
-        
-        protected override void RefreshUnityReferences() => AddUnityReference(offsetByReference);
+        protected override IPathieModifier CreateModifier()
+        {
+            var translation = _offsetByReferenceCollector.Translate(Matrix4x4.Translate(offset));
+            return new PathRepeat(count, translation, offsetByPath, smoothJoin);
+        }
     }
 }
