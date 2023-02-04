@@ -20,7 +20,7 @@ namespace Silksprite.MeshWeaver.Controllers.Commands
             child.transform.localRotation = Quaternion.identity;
             child.transform.localScale = Vector3.one;
 
-            JsonUtility.FromJsonOverwrite(JsonUtility.ToJson(target), child.AddComponent<T>());
+            JsonUtility.FromJsonOverwrite(JsonUtility.ToJson(target), child.AddComponent(target.GetType()));
             
             var serializedObject = new SerializedObject(target);
             var property = serializedObject.GetIterator();
