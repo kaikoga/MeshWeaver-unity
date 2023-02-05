@@ -27,7 +27,7 @@ namespace Silksprite.MeshWeaver.Models.Meshes
             }
             for (var subMeshIndex = 0; subMeshIndex < _mesh.subMeshCount; subMeshIndex++)
             {
-                var material = _materials[subMeshIndex];
+                var material = subMeshIndex < _materials.Length ? _materials[subMeshIndex] : null;
                 var subMesh = _mesh.GetTriangles(subMeshIndex);
                 builder.Gons.AddRange(subMesh.EachTrio((a, b, c) => new Gon(new []{a, b, c}, material)));
             }

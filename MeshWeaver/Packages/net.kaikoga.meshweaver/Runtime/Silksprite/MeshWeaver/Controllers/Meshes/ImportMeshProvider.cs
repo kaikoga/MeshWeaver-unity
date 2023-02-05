@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using Silksprite.MeshWeaver.Controllers.Base;
 using Silksprite.MeshWeaver.Models.Meshes;
@@ -12,7 +13,7 @@ namespace Silksprite.MeshWeaver.Controllers.Meshes
 
         protected override IMeshieFactory CreateFactory()
         {
-            return new ImportMeshieFactory(mesh, materials.ToArray());
+            return new ImportMeshieFactory(mesh, (materials != null) ? materials.ToArray() : Array.Empty<Material>());
         }
     }
 }
