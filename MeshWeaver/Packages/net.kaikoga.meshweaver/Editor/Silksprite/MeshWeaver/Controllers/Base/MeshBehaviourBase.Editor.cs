@@ -52,8 +52,8 @@ namespace Silksprite.MeshWeaver.Controllers.Base
                     onRefresh.Invoke();
                 });
                 c.Add(profilesPopup);
-                c.Add(Prop("profile", Loc("CustomMeshBehaviour.customProfile"))
-                    .WithDisplayOnRefresh(onRefresh, () => profilesPopup.value == customProfileIndex));
+                c.Add(Prop("profile", _Loc(" "))
+                    .WithEnableOnRefresh(onRefresh, () => profilesPopup.value == customProfileIndex));
 
                 var lockMaterials = Prop(nameof(MeshBehaviourBase.overrideMaterials), Loc("MeshBehaviourBase.overrideMaterials"));
                 lockMaterials.RegisterPropertyChangedCallback<bool>(changed => onRefresh.Invoke());
