@@ -16,5 +16,8 @@
     "uv"
   ],
   "description": "Procedurally build mesh data in Unity editor. Build LoD and collider along.",
-  "type": "tool"
+  "type": "tool",
+  "dependencies": {
+    "com.unity.vectorgraphics": "2.0.0-preview.20"
+  }
 }
