@@ -2,7 +2,8 @@
     "name": "MeshWeaver.Controller",
     "references": [
         "MeshWeaver.Model",
-        "MeshWeaver.CustomDrawers"
+        "MeshWeaver.CustomDrawers",
+        "Unity.VectorGraphics"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

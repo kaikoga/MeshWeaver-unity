@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-02-12 09:17+0900\n"
+"POT-Creation-Date: 2023-03-02 21:03+0900\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -185,63 +185,63 @@ msgstr "コライダー メッシュ"
 msgid "Update Exported Assets"
 msgstr "書き出されたアセットを更新"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourProfile.Editor.cs:18
+#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourProfile.Editor.cs:22
 msgid "Realtime Mesh Generator Settings"
 msgstr "リアルタイムプレビュー用メッシュ設定"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourProfile.Editor.cs:19
+#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourProfile.Editor.cs:23
 msgid "MeshBehaviourProfileData.realtimeNormalGeneratorKind"
 msgstr "ノーマル（プレビュー）"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourProfile.Editor.cs:20
+#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourProfile.Editor.cs:24
 msgid "MeshBehaviourProfileData.realtimeNormalGeneratorAngle"
 msgstr "ノーマル角度（プレビュー）"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourProfile.Editor.cs:21
+#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourProfile.Editor.cs:25
 msgid "MeshBehaviourProfileData.realtimeLightmapGeneratorKind"
 msgstr "ライトマップ（プレビュー）"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourProfile.Editor.cs:23
+#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourProfile.Editor.cs:27
 msgid "Exported Mesh Generator Settings"
 msgstr "アセットエクスポート用メッシュ設定"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourProfile.Editor.cs:24
+#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourProfile.Editor.cs:28
 msgid "MeshBehaviourProfileData.exportedNormalGeneratorKind"
 msgstr "ノーマル（エクスポート）"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourProfile.Editor.cs:25
+#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourProfile.Editor.cs:29
 msgid "MeshBehaviourProfileData.exportedNormalGeneratorAngle"
 msgstr "ノーマル角度（エクスポート）"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourProfile.Editor.cs:26
+#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourProfile.Editor.cs:30
 msgid "MeshBehaviourProfileData.exportedLightmapGeneratorKind"
 msgstr "ライトマップ（エクスポート）"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourProfile.Editor.cs:28
+#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourProfile.Editor.cs:32
 msgid "Exported Prefab Settings"
 msgstr "プレハブ書き出し設定"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourProfile.Editor.cs:29
+#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourProfile.Editor.cs:33
 msgid "MeshBehaviourProfileData.useLod"
 msgstr "LODを組み込む"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourProfile.Editor.cs:30
+#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourProfile.Editor.cs:34
 msgid "MeshBehaviourProfileData.useLod1"
 msgstr "LOD1を組み込む"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourProfile.Editor.cs:31
+#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourProfile.Editor.cs:35
 msgid "MeshBehaviourProfileData.useLod2"
 msgstr "LOD2を組み込む"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourProfile.Editor.cs:32
+#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourProfile.Editor.cs:36
 msgid "MeshBehaviourProfileData.useCollider"
 msgstr "コライダーを組み込む"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourProfile.Editor.cs:33
+#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourProfile.Editor.cs:37
 msgid "MeshBehaviourProfileData.useLightmap"
 msgstr "ライトマップを有効"
 
-#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourProfile.Editor.cs:34
+#: Editor/Silksprite/MeshWeaver/Controllers/MeshBehaviourProfile.Editor.cs:38
 msgid "MeshBehaviourProfileData.staticEditorFlags"
 msgstr "Staticフラグを設定"
 
@@ -501,6 +501,22 @@ msgstr "入力パスAのダンプ"
 #: Editor/Silksprite/MeshWeaver/Controllers/Meshes/StitchMeshProvider.Editor.cs:28
 msgid "Input Path dump B"
 msgstr "入力パスBのダンプ"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/SvgMeshProvider.Editor.cs:15
+msgid "SvgMeshProvider.svg"
+msgstr "SVG"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/SvgMeshProvider.Editor.cs:16
+msgid "SvgMeshProvider.svgSprite"
+msgstr "SVGスプライト"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/SvgMeshProvider.Editor.cs:18
+msgid "Reload SVG from Sprite"
+msgstr "スプライトからSVGを読み込む"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/SvgMeshProvider.Editor.cs:25
+msgid "SvgMeshProvider.material"
+msgstr "マテリアル"
 
 #: Editor/Silksprite/MeshWeaver/Controllers/Modifiers/UvChannelRandomizerProvider.Editor.cs:14
 msgid "UvChannelRandomizerProvider.@base"
