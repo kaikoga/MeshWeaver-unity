@@ -17,6 +17,9 @@ namespace Silksprite.MeshWeaver.Controllers.Utils
             typeof(StampMeshProvider),
             typeof(void),
             typeof(ImportMeshProvider),
+#if MW_VECTORGRAPHICS
+            typeof(SvgMeshProvider),
+#endif
             typeof(BakedMeshProvider)
         );
     }

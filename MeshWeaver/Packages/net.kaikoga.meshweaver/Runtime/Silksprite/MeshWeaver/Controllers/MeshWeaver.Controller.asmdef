@@ -2,7 +2,8 @@
     "name": "MeshWeaver.Controller",
     "references": [
         "MeshWeaver.Model",
-        "MeshWeaver.CustomDrawers"
+        "MeshWeaver.CustomDrawers",
+        "Unity.VectorGraphics"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
@@ -11,6 +12,12 @@
     "precompiledReferences": [],
     "autoReferenced": true,
     "defineConstraints": [],
-    "versionDefines": [],
+    "versionDefines": [
+        {
+            "name": "com.unity.vectorgraphics",
+            "expression": "",
+            "define": "MW_VECTORGRAPHICS"
+        }
+    ],
     "noEngineReferences": false
 }

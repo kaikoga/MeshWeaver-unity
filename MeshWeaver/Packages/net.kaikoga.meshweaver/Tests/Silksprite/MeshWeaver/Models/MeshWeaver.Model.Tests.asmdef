@@ -12,6 +12,12 @@
     "precompiledReferences": [],
     "autoReferenced": true,
     "defineConstraints": [],
-    "versionDefines": [],
+    "versionDefines": [
+        {
+            "name": "com.unity.vectorgraphics",
+            "expression": "",
+            "define": "MW_VECTORGRAPHICS"
+        }
+    ],
     "noEngineReferences": false
 }
