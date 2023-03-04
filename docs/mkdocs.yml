@@ -23,6 +23,7 @@ nav:
       - providers/mesh/StitchMeshProvider.md
       - providers/mesh/StampMeshProvider.md
       - providers/mesh/ImportMeshProvider.md
+      - providers/mesh/SvgMeshProvider.md
       - providers/mesh/BakedMeshProvider.md
     - Path:
       - providers/path/CompositePathProvider.md
@@ -47,6 +48,7 @@ nav:
     - Mesh:
       - modifiers/mesh/MeshReverseProvider.md
       - modifiers/mesh/MeshRepeatProvider.md
+      - modifiers/mesh/MeshExtrudeProvider.md
       - modifiers/mesh/MeshSubdivisionProvider.md
       - modifiers/mesh/MeshDisassembleProvider.md
       - modifiers/mesh/MeshCutoutBoundsProvider.md
