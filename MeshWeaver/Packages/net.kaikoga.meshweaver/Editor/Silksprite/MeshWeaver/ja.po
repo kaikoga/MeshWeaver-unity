@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-03-02 21:03+0900\n"
+"POT-Creation-Date: 2023-03-04 15:57+0900\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -357,6 +357,38 @@ msgstr "内側"
 #: Editor/Silksprite/MeshWeaver/Controllers/Meshes/Modifiers/MeshCutoutUvBoundsProvider.Editor.cs:17
 msgid "MeshCutoutUvBoundsProvider.numVertex"
 msgstr "頂点数"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/Modifiers/MeshExtrudeProvider.Editor.cs:15
+msgid "MeshExtrudeProvider.fillBody"
+msgstr "側面を生成する"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/Modifiers/MeshExtrudeProvider.Editor.cs:16
+msgid "MeshExtrudeProvider.fillBottom"
+msgstr "底面を生成する"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/Modifiers/MeshExtrudeProvider.Editor.cs:17
+msgid "MeshExtrudeProvider.fillTop"
+msgstr "上面を生成する"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/Modifiers/MeshExtrudeProvider.Editor.cs:18
+msgid "MeshExtrudeProvider.reverseLids"
+msgstr "底面と上面を反転する"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/Modifiers/MeshExtrudeProvider.Editor.cs:19
+msgid "MeshExtrudeProvider.isSmooth"
+msgstr "スムーズ"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/Modifiers/MeshExtrudeProvider.Editor.cs:20
+msgid "MeshExtrudeProvider.isFromCenter"
+msgstr "メッシュの中心を基準にする"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/Modifiers/MeshExtrudeProvider.Editor.cs:21
+msgid "MeshExtrudeProvider.offset"
+msgstr "オフセット"
+
+#: Editor/Silksprite/MeshWeaver/Controllers/Meshes/Modifiers/MeshExtrudeProvider.Editor.cs:22
+msgid "MeshExtrudeProvider.offsetByReference"
+msgstr "オフセットの設定"
 
 #: Editor/Silksprite/MeshWeaver/Controllers/Meshes/Modifiers/MeshRepeatProvider.Editor.cs:15
 msgid "MeshRepeatProvider.count"

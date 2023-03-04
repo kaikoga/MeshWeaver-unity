@@ -17,6 +17,7 @@ namespace Silksprite.MeshWeaver.Controllers.Utils
             typeof(void),
             typeof(MeshReverseProvider),
             typeof(MeshRepeatProvider),
+            typeof(MeshExtrudeProvider),
             typeof(MeshSubdivisionProvider),
             typeof(MeshDisassembleProvider),
             typeof(MeshCutoutBoundsProvider),
