@@ -4,3 +4,5 @@ SvgMeshProviderはSVGデータをMeshWeaverで扱えるようにインポート�
 使用したいSVGデータをテキストで直接入力するか、SVGアセットをセットした上で「スプライトからSVGを読み込む」を押してください。
 
 MeshWeaverはUnityのVector Graphicsパッケージを利用してSVGを読み込みます。
+
+制限事項：マテリアルはセットされず、SVGデータの塗り情報や色情報は失われます。
