@@ -35,13 +35,54 @@ MeshWeaver（メッシュウィーバー）は、Unity上でメッシュを生�
 
 ## インストール方法
 
-### 新規インストール
+MeshWeaverはプロジェクトウィンドウのPackages以下にインストールされます。
+いくつかのインストール方法をサポートしています。
+
+### UPMでインストール（推奨）
+
+MeshWeaverのパッケージはOpenUPMに登録されており、最新版へのアップグレードをUnityから行うことができます。
+
+#### 新規インストール
+
+Unityのメニューの「Edit」→「Project Settings」で開くウィンドウから「Package Manager」を選び、以下の内容でScoped Registryを登録してください。
+
+```
+Name: OpenUPM
+URL: https://package.openupm.com
+Scope: net.kaikoga.meshweaver
+```
+
+#### アップグレード方法
+
+UnityのPackage Managerからライブラリのバージョンアップを行ってください。
+
+### VPMでインストール（VRChatユーザー向け）
+
+VRChat向けライブラリと併用する場合、MeshWeaverをVPM経由でインストールすると便利です。
+
+#### 新規インストール
+
+[VCCにvpm.kaikoga.netのリポジトリを追加する](vcc://vpm/addRepo?url=https%3A%2F%vpm.kaikoga.net%2Findex.json) か、以下のURLを手動でVPMに登録してください。
+
+```
+https://vpm.kaikoga.net/index.json
+```
+
+MeshWeaverのVRChatプロジェクトへの追加は、VCCやVPM CLIから行ってください。
+
+#### アップグレード方法
+
+VCCやVPM CLIからライブラリのバージョンアップを行ってください。
+
+### UnityPackageでインストール（非推奨）
+
+アップグレード時の問題を回避するため、いずれかのパッケージマネージャを利用することを推奨します。
+
+#### 新規インストール
 
 [ダウンロードページ](https://kaikoga.github.io/MeshWeaver-unity/) または [GitHubのリリースページ](https://github.com/kaikoga/MeshWeaver-unity/releases) から最新版のunitypackageをダウンロードしてください。
 
-unitypackageをインポートすると、プロジェクトウィンドウのPackages以下にMeshWeaverがインストールされます。
-
-### アップグレード方法
+#### アップグレード方法
 
 おそらく以下の手順が確実です。
 
@@ -60,7 +101,7 @@ unitypackageをインポートすると、プロジェクトウィンドウのPa
 
 不安定版です。
 アルファ版に実装されている機能およびコンポーネントは任意のタイミングで削除されたり、複数のコンポーネントが統合される可能性があります。
-次のバージョンへのアップグレードによって生成されるメッシュの形状や挙動が変化する場合があります。
+次のバージョンへのアップグレードによって生成されるメッシュの形状や挙動が変化したり、コンポーネントの設定内容が破壊されたりする場合があります。
 
 ### 0.x.y ｛ベータ版｝
 
