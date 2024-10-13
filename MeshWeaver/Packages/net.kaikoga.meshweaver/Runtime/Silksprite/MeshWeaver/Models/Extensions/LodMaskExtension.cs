@@ -7,5 +7,10 @@ namespace Silksprite.MeshWeaver.Models.Extensions
             // return lodMask.HasFlag((LodMask)layer);
             return ((int)lodMask & (int)layer) != 0;
         }
+        
+        public static LodMask ToLodMask(this LodMaskLayer layer)
+        {
+            return (LodMask)layer;
+        }
     }
 }

@@ -76,6 +76,7 @@ namespace Silksprite.MeshWeaver.Controllers.Base
         {
             menuItems.Add(new UpgradeByWrapWithCompositeEntirely<PathProvider, CompositePathProvider>().ToLocMenuItem(target as PathProvider));
             menuItems.Add(new BakePath().ToLocMenuItem((PathProvider)target));
+            menuItems.Add(new ExplodePath().ToLocMenuItem((PathProvider)target));
         }
 
         protected bool HasFrameBounds() => true;
