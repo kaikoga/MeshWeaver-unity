@@ -120,6 +120,10 @@ msgstr "メッシュをベイクする"
 msgid "Bake Path"
 msgstr "パスをベイクする"
 
+#: Editor/Silksprite/MeshWeaver/Controllers/Commands/ExplodePath.cs:14
+msgid "Explode Path"
+msgstr "パスを分解する"
+
 #: Editor/Silksprite/MeshWeaver/Controllers/Commands/UpgradeByWrapWithCompositeEntirely.cs:13
 msgid "Wrap with Composite/With Modifiers"
 msgstr "Compositeで包む/モディファイアごと"
